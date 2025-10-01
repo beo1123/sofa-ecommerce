@@ -28,7 +28,10 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
-          run_install: true
+          run_install: false # Disable automatic install to control it manually
+
+      - name: Install dependencies
+        run: pnpm install # Explicitly run pnpm install
 
       - name: Run ESLint
         run: pnpm lint
@@ -51,10 +54,13 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
-          run_install: true
+          run_install: false # Disable automatic install
+
+      - name: Install dependencies
+        run: pnpm install # Explicitly run pnpm install
 
       - name: Run Tests (placeholder)
-        run: echo "No tests yet" # sau này đổi thành: pnpm test
+        run: echo "No tests yet" # Replace with `pnpm test` later
 
   build:
     name: Build
@@ -74,7 +80,10 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
-          run_install: true
+          run_install: false # Disable automatic install
+
+      - name: Install dependencies
+        run: pnpm install # Explicitly run pnpm install
 
       - name: Build project
         run: pnpm build
