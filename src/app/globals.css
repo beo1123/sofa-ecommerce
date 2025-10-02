@@ -1,0 +1,102 @@
+/* app/globals.css */
+
+/* 1) import Tailwind (CSS-first). Docs v4+ recommends @import "tailwindcss" */
+@import "tailwindcss";
+
+/* 3) Load local Montserrat font files via @font-face (local woff2s in /public/fonts) */
+@font-face {
+  font-family: "MontserratLocal";
+  src: url("/fonts/Montserrat-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MontserratLocal";
+  src: url("/fonts/Montserrat-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MontserratLocal";
+  src: url("/fonts/Montserrat-SemiBold.ttf") format("ttf");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MontserratLocal";
+  src: url("/fonts/Montserrat-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 4) THEME: define design tokens using @theme (this instructs Tailwind to generate utilities)
+   — colors (user-provided), typography tokens, spacing and breakpoints. */
+@theme {
+  /* Colors (your palette) */
+  --color-brand-50: #e5ddda;
+  --color-brand-100: #c1ae9f;
+  --color-brand-200: #a68d77;
+  --color-brand-300: #826851;
+  --color-brand-400: #57412c;
+
+  /* semantic tokens (optional) */
+  --color-text-default: #111827;
+  --color-text-muted: #6b7280;
+  --color-bg-page: #ffffff;
+  --color-bg-muted: #f7f5f3;
+
+  /* Font families: map a named font var to the @font-face family above */
+  --font-sans:
+    MontserratLocal, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+
+  /* Spacing scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Type scale (you can also add line-height via --text-*---line-height if needed) */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  /* Breakpoints (Tailwind will create responsive variants based on these) */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* 5) small global tweaks if you want the body to use the font var */
+:root {
+  /* sync a CSS variable for fallback usage */
+  --app-font-sans: var(--font-sans);
+}
+
+html,
+body {
+  font-family: var(--app-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* If you want semantic CSS classes you can still use @layer to apply tailwind utilities */
+@layer base {
+  /* example: set default background using generated variables via CSS variable referencing */
+  body {
+    background-color: color-mix(in srgb, var(--color-bg-page) 100%);
+    color: var(--color-text-default);
+  }
+}
