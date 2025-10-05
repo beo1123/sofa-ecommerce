@@ -1,4 +1,6 @@
+// components/Container.tsx
 import React from "react";
+
 type Props = {
   children: React.ReactNode;
   className?: string;

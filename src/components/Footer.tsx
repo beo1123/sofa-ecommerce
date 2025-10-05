@@ -1,6 +1,6 @@
 // components/Footer.tsx
 import React from "react";
-import Container from "@/components/common/Container";
+import Container from "@/components/ui/Container";
 import Link from "next/link";
 
 export default function Footer() {

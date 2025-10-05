@@ -1,440 +1,517 @@
-// components/Header.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Menu,
+  X,
+  Search,
+  ShoppingCart,
+  Heart,
+  BarChart3,
+  User,
+} from "lucide-react";
 
-type Props = {
+/**
+ * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
+ *
+ * Responsive breakpoints:
+ * - xs: < 640px (mobile nhỏ)
+ * - sm: ≥640px (mobile lớn)
+ * - md: ≥768px (tablet)
+ * - lg: ≥1024px (desktop nhỏ)
+ * - xl: ≥1280px (desktop lớn)
+ *
+ * Các phần ẩn/hiện:
+ * - Top bar: hidden md:block
+ * - Desktop nav: hidden lg:flex
+ * - Desktop search: hidden lg:flex
+ * - User profile: hidden xl:flex
+ * - Wishlist/Compare icons: hidden sm:flex
+ * - Mobile menu: lg:hidden
+ * - Mobile search: lg:hidden
+ * - Sidebar: lg:hidden (full responsive với calc width cho scrollbar)
+ */
+
+type HeaderProps = {
   cartCount?: number;
 };
 
-export default function Header({ cartCount = 0 }: Props) {
-  const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");
+const navLinks = [
+  { href: "/", label: "Trang Chủ" },
+  { href: "/shop", label: "Sản Phẩm" },
+  { href: "/about", label: "Giới Thiệu" },
+  { href: "/news", label: "Tin Tức" },
+  { href: "/contact", label: "Liên Hệ" },
+];
+
+/* Framer motion variants */
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const sidebarVariants = {
+  hidden: { x: "100%" },
+  visible: { x: 0 },
+  exit: { x: "100%" },
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.05, duration: 0.28 },
+  }),
+};
+
+/* Hook lock scroll */
+function useLockBodyScroll(active: boolean) {
+  const prevRef = useRef<{
+    bodyOverflow: string;
+    docOverflow: string;
+    bodyPaddingRight: string;
+    docPaddingRight: string;
+  } | null>(null);
 
   useEffect(() => {
-    // lock body scroll while sidebar open
-    document.body.style.overflow = open ? "hidden" : "";
+    const body = document.body;
+    const doc = document.documentElement;
+
+    if (active) {
+      prevRef.current = {
+        bodyOverflow: body.style.overflow,
+        docOverflow: doc.style.overflow,
+        bodyPaddingRight: body.style.paddingRight || "",
+        docPaddingRight: doc.style.paddingRight || "",
+      };
+
+      const scrollBarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      if (scrollBarWidth > 0) {
+        body.style.paddingRight = `${scrollBarWidth}px`;
+        doc.style.paddingRight = `${scrollBarWidth}px`;
+      }
+
+      body.style.overflow = "hidden";
+      doc.style.overflow = "hidden";
+
+      doc.classList.add("menu-open");
+      body.classList.add("menu-open");
+    } else {
+      if (prevRef.current) {
+        body.style.overflow = prevRef.current.bodyOverflow;
+        doc.style.overflow = prevRef.current.docOverflow;
+        body.style.paddingRight = prevRef.current.bodyPaddingRight;
+        doc.style.paddingRight = prevRef.current.docPaddingRight;
+        prevRef.current = null;
+      }
+      document.documentElement.classList.remove("menu-open");
+      document.body.classList.remove("menu-open");
+    }
+
     return () => {
-      document.body.style.overflow = "";
+      if (prevRef.current) {
+        body.style.overflow = prevRef.current.bodyOverflow;
+        doc.style.overflow = prevRef.current.docOverflow;
+        body.style.paddingRight = prevRef.current.bodyPaddingRight;
+        doc.style.paddingRight = prevRef.current.docPaddingRight;
+        prevRef.current = null;
+      }
+      document.documentElement.classList.remove("menu-open");
+      document.body.classList.remove("menu-open");
     };
-  }, [open]);
+  }, [active]);
+}
+
+export default function Header({ cartCount = 0 }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [scrollBarWidth, setScrollBarWidth] = useState(0);
+
+  useEffect(() => {
+    const computeWidth = () => {
+      const width = window.innerWidth - document.documentElement.clientWidth;
+      setScrollBarWidth(width > 0 ? width : 0);
+    };
+    computeWidth();
+    window.addEventListener("resize", computeWidth);
+    return () => window.removeEventListener("resize", computeWidth);
+  }, []);
+
+  useLockBodyScroll(isMenuOpen);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+    }
+  };
+
+  const closeMobileMenu = () => setIsMenuOpen(false);
+
+  const sidebarWidth =
+    scrollBarWidth > 0 ? `calc(85vw + ${scrollBarWidth}px)` : "85vw";
 
   return (
-    <header className="relative z-50 border-b border-[var(--color-brand-50)] bg-[var(--color-bg-page)]">
-      {/* Top small bar (optional) */}
-      <div className="hidden sm:block bg-[var(--color-bg-muted)] text-[var(--color-text-muted)] text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between">
-          <div className="text-xs">
-            Miễn phí giao hàng cho đơn hàng trên 2,000,000₫
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/help" className="hover:text-[var(--color-brand-300)]">
-              Hỗ trợ
-            </Link>
-            <Link
-              href="/account"
-              className="hover:text-[var(--color-brand-300)]"
-            >
-              Tài khoản
-            </Link>
+    <>
+      <header className="sticky top-0 z-50 bg-white shadow-sm">
+        {/* Top Bar - Responsive: Hidden on mobile/tablet (xs, sm, md) */}
+        <div className="hidden md:block bg-[var(--color-bg-muted)] border-b border-[var(--color-brand-50)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-10 text-sm">
+              <p className="text-[var(--color-text-default)] text-xs">
+                Miễn phí giao hàng cho đơn hàng trên 2,000,000₫
+              </p>
+              <div className="flex items-center gap-6">
+                <Link
+                  href="/help"
+                  className="text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors text-xs"
+                >
+                  Hỗ trợ
+                </Link>
+                <Link
+                  href="/account"
+                  className="text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors text-xs"
+                >
+                  Tài khoản
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center gap-4">
-        {/* LOGO (left) */}
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-[var(--color-brand-50)] text-[var(--color-brand-400)]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
+        {/* Main Header - Full responsive */}
+        <div className="bg-[var(--color-bg-page)] border-b border-[var(--color-brand-50)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-3 sm:gap-4 h-16 lg:h-20">
+              {/* Logo - Always visible */}
+              <Link
+                href="/"
+                className="flex items-center gap-2 lg:gap-3 flex-shrink-0"
               >
-                <path
-                  d="M3 10v6a1 1 0 0 0 1 1h1v2h2v-2h10v2h2v-2h1a1 1 0 0 0 1-1v-6H3z"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M7 10V7a5 5 0 1 1 10 0v3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="ml-1 text-lg font-semibold text-[var(--color-text-default)]">
-              Nội Thất
-            </span>
-          </Link>
-        </div>
+                <div className="w-20 h-20 lg:w-30 lg:h-30  flex items-center justify-center">
+                  <Image
+                    src="/images/logo-removebg-preview.png"
+                    width={120}
+                    height={120}
+                    alt="Logo phạm gia"
+                  />
+                </div>
+              </Link>
 
-        {/* SEARCH (desktop center) */}
-        <div className="hidden lg:flex flex-1 px-6">
-          <div className="relative w-full max-w-2xl mx-auto">
-            <input
-              type="search"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Tìm kiếm sản phẩm..."
-              aria-label="Tìm kiếm sản phẩm"
-              className="w-full rounded-full border-2 border-[var(--color-brand-50)] bg-white px-5 py-2.5 pr-12 text-sm placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-100)]"
+              {/* Desktop Navigation - Hidden on mobile/tablet (xs, sm, md, lg-) */}
+              <nav className="hidden lg:flex items-center gap-6 xl:gap-8 flex-shrink-0">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm font-medium text-[var(--color-text-default)] hover:text-[var(--color-brand-300)] transition-colors relative group whitespace-nowrap"
+                  >
+                    {link.label}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-brand-300)] group-hover:w-full transition-all duration-300"></span>
+                  </Link>
+                ))}
+              </nav>
+
+              {/* Search Bar - Desktop: Hidden on mobile/tablet (xs, sm, md, lg-); Mobile version below */}
+              <div className="hidden lg:flex flex-1 lg:mx-6 xl:mx-8">
+                <form onSubmit={handleSearch} className="relative w-full">
+                  <input
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Tìm kiếm sản phẩm..."
+                    className="w-full h-10 pl-4 pr-11 text-sm border-2 border-[var(--color-brand-50)] rounded-full bg-white text-[var(--color-text-default)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-100)] focus:border-[var(--color-brand-100)] transition-all"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors"
+                    aria-label="Tìm kiếm"
+                  >
+                    <Search className="w-4 h-4" />
+                  </button>
+                </form>
+              </div>
+
+              {/* Right Actions - Responsive icons & profile */}
+              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0 ml-auto">
+                {/* User Profile - Hidden on small screens (xs, sm, md, lg, xl-) */}
+                <div className="hidden xl:flex items-center gap-3 pr-4 border-r border-[var(--color-brand-50)]">
+                  <div className="w-10 h-10 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center flex-shrink-0">
+                    <User className="w-5 h-5 text-[var(--color-brand-400)]" />
+                  </div>
+                  <div className="text-sm min-w-0">
+                    <p className="font-medium text-[var(--color-text-default)] truncate">
+                      Xin chào, Khách
+                    </p>
+                    <Link
+                      href="/account"
+                      className="text-xs text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)] whitespace-nowrap"
+                    >
+                      Đăng nhập / Đăng ký
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Icon Actions - Wishlist/Compare: Hidden on xs; Cart & Menu: Always on mobile */}
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Link
+                    href="/wishlist"
+                    className="hidden sm:flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
+                    aria-label="Yêu thích"
+                  >
+                    <Heart className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-brand-300)] transition-colors" />
+                  </Link>
+
+                  <Link
+                    href="/compare"
+                    className="hidden sm:flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
+                    aria-label="So sánh"
+                  >
+                    <BarChart3 className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-brand-300)] transition-colors" />
+                  </Link>
+
+                  <Link
+                    href="/cart"
+                    className="relative flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
+                    aria-label="Giỏ hàng"
+                  >
+                    <ShoppingCart className="w-5 h-5 text-[var(--color-text-default)] group-hover:text-[var(--color-brand-300)] transition-colors" />
+                    {cartCount > 0 && (
+                      <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[var(--color-brand-300)] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-md">
+                        {cartCount}
+                      </span>
+                    )}
+                  </Link>
+
+                  <button
+                    onClick={() => setIsMenuOpen(true)}
+                    className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors"
+                    aria-label="Mở menu"
+                  >
+                    <Menu className="w-6 h-6 text-[var(--color-text-default)]" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Search Bar - Hidden on desktop (lg+) */}
+            <div className="lg:hidden pb-3 pt-1">
+              <form onSubmit={handleSearch} className="relative">
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Tìm kiếm sản phẩm..."
+                  className="w-full h-10 pl-4 pr-11 text-sm border-2 border-[var(--color-brand-50)] rounded-full bg-white text-[var(--color-text-default)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-100)] focus:border-[var(--color-brand-100)]"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
+                  aria-label="Tìm kiếm"
+                >
+                  <Search className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Sidebar - Responsive: Hidden on lg+ */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              transition={{ duration: 0.24 }}
+              onClick={closeMobileMenu}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] lg:hidden"
             />
-            <button
-              aria-label="Tìm"
-              className="absolute right-3 top-1/2 -translate-y-1/2"
-              onClick={() => {
-                /* xử lý tìm kiếm hoặc redirect */
-              }}
+
+            {/* Sidebar Panel */}
+            <motion.aside
+              variants={sidebarVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              style={{ width: sidebarWidth }}
+              className="fixed top-0 right-0 h-full w-[85vw] max-w-2xl bg-[var(--color-bg-page)] z-[70] lg:hidden shadow-2xl will-change-transform overflow-y-auto"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-[var(--color-text-default)]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* NAV + ICONS (right) */}
-        <div className="ml-auto flex items-center gap-4">
-          {/* Desktop nav (visible from lg) */}
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-[var(--color-text-default)] mr-4">
-            <Link href="/" className="hover:text-[var(--color-brand-300)]">
-              Trang Chủ
-            </Link>
-            <Link href="/shop" className="hover:text-[var(--color-brand-300)]">
-              Sản Phẩm
-            </Link>
-            <Link href="/about" className="hover:text-[var(--color-brand-300)]">
-              Giới Thiệu
-            </Link>
-            <Link href="/news" className="hover:text-[var(--color-brand-300)]">
-              Tin Tức
-            </Link>
-            <Link
-              href="/contact"
-              className="hover:text-[var(--color-brand-300)]"
-            >
-              Liên Hệ
-            </Link>
-          </nav>
-
-          {/* Desktop User section (visible md+) */}
-          <div className="hidden md:flex items-center gap-3 pr-2 border-r border-transparent md:border-[var(--color-brand-50)]">
-            <div className="w-9 h-9 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center text-[var(--color-brand-400)]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 7.5A3.75 3.75 0 1 1 8.25 7.5a3.75 3.75 0 0 1 7.5 0zM4.5 20.25a8.25 8.25 0 0 1 15 0"
-                />
-              </svg>
-            </div>
-            <div className="text-sm">
-              <div className="font-medium text-[var(--color-text-default)]">
-                Xin chào, Khách
-              </div>
-              <Link
-                href="/account"
-                className="text-[var(--color-brand-300)] text-xs"
-              >
-                Đăng nhập / Đăng ký
-              </Link>
-            </div>
-          </div>
-
-          {/* Icons group */}
-          <div className="flex items-center gap-2">
-            <Link
-              href="/wishlist"
-              className="hidden md:inline-flex p-2 rounded-full hover:bg-[var(--color-bg-muted)]"
-              aria-label="Yêu thích"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-[var(--color-text-default)]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"
-                />
-              </svg>
-            </Link>
-
-            <Link
-              href="/compare"
-              className="hidden md:inline-flex p-2 rounded-full hover:bg-[var(--color-bg-muted)]"
-              aria-label="So sánh"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-[var(--color-text-default)]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 7h4l3 9 4-18 3 9h4"
-                />
-              </svg>
-            </Link>
-
-            {/* Cart (always visible) */}
-            <Link
-              href="/cart"
-              className="relative p-2 rounded-full hover:bg-[var(--color-bg-muted)]"
-              aria-label="Giỏ hàng"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-[var(--color-text-default)]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13"
-                />
-              </svg>
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[var(--color-brand-300)] text-white text-xs px-1.5 py-0.5 rounded-full">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-
-            {/* Mobile sidebar toggle (right side) */}
-            <button
-              onClick={() => setOpen(true)}
-              className="ml-1 p-2 rounded-md lg:hidden"
-              aria-label="Mở menu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-[var(--color-text-default)]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile sidebar + overlay */}
-      <div aria-hidden={!open}>
-        {/* Overlay */}
-        <div
-          onClick={() => setOpen(false)}
-          className={`fixed inset-0 bg-black/50 z-40 transition-opacity ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-        />
-
-        {/* Sidebar: fixed, full-height, width ~75% (max 420px), slide from right */}
-        <aside
-          className={`fixed top-0 right-0 h-full w-[75vw] max-w-[420px] bg-[var(--color-bg-page)] z-50 transform offcanvas ${open ? "translate-x-0" : "translate-x-full"}`}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="flex flex-col h-full overflow-y-auto">
-            {/* Sidebar header */}
-            <div className="p-4 flex items-center justify-between border-b">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-md bg-[var(--color-brand-50)] flex items-center justify-center text-[var(--color-brand-400)]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      d="M3 10v6a1 1 0 0 0 1 1h1v2h2v-2h10v2h2v-2h1a1 1 0 0 0 1-1v-6H3z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M7 10V7a5 5 0 1 1 10 0v3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div className="text-lg font-semibold">Nội Thất</div>
-              </div>
-
-              <button
-                onClick={() => setOpen(false)}
-                aria-label="Đóng menu"
-                className="p-2 rounded-md"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-[var(--color-text-default)]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
+              <div className="flex flex-col  h-full overflow-hidden">
+                {/* Sidebar Header */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06, duration: 0.24 }}
+                  className="flex items-center justify-between p-4 border-b border-[var(--color-brand-50)] flex-shrink-0"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-lg bg-[var(--color-brand-50)] flex items-center justify-center shadow-sm">
+                      <svg
+                        className="w-5 h-5 text-[var(--color-brand-400)]"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3 10v6a1 1 0 001 1h1v2h2v-2h10v2h2v-2h1a1 1 0 001-1v-6H3z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M7 10V7a5 5 0 1110 0v3"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-lg font-bold text-[var(--color-text-default)]">
+                      Nội Thất
+                    </span>
+                  </div>
+                  <button
+                    onClick={closeMobileMenu}
+                    className="p-2 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors"
+                    aria-label="Đóng menu"
+                  >
+                    <X className="w-6 h-6 text-[var(--color-text-default)]" />
+                  </button>
+                </motion.div>
 
-            {/* User area */}
-            <div className="p-4 border-b flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center text-[var(--color-brand-400)]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
+                {/* User Section */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.12, duration: 0.24 }}
+                  className="p-4 border-b border-[var(--color-brand-50)] bg-[var(--color-bg-muted)] flex-shrink-0"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 7.5A3.75 3.75 0 1 1 8.25 7.5a3.75 3.75 0 0 1 7.5 0zM4.5 20.25a8.25 8.25 0 0 1 15 0"
-                  />
-                </svg>
-              </div>
-              <div>
-                <div className="font-medium text-[var(--color-text-default)]">
-                  Xin chào, Khách
-                </div>
-                <div className="mt-1 flex gap-3">
-                  <Link
-                    href="/account/login"
-                    onClick={() => setOpen(false)}
-                    className="text-[var(--color-brand-300)]"
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center shadow-sm flex-shrink-0">
+                      <User className="w-6 h-6 text-[var(--color-brand-400)]" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-[var(--color-text-default)]">
+                        Xin chào, Khách
+                      </p>
+                      <div className="flex gap-3 mt-1">
+                        <Link
+                          href="/account/login"
+                          onClick={closeMobileMenu}
+                          className="text-sm text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)] font-medium"
+                        >
+                          Đăng nhập
+                        </Link>
+                        <span className="text-[var(--color-text-muted)]">
+                          |
+                        </span>
+                        <Link
+                          href="/account/register"
+                          onClick={closeMobileMenu}
+                          className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-default)] font-medium"
+                        >
+                          Đăng ký
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Navigation Links */}
+                <nav className="flex-1 overflow-y-auto p-4">
+                  <ul className="space-y-1">
+                    {navLinks.map((link, i) => (
+                      <motion.li
+                        key={link.href}
+                        custom={i}
+                        variants={menuItemVariants}
+                        initial="hidden"
+                        animate="visible"
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={closeMobileMenu}
+                          className="flex items-center px-4 py-3 text-base font-medium text-[var(--color-text-default)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-brand-300)] rounded-lg transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  {/* Additional Links */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.32, duration: 0.24 }}
+                    className="mt-6 pt-6 border-t border-[var(--color-brand-50)]"
                   >
-                    Đăng nhập
-                  </Link>
-                  <Link
-                    href="/account/register"
-                    onClick={() => setOpen(false)}
-                    className="text-[var(--color-text-muted)]"
-                  >
-                    Đăng ký
-                  </Link>
-                </div>
+                    <p className="px-4 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">
+                      Tiện ích
+                    </p>
+                    <ul className="space-y-1">
+                      <li>
+                        <Link
+                          href="/wishlist"
+                          onClick={closeMobileMenu}
+                          className="flex items-center gap-3 px-4 py-3 text-sm text-[var(--color-text-default)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-brand-300)] rounded-lg transition-colors"
+                        >
+                          <Heart className="w-4 h-4" /> Yêu thích
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/compare"
+                          onClick={closeMobileMenu}
+                          className="flex items-center gap-3 px-4 py-3 text-sm text-[var(--color-text-default)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-brand-300)] rounded-lg transition-colors"
+                        >
+                          <BarChart3 className="w-4 h-4" /> So sánh
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/cart"
+                          onClick={closeMobileMenu}
+                          className="flex items-center gap-3 px-4 py-3 text-sm text-[var(--color-text-default)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-brand-300)] rounded-lg transition-colors"
+                        >
+                          <ShoppingCart className="w-4 h-4" /> Giỏ hàng
+                          {cartCount > 0 && (
+                            <span className="ml-auto w-6 h-6 bg-[var(--color-brand-300)] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                              {cartCount}
+                            </span>
+                          )}
+                        </Link>
+                      </li>
+                    </ul>
+                  </motion.div>
+                </nav>
+
+                {/* Bottom Info */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.16, duration: 0.24 }}
+                  className="p-4 border-t border-[var(--color-brand-50)] bg-[var(--color-bg-muted)] flex-shrink-0"
+                >
+                  <p className="text-xs text-[var(--color-text-muted)] text-center">
+                    Miễn phí giao hàng cho đơn từ 2,000,000₫
+                  </p>
+                </motion.div>
               </div>
-            </div>
-
-            {/* Search in sidebar */}
-            <div className="p-4 border-b">
-              <input
-                type="search"
-                placeholder="Tìm kiếm sản phẩm..."
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                className="w-full rounded-full border px-4 py-2 text-sm placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-100)]"
-              />
-            </div>
-
-            {/* Menu links */}
-            <nav className="p-6 flex-1 overflow-y-auto">
-              <ul className="flex flex-col gap-5 text-lg">
-                <li>
-                  <Link href="/" onClick={() => setOpen(false)}>
-                    Trang Chủ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/shop" onClick={() => setOpen(false)}>
-                    Sản Phẩm
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" onClick={() => setOpen(false)}>
-                    Giới Thiệu
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/news" onClick={() => setOpen(false)}>
-                    Tin Tức
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" onClick={() => setOpen(false)}>
-                    Liên Hệ
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-
-            {/* Bottom actions */}
-            <div className="p-6 border-t flex flex-col gap-3">
-              <Link
-                href="/wishlist"
-                onClick={() => setOpen(false)}
-                className="text-sm"
-              >
-                Yêu thích
-              </Link>
-              <Link
-                href="/compare"
-                onClick={() => setOpen(false)}
-                className="text-sm"
-              >
-                So sánh
-              </Link>
-              <Link
-                href="/cart"
-                onClick={() => setOpen(false)}
-                className="text-sm"
-              >
-                Giỏ hàng ({cartCount})
-              </Link>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </header>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

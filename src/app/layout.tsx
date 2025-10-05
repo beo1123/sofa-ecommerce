@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
-import Container from "@components/common/Container";
+import Container from "@/components/ui/Container";
 
 export const metadata: Metadata = {
   title: "Sofa Ecommerce",
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="vi">
       <body className="min-h-screen flex flex-col bg-white text-slate-900">
         {/* Header is a client component (handles mobile toggle) */}
-        <Header cartCount={0} />
+        <Header cartCount={3} />
 
         {/* Page container */}
         <Container className="flex-1">
