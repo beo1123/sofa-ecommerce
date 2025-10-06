@@ -2,6 +2,7 @@
   "name": "sofa-ecommerce",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "prepare": "husky",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -11,13 +12,15 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "echo \"No tests yet\""
+    "test": "echo \"No tests yet\"",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev --name init --schema=prisma/schema.prisma",
+    "prisma:studio": "prisma studio"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --ext .js,.jsx,.ts,.tsx",
+      "eslint --fix",
       "prettier --write",
-      "pnpm lint:fix",
       "git add"
     ],
     "*.{json,md,css,scss,html}": [
@@ -26,7 +29,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@prisma/client": "^6.16.3",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.544.0",
     "next": "15.5.4",
@@ -50,6 +55,7 @@
     "eslint": "^9.36.0",
     "eslint-config-next": "15.5.4",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -58,6 +64,7 @@
     "lint-staged": "^16.2.3",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "prisma": "^6.16.3",
     "tailwindcss": "^4.1.14",
     "typescript": "^5"
   }

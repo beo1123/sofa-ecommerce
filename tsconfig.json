@@ -3,24 +3,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@features/*": [
-        "features/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@store/*": [
-        "store/*"
-      ],
-      "@types/*": [
-        "types/*"
-      ]
+      "@/*": ["*"],
+      "@components/*": ["components/*"],
+      "@features/*": ["features/*"],
+      "@lib/*": ["lib/*"],
+      "@store/*": ["store/*"],
+      "@types/*": ["types/*"]
     },
     "plugins": [
       {
@@ -28,13 +16,6 @@
       }
     ]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

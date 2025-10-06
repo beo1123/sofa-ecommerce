@@ -1,0 +1,390 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/prisma_client"
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/**
+ * Enums
+ */
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum OrderStatus {
+  CREATED
+  PENDING_PAYMENT
+  PAID
+  FAILED_PAYMENT
+  COD_PENDING
+  COD_COMPLETED
+  FULFILLED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  VNPAY
+  COD
+  WALLET
+  OTHER
+}
+
+enum CouponType {
+  PERCENT
+  FIXED
+  BOGO
+}
+
+enum RefundStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum ReturnStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  RECEIVED
+}
+
+/**
+ * Core models
+ */
+
+model User {
+  id          Int        @id @default(autoincrement())
+  email       String     @unique
+  username    String?    @unique
+  password    String? // hashed password (if using email/password)
+  displayName String?
+  // relationship to roles via join table
+  userRoles   UserRole[]
+  addresses   Address[]
+  wishlist    Wishlist?
+  reviews     Review[]
+  orders      Order[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  lastLogin   DateTime?
+  AuditLog    AuditLog[]
+
+  @@index([email], map: "idx_user_email")
+}
+
+model Role {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique // e.g. ADMIN, PRODUCT_MANAGER, ORDER_MANAGER, CUSTOMER
+  userRoles UserRole[]
+}
+
+model UserRole {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int
+
+  @@unique([userId, roleId], map: "uq_user_role")
+  @@index([roleId], map: "idx_userrole_role")
+}
+
+/**
+ * Products, Variants, Inventory (SKU)
+ */
+model Product {
+  id               Int              @id @default(autoincrement())
+  title            String
+  slug             String           @unique
+  shortDescription String?
+  description      String?
+  status           ProductStatus    @default(PUBLISHED)
+  metadata         Json?
+  variants         ProductVariant[]
+  reviews          Review[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  OrderItem        OrderItem[]
+  WishlistItem     WishlistItem[]
+
+  // Basic indexes to help searches/filters — for full-text search, add a migration with a GIN tsvector index.
+  @@index([title], map: "idx_product_title")
+  @@index([slug], map: "idx_product_slug")
+  @@index([status], map: "idx_product_status")
+  @@index([createdAt], map: "idx_product_createdAt")
+  @@index([title, shortDescription], map: "idx_product_title_shortdesc")
+}
+
+model ProductVariant {
+  id             Int         @id @default(autoincrement())
+  product        Product     @relation(fields: [productId], references: [id])
+  productId      Int
+  name           String // e.g. "Large / Leather / Gray"
+  skuPrefix      String? // optional: generate skus with prefix
+  price          Decimal     @db.Decimal(12, 2)
+  compareAtPrice Decimal?    @db.Decimal(12, 2)
+  attributes     Json? // e.g. { color: "gray", material: "leather", size: "L" }
+  inventory      Inventory[] // SKU-level items
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  OrderItem      OrderItem[]
+
+  @@index([productId], map: "idx_variant_product")
+  @@index([name], map: "idx_variant_name")
+}
+
+model Inventory {
+  // SKU / Inventory table — one row per SKU
+  id        Int            @id @default(autoincrement())
+  sku       String         @unique
+  variant   ProductVariant @relation(fields: [variantId], references: [id])
+  variantId Int
+  quantity  Int            @default(0)
+  reserved  Int            @default(0) // reserved by pending orders
+  location  String? // warehouse location code
+  metadata  Json?
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([sku], map: "idx_inventory_sku")
+  @@index([variantId], map: "idx_inventory_variant")
+}
+
+/**
+ * Orders & payments
+ */
+model Order {
+  id                Int             @id @default(autoincrement())
+  orderNumber       String          @unique // e.g. "SOFA-20251014-0001"
+  user              User?           @relation(fields: [userId], references: [id])
+  userId            Int?
+  status            OrderStatus     @default(CREATED)
+  subtotal          Decimal         @db.Decimal(12, 2)
+  shipping          Decimal         @default(0) @db.Decimal(12, 2)
+  tax               Decimal         @default(0) @db.Decimal(12, 2)
+  total             Decimal         @db.Decimal(12, 2)
+  paymentMethod     PaymentMethod
+  paymentMeta       PaymentMeta?
+  items             OrderItem[]
+  shippingAddress   Address?        @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  shippingAddressId Int?
+  billingAddress    Address?        @relation("BillingAddress", fields: [billingAddressId], references: [id])
+  billingAddressId  Int?
+  coupon            Coupon?         @relation(fields: [couponId], references: [id])
+  couponId          Int?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  ReturnRequest     ReturnRequest[]
+  Refund            Refund[]
+
+  @@index([orderNumber], map: "idx_order_number")
+  @@index([userId], map: "idx_order_user")
+  @@index([status], map: "idx_order_status")
+  @@index([createdAt], map: "idx_order_createdAt")
+}
+
+model OrderItem {
+  id            Int             @id @default(autoincrement())
+  order         Order           @relation(fields: [orderId], references: [id])
+  orderId       Int
+  product       Product?        @relation(fields: [productId], references: [id])
+  productId     Int?
+  variant       ProductVariant? @relation(fields: [variantId], references: [id])
+  variantId     Int?
+  sku           String? // snapshot of SKU at purchase time
+  name          String // product title snapshot
+  price         Decimal         @db.Decimal(12, 2) // price per unit at purchase time
+  quantity      Int
+  total         Decimal         @db.Decimal(12, 2) // price * quantity (snapshot)
+  returned      Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  ReturnRequest ReturnRequest[]
+
+  @@index([orderId], map: "idx_orderitem_order")
+  @@index([productId], map: "idx_orderitem_product")
+}
+
+/**
+ * Coupons / Promotions
+ */
+model Coupon {
+  id           Int        @id @default(autoincrement())
+  code         String     @unique
+  type         CouponType
+  // For FIXED: amount used; for PERCENT: percent (0-100) field is used
+  amount       Decimal?   @db.Decimal(12, 2)
+  percent      Int? // store integer percent (0..100)
+  description  String?
+  startsAt     DateTime?
+  expiresAt    DateTime?
+  usageLimit   Int? // global usage limit
+  usagePerUser Int? // per-user usage limit
+  timesUsed    Int        @default(0)
+  active       Boolean    @default(true)
+  metadata     Json?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  Order        Order[]
+
+  @@index([code], map: "idx_coupon_code")
+}
+
+/**
+ * Reviews
+ */
+model Review {
+  id        Int      @id @default(autoincrement())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  rating    Int // 1-5
+  title     String?
+  body      String?
+  approved  Boolean  @default(false) // moderation flag
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId], map: "uq_review_user_product")
+  @@index([productId], map: "idx_review_product")
+  @@index([userId], map: "idx_review_user")
+}
+
+/**
+ * Wishlist
+ */
+model Wishlist {
+  id        Int            @id @default(autoincrement())
+  user      User           @relation(fields: [userId], references: [id])
+  userId    Int            @unique // one wishlist per user
+  items     WishlistItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model WishlistItem {
+  id         Int      @id @default(autoincrement())
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
+  wishlistId Int
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  variantId  Int? // optional variant reference snapshot (if needed)
+  createdAt  DateTime @default(now())
+
+  @@unique([wishlistId, productId, variantId], map: "uq_wishlist_item")
+  @@index([productId], map: "idx_wishlist_product")
+}
+
+/**
+ * Addresses
+ */
+model Address {
+  id                Int      @id @default(autoincrement())
+  user              User?    @relation(fields: [userId], references: [id])
+  userId            Int?
+  fullName          String
+  line1             String
+  line2             String?
+  city              String
+  province          String?
+  postalCode        String?
+  country           String
+  phone             String?
+  metadata          Json?
+  isDefaultShipping Boolean  @default(false)
+  isDefaultBilling  Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // back relations for Order (named relations)
+  ordersShipping Order[] @relation("ShippingAddress")
+  ordersBilling  Order[] @relation("BillingAddress")
+
+  @@index([userId], map: "idx_address_user")
+}
+
+/**
+ * Audit logs / admin actions
+ */
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  actor     User?    @relation(fields: [actorId], references: [id])
+  actorId   Int?
+  action    String // e.g. "CREATE_PRODUCT", "UPDATE_ORDER"
+  entity    String // e.g. "Product", "Order"
+  entityId  String?
+  changes   Json? // diff or payload
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([actorId], map: "idx_audit_actor")
+  @@index([entity, entityId], map: "idx_audit_entity")
+}
+
+/**
+ * Returns & Refunds
+ */
+model ReturnRequest {
+  id          Int          @id @default(autoincrement())
+  order       Order        @relation(fields: [orderId], references: [id])
+  orderId     Int
+  orderItem   OrderItem    @relation(fields: [orderItemId], references: [id])
+  orderItemId Int
+  reason      String
+  status      ReturnStatus @default(PENDING)
+  // store images or evidence as JSON array of URLs
+  evidence    Json?
+  requestedAt DateTime     @default(now())
+  processedAt DateTime?
+  refund      Refund?
+  metadata    Json?
+
+  @@index([status], map: "idx_return_status")
+  @@index([orderId], map: "idx_return_order")
+}
+
+model Refund {
+  id              Int            @id @default(autoincrement())
+  order           Order          @relation(fields: [orderId], references: [id])
+  orderId         Int
+  returnRequest   ReturnRequest? @relation(fields: [returnRequestId], references: [id])
+  returnRequestId Int?           @unique
+  amount          Decimal        @db.Decimal(12, 2)
+  method          String // e.g. "VNPAY_REFUND", "MANUAL"
+  status          RefundStatus   @default(PENDING)
+  providerRef     String?
+  metadata        Json?
+  createdAt       DateTime       @default(now())
+  processedAt     DateTime?
+
+  @@index([orderId], map: "idx_refund_order")
+}
+
+/**
+ * Payment metadata (one-to-one with Order)
+ */
+model PaymentMeta {
+  id            Int       @id @default(autoincrement())
+  order         Order     @relation(fields: [orderId], references: [id])
+  orderId       Int       @unique
+  provider      String // e.g. "VNPAY"
+  transactionId String?
+  status        String // provider status (raw)
+  amount        Decimal   @db.Decimal(12, 2)
+  raw           Json?
+  capturedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([transactionId], map: "idx_payment_transaction")
+}
