@@ -3,14 +3,7 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-const {
-  Decimal,
-  objectEnumValues,
-  makeStrictEnum,
-  Public,
-  getRuntime,
-  skip,
-} = require("./runtime/index-browser.js");
+const { Decimal, objectEnumValues, makeStrictEnum, Public, getRuntime, skip } = require("./runtime/index-browser.js");
 
 const Prisma = {};
 
@@ -146,6 +139,16 @@ exports.Prisma.ProductScalarFieldEnum = {
   description: "description",
   status: "status",
   metadata: "metadata",
+  createdAt: "createdAt",
+  updatedAt: "updatedAt",
+};
+
+exports.Prisma.ProductImageScalarFieldEnum = {
+  id: "id",
+  url: "url",
+  alt: "alt",
+  isPrimary: "isPrimary",
+  productId: "productId",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
 };
@@ -392,6 +395,7 @@ exports.Prisma.ModelName = {
   Role: "Role",
   UserRole: "UserRole",
   Product: "Product",
+  ProductImage: "ProductImage",
   ProductVariant: "ProductVariant",
   Inventory: "Inventory",
   Order: "Order",

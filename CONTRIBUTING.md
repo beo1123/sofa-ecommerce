@@ -1,4 +1,3 @@
-
 # Contributing to Sofa Ecommerce
 
 Cảm ơn bạn đã muốn đóng góp! Dưới đây là hướng dẫn để đóng góp trơn tru.
@@ -37,6 +36,8 @@ Husky + commitlint sẽ kiểm tra commit message. Đảm bảo `pnpm prepare` �
 - Unit tests: Jest + React Testing Library (placeholder)
 - E2E tests: Playwright (placeholder)
 - Run tests:
+
 ```bash
 pnpm test
 pnpm test:e2e
+```

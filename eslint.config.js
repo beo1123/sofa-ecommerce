@@ -57,7 +57,20 @@ export default [
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "unused-imports/no-unused-imports": "warn",
-      "prettier/prettier": ["error"],
+      "prettier/prettier": [
+        "error",
+        {
+          semi: true,
+          singleQuote: false,
+          tabWidth: 2,
+          useTabs: false,
+          trailingComma: "es5",
+          printWidth: 120,
+          endOfLine: "crlf",
+          jsxSingleQuote: false,
+          bracketSameLine: true,
+        },
+      ],
     },
   },
 

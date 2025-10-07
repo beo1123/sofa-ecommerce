@@ -7,9 +7,7 @@ type Props = {
 };
 
 export default function Divider({ className = "", vertical = false }: Props) {
-  const base = vertical
-    ? "w-px h-full bg-[var(--color-brand-100)]"
-    : "h-px w-full bg-[var(--color-brand-100)]";
+  const base = vertical ? "w-px h-full bg-[var(--color-brand-100)]" : "h-px w-full bg-[var(--color-brand-100)]";
 
   return <div className={`${base} ${className}`} role="separator" />;
 }

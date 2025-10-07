@@ -28,16 +28,19 @@ export type Role = $Result.DefaultSelection<Prisma.$RolePayload>;
 export type UserRole = $Result.DefaultSelection<Prisma.$UserRolePayload>;
 /**
  * Model Product
- * *
- *  * Products, Variants, Inventory (SKU)
+ *
  */
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>;
+/**
+ * Model ProductImage
+ *
+ */
+export type ProductImage = $Result.DefaultSelection<Prisma.$ProductImagePayload>;
 /**
  * Model ProductVariant
  *
  */
-export type ProductVariant =
-  $Result.DefaultSelection<Prisma.$ProductVariantPayload>;
+export type ProductVariant = $Result.DefaultSelection<Prisma.$ProductVariantPayload>;
 /**
  * Model Inventory
  *
@@ -45,8 +48,7 @@ export type ProductVariant =
 export type Inventory = $Result.DefaultSelection<Prisma.$InventoryPayload>;
 /**
  * Model Order
- * *
- *  * Orders & payments
+ *
  */
 export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>;
 /**
@@ -56,47 +58,39 @@ export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>;
 export type OrderItem = $Result.DefaultSelection<Prisma.$OrderItemPayload>;
 /**
  * Model Coupon
- * *
- *  * Coupons / Promotions
+ *
  */
 export type Coupon = $Result.DefaultSelection<Prisma.$CouponPayload>;
 /**
  * Model Review
- * *
- *  * Reviews
+ *
  */
 export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>;
 /**
  * Model Wishlist
- * *
- *  * Wishlist
+ *
  */
 export type Wishlist = $Result.DefaultSelection<Prisma.$WishlistPayload>;
 /**
  * Model WishlistItem
  *
  */
-export type WishlistItem =
-  $Result.DefaultSelection<Prisma.$WishlistItemPayload>;
+export type WishlistItem = $Result.DefaultSelection<Prisma.$WishlistItemPayload>;
 /**
  * Model Address
- * *
- *  * Addresses
+ *
  */
 export type Address = $Result.DefaultSelection<Prisma.$AddressPayload>;
 /**
  * Model AuditLog
- * *
- *  * Audit logs / admin actions
+ *
  */
 export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>;
 /**
  * Model ReturnRequest
- * *
- *  * Returns & Refunds
+ *
  */
-export type ReturnRequest =
-  $Result.DefaultSelection<Prisma.$ReturnRequestPayload>;
+export type ReturnRequest = $Result.DefaultSelection<Prisma.$ReturnRequestPayload>;
 /**
  * Model Refund
  *
@@ -104,8 +98,7 @@ export type ReturnRequest =
 export type Refund = $Result.DefaultSelection<Prisma.$RefundPayload>;
 /**
  * Model PaymentMeta
- * *
- *  * Payment metadata (one-to-one with Order)
+ *
  */
 export type PaymentMeta = $Result.DefaultSelection<Prisma.$PaymentMetaPayload>;
 
@@ -119,8 +112,7 @@ export namespace $Enums {
     ARCHIVED: "ARCHIVED";
   };
 
-  export type ProductStatus =
-    (typeof ProductStatus)[keyof typeof ProductStatus];
+  export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus];
 
   export const OrderStatus: {
     CREATED: "CREATED";
@@ -143,8 +135,7 @@ export namespace $Enums {
     OTHER: "OTHER";
   };
 
-  export type PaymentMethod =
-    (typeof PaymentMethod)[keyof typeof PaymentMethod];
+  export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod];
 
   export const CouponType: {
     PERCENT: "PERCENT";
@@ -236,14 +227,10 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(
-    optionsArg?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>,
-  );
+  constructor(optionsArg?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
   $on<V extends U>(
     eventType: V,
-    callback: (
-      event: V extends "query" ? Prisma.QueryEvent : Prisma.LogEvent,
-    ) => void,
+    callback: (event: V extends "query" ? Prisma.QueryEvent : Prisma.LogEvent) => void
   ): PrismaClient;
 
   /**
@@ -265,10 +252,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>;
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -280,10 +264,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>;
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -294,10 +275,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>;
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -309,10 +287,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>;
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -329,18 +304,16 @@ export class PrismaClient<
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(
     arg: [...P],
-    options?: { isolationLevel?: Prisma.TransactionIsolationLevel },
+    options?: { isolationLevel?: Prisma.TransactionIsolationLevel }
   ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>;
 
   $transaction<R>(
-    fn: (
-      prisma: Omit<PrismaClient, runtime.ITXClientDenyList>,
-    ) => $Utils.JsPromise<R>,
+    fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>,
     options?: {
       maxWait?: number;
       timeout?: number;
       isolationLevel?: Prisma.TransactionIsolationLevel;
-    },
+    }
   ): $Utils.JsPromise<R>;
 
   $extends: $Extensions.ExtendsHook<
@@ -394,6 +367,16 @@ export class PrismaClient<
    * ```
    */
   get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productImage`: Exposes CRUD operations for the **ProductImage** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more ProductImages
+   * const productImages = await prisma.productImage.findMany()
+   * ```
+   */
+  get productImage(): Prisma.ProductImageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.productVariant`: Exposes CRUD operations for the **ProductVariant** model.
@@ -677,15 +660,12 @@ export namespace Prisma {
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> =
-    T extends PromiseLike<infer U> ? U : T;
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
 
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<
-    T extends (...args: any) => $Utils.JsPromise<any>,
-  > = PromiseType<ReturnType<T>>;
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>;
 
   /**
    * From T, pick a set of properties whose keys are in the union K
@@ -741,11 +721,7 @@ export namespace Prisma {
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> = T extends object
-    ? U extends object
-      ? (Without<T, U> & U) | (Without<U, T> & T)
-      : U
-    : T;
+  type XOR<T, U> = T extends object ? (U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : U) : T;
 
   /**
    * Is T a Record?
@@ -757,7 +733,7 @@ export namespace Prisma {
         ? False
         : T extends Uint8Array
           ? False
-          : T extends bigint
+          : T extends BigInt
             ? False
             : T extends object
               ? True
@@ -780,20 +756,16 @@ export namespace Prisma {
 
   type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>;
 
-  type EitherLoose<O extends object, K extends Key> = ComputeRaw<
-    __Either<O, K>
-  >;
+  type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>;
 
   type _Either<O extends object, K extends Key, strict extends Boolean> = {
     1: EitherStrict<O, K>;
     0: EitherLoose<O, K>;
   }[strict];
 
-  type Either<
-    O extends object,
-    K extends Key,
-    strict extends Boolean = 1,
-  > = O extends unknown ? _Either<O, K, strict> : never;
+  type Either<O extends object, K extends Key, strict extends Boolean = 1> = O extends unknown
+    ? _Either<O, K, strict>
+    : never;
 
   export type Union = any;
 
@@ -802,9 +774,7 @@ export namespace Prisma {
   } & {};
 
   /** Helper Types for "Merge" **/
-  export type IntersectOf<U extends Union> = (
-    U extends unknown ? (k: U) => void : never
-  ) extends (k: infer I) => void
+  export type IntersectOf<U extends Union> = (U extends unknown ? (k: U) => void : never) extends (k: infer I) => void
     ? I
     : never;
 
@@ -822,18 +792,10 @@ export namespace Prisma {
   >;
 
   type Key = string | number | symbol;
-  type AtBasic<O extends object, K extends Key> = K extends keyof O
-    ? O[K]
-    : never;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
   type AtStrict<O extends object, K extends Key> = O[K & keyof O];
-  type AtLoose<O extends object, K extends Key> = O extends unknown
-    ? AtStrict<O, K>
-    : never;
-  export type At<
-    O extends object,
-    K extends Key,
-    strict extends Boolean = 1,
-  > = {
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
     1: AtStrict<O, K>;
     0: AtLoose<O, K>;
   }[strict];
@@ -858,15 +820,11 @@ export namespace Prisma {
   // this type assumes the passed object is entirely optional
   type AtLeast<O extends object, K extends string> = NoExpand<
     O extends unknown
-      ?
-          | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-          | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
+      ? (K extends keyof O ? { [P in K]: O[P] } & O : O) | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
       : never
   >;
 
-  type _Strict<U, _U = U> = U extends unknown
-    ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
-    : never;
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
 
   export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
   /** End Helper Types for "Merge" **/
@@ -899,9 +857,7 @@ export namespace Prisma {
       ? 1
       : 0;
 
-  export type Has<U extends Union, U1 extends Union> = Not<
-    Extends<Exclude<U1, U>, U1>
-  >;
+  export type Has<U extends Union, U1 extends Union> = Not<Extends<Exclude<U1, U>, U1>>;
 
   export type Or<B1 extends Boolean, B2 extends Boolean> = {
     0: {
@@ -930,23 +886,15 @@ export namespace Prisma {
       }
     : never;
 
-  type FieldPaths<
-    T,
-    U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">,
-  > = IsObject<T> extends True ? U : T;
+  type FieldPaths<T, U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">> = IsObject<T> extends True ? U : T;
 
   type GetHavingFields<T> = {
-    [K in keyof T]: Or<
-      Or<Extends<"OR", K>, Extends<"AND", K>>,
-      Extends<"NOT", K>
-    > extends True
+    [K in keyof T]: Or<Or<Extends<"OR", K>, Extends<"AND", K>>, Extends<"NOT", K>> extends True
       ? // infer is only needed to not hit TS limit
         // based on the brilliant idea of Pierre-Antoine Mills
         // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
         T[K] extends infer TK
-        ? GetHavingFields<
-            UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never
-          >
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
         : never
       : {} extends FieldPaths<T[K]>
         ? never
@@ -963,29 +911,23 @@ export namespace Prisma {
   /**
    * Like `Pick`, but additionally can also accept an array of keys
    */
-  type PickEnumerable<
-    T,
-    K extends Enumerable<keyof T> | keyof T,
-  > = Prisma__Pick<T, MaybeTupleToUnion<K>>;
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>;
 
   /**
    * Exclude all keys with underscores
    */
-  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}`
-    ? never
-    : T;
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T;
 
   export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>;
 
-  type FieldRefInputType<Model, FieldType> = Model extends never
-    ? never
-    : FieldRef<Model, FieldType>;
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>;
 
   export const ModelName: {
     User: "User";
     Role: "Role";
     UserRole: "UserRole";
     Product: "Product";
+    ProductImage: "ProductImage";
     ProductVariant: "ProductVariant";
     Inventory: "Inventory";
     Order: "Order";
@@ -1008,20 +950,14 @@ export namespace Prisma {
   };
 
   interface TypeMapCb<ClientOptions = {}>
-    extends $Utils.Fn<
-      { extArgs: $Extensions.InternalArgs },
-      $Utils.Record<string, any>
-    > {
+    extends $Utils.Fn<{ extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
     returns: Prisma.TypeMap<
       this["params"]["extArgs"],
       ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}
     >;
   }
 
-  export type TypeMap<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {},
-  > = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
     globalOmitOptions: {
       omit: GlobalOmitOptions;
     };
@@ -1031,6 +967,7 @@ export namespace Prisma {
         | "role"
         | "userRole"
         | "product"
+        | "productImage"
         | "productVariant"
         | "inventory"
         | "order"
@@ -1343,6 +1280,80 @@ export namespace Prisma {
           };
         };
       };
+      ProductImage: {
+        payload: Prisma.$ProductImagePayload<ExtArgs>;
+        fields: Prisma.ProductImageFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.ProductImageFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.ProductImageFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>;
+          };
+          findFirst: {
+            args: Prisma.ProductImageFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.ProductImageFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>;
+          };
+          findMany: {
+            args: Prisma.ProductImageFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[];
+          };
+          create: {
+            args: Prisma.ProductImageCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>;
+          };
+          createMany: {
+            args: Prisma.ProductImageCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.ProductImageCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[];
+          };
+          delete: {
+            args: Prisma.ProductImageDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>;
+          };
+          update: {
+            args: Prisma.ProductImageUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>;
+          };
+          deleteMany: {
+            args: Prisma.ProductImageDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.ProductImageUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.ProductImageUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[];
+          };
+          upsert: {
+            args: Prisma.ProductImageUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>;
+          };
+          aggregate: {
+            args: Prisma.ProductImageAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateProductImage>;
+          };
+          groupBy: {
+            args: Prisma.ProductImageGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<ProductImageGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.ProductImageCountArgs<ExtArgs>;
+            result: $Utils.Optional<ProductImageCountAggregateOutputType> | number;
+          };
+        };
+      };
       ProductVariant: {
         payload: Prisma.$ProductVariantPayload<ExtArgs>;
         fields: Prisma.ProductVariantFieldRefs;
@@ -1413,9 +1424,7 @@ export namespace Prisma {
           };
           count: {
             args: Prisma.ProductVariantCountArgs<ExtArgs>;
-            result:
-              | $Utils.Optional<ProductVariantCountAggregateOutputType>
-              | number;
+            result: $Utils.Optional<ProductVariantCountAggregateOutputType> | number;
           };
         };
       };
@@ -1933,9 +1942,7 @@ export namespace Prisma {
           };
           count: {
             args: Prisma.WishlistItemCountArgs<ExtArgs>;
-            result:
-              | $Utils.Optional<WishlistItemCountAggregateOutputType>
-              | number;
+            result: $Utils.Optional<WishlistItemCountAggregateOutputType> | number;
           };
         };
       };
@@ -2157,9 +2164,7 @@ export namespace Prisma {
           };
           count: {
             args: Prisma.ReturnRequestCountArgs<ExtArgs>;
-            result:
-              | $Utils.Optional<ReturnRequestCountAggregateOutputType>
-              | number;
+            result: $Utils.Optional<ReturnRequestCountAggregateOutputType> | number;
           };
         };
       };
@@ -2307,9 +2312,7 @@ export namespace Prisma {
           };
           count: {
             args: Prisma.PaymentMetaCountArgs<ExtArgs>;
-            result:
-              | $Utils.Optional<PaymentMetaCountAggregateOutputType>
-              | number;
+            result: $Utils.Optional<PaymentMetaCountAggregateOutputType> | number;
           };
         };
       };
@@ -2337,11 +2340,7 @@ export namespace Prisma {
       };
     };
   };
-  export const defineExtension: $Extensions.ExtendsHook<
-    "define",
-    Prisma.TypeMapCb,
-    $Extensions.DefaultArgs
-  >;
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>;
   export type DefaultPrismaClient = PrismaClient;
   export type ErrorFormat = "pretty" | "colorless" | "minimal";
   export interface PrismaClientOptions {
@@ -2417,6 +2416,7 @@ export namespace Prisma {
     role?: RoleOmit;
     userRole?: UserRoleOmit;
     product?: ProductOmit;
+    productImage?: ProductImageOmit;
     productVariant?: ProductVariantOmit;
     inventory?: InventoryOmit;
     order?: OrderOmit;
@@ -2441,12 +2441,9 @@ export namespace Prisma {
 
   export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
 
-  export type GetLogType<T> = CheckIsLogLevel<
-    T extends LogDefinition ? T["level"] : T
-  >;
+  export type GetLogType<T> = CheckIsLogLevel<T extends LogDefinition ? T["level"] : T>;
 
-  export type GetEvents<T extends any[]> =
-    T extends Array<LogLevel | LogDefinition> ? GetLogType<T[number]> : never;
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition> ? GetLogType<T[number]> : never;
 
   export type QueryEvent = {
     timestamp: Date;
@@ -2487,17 +2484,12 @@ export namespace Prisma {
     | "groupBy";
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(
-    log: Array<LogLevel | LogDefinition>,
-  ): LogLevel | undefined;
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
 
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<
-    Prisma.DefaultPrismaClient,
-    runtime.ITXClientDenyList
-  >;
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>;
 
   export type Datasource = {
     url?: string;
@@ -2519,9 +2511,7 @@ export namespace Prisma {
     AuditLog: number;
   };
 
-  export type UserCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs;
     addresses?: boolean | UserCountOutputTypeCountAddressesArgs;
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs;
@@ -2533,9 +2523,7 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserCountOutputType
      */
@@ -2563,29 +2551,25 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountReviewsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    where?: ReviewWhereInput;
-  };
+  export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      where?: ReviewWhereInput;
+    };
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountOrdersArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput;
   };
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAuditLogArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    where?: AuditLogWhereInput;
-  };
+  export type UserCountOutputTypeCountAuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      where?: AuditLogWhereInput;
+    };
 
   /**
    * Count Type RoleCountOutputType
@@ -2595,9 +2579,7 @@ export namespace Prisma {
     userRoles: number;
   };
 
-  export type RoleCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | RoleCountOutputTypeCountUserRolesArgs;
   };
 
@@ -2605,9 +2587,7 @@ export namespace Prisma {
   /**
    * RoleCountOutputType without action
    */
-  export type RoleCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the RoleCountOutputType
      */
@@ -2628,15 +2608,15 @@ export namespace Prisma {
    */
 
   export type ProductCountOutputType = {
+    images: number;
     variants: number;
     reviews: number;
     OrderItem: number;
     WishlistItem: number;
   };
 
-  export type ProductCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    images?: boolean | ProductCountOutputTypeCountImagesArgs;
     variants?: boolean | ProductCountOutputTypeCountVariantsArgs;
     reviews?: boolean | ProductCountOutputTypeCountReviewsArgs;
     OrderItem?: boolean | ProductCountOutputTypeCountOrderItemArgs;
@@ -2647,13 +2627,20 @@ export namespace Prisma {
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCountOutputType
      */
     select?: ProductCountOutputTypeSelect<ExtArgs> | null;
+  };
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountImagesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: ProductImageWhereInput;
   };
 
   /**
@@ -2701,12 +2688,11 @@ export namespace Prisma {
     OrderItem: number;
   };
 
-  export type ProductVariantCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    inventory?: boolean | ProductVariantCountOutputTypeCountInventoryArgs;
-    OrderItem?: boolean | ProductVariantCountOutputTypeCountOrderItemArgs;
-  };
+  export type ProductVariantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      inventory?: boolean | ProductVariantCountOutputTypeCountInventoryArgs;
+      OrderItem?: boolean | ProductVariantCountOutputTypeCountOrderItemArgs;
+    };
 
   // Custom InputTypes
   /**
@@ -2749,9 +2735,7 @@ export namespace Prisma {
     Refund: number;
   };
 
-  export type OrderCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | OrderCountOutputTypeCountItemsArgs;
     ReturnRequest?: boolean | OrderCountOutputTypeCountReturnRequestArgs;
     Refund?: boolean | OrderCountOutputTypeCountRefundArgs;
@@ -2761,9 +2745,7 @@ export namespace Prisma {
   /**
    * OrderCountOutputType without action
    */
-  export type OrderCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderCountOutputType
      */
@@ -2773,9 +2755,7 @@ export namespace Prisma {
   /**
    * OrderCountOutputType without action
    */
-  export type OrderCountOutputTypeCountItemsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemWhereInput;
   };
 
@@ -2791,11 +2771,10 @@ export namespace Prisma {
   /**
    * OrderCountOutputType without action
    */
-  export type OrderCountOutputTypeCountRefundArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    where?: RefundWhereInput;
-  };
+  export type OrderCountOutputTypeCountRefundArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      where?: RefundWhereInput;
+    };
 
   /**
    * Count Type OrderItemCountOutputType
@@ -2805,9 +2784,7 @@ export namespace Prisma {
     ReturnRequest: number;
   };
 
-  export type OrderItemCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ReturnRequest?: boolean | OrderItemCountOutputTypeCountReturnRequestArgs;
   };
 
@@ -2815,14 +2792,13 @@ export namespace Prisma {
   /**
    * OrderItemCountOutputType without action
    */
-  export type OrderItemCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    /**
-     * Select specific fields to fetch from the OrderItemCountOutputType
-     */
-    select?: OrderItemCountOutputTypeSelect<ExtArgs> | null;
-  };
+  export type OrderItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the OrderItemCountOutputType
+       */
+      select?: OrderItemCountOutputTypeSelect<ExtArgs> | null;
+    };
 
   /**
    * OrderItemCountOutputType without action
@@ -2841,9 +2817,7 @@ export namespace Prisma {
     Order: number;
   };
 
-  export type CouponCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | CouponCountOutputTypeCountOrderArgs;
   };
 
@@ -2851,9 +2825,7 @@ export namespace Prisma {
   /**
    * CouponCountOutputType without action
    */
-  export type CouponCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the CouponCountOutputType
      */
@@ -2863,11 +2835,10 @@ export namespace Prisma {
   /**
    * CouponCountOutputType without action
    */
-  export type CouponCountOutputTypeCountOrderArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    where?: OrderWhereInput;
-  };
+  export type CouponCountOutputTypeCountOrderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      where?: OrderWhereInput;
+    };
 
   /**
    * Count Type WishlistCountOutputType
@@ -2877,9 +2848,7 @@ export namespace Prisma {
     items: number;
   };
 
-  export type WishlistCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | WishlistCountOutputTypeCountItemsArgs;
   };
 
@@ -2887,9 +2856,7 @@ export namespace Prisma {
   /**
    * WishlistCountOutputType without action
    */
-  export type WishlistCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistCountOutputType
      */
@@ -2914,9 +2881,7 @@ export namespace Prisma {
     ordersBilling: number;
   };
 
-  export type AddressCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ordersShipping?: boolean | AddressCountOutputTypeCountOrdersShippingArgs;
     ordersBilling?: boolean | AddressCountOutputTypeCountOrdersBillingArgs;
   };
@@ -2925,9 +2890,7 @@ export namespace Prisma {
   /**
    * AddressCountOutputType without action
    */
-  export type AddressCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AddressCountOutputType
      */
@@ -3052,9 +3015,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type UserAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which User to aggregate.
      */
@@ -3123,13 +3084,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateUser[P]>;
   };
 
-  export type UserGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput;
-    orderBy?:
-      | UserOrderByWithAggregationInput
-      | UserOrderByWithAggregationInput[];
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[];
     by: UserScalarFieldEnum[] | UserScalarFieldEnum;
     having?: UserScalarWhereWithAggregatesInput;
     take?: number;
@@ -3169,9 +3126,7 @@ export namespace Prisma {
     >
   >;
 
-  export type UserSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
     {
       id?: boolean;
       email?: boolean;
@@ -3192,37 +3147,35 @@ export namespace Prisma {
     ExtArgs["result"]["user"]
   >;
 
-  export type UserSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      email?: boolean;
-      username?: boolean;
-      password?: boolean;
-      displayName?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      lastLogin?: boolean;
-    },
-    ExtArgs["result"]["user"]
-  >;
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        email?: boolean;
+        username?: boolean;
+        password?: boolean;
+        displayName?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        lastLogin?: boolean;
+      },
+      ExtArgs["result"]["user"]
+    >;
 
-  export type UserSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      email?: boolean;
-      username?: boolean;
-      password?: boolean;
-      displayName?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      lastLogin?: boolean;
-    },
-    ExtArgs["result"]["user"]
-  >;
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        email?: boolean;
+        username?: boolean;
+        password?: boolean;
+        displayName?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        lastLogin?: boolean;
+      },
+      ExtArgs["result"]["user"]
+    >;
 
   export type UserSelectScalar = {
     id?: boolean;
@@ -3235,22 +3188,11 @@ export namespace Prisma {
     lastLogin?: boolean;
   };
 
-  export type UserOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "email"
-    | "username"
-    | "password"
-    | "displayName"
-    | "createdAt"
-    | "updatedAt"
-    | "lastLogin",
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    "id" | "email" | "username" | "password" | "displayName" | "createdAt" | "updatedAt" | "lastLogin",
     ExtArgs["result"]["user"]
   >;
-  export type UserInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | User$userRolesArgs<ExtArgs>;
     addresses?: boolean | User$addressesArgs<ExtArgs>;
     wishlist?: boolean | User$wishlistArgs<ExtArgs>;
@@ -3259,16 +3201,10 @@ export namespace Prisma {
     AuditLog?: boolean | User$AuditLogArgs<ExtArgs>;
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type UserIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
-  export type UserIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
 
-  export type $UserPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User";
     objects: {
       userRoles: Prisma.$UserRolePayload<ExtArgs>[];
@@ -3294,12 +3230,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> =
-    $Result.GetResult<Prisma.$UserPayload, S>;
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<
+    Prisma.$UserPayload,
+    S
+  >;
 
-  type UserCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<UserFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    UserFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: UserCountAggregateInputType | true;
   };
 
@@ -3307,10 +3246,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["User"];
-      meta: { name: "User" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["User"]; meta: { name: "User" } };
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -3323,14 +3259,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends UserFindUniqueArgs>(
-      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -3349,14 +3280,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -3376,14 +3302,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends UserFindFirstArgs>(
-      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -3404,14 +3325,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -3434,15 +3350,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends UserFindManyArgs>(
-      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a User.
@@ -3457,14 +3366,9 @@ export namespace Prisma {
      *
      */
     create<T extends UserCreateArgs>(
-      args: SelectSubset<T, UserCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -3483,7 +3387,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends UserCreateManyArgs>(
-      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -3509,14 +3413,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends UserCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -3532,14 +3431,9 @@ export namespace Prisma {
      *
      */
     delete<T extends UserDeleteArgs>(
-      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -3561,14 +3455,9 @@ export namespace Prisma {
      *
      */
     update<T extends UserUpdateArgs>(
-      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -3587,7 +3476,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends UserDeleteManyArgs>(
-      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -3608,7 +3497,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends UserUpdateManyArgs>(
-      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -3640,14 +3529,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -3668,14 +3552,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends UserUpsertArgs>(
-      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -3695,7 +3574,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+      args?: Subset<T, UserCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -3729,7 +3608,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends UserAggregateArgs>(
-      args: Subset<T, UserAggregateArgs>,
+      args: Subset<T, UserAggregateArgs>
     ): Prisma.PrismaPromise<GetUserAggregateType<T>>;
 
     /**
@@ -3752,16 +3631,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends UserGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: UserGroupByArgs["orderBy"] }
         : { orderBy?: UserGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -3775,12 +3649,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -3810,10 +3679,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetUserGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the User model
      */
@@ -3834,72 +3701,33 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     userRoles<T extends User$userRolesArgs<ExtArgs> = {}>(
-      args?: Subset<T, User$userRolesArgs<ExtArgs>>,
+      args?: Subset<T, User$userRolesArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$UserRolePayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     addresses<T extends User$addressesArgs<ExtArgs> = {}>(
-      args?: Subset<T, User$addressesArgs<ExtArgs>>,
+      args?: Subset<T, User$addressesArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$AddressPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     wishlist<T extends User$wishlistArgs<ExtArgs> = {}>(
-      args?: Subset<T, User$wishlistArgs<ExtArgs>>,
+      args?: Subset<T, User$wishlistArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(
-      args?: Subset<T, User$reviewsArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$ReviewPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, User$reviewsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     orders<T extends User$ordersArgs<ExtArgs> = {}>(
-      args?: Subset<T, User$ordersArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, User$ordersArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     AuditLog<T extends User$AuditLogArgs<ExtArgs> = {}>(
-      args?: Subset<T, User$AuditLogArgs<ExtArgs>>,
+      args?: Subset<T, User$AuditLogArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$AuditLogPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3908,14 +3736,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -3923,10 +3745,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -3955,9 +3774,7 @@ export namespace Prisma {
   /**
    * User findUnique
    */
-  export type UserFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -3979,9 +3796,7 @@ export namespace Prisma {
   /**
    * User findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4003,9 +3818,7 @@ export namespace Prisma {
   /**
    * User findFirst
    */
-  export type UserFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4057,9 +3870,7 @@ export namespace Prisma {
   /**
    * User findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4111,9 +3922,7 @@ export namespace Prisma {
   /**
    * User findMany
    */
-  export type UserFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4160,9 +3969,7 @@ export namespace Prisma {
   /**
    * User create
    */
-  export type UserCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4184,9 +3991,7 @@ export namespace Prisma {
   /**
    * User createMany
    */
-  export type UserCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Users.
      */
@@ -4197,9 +4002,7 @@ export namespace Prisma {
   /**
    * User createManyAndReturn
    */
-  export type UserCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4218,9 +4021,7 @@ export namespace Prisma {
   /**
    * User update
    */
-  export type UserUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4246,9 +4047,7 @@ export namespace Prisma {
   /**
    * User updateMany
    */
-  export type UserUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Users.
      */
@@ -4266,9 +4065,7 @@ export namespace Prisma {
   /**
    * User updateManyAndReturn
    */
-  export type UserUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4294,9 +4091,7 @@ export namespace Prisma {
   /**
    * User upsert
    */
-  export type UserUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4326,9 +4121,7 @@ export namespace Prisma {
   /**
    * User delete
    */
-  export type UserDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4350,9 +4143,7 @@ export namespace Prisma {
   /**
    * User deleteMany
    */
-  export type UserDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Users to delete
      */
@@ -4366,9 +4157,7 @@ export namespace Prisma {
   /**
    * User.userRoles
    */
-  export type User$userRolesArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type User$userRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -4382,9 +4171,7 @@ export namespace Prisma {
      */
     include?: UserRoleInclude<ExtArgs> | null;
     where?: UserRoleWhereInput;
-    orderBy?:
-      | UserRoleOrderByWithRelationInput
-      | UserRoleOrderByWithRelationInput[];
+    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[];
     cursor?: UserRoleWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -4394,9 +4181,7 @@ export namespace Prisma {
   /**
    * User.addresses
    */
-  export type User$addressesArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type User$addressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -4410,9 +4195,7 @@ export namespace Prisma {
      */
     include?: AddressInclude<ExtArgs> | null;
     where?: AddressWhereInput;
-    orderBy?:
-      | AddressOrderByWithRelationInput
-      | AddressOrderByWithRelationInput[];
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[];
     cursor?: AddressWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -4422,9 +4205,7 @@ export namespace Prisma {
   /**
    * User.wishlist
    */
-  export type User$wishlistArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type User$wishlistArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -4443,9 +4224,7 @@ export namespace Prisma {
   /**
    * User.reviews
    */
-  export type User$reviewsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type User$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -4469,9 +4248,7 @@ export namespace Prisma {
   /**
    * User.orders
    */
-  export type User$ordersArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type User$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -4495,9 +4272,7 @@ export namespace Prisma {
   /**
    * User.AuditLog
    */
-  export type User$AuditLogArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type User$AuditLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -4511,9 +4286,7 @@ export namespace Prisma {
      */
     include?: AuditLogInclude<ExtArgs> | null;
     where?: AuditLogWhereInput;
-    orderBy?:
-      | AuditLogOrderByWithRelationInput
-      | AuditLogOrderByWithRelationInput[];
+    orderBy?: AuditLogOrderByWithRelationInput | AuditLogOrderByWithRelationInput[];
     cursor?: AuditLogWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -4523,9 +4296,7 @@ export namespace Prisma {
   /**
    * User without action
    */
-  export type UserDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4600,9 +4371,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type RoleAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Role to aggregate.
      */
@@ -4671,13 +4440,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateRole[P]>;
   };
 
-  export type RoleGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RoleWhereInput;
-    orderBy?:
-      | RoleOrderByWithAggregationInput
-      | RoleOrderByWithAggregationInput[];
+    orderBy?: RoleOrderByWithAggregationInput | RoleOrderByWithAggregationInput[];
     by: RoleScalarFieldEnum[] | RoleScalarFieldEnum;
     having?: RoleScalarWhereWithAggregatesInput;
     take?: number;
@@ -4711,9 +4476,7 @@ export namespace Prisma {
     >
   >;
 
-  export type RoleSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
+  export type RoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
     {
       id?: boolean;
       name?: boolean;
@@ -4723,50 +4486,41 @@ export namespace Prisma {
     ExtArgs["result"]["role"]
   >;
 
-  export type RoleSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      name?: boolean;
-    },
-    ExtArgs["result"]["role"]
-  >;
+  export type RoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        name?: boolean;
+      },
+      ExtArgs["result"]["role"]
+    >;
 
-  export type RoleSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      name?: boolean;
-    },
-    ExtArgs["result"]["role"]
-  >;
+  export type RoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        name?: boolean;
+      },
+      ExtArgs["result"]["role"]
+    >;
 
   export type RoleSelectScalar = {
     id?: boolean;
     name?: boolean;
   };
 
-  export type RoleOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["role"]>;
-  export type RoleInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    "id" | "name",
+    ExtArgs["result"]["role"]
+  >;
+  export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | Role$userRolesArgs<ExtArgs>;
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type RoleIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
-  export type RoleIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
+  export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
+  export type RoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
 
-  export type $RolePayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $RolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Role";
     objects: {
       userRoles: Prisma.$UserRolePayload<ExtArgs>[];
@@ -4781,12 +4535,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type RoleGetPayload<S extends boolean | null | undefined | RoleDefaultArgs> =
-    $Result.GetResult<Prisma.$RolePayload, S>;
+  type RoleGetPayload<S extends boolean | null | undefined | RoleDefaultArgs> = $Result.GetResult<
+    Prisma.$RolePayload,
+    S
+  >;
 
-  type RoleCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<RoleFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type RoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    RoleFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: RoleCountAggregateInputType | true;
   };
 
@@ -4794,10 +4551,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Role"];
-      meta: { name: "Role" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Role"]; meta: { name: "Role" } };
     /**
      * Find zero or one Role that matches the filter.
      * @param {RoleFindUniqueArgs} args - Arguments to find a Role
@@ -4810,14 +4564,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends RoleFindUniqueArgs>(
-      args: SelectSubset<T, RoleFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleFindUniqueArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -4836,14 +4585,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends RoleFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, RoleFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -4863,14 +4607,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends RoleFindFirstArgs>(
-      args?: SelectSubset<T, RoleFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, RoleFindFirstArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -4891,14 +4630,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends RoleFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, RoleFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, RoleFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -4921,15 +4655,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends RoleFindManyArgs>(
-      args?: SelectSubset<T, RoleFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, RoleFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Role.
@@ -4944,14 +4671,9 @@ export namespace Prisma {
      *
      */
     create<T extends RoleCreateArgs>(
-      args: SelectSubset<T, RoleCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleCreateArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -4970,7 +4692,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends RoleCreateManyArgs>(
-      args?: SelectSubset<T, RoleCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, RoleCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -4996,14 +4718,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends RoleCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, RoleCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, RoleCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -5019,14 +4736,9 @@ export namespace Prisma {
      *
      */
     delete<T extends RoleDeleteArgs>(
-      args: SelectSubset<T, RoleDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleDeleteArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -5048,14 +4760,9 @@ export namespace Prisma {
      *
      */
     update<T extends RoleUpdateArgs>(
-      args: SelectSubset<T, RoleUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleUpdateArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -5074,7 +4781,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends RoleDeleteManyArgs>(
-      args?: SelectSubset<T, RoleDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, RoleDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -5095,7 +4802,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends RoleUpdateManyArgs>(
-      args: SelectSubset<T, RoleUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -5127,14 +4834,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends RoleUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, RoleUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -5155,14 +4857,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends RoleUpsertArgs>(
-      args: SelectSubset<T, RoleUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, RoleUpsertArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      $Result.GetResult<
-        Prisma.$RolePayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -5182,7 +4879,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends RoleCountArgs>(
-      args?: Subset<T, RoleCountArgs>,
+      args?: Subset<T, RoleCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -5216,7 +4913,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends RoleAggregateArgs>(
-      args: Subset<T, RoleAggregateArgs>,
+      args: Subset<T, RoleAggregateArgs>
     ): Prisma.PrismaPromise<GetRoleAggregateType<T>>;
 
     /**
@@ -5239,16 +4936,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends RoleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: RoleGroupByArgs["orderBy"] }
         : { orderBy?: RoleGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -5262,12 +4954,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -5297,10 +4984,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, RoleGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetRoleGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, RoleGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Role model
      */
@@ -5321,15 +5006,9 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     userRoles<T extends Role$userRolesArgs<ExtArgs> = {}>(
-      args?: Subset<T, Role$userRolesArgs<ExtArgs>>,
+      args?: Subset<T, Role$userRolesArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$UserRolePayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5338,14 +5017,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -5353,10 +5026,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -5379,9 +5049,7 @@ export namespace Prisma {
   /**
    * Role findUnique
    */
-  export type RoleFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5403,9 +5071,7 @@ export namespace Prisma {
   /**
    * Role findUniqueOrThrow
    */
-  export type RoleFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5427,9 +5093,7 @@ export namespace Prisma {
   /**
    * Role findFirst
    */
-  export type RoleFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5481,9 +5145,7 @@ export namespace Prisma {
   /**
    * Role findFirstOrThrow
    */
-  export type RoleFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5535,9 +5197,7 @@ export namespace Prisma {
   /**
    * Role findMany
    */
-  export type RoleFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5584,9 +5244,7 @@ export namespace Prisma {
   /**
    * Role create
    */
-  export type RoleCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5608,9 +5266,7 @@ export namespace Prisma {
   /**
    * Role createMany
    */
-  export type RoleCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Roles.
      */
@@ -5621,9 +5277,7 @@ export namespace Prisma {
   /**
    * Role createManyAndReturn
    */
-  export type RoleCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5642,9 +5296,7 @@ export namespace Prisma {
   /**
    * Role update
    */
-  export type RoleUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5670,9 +5322,7 @@ export namespace Prisma {
   /**
    * Role updateMany
    */
-  export type RoleUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Roles.
      */
@@ -5690,9 +5340,7 @@ export namespace Prisma {
   /**
    * Role updateManyAndReturn
    */
-  export type RoleUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5718,9 +5366,7 @@ export namespace Prisma {
   /**
    * Role upsert
    */
-  export type RoleUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5750,9 +5396,7 @@ export namespace Prisma {
   /**
    * Role delete
    */
-  export type RoleDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5774,9 +5418,7 @@ export namespace Prisma {
   /**
    * Role deleteMany
    */
-  export type RoleDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Roles to delete
      */
@@ -5790,9 +5432,7 @@ export namespace Prisma {
   /**
    * Role.userRoles
    */
-  export type Role$userRolesArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Role$userRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -5806,9 +5446,7 @@ export namespace Prisma {
      */
     include?: UserRoleInclude<ExtArgs> | null;
     where?: UserRoleWhereInput;
-    orderBy?:
-      | UserRoleOrderByWithRelationInput
-      | UserRoleOrderByWithRelationInput[];
+    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[];
     cursor?: UserRoleWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -5818,9 +5456,7 @@ export namespace Prisma {
   /**
    * Role without action
    */
-  export type RoleDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Role
      */
@@ -5909,9 +5545,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type UserRoleAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which UserRole to aggregate.
      */
@@ -5921,9 +5555,7 @@ export namespace Prisma {
      *
      * Determine the order of UserRoles to fetch.
      */
-    orderBy?:
-      | UserRoleOrderByWithRelationInput
-      | UserRoleOrderByWithRelationInput[];
+    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -5982,13 +5614,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateUserRole[P]>;
   };
 
-  export type UserRoleGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRoleWhereInput;
-    orderBy?:
-      | UserRoleOrderByWithAggregationInput
-      | UserRoleOrderByWithAggregationInput[];
+    orderBy?: UserRoleOrderByWithAggregationInput | UserRoleOrderByWithAggregationInput[];
     by: UserRoleScalarFieldEnum[] | UserRoleScalarFieldEnum;
     having?: UserRoleScalarWhereWithAggregatesInput;
     take?: number;
@@ -6011,57 +5639,53 @@ export namespace Prisma {
     _max: UserRoleMaxAggregateOutputType | null;
   };
 
-  type GetUserRoleGroupByPayload<T extends UserRoleGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<UserRoleGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof UserRoleGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserRoleGroupByOutputType[P]>
-            : GetScalarType<T[P], UserRoleGroupByOutputType[P]>;
-        }
-      >
+  type GetUserRoleGroupByPayload<T extends UserRoleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserRoleGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof UserRoleGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], UserRoleGroupByOutputType[P]>
+          : GetScalarType<T[P], UserRoleGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type UserRoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        roleId?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+        role?: boolean | RoleDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["userRole"]
     >;
 
-  export type UserRoleSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      roleId?: boolean;
-      user?: boolean | UserDefaultArgs<ExtArgs>;
-      role?: boolean | RoleDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["userRole"]
-  >;
+  export type UserRoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        roleId?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+        role?: boolean | RoleDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["userRole"]
+    >;
 
-  export type UserRoleSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      roleId?: boolean;
-      user?: boolean | UserDefaultArgs<ExtArgs>;
-      role?: boolean | RoleDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["userRole"]
-  >;
-
-  export type UserRoleSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      roleId?: boolean;
-      user?: boolean | UserDefaultArgs<ExtArgs>;
-      role?: boolean | RoleDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["userRole"]
-  >;
+  export type UserRoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        roleId?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+        role?: boolean | RoleDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["userRole"]
+    >;
 
   export type UserRoleSelectScalar = {
     id?: boolean;
@@ -6069,34 +5693,24 @@ export namespace Prisma {
     roleId?: boolean;
   };
 
-  export type UserRoleOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type UserRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     "id" | "userId" | "roleId",
     ExtArgs["result"]["userRole"]
   >;
-  export type UserRoleInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>;
     role?: boolean | RoleDefaultArgs<ExtArgs>;
   };
-  export type UserRoleIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>;
     role?: boolean | RoleDefaultArgs<ExtArgs>;
   };
-  export type UserRoleIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>;
     role?: boolean | RoleDefaultArgs<ExtArgs>;
   };
 
-  export type $UserRolePayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $UserRolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserRole";
     objects: {
       user: Prisma.$UserPayload<ExtArgs>;
@@ -6113,13 +5727,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type UserRoleGetPayload<
-    S extends boolean | null | undefined | UserRoleDefaultArgs,
-  > = $Result.GetResult<Prisma.$UserRolePayload, S>;
+  type UserRoleGetPayload<S extends boolean | null | undefined | UserRoleDefaultArgs> = $Result.GetResult<
+    Prisma.$UserRolePayload,
+    S
+  >;
 
-  type UserRoleCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<UserRoleFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type UserRoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    UserRoleFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: UserRoleCountAggregateInputType | true;
   };
 
@@ -6143,14 +5759,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends UserRoleFindUniqueArgs>(
-      args: SelectSubset<T, UserRoleFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleFindUniqueArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -6169,14 +5780,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends UserRoleFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, UserRoleFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -6196,14 +5802,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends UserRoleFindFirstArgs>(
-      args?: SelectSubset<T, UserRoleFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserRoleFindFirstArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -6224,14 +5825,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends UserRoleFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, UserRoleFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserRoleFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -6254,15 +5850,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends UserRoleFindManyArgs>(
-      args?: SelectSubset<T, UserRoleFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, UserRoleFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a UserRole.
@@ -6277,14 +5866,9 @@ export namespace Prisma {
      *
      */
     create<T extends UserRoleCreateArgs>(
-      args: SelectSubset<T, UserRoleCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleCreateArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -6303,7 +5887,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends UserRoleCreateManyArgs>(
-      args?: SelectSubset<T, UserRoleCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserRoleCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -6329,14 +5913,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends UserRoleCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, UserRoleCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserRoleCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -6352,14 +5931,9 @@ export namespace Prisma {
      *
      */
     delete<T extends UserRoleDeleteArgs>(
-      args: SelectSubset<T, UserRoleDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleDeleteArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -6381,14 +5955,9 @@ export namespace Prisma {
      *
      */
     update<T extends UserRoleUpdateArgs>(
-      args: SelectSubset<T, UserRoleUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleUpdateArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -6407,7 +5976,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends UserRoleDeleteManyArgs>(
-      args?: SelectSubset<T, UserRoleDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, UserRoleDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -6428,7 +5997,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends UserRoleUpdateManyArgs>(
-      args: SelectSubset<T, UserRoleUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -6460,14 +6029,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends UserRoleUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, UserRoleUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -6488,14 +6052,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends UserRoleUpsertArgs>(
-      args: SelectSubset<T, UserRoleUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, UserRoleUpsertArgs<ExtArgs>>
     ): Prisma__UserRoleClient<
-      $Result.GetResult<
-        Prisma.$UserRolePayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -6515,7 +6074,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends UserRoleCountArgs>(
-      args?: Subset<T, UserRoleCountArgs>,
+      args?: Subset<T, UserRoleCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -6549,7 +6108,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends UserRoleAggregateArgs>(
-      args: Subset<T, UserRoleAggregateArgs>,
+      args: Subset<T, UserRoleAggregateArgs>
     ): Prisma.PrismaPromise<GetUserRoleAggregateType<T>>;
 
     /**
@@ -6572,16 +6131,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends UserRoleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: UserRoleGroupByArgs["orderBy"] }
         : { orderBy?: UserRoleGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -6595,12 +6149,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -6630,11 +6179,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, UserRoleGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetUserRoleGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, UserRoleGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetUserRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the UserRole model
      */
@@ -6655,29 +6201,17 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     user<T extends UserDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, UserDefaultArgs<ExtArgs>>,
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
     ): Prisma__UserClient<
-      | $Result.GetResult<
-          Prisma.$UserPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     role<T extends RoleDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, RoleDefaultArgs<ExtArgs>>,
+      args?: Subset<T, RoleDefaultArgs<ExtArgs>>
     ): Prisma__RoleClient<
-      | $Result.GetResult<
-          Prisma.$RolePayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
@@ -6689,14 +6223,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -6704,10 +6232,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -6731,9 +6256,7 @@ export namespace Prisma {
   /**
    * UserRole findUnique
    */
-  export type UserRoleFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -6755,9 +6278,7 @@ export namespace Prisma {
   /**
    * UserRole findUniqueOrThrow
    */
-  export type UserRoleFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -6779,9 +6300,7 @@ export namespace Prisma {
   /**
    * UserRole findFirst
    */
-  export type UserRoleFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -6803,9 +6322,7 @@ export namespace Prisma {
      *
      * Determine the order of UserRoles to fetch.
      */
-    orderBy?:
-      | UserRoleOrderByWithRelationInput
-      | UserRoleOrderByWithRelationInput[];
+    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -6835,9 +6352,7 @@ export namespace Prisma {
   /**
    * UserRole findFirstOrThrow
    */
-  export type UserRoleFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -6859,9 +6374,7 @@ export namespace Prisma {
      *
      * Determine the order of UserRoles to fetch.
      */
-    orderBy?:
-      | UserRoleOrderByWithRelationInput
-      | UserRoleOrderByWithRelationInput[];
+    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -6891,9 +6404,7 @@ export namespace Prisma {
   /**
    * UserRole findMany
    */
-  export type UserRoleFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -6915,9 +6426,7 @@ export namespace Prisma {
      *
      * Determine the order of UserRoles to fetch.
      */
-    orderBy?:
-      | UserRoleOrderByWithRelationInput
-      | UserRoleOrderByWithRelationInput[];
+    orderBy?: UserRoleOrderByWithRelationInput | UserRoleOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -6942,9 +6451,7 @@ export namespace Prisma {
   /**
    * UserRole create
    */
-  export type UserRoleCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -6966,9 +6473,7 @@ export namespace Prisma {
   /**
    * UserRole createMany
    */
-  export type UserRoleCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many UserRoles.
      */
@@ -6979,9 +6484,7 @@ export namespace Prisma {
   /**
    * UserRole createManyAndReturn
    */
-  export type UserRoleCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -7004,9 +6507,7 @@ export namespace Prisma {
   /**
    * UserRole update
    */
-  export type UserRoleUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -7032,16 +6533,11 @@ export namespace Prisma {
   /**
    * UserRole updateMany
    */
-  export type UserRoleUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update UserRoles.
      */
-    data: XOR<
-      UserRoleUpdateManyMutationInput,
-      UserRoleUncheckedUpdateManyInput
-    >;
+    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyInput>;
     /**
      * Filter which UserRoles to update
      */
@@ -7055,9 +6551,7 @@ export namespace Prisma {
   /**
    * UserRole updateManyAndReturn
    */
-  export type UserRoleUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -7069,10 +6563,7 @@ export namespace Prisma {
     /**
      * The data used to update UserRoles.
      */
-    data: XOR<
-      UserRoleUpdateManyMutationInput,
-      UserRoleUncheckedUpdateManyInput
-    >;
+    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyInput>;
     /**
      * Filter which UserRoles to update
      */
@@ -7090,9 +6581,7 @@ export namespace Prisma {
   /**
    * UserRole upsert
    */
-  export type UserRoleUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -7122,9 +6611,7 @@ export namespace Prisma {
   /**
    * UserRole delete
    */
-  export type UserRoleDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -7146,9 +6633,7 @@ export namespace Prisma {
   /**
    * UserRole deleteMany
    */
-  export type UserRoleDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which UserRoles to delete
      */
@@ -7162,9 +6647,7 @@ export namespace Prisma {
   /**
    * UserRole without action
    */
-  export type UserRoleDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserRoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRole
      */
@@ -7277,9 +6760,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type ProductAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Product to aggregate.
      */
@@ -7289,9 +6770,7 @@ export namespace Prisma {
      *
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[];
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -7350,13 +6829,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateProduct[P]>;
   };
 
-  export type ProductGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput;
-    orderBy?:
-      | ProductOrderByWithAggregationInput
-      | ProductOrderByWithAggregationInput[];
+    orderBy?: ProductOrderByWithAggregationInput | ProductOrderByWithAggregationInput[];
     by: ProductScalarFieldEnum[] | ProductScalarFieldEnum;
     having?: ProductScalarWhereWithAggregatesInput;
     take?: number;
@@ -7385,22 +6860,19 @@ export namespace Prisma {
     _max: ProductMaxAggregateOutputType | null;
   };
 
-  type GetProductGroupByPayload<T extends ProductGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<ProductGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof ProductGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProductGroupByOutputType[P]>
-            : GetScalarType<T[P], ProductGroupByOutputType[P]>;
-        }
-      >
-    >;
+  type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof ProductGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], ProductGroupByOutputType[P]>
+          : GetScalarType<T[P], ProductGroupByOutputType[P]>;
+      }
+    >
+  >;
 
-  export type ProductSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
+  export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
     {
       id?: boolean;
       title?: boolean;
@@ -7411,6 +6883,7 @@ export namespace Prisma {
       metadata?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
+      images?: boolean | Product$imagesArgs<ExtArgs>;
       variants?: boolean | Product$variantsArgs<ExtArgs>;
       reviews?: boolean | Product$reviewsArgs<ExtArgs>;
       OrderItem?: boolean | Product$OrderItemArgs<ExtArgs>;
@@ -7420,39 +6893,37 @@ export namespace Prisma {
     ExtArgs["result"]["product"]
   >;
 
-  export type ProductSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      title?: boolean;
-      slug?: boolean;
-      shortDescription?: boolean;
-      description?: boolean;
-      status?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-    },
-    ExtArgs["result"]["product"]
-  >;
+  export type ProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        title?: boolean;
+        slug?: boolean;
+        shortDescription?: boolean;
+        description?: boolean;
+        status?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+      },
+      ExtArgs["result"]["product"]
+    >;
 
-  export type ProductSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      title?: boolean;
-      slug?: boolean;
-      shortDescription?: boolean;
-      description?: boolean;
-      status?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-    },
-    ExtArgs["result"]["product"]
-  >;
+  export type ProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        title?: boolean;
+        slug?: boolean;
+        shortDescription?: boolean;
+        description?: boolean;
+        status?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+      },
+      ExtArgs["result"]["product"]
+    >;
 
   export type ProductSelectScalar = {
     id?: boolean;
@@ -7466,41 +6937,27 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type ProductOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "title"
-    | "slug"
-    | "shortDescription"
-    | "description"
-    | "status"
-    | "metadata"
-    | "createdAt"
-    | "updatedAt",
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    "id" | "title" | "slug" | "shortDescription" | "description" | "status" | "metadata" | "createdAt" | "updatedAt",
     ExtArgs["result"]["product"]
   >;
-  export type ProductInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    images?: boolean | Product$imagesArgs<ExtArgs>;
     variants?: boolean | Product$variantsArgs<ExtArgs>;
     reviews?: boolean | Product$reviewsArgs<ExtArgs>;
     OrderItem?: boolean | Product$OrderItemArgs<ExtArgs>;
     WishlistItem?: boolean | Product$WishlistItemArgs<ExtArgs>;
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type ProductIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
-  export type ProductIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
+  export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {};
+  export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {};
 
-  export type $ProductPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product";
     objects: {
+      images: Prisma.$ProductImagePayload<ExtArgs>[];
       variants: Prisma.$ProductVariantPayload<ExtArgs>[];
       reviews: Prisma.$ReviewPayload<ExtArgs>[];
       OrderItem: Prisma.$OrderItemPayload<ExtArgs>[];
@@ -7523,13 +6980,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type ProductGetPayload<
-    S extends boolean | null | undefined | ProductDefaultArgs,
-  > = $Result.GetResult<Prisma.$ProductPayload, S>;
+  type ProductGetPayload<S extends boolean | null | undefined | ProductDefaultArgs> = $Result.GetResult<
+    Prisma.$ProductPayload,
+    S
+  >;
 
-  type ProductCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<ProductFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type ProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    ProductFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: ProductCountAggregateInputType | true;
   };
 
@@ -7537,10 +6996,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Product"];
-      meta: { name: "Product" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Product"]; meta: { name: "Product" } };
     /**
      * Find zero or one Product that matches the filter.
      * @param {ProductFindUniqueArgs} args - Arguments to find a Product
@@ -7553,14 +7009,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends ProductFindUniqueArgs>(
-      args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -7579,14 +7030,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -7606,14 +7052,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends ProductFindFirstArgs>(
-      args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -7634,14 +7075,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -7664,15 +7100,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends ProductFindManyArgs>(
-      args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Product.
@@ -7687,14 +7116,9 @@ export namespace Prisma {
      *
      */
     create<T extends ProductCreateArgs>(
-      args: SelectSubset<T, ProductCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductCreateArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -7713,7 +7137,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends ProductCreateManyArgs>(
-      args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -7739,14 +7163,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends ProductCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, ProductCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -7762,14 +7181,9 @@ export namespace Prisma {
      *
      */
     delete<T extends ProductDeleteArgs>(
-      args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -7791,14 +7205,9 @@ export namespace Prisma {
      *
      */
     update<T extends ProductUpdateArgs>(
-      args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -7817,7 +7226,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends ProductDeleteManyArgs>(
-      args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -7838,7 +7247,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends ProductUpdateManyArgs>(
-      args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -7870,14 +7279,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends ProductUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, ProductUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -7898,14 +7302,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends ProductUpsertArgs>(
-      args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -7925,7 +7324,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends ProductCountArgs>(
-      args?: Subset<T, ProductCountArgs>,
+      args?: Subset<T, ProductCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -7959,7 +7358,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends ProductAggregateArgs>(
-      args: Subset<T, ProductAggregateArgs>,
+      args: Subset<T, ProductAggregateArgs>
     ): Prisma.PrismaPromise<GetProductAggregateType<T>>;
 
     /**
@@ -7982,16 +7381,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends ProductGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ProductGroupByArgs["orderBy"] }
         : { orderBy?: ProductGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -8005,12 +7399,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -8040,10 +7429,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetProductGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Product model
      */
@@ -8063,49 +7450,28 @@ export namespace Prisma {
     GlobalOmitOptions = {},
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    variants<T extends Product$variantsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Product$variantsArgs<ExtArgs>>,
+    images<T extends Product$imagesArgs<ExtArgs> = {}>(
+      args?: Subset<T, Product$imagesArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$ProductVariantPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
+    >;
+    variants<T extends Product$variantsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Product$variantsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     reviews<T extends Product$reviewsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Product$reviewsArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$ReviewPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, Product$reviewsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     OrderItem<T extends Product$OrderItemArgs<ExtArgs> = {}>(
-      args?: Subset<T, Product$OrderItemArgs<ExtArgs>>,
+      args?: Subset<T, Product$OrderItemArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderItemPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     WishlistItem<T extends Product$WishlistItemArgs<ExtArgs> = {}>(
-      args?: Subset<T, Product$WishlistItemArgs<ExtArgs>>,
+      args?: Subset<T, Product$WishlistItemArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$WishlistItemPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8114,14 +7480,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -8129,10 +7489,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -8162,9 +7519,7 @@ export namespace Prisma {
   /**
    * Product findUnique
    */
-  export type ProductFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8186,9 +7541,7 @@ export namespace Prisma {
   /**
    * Product findUniqueOrThrow
    */
-  export type ProductFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8210,9 +7563,7 @@ export namespace Prisma {
   /**
    * Product findFirst
    */
-  export type ProductFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8234,9 +7585,7 @@ export namespace Prisma {
      *
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[];
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -8266,9 +7615,7 @@ export namespace Prisma {
   /**
    * Product findFirstOrThrow
    */
-  export type ProductFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8290,9 +7637,7 @@ export namespace Prisma {
      *
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[];
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -8322,9 +7667,7 @@ export namespace Prisma {
   /**
    * Product findMany
    */
-  export type ProductFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8346,9 +7689,7 @@ export namespace Prisma {
      *
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[];
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -8373,9 +7714,7 @@ export namespace Prisma {
   /**
    * Product create
    */
-  export type ProductCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8397,9 +7736,7 @@ export namespace Prisma {
   /**
    * Product createMany
    */
-  export type ProductCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Products.
      */
@@ -8410,9 +7747,7 @@ export namespace Prisma {
   /**
    * Product createManyAndReturn
    */
-  export type ProductCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8431,9 +7766,7 @@ export namespace Prisma {
   /**
    * Product update
    */
-  export type ProductUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8459,9 +7792,7 @@ export namespace Prisma {
   /**
    * Product updateMany
    */
-  export type ProductUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Products.
      */
@@ -8479,9 +7810,7 @@ export namespace Prisma {
   /**
    * Product updateManyAndReturn
    */
-  export type ProductUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8507,9 +7836,7 @@ export namespace Prisma {
   /**
    * Product upsert
    */
-  export type ProductUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8539,9 +7866,7 @@ export namespace Prisma {
   /**
    * Product delete
    */
-  export type ProductDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8563,9 +7888,7 @@ export namespace Prisma {
   /**
    * Product deleteMany
    */
-  export type ProductDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Products to delete
      */
@@ -8577,11 +7900,33 @@ export namespace Prisma {
   };
 
   /**
+   * Product.images
+   */
+  export type Product$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    where?: ProductImageWhereInput;
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[];
+    cursor?: ProductImageWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[];
+  };
+
+  /**
    * Product.variants
    */
-  export type Product$variantsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Product$variantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -8595,9 +7940,7 @@ export namespace Prisma {
      */
     include?: ProductVariantInclude<ExtArgs> | null;
     where?: ProductVariantWhereInput;
-    orderBy?:
-      | ProductVariantOrderByWithRelationInput
-      | ProductVariantOrderByWithRelationInput[];
+    orderBy?: ProductVariantOrderByWithRelationInput | ProductVariantOrderByWithRelationInput[];
     cursor?: ProductVariantWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -8607,9 +7950,7 @@ export namespace Prisma {
   /**
    * Product.reviews
    */
-  export type Product$reviewsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Product$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -8633,9 +7974,7 @@ export namespace Prisma {
   /**
    * Product.OrderItem
    */
-  export type Product$OrderItemArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Product$OrderItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -8649,9 +7988,7 @@ export namespace Prisma {
      */
     include?: OrderItemInclude<ExtArgs> | null;
     where?: OrderItemWhereInput;
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     cursor?: OrderItemWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -8661,9 +7998,7 @@ export namespace Prisma {
   /**
    * Product.WishlistItem
    */
-  export type Product$WishlistItemArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Product$WishlistItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -8677,9 +8012,7 @@ export namespace Prisma {
      */
     include?: WishlistItemInclude<ExtArgs> | null;
     where?: WishlistItemWhereInput;
-    orderBy?:
-      | WishlistItemOrderByWithRelationInput
-      | WishlistItemOrderByWithRelationInput[];
+    orderBy?: WishlistItemOrderByWithRelationInput | WishlistItemOrderByWithRelationInput[];
     cursor?: WishlistItemWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -8689,9 +8022,7 @@ export namespace Prisma {
   /**
    * Product without action
    */
-  export type ProductDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -8704,6 +8035,1239 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductInclude<ExtArgs> | null;
+  };
+
+  /**
+   * Model ProductImage
+   */
+
+  export type AggregateProductImage = {
+    _count: ProductImageCountAggregateOutputType | null;
+    _avg: ProductImageAvgAggregateOutputType | null;
+    _sum: ProductImageSumAggregateOutputType | null;
+    _min: ProductImageMinAggregateOutputType | null;
+    _max: ProductImageMaxAggregateOutputType | null;
+  };
+
+  export type ProductImageAvgAggregateOutputType = {
+    id: number | null;
+    productId: number | null;
+  };
+
+  export type ProductImageSumAggregateOutputType = {
+    id: number | null;
+    productId: number | null;
+  };
+
+  export type ProductImageMinAggregateOutputType = {
+    id: number | null;
+    url: string | null;
+    alt: string | null;
+    isPrimary: boolean | null;
+    productId: number | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  };
+
+  export type ProductImageMaxAggregateOutputType = {
+    id: number | null;
+    url: string | null;
+    alt: string | null;
+    isPrimary: boolean | null;
+    productId: number | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  };
+
+  export type ProductImageCountAggregateOutputType = {
+    id: number;
+    url: number;
+    alt: number;
+    isPrimary: number;
+    productId: number;
+    createdAt: number;
+    updatedAt: number;
+    _all: number;
+  };
+
+  export type ProductImageAvgAggregateInputType = {
+    id?: true;
+    productId?: true;
+  };
+
+  export type ProductImageSumAggregateInputType = {
+    id?: true;
+    productId?: true;
+  };
+
+  export type ProductImageMinAggregateInputType = {
+    id?: true;
+    url?: true;
+    alt?: true;
+    isPrimary?: true;
+    productId?: true;
+    createdAt?: true;
+    updatedAt?: true;
+  };
+
+  export type ProductImageMaxAggregateInputType = {
+    id?: true;
+    url?: true;
+    alt?: true;
+    isPrimary?: true;
+    productId?: true;
+    createdAt?: true;
+    updatedAt?: true;
+  };
+
+  export type ProductImageCountAggregateInputType = {
+    id?: true;
+    url?: true;
+    alt?: true;
+    isPrimary?: true;
+    productId?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    _all?: true;
+  };
+
+  export type ProductImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductImage to aggregate.
+     */
+    where?: ProductImageWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: ProductImageWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned ProductImages
+     **/
+    _count?: true | ProductImageCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: ProductImageAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: ProductImageSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: ProductImageMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: ProductImageMaxAggregateInputType;
+  };
+
+  export type GetProductImageAggregateType<T extends ProductImageAggregateArgs> = {
+    [P in keyof T & keyof AggregateProductImage]: P extends "_count" | "count"
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductImage[P]>
+      : GetScalarType<T[P], AggregateProductImage[P]>;
+  };
+
+  export type ProductImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductImageWhereInput;
+    orderBy?: ProductImageOrderByWithAggregationInput | ProductImageOrderByWithAggregationInput[];
+    by: ProductImageScalarFieldEnum[] | ProductImageScalarFieldEnum;
+    having?: ProductImageScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: ProductImageCountAggregateInputType | true;
+    _avg?: ProductImageAvgAggregateInputType;
+    _sum?: ProductImageSumAggregateInputType;
+    _min?: ProductImageMinAggregateInputType;
+    _max?: ProductImageMaxAggregateInputType;
+  };
+
+  export type ProductImageGroupByOutputType = {
+    id: number;
+    url: string;
+    alt: string | null;
+    isPrimary: boolean;
+    productId: number;
+    createdAt: Date;
+    updatedAt: Date;
+    _count: ProductImageCountAggregateOutputType | null;
+    _avg: ProductImageAvgAggregateOutputType | null;
+    _sum: ProductImageSumAggregateOutputType | null;
+    _min: ProductImageMinAggregateOutputType | null;
+    _max: ProductImageMaxAggregateOutputType | null;
+  };
+
+  type GetProductImageGroupByPayload<T extends ProductImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductImageGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof ProductImageGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], ProductImageGroupByOutputType[P]>
+          : GetScalarType<T[P], ProductImageGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type ProductImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        url?: boolean;
+        alt?: boolean;
+        isPrimary?: boolean;
+        productId?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        product?: boolean | ProductDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["productImage"]
+    >;
+
+  export type ProductImageSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      url?: boolean;
+      alt?: boolean;
+      isPrimary?: boolean;
+      productId?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      product?: boolean | ProductDefaultArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["productImage"]
+  >;
+
+  export type ProductImageSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      url?: boolean;
+      alt?: boolean;
+      isPrimary?: boolean;
+      productId?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      product?: boolean | ProductDefaultArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["productImage"]
+  >;
+
+  export type ProductImageSelectScalar = {
+    id?: boolean;
+    url?: boolean;
+    alt?: boolean;
+    isPrimary?: boolean;
+    productId?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+  };
+
+  export type ProductImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      "id" | "url" | "alt" | "isPrimary" | "productId" | "createdAt" | "updatedAt",
+      ExtArgs["result"]["productImage"]
+    >;
+  export type ProductImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>;
+  };
+  export type ProductImageIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>;
+  };
+  export type ProductImageIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>;
+  };
+
+  export type $ProductImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductImage";
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        url: string;
+        alt: string | null;
+        isPrimary: boolean;
+        productId: number;
+        createdAt: Date;
+        updatedAt: Date;
+      },
+      ExtArgs["result"]["productImage"]
+    >;
+    composites: {};
+  };
+
+  type ProductImageGetPayload<S extends boolean | null | undefined | ProductImageDefaultArgs> = $Result.GetResult<
+    Prisma.$ProductImagePayload,
+    S
+  >;
+
+  type ProductImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    ProductImageFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
+    select?: ProductImageCountAggregateInputType | true;
+  };
+
+  export interface ProductImageDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>["model"]["ProductImage"];
+      meta: { name: "ProductImage" };
+    };
+    /**
+     * Find zero or one ProductImage that matches the filter.
+     * @param {ProductImageFindUniqueArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductImageFindUniqueArgs>(
+      args: SelectSubset<T, ProductImageFindUniqueArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one ProductImage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductImageFindUniqueOrThrowArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductImageFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, ProductImageFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first ProductImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindFirstArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductImageFindFirstArgs>(
+      args?: SelectSubset<T, ProductImageFindFirstArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first ProductImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindFirstOrThrowArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductImageFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, ProductImageFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more ProductImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductImages
+     * const productImages = await prisma.productImage.findMany()
+     *
+     * // Get first 10 ProductImages
+     * const productImages = await prisma.productImage.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const productImageWithIdOnly = await prisma.productImage.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends ProductImageFindManyArgs>(
+      args?: SelectSubset<T, ProductImageFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+
+    /**
+     * Create a ProductImage.
+     * @param {ProductImageCreateArgs} args - Arguments to create a ProductImage.
+     * @example
+     * // Create one ProductImage
+     * const ProductImage = await prisma.productImage.create({
+     *   data: {
+     *     // ... data to create a ProductImage
+     *   }
+     * })
+     *
+     */
+    create<T extends ProductImageCreateArgs>(
+      args: SelectSubset<T, ProductImageCreateArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "create", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many ProductImages.
+     * @param {ProductImageCreateManyArgs} args - Arguments to create many ProductImages.
+     * @example
+     * // Create many ProductImages
+     * const productImage = await prisma.productImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends ProductImageCreateManyArgs>(
+      args?: SelectSubset<T, ProductImageCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many ProductImages and returns the data saved in the database.
+     * @param {ProductImageCreateManyAndReturnArgs} args - Arguments to create many ProductImages.
+     * @example
+     * // Create many ProductImages
+     * const productImage = await prisma.productImage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many ProductImages and only return the `id`
+     * const productImageWithIdOnly = await prisma.productImage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends ProductImageCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, ProductImageCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
+    >;
+
+    /**
+     * Delete a ProductImage.
+     * @param {ProductImageDeleteArgs} args - Arguments to delete one ProductImage.
+     * @example
+     * // Delete one ProductImage
+     * const ProductImage = await prisma.productImage.delete({
+     *   where: {
+     *     // ... filter to delete one ProductImage
+     *   }
+     * })
+     *
+     */
+    delete<T extends ProductImageDeleteArgs>(
+      args: SelectSubset<T, ProductImageDeleteArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one ProductImage.
+     * @param {ProductImageUpdateArgs} args - Arguments to update one ProductImage.
+     * @example
+     * // Update one ProductImage
+     * const productImage = await prisma.productImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends ProductImageUpdateArgs>(
+      args: SelectSubset<T, ProductImageUpdateArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "update", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more ProductImages.
+     * @param {ProductImageDeleteManyArgs} args - Arguments to filter ProductImages to delete.
+     * @example
+     * // Delete a few ProductImages
+     * const { count } = await prisma.productImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends ProductImageDeleteManyArgs>(
+      args?: SelectSubset<T, ProductImageDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more ProductImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductImages
+     * const productImage = await prisma.productImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends ProductImageUpdateManyArgs>(
+      args: SelectSubset<T, ProductImageUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more ProductImages and returns the data updated in the database.
+     * @param {ProductImageUpdateManyAndReturnArgs} args - Arguments to update many ProductImages.
+     * @example
+     * // Update many ProductImages
+     * const productImage = await prisma.productImage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more ProductImages and only return the `id`
+     * const productImageWithIdOnly = await prisma.productImage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends ProductImageUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, ProductImageUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
+    >;
+
+    /**
+     * Create or update one ProductImage.
+     * @param {ProductImageUpsertArgs} args - Arguments to update or create a ProductImage.
+     * @example
+     * // Update or create a ProductImage
+     * const productImage = await prisma.productImage.upsert({
+     *   create: {
+     *     // ... data to create a ProductImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductImageUpsertArgs>(
+      args: SelectSubset<T, ProductImageUpsertArgs<ExtArgs>>
+    ): Prisma__ProductImageClient<
+      $Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of ProductImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageCountArgs} args - Arguments to filter ProductImages to count.
+     * @example
+     * // Count the number of ProductImages
+     * const count = await prisma.productImage.count({
+     *   where: {
+     *     // ... the filter for the ProductImages we want to count
+     *   }
+     * })
+     **/
+    count<T extends ProductImageCountArgs>(
+      args?: Subset<T, ProductImageCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
+          ? number
+          : GetScalarType<T["select"], ProductImageCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a ProductImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends ProductImageAggregateArgs>(
+      args: Subset<T, ProductImageAggregateArgs>
+    ): Prisma.PrismaPromise<GetProductImageAggregateType<T>>;
+
+    /**
+     * Group by ProductImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends ProductImageGroupByArgs,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductImageGroupByArgs["orderBy"] }
+        : { orderBy?: ProductImageGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T["having"]>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T["by"] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : "take" extends Keys<T>
+            ? "orderBy" extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : "skip" extends Keys<T>
+              ? "orderBy" extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, ProductImageGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetProductImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the ProductImage model
+     */
+    readonly fields: ProductImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductImageClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, ProductDefaultArgs<ExtArgs>>
+    ): Prisma__ProductClient<
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the ProductImage model
+   */
+  interface ProductImageFieldRefs {
+    readonly id: FieldRef<"ProductImage", "Int">;
+    readonly url: FieldRef<"ProductImage", "String">;
+    readonly alt: FieldRef<"ProductImage", "String">;
+    readonly isPrimary: FieldRef<"ProductImage", "Boolean">;
+    readonly productId: FieldRef<"ProductImage", "Int">;
+    readonly createdAt: FieldRef<"ProductImage", "DateTime">;
+    readonly updatedAt: FieldRef<"ProductImage", "DateTime">;
+  }
+
+  // Custom InputTypes
+  /**
+   * ProductImage findUnique
+   */
+  export type ProductImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where: ProductImageWhereUniqueInput;
+  };
+
+  /**
+   * ProductImage findUniqueOrThrow
+   */
+  export type ProductImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where: ProductImageWhereUniqueInput;
+  };
+
+  /**
+   * ProductImage findFirst
+   */
+  export type ProductImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where?: ProductImageWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of ProductImages.
+     */
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[];
+  };
+
+  /**
+   * ProductImage findFirstOrThrow
+   */
+  export type ProductImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where?: ProductImageWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of ProductImages.
+     */
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[];
+  };
+
+  /**
+   * ProductImage findMany
+   */
+  export type ProductImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * Filter, which ProductImages to fetch.
+     */
+    where?: ProductImageWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number;
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[];
+  };
+
+  /**
+   * ProductImage create
+   */
+  export type ProductImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a ProductImage.
+     */
+    data: XOR<ProductImageCreateInput, ProductImageUncheckedCreateInput>;
+  };
+
+  /**
+   * ProductImage createMany
+   */
+  export type ProductImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductImages.
+     */
+    data: ProductImageCreateManyInput | ProductImageCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * ProductImage createManyAndReturn
+   */
+  export type ProductImageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the ProductImage
+       */
+      select?: ProductImageSelectCreateManyAndReturn<ExtArgs> | null;
+      /**
+       * Omit specific fields from the ProductImage
+       */
+      omit?: ProductImageOmit<ExtArgs> | null;
+      /**
+       * The data used to create many ProductImages.
+       */
+      data: ProductImageCreateManyInput | ProductImageCreateManyInput[];
+      skipDuplicates?: boolean;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: ProductImageIncludeCreateManyAndReturn<ExtArgs> | null;
+    };
+
+  /**
+   * ProductImage update
+   */
+  export type ProductImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a ProductImage.
+     */
+    data: XOR<ProductImageUpdateInput, ProductImageUncheckedUpdateInput>;
+    /**
+     * Choose, which ProductImage to update.
+     */
+    where: ProductImageWhereUniqueInput;
+  };
+
+  /**
+   * ProductImage updateMany
+   */
+  export type ProductImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductImages.
+     */
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyInput>;
+    /**
+     * Filter which ProductImages to update
+     */
+    where?: ProductImageWhereInput;
+    /**
+     * Limit how many ProductImages to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * ProductImage updateManyAndReturn
+   */
+  export type ProductImageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the ProductImage
+       */
+      select?: ProductImageSelectUpdateManyAndReturn<ExtArgs> | null;
+      /**
+       * Omit specific fields from the ProductImage
+       */
+      omit?: ProductImageOmit<ExtArgs> | null;
+      /**
+       * The data used to update ProductImages.
+       */
+      data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyInput>;
+      /**
+       * Filter which ProductImages to update
+       */
+      where?: ProductImageWhereInput;
+      /**
+       * Limit how many ProductImages to update.
+       */
+      limit?: number;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: ProductImageIncludeUpdateManyAndReturn<ExtArgs> | null;
+    };
+
+  /**
+   * ProductImage upsert
+   */
+  export type ProductImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the ProductImage to update in case it exists.
+     */
+    where: ProductImageWhereUniqueInput;
+    /**
+     * In case the ProductImage found by the `where` argument doesn't exist, create a new ProductImage with this data.
+     */
+    create: XOR<ProductImageCreateInput, ProductImageUncheckedCreateInput>;
+    /**
+     * In case the ProductImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductImageUpdateInput, ProductImageUncheckedUpdateInput>;
+  };
+
+  /**
+   * ProductImage delete
+   */
+  export type ProductImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
+    /**
+     * Filter which ProductImage to delete.
+     */
+    where: ProductImageWhereUniqueInput;
+  };
+
+  /**
+   * ProductImage deleteMany
+   */
+  export type ProductImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductImages to delete
+     */
+    where?: ProductImageWhereInput;
+    /**
+     * Limit how many ProductImages to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * ProductImage without action
+   */
+  export type ProductImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null;
   };
 
   /**
@@ -8816,9 +9380,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type ProductVariantAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ProductVariant to aggregate.
      */
@@ -8828,9 +9390,7 @@ export namespace Prisma {
      *
      * Determine the order of ProductVariants to fetch.
      */
-    orderBy?:
-      | ProductVariantOrderByWithRelationInput
-      | ProductVariantOrderByWithRelationInput[];
+    orderBy?: ProductVariantOrderByWithRelationInput | ProductVariantOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -8881,9 +9441,7 @@ export namespace Prisma {
     _max?: ProductVariantMaxAggregateInputType;
   };
 
-  export type GetProductVariantAggregateType<
-    T extends ProductVariantAggregateArgs,
-  > = {
+  export type GetProductVariantAggregateType<T extends ProductVariantAggregateArgs> = {
     [P in keyof T & keyof AggregateProductVariant]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
@@ -8891,13 +9449,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateProductVariant[P]>;
   };
 
-  export type ProductVariantGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductVariantWhereInput;
-    orderBy?:
-      | ProductVariantOrderByWithAggregationInput
-      | ProductVariantOrderByWithAggregationInput[];
+    orderBy?: ProductVariantOrderByWithAggregationInput | ProductVariantOrderByWithAggregationInput[];
     by: ProductVariantScalarFieldEnum[] | ProductVariantScalarFieldEnum;
     having?: ProductVariantScalarWhereWithAggregatesInput;
     take?: number;
@@ -8926,40 +9480,37 @@ export namespace Prisma {
     _max: ProductVariantMaxAggregateOutputType | null;
   };
 
-  type GetProductVariantGroupByPayload<T extends ProductVariantGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<ProductVariantGroupByOutputType, T["by"]> & {
-          [P in keyof T &
-            keyof ProductVariantGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProductVariantGroupByOutputType[P]>
-            : GetScalarType<T[P], ProductVariantGroupByOutputType[P]>;
-        }
-      >
-    >;
-
-  export type ProductVariantSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      productId?: boolean;
-      name?: boolean;
-      skuPrefix?: boolean;
-      price?: boolean;
-      compareAtPrice?: boolean;
-      attributes?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      product?: boolean | ProductDefaultArgs<ExtArgs>;
-      inventory?: boolean | ProductVariant$inventoryArgs<ExtArgs>;
-      OrderItem?: boolean | ProductVariant$OrderItemArgs<ExtArgs>;
-      _count?: boolean | ProductVariantCountOutputTypeDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["productVariant"]
+  type GetProductVariantGroupByPayload<T extends ProductVariantGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductVariantGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof ProductVariantGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], ProductVariantGroupByOutputType[P]>
+          : GetScalarType<T[P], ProductVariantGroupByOutputType[P]>;
+      }
+    >
   >;
+
+  export type ProductVariantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        productId?: boolean;
+        name?: boolean;
+        skuPrefix?: boolean;
+        price?: boolean;
+        compareAtPrice?: boolean;
+        attributes?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        product?: boolean | ProductDefaultArgs<ExtArgs>;
+        inventory?: boolean | ProductVariant$inventoryArgs<ExtArgs>;
+        OrderItem?: boolean | ProductVariant$OrderItemArgs<ExtArgs>;
+        _count?: boolean | ProductVariantCountOutputTypeDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["productVariant"]
+    >;
 
   export type ProductVariantSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -9009,23 +9560,12 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type ProductVariantOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "productId"
-    | "name"
-    | "skuPrefix"
-    | "price"
-    | "compareAtPrice"
-    | "attributes"
-    | "createdAt"
-    | "updatedAt",
-    ExtArgs["result"]["productVariant"]
-  >;
-  export type ProductVariantInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      "id" | "productId" | "name" | "skuPrefix" | "price" | "compareAtPrice" | "attributes" | "createdAt" | "updatedAt",
+      ExtArgs["result"]["productVariant"]
+    >;
+  export type ProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>;
     inventory?: boolean | ProductVariant$inventoryArgs<ExtArgs>;
     OrderItem?: boolean | ProductVariant$OrderItemArgs<ExtArgs>;
@@ -9042,9 +9582,7 @@ export namespace Prisma {
     product?: boolean | ProductDefaultArgs<ExtArgs>;
   };
 
-  export type $ProductVariantPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $ProductVariantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ProductVariant";
     objects: {
       product: Prisma.$ProductPayload<ExtArgs>;
@@ -9068,13 +9606,12 @@ export namespace Prisma {
     composites: {};
   };
 
-  type ProductVariantGetPayload<
-    S extends boolean | null | undefined | ProductVariantDefaultArgs,
-  > = $Result.GetResult<Prisma.$ProductVariantPayload, S>;
+  type ProductVariantGetPayload<S extends boolean | null | undefined | ProductVariantDefaultArgs> = $Result.GetResult<
+    Prisma.$ProductVariantPayload,
+    S
+  >;
 
-  type ProductVariantCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
+  type ProductVariantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
     ProductVariantFindManyArgs,
     "select" | "include" | "distinct" | "omit"
   > & {
@@ -9101,14 +9638,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends ProductVariantFindUniqueArgs>(
-      args: SelectSubset<T, ProductVariantFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantFindUniqueArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -9127,14 +9659,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends ProductVariantFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, ProductVariantFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -9154,14 +9681,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends ProductVariantFindFirstArgs>(
-      args?: SelectSubset<T, ProductVariantFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductVariantFindFirstArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -9182,14 +9704,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends ProductVariantFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ProductVariantFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductVariantFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -9212,14 +9729,9 @@ export namespace Prisma {
      *
      */
     findMany<T extends ProductVariantFindManyArgs>(
-      args?: SelectSubset<T, ProductVariantFindManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductVariantFindManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>
     >;
 
     /**
@@ -9235,14 +9747,9 @@ export namespace Prisma {
      *
      */
     create<T extends ProductVariantCreateArgs>(
-      args: SelectSubset<T, ProductVariantCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantCreateArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -9261,7 +9768,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends ProductVariantCreateManyArgs>(
-      args?: SelectSubset<T, ProductVariantCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductVariantCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -9287,14 +9794,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends ProductVariantCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, ProductVariantCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductVariantCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -9310,14 +9812,9 @@ export namespace Prisma {
      *
      */
     delete<T extends ProductVariantDeleteArgs>(
-      args: SelectSubset<T, ProductVariantDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantDeleteArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -9339,14 +9836,9 @@ export namespace Prisma {
      *
      */
     update<T extends ProductVariantUpdateArgs>(
-      args: SelectSubset<T, ProductVariantUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantUpdateArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -9365,7 +9857,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends ProductVariantDeleteManyArgs>(
-      args?: SelectSubset<T, ProductVariantDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ProductVariantDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -9386,7 +9878,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends ProductVariantUpdateManyArgs>(
-      args: SelectSubset<T, ProductVariantUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -9418,14 +9910,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends ProductVariantUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, ProductVariantUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -9446,14 +9933,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends ProductVariantUpsertArgs>(
-      args: SelectSubset<T, ProductVariantUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, ProductVariantUpsertArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -9473,7 +9955,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends ProductVariantCountArgs>(
-      args?: Subset<T, ProductVariantCountArgs>,
+      args?: Subset<T, ProductVariantCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -9507,7 +9989,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends ProductVariantAggregateArgs>(
-      args: Subset<T, ProductVariantAggregateArgs>,
+      args: Subset<T, ProductVariantAggregateArgs>
     ): Prisma.PrismaPromise<GetProductVariantAggregateType<T>>;
 
     /**
@@ -9530,16 +10012,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends ProductVariantGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ProductVariantGroupByArgs["orderBy"] }
         : { orderBy?: ProductVariantGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -9553,12 +10030,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -9588,11 +10060,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, ProductVariantGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetProductVariantGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, ProductVariantGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetProductVariantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the ProductVariant model
      */
@@ -9613,40 +10082,22 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductDefaultArgs<ExtArgs>>,
+      args?: Subset<T, ProductDefaultArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      | $Result.GetResult<
-          Prisma.$ProductPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     inventory<T extends ProductVariant$inventoryArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductVariant$inventoryArgs<ExtArgs>>,
+      args?: Subset<T, ProductVariant$inventoryArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$InventoryPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     OrderItem<T extends ProductVariant$OrderItemArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductVariant$OrderItemArgs<ExtArgs>>,
+      args?: Subset<T, ProductVariant$OrderItemArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderItemPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9655,14 +10106,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -9670,10 +10115,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -9703,9 +10145,7 @@ export namespace Prisma {
   /**
    * ProductVariant findUnique
    */
-  export type ProductVariantFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -9727,33 +10167,30 @@ export namespace Prisma {
   /**
    * ProductVariant findUniqueOrThrow
    */
-  export type ProductVariantFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    /**
-     * Select specific fields to fetch from the ProductVariant
-     */
-    select?: ProductVariantSelect<ExtArgs> | null;
-    /**
-     * Omit specific fields from the ProductVariant
-     */
-    omit?: ProductVariantOmit<ExtArgs> | null;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductVariantInclude<ExtArgs> | null;
-    /**
-     * Filter, which ProductVariant to fetch.
-     */
-    where: ProductVariantWhereUniqueInput;
-  };
+  export type ProductVariantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the ProductVariant
+       */
+      select?: ProductVariantSelect<ExtArgs> | null;
+      /**
+       * Omit specific fields from the ProductVariant
+       */
+      omit?: ProductVariantOmit<ExtArgs> | null;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: ProductVariantInclude<ExtArgs> | null;
+      /**
+       * Filter, which ProductVariant to fetch.
+       */
+      where: ProductVariantWhereUniqueInput;
+    };
 
   /**
    * ProductVariant findFirst
    */
-  export type ProductVariantFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -9775,9 +10212,7 @@ export namespace Prisma {
      *
      * Determine the order of ProductVariants to fetch.
      */
-    orderBy?:
-      | ProductVariantOrderByWithRelationInput
-      | ProductVariantOrderByWithRelationInput[];
+    orderBy?: ProductVariantOrderByWithRelationInput | ProductVariantOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -9807,9 +10242,7 @@ export namespace Prisma {
   /**
    * ProductVariant findFirstOrThrow
    */
-  export type ProductVariantFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -9831,9 +10264,7 @@ export namespace Prisma {
      *
      * Determine the order of ProductVariants to fetch.
      */
-    orderBy?:
-      | ProductVariantOrderByWithRelationInput
-      | ProductVariantOrderByWithRelationInput[];
+    orderBy?: ProductVariantOrderByWithRelationInput | ProductVariantOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -9863,9 +10294,7 @@ export namespace Prisma {
   /**
    * ProductVariant findMany
    */
-  export type ProductVariantFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -9887,9 +10316,7 @@ export namespace Prisma {
      *
      * Determine the order of ProductVariants to fetch.
      */
-    orderBy?:
-      | ProductVariantOrderByWithRelationInput
-      | ProductVariantOrderByWithRelationInput[];
+    orderBy?: ProductVariantOrderByWithRelationInput | ProductVariantOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -9914,9 +10341,7 @@ export namespace Prisma {
   /**
    * ProductVariant create
    */
-  export type ProductVariantCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -9938,9 +10363,7 @@ export namespace Prisma {
   /**
    * ProductVariant createMany
    */
-  export type ProductVariantCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many ProductVariants.
      */
@@ -9976,9 +10399,7 @@ export namespace Prisma {
   /**
    * ProductVariant update
    */
-  export type ProductVariantUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -10004,16 +10425,11 @@ export namespace Prisma {
   /**
    * ProductVariant updateMany
    */
-  export type ProductVariantUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update ProductVariants.
      */
-    data: XOR<
-      ProductVariantUpdateManyMutationInput,
-      ProductVariantUncheckedUpdateManyInput
-    >;
+    data: XOR<ProductVariantUpdateManyMutationInput, ProductVariantUncheckedUpdateManyInput>;
     /**
      * Filter which ProductVariants to update
      */
@@ -10041,10 +10457,7 @@ export namespace Prisma {
     /**
      * The data used to update ProductVariants.
      */
-    data: XOR<
-      ProductVariantUpdateManyMutationInput,
-      ProductVariantUncheckedUpdateManyInput
-    >;
+    data: XOR<ProductVariantUpdateManyMutationInput, ProductVariantUncheckedUpdateManyInput>;
     /**
      * Filter which ProductVariants to update
      */
@@ -10062,9 +10475,7 @@ export namespace Prisma {
   /**
    * ProductVariant upsert
    */
-  export type ProductVariantUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -10094,9 +10505,7 @@ export namespace Prisma {
   /**
    * ProductVariant delete
    */
-  export type ProductVariantDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -10118,9 +10527,7 @@ export namespace Prisma {
   /**
    * ProductVariant deleteMany
    */
-  export type ProductVariantDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ProductVariants to delete
      */
@@ -10134,9 +10541,7 @@ export namespace Prisma {
   /**
    * ProductVariant.inventory
    */
-  export type ProductVariant$inventoryArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariant$inventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -10150,9 +10555,7 @@ export namespace Prisma {
      */
     include?: InventoryInclude<ExtArgs> | null;
     where?: InventoryWhereInput;
-    orderBy?:
-      | InventoryOrderByWithRelationInput
-      | InventoryOrderByWithRelationInput[];
+    orderBy?: InventoryOrderByWithRelationInput | InventoryOrderByWithRelationInput[];
     cursor?: InventoryWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -10162,9 +10565,7 @@ export namespace Prisma {
   /**
    * ProductVariant.OrderItem
    */
-  export type ProductVariant$OrderItemArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariant$OrderItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -10178,9 +10579,7 @@ export namespace Prisma {
      */
     include?: OrderItemInclude<ExtArgs> | null;
     where?: OrderItemWhereInput;
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     cursor?: OrderItemWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -10190,9 +10589,7 @@ export namespace Prisma {
   /**
    * ProductVariant without action
    */
-  export type ProductVariantDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductVariantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -10317,9 +10714,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type InventoryAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Inventory to aggregate.
      */
@@ -10329,9 +10724,7 @@ export namespace Prisma {
      *
      * Determine the order of Inventories to fetch.
      */
-    orderBy?:
-      | InventoryOrderByWithRelationInput
-      | InventoryOrderByWithRelationInput[];
+    orderBy?: InventoryOrderByWithRelationInput | InventoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -10390,13 +10783,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateInventory[P]>;
   };
 
-  export type InventoryGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InventoryWhereInput;
-    orderBy?:
-      | InventoryOrderByWithAggregationInput
-      | InventoryOrderByWithAggregationInput[];
+    orderBy?: InventoryOrderByWithAggregationInput | InventoryOrderByWithAggregationInput[];
     by: InventoryScalarFieldEnum[] | InventoryScalarFieldEnum;
     having?: InventoryScalarWhereWithAggregatesInput;
     take?: number;
@@ -10425,72 +10814,68 @@ export namespace Prisma {
     _max: InventoryMaxAggregateOutputType | null;
   };
 
-  type GetInventoryGroupByPayload<T extends InventoryGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<InventoryGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof InventoryGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], InventoryGroupByOutputType[P]>
-            : GetScalarType<T[P], InventoryGroupByOutputType[P]>;
-        }
-      >
+  type GetInventoryGroupByPayload<T extends InventoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InventoryGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof InventoryGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], InventoryGroupByOutputType[P]>
+          : GetScalarType<T[P], InventoryGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type InventorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        sku?: boolean;
+        variantId?: boolean;
+        quantity?: boolean;
+        reserved?: boolean;
+        location?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["inventory"]
     >;
 
-  export type InventorySelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      sku?: boolean;
-      variantId?: boolean;
-      quantity?: boolean;
-      reserved?: boolean;
-      location?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["inventory"]
-  >;
+  export type InventorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        sku?: boolean;
+        variantId?: boolean;
+        quantity?: boolean;
+        reserved?: boolean;
+        location?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["inventory"]
+    >;
 
-  export type InventorySelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      sku?: boolean;
-      variantId?: boolean;
-      quantity?: boolean;
-      reserved?: boolean;
-      location?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["inventory"]
-  >;
-
-  export type InventorySelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      sku?: boolean;
-      variantId?: boolean;
-      quantity?: boolean;
-      reserved?: boolean;
-      location?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["inventory"]
-  >;
+  export type InventorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        sku?: boolean;
+        variantId?: boolean;
+        quantity?: boolean;
+        reserved?: boolean;
+        location?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["inventory"]
+    >;
 
   export type InventorySelectScalar = {
     id?: boolean;
@@ -10504,39 +10889,23 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type InventoryOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "sku"
-    | "variantId"
-    | "quantity"
-    | "reserved"
-    | "location"
-    | "metadata"
-    | "createdAt"
-    | "updatedAt",
+  export type InventoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    "id" | "sku" | "variantId" | "quantity" | "reserved" | "location" | "metadata" | "createdAt" | "updatedAt",
     ExtArgs["result"]["inventory"]
   >;
-  export type InventoryInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
   };
-  export type InventoryIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
-  };
-  export type InventoryIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
-  };
+  export type InventoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
+    };
+  export type InventoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      variant?: boolean | ProductVariantDefaultArgs<ExtArgs>;
+    };
 
-  export type $InventoryPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $InventoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Inventory";
     objects: {
       variant: Prisma.$ProductVariantPayload<ExtArgs>;
@@ -10558,13 +10927,12 @@ export namespace Prisma {
     composites: {};
   };
 
-  type InventoryGetPayload<
-    S extends boolean | null | undefined | InventoryDefaultArgs,
-  > = $Result.GetResult<Prisma.$InventoryPayload, S>;
+  type InventoryGetPayload<S extends boolean | null | undefined | InventoryDefaultArgs> = $Result.GetResult<
+    Prisma.$InventoryPayload,
+    S
+  >;
 
-  type InventoryCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
+  type InventoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
     InventoryFindManyArgs,
     "select" | "include" | "distinct" | "omit"
   > & {
@@ -10591,14 +10959,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends InventoryFindUniqueArgs>(
-      args: SelectSubset<T, InventoryFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryFindUniqueArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -10617,14 +10980,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends InventoryFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, InventoryFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -10644,14 +11002,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends InventoryFindFirstArgs>(
-      args?: SelectSubset<T, InventoryFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, InventoryFindFirstArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -10672,14 +11025,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends InventoryFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, InventoryFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, InventoryFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -10702,15 +11050,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends InventoryFindManyArgs>(
-      args?: SelectSubset<T, InventoryFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, InventoryFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Inventory.
@@ -10725,14 +11066,9 @@ export namespace Prisma {
      *
      */
     create<T extends InventoryCreateArgs>(
-      args: SelectSubset<T, InventoryCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryCreateArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -10751,7 +11087,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends InventoryCreateManyArgs>(
-      args?: SelectSubset<T, InventoryCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, InventoryCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -10777,14 +11113,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends InventoryCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, InventoryCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, InventoryCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -10800,14 +11131,9 @@ export namespace Prisma {
      *
      */
     delete<T extends InventoryDeleteArgs>(
-      args: SelectSubset<T, InventoryDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryDeleteArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -10829,14 +11155,9 @@ export namespace Prisma {
      *
      */
     update<T extends InventoryUpdateArgs>(
-      args: SelectSubset<T, InventoryUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryUpdateArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -10855,7 +11176,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends InventoryDeleteManyArgs>(
-      args?: SelectSubset<T, InventoryDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, InventoryDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -10876,7 +11197,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends InventoryUpdateManyArgs>(
-      args: SelectSubset<T, InventoryUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -10908,14 +11229,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends InventoryUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, InventoryUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -10936,14 +11252,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends InventoryUpsertArgs>(
-      args: SelectSubset<T, InventoryUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, InventoryUpsertArgs<ExtArgs>>
     ): Prisma__InventoryClient<
-      $Result.GetResult<
-        Prisma.$InventoryPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -10963,7 +11274,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends InventoryCountArgs>(
-      args?: Subset<T, InventoryCountArgs>,
+      args?: Subset<T, InventoryCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -10997,7 +11308,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends InventoryAggregateArgs>(
-      args: Subset<T, InventoryAggregateArgs>,
+      args: Subset<T, InventoryAggregateArgs>
     ): Prisma.PrismaPromise<GetInventoryAggregateType<T>>;
 
     /**
@@ -11020,16 +11331,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends InventoryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: InventoryGroupByArgs["orderBy"] }
         : { orderBy?: InventoryGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -11043,12 +11349,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -11078,11 +11379,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, InventoryGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetInventoryGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, InventoryGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetInventoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Inventory model
      */
@@ -11103,15 +11401,9 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     variant<T extends ProductVariantDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductVariantDefaultArgs<ExtArgs>>,
+      args?: Subset<T, ProductVariantDefaultArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      | $Result.GetResult<
-          Prisma.$ProductVariantPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
@@ -11123,14 +11415,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -11138,10 +11424,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -11171,9 +11454,7 @@ export namespace Prisma {
   /**
    * Inventory findUnique
    */
-  export type InventoryFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11195,9 +11476,7 @@ export namespace Prisma {
   /**
    * Inventory findUniqueOrThrow
    */
-  export type InventoryFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11219,9 +11498,7 @@ export namespace Prisma {
   /**
    * Inventory findFirst
    */
-  export type InventoryFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11243,9 +11520,7 @@ export namespace Prisma {
      *
      * Determine the order of Inventories to fetch.
      */
-    orderBy?:
-      | InventoryOrderByWithRelationInput
-      | InventoryOrderByWithRelationInput[];
+    orderBy?: InventoryOrderByWithRelationInput | InventoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -11275,9 +11550,7 @@ export namespace Prisma {
   /**
    * Inventory findFirstOrThrow
    */
-  export type InventoryFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11299,9 +11572,7 @@ export namespace Prisma {
      *
      * Determine the order of Inventories to fetch.
      */
-    orderBy?:
-      | InventoryOrderByWithRelationInput
-      | InventoryOrderByWithRelationInput[];
+    orderBy?: InventoryOrderByWithRelationInput | InventoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -11331,9 +11602,7 @@ export namespace Prisma {
   /**
    * Inventory findMany
    */
-  export type InventoryFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11355,9 +11624,7 @@ export namespace Prisma {
      *
      * Determine the order of Inventories to fetch.
      */
-    orderBy?:
-      | InventoryOrderByWithRelationInput
-      | InventoryOrderByWithRelationInput[];
+    orderBy?: InventoryOrderByWithRelationInput | InventoryOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -11382,9 +11649,7 @@ export namespace Prisma {
   /**
    * Inventory create
    */
-  export type InventoryCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11406,9 +11671,7 @@ export namespace Prisma {
   /**
    * Inventory createMany
    */
-  export type InventoryCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Inventories.
      */
@@ -11419,9 +11682,7 @@ export namespace Prisma {
   /**
    * Inventory createManyAndReturn
    */
-  export type InventoryCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11444,9 +11705,7 @@ export namespace Prisma {
   /**
    * Inventory update
    */
-  export type InventoryUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11472,16 +11731,11 @@ export namespace Prisma {
   /**
    * Inventory updateMany
    */
-  export type InventoryUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Inventories.
      */
-    data: XOR<
-      InventoryUpdateManyMutationInput,
-      InventoryUncheckedUpdateManyInput
-    >;
+    data: XOR<InventoryUpdateManyMutationInput, InventoryUncheckedUpdateManyInput>;
     /**
      * Filter which Inventories to update
      */
@@ -11495,9 +11749,7 @@ export namespace Prisma {
   /**
    * Inventory updateManyAndReturn
    */
-  export type InventoryUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11509,10 +11761,7 @@ export namespace Prisma {
     /**
      * The data used to update Inventories.
      */
-    data: XOR<
-      InventoryUpdateManyMutationInput,
-      InventoryUncheckedUpdateManyInput
-    >;
+    data: XOR<InventoryUpdateManyMutationInput, InventoryUncheckedUpdateManyInput>;
     /**
      * Filter which Inventories to update
      */
@@ -11530,9 +11779,7 @@ export namespace Prisma {
   /**
    * Inventory upsert
    */
-  export type InventoryUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11562,9 +11809,7 @@ export namespace Prisma {
   /**
    * Inventory delete
    */
-  export type InventoryDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11586,9 +11831,7 @@ export namespace Prisma {
   /**
    * Inventory deleteMany
    */
-  export type InventoryDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Inventories to delete
      */
@@ -11602,9 +11845,7 @@ export namespace Prisma {
   /**
    * Inventory without action
    */
-  export type InventoryDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type InventoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Inventory
      */
@@ -11783,9 +12024,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type OrderAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Order to aggregate.
      */
@@ -11854,13 +12093,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateOrder[P]>;
   };
 
-  export type OrderGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput;
-    orderBy?:
-      | OrderOrderByWithAggregationInput
-      | OrderOrderByWithAggregationInput[];
+    orderBy?: OrderOrderByWithAggregationInput | OrderOrderByWithAggregationInput[];
     by: OrderScalarFieldEnum[] | OrderScalarFieldEnum;
     having?: OrderScalarWhereWithAggregatesInput;
     take?: number;
@@ -11894,22 +12129,19 @@ export namespace Prisma {
     _max: OrderMaxAggregateOutputType | null;
   };
 
-  type GetOrderGroupByPayload<T extends OrderGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<OrderGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof OrderGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], OrderGroupByOutputType[P]>
-            : GetScalarType<T[P], OrderGroupByOutputType[P]>;
-        }
-      >
-    >;
+  type GetOrderGroupByPayload<T extends OrderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrderGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof OrderGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], OrderGroupByOutputType[P]>
+          : GetScalarType<T[P], OrderGroupByOutputType[P]>;
+      }
+    >
+  >;
 
-  export type OrderSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
+  export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
     {
       id?: boolean;
       orderNumber?: boolean;
@@ -11938,57 +12170,55 @@ export namespace Prisma {
     ExtArgs["result"]["order"]
   >;
 
-  export type OrderSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderNumber?: boolean;
-      userId?: boolean;
-      status?: boolean;
-      subtotal?: boolean;
-      shipping?: boolean;
-      tax?: boolean;
-      total?: boolean;
-      paymentMethod?: boolean;
-      shippingAddressId?: boolean;
-      billingAddressId?: boolean;
-      couponId?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Order$userArgs<ExtArgs>;
-      shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
-      billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
-      coupon?: boolean | Order$couponArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["order"]
-  >;
+  export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderNumber?: boolean;
+        userId?: boolean;
+        status?: boolean;
+        subtotal?: boolean;
+        shipping?: boolean;
+        tax?: boolean;
+        total?: boolean;
+        paymentMethod?: boolean;
+        shippingAddressId?: boolean;
+        billingAddressId?: boolean;
+        couponId?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | Order$userArgs<ExtArgs>;
+        shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
+        billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
+        coupon?: boolean | Order$couponArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["order"]
+    >;
 
-  export type OrderSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderNumber?: boolean;
-      userId?: boolean;
-      status?: boolean;
-      subtotal?: boolean;
-      shipping?: boolean;
-      tax?: boolean;
-      total?: boolean;
-      paymentMethod?: boolean;
-      shippingAddressId?: boolean;
-      billingAddressId?: boolean;
-      couponId?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Order$userArgs<ExtArgs>;
-      shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
-      billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
-      coupon?: boolean | Order$couponArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["order"]
-  >;
+  export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderNumber?: boolean;
+        userId?: boolean;
+        status?: boolean;
+        subtotal?: boolean;
+        shipping?: boolean;
+        tax?: boolean;
+        total?: boolean;
+        paymentMethod?: boolean;
+        shippingAddressId?: boolean;
+        billingAddressId?: boolean;
+        couponId?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | Order$userArgs<ExtArgs>;
+        shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
+        billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
+        coupon?: boolean | Order$couponArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["order"]
+    >;
 
   export type OrderSelectScalar = {
     id?: boolean;
@@ -12007,9 +12237,7 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type OrderOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     | "id"
     | "orderNumber"
     | "userId"
@@ -12026,9 +12254,7 @@ export namespace Prisma {
     | "updatedAt",
     ExtArgs["result"]["order"]
   >;
-  export type OrderInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>;
     paymentMeta?: boolean | Order$paymentMetaArgs<ExtArgs>;
     items?: boolean | Order$itemsArgs<ExtArgs>;
@@ -12039,26 +12265,20 @@ export namespace Prisma {
     Refund?: boolean | Order$RefundArgs<ExtArgs>;
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type OrderIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>;
     shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
     billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
     coupon?: boolean | Order$couponArgs<ExtArgs>;
   };
-  export type OrderIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>;
     shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
     billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
     coupon?: boolean | Order$couponArgs<ExtArgs>;
   };
 
-  export type $OrderPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order";
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null;
@@ -12092,13 +12312,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type OrderGetPayload<
-    S extends boolean | null | undefined | OrderDefaultArgs,
-  > = $Result.GetResult<Prisma.$OrderPayload, S>;
+  type OrderGetPayload<S extends boolean | null | undefined | OrderDefaultArgs> = $Result.GetResult<
+    Prisma.$OrderPayload,
+    S
+  >;
 
-  type OrderCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<OrderFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type OrderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    OrderFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: OrderCountAggregateInputType | true;
   };
 
@@ -12106,10 +12328,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Order"];
-      meta: { name: "Order" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Order"]; meta: { name: "Order" } };
     /**
      * Find zero or one Order that matches the filter.
      * @param {OrderFindUniqueArgs} args - Arguments to find a Order
@@ -12122,14 +12341,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends OrderFindUniqueArgs>(
-      args: SelectSubset<T, OrderFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderFindUniqueArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -12148,14 +12362,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends OrderFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, OrderFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12175,14 +12384,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends OrderFindFirstArgs>(
-      args?: SelectSubset<T, OrderFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderFindFirstArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -12203,14 +12407,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends OrderFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, OrderFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12233,15 +12432,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends OrderFindManyArgs>(
-      args?: SelectSubset<T, OrderFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, OrderFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Order.
@@ -12256,14 +12448,9 @@ export namespace Prisma {
      *
      */
     create<T extends OrderCreateArgs>(
-      args: SelectSubset<T, OrderCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderCreateArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12282,7 +12469,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends OrderCreateManyArgs>(
-      args?: SelectSubset<T, OrderCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -12308,14 +12495,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends OrderCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, OrderCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -12331,14 +12513,9 @@ export namespace Prisma {
      *
      */
     delete<T extends OrderDeleteArgs>(
-      args: SelectSubset<T, OrderDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderDeleteArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12360,14 +12537,9 @@ export namespace Prisma {
      *
      */
     update<T extends OrderUpdateArgs>(
-      args: SelectSubset<T, OrderUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderUpdateArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12386,7 +12558,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends OrderDeleteManyArgs>(
-      args?: SelectSubset<T, OrderDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -12407,7 +12579,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends OrderUpdateManyArgs>(
-      args: SelectSubset<T, OrderUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -12439,14 +12611,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends OrderUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, OrderUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -12467,14 +12634,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends OrderUpsertArgs>(
-      args: SelectSubset<T, OrderUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderUpsertArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      $Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -12494,7 +12656,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends OrderCountArgs>(
-      args?: Subset<T, OrderCountArgs>,
+      args?: Subset<T, OrderCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -12528,7 +12690,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends OrderAggregateArgs>(
-      args: Subset<T, OrderAggregateArgs>,
+      args: Subset<T, OrderAggregateArgs>
     ): Prisma.PrismaPromise<GetOrderAggregateType<T>>;
 
     /**
@@ -12551,16 +12713,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends OrderGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: OrderGroupByArgs["orderBy"] }
         : { orderBy?: OrderGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -12574,12 +12731,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -12609,10 +12761,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, OrderGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetOrderGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, OrderGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetOrderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Order model
      */
@@ -12633,103 +12783,58 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     user<T extends Order$userArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$userArgs<ExtArgs>>,
+      args?: Subset<T, Order$userArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     paymentMeta<T extends Order$paymentMetaArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$paymentMetaArgs<ExtArgs>>,
+      args?: Subset<T, Order$paymentMetaArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     items<T extends Order$itemsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$itemsArgs<ExtArgs>>,
+      args?: Subset<T, Order$itemsArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderItemPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     shippingAddress<T extends Order$shippingAddressArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$shippingAddressArgs<ExtArgs>>,
+      args?: Subset<T, Order$shippingAddressArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     billingAddress<T extends Order$billingAddressArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$billingAddressArgs<ExtArgs>>,
+      args?: Subset<T, Order$billingAddressArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     coupon<T extends Order$couponArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$couponArgs<ExtArgs>>,
+      args?: Subset<T, Order$couponArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     ReturnRequest<T extends Order$ReturnRequestArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$ReturnRequestArgs<ExtArgs>>,
+      args?: Subset<T, Order$ReturnRequestArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$ReturnRequestPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     Refund<T extends Order$RefundArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$RefundArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$RefundPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, Order$RefundArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12737,14 +12842,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -12752,10 +12851,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -12790,9 +12886,7 @@ export namespace Prisma {
   /**
    * Order findUnique
    */
-  export type OrderFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -12814,9 +12908,7 @@ export namespace Prisma {
   /**
    * Order findUniqueOrThrow
    */
-  export type OrderFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -12838,9 +12930,7 @@ export namespace Prisma {
   /**
    * Order findFirst
    */
-  export type OrderFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -12892,9 +12982,7 @@ export namespace Prisma {
   /**
    * Order findFirstOrThrow
    */
-  export type OrderFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -12946,9 +13034,7 @@ export namespace Prisma {
   /**
    * Order findMany
    */
-  export type OrderFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -12995,9 +13081,7 @@ export namespace Prisma {
   /**
    * Order create
    */
-  export type OrderCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13019,9 +13103,7 @@ export namespace Prisma {
   /**
    * Order createMany
    */
-  export type OrderCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Orders.
      */
@@ -13032,9 +13114,7 @@ export namespace Prisma {
   /**
    * Order createManyAndReturn
    */
-  export type OrderCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13057,9 +13137,7 @@ export namespace Prisma {
   /**
    * Order update
    */
-  export type OrderUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13085,9 +13163,7 @@ export namespace Prisma {
   /**
    * Order updateMany
    */
-  export type OrderUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Orders.
      */
@@ -13105,9 +13181,7 @@ export namespace Prisma {
   /**
    * Order updateManyAndReturn
    */
-  export type OrderUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13137,9 +13211,7 @@ export namespace Prisma {
   /**
    * Order upsert
    */
-  export type OrderUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13169,9 +13241,7 @@ export namespace Prisma {
   /**
    * Order delete
    */
-  export type OrderDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13193,9 +13263,7 @@ export namespace Prisma {
   /**
    * Order deleteMany
    */
-  export type OrderDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Orders to delete
      */
@@ -13209,9 +13277,7 @@ export namespace Prisma {
   /**
    * Order.user
    */
-  export type Order$userArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -13230,9 +13296,7 @@ export namespace Prisma {
   /**
    * Order.paymentMeta
    */
-  export type Order$paymentMetaArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$paymentMetaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -13251,9 +13315,7 @@ export namespace Prisma {
   /**
    * Order.items
    */
-  export type Order$itemsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -13267,9 +13329,7 @@ export namespace Prisma {
      */
     include?: OrderItemInclude<ExtArgs> | null;
     where?: OrderItemWhereInput;
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     cursor?: OrderItemWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -13279,9 +13339,7 @@ export namespace Prisma {
   /**
    * Order.shippingAddress
    */
-  export type Order$shippingAddressArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$shippingAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -13300,9 +13358,7 @@ export namespace Prisma {
   /**
    * Order.billingAddress
    */
-  export type Order$billingAddressArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$billingAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -13321,9 +13377,7 @@ export namespace Prisma {
   /**
    * Order.coupon
    */
-  export type Order$couponArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$couponArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -13342,9 +13396,7 @@ export namespace Prisma {
   /**
    * Order.ReturnRequest
    */
-  export type Order$ReturnRequestArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$ReturnRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -13358,9 +13410,7 @@ export namespace Prisma {
      */
     include?: ReturnRequestInclude<ExtArgs> | null;
     where?: ReturnRequestWhereInput;
-    orderBy?:
-      | ReturnRequestOrderByWithRelationInput
-      | ReturnRequestOrderByWithRelationInput[];
+    orderBy?: ReturnRequestOrderByWithRelationInput | ReturnRequestOrderByWithRelationInput[];
     cursor?: ReturnRequestWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -13370,9 +13420,7 @@ export namespace Prisma {
   /**
    * Order.Refund
    */
-  export type Order$RefundArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Order$RefundArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -13396,9 +13444,7 @@ export namespace Prisma {
   /**
    * Order without action
    */
-  export type OrderDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -13551,9 +13597,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type OrderItemAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which OrderItem to aggregate.
      */
@@ -13563,9 +13607,7 @@ export namespace Prisma {
      *
      * Determine the order of OrderItems to fetch.
      */
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -13624,13 +13666,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateOrderItem[P]>;
   };
 
-  export type OrderItemGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemWhereInput;
-    orderBy?:
-      | OrderItemOrderByWithAggregationInput
-      | OrderItemOrderByWithAggregationInput[];
+    orderBy?: OrderItemOrderByWithAggregationInput | OrderItemOrderByWithAggregationInput[];
     by: OrderItemScalarFieldEnum[] | OrderItemScalarFieldEnum;
     having?: OrderItemScalarWhereWithAggregatesInput;
     take?: number;
@@ -13661,86 +13699,82 @@ export namespace Prisma {
     _max: OrderItemMaxAggregateOutputType | null;
   };
 
-  type GetOrderItemGroupByPayload<T extends OrderItemGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<OrderItemGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof OrderItemGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], OrderItemGroupByOutputType[P]>
-            : GetScalarType<T[P], OrderItemGroupByOutputType[P]>;
-        }
-      >
+  type GetOrderItemGroupByPayload<T extends OrderItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrderItemGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof OrderItemGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], OrderItemGroupByOutputType[P]>
+          : GetScalarType<T[P], OrderItemGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type OrderItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        productId?: boolean;
+        variantId?: boolean;
+        sku?: boolean;
+        name?: boolean;
+        price?: boolean;
+        quantity?: boolean;
+        total?: boolean;
+        returned?: boolean;
+        createdAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        product?: boolean | OrderItem$productArgs<ExtArgs>;
+        variant?: boolean | OrderItem$variantArgs<ExtArgs>;
+        ReturnRequest?: boolean | OrderItem$ReturnRequestArgs<ExtArgs>;
+        _count?: boolean | OrderItemCountOutputTypeDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["orderItem"]
     >;
 
-  export type OrderItemSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      productId?: boolean;
-      variantId?: boolean;
-      sku?: boolean;
-      name?: boolean;
-      price?: boolean;
-      quantity?: boolean;
-      total?: boolean;
-      returned?: boolean;
-      createdAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      product?: boolean | OrderItem$productArgs<ExtArgs>;
-      variant?: boolean | OrderItem$variantArgs<ExtArgs>;
-      ReturnRequest?: boolean | OrderItem$ReturnRequestArgs<ExtArgs>;
-      _count?: boolean | OrderItemCountOutputTypeDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["orderItem"]
-  >;
+  export type OrderItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        productId?: boolean;
+        variantId?: boolean;
+        sku?: boolean;
+        name?: boolean;
+        price?: boolean;
+        quantity?: boolean;
+        total?: boolean;
+        returned?: boolean;
+        createdAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        product?: boolean | OrderItem$productArgs<ExtArgs>;
+        variant?: boolean | OrderItem$variantArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["orderItem"]
+    >;
 
-  export type OrderItemSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      productId?: boolean;
-      variantId?: boolean;
-      sku?: boolean;
-      name?: boolean;
-      price?: boolean;
-      quantity?: boolean;
-      total?: boolean;
-      returned?: boolean;
-      createdAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      product?: boolean | OrderItem$productArgs<ExtArgs>;
-      variant?: boolean | OrderItem$variantArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["orderItem"]
-  >;
-
-  export type OrderItemSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      productId?: boolean;
-      variantId?: boolean;
-      sku?: boolean;
-      name?: boolean;
-      price?: boolean;
-      quantity?: boolean;
-      total?: boolean;
-      returned?: boolean;
-      createdAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      product?: boolean | OrderItem$productArgs<ExtArgs>;
-      variant?: boolean | OrderItem$variantArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["orderItem"]
-  >;
+  export type OrderItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        productId?: boolean;
+        variantId?: boolean;
+        sku?: boolean;
+        name?: boolean;
+        price?: boolean;
+        quantity?: boolean;
+        total?: boolean;
+        returned?: boolean;
+        createdAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        product?: boolean | OrderItem$productArgs<ExtArgs>;
+        variant?: boolean | OrderItem$variantArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["orderItem"]
+    >;
 
   export type OrderItemSelectScalar = {
     id?: boolean;
@@ -13756,9 +13790,7 @@ export namespace Prisma {
     createdAt?: boolean;
   };
 
-  export type OrderItemOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     | "id"
     | "orderId"
     | "productId"
@@ -13772,33 +13804,27 @@ export namespace Prisma {
     | "createdAt",
     ExtArgs["result"]["orderItem"]
   >;
-  export type OrderItemInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
     product?: boolean | OrderItem$productArgs<ExtArgs>;
     variant?: boolean | OrderItem$variantArgs<ExtArgs>;
     ReturnRequest?: boolean | OrderItem$ReturnRequestArgs<ExtArgs>;
     _count?: boolean | OrderItemCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type OrderItemIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    order?: boolean | OrderDefaultArgs<ExtArgs>;
-    product?: boolean | OrderItem$productArgs<ExtArgs>;
-    variant?: boolean | OrderItem$variantArgs<ExtArgs>;
-  };
-  export type OrderItemIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    order?: boolean | OrderDefaultArgs<ExtArgs>;
-    product?: boolean | OrderItem$productArgs<ExtArgs>;
-    variant?: boolean | OrderItem$variantArgs<ExtArgs>;
-  };
+  export type OrderItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      order?: boolean | OrderDefaultArgs<ExtArgs>;
+      product?: boolean | OrderItem$productArgs<ExtArgs>;
+      variant?: boolean | OrderItem$variantArgs<ExtArgs>;
+    };
+  export type OrderItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      order?: boolean | OrderDefaultArgs<ExtArgs>;
+      product?: boolean | OrderItem$productArgs<ExtArgs>;
+      variant?: boolean | OrderItem$variantArgs<ExtArgs>;
+    };
 
-  export type $OrderItemPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $OrderItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OrderItem";
     objects: {
       order: Prisma.$OrderPayload<ExtArgs>;
@@ -13825,13 +13851,12 @@ export namespace Prisma {
     composites: {};
   };
 
-  type OrderItemGetPayload<
-    S extends boolean | null | undefined | OrderItemDefaultArgs,
-  > = $Result.GetResult<Prisma.$OrderItemPayload, S>;
+  type OrderItemGetPayload<S extends boolean | null | undefined | OrderItemDefaultArgs> = $Result.GetResult<
+    Prisma.$OrderItemPayload,
+    S
+  >;
 
-  type OrderItemCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
+  type OrderItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
     OrderItemFindManyArgs,
     "select" | "include" | "distinct" | "omit"
   > & {
@@ -13858,14 +13883,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends OrderItemFindUniqueArgs>(
-      args: SelectSubset<T, OrderItemFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemFindUniqueArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -13884,14 +13904,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends OrderItemFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, OrderItemFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -13911,14 +13926,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends OrderItemFindFirstArgs>(
-      args?: SelectSubset<T, OrderItemFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderItemFindFirstArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -13939,14 +13949,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends OrderItemFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, OrderItemFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderItemFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -13969,15 +13974,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends OrderItemFindManyArgs>(
-      args?: SelectSubset<T, OrderItemFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, OrderItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a OrderItem.
@@ -13992,14 +13990,9 @@ export namespace Prisma {
      *
      */
     create<T extends OrderItemCreateArgs>(
-      args: SelectSubset<T, OrderItemCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemCreateArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14018,7 +14011,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends OrderItemCreateManyArgs>(
-      args?: SelectSubset<T, OrderItemCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderItemCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -14044,14 +14037,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends OrderItemCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, OrderItemCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderItemCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -14067,14 +14055,9 @@ export namespace Prisma {
      *
      */
     delete<T extends OrderItemDeleteArgs>(
-      args: SelectSubset<T, OrderItemDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemDeleteArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14096,14 +14079,9 @@ export namespace Prisma {
      *
      */
     update<T extends OrderItemUpdateArgs>(
-      args: SelectSubset<T, OrderItemUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemUpdateArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14122,7 +14100,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends OrderItemDeleteManyArgs>(
-      args?: SelectSubset<T, OrderItemDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, OrderItemDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -14143,7 +14121,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends OrderItemUpdateManyArgs>(
-      args: SelectSubset<T, OrderItemUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -14175,14 +14153,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends OrderItemUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, OrderItemUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -14203,14 +14176,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends OrderItemUpsertArgs>(
-      args: SelectSubset<T, OrderItemUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, OrderItemUpsertArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      $Result.GetResult<
-        Prisma.$OrderItemPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -14230,7 +14198,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends OrderItemCountArgs>(
-      args?: Subset<T, OrderItemCountArgs>,
+      args?: Subset<T, OrderItemCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -14264,7 +14232,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends OrderItemAggregateArgs>(
-      args: Subset<T, OrderItemAggregateArgs>,
+      args: Subset<T, OrderItemAggregateArgs>
     ): Prisma.PrismaPromise<GetOrderItemAggregateType<T>>;
 
     /**
@@ -14287,16 +14255,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends OrderItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: OrderItemGroupByArgs["orderBy"] }
         : { orderBy?: OrderItemGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -14310,12 +14273,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -14345,11 +14303,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, OrderItemGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetOrderItemGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, OrderItemGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetOrderItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the OrderItem model
      */
@@ -14370,55 +14325,33 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     order<T extends OrderDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderDefaultArgs<ExtArgs>>,
+      args?: Subset<T, OrderDefaultArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     product<T extends OrderItem$productArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderItem$productArgs<ExtArgs>>,
+      args?: Subset<T, OrderItem$productArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     variant<T extends OrderItem$variantArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderItem$variantArgs<ExtArgs>>,
+      args?: Subset<T, OrderItem$variantArgs<ExtArgs>>
     ): Prisma__ProductVariantClient<
-      $Result.GetResult<
-        Prisma.$ProductVariantPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     ReturnRequest<T extends OrderItem$ReturnRequestArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderItem$ReturnRequestArgs<ExtArgs>>,
+      args?: Subset<T, OrderItem$ReturnRequestArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$ReturnRequestPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14427,14 +14360,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -14442,10 +14369,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -14477,9 +14401,7 @@ export namespace Prisma {
   /**
    * OrderItem findUnique
    */
-  export type OrderItemFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14501,9 +14423,7 @@ export namespace Prisma {
   /**
    * OrderItem findUniqueOrThrow
    */
-  export type OrderItemFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14525,9 +14445,7 @@ export namespace Prisma {
   /**
    * OrderItem findFirst
    */
-  export type OrderItemFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14549,9 +14467,7 @@ export namespace Prisma {
      *
      * Determine the order of OrderItems to fetch.
      */
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -14581,9 +14497,7 @@ export namespace Prisma {
   /**
    * OrderItem findFirstOrThrow
    */
-  export type OrderItemFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14605,9 +14519,7 @@ export namespace Prisma {
      *
      * Determine the order of OrderItems to fetch.
      */
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -14637,9 +14549,7 @@ export namespace Prisma {
   /**
    * OrderItem findMany
    */
-  export type OrderItemFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14661,9 +14571,7 @@ export namespace Prisma {
      *
      * Determine the order of OrderItems to fetch.
      */
-    orderBy?:
-      | OrderItemOrderByWithRelationInput
-      | OrderItemOrderByWithRelationInput[];
+    orderBy?: OrderItemOrderByWithRelationInput | OrderItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -14688,9 +14596,7 @@ export namespace Prisma {
   /**
    * OrderItem create
    */
-  export type OrderItemCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14712,9 +14618,7 @@ export namespace Prisma {
   /**
    * OrderItem createMany
    */
-  export type OrderItemCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many OrderItems.
      */
@@ -14725,9 +14629,7 @@ export namespace Prisma {
   /**
    * OrderItem createManyAndReturn
    */
-  export type OrderItemCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14750,9 +14652,7 @@ export namespace Prisma {
   /**
    * OrderItem update
    */
-  export type OrderItemUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14778,16 +14678,11 @@ export namespace Prisma {
   /**
    * OrderItem updateMany
    */
-  export type OrderItemUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update OrderItems.
      */
-    data: XOR<
-      OrderItemUpdateManyMutationInput,
-      OrderItemUncheckedUpdateManyInput
-    >;
+    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyInput>;
     /**
      * Filter which OrderItems to update
      */
@@ -14801,9 +14696,7 @@ export namespace Prisma {
   /**
    * OrderItem updateManyAndReturn
    */
-  export type OrderItemUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14815,10 +14708,7 @@ export namespace Prisma {
     /**
      * The data used to update OrderItems.
      */
-    data: XOR<
-      OrderItemUpdateManyMutationInput,
-      OrderItemUncheckedUpdateManyInput
-    >;
+    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyInput>;
     /**
      * Filter which OrderItems to update
      */
@@ -14836,9 +14726,7 @@ export namespace Prisma {
   /**
    * OrderItem upsert
    */
-  export type OrderItemUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14868,9 +14756,7 @@ export namespace Prisma {
   /**
    * OrderItem delete
    */
-  export type OrderItemDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -14892,9 +14778,7 @@ export namespace Prisma {
   /**
    * OrderItem deleteMany
    */
-  export type OrderItemDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which OrderItems to delete
      */
@@ -14908,9 +14792,7 @@ export namespace Prisma {
   /**
    * OrderItem.product
    */
-  export type OrderItem$productArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItem$productArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -14929,9 +14811,7 @@ export namespace Prisma {
   /**
    * OrderItem.variant
    */
-  export type OrderItem$variantArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItem$variantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductVariant
      */
@@ -14950,9 +14830,7 @@ export namespace Prisma {
   /**
    * OrderItem.ReturnRequest
    */
-  export type OrderItem$ReturnRequestArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItem$ReturnRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -14966,9 +14844,7 @@ export namespace Prisma {
      */
     include?: ReturnRequestInclude<ExtArgs> | null;
     where?: ReturnRequestWhereInput;
-    orderBy?:
-      | ReturnRequestOrderByWithRelationInput
-      | ReturnRequestOrderByWithRelationInput[];
+    orderBy?: ReturnRequestOrderByWithRelationInput | ReturnRequestOrderByWithRelationInput[];
     cursor?: ReturnRequestWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -14978,9 +14854,7 @@ export namespace Prisma {
   /**
    * OrderItem without action
    */
-  export type OrderItemDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type OrderItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -15149,9 +15023,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type CouponAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Coupon to aggregate.
      */
@@ -15220,13 +15092,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateCoupon[P]>;
   };
 
-  export type CouponGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CouponWhereInput;
-    orderBy?:
-      | CouponOrderByWithAggregationInput
-      | CouponOrderByWithAggregationInput[];
+    orderBy?: CouponOrderByWithAggregationInput | CouponOrderByWithAggregationInput[];
     by: CouponScalarFieldEnum[] | CouponScalarFieldEnum;
     having?: CouponScalarWhereWithAggregatesInput;
     take?: number;
@@ -15261,22 +15129,19 @@ export namespace Prisma {
     _max: CouponMaxAggregateOutputType | null;
   };
 
-  type GetCouponGroupByPayload<T extends CouponGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<CouponGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof CouponGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], CouponGroupByOutputType[P]>
-            : GetScalarType<T[P], CouponGroupByOutputType[P]>;
-        }
-      >
-    >;
+  type GetCouponGroupByPayload<T extends CouponGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CouponGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof CouponGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], CouponGroupByOutputType[P]>
+          : GetScalarType<T[P], CouponGroupByOutputType[P]>;
+      }
+    >
+  >;
 
-  export type CouponSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
+  export type CouponSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
     {
       id?: boolean;
       code?: boolean;
@@ -15299,51 +15164,49 @@ export namespace Prisma {
     ExtArgs["result"]["coupon"]
   >;
 
-  export type CouponSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      code?: boolean;
-      type?: boolean;
-      amount?: boolean;
-      percent?: boolean;
-      description?: boolean;
-      startsAt?: boolean;
-      expiresAt?: boolean;
-      usageLimit?: boolean;
-      usagePerUser?: boolean;
-      timesUsed?: boolean;
-      active?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-    },
-    ExtArgs["result"]["coupon"]
-  >;
+  export type CouponSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        code?: boolean;
+        type?: boolean;
+        amount?: boolean;
+        percent?: boolean;
+        description?: boolean;
+        startsAt?: boolean;
+        expiresAt?: boolean;
+        usageLimit?: boolean;
+        usagePerUser?: boolean;
+        timesUsed?: boolean;
+        active?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+      },
+      ExtArgs["result"]["coupon"]
+    >;
 
-  export type CouponSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      code?: boolean;
-      type?: boolean;
-      amount?: boolean;
-      percent?: boolean;
-      description?: boolean;
-      startsAt?: boolean;
-      expiresAt?: boolean;
-      usageLimit?: boolean;
-      usagePerUser?: boolean;
-      timesUsed?: boolean;
-      active?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-    },
-    ExtArgs["result"]["coupon"]
-  >;
+  export type CouponSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        code?: boolean;
+        type?: boolean;
+        amount?: boolean;
+        percent?: boolean;
+        description?: boolean;
+        startsAt?: boolean;
+        expiresAt?: boolean;
+        usageLimit?: boolean;
+        usagePerUser?: boolean;
+        timesUsed?: boolean;
+        active?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+      },
+      ExtArgs["result"]["coupon"]
+    >;
 
   export type CouponSelectScalar = {
     id?: boolean;
@@ -15363,9 +15226,7 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type CouponOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type CouponOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     | "id"
     | "code"
     | "type"
@@ -15383,22 +15244,14 @@ export namespace Prisma {
     | "updatedAt",
     ExtArgs["result"]["coupon"]
   >;
-  export type CouponInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | Coupon$OrderArgs<ExtArgs>;
     _count?: boolean | CouponCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type CouponIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
-  export type CouponIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {};
+  export type CouponIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
+  export type CouponIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
 
-  export type $CouponPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $CouponPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Coupon";
     objects: {
       Order: Prisma.$OrderPayload<ExtArgs>[];
@@ -15426,13 +15279,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type CouponGetPayload<
-    S extends boolean | null | undefined | CouponDefaultArgs,
-  > = $Result.GetResult<Prisma.$CouponPayload, S>;
+  type CouponGetPayload<S extends boolean | null | undefined | CouponDefaultArgs> = $Result.GetResult<
+    Prisma.$CouponPayload,
+    S
+  >;
 
-  type CouponCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<CouponFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type CouponCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    CouponFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: CouponCountAggregateInputType | true;
   };
 
@@ -15440,10 +15295,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Coupon"];
-      meta: { name: "Coupon" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Coupon"]; meta: { name: "Coupon" } };
     /**
      * Find zero or one Coupon that matches the filter.
      * @param {CouponFindUniqueArgs} args - Arguments to find a Coupon
@@ -15456,14 +15308,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends CouponFindUniqueArgs>(
-      args: SelectSubset<T, CouponFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponFindUniqueArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -15482,14 +15329,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends CouponFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, CouponFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -15509,14 +15351,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends CouponFindFirstArgs>(
-      args?: SelectSubset<T, CouponFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, CouponFindFirstArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -15537,14 +15374,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends CouponFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, CouponFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, CouponFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -15567,15 +15399,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends CouponFindManyArgs>(
-      args?: SelectSubset<T, CouponFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, CouponFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Coupon.
@@ -15590,14 +15415,9 @@ export namespace Prisma {
      *
      */
     create<T extends CouponCreateArgs>(
-      args: SelectSubset<T, CouponCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponCreateArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -15616,7 +15436,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends CouponCreateManyArgs>(
-      args?: SelectSubset<T, CouponCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, CouponCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -15642,14 +15462,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends CouponCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, CouponCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, CouponCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -15665,14 +15480,9 @@ export namespace Prisma {
      *
      */
     delete<T extends CouponDeleteArgs>(
-      args: SelectSubset<T, CouponDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponDeleteArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -15694,14 +15504,9 @@ export namespace Prisma {
      *
      */
     update<T extends CouponUpdateArgs>(
-      args: SelectSubset<T, CouponUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponUpdateArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -15720,7 +15525,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends CouponDeleteManyArgs>(
-      args?: SelectSubset<T, CouponDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, CouponDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -15741,7 +15546,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends CouponUpdateManyArgs>(
-      args: SelectSubset<T, CouponUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -15773,14 +15578,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends CouponUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, CouponUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -15801,14 +15601,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends CouponUpsertArgs>(
-      args: SelectSubset<T, CouponUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, CouponUpsertArgs<ExtArgs>>
     ): Prisma__CouponClient<
-      $Result.GetResult<
-        Prisma.$CouponPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -15828,7 +15623,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends CouponCountArgs>(
-      args?: Subset<T, CouponCountArgs>,
+      args?: Subset<T, CouponCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -15862,7 +15657,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends CouponAggregateArgs>(
-      args: Subset<T, CouponAggregateArgs>,
+      args: Subset<T, CouponAggregateArgs>
     ): Prisma.PrismaPromise<GetCouponAggregateType<T>>;
 
     /**
@@ -15885,16 +15680,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends CouponGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: CouponGroupByArgs["orderBy"] }
         : { orderBy?: CouponGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -15908,12 +15698,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -15943,10 +15728,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, CouponGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetCouponGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, CouponGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetCouponGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Coupon model
      */
@@ -15967,16 +15750,8 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     Order<T extends Coupon$OrderArgs<ExtArgs> = {}>(
-      args?: Subset<T, Coupon$OrderArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, Coupon$OrderArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15984,14 +15759,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -15999,10 +15768,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -16038,9 +15804,7 @@ export namespace Prisma {
   /**
    * Coupon findUnique
    */
-  export type CouponFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16062,9 +15826,7 @@ export namespace Prisma {
   /**
    * Coupon findUniqueOrThrow
    */
-  export type CouponFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16086,9 +15848,7 @@ export namespace Prisma {
   /**
    * Coupon findFirst
    */
-  export type CouponFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16140,9 +15900,7 @@ export namespace Prisma {
   /**
    * Coupon findFirstOrThrow
    */
-  export type CouponFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16194,9 +15952,7 @@ export namespace Prisma {
   /**
    * Coupon findMany
    */
-  export type CouponFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16243,9 +15999,7 @@ export namespace Prisma {
   /**
    * Coupon create
    */
-  export type CouponCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16267,9 +16021,7 @@ export namespace Prisma {
   /**
    * Coupon createMany
    */
-  export type CouponCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Coupons.
      */
@@ -16280,9 +16032,7 @@ export namespace Prisma {
   /**
    * Coupon createManyAndReturn
    */
-  export type CouponCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16301,9 +16051,7 @@ export namespace Prisma {
   /**
    * Coupon update
    */
-  export type CouponUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16329,9 +16077,7 @@ export namespace Prisma {
   /**
    * Coupon updateMany
    */
-  export type CouponUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Coupons.
      */
@@ -16349,9 +16095,7 @@ export namespace Prisma {
   /**
    * Coupon updateManyAndReturn
    */
-  export type CouponUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16377,9 +16121,7 @@ export namespace Prisma {
   /**
    * Coupon upsert
    */
-  export type CouponUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16409,9 +16151,7 @@ export namespace Prisma {
   /**
    * Coupon delete
    */
-  export type CouponDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16433,9 +16173,7 @@ export namespace Prisma {
   /**
    * Coupon deleteMany
    */
-  export type CouponDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Coupons to delete
      */
@@ -16449,9 +16187,7 @@ export namespace Prisma {
   /**
    * Coupon.Order
    */
-  export type Coupon$OrderArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Coupon$OrderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -16475,9 +16211,7 @@ export namespace Prisma {
   /**
    * Coupon without action
    */
-  export type CouponDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type CouponDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Coupon
      */
@@ -16606,9 +16340,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type ReviewAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Review to aggregate.
      */
@@ -16677,13 +16409,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateReview[P]>;
   };
 
-  export type ReviewGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewWhereInput;
-    orderBy?:
-      | ReviewOrderByWithAggregationInput
-      | ReviewOrderByWithAggregationInput[];
+    orderBy?: ReviewOrderByWithAggregationInput | ReviewOrderByWithAggregationInput[];
     by: ReviewScalarFieldEnum[] | ReviewScalarFieldEnum;
     having?: ReviewScalarWhereWithAggregatesInput;
     take?: number;
@@ -16712,75 +16440,70 @@ export namespace Prisma {
     _max: ReviewMaxAggregateOutputType | null;
   };
 
-  type GetReviewGroupByPayload<T extends ReviewGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<ReviewGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof ReviewGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReviewGroupByOutputType[P]>
-            : GetScalarType<T[P], ReviewGroupByOutputType[P]>;
-        }
-      >
+  type GetReviewGroupByPayload<T extends ReviewGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReviewGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof ReviewGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], ReviewGroupByOutputType[P]>
+          : GetScalarType<T[P], ReviewGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type ReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      userId?: boolean;
+      productId?: boolean;
+      rating?: boolean;
+      title?: boolean;
+      body?: boolean;
+      approved?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      user?: boolean | Review$userArgs<ExtArgs>;
+      product?: boolean | ProductDefaultArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["review"]
+  >;
+
+  export type ReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        productId?: boolean;
+        rating?: boolean;
+        title?: boolean;
+        body?: boolean;
+        approved?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | Review$userArgs<ExtArgs>;
+        product?: boolean | ProductDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["review"]
     >;
 
-  export type ReviewSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      productId?: boolean;
-      rating?: boolean;
-      title?: boolean;
-      body?: boolean;
-      approved?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Review$userArgs<ExtArgs>;
-      product?: boolean | ProductDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["review"]
-  >;
-
-  export type ReviewSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      productId?: boolean;
-      rating?: boolean;
-      title?: boolean;
-      body?: boolean;
-      approved?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Review$userArgs<ExtArgs>;
-      product?: boolean | ProductDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["review"]
-  >;
-
-  export type ReviewSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      productId?: boolean;
-      rating?: boolean;
-      title?: boolean;
-      body?: boolean;
-      approved?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Review$userArgs<ExtArgs>;
-      product?: boolean | ProductDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["review"]
-  >;
+  export type ReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        productId?: boolean;
+        rating?: boolean;
+        title?: boolean;
+        body?: boolean;
+        approved?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | Review$userArgs<ExtArgs>;
+        product?: boolean | ProductDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["review"]
+    >;
 
   export type ReviewSelectScalar = {
     id?: boolean;
@@ -16794,42 +16517,24 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type ReviewOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "userId"
-    | "productId"
-    | "rating"
-    | "title"
-    | "body"
-    | "approved"
-    | "createdAt"
-    | "updatedAt",
+  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    "id" | "userId" | "productId" | "rating" | "title" | "body" | "approved" | "createdAt" | "updatedAt",
     ExtArgs["result"]["review"]
   >;
-  export type ReviewInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Review$userArgs<ExtArgs>;
     product?: boolean | ProductDefaultArgs<ExtArgs>;
   };
-  export type ReviewIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Review$userArgs<ExtArgs>;
     product?: boolean | ProductDefaultArgs<ExtArgs>;
   };
-  export type ReviewIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Review$userArgs<ExtArgs>;
     product?: boolean | ProductDefaultArgs<ExtArgs>;
   };
 
-  export type $ReviewPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Review";
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null;
@@ -16852,13 +16557,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type ReviewGetPayload<
-    S extends boolean | null | undefined | ReviewDefaultArgs,
-  > = $Result.GetResult<Prisma.$ReviewPayload, S>;
+  type ReviewGetPayload<S extends boolean | null | undefined | ReviewDefaultArgs> = $Result.GetResult<
+    Prisma.$ReviewPayload,
+    S
+  >;
 
-  type ReviewCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<ReviewFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type ReviewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    ReviewFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: ReviewCountAggregateInputType | true;
   };
 
@@ -16866,10 +16573,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Review"];
-      meta: { name: "Review" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Review"]; meta: { name: "Review" } };
     /**
      * Find zero or one Review that matches the filter.
      * @param {ReviewFindUniqueArgs} args - Arguments to find a Review
@@ -16882,14 +16586,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends ReviewFindUniqueArgs>(
-      args: SelectSubset<T, ReviewFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewFindUniqueArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -16908,14 +16607,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends ReviewFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, ReviewFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -16935,14 +16629,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends ReviewFindFirstArgs>(
-      args?: SelectSubset<T, ReviewFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReviewFindFirstArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -16963,14 +16652,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends ReviewFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ReviewFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReviewFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -16993,15 +16677,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends ReviewFindManyArgs>(
-      args?: SelectSubset<T, ReviewFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, ReviewFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Review.
@@ -17016,14 +16693,9 @@ export namespace Prisma {
      *
      */
     create<T extends ReviewCreateArgs>(
-      args: SelectSubset<T, ReviewCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewCreateArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -17042,7 +16714,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends ReviewCreateManyArgs>(
-      args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -17068,14 +16740,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends ReviewCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -17091,14 +16758,9 @@ export namespace Prisma {
      *
      */
     delete<T extends ReviewDeleteArgs>(
-      args: SelectSubset<T, ReviewDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewDeleteArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -17120,14 +16782,9 @@ export namespace Prisma {
      *
      */
     update<T extends ReviewUpdateArgs>(
-      args: SelectSubset<T, ReviewUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewUpdateArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -17146,7 +16803,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends ReviewDeleteManyArgs>(
-      args?: SelectSubset<T, ReviewDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReviewDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -17167,7 +16824,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends ReviewUpdateManyArgs>(
-      args: SelectSubset<T, ReviewUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -17199,14 +16856,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends ReviewUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, ReviewUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -17227,14 +16879,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends ReviewUpsertArgs>(
-      args: SelectSubset<T, ReviewUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, ReviewUpsertArgs<ExtArgs>>
     ): Prisma__ReviewClient<
-      $Result.GetResult<
-        Prisma.$ReviewPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -17254,7 +16901,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends ReviewCountArgs>(
-      args?: Subset<T, ReviewCountArgs>,
+      args?: Subset<T, ReviewCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -17288,7 +16935,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends ReviewAggregateArgs>(
-      args: Subset<T, ReviewAggregateArgs>,
+      args: Subset<T, ReviewAggregateArgs>
     ): Prisma.PrismaPromise<GetReviewAggregateType<T>>;
 
     /**
@@ -17311,16 +16958,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends ReviewGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ReviewGroupByArgs["orderBy"] }
         : { orderBy?: ReviewGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -17334,12 +16976,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -17369,10 +17006,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, ReviewGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetReviewGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, ReviewGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetReviewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Review model
      */
@@ -17393,28 +17028,17 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     user<T extends Review$userArgs<ExtArgs> = {}>(
-      args?: Subset<T, Review$userArgs<ExtArgs>>,
+      args?: Subset<T, Review$userArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductDefaultArgs<ExtArgs>>,
+      args?: Subset<T, ProductDefaultArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      | $Result.GetResult<
-          Prisma.$ProductPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
@@ -17426,14 +17050,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -17441,10 +17059,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -17474,9 +17089,7 @@ export namespace Prisma {
   /**
    * Review findUnique
    */
-  export type ReviewFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17498,9 +17111,7 @@ export namespace Prisma {
   /**
    * Review findUniqueOrThrow
    */
-  export type ReviewFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17522,9 +17133,7 @@ export namespace Prisma {
   /**
    * Review findFirst
    */
-  export type ReviewFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17576,9 +17185,7 @@ export namespace Prisma {
   /**
    * Review findFirstOrThrow
    */
-  export type ReviewFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17630,9 +17237,7 @@ export namespace Prisma {
   /**
    * Review findMany
    */
-  export type ReviewFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17679,9 +17284,7 @@ export namespace Prisma {
   /**
    * Review create
    */
-  export type ReviewCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17703,9 +17306,7 @@ export namespace Prisma {
   /**
    * Review createMany
    */
-  export type ReviewCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Reviews.
      */
@@ -17716,9 +17317,7 @@ export namespace Prisma {
   /**
    * Review createManyAndReturn
    */
-  export type ReviewCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17741,9 +17340,7 @@ export namespace Prisma {
   /**
    * Review update
    */
-  export type ReviewUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17769,9 +17366,7 @@ export namespace Prisma {
   /**
    * Review updateMany
    */
-  export type ReviewUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Reviews.
      */
@@ -17789,9 +17384,7 @@ export namespace Prisma {
   /**
    * Review updateManyAndReturn
    */
-  export type ReviewUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17821,9 +17414,7 @@ export namespace Prisma {
   /**
    * Review upsert
    */
-  export type ReviewUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17853,9 +17444,7 @@ export namespace Prisma {
   /**
    * Review delete
    */
-  export type ReviewDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -17877,9 +17466,7 @@ export namespace Prisma {
   /**
    * Review deleteMany
    */
-  export type ReviewDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Reviews to delete
      */
@@ -17893,9 +17480,7 @@ export namespace Prisma {
   /**
    * Review.user
    */
-  export type Review$userArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Review$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -17914,9 +17499,7 @@ export namespace Prisma {
   /**
    * Review without action
    */
-  export type ReviewDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Review
      */
@@ -18007,9 +17590,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type WishlistAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Wishlist to aggregate.
      */
@@ -18019,9 +17600,7 @@ export namespace Prisma {
      *
      * Determine the order of Wishlists to fetch.
      */
-    orderBy?:
-      | WishlistOrderByWithRelationInput
-      | WishlistOrderByWithRelationInput[];
+    orderBy?: WishlistOrderByWithRelationInput | WishlistOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -18080,13 +17659,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateWishlist[P]>;
   };
 
-  export type WishlistGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WishlistWhereInput;
-    orderBy?:
-      | WishlistOrderByWithAggregationInput
-      | WishlistOrderByWithAggregationInput[];
+    orderBy?: WishlistOrderByWithAggregationInput | WishlistOrderByWithAggregationInput[];
     by: WishlistScalarFieldEnum[] | WishlistScalarFieldEnum;
     having?: WishlistScalarWhereWithAggregatesInput;
     take?: number;
@@ -18110,59 +17685,55 @@ export namespace Prisma {
     _max: WishlistMaxAggregateOutputType | null;
   };
 
-  type GetWishlistGroupByPayload<T extends WishlistGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<WishlistGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof WishlistGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], WishlistGroupByOutputType[P]>
-            : GetScalarType<T[P], WishlistGroupByOutputType[P]>;
-        }
-      >
+  type GetWishlistGroupByPayload<T extends WishlistGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WishlistGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof WishlistGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], WishlistGroupByOutputType[P]>
+          : GetScalarType<T[P], WishlistGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type WishlistSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+        items?: boolean | Wishlist$itemsArgs<ExtArgs>;
+        _count?: boolean | WishlistCountOutputTypeDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["wishlist"]
     >;
 
-  export type WishlistSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | UserDefaultArgs<ExtArgs>;
-      items?: boolean | Wishlist$itemsArgs<ExtArgs>;
-      _count?: boolean | WishlistCountOutputTypeDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["wishlist"]
-  >;
+  export type WishlistSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["wishlist"]
+    >;
 
-  export type WishlistSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | UserDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["wishlist"]
-  >;
-
-  export type WishlistSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | UserDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["wishlist"]
-  >;
+  export type WishlistSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | UserDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["wishlist"]
+    >;
 
   export type WishlistSelectScalar = {
     id?: boolean;
@@ -18171,33 +17742,23 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type WishlistOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type WishlistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     "id" | "userId" | "createdAt" | "updatedAt",
     ExtArgs["result"]["wishlist"]
   >;
-  export type WishlistInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>;
     items?: boolean | Wishlist$itemsArgs<ExtArgs>;
     _count?: boolean | WishlistCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type WishlistIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
-  export type WishlistIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>;
   };
 
-  export type $WishlistPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $WishlistPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Wishlist";
     objects: {
       user: Prisma.$UserPayload<ExtArgs>;
@@ -18215,13 +17776,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type WishlistGetPayload<
-    S extends boolean | null | undefined | WishlistDefaultArgs,
-  > = $Result.GetResult<Prisma.$WishlistPayload, S>;
+  type WishlistGetPayload<S extends boolean | null | undefined | WishlistDefaultArgs> = $Result.GetResult<
+    Prisma.$WishlistPayload,
+    S
+  >;
 
-  type WishlistCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<WishlistFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type WishlistCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    WishlistFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: WishlistCountAggregateInputType | true;
   };
 
@@ -18245,14 +17808,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends WishlistFindUniqueArgs>(
-      args: SelectSubset<T, WishlistFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistFindUniqueArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -18271,14 +17829,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends WishlistFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, WishlistFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -18298,14 +17851,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends WishlistFindFirstArgs>(
-      args?: SelectSubset<T, WishlistFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistFindFirstArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -18326,14 +17874,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends WishlistFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, WishlistFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -18356,15 +17899,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends WishlistFindManyArgs>(
-      args?: SelectSubset<T, WishlistFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, WishlistFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Wishlist.
@@ -18379,14 +17915,9 @@ export namespace Prisma {
      *
      */
     create<T extends WishlistCreateArgs>(
-      args: SelectSubset<T, WishlistCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistCreateArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -18405,7 +17936,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends WishlistCreateManyArgs>(
-      args?: SelectSubset<T, WishlistCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -18431,14 +17962,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends WishlistCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, WishlistCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -18454,14 +17980,9 @@ export namespace Prisma {
      *
      */
     delete<T extends WishlistDeleteArgs>(
-      args: SelectSubset<T, WishlistDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistDeleteArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -18483,14 +18004,9 @@ export namespace Prisma {
      *
      */
     update<T extends WishlistUpdateArgs>(
-      args: SelectSubset<T, WishlistUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistUpdateArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -18509,7 +18025,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends WishlistDeleteManyArgs>(
-      args?: SelectSubset<T, WishlistDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -18530,7 +18046,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends WishlistUpdateManyArgs>(
-      args: SelectSubset<T, WishlistUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -18562,14 +18078,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends WishlistUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, WishlistUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -18590,14 +18101,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends WishlistUpsertArgs>(
-      args: SelectSubset<T, WishlistUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistUpsertArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      $Result.GetResult<
-        Prisma.$WishlistPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -18617,7 +18123,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends WishlistCountArgs>(
-      args?: Subset<T, WishlistCountArgs>,
+      args?: Subset<T, WishlistCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -18651,7 +18157,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends WishlistAggregateArgs>(
-      args: Subset<T, WishlistAggregateArgs>,
+      args: Subset<T, WishlistAggregateArgs>
     ): Prisma.PrismaPromise<GetWishlistAggregateType<T>>;
 
     /**
@@ -18674,16 +18180,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends WishlistGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: WishlistGroupByArgs["orderBy"] }
         : { orderBy?: WishlistGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -18697,12 +18198,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -18732,11 +18228,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, WishlistGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetWishlistGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, WishlistGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetWishlistGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Wishlist model
      */
@@ -18757,29 +18250,17 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     user<T extends UserDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, UserDefaultArgs<ExtArgs>>,
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
     ): Prisma__UserClient<
-      | $Result.GetResult<
-          Prisma.$UserPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     items<T extends Wishlist$itemsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Wishlist$itemsArgs<ExtArgs>>,
+      args?: Subset<T, Wishlist$itemsArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$WishlistItemPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -18788,14 +18269,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -18803,10 +18278,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -18831,9 +18303,7 @@ export namespace Prisma {
   /**
    * Wishlist findUnique
    */
-  export type WishlistFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -18855,9 +18325,7 @@ export namespace Prisma {
   /**
    * Wishlist findUniqueOrThrow
    */
-  export type WishlistFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -18879,9 +18347,7 @@ export namespace Prisma {
   /**
    * Wishlist findFirst
    */
-  export type WishlistFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -18903,9 +18369,7 @@ export namespace Prisma {
      *
      * Determine the order of Wishlists to fetch.
      */
-    orderBy?:
-      | WishlistOrderByWithRelationInput
-      | WishlistOrderByWithRelationInput[];
+    orderBy?: WishlistOrderByWithRelationInput | WishlistOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -18935,9 +18399,7 @@ export namespace Prisma {
   /**
    * Wishlist findFirstOrThrow
    */
-  export type WishlistFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -18959,9 +18421,7 @@ export namespace Prisma {
      *
      * Determine the order of Wishlists to fetch.
      */
-    orderBy?:
-      | WishlistOrderByWithRelationInput
-      | WishlistOrderByWithRelationInput[];
+    orderBy?: WishlistOrderByWithRelationInput | WishlistOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -18991,9 +18451,7 @@ export namespace Prisma {
   /**
    * Wishlist findMany
    */
-  export type WishlistFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19015,9 +18473,7 @@ export namespace Prisma {
      *
      * Determine the order of Wishlists to fetch.
      */
-    orderBy?:
-      | WishlistOrderByWithRelationInput
-      | WishlistOrderByWithRelationInput[];
+    orderBy?: WishlistOrderByWithRelationInput | WishlistOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -19042,9 +18498,7 @@ export namespace Prisma {
   /**
    * Wishlist create
    */
-  export type WishlistCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19066,9 +18520,7 @@ export namespace Prisma {
   /**
    * Wishlist createMany
    */
-  export type WishlistCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Wishlists.
      */
@@ -19079,9 +18531,7 @@ export namespace Prisma {
   /**
    * Wishlist createManyAndReturn
    */
-  export type WishlistCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19104,9 +18554,7 @@ export namespace Prisma {
   /**
    * Wishlist update
    */
-  export type WishlistUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19132,16 +18580,11 @@ export namespace Prisma {
   /**
    * Wishlist updateMany
    */
-  export type WishlistUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Wishlists.
      */
-    data: XOR<
-      WishlistUpdateManyMutationInput,
-      WishlistUncheckedUpdateManyInput
-    >;
+    data: XOR<WishlistUpdateManyMutationInput, WishlistUncheckedUpdateManyInput>;
     /**
      * Filter which Wishlists to update
      */
@@ -19155,9 +18598,7 @@ export namespace Prisma {
   /**
    * Wishlist updateManyAndReturn
    */
-  export type WishlistUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19169,10 +18610,7 @@ export namespace Prisma {
     /**
      * The data used to update Wishlists.
      */
-    data: XOR<
-      WishlistUpdateManyMutationInput,
-      WishlistUncheckedUpdateManyInput
-    >;
+    data: XOR<WishlistUpdateManyMutationInput, WishlistUncheckedUpdateManyInput>;
     /**
      * Filter which Wishlists to update
      */
@@ -19190,9 +18628,7 @@ export namespace Prisma {
   /**
    * Wishlist upsert
    */
-  export type WishlistUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19222,9 +18658,7 @@ export namespace Prisma {
   /**
    * Wishlist delete
    */
-  export type WishlistDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19246,9 +18680,7 @@ export namespace Prisma {
   /**
    * Wishlist deleteMany
    */
-  export type WishlistDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Wishlists to delete
      */
@@ -19262,9 +18694,7 @@ export namespace Prisma {
   /**
    * Wishlist.items
    */
-  export type Wishlist$itemsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Wishlist$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -19278,9 +18708,7 @@ export namespace Prisma {
      */
     include?: WishlistItemInclude<ExtArgs> | null;
     where?: WishlistItemWhereInput;
-    orderBy?:
-      | WishlistItemOrderByWithRelationInput
-      | WishlistItemOrderByWithRelationInput[];
+    orderBy?: WishlistItemOrderByWithRelationInput | WishlistItemOrderByWithRelationInput[];
     cursor?: WishlistItemWhereUniqueInput;
     take?: number;
     skip?: number;
@@ -19290,9 +18718,7 @@ export namespace Prisma {
   /**
    * Wishlist without action
    */
-  export type WishlistDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Wishlist
      */
@@ -19397,9 +18823,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type WishlistItemAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which WishlistItem to aggregate.
      */
@@ -19409,9 +18833,7 @@ export namespace Prisma {
      *
      * Determine the order of WishlistItems to fetch.
      */
-    orderBy?:
-      | WishlistItemOrderByWithRelationInput
-      | WishlistItemOrderByWithRelationInput[];
+    orderBy?: WishlistItemOrderByWithRelationInput | WishlistItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -19462,9 +18884,7 @@ export namespace Prisma {
     _max?: WishlistItemMaxAggregateInputType;
   };
 
-  export type GetWishlistItemAggregateType<
-    T extends WishlistItemAggregateArgs,
-  > = {
+  export type GetWishlistItemAggregateType<T extends WishlistItemAggregateArgs> = {
     [P in keyof T & keyof AggregateWishlistItem]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
@@ -19472,13 +18892,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateWishlistItem[P]>;
   };
 
-  export type WishlistItemGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WishlistItemWhereInput;
-    orderBy?:
-      | WishlistItemOrderByWithAggregationInput
-      | WishlistItemOrderByWithAggregationInput[];
+    orderBy?: WishlistItemOrderByWithAggregationInput | WishlistItemOrderByWithAggregationInput[];
     by: WishlistItemScalarFieldEnum[] | WishlistItemScalarFieldEnum;
     having?: WishlistItemScalarWhereWithAggregatesInput;
     take?: number;
@@ -19503,34 +18919,31 @@ export namespace Prisma {
     _max: WishlistItemMaxAggregateOutputType | null;
   };
 
-  type GetWishlistItemGroupByPayload<T extends WishlistItemGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<WishlistItemGroupByOutputType, T["by"]> & {
-          [P in keyof T &
-            keyof WishlistItemGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], WishlistItemGroupByOutputType[P]>
-            : GetScalarType<T[P], WishlistItemGroupByOutputType[P]>;
-        }
-      >
-    >;
-
-  export type WishlistItemSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      wishlistId?: boolean;
-      productId?: boolean;
-      variantId?: boolean;
-      createdAt?: boolean;
-      wishlist?: boolean | WishlistDefaultArgs<ExtArgs>;
-      product?: boolean | ProductDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["wishlistItem"]
+  type GetWishlistItemGroupByPayload<T extends WishlistItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WishlistItemGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof WishlistItemGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], WishlistItemGroupByOutputType[P]>
+          : GetScalarType<T[P], WishlistItemGroupByOutputType[P]>;
+      }
+    >
   >;
+
+  export type WishlistItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        wishlistId?: boolean;
+        productId?: boolean;
+        variantId?: boolean;
+        createdAt?: boolean;
+        wishlist?: boolean | WishlistDefaultArgs<ExtArgs>;
+        product?: boolean | ProductDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["wishlistItem"]
+    >;
 
   export type WishlistItemSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -19570,15 +18983,12 @@ export namespace Prisma {
     createdAt?: boolean;
   };
 
-  export type WishlistItemOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    "id" | "wishlistId" | "productId" | "variantId" | "createdAt",
-    ExtArgs["result"]["wishlistItem"]
-  >;
-  export type WishlistItemInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      "id" | "wishlistId" | "productId" | "variantId" | "createdAt",
+      ExtArgs["result"]["wishlistItem"]
+    >;
+  export type WishlistItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     wishlist?: boolean | WishlistDefaultArgs<ExtArgs>;
     product?: boolean | ProductDefaultArgs<ExtArgs>;
   };
@@ -19595,9 +19005,7 @@ export namespace Prisma {
     product?: boolean | ProductDefaultArgs<ExtArgs>;
   };
 
-  export type $WishlistItemPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $WishlistItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "WishlistItem";
     objects: {
       wishlist: Prisma.$WishlistPayload<ExtArgs>;
@@ -19616,13 +19024,12 @@ export namespace Prisma {
     composites: {};
   };
 
-  type WishlistItemGetPayload<
-    S extends boolean | null | undefined | WishlistItemDefaultArgs,
-  > = $Result.GetResult<Prisma.$WishlistItemPayload, S>;
+  type WishlistItemGetPayload<S extends boolean | null | undefined | WishlistItemDefaultArgs> = $Result.GetResult<
+    Prisma.$WishlistItemPayload,
+    S
+  >;
 
-  type WishlistItemCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
+  type WishlistItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
     WishlistItemFindManyArgs,
     "select" | "include" | "distinct" | "omit"
   > & {
@@ -19649,14 +19056,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends WishlistItemFindUniqueArgs>(
-      args: SelectSubset<T, WishlistItemFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemFindUniqueArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -19675,14 +19077,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends WishlistItemFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, WishlistItemFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -19702,14 +19099,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends WishlistItemFindFirstArgs>(
-      args?: SelectSubset<T, WishlistItemFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistItemFindFirstArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -19730,14 +19122,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends WishlistItemFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, WishlistItemFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistItemFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -19760,15 +19147,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends WishlistItemFindManyArgs>(
-      args?: SelectSubset<T, WishlistItemFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, WishlistItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a WishlistItem.
@@ -19783,14 +19163,9 @@ export namespace Prisma {
      *
      */
     create<T extends WishlistItemCreateArgs>(
-      args: SelectSubset<T, WishlistItemCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemCreateArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -19809,7 +19184,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends WishlistItemCreateManyArgs>(
-      args?: SelectSubset<T, WishlistItemCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistItemCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -19835,14 +19210,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends WishlistItemCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, WishlistItemCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistItemCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -19858,14 +19228,9 @@ export namespace Prisma {
      *
      */
     delete<T extends WishlistItemDeleteArgs>(
-      args: SelectSubset<T, WishlistItemDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemDeleteArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -19887,14 +19252,9 @@ export namespace Prisma {
      *
      */
     update<T extends WishlistItemUpdateArgs>(
-      args: SelectSubset<T, WishlistItemUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemUpdateArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -19913,7 +19273,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends WishlistItemDeleteManyArgs>(
-      args?: SelectSubset<T, WishlistItemDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, WishlistItemDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -19934,7 +19294,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends WishlistItemUpdateManyArgs>(
-      args: SelectSubset<T, WishlistItemUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -19966,14 +19326,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends WishlistItemUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, WishlistItemUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -19994,14 +19349,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends WishlistItemUpsertArgs>(
-      args: SelectSubset<T, WishlistItemUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, WishlistItemUpsertArgs<ExtArgs>>
     ): Prisma__WishlistItemClient<
-      $Result.GetResult<
-        Prisma.$WishlistItemPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$WishlistItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -20021,7 +19371,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends WishlistItemCountArgs>(
-      args?: Subset<T, WishlistItemCountArgs>,
+      args?: Subset<T, WishlistItemCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -20055,7 +19405,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends WishlistItemAggregateArgs>(
-      args: Subset<T, WishlistItemAggregateArgs>,
+      args: Subset<T, WishlistItemAggregateArgs>
     ): Prisma.PrismaPromise<GetWishlistItemAggregateType<T>>;
 
     /**
@@ -20078,16 +19428,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends WishlistItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: WishlistItemGroupByArgs["orderBy"] }
         : { orderBy?: WishlistItemGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -20101,12 +19446,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -20136,11 +19476,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, WishlistItemGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetWishlistItemGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, WishlistItemGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetWishlistItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the WishlistItem model
      */
@@ -20161,29 +19498,17 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     wishlist<T extends WishlistDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, WishlistDefaultArgs<ExtArgs>>,
+      args?: Subset<T, WishlistDefaultArgs<ExtArgs>>
     ): Prisma__WishlistClient<
-      | $Result.GetResult<
-          Prisma.$WishlistPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductDefaultArgs<ExtArgs>>,
+      args?: Subset<T, ProductDefaultArgs<ExtArgs>>
     ): Prisma__ProductClient<
-      | $Result.GetResult<
-          Prisma.$ProductPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
@@ -20195,14 +19520,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -20210,10 +19529,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -20239,9 +19555,7 @@ export namespace Prisma {
   /**
    * WishlistItem findUnique
    */
-  export type WishlistItemFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20263,9 +19577,7 @@ export namespace Prisma {
   /**
    * WishlistItem findUniqueOrThrow
    */
-  export type WishlistItemFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20287,9 +19599,7 @@ export namespace Prisma {
   /**
    * WishlistItem findFirst
    */
-  export type WishlistItemFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20311,9 +19621,7 @@ export namespace Prisma {
      *
      * Determine the order of WishlistItems to fetch.
      */
-    orderBy?:
-      | WishlistItemOrderByWithRelationInput
-      | WishlistItemOrderByWithRelationInput[];
+    orderBy?: WishlistItemOrderByWithRelationInput | WishlistItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -20343,9 +19651,7 @@ export namespace Prisma {
   /**
    * WishlistItem findFirstOrThrow
    */
-  export type WishlistItemFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20367,9 +19673,7 @@ export namespace Prisma {
      *
      * Determine the order of WishlistItems to fetch.
      */
-    orderBy?:
-      | WishlistItemOrderByWithRelationInput
-      | WishlistItemOrderByWithRelationInput[];
+    orderBy?: WishlistItemOrderByWithRelationInput | WishlistItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -20399,9 +19703,7 @@ export namespace Prisma {
   /**
    * WishlistItem findMany
    */
-  export type WishlistItemFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20423,9 +19725,7 @@ export namespace Prisma {
      *
      * Determine the order of WishlistItems to fetch.
      */
-    orderBy?:
-      | WishlistItemOrderByWithRelationInput
-      | WishlistItemOrderByWithRelationInput[];
+    orderBy?: WishlistItemOrderByWithRelationInput | WishlistItemOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -20450,9 +19750,7 @@ export namespace Prisma {
   /**
    * WishlistItem create
    */
-  export type WishlistItemCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20474,9 +19772,7 @@ export namespace Prisma {
   /**
    * WishlistItem createMany
    */
-  export type WishlistItemCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many WishlistItems.
      */
@@ -20487,34 +19783,31 @@ export namespace Prisma {
   /**
    * WishlistItem createManyAndReturn
    */
-  export type WishlistItemCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    /**
-     * Select specific fields to fetch from the WishlistItem
-     */
-    select?: WishlistItemSelectCreateManyAndReturn<ExtArgs> | null;
-    /**
-     * Omit specific fields from the WishlistItem
-     */
-    omit?: WishlistItemOmit<ExtArgs> | null;
-    /**
-     * The data used to create many WishlistItems.
-     */
-    data: WishlistItemCreateManyInput | WishlistItemCreateManyInput[];
-    skipDuplicates?: boolean;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WishlistItemIncludeCreateManyAndReturn<ExtArgs> | null;
-  };
+  export type WishlistItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the WishlistItem
+       */
+      select?: WishlistItemSelectCreateManyAndReturn<ExtArgs> | null;
+      /**
+       * Omit specific fields from the WishlistItem
+       */
+      omit?: WishlistItemOmit<ExtArgs> | null;
+      /**
+       * The data used to create many WishlistItems.
+       */
+      data: WishlistItemCreateManyInput | WishlistItemCreateManyInput[];
+      skipDuplicates?: boolean;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: WishlistItemIncludeCreateManyAndReturn<ExtArgs> | null;
+    };
 
   /**
    * WishlistItem update
    */
-  export type WishlistItemUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20540,16 +19833,11 @@ export namespace Prisma {
   /**
    * WishlistItem updateMany
    */
-  export type WishlistItemUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update WishlistItems.
      */
-    data: XOR<
-      WishlistItemUpdateManyMutationInput,
-      WishlistItemUncheckedUpdateManyInput
-    >;
+    data: XOR<WishlistItemUpdateManyMutationInput, WishlistItemUncheckedUpdateManyInput>;
     /**
      * Filter which WishlistItems to update
      */
@@ -20563,44 +19851,38 @@ export namespace Prisma {
   /**
    * WishlistItem updateManyAndReturn
    */
-  export type WishlistItemUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    /**
-     * Select specific fields to fetch from the WishlistItem
-     */
-    select?: WishlistItemSelectUpdateManyAndReturn<ExtArgs> | null;
-    /**
-     * Omit specific fields from the WishlistItem
-     */
-    omit?: WishlistItemOmit<ExtArgs> | null;
-    /**
-     * The data used to update WishlistItems.
-     */
-    data: XOR<
-      WishlistItemUpdateManyMutationInput,
-      WishlistItemUncheckedUpdateManyInput
-    >;
-    /**
-     * Filter which WishlistItems to update
-     */
-    where?: WishlistItemWhereInput;
-    /**
-     * Limit how many WishlistItems to update.
-     */
-    limit?: number;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WishlistItemIncludeUpdateManyAndReturn<ExtArgs> | null;
-  };
+  export type WishlistItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the WishlistItem
+       */
+      select?: WishlistItemSelectUpdateManyAndReturn<ExtArgs> | null;
+      /**
+       * Omit specific fields from the WishlistItem
+       */
+      omit?: WishlistItemOmit<ExtArgs> | null;
+      /**
+       * The data used to update WishlistItems.
+       */
+      data: XOR<WishlistItemUpdateManyMutationInput, WishlistItemUncheckedUpdateManyInput>;
+      /**
+       * Filter which WishlistItems to update
+       */
+      where?: WishlistItemWhereInput;
+      /**
+       * Limit how many WishlistItems to update.
+       */
+      limit?: number;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: WishlistItemIncludeUpdateManyAndReturn<ExtArgs> | null;
+    };
 
   /**
    * WishlistItem upsert
    */
-  export type WishlistItemUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20630,9 +19912,7 @@ export namespace Prisma {
   /**
    * WishlistItem delete
    */
-  export type WishlistItemDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20654,9 +19934,7 @@ export namespace Prisma {
   /**
    * WishlistItem deleteMany
    */
-  export type WishlistItemDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which WishlistItems to delete
      */
@@ -20670,9 +19948,7 @@ export namespace Prisma {
   /**
    * WishlistItem without action
    */
-  export type WishlistItemDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type WishlistItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WishlistItem
      */
@@ -20825,9 +20101,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type AddressAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Address to aggregate.
      */
@@ -20837,9 +20111,7 @@ export namespace Prisma {
      *
      * Determine the order of Addresses to fetch.
      */
-    orderBy?:
-      | AddressOrderByWithRelationInput
-      | AddressOrderByWithRelationInput[];
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -20898,13 +20170,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateAddress[P]>;
   };
 
-  export type AddressGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AddressWhereInput;
-    orderBy?:
-      | AddressOrderByWithAggregationInput
-      | AddressOrderByWithAggregationInput[];
+    orderBy?: AddressOrderByWithAggregationInput | AddressOrderByWithAggregationInput[];
     by: AddressScalarFieldEnum[] | AddressScalarFieldEnum;
     having?: AddressScalarWhereWithAggregatesInput;
     take?: number;
@@ -20939,22 +20207,19 @@ export namespace Prisma {
     _max: AddressMaxAggregateOutputType | null;
   };
 
-  type GetAddressGroupByPayload<T extends AddressGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<AddressGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof AddressGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AddressGroupByOutputType[P]>
-            : GetScalarType<T[P], AddressGroupByOutputType[P]>;
-        }
-      >
-    >;
+  type GetAddressGroupByPayload<T extends AddressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AddressGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof AddressGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], AddressGroupByOutputType[P]>
+          : GetScalarType<T[P], AddressGroupByOutputType[P]>;
+      }
+    >
+  >;
 
-  export type AddressSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
+  export type AddressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
     {
       id?: boolean;
       userId?: boolean;
@@ -20979,53 +20244,51 @@ export namespace Prisma {
     ExtArgs["result"]["address"]
   >;
 
-  export type AddressSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      fullName?: boolean;
-      line1?: boolean;
-      line2?: boolean;
-      city?: boolean;
-      province?: boolean;
-      postalCode?: boolean;
-      country?: boolean;
-      phone?: boolean;
-      metadata?: boolean;
-      isDefaultShipping?: boolean;
-      isDefaultBilling?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Address$userArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["address"]
-  >;
+  export type AddressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        fullName?: boolean;
+        line1?: boolean;
+        line2?: boolean;
+        city?: boolean;
+        province?: boolean;
+        postalCode?: boolean;
+        country?: boolean;
+        phone?: boolean;
+        metadata?: boolean;
+        isDefaultShipping?: boolean;
+        isDefaultBilling?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | Address$userArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["address"]
+    >;
 
-  export type AddressSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      userId?: boolean;
-      fullName?: boolean;
-      line1?: boolean;
-      line2?: boolean;
-      city?: boolean;
-      province?: boolean;
-      postalCode?: boolean;
-      country?: boolean;
-      phone?: boolean;
-      metadata?: boolean;
-      isDefaultShipping?: boolean;
-      isDefaultBilling?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      user?: boolean | Address$userArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["address"]
-  >;
+  export type AddressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        userId?: boolean;
+        fullName?: boolean;
+        line1?: boolean;
+        line2?: boolean;
+        city?: boolean;
+        province?: boolean;
+        postalCode?: boolean;
+        country?: boolean;
+        phone?: boolean;
+        metadata?: boolean;
+        isDefaultShipping?: boolean;
+        isDefaultBilling?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        user?: boolean | Address$userArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["address"]
+    >;
 
   export type AddressSelectScalar = {
     id?: boolean;
@@ -21045,9 +20308,7 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type AddressOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     | "id"
     | "userId"
     | "fullName"
@@ -21065,28 +20326,20 @@ export namespace Prisma {
     | "updatedAt",
     ExtArgs["result"]["address"]
   >;
-  export type AddressInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Address$userArgs<ExtArgs>;
     ordersShipping?: boolean | Address$ordersShippingArgs<ExtArgs>;
     ordersBilling?: boolean | Address$ordersBillingArgs<ExtArgs>;
     _count?: boolean | AddressCountOutputTypeDefaultArgs<ExtArgs>;
   };
-  export type AddressIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Address$userArgs<ExtArgs>;
   };
-  export type AddressIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Address$userArgs<ExtArgs>;
   };
 
-  export type $AddressPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $AddressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Address";
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null;
@@ -21116,13 +20369,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type AddressGetPayload<
-    S extends boolean | null | undefined | AddressDefaultArgs,
-  > = $Result.GetResult<Prisma.$AddressPayload, S>;
+  type AddressGetPayload<S extends boolean | null | undefined | AddressDefaultArgs> = $Result.GetResult<
+    Prisma.$AddressPayload,
+    S
+  >;
 
-  type AddressCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<AddressFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type AddressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    AddressFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: AddressCountAggregateInputType | true;
   };
 
@@ -21130,10 +20385,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Address"];
-      meta: { name: "Address" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Address"]; meta: { name: "Address" } };
     /**
      * Find zero or one Address that matches the filter.
      * @param {AddressFindUniqueArgs} args - Arguments to find a Address
@@ -21146,14 +20398,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends AddressFindUniqueArgs>(
-      args: SelectSubset<T, AddressFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressFindUniqueArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -21172,14 +20419,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends AddressFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, AddressFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -21199,14 +20441,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends AddressFindFirstArgs>(
-      args?: SelectSubset<T, AddressFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, AddressFindFirstArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -21227,14 +20464,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends AddressFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, AddressFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, AddressFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -21257,15 +20489,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends AddressFindManyArgs>(
-      args?: SelectSubset<T, AddressFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, AddressFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Address.
@@ -21280,14 +20505,9 @@ export namespace Prisma {
      *
      */
     create<T extends AddressCreateArgs>(
-      args: SelectSubset<T, AddressCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressCreateArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -21306,7 +20526,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends AddressCreateManyArgs>(
-      args?: SelectSubset<T, AddressCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, AddressCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -21332,14 +20552,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends AddressCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, AddressCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, AddressCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -21355,14 +20570,9 @@ export namespace Prisma {
      *
      */
     delete<T extends AddressDeleteArgs>(
-      args: SelectSubset<T, AddressDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressDeleteArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -21384,14 +20594,9 @@ export namespace Prisma {
      *
      */
     update<T extends AddressUpdateArgs>(
-      args: SelectSubset<T, AddressUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressUpdateArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -21410,7 +20615,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends AddressDeleteManyArgs>(
-      args?: SelectSubset<T, AddressDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, AddressDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -21431,7 +20636,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends AddressUpdateManyArgs>(
-      args: SelectSubset<T, AddressUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -21463,14 +20668,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends AddressUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, AddressUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -21491,14 +20691,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends AddressUpsertArgs>(
-      args: SelectSubset<T, AddressUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, AddressUpsertArgs<ExtArgs>>
     ): Prisma__AddressClient<
-      $Result.GetResult<
-        Prisma.$AddressPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -21518,7 +20713,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends AddressCountArgs>(
-      args?: Subset<T, AddressCountArgs>,
+      args?: Subset<T, AddressCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -21552,7 +20747,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends AddressAggregateArgs>(
-      args: Subset<T, AddressAggregateArgs>,
+      args: Subset<T, AddressAggregateArgs>
     ): Prisma.PrismaPromise<GetAddressAggregateType<T>>;
 
     /**
@@ -21575,16 +20770,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends AddressGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: AddressGroupByArgs["orderBy"] }
         : { orderBy?: AddressGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -21598,12 +20788,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -21633,10 +20818,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, AddressGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetAddressGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, AddressGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetAddressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Address model
      */
@@ -21657,40 +20840,19 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     user<T extends Address$userArgs<ExtArgs> = {}>(
-      args?: Subset<T, Address$userArgs<ExtArgs>>,
+      args?: Subset<T, Address$userArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
     >;
     ordersShipping<T extends Address$ordersShippingArgs<ExtArgs> = {}>(
-      args?: Subset<T, Address$ordersShippingArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, Address$ordersShippingArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     ordersBilling<T extends Address$ordersBillingArgs<ExtArgs> = {}>(
-      args?: Subset<T, Address$ordersBillingArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findMany",
-          GlobalOmitOptions
-        >
-      | Null
-    >;
+      args?: Subset<T, Address$ordersBillingArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21698,14 +20860,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -21713,10 +20869,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -21752,9 +20905,7 @@ export namespace Prisma {
   /**
    * Address findUnique
    */
-  export type AddressFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -21776,9 +20927,7 @@ export namespace Prisma {
   /**
    * Address findUniqueOrThrow
    */
-  export type AddressFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -21800,9 +20949,7 @@ export namespace Prisma {
   /**
    * Address findFirst
    */
-  export type AddressFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -21824,9 +20971,7 @@ export namespace Prisma {
      *
      * Determine the order of Addresses to fetch.
      */
-    orderBy?:
-      | AddressOrderByWithRelationInput
-      | AddressOrderByWithRelationInput[];
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -21856,9 +21001,7 @@ export namespace Prisma {
   /**
    * Address findFirstOrThrow
    */
-  export type AddressFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -21880,9 +21023,7 @@ export namespace Prisma {
      *
      * Determine the order of Addresses to fetch.
      */
-    orderBy?:
-      | AddressOrderByWithRelationInput
-      | AddressOrderByWithRelationInput[];
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -21912,9 +21053,7 @@ export namespace Prisma {
   /**
    * Address findMany
    */
-  export type AddressFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -21936,9 +21075,7 @@ export namespace Prisma {
      *
      * Determine the order of Addresses to fetch.
      */
-    orderBy?:
-      | AddressOrderByWithRelationInput
-      | AddressOrderByWithRelationInput[];
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -21963,9 +21100,7 @@ export namespace Prisma {
   /**
    * Address create
    */
-  export type AddressCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -21987,9 +21122,7 @@ export namespace Prisma {
   /**
    * Address createMany
    */
-  export type AddressCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Addresses.
      */
@@ -22000,9 +21133,7 @@ export namespace Prisma {
   /**
    * Address createManyAndReturn
    */
-  export type AddressCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -22025,9 +21156,7 @@ export namespace Prisma {
   /**
    * Address update
    */
-  export type AddressUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -22053,9 +21182,7 @@ export namespace Prisma {
   /**
    * Address updateMany
    */
-  export type AddressUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Addresses.
      */
@@ -22073,9 +21200,7 @@ export namespace Prisma {
   /**
    * Address updateManyAndReturn
    */
-  export type AddressUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -22105,9 +21230,7 @@ export namespace Prisma {
   /**
    * Address upsert
    */
-  export type AddressUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -22137,9 +21260,7 @@ export namespace Prisma {
   /**
    * Address delete
    */
-  export type AddressDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -22161,9 +21282,7 @@ export namespace Prisma {
   /**
    * Address deleteMany
    */
-  export type AddressDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Addresses to delete
      */
@@ -22177,9 +21296,7 @@ export namespace Prisma {
   /**
    * Address.user
    */
-  export type Address$userArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Address$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -22198,9 +21315,7 @@ export namespace Prisma {
   /**
    * Address.ordersShipping
    */
-  export type Address$ordersShippingArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Address$ordersShippingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -22224,9 +21339,7 @@ export namespace Prisma {
   /**
    * Address.ordersBilling
    */
-  export type Address$ordersBillingArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Address$ordersBillingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -22250,9 +21363,7 @@ export namespace Prisma {
   /**
    * Address without action
    */
-  export type AddressDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AddressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Address
      */
@@ -22369,9 +21480,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type AuditLogAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which AuditLog to aggregate.
      */
@@ -22381,9 +21490,7 @@ export namespace Prisma {
      *
      * Determine the order of AuditLogs to fetch.
      */
-    orderBy?:
-      | AuditLogOrderByWithRelationInput
-      | AuditLogOrderByWithRelationInput[];
+    orderBy?: AuditLogOrderByWithRelationInput | AuditLogOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -22442,13 +21549,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateAuditLog[P]>;
   };
 
-  export type AuditLogGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditLogWhereInput;
-    orderBy?:
-      | AuditLogOrderByWithAggregationInput
-      | AuditLogOrderByWithAggregationInput[];
+    orderBy?: AuditLogOrderByWithAggregationInput | AuditLogOrderByWithAggregationInput[];
     by: AuditLogScalarFieldEnum[] | AuditLogScalarFieldEnum;
     having?: AuditLogScalarWhereWithAggregatesInput;
     take?: number;
@@ -22477,72 +21580,68 @@ export namespace Prisma {
     _max: AuditLogMaxAggregateOutputType | null;
   };
 
-  type GetAuditLogGroupByPayload<T extends AuditLogGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<AuditLogGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof AuditLogGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AuditLogGroupByOutputType[P]>
-            : GetScalarType<T[P], AuditLogGroupByOutputType[P]>;
-        }
-      >
+  type GetAuditLogGroupByPayload<T extends AuditLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AuditLogGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof AuditLogGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], AuditLogGroupByOutputType[P]>
+          : GetScalarType<T[P], AuditLogGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type AuditLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        actorId?: boolean;
+        action?: boolean;
+        entity?: boolean;
+        entityId?: boolean;
+        changes?: boolean;
+        ip?: boolean;
+        userAgent?: boolean;
+        createdAt?: boolean;
+        actor?: boolean | AuditLog$actorArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["auditLog"]
     >;
 
-  export type AuditLogSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      actorId?: boolean;
-      action?: boolean;
-      entity?: boolean;
-      entityId?: boolean;
-      changes?: boolean;
-      ip?: boolean;
-      userAgent?: boolean;
-      createdAt?: boolean;
-      actor?: boolean | AuditLog$actorArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["auditLog"]
-  >;
+  export type AuditLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        actorId?: boolean;
+        action?: boolean;
+        entity?: boolean;
+        entityId?: boolean;
+        changes?: boolean;
+        ip?: boolean;
+        userAgent?: boolean;
+        createdAt?: boolean;
+        actor?: boolean | AuditLog$actorArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["auditLog"]
+    >;
 
-  export type AuditLogSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      actorId?: boolean;
-      action?: boolean;
-      entity?: boolean;
-      entityId?: boolean;
-      changes?: boolean;
-      ip?: boolean;
-      userAgent?: boolean;
-      createdAt?: boolean;
-      actor?: boolean | AuditLog$actorArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["auditLog"]
-  >;
-
-  export type AuditLogSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      actorId?: boolean;
-      action?: boolean;
-      entity?: boolean;
-      entityId?: boolean;
-      changes?: boolean;
-      ip?: boolean;
-      userAgent?: boolean;
-      createdAt?: boolean;
-      actor?: boolean | AuditLog$actorArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["auditLog"]
-  >;
+  export type AuditLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        actorId?: boolean;
+        action?: boolean;
+        entity?: boolean;
+        entityId?: boolean;
+        changes?: boolean;
+        ip?: boolean;
+        userAgent?: boolean;
+        createdAt?: boolean;
+        actor?: boolean | AuditLog$actorArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["auditLog"]
+    >;
 
   export type AuditLogSelectScalar = {
     id?: boolean;
@@ -22556,39 +21655,21 @@ export namespace Prisma {
     createdAt?: boolean;
   };
 
-  export type AuditLogOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "actorId"
-    | "action"
-    | "entity"
-    | "entityId"
-    | "changes"
-    | "ip"
-    | "userAgent"
-    | "createdAt",
+  export type AuditLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    "id" | "actorId" | "action" | "entity" | "entityId" | "changes" | "ip" | "userAgent" | "createdAt",
     ExtArgs["result"]["auditLog"]
   >;
-  export type AuditLogInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     actor?: boolean | AuditLog$actorArgs<ExtArgs>;
   };
-  export type AuditLogIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     actor?: boolean | AuditLog$actorArgs<ExtArgs>;
   };
-  export type AuditLogIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     actor?: boolean | AuditLog$actorArgs<ExtArgs>;
   };
 
-  export type $AuditLogPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $AuditLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AuditLog";
     objects: {
       actor: Prisma.$UserPayload<ExtArgs> | null;
@@ -22610,13 +21691,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type AuditLogGetPayload<
-    S extends boolean | null | undefined | AuditLogDefaultArgs,
-  > = $Result.GetResult<Prisma.$AuditLogPayload, S>;
+  type AuditLogGetPayload<S extends boolean | null | undefined | AuditLogDefaultArgs> = $Result.GetResult<
+    Prisma.$AuditLogPayload,
+    S
+  >;
 
-  type AuditLogCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<AuditLogFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type AuditLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    AuditLogFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: AuditLogCountAggregateInputType | true;
   };
 
@@ -22640,14 +21723,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends AuditLogFindUniqueArgs>(
-      args: SelectSubset<T, AuditLogFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogFindUniqueArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -22666,14 +21744,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends AuditLogFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, AuditLogFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -22693,14 +21766,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends AuditLogFindFirstArgs>(
-      args?: SelectSubset<T, AuditLogFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, AuditLogFindFirstArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -22721,14 +21789,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends AuditLogFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, AuditLogFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, AuditLogFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -22751,15 +21814,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends AuditLogFindManyArgs>(
-      args?: SelectSubset<T, AuditLogFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, AuditLogFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a AuditLog.
@@ -22774,14 +21830,9 @@ export namespace Prisma {
      *
      */
     create<T extends AuditLogCreateArgs>(
-      args: SelectSubset<T, AuditLogCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogCreateArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -22800,7 +21851,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends AuditLogCreateManyArgs>(
-      args?: SelectSubset<T, AuditLogCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, AuditLogCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -22826,14 +21877,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends AuditLogCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, AuditLogCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, AuditLogCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -22849,14 +21895,9 @@ export namespace Prisma {
      *
      */
     delete<T extends AuditLogDeleteArgs>(
-      args: SelectSubset<T, AuditLogDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogDeleteArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -22878,14 +21919,9 @@ export namespace Prisma {
      *
      */
     update<T extends AuditLogUpdateArgs>(
-      args: SelectSubset<T, AuditLogUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogUpdateArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -22904,7 +21940,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends AuditLogDeleteManyArgs>(
-      args?: SelectSubset<T, AuditLogDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, AuditLogDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -22925,7 +21961,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends AuditLogUpdateManyArgs>(
-      args: SelectSubset<T, AuditLogUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -22957,14 +21993,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends AuditLogUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, AuditLogUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -22985,14 +22016,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends AuditLogUpsertArgs>(
-      args: SelectSubset<T, AuditLogUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, AuditLogUpsertArgs<ExtArgs>>
     ): Prisma__AuditLogClient<
-      $Result.GetResult<
-        Prisma.$AuditLogPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -23012,7 +22038,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends AuditLogCountArgs>(
-      args?: Subset<T, AuditLogCountArgs>,
+      args?: Subset<T, AuditLogCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -23046,7 +22072,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends AuditLogAggregateArgs>(
-      args: Subset<T, AuditLogAggregateArgs>,
+      args: Subset<T, AuditLogAggregateArgs>
     ): Prisma.PrismaPromise<GetAuditLogAggregateType<T>>;
 
     /**
@@ -23069,16 +22095,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends AuditLogGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: AuditLogGroupByArgs["orderBy"] }
         : { orderBy?: AuditLogGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -23092,12 +22113,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -23127,11 +22143,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, AuditLogGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetAuditLogGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, AuditLogGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetAuditLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the AuditLog model
      */
@@ -23152,14 +22165,9 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     actor<T extends AuditLog$actorArgs<ExtArgs> = {}>(
-      args?: Subset<T, AuditLog$actorArgs<ExtArgs>>,
+      args?: Subset<T, AuditLog$actorArgs<ExtArgs>>
     ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -23171,14 +22179,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -23186,10 +22188,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -23219,9 +22218,7 @@ export namespace Prisma {
   /**
    * AuditLog findUnique
    */
-  export type AuditLogFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23243,9 +22240,7 @@ export namespace Prisma {
   /**
    * AuditLog findUniqueOrThrow
    */
-  export type AuditLogFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23267,9 +22262,7 @@ export namespace Prisma {
   /**
    * AuditLog findFirst
    */
-  export type AuditLogFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23291,9 +22284,7 @@ export namespace Prisma {
      *
      * Determine the order of AuditLogs to fetch.
      */
-    orderBy?:
-      | AuditLogOrderByWithRelationInput
-      | AuditLogOrderByWithRelationInput[];
+    orderBy?: AuditLogOrderByWithRelationInput | AuditLogOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -23323,9 +22314,7 @@ export namespace Prisma {
   /**
    * AuditLog findFirstOrThrow
    */
-  export type AuditLogFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23347,9 +22336,7 @@ export namespace Prisma {
      *
      * Determine the order of AuditLogs to fetch.
      */
-    orderBy?:
-      | AuditLogOrderByWithRelationInput
-      | AuditLogOrderByWithRelationInput[];
+    orderBy?: AuditLogOrderByWithRelationInput | AuditLogOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -23379,9 +22366,7 @@ export namespace Prisma {
   /**
    * AuditLog findMany
    */
-  export type AuditLogFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23403,9 +22388,7 @@ export namespace Prisma {
      *
      * Determine the order of AuditLogs to fetch.
      */
-    orderBy?:
-      | AuditLogOrderByWithRelationInput
-      | AuditLogOrderByWithRelationInput[];
+    orderBy?: AuditLogOrderByWithRelationInput | AuditLogOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -23430,9 +22413,7 @@ export namespace Prisma {
   /**
    * AuditLog create
    */
-  export type AuditLogCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23454,9 +22435,7 @@ export namespace Prisma {
   /**
    * AuditLog createMany
    */
-  export type AuditLogCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many AuditLogs.
      */
@@ -23467,9 +22446,7 @@ export namespace Prisma {
   /**
    * AuditLog createManyAndReturn
    */
-  export type AuditLogCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23492,9 +22469,7 @@ export namespace Prisma {
   /**
    * AuditLog update
    */
-  export type AuditLogUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23520,16 +22495,11 @@ export namespace Prisma {
   /**
    * AuditLog updateMany
    */
-  export type AuditLogUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update AuditLogs.
      */
-    data: XOR<
-      AuditLogUpdateManyMutationInput,
-      AuditLogUncheckedUpdateManyInput
-    >;
+    data: XOR<AuditLogUpdateManyMutationInput, AuditLogUncheckedUpdateManyInput>;
     /**
      * Filter which AuditLogs to update
      */
@@ -23543,9 +22513,7 @@ export namespace Prisma {
   /**
    * AuditLog updateManyAndReturn
    */
-  export type AuditLogUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23557,10 +22525,7 @@ export namespace Prisma {
     /**
      * The data used to update AuditLogs.
      */
-    data: XOR<
-      AuditLogUpdateManyMutationInput,
-      AuditLogUncheckedUpdateManyInput
-    >;
+    data: XOR<AuditLogUpdateManyMutationInput, AuditLogUncheckedUpdateManyInput>;
     /**
      * Filter which AuditLogs to update
      */
@@ -23578,9 +22543,7 @@ export namespace Prisma {
   /**
    * AuditLog upsert
    */
-  export type AuditLogUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23610,9 +22573,7 @@ export namespace Prisma {
   /**
    * AuditLog delete
    */
-  export type AuditLogDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23634,9 +22595,7 @@ export namespace Prisma {
   /**
    * AuditLog deleteMany
    */
-  export type AuditLogDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which AuditLogs to delete
      */
@@ -23650,9 +22609,7 @@ export namespace Prisma {
   /**
    * AuditLog.actor
    */
-  export type AuditLog$actorArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLog$actorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -23671,9 +22628,7 @@ export namespace Prisma {
   /**
    * AuditLog without action
    */
-  export type AuditLogDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type AuditLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the AuditLog
      */
@@ -23790,9 +22745,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type ReturnRequestAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ReturnRequest to aggregate.
      */
@@ -23802,9 +22755,7 @@ export namespace Prisma {
      *
      * Determine the order of ReturnRequests to fetch.
      */
-    orderBy?:
-      | ReturnRequestOrderByWithRelationInput
-      | ReturnRequestOrderByWithRelationInput[];
+    orderBy?: ReturnRequestOrderByWithRelationInput | ReturnRequestOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -23855,9 +22806,7 @@ export namespace Prisma {
     _max?: ReturnRequestMaxAggregateInputType;
   };
 
-  export type GetReturnRequestAggregateType<
-    T extends ReturnRequestAggregateArgs,
-  > = {
+  export type GetReturnRequestAggregateType<T extends ReturnRequestAggregateArgs> = {
     [P in keyof T & keyof AggregateReturnRequest]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
@@ -23865,13 +22814,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateReturnRequest[P]>;
   };
 
-  export type ReturnRequestGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReturnRequestWhereInput;
-    orderBy?:
-      | ReturnRequestOrderByWithAggregationInput
-      | ReturnRequestOrderByWithAggregationInput[];
+    orderBy?: ReturnRequestOrderByWithAggregationInput | ReturnRequestOrderByWithAggregationInput[];
     by: ReturnRequestScalarFieldEnum[] | ReturnRequestScalarFieldEnum;
     having?: ReturnRequestScalarWhereWithAggregatesInput;
     take?: number;
@@ -23900,39 +22845,36 @@ export namespace Prisma {
     _max: ReturnRequestMaxAggregateOutputType | null;
   };
 
-  type GetReturnRequestGroupByPayload<T extends ReturnRequestGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<ReturnRequestGroupByOutputType, T["by"]> & {
-          [P in keyof T &
-            keyof ReturnRequestGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReturnRequestGroupByOutputType[P]>
-            : GetScalarType<T[P], ReturnRequestGroupByOutputType[P]>;
-        }
-      >
-    >;
-
-  export type ReturnRequestSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      orderItemId?: boolean;
-      reason?: boolean;
-      status?: boolean;
-      evidence?: boolean;
-      requestedAt?: boolean;
-      processedAt?: boolean;
-      metadata?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      orderItem?: boolean | OrderItemDefaultArgs<ExtArgs>;
-      refund?: boolean | ReturnRequest$refundArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["returnRequest"]
+  type GetReturnRequestGroupByPayload<T extends ReturnRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReturnRequestGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof ReturnRequestGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], ReturnRequestGroupByOutputType[P]>
+          : GetScalarType<T[P], ReturnRequestGroupByOutputType[P]>;
+      }
+    >
   >;
+
+  export type ReturnRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        orderItemId?: boolean;
+        reason?: boolean;
+        status?: boolean;
+        evidence?: boolean;
+        requestedAt?: boolean;
+        processedAt?: boolean;
+        metadata?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        orderItem?: boolean | OrderItemDefaultArgs<ExtArgs>;
+        refund?: boolean | ReturnRequest$refundArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["returnRequest"]
+    >;
 
   export type ReturnRequestSelectCreateManyAndReturn<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
@@ -23984,23 +22926,12 @@ export namespace Prisma {
     metadata?: boolean;
   };
 
-  export type ReturnRequestOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    | "id"
-    | "orderId"
-    | "orderItemId"
-    | "reason"
-    | "status"
-    | "evidence"
-    | "requestedAt"
-    | "processedAt"
-    | "metadata",
-    ExtArgs["result"]["returnRequest"]
-  >;
-  export type ReturnRequestInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      "id" | "orderId" | "orderItemId" | "reason" | "status" | "evidence" | "requestedAt" | "processedAt" | "metadata",
+      ExtArgs["result"]["returnRequest"]
+    >;
+  export type ReturnRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
     orderItem?: boolean | OrderItemDefaultArgs<ExtArgs>;
     refund?: boolean | ReturnRequest$refundArgs<ExtArgs>;
@@ -24018,9 +22949,7 @@ export namespace Prisma {
     orderItem?: boolean | OrderItemDefaultArgs<ExtArgs>;
   };
 
-  export type $ReturnRequestPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $ReturnRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ReturnRequest";
     objects: {
       order: Prisma.$OrderPayload<ExtArgs>;
@@ -24044,13 +22973,12 @@ export namespace Prisma {
     composites: {};
   };
 
-  type ReturnRequestGetPayload<
-    S extends boolean | null | undefined | ReturnRequestDefaultArgs,
-  > = $Result.GetResult<Prisma.$ReturnRequestPayload, S>;
+  type ReturnRequestGetPayload<S extends boolean | null | undefined | ReturnRequestDefaultArgs> = $Result.GetResult<
+    Prisma.$ReturnRequestPayload,
+    S
+  >;
 
-  type ReturnRequestCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
+  type ReturnRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
     ReturnRequestFindManyArgs,
     "select" | "include" | "distinct" | "omit"
   > & {
@@ -24077,14 +23005,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends ReturnRequestFindUniqueArgs>(
-      args: SelectSubset<T, ReturnRequestFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestFindUniqueArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -24103,14 +23026,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends ReturnRequestFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, ReturnRequestFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -24130,14 +23048,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends ReturnRequestFindFirstArgs>(
-      args?: SelectSubset<T, ReturnRequestFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReturnRequestFindFirstArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -24158,14 +23071,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends ReturnRequestFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ReturnRequestFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReturnRequestFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -24188,15 +23096,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends ReturnRequestFindManyArgs>(
-      args?: SelectSubset<T, ReturnRequestFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, ReturnRequestFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a ReturnRequest.
@@ -24211,14 +23112,9 @@ export namespace Prisma {
      *
      */
     create<T extends ReturnRequestCreateArgs>(
-      args: SelectSubset<T, ReturnRequestCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestCreateArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -24237,7 +23133,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends ReturnRequestCreateManyArgs>(
-      args?: SelectSubset<T, ReturnRequestCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReturnRequestCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -24263,14 +23159,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends ReturnRequestCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, ReturnRequestCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReturnRequestCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -24286,14 +23177,9 @@ export namespace Prisma {
      *
      */
     delete<T extends ReturnRequestDeleteArgs>(
-      args: SelectSubset<T, ReturnRequestDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestDeleteArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -24315,14 +23201,9 @@ export namespace Prisma {
      *
      */
     update<T extends ReturnRequestUpdateArgs>(
-      args: SelectSubset<T, ReturnRequestUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestUpdateArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -24341,7 +23222,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends ReturnRequestDeleteManyArgs>(
-      args?: SelectSubset<T, ReturnRequestDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, ReturnRequestDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -24362,7 +23243,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends ReturnRequestUpdateManyArgs>(
-      args: SelectSubset<T, ReturnRequestUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -24394,14 +23275,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends ReturnRequestUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, ReturnRequestUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -24422,14 +23298,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends ReturnRequestUpsertArgs>(
-      args: SelectSubset<T, ReturnRequestUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, ReturnRequestUpsertArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -24449,7 +23320,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends ReturnRequestCountArgs>(
-      args?: Subset<T, ReturnRequestCountArgs>,
+      args?: Subset<T, ReturnRequestCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -24483,7 +23354,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends ReturnRequestAggregateArgs>(
-      args: Subset<T, ReturnRequestAggregateArgs>,
+      args: Subset<T, ReturnRequestAggregateArgs>
     ): Prisma.PrismaPromise<GetReturnRequestAggregateType<T>>;
 
     /**
@@ -24506,16 +23377,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends ReturnRequestGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ReturnRequestGroupByArgs["orderBy"] }
         : { orderBy?: ReturnRequestGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -24529,12 +23395,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -24564,11 +23425,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, ReturnRequestGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetReturnRequestGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, ReturnRequestGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetReturnRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the ReturnRequest model
      */
@@ -24589,42 +23447,25 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     order<T extends OrderDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderDefaultArgs<ExtArgs>>,
+      args?: Subset<T, OrderDefaultArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     orderItem<T extends OrderItemDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderItemDefaultArgs<ExtArgs>>,
+      args?: Subset<T, OrderItemDefaultArgs<ExtArgs>>
     ): Prisma__OrderItemClient<
-      | $Result.GetResult<
-          Prisma.$OrderItemPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     refund<T extends ReturnRequest$refundArgs<ExtArgs> = {}>(
-      args?: Subset<T, ReturnRequest$refundArgs<ExtArgs>>,
+      args?: Subset<T, ReturnRequest$refundArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -24636,14 +23477,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -24651,10 +23486,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -24684,9 +23516,7 @@ export namespace Prisma {
   /**
    * ReturnRequest findUnique
    */
-  export type ReturnRequestFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24708,9 +23538,7 @@ export namespace Prisma {
   /**
    * ReturnRequest findUniqueOrThrow
    */
-  export type ReturnRequestFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24732,9 +23560,7 @@ export namespace Prisma {
   /**
    * ReturnRequest findFirst
    */
-  export type ReturnRequestFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24756,9 +23582,7 @@ export namespace Prisma {
      *
      * Determine the order of ReturnRequests to fetch.
      */
-    orderBy?:
-      | ReturnRequestOrderByWithRelationInput
-      | ReturnRequestOrderByWithRelationInput[];
+    orderBy?: ReturnRequestOrderByWithRelationInput | ReturnRequestOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -24788,9 +23612,7 @@ export namespace Prisma {
   /**
    * ReturnRequest findFirstOrThrow
    */
-  export type ReturnRequestFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24812,9 +23634,7 @@ export namespace Prisma {
      *
      * Determine the order of ReturnRequests to fetch.
      */
-    orderBy?:
-      | ReturnRequestOrderByWithRelationInput
-      | ReturnRequestOrderByWithRelationInput[];
+    orderBy?: ReturnRequestOrderByWithRelationInput | ReturnRequestOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -24844,9 +23664,7 @@ export namespace Prisma {
   /**
    * ReturnRequest findMany
    */
-  export type ReturnRequestFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24868,9 +23686,7 @@ export namespace Prisma {
      *
      * Determine the order of ReturnRequests to fetch.
      */
-    orderBy?:
-      | ReturnRequestOrderByWithRelationInput
-      | ReturnRequestOrderByWithRelationInput[];
+    orderBy?: ReturnRequestOrderByWithRelationInput | ReturnRequestOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -24895,9 +23711,7 @@ export namespace Prisma {
   /**
    * ReturnRequest create
    */
-  export type ReturnRequestCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24919,9 +23733,7 @@ export namespace Prisma {
   /**
    * ReturnRequest createMany
    */
-  export type ReturnRequestCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many ReturnRequests.
      */
@@ -24932,34 +23744,31 @@ export namespace Prisma {
   /**
    * ReturnRequest createManyAndReturn
    */
-  export type ReturnRequestCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    /**
-     * Select specific fields to fetch from the ReturnRequest
-     */
-    select?: ReturnRequestSelectCreateManyAndReturn<ExtArgs> | null;
-    /**
-     * Omit specific fields from the ReturnRequest
-     */
-    omit?: ReturnRequestOmit<ExtArgs> | null;
-    /**
-     * The data used to create many ReturnRequests.
-     */
-    data: ReturnRequestCreateManyInput | ReturnRequestCreateManyInput[];
-    skipDuplicates?: boolean;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReturnRequestIncludeCreateManyAndReturn<ExtArgs> | null;
-  };
+  export type ReturnRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the ReturnRequest
+       */
+      select?: ReturnRequestSelectCreateManyAndReturn<ExtArgs> | null;
+      /**
+       * Omit specific fields from the ReturnRequest
+       */
+      omit?: ReturnRequestOmit<ExtArgs> | null;
+      /**
+       * The data used to create many ReturnRequests.
+       */
+      data: ReturnRequestCreateManyInput | ReturnRequestCreateManyInput[];
+      skipDuplicates?: boolean;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: ReturnRequestIncludeCreateManyAndReturn<ExtArgs> | null;
+    };
 
   /**
    * ReturnRequest update
    */
-  export type ReturnRequestUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -24985,16 +23794,11 @@ export namespace Prisma {
   /**
    * ReturnRequest updateMany
    */
-  export type ReturnRequestUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update ReturnRequests.
      */
-    data: XOR<
-      ReturnRequestUpdateManyMutationInput,
-      ReturnRequestUncheckedUpdateManyInput
-    >;
+    data: XOR<ReturnRequestUpdateManyMutationInput, ReturnRequestUncheckedUpdateManyInput>;
     /**
      * Filter which ReturnRequests to update
      */
@@ -25008,44 +23812,38 @@ export namespace Prisma {
   /**
    * ReturnRequest updateManyAndReturn
    */
-  export type ReturnRequestUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    /**
-     * Select specific fields to fetch from the ReturnRequest
-     */
-    select?: ReturnRequestSelectUpdateManyAndReturn<ExtArgs> | null;
-    /**
-     * Omit specific fields from the ReturnRequest
-     */
-    omit?: ReturnRequestOmit<ExtArgs> | null;
-    /**
-     * The data used to update ReturnRequests.
-     */
-    data: XOR<
-      ReturnRequestUpdateManyMutationInput,
-      ReturnRequestUncheckedUpdateManyInput
-    >;
-    /**
-     * Filter which ReturnRequests to update
-     */
-    where?: ReturnRequestWhereInput;
-    /**
-     * Limit how many ReturnRequests to update.
-     */
-    limit?: number;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReturnRequestIncludeUpdateManyAndReturn<ExtArgs> | null;
-  };
+  export type ReturnRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the ReturnRequest
+       */
+      select?: ReturnRequestSelectUpdateManyAndReturn<ExtArgs> | null;
+      /**
+       * Omit specific fields from the ReturnRequest
+       */
+      omit?: ReturnRequestOmit<ExtArgs> | null;
+      /**
+       * The data used to update ReturnRequests.
+       */
+      data: XOR<ReturnRequestUpdateManyMutationInput, ReturnRequestUncheckedUpdateManyInput>;
+      /**
+       * Filter which ReturnRequests to update
+       */
+      where?: ReturnRequestWhereInput;
+      /**
+       * Limit how many ReturnRequests to update.
+       */
+      limit?: number;
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: ReturnRequestIncludeUpdateManyAndReturn<ExtArgs> | null;
+    };
 
   /**
    * ReturnRequest upsert
    */
-  export type ReturnRequestUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -25075,9 +23873,7 @@ export namespace Prisma {
   /**
    * ReturnRequest delete
    */
-  export type ReturnRequestDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -25099,9 +23895,7 @@ export namespace Prisma {
   /**
    * ReturnRequest deleteMany
    */
-  export type ReturnRequestDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ReturnRequests to delete
      */
@@ -25115,9 +23909,7 @@ export namespace Prisma {
   /**
    * ReturnRequest.refund
    */
-  export type ReturnRequest$refundArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequest$refundArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -25136,9 +23928,7 @@ export namespace Prisma {
   /**
    * ReturnRequest without action
    */
-  export type ReturnRequestDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ReturnRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -25269,9 +24059,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type RefundAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Refund to aggregate.
      */
@@ -25340,13 +24128,9 @@ export namespace Prisma {
       : GetScalarType<T[P], AggregateRefund[P]>;
   };
 
-  export type RefundGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RefundWhereInput;
-    orderBy?:
-      | RefundOrderByWithAggregationInput
-      | RefundOrderByWithAggregationInput[];
+    orderBy?: RefundOrderByWithAggregationInput | RefundOrderByWithAggregationInput[];
     by: RefundScalarFieldEnum[] | RefundScalarFieldEnum;
     having?: RefundScalarWhereWithAggregatesInput;
     take?: number;
@@ -25376,78 +24160,73 @@ export namespace Prisma {
     _max: RefundMaxAggregateOutputType | null;
   };
 
-  type GetRefundGroupByPayload<T extends RefundGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<RefundGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof RefundGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], RefundGroupByOutputType[P]>
-            : GetScalarType<T[P], RefundGroupByOutputType[P]>;
-        }
-      >
+  type GetRefundGroupByPayload<T extends RefundGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefundGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof RefundGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], RefundGroupByOutputType[P]>
+          : GetScalarType<T[P], RefundGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type RefundSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      orderId?: boolean;
+      returnRequestId?: boolean;
+      amount?: boolean;
+      method?: boolean;
+      status?: boolean;
+      providerRef?: boolean;
+      metadata?: boolean;
+      createdAt?: boolean;
+      processedAt?: boolean;
+      order?: boolean | OrderDefaultArgs<ExtArgs>;
+      returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["refund"]
+  >;
+
+  export type RefundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        returnRequestId?: boolean;
+        amount?: boolean;
+        method?: boolean;
+        status?: boolean;
+        providerRef?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        processedAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["refund"]
     >;
 
-  export type RefundSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      returnRequestId?: boolean;
-      amount?: boolean;
-      method?: boolean;
-      status?: boolean;
-      providerRef?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      processedAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["refund"]
-  >;
-
-  export type RefundSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      returnRequestId?: boolean;
-      amount?: boolean;
-      method?: boolean;
-      status?: boolean;
-      providerRef?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      processedAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["refund"]
-  >;
-
-  export type RefundSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      returnRequestId?: boolean;
-      amount?: boolean;
-      method?: boolean;
-      status?: boolean;
-      providerRef?: boolean;
-      metadata?: boolean;
-      createdAt?: boolean;
-      processedAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-      returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["refund"]
-  >;
+  export type RefundSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        returnRequestId?: boolean;
+        amount?: boolean;
+        method?: boolean;
+        status?: boolean;
+        providerRef?: boolean;
+        metadata?: boolean;
+        createdAt?: boolean;
+        processedAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["refund"]
+    >;
 
   export type RefundSelectScalar = {
     id?: boolean;
@@ -25462,9 +24241,7 @@ export namespace Prisma {
     processedAt?: boolean;
   };
 
-  export type RefundOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type RefundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     | "id"
     | "orderId"
     | "returnRequestId"
@@ -25477,28 +24254,20 @@ export namespace Prisma {
     | "processedAt",
     ExtArgs["result"]["refund"]
   >;
-  export type RefundInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
     returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
   };
-  export type RefundIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
     returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
   };
-  export type RefundIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
     returnRequest?: boolean | Refund$returnRequestArgs<ExtArgs>;
   };
 
-  export type $RefundPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $RefundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Refund";
     objects: {
       order: Prisma.$OrderPayload<ExtArgs>;
@@ -25522,13 +24291,15 @@ export namespace Prisma {
     composites: {};
   };
 
-  type RefundGetPayload<
-    S extends boolean | null | undefined | RefundDefaultArgs,
-  > = $Result.GetResult<Prisma.$RefundPayload, S>;
+  type RefundGetPayload<S extends boolean | null | undefined | RefundDefaultArgs> = $Result.GetResult<
+    Prisma.$RefundPayload,
+    S
+  >;
 
-  type RefundCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<RefundFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  type RefundCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    RefundFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
     select?: RefundCountAggregateInputType | true;
   };
 
@@ -25536,10 +24307,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Refund"];
-      meta: { name: "Refund" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Refund"]; meta: { name: "Refund" } };
     /**
      * Find zero or one Refund that matches the filter.
      * @param {RefundFindUniqueArgs} args - Arguments to find a Refund
@@ -25552,14 +24320,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends RefundFindUniqueArgs>(
-      args: SelectSubset<T, RefundFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundFindUniqueArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -25578,14 +24341,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends RefundFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, RefundFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -25605,14 +24363,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends RefundFindFirstArgs>(
-      args?: SelectSubset<T, RefundFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, RefundFindFirstArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -25633,14 +24386,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends RefundFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, RefundFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, RefundFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -25663,15 +24411,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends RefundFindManyArgs>(
-      args?: SelectSubset<T, RefundFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, RefundFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a Refund.
@@ -25686,14 +24427,9 @@ export namespace Prisma {
      *
      */
     create<T extends RefundCreateArgs>(
-      args: SelectSubset<T, RefundCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundCreateArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -25712,7 +24448,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends RefundCreateManyArgs>(
-      args?: SelectSubset<T, RefundCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, RefundCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -25738,14 +24474,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends RefundCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, RefundCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, RefundCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -25761,14 +24492,9 @@ export namespace Prisma {
      *
      */
     delete<T extends RefundDeleteArgs>(
-      args: SelectSubset<T, RefundDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundDeleteArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -25790,14 +24516,9 @@ export namespace Prisma {
      *
      */
     update<T extends RefundUpdateArgs>(
-      args: SelectSubset<T, RefundUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundUpdateArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -25816,7 +24537,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends RefundDeleteManyArgs>(
-      args?: SelectSubset<T, RefundDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, RefundDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -25837,7 +24558,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends RefundUpdateManyArgs>(
-      args: SelectSubset<T, RefundUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -25869,14 +24590,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends RefundUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, RefundUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -25897,14 +24613,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends RefundUpsertArgs>(
-      args: SelectSubset<T, RefundUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, RefundUpsertArgs<ExtArgs>>
     ): Prisma__RefundClient<
-      $Result.GetResult<
-        Prisma.$RefundPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -25924,7 +24635,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends RefundCountArgs>(
-      args?: Subset<T, RefundCountArgs>,
+      args?: Subset<T, RefundCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -25958,7 +24669,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends RefundAggregateArgs>(
-      args: Subset<T, RefundAggregateArgs>,
+      args: Subset<T, RefundAggregateArgs>
     ): Prisma.PrismaPromise<GetRefundAggregateType<T>>;
 
     /**
@@ -25981,16 +24692,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends RefundGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: RefundGroupByArgs["orderBy"] }
         : { orderBy?: RefundGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -26004,12 +24710,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -26039,10 +24740,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, RefundGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetRefundGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, RefundGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetRefundGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the Refund model
      */
@@ -26063,28 +24762,17 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     order<T extends OrderDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderDefaultArgs<ExtArgs>>,
+      args?: Subset<T, OrderDefaultArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
     >;
     returnRequest<T extends Refund$returnRequestArgs<ExtArgs> = {}>(
-      args?: Subset<T, Refund$returnRequestArgs<ExtArgs>>,
+      args?: Subset<T, Refund$returnRequestArgs<ExtArgs>>
     ): Prisma__ReturnRequestClient<
-      $Result.GetResult<
-        Prisma.$ReturnRequestPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$ReturnRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -26096,14 +24784,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -26111,10 +24793,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -26145,9 +24824,7 @@ export namespace Prisma {
   /**
    * Refund findUnique
    */
-  export type RefundFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26169,9 +24846,7 @@ export namespace Prisma {
   /**
    * Refund findUniqueOrThrow
    */
-  export type RefundFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26193,9 +24868,7 @@ export namespace Prisma {
   /**
    * Refund findFirst
    */
-  export type RefundFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26247,9 +24920,7 @@ export namespace Prisma {
   /**
    * Refund findFirstOrThrow
    */
-  export type RefundFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26301,9 +24972,7 @@ export namespace Prisma {
   /**
    * Refund findMany
    */
-  export type RefundFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26350,9 +25019,7 @@ export namespace Prisma {
   /**
    * Refund create
    */
-  export type RefundCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26374,9 +25041,7 @@ export namespace Prisma {
   /**
    * Refund createMany
    */
-  export type RefundCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Refunds.
      */
@@ -26387,9 +25052,7 @@ export namespace Prisma {
   /**
    * Refund createManyAndReturn
    */
-  export type RefundCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26412,9 +25075,7 @@ export namespace Prisma {
   /**
    * Refund update
    */
-  export type RefundUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26440,9 +25101,7 @@ export namespace Prisma {
   /**
    * Refund updateMany
    */
-  export type RefundUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Refunds.
      */
@@ -26460,9 +25119,7 @@ export namespace Prisma {
   /**
    * Refund updateManyAndReturn
    */
-  export type RefundUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26492,9 +25149,7 @@ export namespace Prisma {
   /**
    * Refund upsert
    */
-  export type RefundUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26524,9 +25179,7 @@ export namespace Prisma {
   /**
    * Refund delete
    */
-  export type RefundDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26548,9 +25201,7 @@ export namespace Prisma {
   /**
    * Refund deleteMany
    */
-  export type RefundDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Refunds to delete
      */
@@ -26564,9 +25215,7 @@ export namespace Prisma {
   /**
    * Refund.returnRequest
    */
-  export type Refund$returnRequestArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Refund$returnRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReturnRequest
      */
@@ -26585,9 +25234,7 @@ export namespace Prisma {
   /**
    * Refund without action
    */
-  export type RefundDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type RefundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Refund
      */
@@ -26714,9 +25361,7 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type PaymentMetaAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which PaymentMeta to aggregate.
      */
@@ -26726,9 +25371,7 @@ export namespace Prisma {
      *
      * Determine the order of PaymentMetas to fetch.
      */
-    orderBy?:
-      | PaymentMetaOrderByWithRelationInput
-      | PaymentMetaOrderByWithRelationInput[];
+    orderBy?: PaymentMetaOrderByWithRelationInput | PaymentMetaOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -26779,22 +25422,17 @@ export namespace Prisma {
     _max?: PaymentMetaMaxAggregateInputType;
   };
 
-  export type GetPaymentMetaAggregateType<T extends PaymentMetaAggregateArgs> =
-    {
-      [P in keyof T & keyof AggregatePaymentMeta]: P extends "_count" | "count"
-        ? T[P] extends true
-          ? number
-          : GetScalarType<T[P], AggregatePaymentMeta[P]>
-        : GetScalarType<T[P], AggregatePaymentMeta[P]>;
-    };
+  export type GetPaymentMetaAggregateType<T extends PaymentMetaAggregateArgs> = {
+    [P in keyof T & keyof AggregatePaymentMeta]: P extends "_count" | "count"
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaymentMeta[P]>
+      : GetScalarType<T[P], AggregatePaymentMeta[P]>;
+  };
 
-  export type PaymentMetaGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentMetaWhereInput;
-    orderBy?:
-      | PaymentMetaOrderByWithAggregationInput
-      | PaymentMetaOrderByWithAggregationInput[];
+    orderBy?: PaymentMetaOrderByWithAggregationInput | PaymentMetaOrderByWithAggregationInput[];
     by: PaymentMetaScalarFieldEnum[] | PaymentMetaScalarFieldEnum;
     having?: PaymentMetaScalarWhereWithAggregatesInput;
     take?: number;
@@ -26824,76 +25462,71 @@ export namespace Prisma {
     _max: PaymentMetaMaxAggregateOutputType | null;
   };
 
-  type GetPaymentMetaGroupByPayload<T extends PaymentMetaGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<PaymentMetaGroupByOutputType, T["by"]> & {
-          [P in keyof T &
-            keyof PaymentMetaGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PaymentMetaGroupByOutputType[P]>
-            : GetScalarType<T[P], PaymentMetaGroupByOutputType[P]>;
-        }
-      >
+  type GetPaymentMetaGroupByPayload<T extends PaymentMetaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentMetaGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof PaymentMetaGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], PaymentMetaGroupByOutputType[P]>
+          : GetScalarType<T[P], PaymentMetaGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type PaymentMetaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        provider?: boolean;
+        transactionId?: boolean;
+        status?: boolean;
+        amount?: boolean;
+        raw?: boolean;
+        capturedAt?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["paymentMeta"]
     >;
 
-  export type PaymentMetaSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      provider?: boolean;
-      transactionId?: boolean;
-      status?: boolean;
-      amount?: boolean;
-      raw?: boolean;
-      capturedAt?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["paymentMeta"]
-  >;
+  export type PaymentMetaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        provider?: boolean;
+        transactionId?: boolean;
+        status?: boolean;
+        amount?: boolean;
+        raw?: boolean;
+        capturedAt?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["paymentMeta"]
+    >;
 
-  export type PaymentMetaSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      provider?: boolean;
-      transactionId?: boolean;
-      status?: boolean;
-      amount?: boolean;
-      raw?: boolean;
-      capturedAt?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["paymentMeta"]
-  >;
-
-  export type PaymentMetaSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean;
-      orderId?: boolean;
-      provider?: boolean;
-      transactionId?: boolean;
-      status?: boolean;
-      amount?: boolean;
-      raw?: boolean;
-      capturedAt?: boolean;
-      createdAt?: boolean;
-      updatedAt?: boolean;
-      order?: boolean | OrderDefaultArgs<ExtArgs>;
-    },
-    ExtArgs["result"]["paymentMeta"]
-  >;
+  export type PaymentMetaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        provider?: boolean;
+        transactionId?: boolean;
+        status?: boolean;
+        amount?: boolean;
+        raw?: boolean;
+        capturedAt?: boolean;
+        createdAt?: boolean;
+        updatedAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["paymentMeta"]
+    >;
 
   export type PaymentMetaSelectScalar = {
     id?: boolean;
@@ -26908,9 +25541,7 @@ export namespace Prisma {
     updatedAt?: boolean;
   };
 
-  export type PaymentMetaOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
+  export type PaymentMetaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
     | "id"
     | "orderId"
     | "provider"
@@ -26923,9 +25554,7 @@ export namespace Prisma {
     | "updatedAt",
     ExtArgs["result"]["paymentMeta"]
   >;
-  export type PaymentMetaInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
   };
   export type PaymentMetaIncludeCreateManyAndReturn<
@@ -26939,9 +25568,7 @@ export namespace Prisma {
     order?: boolean | OrderDefaultArgs<ExtArgs>;
   };
 
-  export type $PaymentMetaPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type $PaymentMetaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PaymentMeta";
     objects: {
       order: Prisma.$OrderPayload<ExtArgs>;
@@ -26964,13 +25591,12 @@ export namespace Prisma {
     composites: {};
   };
 
-  type PaymentMetaGetPayload<
-    S extends boolean | null | undefined | PaymentMetaDefaultArgs,
-  > = $Result.GetResult<Prisma.$PaymentMetaPayload, S>;
+  type PaymentMetaGetPayload<S extends boolean | null | undefined | PaymentMetaDefaultArgs> = $Result.GetResult<
+    Prisma.$PaymentMetaPayload,
+    S
+  >;
 
-  type PaymentMetaCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
+  type PaymentMetaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
     PaymentMetaFindManyArgs,
     "select" | "include" | "distinct" | "omit"
   > & {
@@ -26997,14 +25623,9 @@ export namespace Prisma {
      * })
      */
     findUnique<T extends PaymentMetaFindUniqueArgs>(
-      args: SelectSubset<T, PaymentMetaFindUniqueArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaFindUniqueArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "findUnique",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -27023,14 +25644,9 @@ export namespace Prisma {
      * })
      */
     findUniqueOrThrow<T extends PaymentMetaFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, PaymentMetaFindUniqueOrThrowArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaFindUniqueOrThrowArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "findUniqueOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -27050,14 +25666,9 @@ export namespace Prisma {
      * })
      */
     findFirst<T extends PaymentMetaFindFirstArgs>(
-      args?: SelectSubset<T, PaymentMetaFindFirstArgs<ExtArgs>>,
+      args?: SelectSubset<T, PaymentMetaFindFirstArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "findFirst",
-        GlobalOmitOptions
-      > | null,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
       null,
       ExtArgs,
       GlobalOmitOptions
@@ -27078,14 +25689,9 @@ export namespace Prisma {
      * })
      */
     findFirstOrThrow<T extends PaymentMetaFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, PaymentMetaFindFirstOrThrowArgs<ExtArgs>>,
+      args?: SelectSubset<T, PaymentMetaFindFirstOrThrowArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "findFirstOrThrow",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -27108,15 +25714,8 @@ export namespace Prisma {
      *
      */
     findMany<T extends PaymentMetaFindManyArgs>(
-      args?: SelectSubset<T, PaymentMetaFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "findMany",
-        GlobalOmitOptions
-      >
-    >;
+      args?: SelectSubset<T, PaymentMetaFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
 
     /**
      * Create a PaymentMeta.
@@ -27131,14 +25730,9 @@ export namespace Prisma {
      *
      */
     create<T extends PaymentMetaCreateArgs>(
-      args: SelectSubset<T, PaymentMetaCreateArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaCreateArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "create",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -27157,7 +25751,7 @@ export namespace Prisma {
      *
      */
     createMany<T extends PaymentMetaCreateManyArgs>(
-      args?: SelectSubset<T, PaymentMetaCreateManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, PaymentMetaCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -27183,14 +25777,9 @@ export namespace Prisma {
      *
      */
     createManyAndReturn<T extends PaymentMetaCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, PaymentMetaCreateManyAndReturnArgs<ExtArgs>>,
+      args?: SelectSubset<T, PaymentMetaCreateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "createManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -27206,14 +25795,9 @@ export namespace Prisma {
      *
      */
     delete<T extends PaymentMetaDeleteArgs>(
-      args: SelectSubset<T, PaymentMetaDeleteArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaDeleteArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "delete",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -27235,14 +25819,9 @@ export namespace Prisma {
      *
      */
     update<T extends PaymentMetaUpdateArgs>(
-      args: SelectSubset<T, PaymentMetaUpdateArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaUpdateArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "update",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -27261,7 +25840,7 @@ export namespace Prisma {
      *
      */
     deleteMany<T extends PaymentMetaDeleteManyArgs>(
-      args?: SelectSubset<T, PaymentMetaDeleteManyArgs<ExtArgs>>,
+      args?: SelectSubset<T, PaymentMetaDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -27282,7 +25861,7 @@ export namespace Prisma {
      *
      */
     updateMany<T extends PaymentMetaUpdateManyArgs>(
-      args: SelectSubset<T, PaymentMetaUpdateManyArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
@@ -27314,14 +25893,9 @@ export namespace Prisma {
      *
      */
     updateManyAndReturn<T extends PaymentMetaUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, PaymentMetaUpdateManyAndReturnArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaUpdateManyAndReturnArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "updateManyAndReturn",
-        GlobalOmitOptions
-      >
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
     >;
 
     /**
@@ -27342,14 +25916,9 @@ export namespace Prisma {
      * })
      */
     upsert<T extends PaymentMetaUpsertArgs>(
-      args: SelectSubset<T, PaymentMetaUpsertArgs<ExtArgs>>,
+      args: SelectSubset<T, PaymentMetaUpsertArgs<ExtArgs>>
     ): Prisma__PaymentMetaClient<
-      $Result.GetResult<
-        Prisma.$PaymentMetaPayload<ExtArgs>,
-        T,
-        "upsert",
-        GlobalOmitOptions
-      >,
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
       never,
       ExtArgs,
       GlobalOmitOptions
@@ -27369,7 +25938,7 @@ export namespace Prisma {
      * })
      **/
     count<T extends PaymentMetaCountArgs>(
-      args?: Subset<T, PaymentMetaCountArgs>,
+      args?: Subset<T, PaymentMetaCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<"select", any>
         ? T["select"] extends true
@@ -27403,7 +25972,7 @@ export namespace Prisma {
      * })
      **/
     aggregate<T extends PaymentMetaAggregateArgs>(
-      args: Subset<T, PaymentMetaAggregateArgs>,
+      args: Subset<T, PaymentMetaAggregateArgs>
     ): Prisma.PrismaPromise<GetPaymentMetaAggregateType<T>>;
 
     /**
@@ -27426,16 +25995,11 @@ export namespace Prisma {
      **/
     groupBy<
       T extends PaymentMetaGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: PaymentMetaGroupByArgs["orderBy"] }
         : { orderBy?: PaymentMetaGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
       ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T["having"]>,
@@ -27449,12 +26013,7 @@ export namespace Prisma {
                 ? never
                 : P extends string
                   ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      "Field ",
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ];
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
             }[HavingFields]
           : "take" extends Keys<T>
             ? "orderBy" extends Keys<T>
@@ -27484,11 +26043,8 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, PaymentMetaGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetPaymentMetaGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, PaymentMetaGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetPaymentMetaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
      * Fields of the PaymentMeta model
      */
@@ -27509,15 +26065,9 @@ export namespace Prisma {
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     order<T extends OrderDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, OrderDefaultArgs<ExtArgs>>,
+      args?: Subset<T, OrderDefaultArgs<ExtArgs>>
     ): Prisma__OrderClient<
-      | $Result.GetResult<
-          Prisma.$OrderPayload<ExtArgs>,
-          T,
-          "findUniqueOrThrow",
-          GlobalOmitOptions
-        >
-      | Null,
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
       Null,
       ExtArgs,
       GlobalOmitOptions
@@ -27529,14 +26079,8 @@ export namespace Prisma {
      * @returns A Promise for the completion of which ever callback is executed.
      */
     then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
     ): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
@@ -27544,10 +26088,7 @@ export namespace Prisma {
      * @returns A Promise for the completion of the callback.
      */
     catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
     ): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -27578,9 +26119,7 @@ export namespace Prisma {
   /**
    * PaymentMeta findUnique
    */
-  export type PaymentMetaFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27602,9 +26141,7 @@ export namespace Prisma {
   /**
    * PaymentMeta findUniqueOrThrow
    */
-  export type PaymentMetaFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27626,9 +26163,7 @@ export namespace Prisma {
   /**
    * PaymentMeta findFirst
    */
-  export type PaymentMetaFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27650,9 +26185,7 @@ export namespace Prisma {
      *
      * Determine the order of PaymentMetas to fetch.
      */
-    orderBy?:
-      | PaymentMetaOrderByWithRelationInput
-      | PaymentMetaOrderByWithRelationInput[];
+    orderBy?: PaymentMetaOrderByWithRelationInput | PaymentMetaOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -27682,9 +26215,7 @@ export namespace Prisma {
   /**
    * PaymentMeta findFirstOrThrow
    */
-  export type PaymentMetaFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27706,9 +26237,7 @@ export namespace Prisma {
      *
      * Determine the order of PaymentMetas to fetch.
      */
-    orderBy?:
-      | PaymentMetaOrderByWithRelationInput
-      | PaymentMetaOrderByWithRelationInput[];
+    orderBy?: PaymentMetaOrderByWithRelationInput | PaymentMetaOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -27738,9 +26267,7 @@ export namespace Prisma {
   /**
    * PaymentMeta findMany
    */
-  export type PaymentMetaFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27762,9 +26289,7 @@ export namespace Prisma {
      *
      * Determine the order of PaymentMetas to fetch.
      */
-    orderBy?:
-      | PaymentMetaOrderByWithRelationInput
-      | PaymentMetaOrderByWithRelationInput[];
+    orderBy?: PaymentMetaOrderByWithRelationInput | PaymentMetaOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
@@ -27789,9 +26314,7 @@ export namespace Prisma {
   /**
    * PaymentMeta create
    */
-  export type PaymentMetaCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27813,9 +26336,7 @@ export namespace Prisma {
   /**
    * PaymentMeta createMany
    */
-  export type PaymentMetaCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many PaymentMetas.
      */
@@ -27826,9 +26347,7 @@ export namespace Prisma {
   /**
    * PaymentMeta createManyAndReturn
    */
-  export type PaymentMetaCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27851,9 +26370,7 @@ export namespace Prisma {
   /**
    * PaymentMeta update
    */
-  export type PaymentMetaUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27879,16 +26396,11 @@ export namespace Prisma {
   /**
    * PaymentMeta updateMany
    */
-  export type PaymentMetaUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update PaymentMetas.
      */
-    data: XOR<
-      PaymentMetaUpdateManyMutationInput,
-      PaymentMetaUncheckedUpdateManyInput
-    >;
+    data: XOR<PaymentMetaUpdateManyMutationInput, PaymentMetaUncheckedUpdateManyInput>;
     /**
      * Filter which PaymentMetas to update
      */
@@ -27902,9 +26414,7 @@ export namespace Prisma {
   /**
    * PaymentMeta updateManyAndReturn
    */
-  export type PaymentMetaUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27916,10 +26426,7 @@ export namespace Prisma {
     /**
      * The data used to update PaymentMetas.
      */
-    data: XOR<
-      PaymentMetaUpdateManyMutationInput,
-      PaymentMetaUncheckedUpdateManyInput
-    >;
+    data: XOR<PaymentMetaUpdateManyMutationInput, PaymentMetaUncheckedUpdateManyInput>;
     /**
      * Filter which PaymentMetas to update
      */
@@ -27937,9 +26444,7 @@ export namespace Prisma {
   /**
    * PaymentMeta upsert
    */
-  export type PaymentMetaUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27969,9 +26474,7 @@ export namespace Prisma {
   /**
    * PaymentMeta delete
    */
-  export type PaymentMetaDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -27993,9 +26496,7 @@ export namespace Prisma {
   /**
    * PaymentMeta deleteMany
    */
-  export type PaymentMetaDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which PaymentMetas to delete
      */
@@ -28009,9 +26510,7 @@ export namespace Prisma {
   /**
    * PaymentMeta without action
    */
-  export type PaymentMetaDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type PaymentMetaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentMeta
      */
@@ -28037,8 +26536,7 @@ export namespace Prisma {
     Serializable: "Serializable";
   };
 
-  export type TransactionIsolationLevel =
-    (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
   export const UserScalarFieldEnum: {
     id: "id";
@@ -28051,16 +26549,14 @@ export namespace Prisma {
     lastLogin: "lastLogin";
   };
 
-  export type UserScalarFieldEnum =
-    (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
   export const RoleScalarFieldEnum: {
     id: "id";
     name: "name";
   };
 
-  export type RoleScalarFieldEnum =
-    (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum];
+  export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum];
 
   export const UserRoleScalarFieldEnum: {
     id: "id";
@@ -28068,8 +26564,7 @@ export namespace Prisma {
     roleId: "roleId";
   };
 
-  export type UserRoleScalarFieldEnum =
-    (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum];
+  export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum];
 
   export const ProductScalarFieldEnum: {
     id: "id";
@@ -28083,8 +26578,20 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type ProductScalarFieldEnum =
-    (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum];
+  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum];
+
+  export const ProductImageScalarFieldEnum: {
+    id: "id";
+    url: "url";
+    alt: "alt";
+    isPrimary: "isPrimary";
+    productId: "productId";
+    createdAt: "createdAt";
+    updatedAt: "updatedAt";
+  };
+
+  export type ProductImageScalarFieldEnum =
+    (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum];
 
   export const ProductVariantScalarFieldEnum: {
     id: "id";
@@ -28113,8 +26620,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type InventoryScalarFieldEnum =
-    (typeof InventoryScalarFieldEnum)[keyof typeof InventoryScalarFieldEnum];
+  export type InventoryScalarFieldEnum = (typeof InventoryScalarFieldEnum)[keyof typeof InventoryScalarFieldEnum];
 
   export const OrderScalarFieldEnum: {
     id: "id";
@@ -28133,8 +26639,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type OrderScalarFieldEnum =
-    (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
+  export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
 
   export const OrderItemScalarFieldEnum: {
     id: "id";
@@ -28150,8 +26655,7 @@ export namespace Prisma {
     createdAt: "createdAt";
   };
 
-  export type OrderItemScalarFieldEnum =
-    (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
+  export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
 
   export const CouponScalarFieldEnum: {
     id: "id";
@@ -28171,8 +26675,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type CouponScalarFieldEnum =
-    (typeof CouponScalarFieldEnum)[keyof typeof CouponScalarFieldEnum];
+  export type CouponScalarFieldEnum = (typeof CouponScalarFieldEnum)[keyof typeof CouponScalarFieldEnum];
 
   export const ReviewScalarFieldEnum: {
     id: "id";
@@ -28186,8 +26689,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type ReviewScalarFieldEnum =
-    (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum];
+  export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum];
 
   export const WishlistScalarFieldEnum: {
     id: "id";
@@ -28196,8 +26698,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type WishlistScalarFieldEnum =
-    (typeof WishlistScalarFieldEnum)[keyof typeof WishlistScalarFieldEnum];
+  export type WishlistScalarFieldEnum = (typeof WishlistScalarFieldEnum)[keyof typeof WishlistScalarFieldEnum];
 
   export const WishlistItemScalarFieldEnum: {
     id: "id";
@@ -28228,8 +26729,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type AddressScalarFieldEnum =
-    (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum];
+  export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum];
 
   export const AuditLogScalarFieldEnum: {
     id: "id";
@@ -28243,8 +26743,7 @@ export namespace Prisma {
     createdAt: "createdAt";
   };
 
-  export type AuditLogScalarFieldEnum =
-    (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum];
+  export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum];
 
   export const ReturnRequestScalarFieldEnum: {
     id: "id";
@@ -28274,8 +26773,7 @@ export namespace Prisma {
     processedAt: "processedAt";
   };
 
-  export type RefundScalarFieldEnum =
-    (typeof RefundScalarFieldEnum)[keyof typeof RefundScalarFieldEnum];
+  export type RefundScalarFieldEnum = (typeof RefundScalarFieldEnum)[keyof typeof RefundScalarFieldEnum];
 
   export const PaymentMetaScalarFieldEnum: {
     id: "id";
@@ -28290,8 +26788,7 @@ export namespace Prisma {
     updatedAt: "updatedAt";
   };
 
-  export type PaymentMetaScalarFieldEnum =
-    (typeof PaymentMetaScalarFieldEnum)[keyof typeof PaymentMetaScalarFieldEnum];
+  export type PaymentMetaScalarFieldEnum = (typeof PaymentMetaScalarFieldEnum)[keyof typeof PaymentMetaScalarFieldEnum];
 
   export const SortOrder: {
     asc: "asc";
@@ -28305,8 +26802,7 @@ export namespace Prisma {
     JsonNull: typeof JsonNull;
   };
 
-  export type NullableJsonNullValueInput =
-    (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput];
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput];
 
   export const QueryMode: {
     default: "default";
@@ -28328,8 +26824,7 @@ export namespace Prisma {
     AnyNull: typeof AnyNull;
   };
 
-  export type JsonNullValueFilter =
-    (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter];
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter];
 
   /**
    * Field references
@@ -28338,192 +26833,127 @@ export namespace Prisma {
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Int"
-  >;
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int">;
 
   /**
    * Reference to a field of type 'Int[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Int[]"
-  >;
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int[]">;
 
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "String"
-  >;
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String">;
 
   /**
    * Reference to a field of type 'String[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "String[]"
-  >;
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String[]">;
 
   /**
    * Reference to a field of type 'DateTime'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "DateTime"
-  >;
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime">;
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "DateTime[]"
-  >;
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime[]">;
 
   /**
    * Reference to a field of type 'ProductStatus'
    */
-  export type EnumProductStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "ProductStatus"
-  >;
+  export type EnumProductStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "ProductStatus">;
 
   /**
    * Reference to a field of type 'ProductStatus[]'
    */
-  export type ListEnumProductStatusFieldRefInput<$PrismaModel> =
-    FieldRefInputType<$PrismaModel, "ProductStatus[]">;
+  export type ListEnumProductStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "ProductStatus[]">;
 
   /**
    * Reference to a field of type 'Json'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Json"
-  >;
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Json">;
 
   /**
    * Reference to a field of type 'QueryMode'
    */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "QueryMode"
-  >;
-
-  /**
-   * Reference to a field of type 'Decimal'
-   */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Decimal"
-  >;
-
-  /**
-   * Reference to a field of type 'Decimal[]'
-   */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Decimal[]"
-  >;
-
-  /**
-   * Reference to a field of type 'OrderStatus'
-   */
-  export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "OrderStatus"
-  >;
-
-  /**
-   * Reference to a field of type 'OrderStatus[]'
-   */
-  export type ListEnumOrderStatusFieldRefInput<$PrismaModel> =
-    FieldRefInputType<$PrismaModel, "OrderStatus[]">;
-
-  /**
-   * Reference to a field of type 'PaymentMethod'
-   */
-  export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "PaymentMethod"
-  >;
-
-  /**
-   * Reference to a field of type 'PaymentMethod[]'
-   */
-  export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> =
-    FieldRefInputType<$PrismaModel, "PaymentMethod[]">;
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "QueryMode">;
 
   /**
    * Reference to a field of type 'Boolean'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Boolean"
-  >;
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Boolean">;
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Decimal">;
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Decimal[]">;
+
+  /**
+   * Reference to a field of type 'OrderStatus'
+   */
+  export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "OrderStatus">;
+
+  /**
+   * Reference to a field of type 'OrderStatus[]'
+   */
+  export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "OrderStatus[]">;
+
+  /**
+   * Reference to a field of type 'PaymentMethod'
+   */
+  export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "PaymentMethod">;
+
+  /**
+   * Reference to a field of type 'PaymentMethod[]'
+   */
+  export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "PaymentMethod[]">;
 
   /**
    * Reference to a field of type 'CouponType'
    */
-  export type EnumCouponTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "CouponType"
-  >;
+  export type EnumCouponTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CouponType">;
 
   /**
    * Reference to a field of type 'CouponType[]'
    */
-  export type ListEnumCouponTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "CouponType[]"
-  >;
+  export type ListEnumCouponTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CouponType[]">;
 
   /**
    * Reference to a field of type 'ReturnStatus'
    */
-  export type EnumReturnStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "ReturnStatus"
-  >;
+  export type EnumReturnStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "ReturnStatus">;
 
   /**
    * Reference to a field of type 'ReturnStatus[]'
    */
-  export type ListEnumReturnStatusFieldRefInput<$PrismaModel> =
-    FieldRefInputType<$PrismaModel, "ReturnStatus[]">;
+  export type ListEnumReturnStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "ReturnStatus[]">;
 
   /**
    * Reference to a field of type 'RefundStatus'
    */
-  export type EnumRefundStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "RefundStatus"
-  >;
+  export type EnumRefundStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "RefundStatus">;
 
   /**
    * Reference to a field of type 'RefundStatus[]'
    */
-  export type ListEnumRefundStatusFieldRefInput<$PrismaModel> =
-    FieldRefInputType<$PrismaModel, "RefundStatus[]">;
+  export type ListEnumRefundStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "RefundStatus[]">;
 
   /**
    * Reference to a field of type 'Float'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Float"
-  >;
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Float">;
 
   /**
    * Reference to a field of type 'Float[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    "Float[]"
-  >;
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Float[]">;
 
   /**
    * Deep Input Types
@@ -28543,10 +26973,7 @@ export namespace Prisma {
     lastLogin?: DateTimeNullableFilter<"User"> | Date | string | null;
     userRoles?: UserRoleListRelationFilter;
     addresses?: AddressListRelationFilter;
-    wishlist?: XOR<
-      WishlistNullableScalarRelationFilter,
-      WishlistWhereInput
-    > | null;
+    wishlist?: XOR<WishlistNullableScalarRelationFilter, WishlistWhereInput> | null;
     reviews?: ReviewListRelationFilter;
     orders?: OrderListRelationFilter;
     AuditLog?: AuditLogListRelationFilter;
@@ -28584,10 +27011,7 @@ export namespace Prisma {
       lastLogin?: DateTimeNullableFilter<"User"> | Date | string | null;
       userRoles?: UserRoleListRelationFilter;
       addresses?: AddressListRelationFilter;
-      wishlist?: XOR<
-        WishlistNullableScalarRelationFilter,
-        WishlistWhereInput
-      > | null;
+      wishlist?: XOR<WishlistNullableScalarRelationFilter, WishlistWhereInput> | null;
       reviews?: ReviewListRelationFilter;
       orders?: OrderListRelationFilter;
       AuditLog?: AuditLogListRelationFilter;
@@ -28612,13 +27036,9 @@ export namespace Prisma {
   };
 
   export type UserScalarWhereWithAggregatesInput = {
-    AND?:
-      | UserScalarWhereWithAggregatesInput
-      | UserScalarWhereWithAggregatesInput[];
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[];
     OR?: UserScalarWhereWithAggregatesInput[];
-    NOT?:
-      | UserScalarWhereWithAggregatesInput
-      | UserScalarWhereWithAggregatesInput[];
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"User"> | number;
     email?: StringWithAggregatesFilter<"User"> | string;
     username?: StringNullableWithAggregatesFilter<"User"> | string | null;
@@ -28626,11 +27046,7 @@ export namespace Prisma {
     displayName?: StringNullableWithAggregatesFilter<"User"> | string | null;
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string;
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string;
-    lastLogin?:
-      | DateTimeNullableWithAggregatesFilter<"User">
-      | Date
-      | string
-      | null;
+    lastLogin?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null;
   };
 
   export type RoleWhereInput = {
@@ -28671,13 +27087,9 @@ export namespace Prisma {
   };
 
   export type RoleScalarWhereWithAggregatesInput = {
-    AND?:
-      | RoleScalarWhereWithAggregatesInput
-      | RoleScalarWhereWithAggregatesInput[];
+    AND?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[];
     OR?: RoleScalarWhereWithAggregatesInput[];
-    NOT?:
-      | RoleScalarWhereWithAggregatesInput
-      | RoleScalarWhereWithAggregatesInput[];
+    NOT?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Role"> | number;
     name?: StringWithAggregatesFilter<"Role"> | string;
   };
@@ -28728,13 +27140,9 @@ export namespace Prisma {
   };
 
   export type UserRoleScalarWhereWithAggregatesInput = {
-    AND?:
-      | UserRoleScalarWhereWithAggregatesInput
-      | UserRoleScalarWhereWithAggregatesInput[];
+    AND?: UserRoleScalarWhereWithAggregatesInput | UserRoleScalarWhereWithAggregatesInput[];
     OR?: UserRoleScalarWhereWithAggregatesInput[];
-    NOT?:
-      | UserRoleScalarWhereWithAggregatesInput
-      | UserRoleScalarWhereWithAggregatesInput[];
+    NOT?: UserRoleScalarWhereWithAggregatesInput | UserRoleScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"UserRole"> | number;
     userId?: IntWithAggregatesFilter<"UserRole"> | number;
     roleId?: IntWithAggregatesFilter<"UserRole"> | number;
@@ -28753,6 +27161,7 @@ export namespace Prisma {
     metadata?: JsonNullableFilter<"Product">;
     createdAt?: DateTimeFilter<"Product"> | Date | string;
     updatedAt?: DateTimeFilter<"Product"> | Date | string;
+    images?: ProductImageListRelationFilter;
     variants?: ProductVariantListRelationFilter;
     reviews?: ReviewListRelationFilter;
     OrderItem?: OrderItemListRelationFilter;
@@ -28769,6 +27178,7 @@ export namespace Prisma {
     metadata?: SortOrderInput | SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
+    images?: ProductImageOrderByRelationAggregateInput;
     variants?: ProductVariantOrderByRelationAggregateInput;
     reviews?: ReviewOrderByRelationAggregateInput;
     OrderItem?: OrderItemOrderByRelationAggregateInput;
@@ -28789,6 +27199,7 @@ export namespace Prisma {
       metadata?: JsonNullableFilter<"Product">;
       createdAt?: DateTimeFilter<"Product"> | Date | string;
       updatedAt?: DateTimeFilter<"Product"> | Date | string;
+      images?: ProductImageListRelationFilter;
       variants?: ProductVariantListRelationFilter;
       reviews?: ReviewListRelationFilter;
       OrderItem?: OrderItemListRelationFilter;
@@ -28815,27 +27226,88 @@ export namespace Prisma {
   };
 
   export type ProductScalarWhereWithAggregatesInput = {
-    AND?:
-      | ProductScalarWhereWithAggregatesInput
-      | ProductScalarWhereWithAggregatesInput[];
+    AND?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[];
     OR?: ProductScalarWhereWithAggregatesInput[];
-    NOT?:
-      | ProductScalarWhereWithAggregatesInput
-      | ProductScalarWhereWithAggregatesInput[];
+    NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Product"> | number;
     title?: StringWithAggregatesFilter<"Product"> | string;
     slug?: StringWithAggregatesFilter<"Product"> | string;
-    shortDescription?:
-      | StringNullableWithAggregatesFilter<"Product">
-      | string
-      | null;
+    shortDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null;
     description?: StringNullableWithAggregatesFilter<"Product"> | string | null;
-    status?:
-      | EnumProductStatusWithAggregatesFilter<"Product">
-      | $Enums.ProductStatus;
+    status?: EnumProductStatusWithAggregatesFilter<"Product"> | $Enums.ProductStatus;
     metadata?: JsonNullableWithAggregatesFilter<"Product">;
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string;
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string;
+  };
+
+  export type ProductImageWhereInput = {
+    AND?: ProductImageWhereInput | ProductImageWhereInput[];
+    OR?: ProductImageWhereInput[];
+    NOT?: ProductImageWhereInput | ProductImageWhereInput[];
+    id?: IntFilter<"ProductImage"> | number;
+    url?: StringFilter<"ProductImage"> | string;
+    alt?: StringNullableFilter<"ProductImage"> | string | null;
+    isPrimary?: BoolFilter<"ProductImage"> | boolean;
+    productId?: IntFilter<"ProductImage"> | number;
+    createdAt?: DateTimeFilter<"ProductImage"> | Date | string;
+    updatedAt?: DateTimeFilter<"ProductImage"> | Date | string;
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>;
+  };
+
+  export type ProductImageOrderByWithRelationInput = {
+    id?: SortOrder;
+    url?: SortOrder;
+    alt?: SortOrderInput | SortOrder;
+    isPrimary?: SortOrder;
+    productId?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    product?: ProductOrderByWithRelationInput;
+  };
+
+  export type ProductImageWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      AND?: ProductImageWhereInput | ProductImageWhereInput[];
+      OR?: ProductImageWhereInput[];
+      NOT?: ProductImageWhereInput | ProductImageWhereInput[];
+      url?: StringFilter<"ProductImage"> | string;
+      alt?: StringNullableFilter<"ProductImage"> | string | null;
+      isPrimary?: BoolFilter<"ProductImage"> | boolean;
+      productId?: IntFilter<"ProductImage"> | number;
+      createdAt?: DateTimeFilter<"ProductImage"> | Date | string;
+      updatedAt?: DateTimeFilter<"ProductImage"> | Date | string;
+      product?: XOR<ProductScalarRelationFilter, ProductWhereInput>;
+    },
+    "id"
+  >;
+
+  export type ProductImageOrderByWithAggregationInput = {
+    id?: SortOrder;
+    url?: SortOrder;
+    alt?: SortOrderInput | SortOrder;
+    isPrimary?: SortOrder;
+    productId?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+    _count?: ProductImageCountOrderByAggregateInput;
+    _avg?: ProductImageAvgOrderByAggregateInput;
+    _max?: ProductImageMaxOrderByAggregateInput;
+    _min?: ProductImageMinOrderByAggregateInput;
+    _sum?: ProductImageSumOrderByAggregateInput;
+  };
+
+  export type ProductImageScalarWhereWithAggregatesInput = {
+    AND?: ProductImageScalarWhereWithAggregatesInput | ProductImageScalarWhereWithAggregatesInput[];
+    OR?: ProductImageScalarWhereWithAggregatesInput[];
+    NOT?: ProductImageScalarWhereWithAggregatesInput | ProductImageScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<"ProductImage"> | number;
+    url?: StringWithAggregatesFilter<"ProductImage"> | string;
+    alt?: StringNullableWithAggregatesFilter<"ProductImage"> | string | null;
+    isPrimary?: BoolWithAggregatesFilter<"ProductImage"> | boolean;
+    productId?: IntWithAggregatesFilter<"ProductImage"> | number;
+    createdAt?: DateTimeWithAggregatesFilter<"ProductImage"> | Date | string;
+    updatedAt?: DateTimeWithAggregatesFilter<"ProductImage"> | Date | string;
   };
 
   export type ProductVariantWhereInput = {
@@ -28846,19 +27318,8 @@ export namespace Prisma {
     productId?: IntFilter<"ProductVariant"> | number;
     name?: StringFilter<"ProductVariant"> | string;
     skuPrefix?: StringNullableFilter<"ProductVariant"> | string | null;
-    price?:
-      | DecimalFilter<"ProductVariant">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | DecimalNullableFilter<"ProductVariant">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null;
     attributes?: JsonNullableFilter<"ProductVariant">;
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string;
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string;
@@ -28891,19 +27352,8 @@ export namespace Prisma {
       productId?: IntFilter<"ProductVariant"> | number;
       name?: StringFilter<"ProductVariant"> | string;
       skuPrefix?: StringNullableFilter<"ProductVariant"> | string | null;
-      price?:
-        | DecimalFilter<"ProductVariant">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
-      compareAtPrice?:
-        | DecimalNullableFilter<"ProductVariant">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | null;
+      price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
+      compareAtPrice?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null;
       attributes?: JsonNullableFilter<"ProductVariant">;
       createdAt?: DateTimeFilter<"ProductVariant"> | Date | string;
       updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string;
@@ -28932,26 +27382,14 @@ export namespace Prisma {
   };
 
   export type ProductVariantScalarWhereWithAggregatesInput = {
-    AND?:
-      | ProductVariantScalarWhereWithAggregatesInput
-      | ProductVariantScalarWhereWithAggregatesInput[];
+    AND?: ProductVariantScalarWhereWithAggregatesInput | ProductVariantScalarWhereWithAggregatesInput[];
     OR?: ProductVariantScalarWhereWithAggregatesInput[];
-    NOT?:
-      | ProductVariantScalarWhereWithAggregatesInput
-      | ProductVariantScalarWhereWithAggregatesInput[];
+    NOT?: ProductVariantScalarWhereWithAggregatesInput | ProductVariantScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"ProductVariant"> | number;
     productId?: IntWithAggregatesFilter<"ProductVariant"> | number;
     name?: StringWithAggregatesFilter<"ProductVariant"> | string;
-    skuPrefix?:
-      | StringNullableWithAggregatesFilter<"ProductVariant">
-      | string
-      | null;
-    price?:
-      | DecimalWithAggregatesFilter<"ProductVariant">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    skuPrefix?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null;
+    price?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
     compareAtPrice?:
       | DecimalNullableWithAggregatesFilter<"ProductVariant">
       | Decimal
@@ -29007,10 +27445,7 @@ export namespace Prisma {
       metadata?: JsonNullableFilter<"Inventory">;
       createdAt?: DateTimeFilter<"Inventory"> | Date | string;
       updatedAt?: DateTimeFilter<"Inventory"> | Date | string;
-      variant?: XOR<
-        ProductVariantScalarRelationFilter,
-        ProductVariantWhereInput
-      >;
+      variant?: XOR<ProductVariantScalarRelationFilter, ProductVariantWhereInput>;
     },
     "id" | "sku"
   >;
@@ -29033,13 +27468,9 @@ export namespace Prisma {
   };
 
   export type InventoryScalarWhereWithAggregatesInput = {
-    AND?:
-      | InventoryScalarWhereWithAggregatesInput
-      | InventoryScalarWhereWithAggregatesInput[];
+    AND?: InventoryScalarWhereWithAggregatesInput | InventoryScalarWhereWithAggregatesInput[];
     OR?: InventoryScalarWhereWithAggregatesInput[];
-    NOT?:
-      | InventoryScalarWhereWithAggregatesInput
-      | InventoryScalarWhereWithAggregatesInput[];
+    NOT?: InventoryScalarWhereWithAggregatesInput | InventoryScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Inventory"> | number;
     sku?: StringWithAggregatesFilter<"Inventory"> | string;
     variantId?: IntWithAggregatesFilter<"Inventory"> | number;
@@ -29059,18 +27490,8 @@ export namespace Prisma {
     orderNumber?: StringFilter<"Order"> | string;
     userId?: IntNullableFilter<"Order"> | number | null;
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     total?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod;
@@ -29080,19 +27501,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Order"> | Date | string;
     updatedAt?: DateTimeFilter<"Order"> | Date | string;
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
-    paymentMeta?: XOR<
-      PaymentMetaNullableScalarRelationFilter,
-      PaymentMetaWhereInput
-    > | null;
+    paymentMeta?: XOR<PaymentMetaNullableScalarRelationFilter, PaymentMetaWhereInput> | null;
     items?: OrderItemListRelationFilter;
-    shippingAddress?: XOR<
-      AddressNullableScalarRelationFilter,
-      AddressWhereInput
-    > | null;
-    billingAddress?: XOR<
-      AddressNullableScalarRelationFilter,
-      AddressWhereInput
-    > | null;
+    shippingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
+    billingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
     coupon?: XOR<CouponNullableScalarRelationFilter, CouponWhereInput> | null;
     ReturnRequest?: ReturnRequestListRelationFilter;
     Refund?: RefundListRelationFilter;
@@ -29132,25 +27544,10 @@ export namespace Prisma {
       NOT?: OrderWhereInput | OrderWhereInput[];
       userId?: IntNullableFilter<"Order"> | number | null;
       status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
-      subtotal?:
-        | DecimalFilter<"Order">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
-      shipping?:
-        | DecimalFilter<"Order">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
+      subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+      shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
       tax?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
-      total?:
-        | DecimalFilter<"Order">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
+      total?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
       paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod;
       shippingAddressId?: IntNullableFilter<"Order"> | number | null;
       billingAddressId?: IntNullableFilter<"Order"> | number | null;
@@ -29158,19 +27555,10 @@ export namespace Prisma {
       createdAt?: DateTimeFilter<"Order"> | Date | string;
       updatedAt?: DateTimeFilter<"Order"> | Date | string;
       user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
-      paymentMeta?: XOR<
-        PaymentMetaNullableScalarRelationFilter,
-        PaymentMetaWhereInput
-      > | null;
+      paymentMeta?: XOR<PaymentMetaNullableScalarRelationFilter, PaymentMetaWhereInput> | null;
       items?: OrderItemListRelationFilter;
-      shippingAddress?: XOR<
-        AddressNullableScalarRelationFilter,
-        AddressWhereInput
-      > | null;
-      billingAddress?: XOR<
-        AddressNullableScalarRelationFilter,
-        AddressWhereInput
-      > | null;
+      shippingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
+      billingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
       coupon?: XOR<CouponNullableScalarRelationFilter, CouponWhereInput> | null;
       ReturnRequest?: ReturnRequestListRelationFilter;
       Refund?: RefundListRelationFilter;
@@ -29201,48 +27589,19 @@ export namespace Prisma {
   };
 
   export type OrderScalarWhereWithAggregatesInput = {
-    AND?:
-      | OrderScalarWhereWithAggregatesInput
-      | OrderScalarWhereWithAggregatesInput[];
+    AND?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[];
     OR?: OrderScalarWhereWithAggregatesInput[];
-    NOT?:
-      | OrderScalarWhereWithAggregatesInput
-      | OrderScalarWhereWithAggregatesInput[];
+    NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Order"> | number;
     orderNumber?: StringWithAggregatesFilter<"Order"> | string;
     userId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalWithAggregatesFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalWithAggregatesFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalWithAggregatesFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalWithAggregatesFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodWithAggregatesFilter<"Order">
-      | $Enums.PaymentMethod;
-    shippingAddressId?:
-      | IntNullableWithAggregatesFilter<"Order">
-      | number
-      | null;
+    subtotal?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+    total?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodWithAggregatesFilter<"Order"> | $Enums.PaymentMethod;
+    shippingAddressId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
     billingAddressId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
     couponId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string;
@@ -29259,30 +27618,14 @@ export namespace Prisma {
     variantId?: IntNullableFilter<"OrderItem"> | number | null;
     sku?: StringNullableFilter<"OrderItem"> | string | null;
     name?: StringFilter<"OrderItem"> | string;
-    price?:
-      | DecimalFilter<"OrderItem">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     quantity?: IntFilter<"OrderItem"> | number;
-    total?:
-      | DecimalFilter<"OrderItem">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     returned?: BoolFilter<"OrderItem"> | boolean;
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string;
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
-    product?: XOR<
-      ProductNullableScalarRelationFilter,
-      ProductWhereInput
-    > | null;
-    variant?: XOR<
-      ProductVariantNullableScalarRelationFilter,
-      ProductVariantWhereInput
-    > | null;
+    product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null;
+    variant?: XOR<ProductVariantNullableScalarRelationFilter, ProductVariantWhereInput> | null;
     ReturnRequest?: ReturnRequestListRelationFilter;
   };
 
@@ -29315,30 +27658,14 @@ export namespace Prisma {
       variantId?: IntNullableFilter<"OrderItem"> | number | null;
       sku?: StringNullableFilter<"OrderItem"> | string | null;
       name?: StringFilter<"OrderItem"> | string;
-      price?:
-        | DecimalFilter<"OrderItem">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
+      price?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
       quantity?: IntFilter<"OrderItem"> | number;
-      total?:
-        | DecimalFilter<"OrderItem">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
+      total?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
       returned?: BoolFilter<"OrderItem"> | boolean;
       createdAt?: DateTimeFilter<"OrderItem"> | Date | string;
       order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
-      product?: XOR<
-        ProductNullableScalarRelationFilter,
-        ProductWhereInput
-      > | null;
-      variant?: XOR<
-        ProductVariantNullableScalarRelationFilter,
-        ProductVariantWhereInput
-      > | null;
+      product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null;
+      variant?: XOR<ProductVariantNullableScalarRelationFilter, ProductVariantWhereInput> | null;
       ReturnRequest?: ReturnRequestListRelationFilter;
     },
     "id"
@@ -29364,32 +27691,18 @@ export namespace Prisma {
   };
 
   export type OrderItemScalarWhereWithAggregatesInput = {
-    AND?:
-      | OrderItemScalarWhereWithAggregatesInput
-      | OrderItemScalarWhereWithAggregatesInput[];
+    AND?: OrderItemScalarWhereWithAggregatesInput | OrderItemScalarWhereWithAggregatesInput[];
     OR?: OrderItemScalarWhereWithAggregatesInput[];
-    NOT?:
-      | OrderItemScalarWhereWithAggregatesInput
-      | OrderItemScalarWhereWithAggregatesInput[];
+    NOT?: OrderItemScalarWhereWithAggregatesInput | OrderItemScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"OrderItem"> | number;
     orderId?: IntWithAggregatesFilter<"OrderItem"> | number;
     productId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null;
     variantId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null;
     sku?: StringNullableWithAggregatesFilter<"OrderItem"> | string | null;
     name?: StringWithAggregatesFilter<"OrderItem"> | string;
-    price?:
-      | DecimalWithAggregatesFilter<"OrderItem">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalWithAggregatesFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     quantity?: IntWithAggregatesFilter<"OrderItem"> | number;
-    total?:
-      | DecimalWithAggregatesFilter<"OrderItem">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalWithAggregatesFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     returned?: BoolWithAggregatesFilter<"OrderItem"> | boolean;
     createdAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string;
   };
@@ -29401,13 +27714,7 @@ export namespace Prisma {
     id?: IntFilter<"Coupon"> | number;
     code?: StringFilter<"Coupon"> | string;
     type?: EnumCouponTypeFilter<"Coupon"> | $Enums.CouponType;
-    amount?:
-      | DecimalNullableFilter<"Coupon">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: DecimalNullableFilter<"Coupon"> | Decimal | DecimalJsLike | number | string | null;
     percent?: IntNullableFilter<"Coupon"> | number | null;
     description?: StringNullableFilter<"Coupon"> | string | null;
     startsAt?: DateTimeNullableFilter<"Coupon"> | Date | string | null;
@@ -29449,13 +27756,7 @@ export namespace Prisma {
       OR?: CouponWhereInput[];
       NOT?: CouponWhereInput | CouponWhereInput[];
       type?: EnumCouponTypeFilter<"Coupon"> | $Enums.CouponType;
-      amount?:
-        | DecimalNullableFilter<"Coupon">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | null;
+      amount?: DecimalNullableFilter<"Coupon"> | Decimal | DecimalJsLike | number | string | null;
       percent?: IntNullableFilter<"Coupon"> | number | null;
       description?: StringNullableFilter<"Coupon"> | string | null;
       startsAt?: DateTimeNullableFilter<"Coupon"> | Date | string | null;
@@ -29496,35 +27797,17 @@ export namespace Prisma {
   };
 
   export type CouponScalarWhereWithAggregatesInput = {
-    AND?:
-      | CouponScalarWhereWithAggregatesInput
-      | CouponScalarWhereWithAggregatesInput[];
+    AND?: CouponScalarWhereWithAggregatesInput | CouponScalarWhereWithAggregatesInput[];
     OR?: CouponScalarWhereWithAggregatesInput[];
-    NOT?:
-      | CouponScalarWhereWithAggregatesInput
-      | CouponScalarWhereWithAggregatesInput[];
+    NOT?: CouponScalarWhereWithAggregatesInput | CouponScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Coupon"> | number;
     code?: StringWithAggregatesFilter<"Coupon"> | string;
     type?: EnumCouponTypeWithAggregatesFilter<"Coupon"> | $Enums.CouponType;
-    amount?:
-      | DecimalNullableWithAggregatesFilter<"Coupon">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: DecimalNullableWithAggregatesFilter<"Coupon"> | Decimal | DecimalJsLike | number | string | null;
     percent?: IntNullableWithAggregatesFilter<"Coupon"> | number | null;
     description?: StringNullableWithAggregatesFilter<"Coupon"> | string | null;
-    startsAt?:
-      | DateTimeNullableWithAggregatesFilter<"Coupon">
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | DateTimeNullableWithAggregatesFilter<"Coupon">
-      | Date
-      | string
-      | null;
+    startsAt?: DateTimeNullableWithAggregatesFilter<"Coupon"> | Date | string | null;
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"Coupon"> | Date | string | null;
     usageLimit?: IntNullableWithAggregatesFilter<"Coupon"> | number | null;
     usagePerUser?: IntNullableWithAggregatesFilter<"Coupon"> | number | null;
     timesUsed?: IntWithAggregatesFilter<"Coupon"> | number;
@@ -29604,13 +27887,9 @@ export namespace Prisma {
   };
 
   export type ReviewScalarWhereWithAggregatesInput = {
-    AND?:
-      | ReviewScalarWhereWithAggregatesInput
-      | ReviewScalarWhereWithAggregatesInput[];
+    AND?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[];
     OR?: ReviewScalarWhereWithAggregatesInput[];
-    NOT?:
-      | ReviewScalarWhereWithAggregatesInput
-      | ReviewScalarWhereWithAggregatesInput[];
+    NOT?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Review"> | number;
     userId?: IntNullableWithAggregatesFilter<"Review"> | number | null;
     productId?: IntWithAggregatesFilter<"Review"> | number;
@@ -29671,13 +27950,9 @@ export namespace Prisma {
   };
 
   export type WishlistScalarWhereWithAggregatesInput = {
-    AND?:
-      | WishlistScalarWhereWithAggregatesInput
-      | WishlistScalarWhereWithAggregatesInput[];
+    AND?: WishlistScalarWhereWithAggregatesInput | WishlistScalarWhereWithAggregatesInput[];
     OR?: WishlistScalarWhereWithAggregatesInput[];
-    NOT?:
-      | WishlistScalarWhereWithAggregatesInput
-      | WishlistScalarWhereWithAggregatesInput[];
+    NOT?: WishlistScalarWhereWithAggregatesInput | WishlistScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Wishlist"> | number;
     userId?: IntWithAggregatesFilter<"Wishlist"> | number;
     createdAt?: DateTimeWithAggregatesFilter<"Wishlist"> | Date | string;
@@ -29738,13 +28013,9 @@ export namespace Prisma {
   };
 
   export type WishlistItemScalarWhereWithAggregatesInput = {
-    AND?:
-      | WishlistItemScalarWhereWithAggregatesInput
-      | WishlistItemScalarWhereWithAggregatesInput[];
+    AND?: WishlistItemScalarWhereWithAggregatesInput | WishlistItemScalarWhereWithAggregatesInput[];
     OR?: WishlistItemScalarWhereWithAggregatesInput[];
-    NOT?:
-      | WishlistItemScalarWhereWithAggregatesInput
-      | WishlistItemScalarWhereWithAggregatesInput[];
+    NOT?: WishlistItemScalarWhereWithAggregatesInput | WishlistItemScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"WishlistItem"> | number;
     wishlistId?: IntWithAggregatesFilter<"WishlistItem"> | number;
     productId?: IntWithAggregatesFilter<"WishlistItem"> | number;
@@ -29848,13 +28119,9 @@ export namespace Prisma {
   };
 
   export type AddressScalarWhereWithAggregatesInput = {
-    AND?:
-      | AddressScalarWhereWithAggregatesInput
-      | AddressScalarWhereWithAggregatesInput[];
+    AND?: AddressScalarWhereWithAggregatesInput | AddressScalarWhereWithAggregatesInput[];
     OR?: AddressScalarWhereWithAggregatesInput[];
-    NOT?:
-      | AddressScalarWhereWithAggregatesInput
-      | AddressScalarWhereWithAggregatesInput[];
+    NOT?: AddressScalarWhereWithAggregatesInput | AddressScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Address"> | number;
     userId?: IntNullableWithAggregatesFilter<"Address"> | number | null;
     fullName?: StringWithAggregatesFilter<"Address"> | string;
@@ -29938,13 +28205,9 @@ export namespace Prisma {
   };
 
   export type AuditLogScalarWhereWithAggregatesInput = {
-    AND?:
-      | AuditLogScalarWhereWithAggregatesInput
-      | AuditLogScalarWhereWithAggregatesInput[];
+    AND?: AuditLogScalarWhereWithAggregatesInput | AuditLogScalarWhereWithAggregatesInput[];
     OR?: AuditLogScalarWhereWithAggregatesInput[];
-    NOT?:
-      | AuditLogScalarWhereWithAggregatesInput
-      | AuditLogScalarWhereWithAggregatesInput[];
+    NOT?: AuditLogScalarWhereWithAggregatesInput | AuditLogScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"AuditLog"> | number;
     actorId?: IntNullableWithAggregatesFilter<"AuditLog"> | number | null;
     action?: StringWithAggregatesFilter<"AuditLog"> | string;
@@ -29967,11 +28230,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFilter<"ReturnRequest"> | $Enums.ReturnStatus;
     evidence?: JsonNullableFilter<"ReturnRequest">;
     requestedAt?: DateTimeFilter<"ReturnRequest"> | Date | string;
-    processedAt?:
-      | DateTimeNullableFilter<"ReturnRequest">
-      | Date
-      | string
-      | null;
+    processedAt?: DateTimeNullableFilter<"ReturnRequest"> | Date | string | null;
     metadata?: JsonNullableFilter<"ReturnRequest">;
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
     orderItem?: XOR<OrderItemScalarRelationFilter, OrderItemWhereInput>;
@@ -30005,11 +28264,7 @@ export namespace Prisma {
       status?: EnumReturnStatusFilter<"ReturnRequest"> | $Enums.ReturnStatus;
       evidence?: JsonNullableFilter<"ReturnRequest">;
       requestedAt?: DateTimeFilter<"ReturnRequest"> | Date | string;
-      processedAt?:
-        | DateTimeNullableFilter<"ReturnRequest">
-        | Date
-        | string
-        | null;
+      processedAt?: DateTimeNullableFilter<"ReturnRequest"> | Date | string | null;
       metadata?: JsonNullableFilter<"ReturnRequest">;
       order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
       orderItem?: XOR<OrderItemScalarRelationFilter, OrderItemWhereInput>;
@@ -30036,27 +28291,17 @@ export namespace Prisma {
   };
 
   export type ReturnRequestScalarWhereWithAggregatesInput = {
-    AND?:
-      | ReturnRequestScalarWhereWithAggregatesInput
-      | ReturnRequestScalarWhereWithAggregatesInput[];
+    AND?: ReturnRequestScalarWhereWithAggregatesInput | ReturnRequestScalarWhereWithAggregatesInput[];
     OR?: ReturnRequestScalarWhereWithAggregatesInput[];
-    NOT?:
-      | ReturnRequestScalarWhereWithAggregatesInput
-      | ReturnRequestScalarWhereWithAggregatesInput[];
+    NOT?: ReturnRequestScalarWhereWithAggregatesInput | ReturnRequestScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"ReturnRequest"> | number;
     orderId?: IntWithAggregatesFilter<"ReturnRequest"> | number;
     orderItemId?: IntWithAggregatesFilter<"ReturnRequest"> | number;
     reason?: StringWithAggregatesFilter<"ReturnRequest"> | string;
-    status?:
-      | EnumReturnStatusWithAggregatesFilter<"ReturnRequest">
-      | $Enums.ReturnStatus;
+    status?: EnumReturnStatusWithAggregatesFilter<"ReturnRequest"> | $Enums.ReturnStatus;
     evidence?: JsonNullableWithAggregatesFilter<"ReturnRequest">;
     requestedAt?: DateTimeWithAggregatesFilter<"ReturnRequest"> | Date | string;
-    processedAt?:
-      | DateTimeNullableWithAggregatesFilter<"ReturnRequest">
-      | Date
-      | string
-      | null;
+    processedAt?: DateTimeNullableWithAggregatesFilter<"ReturnRequest"> | Date | string | null;
     metadata?: JsonNullableWithAggregatesFilter<"ReturnRequest">;
   };
 
@@ -30067,12 +28312,7 @@ export namespace Prisma {
     id?: IntFilter<"Refund"> | number;
     orderId?: IntFilter<"Refund"> | number;
     returnRequestId?: IntNullableFilter<"Refund"> | number | null;
-    amount?:
-      | DecimalFilter<"Refund">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFilter<"Refund"> | Decimal | DecimalJsLike | number | string;
     method?: StringFilter<"Refund"> | string;
     status?: EnumRefundStatusFilter<"Refund"> | $Enums.RefundStatus;
     providerRef?: StringNullableFilter<"Refund"> | string | null;
@@ -30080,10 +28320,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Refund"> | Date | string;
     processedAt?: DateTimeNullableFilter<"Refund"> | Date | string | null;
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
-    returnRequest?: XOR<
-      ReturnRequestNullableScalarRelationFilter,
-      ReturnRequestWhereInput
-    > | null;
+    returnRequest?: XOR<ReturnRequestNullableScalarRelationFilter, ReturnRequestWhereInput> | null;
   };
 
   export type RefundOrderByWithRelationInput = {
@@ -30109,12 +28346,7 @@ export namespace Prisma {
       OR?: RefundWhereInput[];
       NOT?: RefundWhereInput | RefundWhereInput[];
       orderId?: IntFilter<"Refund"> | number;
-      amount?:
-        | DecimalFilter<"Refund">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
+      amount?: DecimalFilter<"Refund"> | Decimal | DecimalJsLike | number | string;
       method?: StringFilter<"Refund"> | string;
       status?: EnumRefundStatusFilter<"Refund"> | $Enums.RefundStatus;
       providerRef?: StringNullableFilter<"Refund"> | string | null;
@@ -30122,10 +28354,7 @@ export namespace Prisma {
       createdAt?: DateTimeFilter<"Refund"> | Date | string;
       processedAt?: DateTimeNullableFilter<"Refund"> | Date | string | null;
       order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
-      returnRequest?: XOR<
-        ReturnRequestNullableScalarRelationFilter,
-        ReturnRequestWhereInput
-      > | null;
+      returnRequest?: XOR<ReturnRequestNullableScalarRelationFilter, ReturnRequestWhereInput> | null;
     },
     "id" | "returnRequestId"
   >;
@@ -30149,34 +28378,19 @@ export namespace Prisma {
   };
 
   export type RefundScalarWhereWithAggregatesInput = {
-    AND?:
-      | RefundScalarWhereWithAggregatesInput
-      | RefundScalarWhereWithAggregatesInput[];
+    AND?: RefundScalarWhereWithAggregatesInput | RefundScalarWhereWithAggregatesInput[];
     OR?: RefundScalarWhereWithAggregatesInput[];
-    NOT?:
-      | RefundScalarWhereWithAggregatesInput
-      | RefundScalarWhereWithAggregatesInput[];
+    NOT?: RefundScalarWhereWithAggregatesInput | RefundScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"Refund"> | number;
     orderId?: IntWithAggregatesFilter<"Refund"> | number;
     returnRequestId?: IntNullableWithAggregatesFilter<"Refund"> | number | null;
-    amount?:
-      | DecimalWithAggregatesFilter<"Refund">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalWithAggregatesFilter<"Refund"> | Decimal | DecimalJsLike | number | string;
     method?: StringWithAggregatesFilter<"Refund"> | string;
-    status?:
-      | EnumRefundStatusWithAggregatesFilter<"Refund">
-      | $Enums.RefundStatus;
+    status?: EnumRefundStatusWithAggregatesFilter<"Refund"> | $Enums.RefundStatus;
     providerRef?: StringNullableWithAggregatesFilter<"Refund"> | string | null;
     metadata?: JsonNullableWithAggregatesFilter<"Refund">;
     createdAt?: DateTimeWithAggregatesFilter<"Refund"> | Date | string;
-    processedAt?:
-      | DateTimeNullableWithAggregatesFilter<"Refund">
-      | Date
-      | string
-      | null;
+    processedAt?: DateTimeNullableWithAggregatesFilter<"Refund"> | Date | string | null;
   };
 
   export type PaymentMetaWhereInput = {
@@ -30188,12 +28402,7 @@ export namespace Prisma {
     provider?: StringFilter<"PaymentMeta"> | string;
     transactionId?: StringNullableFilter<"PaymentMeta"> | string | null;
     status?: StringFilter<"PaymentMeta"> | string;
-    amount?:
-      | DecimalFilter<"PaymentMeta">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFilter<"PaymentMeta"> | Decimal | DecimalJsLike | number | string;
     raw?: JsonNullableFilter<"PaymentMeta">;
     capturedAt?: DateTimeNullableFilter<"PaymentMeta"> | Date | string | null;
     createdAt?: DateTimeFilter<"PaymentMeta"> | Date | string;
@@ -30225,12 +28434,7 @@ export namespace Prisma {
       provider?: StringFilter<"PaymentMeta"> | string;
       transactionId?: StringNullableFilter<"PaymentMeta"> | string | null;
       status?: StringFilter<"PaymentMeta"> | string;
-      amount?:
-        | DecimalFilter<"PaymentMeta">
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string;
+      amount?: DecimalFilter<"PaymentMeta"> | Decimal | DecimalJsLike | number | string;
       raw?: JsonNullableFilter<"PaymentMeta">;
       capturedAt?: DateTimeNullableFilter<"PaymentMeta"> | Date | string | null;
       createdAt?: DateTimeFilter<"PaymentMeta"> | Date | string;
@@ -30259,33 +28463,17 @@ export namespace Prisma {
   };
 
   export type PaymentMetaScalarWhereWithAggregatesInput = {
-    AND?:
-      | PaymentMetaScalarWhereWithAggregatesInput
-      | PaymentMetaScalarWhereWithAggregatesInput[];
+    AND?: PaymentMetaScalarWhereWithAggregatesInput | PaymentMetaScalarWhereWithAggregatesInput[];
     OR?: PaymentMetaScalarWhereWithAggregatesInput[];
-    NOT?:
-      | PaymentMetaScalarWhereWithAggregatesInput
-      | PaymentMetaScalarWhereWithAggregatesInput[];
+    NOT?: PaymentMetaScalarWhereWithAggregatesInput | PaymentMetaScalarWhereWithAggregatesInput[];
     id?: IntWithAggregatesFilter<"PaymentMeta"> | number;
     orderId?: IntWithAggregatesFilter<"PaymentMeta"> | number;
     provider?: StringWithAggregatesFilter<"PaymentMeta"> | string;
-    transactionId?:
-      | StringNullableWithAggregatesFilter<"PaymentMeta">
-      | string
-      | null;
+    transactionId?: StringNullableWithAggregatesFilter<"PaymentMeta"> | string | null;
     status?: StringWithAggregatesFilter<"PaymentMeta"> | string;
-    amount?:
-      | DecimalWithAggregatesFilter<"PaymentMeta">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalWithAggregatesFilter<"PaymentMeta"> | Decimal | DecimalJsLike | number | string;
     raw?: JsonNullableWithAggregatesFilter<"PaymentMeta">;
-    capturedAt?:
-      | DateTimeNullableWithAggregatesFilter<"PaymentMeta">
-      | Date
-      | string
-      | null;
+    capturedAt?: DateTimeNullableWithAggregatesFilter<"PaymentMeta"> | Date | string | null;
     createdAt?: DateTimeWithAggregatesFilter<"PaymentMeta"> | Date | string;
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentMeta"> | Date | string;
   };
@@ -30330,11 +28518,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
     addresses?: AddressUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
@@ -30351,11 +28535,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
@@ -30382,11 +28562,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type UserUncheckedUpdateManyInput = {
@@ -30397,11 +28573,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type RoleCreateInput = {
@@ -30485,6 +28657,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageCreateNestedManyWithoutProductInput;
     variants?: ProductVariantCreateNestedManyWithoutProductInput;
     reviews?: ReviewCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemCreateNestedManyWithoutProductInput;
@@ -30501,6 +28674,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput;
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput;
     reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutProductInput;
@@ -30516,6 +28690,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUpdateManyWithoutProductNestedInput;
@@ -30532,6 +28707,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUncheckedUpdateManyWithoutProductNestedInput;
@@ -30573,6 +28749,72 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
+  export type ProductImageCreateInput = {
+    url: string;
+    alt?: string | null;
+    isPrimary?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    product: ProductCreateNestedOneWithoutImagesInput;
+  };
+
+  export type ProductImageUncheckedCreateInput = {
+    id?: number;
+    url: string;
+    alt?: string | null;
+    isPrimary?: boolean;
+    productId: number;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type ProductImageUpdateInput = {
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    product?: ProductUpdateOneRequiredWithoutImagesNestedInput;
+  };
+
+  export type ProductImageUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    productId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type ProductImageCreateManyInput = {
+    id?: number;
+    url: string;
+    alt?: string | null;
+    isPrimary?: boolean;
+    productId: number;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type ProductImageUpdateManyMutationInput = {
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type ProductImageUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    productId?: IntFieldUpdateOperationsInput | number;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
   export type ProductVariantCreateInput = {
     name: string;
     skuPrefix?: string | null;
@@ -30603,19 +28845,8 @@ export namespace Prisma {
   export type ProductVariantUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -30629,19 +28860,8 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -30664,19 +28884,8 @@ export namespace Prisma {
   export type ProductVariantUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -30687,19 +28896,8 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -30829,33 +29027,11 @@ export namespace Prisma {
   export type OrderUpdateInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -30873,33 +29049,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -30931,33 +29085,11 @@ export namespace Prisma {
   export type OrderUpdateManyMutationInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -30967,33 +29099,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -31033,19 +29143,9 @@ export namespace Prisma {
   export type OrderItemUpdateInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput;
@@ -31061,19 +29161,9 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderItemNestedInput;
@@ -31096,19 +29186,9 @@ export namespace Prisma {
   export type OrderItemUpdateManyMutationInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -31120,19 +29200,9 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -31177,25 +29247,11 @@ export namespace Prisma {
   export type CouponUpdateInput = {
     code?: StringFieldUpdateOperationsInput | string;
     type?: EnumCouponTypeFieldUpdateOperationsInput | $Enums.CouponType;
-    amount?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     percent?: NullableIntFieldUpdateOperationsInput | number | null;
     description?: NullableStringFieldUpdateOperationsInput | string | null;
-    startsAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     usageLimit?: NullableIntFieldUpdateOperationsInput | number | null;
     usagePerUser?: NullableIntFieldUpdateOperationsInput | number | null;
     timesUsed?: IntFieldUpdateOperationsInput | number;
@@ -31210,25 +29266,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     code?: StringFieldUpdateOperationsInput | string;
     type?: EnumCouponTypeFieldUpdateOperationsInput | $Enums.CouponType;
-    amount?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     percent?: NullableIntFieldUpdateOperationsInput | number | null;
     description?: NullableStringFieldUpdateOperationsInput | string | null;
-    startsAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     usageLimit?: NullableIntFieldUpdateOperationsInput | number | null;
     usagePerUser?: NullableIntFieldUpdateOperationsInput | number | null;
     timesUsed?: IntFieldUpdateOperationsInput | number;
@@ -31260,25 +29302,11 @@ export namespace Prisma {
   export type CouponUpdateManyMutationInput = {
     code?: StringFieldUpdateOperationsInput | string;
     type?: EnumCouponTypeFieldUpdateOperationsInput | $Enums.CouponType;
-    amount?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     percent?: NullableIntFieldUpdateOperationsInput | number | null;
     description?: NullableStringFieldUpdateOperationsInput | string | null;
-    startsAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     usageLimit?: NullableIntFieldUpdateOperationsInput | number | null;
     usagePerUser?: NullableIntFieldUpdateOperationsInput | number | null;
     timesUsed?: IntFieldUpdateOperationsInput | number;
@@ -31292,25 +29320,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     code?: StringFieldUpdateOperationsInput | string;
     type?: EnumCouponTypeFieldUpdateOperationsInput | $Enums.CouponType;
-    amount?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     percent?: NullableIntFieldUpdateOperationsInput | number | null;
     description?: NullableStringFieldUpdateOperationsInput | string | null;
-    startsAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     usageLimit?: NullableIntFieldUpdateOperationsInput | number | null;
     usagePerUser?: NullableIntFieldUpdateOperationsInput | number | null;
     timesUsed?: IntFieldUpdateOperationsInput | number;
@@ -31739,11 +29753,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     order?: OrderUpdateOneRequiredWithoutReturnRequestNestedInput;
     orderItem?: OrderItemUpdateOneRequiredWithoutReturnRequestNestedInput;
@@ -31758,11 +29768,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     refund?: RefundUncheckedUpdateOneWithoutReturnRequestNestedInput;
   };
@@ -31784,11 +29790,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
   };
 
@@ -31800,11 +29802,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
   };
 
@@ -31834,22 +29832,13 @@ export namespace Prisma {
   };
 
   export type RefundUpdateInput = {
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     order?: OrderUpdateOneRequiredWithoutRefundNestedInput;
     returnRequest?: ReturnRequestUpdateOneWithoutRefundNestedInput;
   };
@@ -31858,22 +29847,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderId?: IntFieldUpdateOperationsInput | number;
     returnRequestId?: NullableIntFieldUpdateOperationsInput | number | null;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type RefundCreateManyInput = {
@@ -31890,44 +29870,26 @@ export namespace Prisma {
   };
 
   export type RefundUpdateManyMutationInput = {
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type RefundUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     orderId?: IntFieldUpdateOperationsInput | number;
     returnRequestId?: NullableIntFieldUpdateOperationsInput | number | null;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type PaymentMetaCreateInput = {
@@ -31959,18 +29921,9 @@ export namespace Prisma {
     provider?: StringFieldUpdateOperationsInput | string;
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: StringFieldUpdateOperationsInput | string;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     order?: OrderUpdateOneRequiredWithoutPaymentMetaNestedInput;
@@ -31982,18 +29935,9 @@ export namespace Prisma {
     provider?: StringFieldUpdateOperationsInput | string;
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: StringFieldUpdateOperationsInput | string;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -32015,18 +29959,9 @@ export namespace Prisma {
     provider?: StringFieldUpdateOperationsInput | string;
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: StringFieldUpdateOperationsInput | string;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -32037,18 +29972,9 @@ export namespace Prisma {
     provider?: StringFieldUpdateOperationsInput | string;
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: StringFieldUpdateOperationsInput | string;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -32263,10 +30189,7 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
     mode?: QueryMode;
-    not?:
-      | NestedStringNullableWithAggregatesFilter<$PrismaModel>
-      | string
-      | null;
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null;
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedStringNullableFilter<$PrismaModel>;
     _max?: NestedStringNullableFilter<$PrismaModel>;
@@ -32294,11 +30217,7 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDateTimeNullableWithAggregatesFilter<$PrismaModel>
-      | Date
-      | string
-      | null;
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null;
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedDateTimeNullableFilter<$PrismaModel>;
     _max?: NestedDateTimeNullableFilter<$PrismaModel>;
@@ -32373,15 +30292,9 @@ export namespace Prisma {
   };
 
   export type EnumProductStatusFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.ProductStatus
-      | EnumProductStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus;
   };
   export type JsonNullableFilter<$PrismaModel = never> =
@@ -32392,15 +30305,10 @@ export namespace Prisma {
         >,
         Required<JsonNullableFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<
-        Omit<Required<JsonNullableFilterBase<$PrismaModel>>, "path">
-      >;
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, "path">>;
 
   export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter;
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter;
     path?: string[];
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>;
     string_contains?: string | StringFieldRefInput<$PrismaModel>;
@@ -32413,10 +30321,13 @@ export namespace Prisma {
     lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
-    not?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter;
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter;
+  };
+
+  export type ProductImageListRelationFilter = {
+    every?: ProductImageWhereInput;
+    some?: ProductImageWhereInput;
+    none?: ProductImageWhereInput;
   };
 
   export type ProductVariantListRelationFilter = {
@@ -32435,6 +30346,10 @@ export namespace Prisma {
     every?: WishlistItemWhereInput;
     some?: WishlistItemWhereInput;
     none?: WishlistItemWhereInput;
+  };
+
+  export type ProductImageOrderByRelationAggregateInput = {
+    _count?: SortOrder;
   };
 
   export type ProductVariantOrderByRelationAggregateInput = {
@@ -32492,18 +30407,10 @@ export namespace Prisma {
   };
 
   export type EnumProductStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.ProductStatus
-      | EnumProductStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumProductStatusWithAggregatesFilter<$PrismaModel>
-      | $Enums.ProductStatus;
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumProductStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductStatus;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumProductStatusFilter<$PrismaModel>;
     _max?: NestedEnumProductStatusFilter<$PrismaModel>;
@@ -32512,25 +30419,14 @@ export namespace Prisma {
     | PatchUndefined<
         Either<
           Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>,
-          Exclude<
-            keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>,
-            "path"
-          >
+          Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, "path">
         >,
         Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<
-        Omit<
-          Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>,
-          "path"
-        >
-      >;
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, "path">>;
 
   export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter;
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter;
     path?: string[];
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>;
     string_contains?: string | StringFieldRefInput<$PrismaModel>;
@@ -32543,124 +30439,90 @@ export namespace Prisma {
     lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
-    not?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter;
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter;
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedJsonNullableFilter<$PrismaModel>;
     _max?: NestedJsonNullableFilter<$PrismaModel>;
   };
 
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-  };
-
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>
-      | null;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>
-      | null;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>
-      | null;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalNullableFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolFilter<$PrismaModel> | boolean;
   };
 
   export type ProductScalarRelationFilter = {
     is?: ProductWhereInput;
     isNot?: ProductWhereInput;
+  };
+
+  export type ProductImageCountOrderByAggregateInput = {
+    id?: SortOrder;
+    url?: SortOrder;
+    alt?: SortOrder;
+    isPrimary?: SortOrder;
+    productId?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
+
+  export type ProductImageAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    productId?: SortOrder;
+  };
+
+  export type ProductImageMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    url?: SortOrder;
+    alt?: SortOrder;
+    isPrimary?: SortOrder;
+    productId?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
+
+  export type ProductImageMinOrderByAggregateInput = {
+    id?: SortOrder;
+    url?: SortOrder;
+    alt?: SortOrder;
+    isPrimary?: SortOrder;
+    productId?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
+  };
+
+  export type ProductImageSumOrderByAggregateInput = {
+    id?: SortOrder;
+    productId?: SortOrder;
+  };
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedBoolFilter<$PrismaModel>;
+    _max?: NestedBoolFilter<$PrismaModel>;
+  };
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string;
+  };
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null;
   };
 
   export type InventoryListRelationFilter = {
@@ -32722,54 +30584,14 @@ export namespace Prisma {
   };
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalWithAggregatesFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string;
     _count?: NestedIntFilter<$PrismaModel>;
     _avg?: NestedDecimalFilter<$PrismaModel>;
     _sum?: NestedDecimalFilter<$PrismaModel>;
@@ -32778,58 +30600,14 @@ export namespace Prisma {
   };
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>
-      | null;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>
-      | null;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>
-      | null;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalNullableWithAggregatesFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null;
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _avg?: NestedDecimalNullableFilter<$PrismaModel>;
     _sum?: NestedDecimalNullableFilter<$PrismaModel>;
@@ -32904,22 +30682,14 @@ export namespace Prisma {
   export type EnumOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>;
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.OrderStatus[]
-      | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus;
   };
 
   export type EnumPaymentMethodFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.PaymentMethod
-      | EnumPaymentMethodFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>;
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
     not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod;
   };
 
@@ -33057,38 +30827,21 @@ export namespace Prisma {
   export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>;
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.OrderStatus[]
-      | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel>
-      | $Enums.OrderStatus;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>;
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>;
   };
 
   export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.PaymentMethod
-      | EnumPaymentMethodFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel>
-      | $Enums.PaymentMethod;
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>;
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumPaymentMethodFilter<$PrismaModel>;
     _max?: NestedEnumPaymentMethodFilter<$PrismaModel>;
-  };
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
-    not?: NestedBoolFilter<$PrismaModel> | boolean;
   };
 
   export type OrderScalarRelationFilter = {
@@ -33166,14 +30919,6 @@ export namespace Prisma {
     price?: SortOrder;
     quantity?: SortOrder;
     total?: SortOrder;
-  };
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
-    _count?: NestedIntFilter<$PrismaModel>;
-    _min?: NestedBoolFilter<$PrismaModel>;
-    _max?: NestedBoolFilter<$PrismaModel>;
   };
 
   export type EnumCouponTypeFilter<$PrismaModel = never> = {
@@ -33257,9 +31002,7 @@ export namespace Prisma {
     equals?: $Enums.CouponType | EnumCouponTypeFieldRefInput<$PrismaModel>;
     in?: $Enums.CouponType[] | ListEnumCouponTypeFieldRefInput<$PrismaModel>;
     notIn?: $Enums.CouponType[] | ListEnumCouponTypeFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumCouponTypeWithAggregatesFilter<$PrismaModel>
-      | $Enums.CouponType;
+    not?: NestedEnumCouponTypeWithAggregatesFilter<$PrismaModel> | $Enums.CouponType;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumCouponTypeFilter<$PrismaModel>;
     _max?: NestedEnumCouponTypeFilter<$PrismaModel>;
@@ -33508,12 +31251,8 @@ export namespace Prisma {
 
   export type EnumReturnStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ReturnStatus | EnumReturnStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ReturnStatus[]
-      | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ReturnStatus[]
-      | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumReturnStatusFilter<$PrismaModel> | $Enums.ReturnStatus;
   };
 
@@ -33573,15 +31312,9 @@ export namespace Prisma {
 
   export type EnumReturnStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ReturnStatus | EnumReturnStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ReturnStatus[]
-      | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ReturnStatus[]
-      | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumReturnStatusWithAggregatesFilter<$PrismaModel>
-      | $Enums.ReturnStatus;
+    in?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumReturnStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReturnStatus;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumReturnStatusFilter<$PrismaModel>;
     _max?: NestedEnumReturnStatusFilter<$PrismaModel>;
@@ -33589,12 +31322,8 @@ export namespace Prisma {
 
   export type EnumRefundStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.RefundStatus | EnumRefundStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.RefundStatus[]
-      | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.RefundStatus[]
-      | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumRefundStatusFilter<$PrismaModel> | $Enums.RefundStatus;
   };
 
@@ -33656,15 +31385,9 @@ export namespace Prisma {
 
   export type EnumRefundStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.RefundStatus | EnumRefundStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.RefundStatus[]
-      | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.RefundStatus[]
-      | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumRefundStatusWithAggregatesFilter<$PrismaModel>
-      | $Enums.RefundStatus;
+    in?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumRefundStatusWithAggregatesFilter<$PrismaModel> | $Enums.RefundStatus;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumRefundStatusFilter<$PrismaModel>;
     _max?: NestedEnumRefundStatusFilter<$PrismaModel>;
@@ -33721,39 +31444,26 @@ export namespace Prisma {
 
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutUserInput,
-          UserRoleUncheckedCreateWithoutUserInput
-        >
+      | XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
       | UserRoleCreateWithoutUserInput[]
       | UserRoleUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutUserInput
-      | UserRoleCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[];
     createMany?: UserRoleCreateManyUserInputEnvelope;
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
   };
 
   export type AddressCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<
-          AddressCreateWithoutUserInput,
-          AddressUncheckedCreateWithoutUserInput
-        >
+      | XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>
       | AddressCreateWithoutUserInput[]
       | AddressUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | AddressCreateOrConnectWithoutUserInput
-      | AddressCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: AddressCreateOrConnectWithoutUserInput | AddressCreateOrConnectWithoutUserInput[];
     createMany?: AddressCreateManyUserInputEnvelope;
     connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
   };
 
   export type WishlistCreateNestedOneWithoutUserInput = {
-    create?: XOR<
-      WishlistCreateWithoutUserInput,
-      WishlistUncheckedCreateWithoutUserInput
-    >;
+    create?: XOR<WishlistCreateWithoutUserInput, WishlistUncheckedCreateWithoutUserInput>;
     connectOrCreate?: WishlistCreateOrConnectWithoutUserInput;
     connect?: WishlistWhereUniqueInput;
   };
@@ -33763,9 +31473,7 @@ export namespace Prisma {
       | XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
       | ReviewCreateWithoutUserInput[]
       | ReviewUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutUserInput
-      | ReviewCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[];
     createMany?: ReviewCreateManyUserInputEnvelope;
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
   };
@@ -33775,63 +31483,43 @@ export namespace Prisma {
       | XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
       | OrderCreateWithoutUserInput[]
       | OrderUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutUserInput
-      | OrderCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[];
     createMany?: OrderCreateManyUserInputEnvelope;
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
   };
 
   export type AuditLogCreateNestedManyWithoutActorInput = {
     create?:
-      | XOR<
-          AuditLogCreateWithoutActorInput,
-          AuditLogUncheckedCreateWithoutActorInput
-        >
+      | XOR<AuditLogCreateWithoutActorInput, AuditLogUncheckedCreateWithoutActorInput>
       | AuditLogCreateWithoutActorInput[]
       | AuditLogUncheckedCreateWithoutActorInput[];
-    connectOrCreate?:
-      | AuditLogCreateOrConnectWithoutActorInput
-      | AuditLogCreateOrConnectWithoutActorInput[];
+    connectOrCreate?: AuditLogCreateOrConnectWithoutActorInput | AuditLogCreateOrConnectWithoutActorInput[];
     createMany?: AuditLogCreateManyActorInputEnvelope;
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
   };
 
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutUserInput,
-          UserRoleUncheckedCreateWithoutUserInput
-        >
+      | XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
       | UserRoleCreateWithoutUserInput[]
       | UserRoleUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutUserInput
-      | UserRoleCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[];
     createMany?: UserRoleCreateManyUserInputEnvelope;
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
   };
 
   export type AddressUncheckedCreateNestedManyWithoutUserInput = {
     create?:
-      | XOR<
-          AddressCreateWithoutUserInput,
-          AddressUncheckedCreateWithoutUserInput
-        >
+      | XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>
       | AddressCreateWithoutUserInput[]
       | AddressUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | AddressCreateOrConnectWithoutUserInput
-      | AddressCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: AddressCreateOrConnectWithoutUserInput | AddressCreateOrConnectWithoutUserInput[];
     createMany?: AddressCreateManyUserInputEnvelope;
     connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
   };
 
   export type WishlistUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<
-      WishlistCreateWithoutUserInput,
-      WishlistUncheckedCreateWithoutUserInput
-    >;
+    create?: XOR<WishlistCreateWithoutUserInput, WishlistUncheckedCreateWithoutUserInput>;
     connectOrCreate?: WishlistCreateOrConnectWithoutUserInput;
     connect?: WishlistWhereUniqueInput;
   };
@@ -33841,9 +31529,7 @@ export namespace Prisma {
       | XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
       | ReviewCreateWithoutUserInput[]
       | ReviewUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutUserInput
-      | ReviewCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[];
     createMany?: ReviewCreateManyUserInputEnvelope;
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
   };
@@ -33853,24 +31539,17 @@ export namespace Prisma {
       | XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
       | OrderCreateWithoutUserInput[]
       | OrderUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutUserInput
-      | OrderCreateOrConnectWithoutUserInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[];
     createMany?: OrderCreateManyUserInputEnvelope;
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
   };
 
   export type AuditLogUncheckedCreateNestedManyWithoutActorInput = {
     create?:
-      | XOR<
-          AuditLogCreateWithoutActorInput,
-          AuditLogUncheckedCreateWithoutActorInput
-        >
+      | XOR<AuditLogCreateWithoutActorInput, AuditLogUncheckedCreateWithoutActorInput>
       | AuditLogCreateWithoutActorInput[]
       | AuditLogUncheckedCreateWithoutActorInput[];
-    connectOrCreate?:
-      | AuditLogCreateOrConnectWithoutActorInput
-      | AuditLogCreateOrConnectWithoutActorInput[];
+    connectOrCreate?: AuditLogCreateOrConnectWithoutActorInput | AuditLogCreateOrConnectWithoutActorInput[];
     createMany?: AuditLogCreateManyActorInputEnvelope;
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
   };
@@ -33893,75 +31572,47 @@ export namespace Prisma {
 
   export type UserRoleUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutUserInput,
-          UserRoleUncheckedCreateWithoutUserInput
-        >
+      | XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
       | UserRoleCreateWithoutUserInput[]
       | UserRoleUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutUserInput
-      | UserRoleCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | UserRoleUpsertWithWhereUniqueWithoutUserInput
-      | UserRoleUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[];
+    upsert?: UserRoleUpsertWithWhereUniqueWithoutUserInput | UserRoleUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: UserRoleCreateManyUserInputEnvelope;
     set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
-    update?:
-      | UserRoleUpdateWithWhereUniqueWithoutUserInput
-      | UserRoleUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | UserRoleUpdateManyWithWhereWithoutUserInput
-      | UserRoleUpdateManyWithWhereWithoutUserInput[];
+    update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[];
   };
 
   export type AddressUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<
-          AddressCreateWithoutUserInput,
-          AddressUncheckedCreateWithoutUserInput
-        >
+      | XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>
       | AddressCreateWithoutUserInput[]
       | AddressUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | AddressCreateOrConnectWithoutUserInput
-      | AddressCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | AddressUpsertWithWhereUniqueWithoutUserInput
-      | AddressUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: AddressCreateOrConnectWithoutUserInput | AddressCreateOrConnectWithoutUserInput[];
+    upsert?: AddressUpsertWithWhereUniqueWithoutUserInput | AddressUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: AddressCreateManyUserInputEnvelope;
     set?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
     disconnect?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
     delete?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
     connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
-    update?:
-      | AddressUpdateWithWhereUniqueWithoutUserInput
-      | AddressUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | AddressUpdateManyWithWhereWithoutUserInput
-      | AddressUpdateManyWithWhereWithoutUserInput[];
+    update?: AddressUpdateWithWhereUniqueWithoutUserInput | AddressUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: AddressUpdateManyWithWhereWithoutUserInput | AddressUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: AddressScalarWhereInput | AddressScalarWhereInput[];
   };
 
   export type WishlistUpdateOneWithoutUserNestedInput = {
-    create?: XOR<
-      WishlistCreateWithoutUserInput,
-      WishlistUncheckedCreateWithoutUserInput
-    >;
+    create?: XOR<WishlistCreateWithoutUserInput, WishlistUncheckedCreateWithoutUserInput>;
     connectOrCreate?: WishlistCreateOrConnectWithoutUserInput;
     upsert?: WishlistUpsertWithoutUserInput;
     disconnect?: WishlistWhereInput | boolean;
     delete?: WishlistWhereInput | boolean;
     connect?: WishlistWhereUniqueInput;
     update?: XOR<
-      XOR<
-        WishlistUpdateToOneWithWhereWithoutUserInput,
-        WishlistUpdateWithoutUserInput
-      >,
+      XOR<WishlistUpdateToOneWithWhereWithoutUserInput, WishlistUpdateWithoutUserInput>,
       WishlistUncheckedUpdateWithoutUserInput
     >;
   };
@@ -33971,23 +31622,15 @@ export namespace Prisma {
       | XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
       | ReviewCreateWithoutUserInput[]
       | ReviewUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutUserInput
-      | ReviewCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | ReviewUpsertWithWhereUniqueWithoutUserInput
-      | ReviewUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[];
+    upsert?: ReviewUpsertWithWhereUniqueWithoutUserInput | ReviewUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: ReviewCreateManyUserInputEnvelope;
     set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
-    update?:
-      | ReviewUpdateWithWhereUniqueWithoutUserInput
-      | ReviewUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | ReviewUpdateManyWithWhereWithoutUserInput
-      | ReviewUpdateManyWithWhereWithoutUserInput[];
+    update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
   };
 
@@ -33996,51 +31639,32 @@ export namespace Prisma {
       | XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
       | OrderCreateWithoutUserInput[]
       | OrderUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutUserInput
-      | OrderCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | OrderUpsertWithWhereUniqueWithoutUserInput
-      | OrderUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[];
+    upsert?: OrderUpsertWithWhereUniqueWithoutUserInput | OrderUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: OrderCreateManyUserInputEnvelope;
     set?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
-    update?:
-      | OrderUpdateWithWhereUniqueWithoutUserInput
-      | OrderUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | OrderUpdateManyWithWhereWithoutUserInput
-      | OrderUpdateManyWithWhereWithoutUserInput[];
+    update?: OrderUpdateWithWhereUniqueWithoutUserInput | OrderUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: OrderUpdateManyWithWhereWithoutUserInput | OrderUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[];
   };
 
   export type AuditLogUpdateManyWithoutActorNestedInput = {
     create?:
-      | XOR<
-          AuditLogCreateWithoutActorInput,
-          AuditLogUncheckedCreateWithoutActorInput
-        >
+      | XOR<AuditLogCreateWithoutActorInput, AuditLogUncheckedCreateWithoutActorInput>
       | AuditLogCreateWithoutActorInput[]
       | AuditLogUncheckedCreateWithoutActorInput[];
-    connectOrCreate?:
-      | AuditLogCreateOrConnectWithoutActorInput
-      | AuditLogCreateOrConnectWithoutActorInput[];
-    upsert?:
-      | AuditLogUpsertWithWhereUniqueWithoutActorInput
-      | AuditLogUpsertWithWhereUniqueWithoutActorInput[];
+    connectOrCreate?: AuditLogCreateOrConnectWithoutActorInput | AuditLogCreateOrConnectWithoutActorInput[];
+    upsert?: AuditLogUpsertWithWhereUniqueWithoutActorInput | AuditLogUpsertWithWhereUniqueWithoutActorInput[];
     createMany?: AuditLogCreateManyActorInputEnvelope;
     set?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
     disconnect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
     delete?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
-    update?:
-      | AuditLogUpdateWithWhereUniqueWithoutActorInput
-      | AuditLogUpdateWithWhereUniqueWithoutActorInput[];
-    updateMany?:
-      | AuditLogUpdateManyWithWhereWithoutActorInput
-      | AuditLogUpdateManyWithWhereWithoutActorInput[];
+    update?: AuditLogUpdateWithWhereUniqueWithoutActorInput | AuditLogUpdateWithWhereUniqueWithoutActorInput[];
+    updateMany?: AuditLogUpdateManyWithWhereWithoutActorInput | AuditLogUpdateManyWithWhereWithoutActorInput[];
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[];
   };
 
@@ -34054,75 +31678,47 @@ export namespace Prisma {
 
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutUserInput,
-          UserRoleUncheckedCreateWithoutUserInput
-        >
+      | XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
       | UserRoleCreateWithoutUserInput[]
       | UserRoleUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutUserInput
-      | UserRoleCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | UserRoleUpsertWithWhereUniqueWithoutUserInput
-      | UserRoleUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[];
+    upsert?: UserRoleUpsertWithWhereUniqueWithoutUserInput | UserRoleUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: UserRoleCreateManyUserInputEnvelope;
     set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
-    update?:
-      | UserRoleUpdateWithWhereUniqueWithoutUserInput
-      | UserRoleUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | UserRoleUpdateManyWithWhereWithoutUserInput
-      | UserRoleUpdateManyWithWhereWithoutUserInput[];
+    update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[];
   };
 
   export type AddressUncheckedUpdateManyWithoutUserNestedInput = {
     create?:
-      | XOR<
-          AddressCreateWithoutUserInput,
-          AddressUncheckedCreateWithoutUserInput
-        >
+      | XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>
       | AddressCreateWithoutUserInput[]
       | AddressUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | AddressCreateOrConnectWithoutUserInput
-      | AddressCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | AddressUpsertWithWhereUniqueWithoutUserInput
-      | AddressUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: AddressCreateOrConnectWithoutUserInput | AddressCreateOrConnectWithoutUserInput[];
+    upsert?: AddressUpsertWithWhereUniqueWithoutUserInput | AddressUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: AddressCreateManyUserInputEnvelope;
     set?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
     disconnect?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
     delete?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
     connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[];
-    update?:
-      | AddressUpdateWithWhereUniqueWithoutUserInput
-      | AddressUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | AddressUpdateManyWithWhereWithoutUserInput
-      | AddressUpdateManyWithWhereWithoutUserInput[];
+    update?: AddressUpdateWithWhereUniqueWithoutUserInput | AddressUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: AddressUpdateManyWithWhereWithoutUserInput | AddressUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: AddressScalarWhereInput | AddressScalarWhereInput[];
   };
 
   export type WishlistUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<
-      WishlistCreateWithoutUserInput,
-      WishlistUncheckedCreateWithoutUserInput
-    >;
+    create?: XOR<WishlistCreateWithoutUserInput, WishlistUncheckedCreateWithoutUserInput>;
     connectOrCreate?: WishlistCreateOrConnectWithoutUserInput;
     upsert?: WishlistUpsertWithoutUserInput;
     disconnect?: WishlistWhereInput | boolean;
     delete?: WishlistWhereInput | boolean;
     connect?: WishlistWhereUniqueInput;
     update?: XOR<
-      XOR<
-        WishlistUpdateToOneWithWhereWithoutUserInput,
-        WishlistUpdateWithoutUserInput
-      >,
+      XOR<WishlistUpdateToOneWithWhereWithoutUserInput, WishlistUpdateWithoutUserInput>,
       WishlistUncheckedUpdateWithoutUserInput
     >;
   };
@@ -34132,23 +31728,15 @@ export namespace Prisma {
       | XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
       | ReviewCreateWithoutUserInput[]
       | ReviewUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutUserInput
-      | ReviewCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | ReviewUpsertWithWhereUniqueWithoutUserInput
-      | ReviewUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[];
+    upsert?: ReviewUpsertWithWhereUniqueWithoutUserInput | ReviewUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: ReviewCreateManyUserInputEnvelope;
     set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
-    update?:
-      | ReviewUpdateWithWhereUniqueWithoutUserInput
-      | ReviewUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | ReviewUpdateManyWithWhereWithoutUserInput
-      | ReviewUpdateManyWithWhereWithoutUserInput[];
+    update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
   };
 
@@ -34157,198 +31745,136 @@ export namespace Prisma {
       | XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
       | OrderCreateWithoutUserInput[]
       | OrderUncheckedCreateWithoutUserInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutUserInput
-      | OrderCreateOrConnectWithoutUserInput[];
-    upsert?:
-      | OrderUpsertWithWhereUniqueWithoutUserInput
-      | OrderUpsertWithWhereUniqueWithoutUserInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[];
+    upsert?: OrderUpsertWithWhereUniqueWithoutUserInput | OrderUpsertWithWhereUniqueWithoutUserInput[];
     createMany?: OrderCreateManyUserInputEnvelope;
     set?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
-    update?:
-      | OrderUpdateWithWhereUniqueWithoutUserInput
-      | OrderUpdateWithWhereUniqueWithoutUserInput[];
-    updateMany?:
-      | OrderUpdateManyWithWhereWithoutUserInput
-      | OrderUpdateManyWithWhereWithoutUserInput[];
+    update?: OrderUpdateWithWhereUniqueWithoutUserInput | OrderUpdateWithWhereUniqueWithoutUserInput[];
+    updateMany?: OrderUpdateManyWithWhereWithoutUserInput | OrderUpdateManyWithWhereWithoutUserInput[];
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[];
   };
 
   export type AuditLogUncheckedUpdateManyWithoutActorNestedInput = {
     create?:
-      | XOR<
-          AuditLogCreateWithoutActorInput,
-          AuditLogUncheckedCreateWithoutActorInput
-        >
+      | XOR<AuditLogCreateWithoutActorInput, AuditLogUncheckedCreateWithoutActorInput>
       | AuditLogCreateWithoutActorInput[]
       | AuditLogUncheckedCreateWithoutActorInput[];
-    connectOrCreate?:
-      | AuditLogCreateOrConnectWithoutActorInput
-      | AuditLogCreateOrConnectWithoutActorInput[];
-    upsert?:
-      | AuditLogUpsertWithWhereUniqueWithoutActorInput
-      | AuditLogUpsertWithWhereUniqueWithoutActorInput[];
+    connectOrCreate?: AuditLogCreateOrConnectWithoutActorInput | AuditLogCreateOrConnectWithoutActorInput[];
+    upsert?: AuditLogUpsertWithWhereUniqueWithoutActorInput | AuditLogUpsertWithWhereUniqueWithoutActorInput[];
     createMany?: AuditLogCreateManyActorInputEnvelope;
     set?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
     disconnect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
     delete?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
-    update?:
-      | AuditLogUpdateWithWhereUniqueWithoutActorInput
-      | AuditLogUpdateWithWhereUniqueWithoutActorInput[];
-    updateMany?:
-      | AuditLogUpdateManyWithWhereWithoutActorInput
-      | AuditLogUpdateManyWithWhereWithoutActorInput[];
+    update?: AuditLogUpdateWithWhereUniqueWithoutActorInput | AuditLogUpdateWithWhereUniqueWithoutActorInput[];
+    updateMany?: AuditLogUpdateManyWithWhereWithoutActorInput | AuditLogUpdateManyWithWhereWithoutActorInput[];
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[];
   };
 
   export type UserRoleCreateNestedManyWithoutRoleInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutRoleInput,
-          UserRoleUncheckedCreateWithoutRoleInput
-        >
+      | XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>
       | UserRoleCreateWithoutRoleInput[]
       | UserRoleUncheckedCreateWithoutRoleInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutRoleInput
-      | UserRoleCreateOrConnectWithoutRoleInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[];
     createMany?: UserRoleCreateManyRoleInputEnvelope;
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
   };
 
   export type UserRoleUncheckedCreateNestedManyWithoutRoleInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutRoleInput,
-          UserRoleUncheckedCreateWithoutRoleInput
-        >
+      | XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>
       | UserRoleCreateWithoutRoleInput[]
       | UserRoleUncheckedCreateWithoutRoleInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutRoleInput
-      | UserRoleCreateOrConnectWithoutRoleInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[];
     createMany?: UserRoleCreateManyRoleInputEnvelope;
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
   };
 
   export type UserRoleUpdateManyWithoutRoleNestedInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutRoleInput,
-          UserRoleUncheckedCreateWithoutRoleInput
-        >
+      | XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>
       | UserRoleCreateWithoutRoleInput[]
       | UserRoleUncheckedCreateWithoutRoleInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutRoleInput
-      | UserRoleCreateOrConnectWithoutRoleInput[];
-    upsert?:
-      | UserRoleUpsertWithWhereUniqueWithoutRoleInput
-      | UserRoleUpsertWithWhereUniqueWithoutRoleInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[];
+    upsert?: UserRoleUpsertWithWhereUniqueWithoutRoleInput | UserRoleUpsertWithWhereUniqueWithoutRoleInput[];
     createMany?: UserRoleCreateManyRoleInputEnvelope;
     set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
-    update?:
-      | UserRoleUpdateWithWhereUniqueWithoutRoleInput
-      | UserRoleUpdateWithWhereUniqueWithoutRoleInput[];
-    updateMany?:
-      | UserRoleUpdateManyWithWhereWithoutRoleInput
-      | UserRoleUpdateManyWithWhereWithoutRoleInput[];
+    update?: UserRoleUpdateWithWhereUniqueWithoutRoleInput | UserRoleUpdateWithWhereUniqueWithoutRoleInput[];
+    updateMany?: UserRoleUpdateManyWithWhereWithoutRoleInput | UserRoleUpdateManyWithWhereWithoutRoleInput[];
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[];
   };
 
   export type UserRoleUncheckedUpdateManyWithoutRoleNestedInput = {
     create?:
-      | XOR<
-          UserRoleCreateWithoutRoleInput,
-          UserRoleUncheckedCreateWithoutRoleInput
-        >
+      | XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>
       | UserRoleCreateWithoutRoleInput[]
       | UserRoleUncheckedCreateWithoutRoleInput[];
-    connectOrCreate?:
-      | UserRoleCreateOrConnectWithoutRoleInput
-      | UserRoleCreateOrConnectWithoutRoleInput[];
-    upsert?:
-      | UserRoleUpsertWithWhereUniqueWithoutRoleInput
-      | UserRoleUpsertWithWhereUniqueWithoutRoleInput[];
+    connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[];
+    upsert?: UserRoleUpsertWithWhereUniqueWithoutRoleInput | UserRoleUpsertWithWhereUniqueWithoutRoleInput[];
     createMany?: UserRoleCreateManyRoleInputEnvelope;
     set?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     disconnect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     delete?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[];
-    update?:
-      | UserRoleUpdateWithWhereUniqueWithoutRoleInput
-      | UserRoleUpdateWithWhereUniqueWithoutRoleInput[];
-    updateMany?:
-      | UserRoleUpdateManyWithWhereWithoutRoleInput
-      | UserRoleUpdateManyWithWhereWithoutRoleInput[];
+    update?: UserRoleUpdateWithWhereUniqueWithoutRoleInput | UserRoleUpdateWithWhereUniqueWithoutRoleInput[];
+    updateMany?: UserRoleUpdateManyWithWhereWithoutRoleInput | UserRoleUpdateManyWithWhereWithoutRoleInput[];
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[];
   };
 
   export type UserCreateNestedOneWithoutUserRolesInput = {
-    create?: XOR<
-      UserCreateWithoutUserRolesInput,
-      UserUncheckedCreateWithoutUserRolesInput
-    >;
+    create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>;
     connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput;
     connect?: UserWhereUniqueInput;
   };
 
   export type RoleCreateNestedOneWithoutUserRolesInput = {
-    create?: XOR<
-      RoleCreateWithoutUserRolesInput,
-      RoleUncheckedCreateWithoutUserRolesInput
-    >;
+    create?: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>;
     connectOrCreate?: RoleCreateOrConnectWithoutUserRolesInput;
     connect?: RoleWhereUniqueInput;
   };
 
   export type UserUpdateOneRequiredWithoutUserRolesNestedInput = {
-    create?: XOR<
-      UserCreateWithoutUserRolesInput,
-      UserUncheckedCreateWithoutUserRolesInput
-    >;
+    create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>;
     connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput;
     upsert?: UserUpsertWithoutUserRolesInput;
     connect?: UserWhereUniqueInput;
     update?: XOR<
-      XOR<
-        UserUpdateToOneWithWhereWithoutUserRolesInput,
-        UserUpdateWithoutUserRolesInput
-      >,
+      XOR<UserUpdateToOneWithWhereWithoutUserRolesInput, UserUpdateWithoutUserRolesInput>,
       UserUncheckedUpdateWithoutUserRolesInput
     >;
   };
 
   export type RoleUpdateOneRequiredWithoutUserRolesNestedInput = {
-    create?: XOR<
-      RoleCreateWithoutUserRolesInput,
-      RoleUncheckedCreateWithoutUserRolesInput
-    >;
+    create?: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>;
     connectOrCreate?: RoleCreateOrConnectWithoutUserRolesInput;
     upsert?: RoleUpsertWithoutUserRolesInput;
     connect?: RoleWhereUniqueInput;
     update?: XOR<
-      XOR<
-        RoleUpdateToOneWithWhereWithoutUserRolesInput,
-        RoleUpdateWithoutUserRolesInput
-      >,
+      XOR<RoleUpdateToOneWithWhereWithoutUserRolesInput, RoleUpdateWithoutUserRolesInput>,
       RoleUncheckedUpdateWithoutUserRolesInput
     >;
   };
 
+  export type ProductImageCreateNestedManyWithoutProductInput = {
+    create?:
+      | XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+      | ProductImageCreateWithoutProductInput[]
+      | ProductImageUncheckedCreateWithoutProductInput[];
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[];
+    createMany?: ProductImageCreateManyProductInputEnvelope;
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+  };
+
   export type ProductVariantCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          ProductVariantCreateWithoutProductInput,
-          ProductVariantUncheckedCreateWithoutProductInput
-        >
+      | XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput>
       | ProductVariantCreateWithoutProductInput[]
       | ProductVariantUncheckedCreateWithoutProductInput[];
     connectOrCreate?:
@@ -34360,55 +31886,47 @@ export namespace Prisma {
 
   export type ReviewCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          ReviewCreateWithoutProductInput,
-          ReviewUncheckedCreateWithoutProductInput
-        >
+      | XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>
       | ReviewCreateWithoutProductInput[]
       | ReviewUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutProductInput
-      | ReviewCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[];
     createMany?: ReviewCreateManyProductInputEnvelope;
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
   };
 
   export type OrderItemCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutProductInput,
-          OrderItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<OrderItemCreateWithoutProductInput, OrderItemUncheckedCreateWithoutProductInput>
       | OrderItemCreateWithoutProductInput[]
       | OrderItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutProductInput
-      | OrderItemCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutProductInput | OrderItemCreateOrConnectWithoutProductInput[];
     createMany?: OrderItemCreateManyProductInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
   };
 
   export type WishlistItemCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutProductInput,
-          WishlistItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<WishlistItemCreateWithoutProductInput, WishlistItemUncheckedCreateWithoutProductInput>
       | WishlistItemCreateWithoutProductInput[]
       | WishlistItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | WishlistItemCreateOrConnectWithoutProductInput
-      | WishlistItemCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: WishlistItemCreateOrConnectWithoutProductInput | WishlistItemCreateOrConnectWithoutProductInput[];
     createMany?: WishlistItemCreateManyProductInputEnvelope;
     connect?: WishlistItemWhereUniqueInput | WishlistItemWhereUniqueInput[];
   };
 
+  export type ProductImageUncheckedCreateNestedManyWithoutProductInput = {
+    create?:
+      | XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+      | ProductImageCreateWithoutProductInput[]
+      | ProductImageUncheckedCreateWithoutProductInput[];
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[];
+    createMany?: ProductImageCreateManyProductInputEnvelope;
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+  };
+
   export type ProductVariantUncheckedCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          ProductVariantCreateWithoutProductInput,
-          ProductVariantUncheckedCreateWithoutProductInput
-        >
+      | XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput>
       | ProductVariantCreateWithoutProductInput[]
       | ProductVariantUncheckedCreateWithoutProductInput[];
     connectOrCreate?:
@@ -34420,45 +31938,30 @@ export namespace Prisma {
 
   export type ReviewUncheckedCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          ReviewCreateWithoutProductInput,
-          ReviewUncheckedCreateWithoutProductInput
-        >
+      | XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>
       | ReviewCreateWithoutProductInput[]
       | ReviewUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutProductInput
-      | ReviewCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[];
     createMany?: ReviewCreateManyProductInputEnvelope;
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
   };
 
   export type OrderItemUncheckedCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutProductInput,
-          OrderItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<OrderItemCreateWithoutProductInput, OrderItemUncheckedCreateWithoutProductInput>
       | OrderItemCreateWithoutProductInput[]
       | OrderItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutProductInput
-      | OrderItemCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutProductInput | OrderItemCreateOrConnectWithoutProductInput[];
     createMany?: OrderItemCreateManyProductInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
   };
 
   export type WishlistItemUncheckedCreateNestedManyWithoutProductInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutProductInput,
-          WishlistItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<WishlistItemCreateWithoutProductInput, WishlistItemUncheckedCreateWithoutProductInput>
       | WishlistItemCreateWithoutProductInput[]
       | WishlistItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | WishlistItemCreateOrConnectWithoutProductInput
-      | WishlistItemCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: WishlistItemCreateOrConnectWithoutProductInput | WishlistItemCreateOrConnectWithoutProductInput[];
     createMany?: WishlistItemCreateManyProductInputEnvelope;
     connect?: WishlistItemWhereUniqueInput | WishlistItemWhereUniqueInput[];
   };
@@ -34467,12 +31970,32 @@ export namespace Prisma {
     set?: $Enums.ProductStatus;
   };
 
+  export type ProductImageUpdateManyWithoutProductNestedInput = {
+    create?:
+      | XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+      | ProductImageCreateWithoutProductInput[]
+      | ProductImageUncheckedCreateWithoutProductInput[];
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[];
+    upsert?:
+      | ProductImageUpsertWithWhereUniqueWithoutProductInput
+      | ProductImageUpsertWithWhereUniqueWithoutProductInput[];
+    createMany?: ProductImageCreateManyProductInputEnvelope;
+    set?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    disconnect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    delete?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    update?:
+      | ProductImageUpdateWithWhereUniqueWithoutProductInput
+      | ProductImageUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?:
+      | ProductImageUpdateManyWithWhereWithoutProductInput
+      | ProductImageUpdateManyWithWhereWithoutProductInput[];
+    deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[];
+  };
+
   export type ProductVariantUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          ProductVariantCreateWithoutProductInput,
-          ProductVariantUncheckedCreateWithoutProductInput
-        >
+      | XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput>
       | ProductVariantCreateWithoutProductInput[]
       | ProductVariantUncheckedCreateWithoutProductInput[];
     connectOrCreate?:
@@ -34483,9 +32006,7 @@ export namespace Prisma {
       | ProductVariantUpsertWithWhereUniqueWithoutProductInput[];
     createMany?: ProductVariantCreateManyProductInputEnvelope;
     set?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
-    disconnect?:
-      | ProductVariantWhereUniqueInput
-      | ProductVariantWhereUniqueInput[];
+    disconnect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
     delete?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
     connect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
     update?:
@@ -34494,78 +32015,49 @@ export namespace Prisma {
     updateMany?:
       | ProductVariantUpdateManyWithWhereWithoutProductInput
       | ProductVariantUpdateManyWithWhereWithoutProductInput[];
-    deleteMany?:
-      | ProductVariantScalarWhereInput
-      | ProductVariantScalarWhereInput[];
+    deleteMany?: ProductVariantScalarWhereInput | ProductVariantScalarWhereInput[];
   };
 
   export type ReviewUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          ReviewCreateWithoutProductInput,
-          ReviewUncheckedCreateWithoutProductInput
-        >
+      | XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>
       | ReviewCreateWithoutProductInput[]
       | ReviewUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutProductInput
-      | ReviewCreateOrConnectWithoutProductInput[];
-    upsert?:
-      | ReviewUpsertWithWhereUniqueWithoutProductInput
-      | ReviewUpsertWithWhereUniqueWithoutProductInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[];
+    upsert?: ReviewUpsertWithWhereUniqueWithoutProductInput | ReviewUpsertWithWhereUniqueWithoutProductInput[];
     createMany?: ReviewCreateManyProductInputEnvelope;
     set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
-    update?:
-      | ReviewUpdateWithWhereUniqueWithoutProductInput
-      | ReviewUpdateWithWhereUniqueWithoutProductInput[];
-    updateMany?:
-      | ReviewUpdateManyWithWhereWithoutProductInput
-      | ReviewUpdateManyWithWhereWithoutProductInput[];
+    update?: ReviewUpdateWithWhereUniqueWithoutProductInput | ReviewUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?: ReviewUpdateManyWithWhereWithoutProductInput | ReviewUpdateManyWithWhereWithoutProductInput[];
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
   };
 
   export type OrderItemUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutProductInput,
-          OrderItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<OrderItemCreateWithoutProductInput, OrderItemUncheckedCreateWithoutProductInput>
       | OrderItemCreateWithoutProductInput[]
       | OrderItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutProductInput
-      | OrderItemCreateOrConnectWithoutProductInput[];
-    upsert?:
-      | OrderItemUpsertWithWhereUniqueWithoutProductInput
-      | OrderItemUpsertWithWhereUniqueWithoutProductInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutProductInput | OrderItemCreateOrConnectWithoutProductInput[];
+    upsert?: OrderItemUpsertWithWhereUniqueWithoutProductInput | OrderItemUpsertWithWhereUniqueWithoutProductInput[];
     createMany?: OrderItemCreateManyProductInputEnvelope;
     set?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     disconnect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     delete?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-    update?:
-      | OrderItemUpdateWithWhereUniqueWithoutProductInput
-      | OrderItemUpdateWithWhereUniqueWithoutProductInput[];
-    updateMany?:
-      | OrderItemUpdateManyWithWhereWithoutProductInput
-      | OrderItemUpdateManyWithWhereWithoutProductInput[];
+    update?: OrderItemUpdateWithWhereUniqueWithoutProductInput | OrderItemUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?: OrderItemUpdateManyWithWhereWithoutProductInput | OrderItemUpdateManyWithWhereWithoutProductInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
   };
 
   export type WishlistItemUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutProductInput,
-          WishlistItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<WishlistItemCreateWithoutProductInput, WishlistItemUncheckedCreateWithoutProductInput>
       | WishlistItemCreateWithoutProductInput[]
       | WishlistItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | WishlistItemCreateOrConnectWithoutProductInput
-      | WishlistItemCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: WishlistItemCreateOrConnectWithoutProductInput | WishlistItemCreateOrConnectWithoutProductInput[];
     upsert?:
       | WishlistItemUpsertWithWhereUniqueWithoutProductInput
       | WishlistItemUpsertWithWhereUniqueWithoutProductInput[];
@@ -34583,12 +32075,32 @@ export namespace Prisma {
     deleteMany?: WishlistItemScalarWhereInput | WishlistItemScalarWhereInput[];
   };
 
+  export type ProductImageUncheckedUpdateManyWithoutProductNestedInput = {
+    create?:
+      | XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+      | ProductImageCreateWithoutProductInput[]
+      | ProductImageUncheckedCreateWithoutProductInput[];
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[];
+    upsert?:
+      | ProductImageUpsertWithWhereUniqueWithoutProductInput
+      | ProductImageUpsertWithWhereUniqueWithoutProductInput[];
+    createMany?: ProductImageCreateManyProductInputEnvelope;
+    set?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    disconnect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    delete?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[];
+    update?:
+      | ProductImageUpdateWithWhereUniqueWithoutProductInput
+      | ProductImageUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?:
+      | ProductImageUpdateManyWithWhereWithoutProductInput
+      | ProductImageUpdateManyWithWhereWithoutProductInput[];
+    deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[];
+  };
+
   export type ProductVariantUncheckedUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          ProductVariantCreateWithoutProductInput,
-          ProductVariantUncheckedCreateWithoutProductInput
-        >
+      | XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput>
       | ProductVariantCreateWithoutProductInput[]
       | ProductVariantUncheckedCreateWithoutProductInput[];
     connectOrCreate?:
@@ -34599,9 +32111,7 @@ export namespace Prisma {
       | ProductVariantUpsertWithWhereUniqueWithoutProductInput[];
     createMany?: ProductVariantCreateManyProductInputEnvelope;
     set?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
-    disconnect?:
-      | ProductVariantWhereUniqueInput
-      | ProductVariantWhereUniqueInput[];
+    disconnect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
     delete?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
     connect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[];
     update?:
@@ -34610,78 +32120,49 @@ export namespace Prisma {
     updateMany?:
       | ProductVariantUpdateManyWithWhereWithoutProductInput
       | ProductVariantUpdateManyWithWhereWithoutProductInput[];
-    deleteMany?:
-      | ProductVariantScalarWhereInput
-      | ProductVariantScalarWhereInput[];
+    deleteMany?: ProductVariantScalarWhereInput | ProductVariantScalarWhereInput[];
   };
 
   export type ReviewUncheckedUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          ReviewCreateWithoutProductInput,
-          ReviewUncheckedCreateWithoutProductInput
-        >
+      | XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>
       | ReviewCreateWithoutProductInput[]
       | ReviewUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | ReviewCreateOrConnectWithoutProductInput
-      | ReviewCreateOrConnectWithoutProductInput[];
-    upsert?:
-      | ReviewUpsertWithWhereUniqueWithoutProductInput
-      | ReviewUpsertWithWhereUniqueWithoutProductInput[];
+    connectOrCreate?: ReviewCreateOrConnectWithoutProductInput | ReviewCreateOrConnectWithoutProductInput[];
+    upsert?: ReviewUpsertWithWhereUniqueWithoutProductInput | ReviewUpsertWithWhereUniqueWithoutProductInput[];
     createMany?: ReviewCreateManyProductInputEnvelope;
     set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[];
-    update?:
-      | ReviewUpdateWithWhereUniqueWithoutProductInput
-      | ReviewUpdateWithWhereUniqueWithoutProductInput[];
-    updateMany?:
-      | ReviewUpdateManyWithWhereWithoutProductInput
-      | ReviewUpdateManyWithWhereWithoutProductInput[];
+    update?: ReviewUpdateWithWhereUniqueWithoutProductInput | ReviewUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?: ReviewUpdateManyWithWhereWithoutProductInput | ReviewUpdateManyWithWhereWithoutProductInput[];
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[];
   };
 
   export type OrderItemUncheckedUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutProductInput,
-          OrderItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<OrderItemCreateWithoutProductInput, OrderItemUncheckedCreateWithoutProductInput>
       | OrderItemCreateWithoutProductInput[]
       | OrderItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutProductInput
-      | OrderItemCreateOrConnectWithoutProductInput[];
-    upsert?:
-      | OrderItemUpsertWithWhereUniqueWithoutProductInput
-      | OrderItemUpsertWithWhereUniqueWithoutProductInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutProductInput | OrderItemCreateOrConnectWithoutProductInput[];
+    upsert?: OrderItemUpsertWithWhereUniqueWithoutProductInput | OrderItemUpsertWithWhereUniqueWithoutProductInput[];
     createMany?: OrderItemCreateManyProductInputEnvelope;
     set?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     disconnect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     delete?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-    update?:
-      | OrderItemUpdateWithWhereUniqueWithoutProductInput
-      | OrderItemUpdateWithWhereUniqueWithoutProductInput[];
-    updateMany?:
-      | OrderItemUpdateManyWithWhereWithoutProductInput
-      | OrderItemUpdateManyWithWhereWithoutProductInput[];
+    update?: OrderItemUpdateWithWhereUniqueWithoutProductInput | OrderItemUpdateWithWhereUniqueWithoutProductInput[];
+    updateMany?: OrderItemUpdateManyWithWhereWithoutProductInput | OrderItemUpdateManyWithWhereWithoutProductInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
   };
 
   export type WishlistItemUncheckedUpdateManyWithoutProductNestedInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutProductInput,
-          WishlistItemUncheckedCreateWithoutProductInput
-        >
+      | XOR<WishlistItemCreateWithoutProductInput, WishlistItemUncheckedCreateWithoutProductInput>
       | WishlistItemCreateWithoutProductInput[]
       | WishlistItemUncheckedCreateWithoutProductInput[];
-    connectOrCreate?:
-      | WishlistItemCreateOrConnectWithoutProductInput
-      | WishlistItemCreateOrConnectWithoutProductInput[];
+    connectOrCreate?: WishlistItemCreateOrConnectWithoutProductInput | WishlistItemCreateOrConnectWithoutProductInput[];
     upsert?:
       | WishlistItemUpsertWithWhereUniqueWithoutProductInput
       | WishlistItemUpsertWithWhereUniqueWithoutProductInput[];
@@ -34699,71 +32180,69 @@ export namespace Prisma {
     deleteMany?: WishlistItemScalarWhereInput | WishlistItemScalarWhereInput[];
   };
 
-  export type ProductCreateNestedOneWithoutVariantsInput = {
-    create?: XOR<
-      ProductCreateWithoutVariantsInput,
-      ProductUncheckedCreateWithoutVariantsInput
+  export type ProductCreateNestedOneWithoutImagesInput = {
+    create?: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>;
+    connectOrCreate?: ProductCreateOrConnectWithoutImagesInput;
+    connect?: ProductWhereUniqueInput;
+  };
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean;
+  };
+
+  export type ProductUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>;
+    connectOrCreate?: ProductCreateOrConnectWithoutImagesInput;
+    upsert?: ProductUpsertWithoutImagesInput;
+    connect?: ProductWhereUniqueInput;
+    update?: XOR<
+      XOR<ProductUpdateToOneWithWhereWithoutImagesInput, ProductUpdateWithoutImagesInput>,
+      ProductUncheckedUpdateWithoutImagesInput
     >;
+  };
+
+  export type ProductCreateNestedOneWithoutVariantsInput = {
+    create?: XOR<ProductCreateWithoutVariantsInput, ProductUncheckedCreateWithoutVariantsInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutVariantsInput;
     connect?: ProductWhereUniqueInput;
   };
 
   export type InventoryCreateNestedManyWithoutVariantInput = {
     create?:
-      | XOR<
-          InventoryCreateWithoutVariantInput,
-          InventoryUncheckedCreateWithoutVariantInput
-        >
+      | XOR<InventoryCreateWithoutVariantInput, InventoryUncheckedCreateWithoutVariantInput>
       | InventoryCreateWithoutVariantInput[]
       | InventoryUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | InventoryCreateOrConnectWithoutVariantInput
-      | InventoryCreateOrConnectWithoutVariantInput[];
+    connectOrCreate?: InventoryCreateOrConnectWithoutVariantInput | InventoryCreateOrConnectWithoutVariantInput[];
     createMany?: InventoryCreateManyVariantInputEnvelope;
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
   };
 
   export type OrderItemCreateNestedManyWithoutVariantInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutVariantInput,
-          OrderItemUncheckedCreateWithoutVariantInput
-        >
+      | XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput>
       | OrderItemCreateWithoutVariantInput[]
       | OrderItemUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutVariantInput
-      | OrderItemCreateOrConnectWithoutVariantInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[];
     createMany?: OrderItemCreateManyVariantInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
   };
 
   export type InventoryUncheckedCreateNestedManyWithoutVariantInput = {
     create?:
-      | XOR<
-          InventoryCreateWithoutVariantInput,
-          InventoryUncheckedCreateWithoutVariantInput
-        >
+      | XOR<InventoryCreateWithoutVariantInput, InventoryUncheckedCreateWithoutVariantInput>
       | InventoryCreateWithoutVariantInput[]
       | InventoryUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | InventoryCreateOrConnectWithoutVariantInput
-      | InventoryCreateOrConnectWithoutVariantInput[];
+    connectOrCreate?: InventoryCreateOrConnectWithoutVariantInput | InventoryCreateOrConnectWithoutVariantInput[];
     createMany?: InventoryCreateManyVariantInputEnvelope;
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
   };
 
   export type OrderItemUncheckedCreateNestedManyWithoutVariantInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutVariantInput,
-          OrderItemUncheckedCreateWithoutVariantInput
-        >
+      | XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput>
       | OrderItemCreateWithoutVariantInput[]
       | OrderItemUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutVariantInput
-      | OrderItemCreateOrConnectWithoutVariantInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[];
     createMany?: OrderItemCreateManyVariantInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
   };
@@ -34785,300 +32264,193 @@ export namespace Prisma {
   };
 
   export type ProductUpdateOneRequiredWithoutVariantsNestedInput = {
-    create?: XOR<
-      ProductCreateWithoutVariantsInput,
-      ProductUncheckedCreateWithoutVariantsInput
-    >;
+    create?: XOR<ProductCreateWithoutVariantsInput, ProductUncheckedCreateWithoutVariantsInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutVariantsInput;
     upsert?: ProductUpsertWithoutVariantsInput;
     connect?: ProductWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ProductUpdateToOneWithWhereWithoutVariantsInput,
-        ProductUpdateWithoutVariantsInput
-      >,
+      XOR<ProductUpdateToOneWithWhereWithoutVariantsInput, ProductUpdateWithoutVariantsInput>,
       ProductUncheckedUpdateWithoutVariantsInput
     >;
   };
 
   export type InventoryUpdateManyWithoutVariantNestedInput = {
     create?:
-      | XOR<
-          InventoryCreateWithoutVariantInput,
-          InventoryUncheckedCreateWithoutVariantInput
-        >
+      | XOR<InventoryCreateWithoutVariantInput, InventoryUncheckedCreateWithoutVariantInput>
       | InventoryCreateWithoutVariantInput[]
       | InventoryUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | InventoryCreateOrConnectWithoutVariantInput
-      | InventoryCreateOrConnectWithoutVariantInput[];
-    upsert?:
-      | InventoryUpsertWithWhereUniqueWithoutVariantInput
-      | InventoryUpsertWithWhereUniqueWithoutVariantInput[];
+    connectOrCreate?: InventoryCreateOrConnectWithoutVariantInput | InventoryCreateOrConnectWithoutVariantInput[];
+    upsert?: InventoryUpsertWithWhereUniqueWithoutVariantInput | InventoryUpsertWithWhereUniqueWithoutVariantInput[];
     createMany?: InventoryCreateManyVariantInputEnvelope;
     set?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
     disconnect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
     delete?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
-    update?:
-      | InventoryUpdateWithWhereUniqueWithoutVariantInput
-      | InventoryUpdateWithWhereUniqueWithoutVariantInput[];
-    updateMany?:
-      | InventoryUpdateManyWithWhereWithoutVariantInput
-      | InventoryUpdateManyWithWhereWithoutVariantInput[];
+    update?: InventoryUpdateWithWhereUniqueWithoutVariantInput | InventoryUpdateWithWhereUniqueWithoutVariantInput[];
+    updateMany?: InventoryUpdateManyWithWhereWithoutVariantInput | InventoryUpdateManyWithWhereWithoutVariantInput[];
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[];
   };
 
   export type OrderItemUpdateManyWithoutVariantNestedInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutVariantInput,
-          OrderItemUncheckedCreateWithoutVariantInput
-        >
+      | XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput>
       | OrderItemCreateWithoutVariantInput[]
       | OrderItemUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutVariantInput
-      | OrderItemCreateOrConnectWithoutVariantInput[];
-    upsert?:
-      | OrderItemUpsertWithWhereUniqueWithoutVariantInput
-      | OrderItemUpsertWithWhereUniqueWithoutVariantInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[];
+    upsert?: OrderItemUpsertWithWhereUniqueWithoutVariantInput | OrderItemUpsertWithWhereUniqueWithoutVariantInput[];
     createMany?: OrderItemCreateManyVariantInputEnvelope;
     set?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     disconnect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     delete?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-    update?:
-      | OrderItemUpdateWithWhereUniqueWithoutVariantInput
-      | OrderItemUpdateWithWhereUniqueWithoutVariantInput[];
-    updateMany?:
-      | OrderItemUpdateManyWithWhereWithoutVariantInput
-      | OrderItemUpdateManyWithWhereWithoutVariantInput[];
+    update?: OrderItemUpdateWithWhereUniqueWithoutVariantInput | OrderItemUpdateWithWhereUniqueWithoutVariantInput[];
+    updateMany?: OrderItemUpdateManyWithWhereWithoutVariantInput | OrderItemUpdateManyWithWhereWithoutVariantInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
   };
 
   export type InventoryUncheckedUpdateManyWithoutVariantNestedInput = {
     create?:
-      | XOR<
-          InventoryCreateWithoutVariantInput,
-          InventoryUncheckedCreateWithoutVariantInput
-        >
+      | XOR<InventoryCreateWithoutVariantInput, InventoryUncheckedCreateWithoutVariantInput>
       | InventoryCreateWithoutVariantInput[]
       | InventoryUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | InventoryCreateOrConnectWithoutVariantInput
-      | InventoryCreateOrConnectWithoutVariantInput[];
-    upsert?:
-      | InventoryUpsertWithWhereUniqueWithoutVariantInput
-      | InventoryUpsertWithWhereUniqueWithoutVariantInput[];
+    connectOrCreate?: InventoryCreateOrConnectWithoutVariantInput | InventoryCreateOrConnectWithoutVariantInput[];
+    upsert?: InventoryUpsertWithWhereUniqueWithoutVariantInput | InventoryUpsertWithWhereUniqueWithoutVariantInput[];
     createMany?: InventoryCreateManyVariantInputEnvelope;
     set?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
     disconnect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
     delete?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[];
-    update?:
-      | InventoryUpdateWithWhereUniqueWithoutVariantInput
-      | InventoryUpdateWithWhereUniqueWithoutVariantInput[];
-    updateMany?:
-      | InventoryUpdateManyWithWhereWithoutVariantInput
-      | InventoryUpdateManyWithWhereWithoutVariantInput[];
+    update?: InventoryUpdateWithWhereUniqueWithoutVariantInput | InventoryUpdateWithWhereUniqueWithoutVariantInput[];
+    updateMany?: InventoryUpdateManyWithWhereWithoutVariantInput | InventoryUpdateManyWithWhereWithoutVariantInput[];
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[];
   };
 
   export type OrderItemUncheckedUpdateManyWithoutVariantNestedInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutVariantInput,
-          OrderItemUncheckedCreateWithoutVariantInput
-        >
+      | XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput>
       | OrderItemCreateWithoutVariantInput[]
       | OrderItemUncheckedCreateWithoutVariantInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutVariantInput
-      | OrderItemCreateOrConnectWithoutVariantInput[];
-    upsert?:
-      | OrderItemUpsertWithWhereUniqueWithoutVariantInput
-      | OrderItemUpsertWithWhereUniqueWithoutVariantInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[];
+    upsert?: OrderItemUpsertWithWhereUniqueWithoutVariantInput | OrderItemUpsertWithWhereUniqueWithoutVariantInput[];
     createMany?: OrderItemCreateManyVariantInputEnvelope;
     set?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     disconnect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     delete?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-    update?:
-      | OrderItemUpdateWithWhereUniqueWithoutVariantInput
-      | OrderItemUpdateWithWhereUniqueWithoutVariantInput[];
-    updateMany?:
-      | OrderItemUpdateManyWithWhereWithoutVariantInput
-      | OrderItemUpdateManyWithWhereWithoutVariantInput[];
+    update?: OrderItemUpdateWithWhereUniqueWithoutVariantInput | OrderItemUpdateWithWhereUniqueWithoutVariantInput[];
+    updateMany?: OrderItemUpdateManyWithWhereWithoutVariantInput | OrderItemUpdateManyWithWhereWithoutVariantInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
   };
 
   export type ProductVariantCreateNestedOneWithoutInventoryInput = {
-    create?: XOR<
-      ProductVariantCreateWithoutInventoryInput,
-      ProductVariantUncheckedCreateWithoutInventoryInput
-    >;
+    create?: XOR<ProductVariantCreateWithoutInventoryInput, ProductVariantUncheckedCreateWithoutInventoryInput>;
     connectOrCreate?: ProductVariantCreateOrConnectWithoutInventoryInput;
     connect?: ProductVariantWhereUniqueInput;
   };
 
   export type ProductVariantUpdateOneRequiredWithoutInventoryNestedInput = {
-    create?: XOR<
-      ProductVariantCreateWithoutInventoryInput,
-      ProductVariantUncheckedCreateWithoutInventoryInput
-    >;
+    create?: XOR<ProductVariantCreateWithoutInventoryInput, ProductVariantUncheckedCreateWithoutInventoryInput>;
     connectOrCreate?: ProductVariantCreateOrConnectWithoutInventoryInput;
     upsert?: ProductVariantUpsertWithoutInventoryInput;
     connect?: ProductVariantWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ProductVariantUpdateToOneWithWhereWithoutInventoryInput,
-        ProductVariantUpdateWithoutInventoryInput
-      >,
+      XOR<ProductVariantUpdateToOneWithWhereWithoutInventoryInput, ProductVariantUpdateWithoutInventoryInput>,
       ProductVariantUncheckedUpdateWithoutInventoryInput
     >;
   };
 
   export type UserCreateNestedOneWithoutOrdersInput = {
-    create?: XOR<
-      UserCreateWithoutOrdersInput,
-      UserUncheckedCreateWithoutOrdersInput
-    >;
+    create?: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>;
     connectOrCreate?: UserCreateOrConnectWithoutOrdersInput;
     connect?: UserWhereUniqueInput;
   };
 
   export type PaymentMetaCreateNestedOneWithoutOrderInput = {
-    create?: XOR<
-      PaymentMetaCreateWithoutOrderInput,
-      PaymentMetaUncheckedCreateWithoutOrderInput
-    >;
+    create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
     connect?: PaymentMetaWhereUniqueInput;
   };
 
   export type OrderItemCreateNestedManyWithoutOrderInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutOrderInput,
-          OrderItemUncheckedCreateWithoutOrderInput
-        >
+      | XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>
       | OrderItemCreateWithoutOrderInput[]
       | OrderItemUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutOrderInput
-      | OrderItemCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[];
     createMany?: OrderItemCreateManyOrderInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
   };
 
   export type AddressCreateNestedOneWithoutOrdersShippingInput = {
-    create?: XOR<
-      AddressCreateWithoutOrdersShippingInput,
-      AddressUncheckedCreateWithoutOrdersShippingInput
-    >;
+    create?: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
     connectOrCreate?: AddressCreateOrConnectWithoutOrdersShippingInput;
     connect?: AddressWhereUniqueInput;
   };
 
   export type AddressCreateNestedOneWithoutOrdersBillingInput = {
-    create?: XOR<
-      AddressCreateWithoutOrdersBillingInput,
-      AddressUncheckedCreateWithoutOrdersBillingInput
-    >;
+    create?: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
     connectOrCreate?: AddressCreateOrConnectWithoutOrdersBillingInput;
     connect?: AddressWhereUniqueInput;
   };
 
   export type CouponCreateNestedOneWithoutOrderInput = {
-    create?: XOR<
-      CouponCreateWithoutOrderInput,
-      CouponUncheckedCreateWithoutOrderInput
-    >;
+    create?: XOR<CouponCreateWithoutOrderInput, CouponUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: CouponCreateOrConnectWithoutOrderInput;
     connect?: CouponWhereUniqueInput;
   };
 
   export type ReturnRequestCreateNestedManyWithoutOrderInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderInput,
-          ReturnRequestUncheckedCreateWithoutOrderInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderInput, ReturnRequestUncheckedCreateWithoutOrderInput>
       | ReturnRequestCreateWithoutOrderInput[]
       | ReturnRequestUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | ReturnRequestCreateOrConnectWithoutOrderInput
-      | ReturnRequestCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: ReturnRequestCreateOrConnectWithoutOrderInput | ReturnRequestCreateOrConnectWithoutOrderInput[];
     createMany?: ReturnRequestCreateManyOrderInputEnvelope;
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
   };
 
   export type RefundCreateNestedManyWithoutOrderInput = {
     create?:
-      | XOR<
-          RefundCreateWithoutOrderInput,
-          RefundUncheckedCreateWithoutOrderInput
-        >
+      | XOR<RefundCreateWithoutOrderInput, RefundUncheckedCreateWithoutOrderInput>
       | RefundCreateWithoutOrderInput[]
       | RefundUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | RefundCreateOrConnectWithoutOrderInput
-      | RefundCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: RefundCreateOrConnectWithoutOrderInput | RefundCreateOrConnectWithoutOrderInput[];
     createMany?: RefundCreateManyOrderInputEnvelope;
     connect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
   };
 
   export type PaymentMetaUncheckedCreateNestedOneWithoutOrderInput = {
-    create?: XOR<
-      PaymentMetaCreateWithoutOrderInput,
-      PaymentMetaUncheckedCreateWithoutOrderInput
-    >;
+    create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
     connect?: PaymentMetaWhereUniqueInput;
   };
 
   export type OrderItemUncheckedCreateNestedManyWithoutOrderInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutOrderInput,
-          OrderItemUncheckedCreateWithoutOrderInput
-        >
+      | XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>
       | OrderItemCreateWithoutOrderInput[]
       | OrderItemUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutOrderInput
-      | OrderItemCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[];
     createMany?: OrderItemCreateManyOrderInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
   };
 
   export type ReturnRequestUncheckedCreateNestedManyWithoutOrderInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderInput,
-          ReturnRequestUncheckedCreateWithoutOrderInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderInput, ReturnRequestUncheckedCreateWithoutOrderInput>
       | ReturnRequestCreateWithoutOrderInput[]
       | ReturnRequestUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | ReturnRequestCreateOrConnectWithoutOrderInput
-      | ReturnRequestCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: ReturnRequestCreateOrConnectWithoutOrderInput | ReturnRequestCreateOrConnectWithoutOrderInput[];
     createMany?: ReturnRequestCreateManyOrderInputEnvelope;
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
   };
 
   export type RefundUncheckedCreateNestedManyWithoutOrderInput = {
     create?:
-      | XOR<
-          RefundCreateWithoutOrderInput,
-          RefundUncheckedCreateWithoutOrderInput
-        >
+      | XOR<RefundCreateWithoutOrderInput, RefundUncheckedCreateWithoutOrderInput>
       | RefundCreateWithoutOrderInput[]
       | RefundUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | RefundCreateOrConnectWithoutOrderInput
-      | RefundCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: RefundCreateOrConnectWithoutOrderInput | RefundCreateOrConnectWithoutOrderInput[];
     createMany?: RefundCreateManyOrderInputEnvelope;
     connect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
   };
@@ -35092,147 +32464,99 @@ export namespace Prisma {
   };
 
   export type UserUpdateOneWithoutOrdersNestedInput = {
-    create?: XOR<
-      UserCreateWithoutOrdersInput,
-      UserUncheckedCreateWithoutOrdersInput
-    >;
+    create?: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>;
     connectOrCreate?: UserCreateOrConnectWithoutOrdersInput;
     upsert?: UserUpsertWithoutOrdersInput;
     disconnect?: UserWhereInput | boolean;
     delete?: UserWhereInput | boolean;
     connect?: UserWhereUniqueInput;
     update?: XOR<
-      XOR<
-        UserUpdateToOneWithWhereWithoutOrdersInput,
-        UserUpdateWithoutOrdersInput
-      >,
+      XOR<UserUpdateToOneWithWhereWithoutOrdersInput, UserUpdateWithoutOrdersInput>,
       UserUncheckedUpdateWithoutOrdersInput
     >;
   };
 
   export type PaymentMetaUpdateOneWithoutOrderNestedInput = {
-    create?: XOR<
-      PaymentMetaCreateWithoutOrderInput,
-      PaymentMetaUncheckedCreateWithoutOrderInput
-    >;
+    create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
     upsert?: PaymentMetaUpsertWithoutOrderInput;
     disconnect?: PaymentMetaWhereInput | boolean;
     delete?: PaymentMetaWhereInput | boolean;
     connect?: PaymentMetaWhereUniqueInput;
     update?: XOR<
-      XOR<
-        PaymentMetaUpdateToOneWithWhereWithoutOrderInput,
-        PaymentMetaUpdateWithoutOrderInput
-      >,
+      XOR<PaymentMetaUpdateToOneWithWhereWithoutOrderInput, PaymentMetaUpdateWithoutOrderInput>,
       PaymentMetaUncheckedUpdateWithoutOrderInput
     >;
   };
 
   export type OrderItemUpdateManyWithoutOrderNestedInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutOrderInput,
-          OrderItemUncheckedCreateWithoutOrderInput
-        >
+      | XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>
       | OrderItemCreateWithoutOrderInput[]
       | OrderItemUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutOrderInput
-      | OrderItemCreateOrConnectWithoutOrderInput[];
-    upsert?:
-      | OrderItemUpsertWithWhereUniqueWithoutOrderInput
-      | OrderItemUpsertWithWhereUniqueWithoutOrderInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[];
+    upsert?: OrderItemUpsertWithWhereUniqueWithoutOrderInput | OrderItemUpsertWithWhereUniqueWithoutOrderInput[];
     createMany?: OrderItemCreateManyOrderInputEnvelope;
     set?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     disconnect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     delete?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-    update?:
-      | OrderItemUpdateWithWhereUniqueWithoutOrderInput
-      | OrderItemUpdateWithWhereUniqueWithoutOrderInput[];
-    updateMany?:
-      | OrderItemUpdateManyWithWhereWithoutOrderInput
-      | OrderItemUpdateManyWithWhereWithoutOrderInput[];
+    update?: OrderItemUpdateWithWhereUniqueWithoutOrderInput | OrderItemUpdateWithWhereUniqueWithoutOrderInput[];
+    updateMany?: OrderItemUpdateManyWithWhereWithoutOrderInput | OrderItemUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
   };
 
   export type AddressUpdateOneWithoutOrdersShippingNestedInput = {
-    create?: XOR<
-      AddressCreateWithoutOrdersShippingInput,
-      AddressUncheckedCreateWithoutOrdersShippingInput
-    >;
+    create?: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
     connectOrCreate?: AddressCreateOrConnectWithoutOrdersShippingInput;
     upsert?: AddressUpsertWithoutOrdersShippingInput;
     disconnect?: AddressWhereInput | boolean;
     delete?: AddressWhereInput | boolean;
     connect?: AddressWhereUniqueInput;
     update?: XOR<
-      XOR<
-        AddressUpdateToOneWithWhereWithoutOrdersShippingInput,
-        AddressUpdateWithoutOrdersShippingInput
-      >,
+      XOR<AddressUpdateToOneWithWhereWithoutOrdersShippingInput, AddressUpdateWithoutOrdersShippingInput>,
       AddressUncheckedUpdateWithoutOrdersShippingInput
     >;
   };
 
   export type AddressUpdateOneWithoutOrdersBillingNestedInput = {
-    create?: XOR<
-      AddressCreateWithoutOrdersBillingInput,
-      AddressUncheckedCreateWithoutOrdersBillingInput
-    >;
+    create?: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
     connectOrCreate?: AddressCreateOrConnectWithoutOrdersBillingInput;
     upsert?: AddressUpsertWithoutOrdersBillingInput;
     disconnect?: AddressWhereInput | boolean;
     delete?: AddressWhereInput | boolean;
     connect?: AddressWhereUniqueInput;
     update?: XOR<
-      XOR<
-        AddressUpdateToOneWithWhereWithoutOrdersBillingInput,
-        AddressUpdateWithoutOrdersBillingInput
-      >,
+      XOR<AddressUpdateToOneWithWhereWithoutOrdersBillingInput, AddressUpdateWithoutOrdersBillingInput>,
       AddressUncheckedUpdateWithoutOrdersBillingInput
     >;
   };
 
   export type CouponUpdateOneWithoutOrderNestedInput = {
-    create?: XOR<
-      CouponCreateWithoutOrderInput,
-      CouponUncheckedCreateWithoutOrderInput
-    >;
+    create?: XOR<CouponCreateWithoutOrderInput, CouponUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: CouponCreateOrConnectWithoutOrderInput;
     upsert?: CouponUpsertWithoutOrderInput;
     disconnect?: CouponWhereInput | boolean;
     delete?: CouponWhereInput | boolean;
     connect?: CouponWhereUniqueInput;
     update?: XOR<
-      XOR<
-        CouponUpdateToOneWithWhereWithoutOrderInput,
-        CouponUpdateWithoutOrderInput
-      >,
+      XOR<CouponUpdateToOneWithWhereWithoutOrderInput, CouponUpdateWithoutOrderInput>,
       CouponUncheckedUpdateWithoutOrderInput
     >;
   };
 
   export type ReturnRequestUpdateManyWithoutOrderNestedInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderInput,
-          ReturnRequestUncheckedCreateWithoutOrderInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderInput, ReturnRequestUncheckedCreateWithoutOrderInput>
       | ReturnRequestCreateWithoutOrderInput[]
       | ReturnRequestUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | ReturnRequestCreateOrConnectWithoutOrderInput
-      | ReturnRequestCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: ReturnRequestCreateOrConnectWithoutOrderInput | ReturnRequestCreateOrConnectWithoutOrderInput[];
     upsert?:
       | ReturnRequestUpsertWithWhereUniqueWithoutOrderInput
       | ReturnRequestUpsertWithWhereUniqueWithoutOrderInput[];
     createMany?: ReturnRequestCreateManyOrderInputEnvelope;
     set?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
-    disconnect?:
-      | ReturnRequestWhereUniqueInput
-      | ReturnRequestWhereUniqueInput[];
+    disconnect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     delete?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     update?:
@@ -35241,36 +32565,23 @@ export namespace Prisma {
     updateMany?:
       | ReturnRequestUpdateManyWithWhereWithoutOrderInput
       | ReturnRequestUpdateManyWithWhereWithoutOrderInput[];
-    deleteMany?:
-      | ReturnRequestScalarWhereInput
-      | ReturnRequestScalarWhereInput[];
+    deleteMany?: ReturnRequestScalarWhereInput | ReturnRequestScalarWhereInput[];
   };
 
   export type RefundUpdateManyWithoutOrderNestedInput = {
     create?:
-      | XOR<
-          RefundCreateWithoutOrderInput,
-          RefundUncheckedCreateWithoutOrderInput
-        >
+      | XOR<RefundCreateWithoutOrderInput, RefundUncheckedCreateWithoutOrderInput>
       | RefundCreateWithoutOrderInput[]
       | RefundUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | RefundCreateOrConnectWithoutOrderInput
-      | RefundCreateOrConnectWithoutOrderInput[];
-    upsert?:
-      | RefundUpsertWithWhereUniqueWithoutOrderInput
-      | RefundUpsertWithWhereUniqueWithoutOrderInput[];
+    connectOrCreate?: RefundCreateOrConnectWithoutOrderInput | RefundCreateOrConnectWithoutOrderInput[];
+    upsert?: RefundUpsertWithWhereUniqueWithoutOrderInput | RefundUpsertWithWhereUniqueWithoutOrderInput[];
     createMany?: RefundCreateManyOrderInputEnvelope;
     set?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
     disconnect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
     delete?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
     connect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
-    update?:
-      | RefundUpdateWithWhereUniqueWithoutOrderInput
-      | RefundUpdateWithWhereUniqueWithoutOrderInput[];
-    updateMany?:
-      | RefundUpdateManyWithWhereWithoutOrderInput
-      | RefundUpdateManyWithWhereWithoutOrderInput[];
+    update?: RefundUpdateWithWhereUniqueWithoutOrderInput | RefundUpdateWithWhereUniqueWithoutOrderInput[];
+    updateMany?: RefundUpdateManyWithWhereWithoutOrderInput | RefundUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: RefundScalarWhereInput | RefundScalarWhereInput[];
   };
 
@@ -35283,71 +32594,47 @@ export namespace Prisma {
   };
 
   export type PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput = {
-    create?: XOR<
-      PaymentMetaCreateWithoutOrderInput,
-      PaymentMetaUncheckedCreateWithoutOrderInput
-    >;
+    create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
     upsert?: PaymentMetaUpsertWithoutOrderInput;
     disconnect?: PaymentMetaWhereInput | boolean;
     delete?: PaymentMetaWhereInput | boolean;
     connect?: PaymentMetaWhereUniqueInput;
     update?: XOR<
-      XOR<
-        PaymentMetaUpdateToOneWithWhereWithoutOrderInput,
-        PaymentMetaUpdateWithoutOrderInput
-      >,
+      XOR<PaymentMetaUpdateToOneWithWhereWithoutOrderInput, PaymentMetaUpdateWithoutOrderInput>,
       PaymentMetaUncheckedUpdateWithoutOrderInput
     >;
   };
 
   export type OrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
     create?:
-      | XOR<
-          OrderItemCreateWithoutOrderInput,
-          OrderItemUncheckedCreateWithoutOrderInput
-        >
+      | XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>
       | OrderItemCreateWithoutOrderInput[]
       | OrderItemUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | OrderItemCreateOrConnectWithoutOrderInput
-      | OrderItemCreateOrConnectWithoutOrderInput[];
-    upsert?:
-      | OrderItemUpsertWithWhereUniqueWithoutOrderInput
-      | OrderItemUpsertWithWhereUniqueWithoutOrderInput[];
+    connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[];
+    upsert?: OrderItemUpsertWithWhereUniqueWithoutOrderInput | OrderItemUpsertWithWhereUniqueWithoutOrderInput[];
     createMany?: OrderItemCreateManyOrderInputEnvelope;
     set?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     disconnect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     delete?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-    update?:
-      | OrderItemUpdateWithWhereUniqueWithoutOrderInput
-      | OrderItemUpdateWithWhereUniqueWithoutOrderInput[];
-    updateMany?:
-      | OrderItemUpdateManyWithWhereWithoutOrderInput
-      | OrderItemUpdateManyWithWhereWithoutOrderInput[];
+    update?: OrderItemUpdateWithWhereUniqueWithoutOrderInput | OrderItemUpdateWithWhereUniqueWithoutOrderInput[];
+    updateMany?: OrderItemUpdateManyWithWhereWithoutOrderInput | OrderItemUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
   };
 
   export type ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderInput,
-          ReturnRequestUncheckedCreateWithoutOrderInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderInput, ReturnRequestUncheckedCreateWithoutOrderInput>
       | ReturnRequestCreateWithoutOrderInput[]
       | ReturnRequestUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | ReturnRequestCreateOrConnectWithoutOrderInput
-      | ReturnRequestCreateOrConnectWithoutOrderInput[];
+    connectOrCreate?: ReturnRequestCreateOrConnectWithoutOrderInput | ReturnRequestCreateOrConnectWithoutOrderInput[];
     upsert?:
       | ReturnRequestUpsertWithWhereUniqueWithoutOrderInput
       | ReturnRequestUpsertWithWhereUniqueWithoutOrderInput[];
     createMany?: ReturnRequestCreateManyOrderInputEnvelope;
     set?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
-    disconnect?:
-      | ReturnRequestWhereUniqueInput
-      | ReturnRequestWhereUniqueInput[];
+    disconnect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     delete?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     update?:
@@ -35356,72 +32643,47 @@ export namespace Prisma {
     updateMany?:
       | ReturnRequestUpdateManyWithWhereWithoutOrderInput
       | ReturnRequestUpdateManyWithWhereWithoutOrderInput[];
-    deleteMany?:
-      | ReturnRequestScalarWhereInput
-      | ReturnRequestScalarWhereInput[];
+    deleteMany?: ReturnRequestScalarWhereInput | ReturnRequestScalarWhereInput[];
   };
 
   export type RefundUncheckedUpdateManyWithoutOrderNestedInput = {
     create?:
-      | XOR<
-          RefundCreateWithoutOrderInput,
-          RefundUncheckedCreateWithoutOrderInput
-        >
+      | XOR<RefundCreateWithoutOrderInput, RefundUncheckedCreateWithoutOrderInput>
       | RefundCreateWithoutOrderInput[]
       | RefundUncheckedCreateWithoutOrderInput[];
-    connectOrCreate?:
-      | RefundCreateOrConnectWithoutOrderInput
-      | RefundCreateOrConnectWithoutOrderInput[];
-    upsert?:
-      | RefundUpsertWithWhereUniqueWithoutOrderInput
-      | RefundUpsertWithWhereUniqueWithoutOrderInput[];
+    connectOrCreate?: RefundCreateOrConnectWithoutOrderInput | RefundCreateOrConnectWithoutOrderInput[];
+    upsert?: RefundUpsertWithWhereUniqueWithoutOrderInput | RefundUpsertWithWhereUniqueWithoutOrderInput[];
     createMany?: RefundCreateManyOrderInputEnvelope;
     set?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
     disconnect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
     delete?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
     connect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
-    update?:
-      | RefundUpdateWithWhereUniqueWithoutOrderInput
-      | RefundUpdateWithWhereUniqueWithoutOrderInput[];
-    updateMany?:
-      | RefundUpdateManyWithWhereWithoutOrderInput
-      | RefundUpdateManyWithWhereWithoutOrderInput[];
+    update?: RefundUpdateWithWhereUniqueWithoutOrderInput | RefundUpdateWithWhereUniqueWithoutOrderInput[];
+    updateMany?: RefundUpdateManyWithWhereWithoutOrderInput | RefundUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: RefundScalarWhereInput | RefundScalarWhereInput[];
   };
 
   export type OrderCreateNestedOneWithoutItemsInput = {
-    create?: XOR<
-      OrderCreateWithoutItemsInput,
-      OrderUncheckedCreateWithoutItemsInput
-    >;
+    create?: XOR<OrderCreateWithoutItemsInput, OrderUncheckedCreateWithoutItemsInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutItemsInput;
     connect?: OrderWhereUniqueInput;
   };
 
   export type ProductCreateNestedOneWithoutOrderItemInput = {
-    create?: XOR<
-      ProductCreateWithoutOrderItemInput,
-      ProductUncheckedCreateWithoutOrderItemInput
-    >;
+    create?: XOR<ProductCreateWithoutOrderItemInput, ProductUncheckedCreateWithoutOrderItemInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutOrderItemInput;
     connect?: ProductWhereUniqueInput;
   };
 
   export type ProductVariantCreateNestedOneWithoutOrderItemInput = {
-    create?: XOR<
-      ProductVariantCreateWithoutOrderItemInput,
-      ProductVariantUncheckedCreateWithoutOrderItemInput
-    >;
+    create?: XOR<ProductVariantCreateWithoutOrderItemInput, ProductVariantUncheckedCreateWithoutOrderItemInput>;
     connectOrCreate?: ProductVariantCreateOrConnectWithoutOrderItemInput;
     connect?: ProductVariantWhereUniqueInput;
   };
 
   export type ReturnRequestCreateNestedManyWithoutOrderItemInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderItemInput,
-          ReturnRequestUncheckedCreateWithoutOrderItemInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderItemInput, ReturnRequestUncheckedCreateWithoutOrderItemInput>
       | ReturnRequestCreateWithoutOrderItemInput[]
       | ReturnRequestUncheckedCreateWithoutOrderItemInput[];
     connectOrCreate?:
@@ -35433,10 +32695,7 @@ export namespace Prisma {
 
   export type ReturnRequestUncheckedCreateNestedManyWithoutOrderItemInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderItemInput,
-          ReturnRequestUncheckedCreateWithoutOrderItemInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderItemInput, ReturnRequestUncheckedCreateWithoutOrderItemInput>
       | ReturnRequestCreateWithoutOrderItemInput[]
       | ReturnRequestUncheckedCreateWithoutOrderItemInput[];
     connectOrCreate?:
@@ -35446,71 +32705,46 @@ export namespace Prisma {
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
   };
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean;
-  };
-
   export type OrderUpdateOneRequiredWithoutItemsNestedInput = {
-    create?: XOR<
-      OrderCreateWithoutItemsInput,
-      OrderUncheckedCreateWithoutItemsInput
-    >;
+    create?: XOR<OrderCreateWithoutItemsInput, OrderUncheckedCreateWithoutItemsInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutItemsInput;
     upsert?: OrderUpsertWithoutItemsInput;
     connect?: OrderWhereUniqueInput;
     update?: XOR<
-      XOR<
-        OrderUpdateToOneWithWhereWithoutItemsInput,
-        OrderUpdateWithoutItemsInput
-      >,
+      XOR<OrderUpdateToOneWithWhereWithoutItemsInput, OrderUpdateWithoutItemsInput>,
       OrderUncheckedUpdateWithoutItemsInput
     >;
   };
 
   export type ProductUpdateOneWithoutOrderItemNestedInput = {
-    create?: XOR<
-      ProductCreateWithoutOrderItemInput,
-      ProductUncheckedCreateWithoutOrderItemInput
-    >;
+    create?: XOR<ProductCreateWithoutOrderItemInput, ProductUncheckedCreateWithoutOrderItemInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutOrderItemInput;
     upsert?: ProductUpsertWithoutOrderItemInput;
     disconnect?: ProductWhereInput | boolean;
     delete?: ProductWhereInput | boolean;
     connect?: ProductWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ProductUpdateToOneWithWhereWithoutOrderItemInput,
-        ProductUpdateWithoutOrderItemInput
-      >,
+      XOR<ProductUpdateToOneWithWhereWithoutOrderItemInput, ProductUpdateWithoutOrderItemInput>,
       ProductUncheckedUpdateWithoutOrderItemInput
     >;
   };
 
   export type ProductVariantUpdateOneWithoutOrderItemNestedInput = {
-    create?: XOR<
-      ProductVariantCreateWithoutOrderItemInput,
-      ProductVariantUncheckedCreateWithoutOrderItemInput
-    >;
+    create?: XOR<ProductVariantCreateWithoutOrderItemInput, ProductVariantUncheckedCreateWithoutOrderItemInput>;
     connectOrCreate?: ProductVariantCreateOrConnectWithoutOrderItemInput;
     upsert?: ProductVariantUpsertWithoutOrderItemInput;
     disconnect?: ProductVariantWhereInput | boolean;
     delete?: ProductVariantWhereInput | boolean;
     connect?: ProductVariantWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ProductVariantUpdateToOneWithWhereWithoutOrderItemInput,
-        ProductVariantUpdateWithoutOrderItemInput
-      >,
+      XOR<ProductVariantUpdateToOneWithWhereWithoutOrderItemInput, ProductVariantUpdateWithoutOrderItemInput>,
       ProductVariantUncheckedUpdateWithoutOrderItemInput
     >;
   };
 
   export type ReturnRequestUpdateManyWithoutOrderItemNestedInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderItemInput,
-          ReturnRequestUncheckedCreateWithoutOrderItemInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderItemInput, ReturnRequestUncheckedCreateWithoutOrderItemInput>
       | ReturnRequestCreateWithoutOrderItemInput[]
       | ReturnRequestUncheckedCreateWithoutOrderItemInput[];
     connectOrCreate?:
@@ -35521,9 +32755,7 @@ export namespace Prisma {
       | ReturnRequestUpsertWithWhereUniqueWithoutOrderItemInput[];
     createMany?: ReturnRequestCreateManyOrderItemInputEnvelope;
     set?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
-    disconnect?:
-      | ReturnRequestWhereUniqueInput
-      | ReturnRequestWhereUniqueInput[];
+    disconnect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     delete?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     update?:
@@ -35532,17 +32764,12 @@ export namespace Prisma {
     updateMany?:
       | ReturnRequestUpdateManyWithWhereWithoutOrderItemInput
       | ReturnRequestUpdateManyWithWhereWithoutOrderItemInput[];
-    deleteMany?:
-      | ReturnRequestScalarWhereInput
-      | ReturnRequestScalarWhereInput[];
+    deleteMany?: ReturnRequestScalarWhereInput | ReturnRequestScalarWhereInput[];
   };
 
   export type ReturnRequestUncheckedUpdateManyWithoutOrderItemNestedInput = {
     create?:
-      | XOR<
-          ReturnRequestCreateWithoutOrderItemInput,
-          ReturnRequestUncheckedCreateWithoutOrderItemInput
-        >
+      | XOR<ReturnRequestCreateWithoutOrderItemInput, ReturnRequestUncheckedCreateWithoutOrderItemInput>
       | ReturnRequestCreateWithoutOrderItemInput[]
       | ReturnRequestUncheckedCreateWithoutOrderItemInput[];
     connectOrCreate?:
@@ -35553,9 +32780,7 @@ export namespace Prisma {
       | ReturnRequestUpsertWithWhereUniqueWithoutOrderItemInput[];
     createMany?: ReturnRequestCreateManyOrderItemInputEnvelope;
     set?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
-    disconnect?:
-      | ReturnRequestWhereUniqueInput
-      | ReturnRequestWhereUniqueInput[];
+    disconnect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     delete?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     connect?: ReturnRequestWhereUniqueInput | ReturnRequestWhereUniqueInput[];
     update?:
@@ -35564,37 +32789,25 @@ export namespace Prisma {
     updateMany?:
       | ReturnRequestUpdateManyWithWhereWithoutOrderItemInput
       | ReturnRequestUpdateManyWithWhereWithoutOrderItemInput[];
-    deleteMany?:
-      | ReturnRequestScalarWhereInput
-      | ReturnRequestScalarWhereInput[];
+    deleteMany?: ReturnRequestScalarWhereInput | ReturnRequestScalarWhereInput[];
   };
 
   export type OrderCreateNestedManyWithoutCouponInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutCouponInput,
-          OrderUncheckedCreateWithoutCouponInput
-        >
+      | XOR<OrderCreateWithoutCouponInput, OrderUncheckedCreateWithoutCouponInput>
       | OrderCreateWithoutCouponInput[]
       | OrderUncheckedCreateWithoutCouponInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutCouponInput
-      | OrderCreateOrConnectWithoutCouponInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutCouponInput | OrderCreateOrConnectWithoutCouponInput[];
     createMany?: OrderCreateManyCouponInputEnvelope;
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
   };
 
   export type OrderUncheckedCreateNestedManyWithoutCouponInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutCouponInput,
-          OrderUncheckedCreateWithoutCouponInput
-        >
+      | XOR<OrderCreateWithoutCouponInput, OrderUncheckedCreateWithoutCouponInput>
       | OrderCreateWithoutCouponInput[]
       | OrderUncheckedCreateWithoutCouponInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutCouponInput
-      | OrderCreateOrConnectWithoutCouponInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutCouponInput | OrderCreateOrConnectWithoutCouponInput[];
     createMany?: OrderCreateManyCouponInputEnvelope;
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
   };
@@ -35605,129 +32818,83 @@ export namespace Prisma {
 
   export type OrderUpdateManyWithoutCouponNestedInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutCouponInput,
-          OrderUncheckedCreateWithoutCouponInput
-        >
+      | XOR<OrderCreateWithoutCouponInput, OrderUncheckedCreateWithoutCouponInput>
       | OrderCreateWithoutCouponInput[]
       | OrderUncheckedCreateWithoutCouponInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutCouponInput
-      | OrderCreateOrConnectWithoutCouponInput[];
-    upsert?:
-      | OrderUpsertWithWhereUniqueWithoutCouponInput
-      | OrderUpsertWithWhereUniqueWithoutCouponInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutCouponInput | OrderCreateOrConnectWithoutCouponInput[];
+    upsert?: OrderUpsertWithWhereUniqueWithoutCouponInput | OrderUpsertWithWhereUniqueWithoutCouponInput[];
     createMany?: OrderCreateManyCouponInputEnvelope;
     set?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
-    update?:
-      | OrderUpdateWithWhereUniqueWithoutCouponInput
-      | OrderUpdateWithWhereUniqueWithoutCouponInput[];
-    updateMany?:
-      | OrderUpdateManyWithWhereWithoutCouponInput
-      | OrderUpdateManyWithWhereWithoutCouponInput[];
+    update?: OrderUpdateWithWhereUniqueWithoutCouponInput | OrderUpdateWithWhereUniqueWithoutCouponInput[];
+    updateMany?: OrderUpdateManyWithWhereWithoutCouponInput | OrderUpdateManyWithWhereWithoutCouponInput[];
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[];
   };
 
   export type OrderUncheckedUpdateManyWithoutCouponNestedInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutCouponInput,
-          OrderUncheckedCreateWithoutCouponInput
-        >
+      | XOR<OrderCreateWithoutCouponInput, OrderUncheckedCreateWithoutCouponInput>
       | OrderCreateWithoutCouponInput[]
       | OrderUncheckedCreateWithoutCouponInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutCouponInput
-      | OrderCreateOrConnectWithoutCouponInput[];
-    upsert?:
-      | OrderUpsertWithWhereUniqueWithoutCouponInput
-      | OrderUpsertWithWhereUniqueWithoutCouponInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutCouponInput | OrderCreateOrConnectWithoutCouponInput[];
+    upsert?: OrderUpsertWithWhereUniqueWithoutCouponInput | OrderUpsertWithWhereUniqueWithoutCouponInput[];
     createMany?: OrderCreateManyCouponInputEnvelope;
     set?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
-    update?:
-      | OrderUpdateWithWhereUniqueWithoutCouponInput
-      | OrderUpdateWithWhereUniqueWithoutCouponInput[];
-    updateMany?:
-      | OrderUpdateManyWithWhereWithoutCouponInput
-      | OrderUpdateManyWithWhereWithoutCouponInput[];
+    update?: OrderUpdateWithWhereUniqueWithoutCouponInput | OrderUpdateWithWhereUniqueWithoutCouponInput[];
+    updateMany?: OrderUpdateManyWithWhereWithoutCouponInput | OrderUpdateManyWithWhereWithoutCouponInput[];
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[];
   };
 
   export type UserCreateNestedOneWithoutReviewsInput = {
-    create?: XOR<
-      UserCreateWithoutReviewsInput,
-      UserUncheckedCreateWithoutReviewsInput
-    >;
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>;
     connectOrCreate?: UserCreateOrConnectWithoutReviewsInput;
     connect?: UserWhereUniqueInput;
   };
 
   export type ProductCreateNestedOneWithoutReviewsInput = {
-    create?: XOR<
-      ProductCreateWithoutReviewsInput,
-      ProductUncheckedCreateWithoutReviewsInput
-    >;
+    create?: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput;
     connect?: ProductWhereUniqueInput;
   };
 
   export type UserUpdateOneWithoutReviewsNestedInput = {
-    create?: XOR<
-      UserCreateWithoutReviewsInput,
-      UserUncheckedCreateWithoutReviewsInput
-    >;
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>;
     connectOrCreate?: UserCreateOrConnectWithoutReviewsInput;
     upsert?: UserUpsertWithoutReviewsInput;
     disconnect?: UserWhereInput | boolean;
     delete?: UserWhereInput | boolean;
     connect?: UserWhereUniqueInput;
     update?: XOR<
-      XOR<
-        UserUpdateToOneWithWhereWithoutReviewsInput,
-        UserUpdateWithoutReviewsInput
-      >,
+      XOR<UserUpdateToOneWithWhereWithoutReviewsInput, UserUpdateWithoutReviewsInput>,
       UserUncheckedUpdateWithoutReviewsInput
     >;
   };
 
   export type ProductUpdateOneRequiredWithoutReviewsNestedInput = {
-    create?: XOR<
-      ProductCreateWithoutReviewsInput,
-      ProductUncheckedCreateWithoutReviewsInput
-    >;
+    create?: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput;
     upsert?: ProductUpsertWithoutReviewsInput;
     connect?: ProductWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ProductUpdateToOneWithWhereWithoutReviewsInput,
-        ProductUpdateWithoutReviewsInput
-      >,
+      XOR<ProductUpdateToOneWithWhereWithoutReviewsInput, ProductUpdateWithoutReviewsInput>,
       ProductUncheckedUpdateWithoutReviewsInput
     >;
   };
 
   export type UserCreateNestedOneWithoutWishlistInput = {
-    create?: XOR<
-      UserCreateWithoutWishlistInput,
-      UserUncheckedCreateWithoutWishlistInput
-    >;
+    create?: XOR<UserCreateWithoutWishlistInput, UserUncheckedCreateWithoutWishlistInput>;
     connectOrCreate?: UserCreateOrConnectWithoutWishlistInput;
     connect?: UserWhereUniqueInput;
   };
 
   export type WishlistItemCreateNestedManyWithoutWishlistInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutWishlistInput,
-          WishlistItemUncheckedCreateWithoutWishlistInput
-        >
+      | XOR<WishlistItemCreateWithoutWishlistInput, WishlistItemUncheckedCreateWithoutWishlistInput>
       | WishlistItemCreateWithoutWishlistInput[]
       | WishlistItemUncheckedCreateWithoutWishlistInput[];
     connectOrCreate?:
@@ -35739,10 +32906,7 @@ export namespace Prisma {
 
   export type WishlistItemUncheckedCreateNestedManyWithoutWishlistInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutWishlistInput,
-          WishlistItemUncheckedCreateWithoutWishlistInput
-        >
+      | XOR<WishlistItemCreateWithoutWishlistInput, WishlistItemUncheckedCreateWithoutWishlistInput>
       | WishlistItemCreateWithoutWishlistInput[]
       | WishlistItemUncheckedCreateWithoutWishlistInput[];
     connectOrCreate?:
@@ -35753,28 +32917,19 @@ export namespace Prisma {
   };
 
   export type UserUpdateOneRequiredWithoutWishlistNestedInput = {
-    create?: XOR<
-      UserCreateWithoutWishlistInput,
-      UserUncheckedCreateWithoutWishlistInput
-    >;
+    create?: XOR<UserCreateWithoutWishlistInput, UserUncheckedCreateWithoutWishlistInput>;
     connectOrCreate?: UserCreateOrConnectWithoutWishlistInput;
     upsert?: UserUpsertWithoutWishlistInput;
     connect?: UserWhereUniqueInput;
     update?: XOR<
-      XOR<
-        UserUpdateToOneWithWhereWithoutWishlistInput,
-        UserUpdateWithoutWishlistInput
-      >,
+      XOR<UserUpdateToOneWithWhereWithoutWishlistInput, UserUpdateWithoutWishlistInput>,
       UserUncheckedUpdateWithoutWishlistInput
     >;
   };
 
   export type WishlistItemUpdateManyWithoutWishlistNestedInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutWishlistInput,
-          WishlistItemUncheckedCreateWithoutWishlistInput
-        >
+      | XOR<WishlistItemCreateWithoutWishlistInput, WishlistItemUncheckedCreateWithoutWishlistInput>
       | WishlistItemCreateWithoutWishlistInput[]
       | WishlistItemUncheckedCreateWithoutWishlistInput[];
     connectOrCreate?:
@@ -35799,10 +32954,7 @@ export namespace Prisma {
 
   export type WishlistItemUncheckedUpdateManyWithoutWishlistNestedInput = {
     create?:
-      | XOR<
-          WishlistItemCreateWithoutWishlistInput,
-          WishlistItemUncheckedCreateWithoutWishlistInput
-        >
+      | XOR<WishlistItemCreateWithoutWishlistInput, WishlistItemUncheckedCreateWithoutWishlistInput>
       | WishlistItemCreateWithoutWishlistInput[]
       | WishlistItemUncheckedCreateWithoutWishlistInput[];
     connectOrCreate?:
@@ -35826,72 +32978,48 @@ export namespace Prisma {
   };
 
   export type WishlistCreateNestedOneWithoutItemsInput = {
-    create?: XOR<
-      WishlistCreateWithoutItemsInput,
-      WishlistUncheckedCreateWithoutItemsInput
-    >;
+    create?: XOR<WishlistCreateWithoutItemsInput, WishlistUncheckedCreateWithoutItemsInput>;
     connectOrCreate?: WishlistCreateOrConnectWithoutItemsInput;
     connect?: WishlistWhereUniqueInput;
   };
 
   export type ProductCreateNestedOneWithoutWishlistItemInput = {
-    create?: XOR<
-      ProductCreateWithoutWishlistItemInput,
-      ProductUncheckedCreateWithoutWishlistItemInput
-    >;
+    create?: XOR<ProductCreateWithoutWishlistItemInput, ProductUncheckedCreateWithoutWishlistItemInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutWishlistItemInput;
     connect?: ProductWhereUniqueInput;
   };
 
   export type WishlistUpdateOneRequiredWithoutItemsNestedInput = {
-    create?: XOR<
-      WishlistCreateWithoutItemsInput,
-      WishlistUncheckedCreateWithoutItemsInput
-    >;
+    create?: XOR<WishlistCreateWithoutItemsInput, WishlistUncheckedCreateWithoutItemsInput>;
     connectOrCreate?: WishlistCreateOrConnectWithoutItemsInput;
     upsert?: WishlistUpsertWithoutItemsInput;
     connect?: WishlistWhereUniqueInput;
     update?: XOR<
-      XOR<
-        WishlistUpdateToOneWithWhereWithoutItemsInput,
-        WishlistUpdateWithoutItemsInput
-      >,
+      XOR<WishlistUpdateToOneWithWhereWithoutItemsInput, WishlistUpdateWithoutItemsInput>,
       WishlistUncheckedUpdateWithoutItemsInput
     >;
   };
 
   export type ProductUpdateOneRequiredWithoutWishlistItemNestedInput = {
-    create?: XOR<
-      ProductCreateWithoutWishlistItemInput,
-      ProductUncheckedCreateWithoutWishlistItemInput
-    >;
+    create?: XOR<ProductCreateWithoutWishlistItemInput, ProductUncheckedCreateWithoutWishlistItemInput>;
     connectOrCreate?: ProductCreateOrConnectWithoutWishlistItemInput;
     upsert?: ProductUpsertWithoutWishlistItemInput;
     connect?: ProductWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ProductUpdateToOneWithWhereWithoutWishlistItemInput,
-        ProductUpdateWithoutWishlistItemInput
-      >,
+      XOR<ProductUpdateToOneWithWhereWithoutWishlistItemInput, ProductUpdateWithoutWishlistItemInput>,
       ProductUncheckedUpdateWithoutWishlistItemInput
     >;
   };
 
   export type UserCreateNestedOneWithoutAddressesInput = {
-    create?: XOR<
-      UserCreateWithoutAddressesInput,
-      UserUncheckedCreateWithoutAddressesInput
-    >;
+    create?: XOR<UserCreateWithoutAddressesInput, UserUncheckedCreateWithoutAddressesInput>;
     connectOrCreate?: UserCreateOrConnectWithoutAddressesInput;
     connect?: UserWhereUniqueInput;
   };
 
   export type OrderCreateNestedManyWithoutShippingAddressInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutShippingAddressInput,
-          OrderUncheckedCreateWithoutShippingAddressInput
-        >
+      | XOR<OrderCreateWithoutShippingAddressInput, OrderUncheckedCreateWithoutShippingAddressInput>
       | OrderCreateWithoutShippingAddressInput[]
       | OrderUncheckedCreateWithoutShippingAddressInput[];
     connectOrCreate?:
@@ -35903,25 +33031,17 @@ export namespace Prisma {
 
   export type OrderCreateNestedManyWithoutBillingAddressInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutBillingAddressInput,
-          OrderUncheckedCreateWithoutBillingAddressInput
-        >
+      | XOR<OrderCreateWithoutBillingAddressInput, OrderUncheckedCreateWithoutBillingAddressInput>
       | OrderCreateWithoutBillingAddressInput[]
       | OrderUncheckedCreateWithoutBillingAddressInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutBillingAddressInput
-      | OrderCreateOrConnectWithoutBillingAddressInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutBillingAddressInput | OrderCreateOrConnectWithoutBillingAddressInput[];
     createMany?: OrderCreateManyBillingAddressInputEnvelope;
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
   };
 
   export type OrderUncheckedCreateNestedManyWithoutShippingAddressInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutShippingAddressInput,
-          OrderUncheckedCreateWithoutShippingAddressInput
-        >
+      | XOR<OrderCreateWithoutShippingAddressInput, OrderUncheckedCreateWithoutShippingAddressInput>
       | OrderCreateWithoutShippingAddressInput[]
       | OrderUncheckedCreateWithoutShippingAddressInput[];
     connectOrCreate?:
@@ -35933,44 +33053,30 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateNestedManyWithoutBillingAddressInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutBillingAddressInput,
-          OrderUncheckedCreateWithoutBillingAddressInput
-        >
+      | XOR<OrderCreateWithoutBillingAddressInput, OrderUncheckedCreateWithoutBillingAddressInput>
       | OrderCreateWithoutBillingAddressInput[]
       | OrderUncheckedCreateWithoutBillingAddressInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutBillingAddressInput
-      | OrderCreateOrConnectWithoutBillingAddressInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutBillingAddressInput | OrderCreateOrConnectWithoutBillingAddressInput[];
     createMany?: OrderCreateManyBillingAddressInputEnvelope;
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[];
   };
 
   export type UserUpdateOneWithoutAddressesNestedInput = {
-    create?: XOR<
-      UserCreateWithoutAddressesInput,
-      UserUncheckedCreateWithoutAddressesInput
-    >;
+    create?: XOR<UserCreateWithoutAddressesInput, UserUncheckedCreateWithoutAddressesInput>;
     connectOrCreate?: UserCreateOrConnectWithoutAddressesInput;
     upsert?: UserUpsertWithoutAddressesInput;
     disconnect?: UserWhereInput | boolean;
     delete?: UserWhereInput | boolean;
     connect?: UserWhereUniqueInput;
     update?: XOR<
-      XOR<
-        UserUpdateToOneWithWhereWithoutAddressesInput,
-        UserUpdateWithoutAddressesInput
-      >,
+      XOR<UserUpdateToOneWithWhereWithoutAddressesInput, UserUpdateWithoutAddressesInput>,
       UserUncheckedUpdateWithoutAddressesInput
     >;
   };
 
   export type OrderUpdateManyWithoutShippingAddressNestedInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutShippingAddressInput,
-          OrderUncheckedCreateWithoutShippingAddressInput
-        >
+      | XOR<OrderCreateWithoutShippingAddressInput, OrderUncheckedCreateWithoutShippingAddressInput>
       | OrderCreateWithoutShippingAddressInput[]
       | OrderUncheckedCreateWithoutShippingAddressInput[];
     connectOrCreate?:
@@ -35995,15 +33101,10 @@ export namespace Prisma {
 
   export type OrderUpdateManyWithoutBillingAddressNestedInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutBillingAddressInput,
-          OrderUncheckedCreateWithoutBillingAddressInput
-        >
+      | XOR<OrderCreateWithoutBillingAddressInput, OrderUncheckedCreateWithoutBillingAddressInput>
       | OrderCreateWithoutBillingAddressInput[]
       | OrderUncheckedCreateWithoutBillingAddressInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutBillingAddressInput
-      | OrderCreateOrConnectWithoutBillingAddressInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutBillingAddressInput | OrderCreateOrConnectWithoutBillingAddressInput[];
     upsert?:
       | OrderUpsertWithWhereUniqueWithoutBillingAddressInput
       | OrderUpsertWithWhereUniqueWithoutBillingAddressInput[];
@@ -36023,10 +33124,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutShippingAddressNestedInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutShippingAddressInput,
-          OrderUncheckedCreateWithoutShippingAddressInput
-        >
+      | XOR<OrderCreateWithoutShippingAddressInput, OrderUncheckedCreateWithoutShippingAddressInput>
       | OrderCreateWithoutShippingAddressInput[]
       | OrderUncheckedCreateWithoutShippingAddressInput[];
     connectOrCreate?:
@@ -36051,15 +33149,10 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutBillingAddressNestedInput = {
     create?:
-      | XOR<
-          OrderCreateWithoutBillingAddressInput,
-          OrderUncheckedCreateWithoutBillingAddressInput
-        >
+      | XOR<OrderCreateWithoutBillingAddressInput, OrderUncheckedCreateWithoutBillingAddressInput>
       | OrderCreateWithoutBillingAddressInput[]
       | OrderUncheckedCreateWithoutBillingAddressInput[];
-    connectOrCreate?:
-      | OrderCreateOrConnectWithoutBillingAddressInput
-      | OrderCreateOrConnectWithoutBillingAddressInput[];
+    connectOrCreate?: OrderCreateOrConnectWithoutBillingAddressInput | OrderCreateOrConnectWithoutBillingAddressInput[];
     upsert?:
       | OrderUpsertWithWhereUniqueWithoutBillingAddressInput
       | OrderUpsertWithWhereUniqueWithoutBillingAddressInput[];
@@ -36078,65 +33171,44 @@ export namespace Prisma {
   };
 
   export type UserCreateNestedOneWithoutAuditLogInput = {
-    create?: XOR<
-      UserCreateWithoutAuditLogInput,
-      UserUncheckedCreateWithoutAuditLogInput
-    >;
+    create?: XOR<UserCreateWithoutAuditLogInput, UserUncheckedCreateWithoutAuditLogInput>;
     connectOrCreate?: UserCreateOrConnectWithoutAuditLogInput;
     connect?: UserWhereUniqueInput;
   };
 
   export type UserUpdateOneWithoutAuditLogNestedInput = {
-    create?: XOR<
-      UserCreateWithoutAuditLogInput,
-      UserUncheckedCreateWithoutAuditLogInput
-    >;
+    create?: XOR<UserCreateWithoutAuditLogInput, UserUncheckedCreateWithoutAuditLogInput>;
     connectOrCreate?: UserCreateOrConnectWithoutAuditLogInput;
     upsert?: UserUpsertWithoutAuditLogInput;
     disconnect?: UserWhereInput | boolean;
     delete?: UserWhereInput | boolean;
     connect?: UserWhereUniqueInput;
     update?: XOR<
-      XOR<
-        UserUpdateToOneWithWhereWithoutAuditLogInput,
-        UserUpdateWithoutAuditLogInput
-      >,
+      XOR<UserUpdateToOneWithWhereWithoutAuditLogInput, UserUpdateWithoutAuditLogInput>,
       UserUncheckedUpdateWithoutAuditLogInput
     >;
   };
 
   export type OrderCreateNestedOneWithoutReturnRequestInput = {
-    create?: XOR<
-      OrderCreateWithoutReturnRequestInput,
-      OrderUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<OrderCreateWithoutReturnRequestInput, OrderUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutReturnRequestInput;
     connect?: OrderWhereUniqueInput;
   };
 
   export type OrderItemCreateNestedOneWithoutReturnRequestInput = {
-    create?: XOR<
-      OrderItemCreateWithoutReturnRequestInput,
-      OrderItemUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<OrderItemCreateWithoutReturnRequestInput, OrderItemUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: OrderItemCreateOrConnectWithoutReturnRequestInput;
     connect?: OrderItemWhereUniqueInput;
   };
 
   export type RefundCreateNestedOneWithoutReturnRequestInput = {
-    create?: XOR<
-      RefundCreateWithoutReturnRequestInput,
-      RefundUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<RefundCreateWithoutReturnRequestInput, RefundUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: RefundCreateOrConnectWithoutReturnRequestInput;
     connect?: RefundWhereUniqueInput;
   };
 
   export type RefundUncheckedCreateNestedOneWithoutReturnRequestInput = {
-    create?: XOR<
-      RefundCreateWithoutReturnRequestInput,
-      RefundUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<RefundCreateWithoutReturnRequestInput, RefundUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: RefundCreateOrConnectWithoutReturnRequestInput;
     connect?: RefundWhereUniqueInput;
   };
@@ -36146,91 +33218,61 @@ export namespace Prisma {
   };
 
   export type OrderUpdateOneRequiredWithoutReturnRequestNestedInput = {
-    create?: XOR<
-      OrderCreateWithoutReturnRequestInput,
-      OrderUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<OrderCreateWithoutReturnRequestInput, OrderUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutReturnRequestInput;
     upsert?: OrderUpsertWithoutReturnRequestInput;
     connect?: OrderWhereUniqueInput;
     update?: XOR<
-      XOR<
-        OrderUpdateToOneWithWhereWithoutReturnRequestInput,
-        OrderUpdateWithoutReturnRequestInput
-      >,
+      XOR<OrderUpdateToOneWithWhereWithoutReturnRequestInput, OrderUpdateWithoutReturnRequestInput>,
       OrderUncheckedUpdateWithoutReturnRequestInput
     >;
   };
 
   export type OrderItemUpdateOneRequiredWithoutReturnRequestNestedInput = {
-    create?: XOR<
-      OrderItemCreateWithoutReturnRequestInput,
-      OrderItemUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<OrderItemCreateWithoutReturnRequestInput, OrderItemUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: OrderItemCreateOrConnectWithoutReturnRequestInput;
     upsert?: OrderItemUpsertWithoutReturnRequestInput;
     connect?: OrderItemWhereUniqueInput;
     update?: XOR<
-      XOR<
-        OrderItemUpdateToOneWithWhereWithoutReturnRequestInput,
-        OrderItemUpdateWithoutReturnRequestInput
-      >,
+      XOR<OrderItemUpdateToOneWithWhereWithoutReturnRequestInput, OrderItemUpdateWithoutReturnRequestInput>,
       OrderItemUncheckedUpdateWithoutReturnRequestInput
     >;
   };
 
   export type RefundUpdateOneWithoutReturnRequestNestedInput = {
-    create?: XOR<
-      RefundCreateWithoutReturnRequestInput,
-      RefundUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<RefundCreateWithoutReturnRequestInput, RefundUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: RefundCreateOrConnectWithoutReturnRequestInput;
     upsert?: RefundUpsertWithoutReturnRequestInput;
     disconnect?: RefundWhereInput | boolean;
     delete?: RefundWhereInput | boolean;
     connect?: RefundWhereUniqueInput;
     update?: XOR<
-      XOR<
-        RefundUpdateToOneWithWhereWithoutReturnRequestInput,
-        RefundUpdateWithoutReturnRequestInput
-      >,
+      XOR<RefundUpdateToOneWithWhereWithoutReturnRequestInput, RefundUpdateWithoutReturnRequestInput>,
       RefundUncheckedUpdateWithoutReturnRequestInput
     >;
   };
 
   export type RefundUncheckedUpdateOneWithoutReturnRequestNestedInput = {
-    create?: XOR<
-      RefundCreateWithoutReturnRequestInput,
-      RefundUncheckedCreateWithoutReturnRequestInput
-    >;
+    create?: XOR<RefundCreateWithoutReturnRequestInput, RefundUncheckedCreateWithoutReturnRequestInput>;
     connectOrCreate?: RefundCreateOrConnectWithoutReturnRequestInput;
     upsert?: RefundUpsertWithoutReturnRequestInput;
     disconnect?: RefundWhereInput | boolean;
     delete?: RefundWhereInput | boolean;
     connect?: RefundWhereUniqueInput;
     update?: XOR<
-      XOR<
-        RefundUpdateToOneWithWhereWithoutReturnRequestInput,
-        RefundUpdateWithoutReturnRequestInput
-      >,
+      XOR<RefundUpdateToOneWithWhereWithoutReturnRequestInput, RefundUpdateWithoutReturnRequestInput>,
       RefundUncheckedUpdateWithoutReturnRequestInput
     >;
   };
 
   export type OrderCreateNestedOneWithoutRefundInput = {
-    create?: XOR<
-      OrderCreateWithoutRefundInput,
-      OrderUncheckedCreateWithoutRefundInput
-    >;
+    create?: XOR<OrderCreateWithoutRefundInput, OrderUncheckedCreateWithoutRefundInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutRefundInput;
     connect?: OrderWhereUniqueInput;
   };
 
   export type ReturnRequestCreateNestedOneWithoutRefundInput = {
-    create?: XOR<
-      ReturnRequestCreateWithoutRefundInput,
-      ReturnRequestUncheckedCreateWithoutRefundInput
-    >;
+    create?: XOR<ReturnRequestCreateWithoutRefundInput, ReturnRequestUncheckedCreateWithoutRefundInput>;
     connectOrCreate?: ReturnRequestCreateOrConnectWithoutRefundInput;
     connect?: ReturnRequestWhereUniqueInput;
   };
@@ -36240,63 +33282,42 @@ export namespace Prisma {
   };
 
   export type OrderUpdateOneRequiredWithoutRefundNestedInput = {
-    create?: XOR<
-      OrderCreateWithoutRefundInput,
-      OrderUncheckedCreateWithoutRefundInput
-    >;
+    create?: XOR<OrderCreateWithoutRefundInput, OrderUncheckedCreateWithoutRefundInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutRefundInput;
     upsert?: OrderUpsertWithoutRefundInput;
     connect?: OrderWhereUniqueInput;
     update?: XOR<
-      XOR<
-        OrderUpdateToOneWithWhereWithoutRefundInput,
-        OrderUpdateWithoutRefundInput
-      >,
+      XOR<OrderUpdateToOneWithWhereWithoutRefundInput, OrderUpdateWithoutRefundInput>,
       OrderUncheckedUpdateWithoutRefundInput
     >;
   };
 
   export type ReturnRequestUpdateOneWithoutRefundNestedInput = {
-    create?: XOR<
-      ReturnRequestCreateWithoutRefundInput,
-      ReturnRequestUncheckedCreateWithoutRefundInput
-    >;
+    create?: XOR<ReturnRequestCreateWithoutRefundInput, ReturnRequestUncheckedCreateWithoutRefundInput>;
     connectOrCreate?: ReturnRequestCreateOrConnectWithoutRefundInput;
     upsert?: ReturnRequestUpsertWithoutRefundInput;
     disconnect?: ReturnRequestWhereInput | boolean;
     delete?: ReturnRequestWhereInput | boolean;
     connect?: ReturnRequestWhereUniqueInput;
     update?: XOR<
-      XOR<
-        ReturnRequestUpdateToOneWithWhereWithoutRefundInput,
-        ReturnRequestUpdateWithoutRefundInput
-      >,
+      XOR<ReturnRequestUpdateToOneWithWhereWithoutRefundInput, ReturnRequestUpdateWithoutRefundInput>,
       ReturnRequestUncheckedUpdateWithoutRefundInput
     >;
   };
 
   export type OrderCreateNestedOneWithoutPaymentMetaInput = {
-    create?: XOR<
-      OrderCreateWithoutPaymentMetaInput,
-      OrderUncheckedCreateWithoutPaymentMetaInput
-    >;
+    create?: XOR<OrderCreateWithoutPaymentMetaInput, OrderUncheckedCreateWithoutPaymentMetaInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutPaymentMetaInput;
     connect?: OrderWhereUniqueInput;
   };
 
   export type OrderUpdateOneRequiredWithoutPaymentMetaNestedInput = {
-    create?: XOR<
-      OrderCreateWithoutPaymentMetaInput,
-      OrderUncheckedCreateWithoutPaymentMetaInput
-    >;
+    create?: XOR<OrderCreateWithoutPaymentMetaInput, OrderUncheckedCreateWithoutPaymentMetaInput>;
     connectOrCreate?: OrderCreateOrConnectWithoutPaymentMetaInput;
     upsert?: OrderUpsertWithoutPaymentMetaInput;
     connect?: OrderWhereUniqueInput;
     update?: XOR<
-      XOR<
-        OrderUpdateToOneWithWhereWithoutPaymentMetaInput,
-        OrderUpdateWithoutPaymentMetaInput
-      >,
+      XOR<OrderUpdateToOneWithWhereWithoutPaymentMetaInput, OrderUpdateWithoutPaymentMetaInput>,
       OrderUncheckedUpdateWithoutPaymentMetaInput
     >;
   };
@@ -36417,10 +33438,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>;
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedStringNullableWithAggregatesFilter<$PrismaModel>
-      | string
-      | null;
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null;
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedStringNullableFilter<$PrismaModel>;
     _max?: NestedStringNullableFilter<$PrismaModel>;
@@ -36451,57 +33469,32 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>;
   };
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> =
-    {
-      equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null;
-      in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
-      notIn?:
-        | Date[]
-        | string[]
-        | ListDateTimeFieldRefInput<$PrismaModel>
-        | null;
-      lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-      lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-      gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-      gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-      not?:
-        | NestedDateTimeNullableWithAggregatesFilter<$PrismaModel>
-        | Date
-        | string
-        | null;
-      _count?: NestedIntNullableFilter<$PrismaModel>;
-      _min?: NestedDateTimeNullableFilter<$PrismaModel>;
-      _max?: NestedDateTimeNullableFilter<$PrismaModel>;
-    };
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null;
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null;
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>;
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>;
+  };
 
   export type NestedEnumProductStatusFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.ProductStatus
-      | EnumProductStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus;
   };
 
-  export type NestedEnumProductStatusWithAggregatesFilter<
-    $PrismaModel = never,
-  > = {
-    equals?:
-      | $Enums.ProductStatus
-      | EnumProductStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ProductStatus[]
-      | ListEnumProductStatusFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumProductStatusWithAggregatesFilter<$PrismaModel>
-      | $Enums.ProductStatus;
+  export type NestedEnumProductStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumProductStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductStatus;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumProductStatusFilter<$PrismaModel>;
     _max?: NestedEnumProductStatusFilter<$PrismaModel>;
@@ -36510,22 +33503,14 @@ export namespace Prisma {
     | PatchUndefined<
         Either<
           Required<NestedJsonNullableFilterBase<$PrismaModel>>,
-          Exclude<
-            keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>,
-            "path"
-          >
+          Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, "path">
         >,
         Required<NestedJsonNullableFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<
-        Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, "path">
-      >;
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, "path">>;
 
   export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
-    equals?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter;
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter;
     path?: string[];
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>;
     string_contains?: string | StringFieldRefInput<$PrismaModel>;
@@ -36538,167 +33523,53 @@ export namespace Prisma {
     lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>;
-    not?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter;
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter;
+  };
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolFilter<$PrismaModel> | boolean;
+  };
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedBoolFilter<$PrismaModel>;
+    _max?: NestedBoolFilter<$PrismaModel>;
   };
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string;
   };
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>
-      | null;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>
-      | null;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>
-      | null;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalNullableFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null;
   };
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    in?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    notIn?:
-      | Decimal[]
-      | DecimalJsLike[]
-      | number[]
-      | string[]
-      | ListDecimalFieldRefInput<$PrismaModel>;
-    lt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    lte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gt?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    gte?:
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | DecimalFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedDecimalWithAggregatesFilter<$PrismaModel>
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string;
     _count?: NestedIntFilter<$PrismaModel>;
     _avg?: NestedDecimalFilter<$PrismaModel>;
     _sum?: NestedDecimalFilter<$PrismaModel>;
@@ -36706,86 +33577,33 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>;
   };
 
-  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> =
-    {
-      equals?:
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | DecimalFieldRefInput<$PrismaModel>
-        | null;
-      in?:
-        | Decimal[]
-        | DecimalJsLike[]
-        | number[]
-        | string[]
-        | ListDecimalFieldRefInput<$PrismaModel>
-        | null;
-      notIn?:
-        | Decimal[]
-        | DecimalJsLike[]
-        | number[]
-        | string[]
-        | ListDecimalFieldRefInput<$PrismaModel>
-        | null;
-      lt?:
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | DecimalFieldRefInput<$PrismaModel>;
-      lte?:
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | DecimalFieldRefInput<$PrismaModel>;
-      gt?:
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | DecimalFieldRefInput<$PrismaModel>;
-      gte?:
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | DecimalFieldRefInput<$PrismaModel>;
-      not?:
-        | NestedDecimalNullableWithAggregatesFilter<$PrismaModel>
-        | Decimal
-        | DecimalJsLike
-        | number
-        | string
-        | null;
-      _count?: NestedIntNullableFilter<$PrismaModel>;
-      _avg?: NestedDecimalNullableFilter<$PrismaModel>;
-      _sum?: NestedDecimalNullableFilter<$PrismaModel>;
-      _min?: NestedDecimalNullableFilter<$PrismaModel>;
-      _max?: NestedDecimalNullableFilter<$PrismaModel>;
-    };
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null;
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null;
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>;
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>;
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>;
+    _min?: NestedDecimalNullableFilter<$PrismaModel>;
+    _max?: NestedDecimalNullableFilter<$PrismaModel>;
+  };
 
   export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>;
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.OrderStatus[]
-      | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus;
   };
 
   export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.PaymentMethod
-      | EnumPaymentMethodFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>;
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
     not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod;
   };
 
@@ -36816,54 +33634,24 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null;
   };
 
-  export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> =
-    {
-      equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>;
-      in?:
-        | $Enums.OrderStatus[]
-        | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
-      notIn?:
-        | $Enums.OrderStatus[]
-        | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
-      not?:
-        | NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel>
-        | $Enums.OrderStatus;
-      _count?: NestedIntFilter<$PrismaModel>;
-      _min?: NestedEnumOrderStatusFilter<$PrismaModel>;
-      _max?: NestedEnumOrderStatusFilter<$PrismaModel>;
-    };
+  export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedEnumOrderStatusFilter<$PrismaModel>;
+    _max?: NestedEnumOrderStatusFilter<$PrismaModel>;
+  };
 
-  export type NestedEnumPaymentMethodWithAggregatesFilter<
-    $PrismaModel = never,
-  > = {
-    equals?:
-      | $Enums.PaymentMethod
-      | EnumPaymentMethodFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.PaymentMethod[]
-      | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel>
-      | $Enums.PaymentMethod;
+  export type NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>;
+    in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>;
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumPaymentMethodFilter<$PrismaModel>;
     _max?: NestedEnumPaymentMethodFilter<$PrismaModel>;
-  };
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
-    not?: NestedBoolFilter<$PrismaModel> | boolean;
-  };
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>;
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean;
-    _count?: NestedIntFilter<$PrismaModel>;
-    _min?: NestedBoolFilter<$PrismaModel>;
-    _max?: NestedBoolFilter<$PrismaModel>;
   };
 
   export type NestedEnumCouponTypeFilter<$PrismaModel = never> = {
@@ -36877,9 +33665,7 @@ export namespace Prisma {
     equals?: $Enums.CouponType | EnumCouponTypeFieldRefInput<$PrismaModel>;
     in?: $Enums.CouponType[] | ListEnumCouponTypeFieldRefInput<$PrismaModel>;
     notIn?: $Enums.CouponType[] | ListEnumCouponTypeFieldRefInput<$PrismaModel>;
-    not?:
-      | NestedEnumCouponTypeWithAggregatesFilter<$PrismaModel>
-      | $Enums.CouponType;
+    not?: NestedEnumCouponTypeWithAggregatesFilter<$PrismaModel> | $Enums.CouponType;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedEnumCouponTypeFilter<$PrismaModel>;
     _max?: NestedEnumCouponTypeFilter<$PrismaModel>;
@@ -36887,63 +33673,37 @@ export namespace Prisma {
 
   export type NestedEnumReturnStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ReturnStatus | EnumReturnStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.ReturnStatus[]
-      | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.ReturnStatus[]
-      | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumReturnStatusFilter<$PrismaModel> | $Enums.ReturnStatus;
   };
 
-  export type NestedEnumReturnStatusWithAggregatesFilter<$PrismaModel = never> =
-    {
-      equals?:
-        | $Enums.ReturnStatus
-        | EnumReturnStatusFieldRefInput<$PrismaModel>;
-      in?:
-        | $Enums.ReturnStatus[]
-        | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
-      notIn?:
-        | $Enums.ReturnStatus[]
-        | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
-      not?:
-        | NestedEnumReturnStatusWithAggregatesFilter<$PrismaModel>
-        | $Enums.ReturnStatus;
-      _count?: NestedIntFilter<$PrismaModel>;
-      _min?: NestedEnumReturnStatusFilter<$PrismaModel>;
-      _max?: NestedEnumReturnStatusFilter<$PrismaModel>;
-    };
+  export type NestedEnumReturnStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReturnStatus | EnumReturnStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReturnStatus[] | ListEnumReturnStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumReturnStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReturnStatus;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedEnumReturnStatusFilter<$PrismaModel>;
+    _max?: NestedEnumReturnStatusFilter<$PrismaModel>;
+  };
 
   export type NestedEnumRefundStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.RefundStatus | EnumRefundStatusFieldRefInput<$PrismaModel>;
-    in?:
-      | $Enums.RefundStatus[]
-      | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
-    notIn?:
-      | $Enums.RefundStatus[]
-      | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
     not?: NestedEnumRefundStatusFilter<$PrismaModel> | $Enums.RefundStatus;
   };
 
-  export type NestedEnumRefundStatusWithAggregatesFilter<$PrismaModel = never> =
-    {
-      equals?:
-        | $Enums.RefundStatus
-        | EnumRefundStatusFieldRefInput<$PrismaModel>;
-      in?:
-        | $Enums.RefundStatus[]
-        | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
-      notIn?:
-        | $Enums.RefundStatus[]
-        | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
-      not?:
-        | NestedEnumRefundStatusWithAggregatesFilter<$PrismaModel>
-        | $Enums.RefundStatus;
-      _count?: NestedIntFilter<$PrismaModel>;
-      _min?: NestedEnumRefundStatusFilter<$PrismaModel>;
-      _max?: NestedEnumRefundStatusFilter<$PrismaModel>;
-    };
+  export type NestedEnumRefundStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RefundStatus | EnumRefundStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.RefundStatus[] | ListEnumRefundStatusFieldRefInput<$PrismaModel>;
+    not?: NestedEnumRefundStatusWithAggregatesFilter<$PrismaModel> | $Enums.RefundStatus;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedEnumRefundStatusFilter<$PrismaModel>;
+    _max?: NestedEnumRefundStatusFilter<$PrismaModel>;
+  };
 
   export type UserRoleCreateWithoutUserInput = {
     role: RoleCreateNestedOneWithoutUserRolesInput;
@@ -36956,10 +33716,7 @@ export namespace Prisma {
 
   export type UserRoleCreateOrConnectWithoutUserInput = {
     where: UserRoleWhereUniqueInput;
-    create: XOR<
-      UserRoleCreateWithoutUserInput,
-      UserRoleUncheckedCreateWithoutUserInput
-    >;
+    create: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>;
   };
 
   export type UserRoleCreateManyUserInputEnvelope = {
@@ -37006,10 +33763,7 @@ export namespace Prisma {
 
   export type AddressCreateOrConnectWithoutUserInput = {
     where: AddressWhereUniqueInput;
-    create: XOR<
-      AddressCreateWithoutUserInput,
-      AddressUncheckedCreateWithoutUserInput
-    >;
+    create: XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>;
   };
 
   export type AddressCreateManyUserInputEnvelope = {
@@ -37032,10 +33786,7 @@ export namespace Prisma {
 
   export type WishlistCreateOrConnectWithoutUserInput = {
     where: WishlistWhereUniqueInput;
-    create: XOR<
-      WishlistCreateWithoutUserInput,
-      WishlistUncheckedCreateWithoutUserInput
-    >;
+    create: XOR<WishlistCreateWithoutUserInput, WishlistUncheckedCreateWithoutUserInput>;
   };
 
   export type ReviewCreateWithoutUserInput = {
@@ -37061,10 +33812,7 @@ export namespace Prisma {
 
   export type ReviewCreateOrConnectWithoutUserInput = {
     where: ReviewWhereUniqueInput;
-    create: XOR<
-      ReviewCreateWithoutUserInput,
-      ReviewUncheckedCreateWithoutUserInput
-    >;
+    create: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>;
   };
 
   export type ReviewCreateManyUserInputEnvelope = {
@@ -37113,10 +33861,7 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutUserInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutUserInput,
-      OrderUncheckedCreateWithoutUserInput
-    >;
+    create: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>;
   };
 
   export type OrderCreateManyUserInputEnvelope = {
@@ -37147,10 +33892,7 @@ export namespace Prisma {
 
   export type AuditLogCreateOrConnectWithoutActorInput = {
     where: AuditLogWhereUniqueInput;
-    create: XOR<
-      AuditLogCreateWithoutActorInput,
-      AuditLogUncheckedCreateWithoutActorInput
-    >;
+    create: XOR<AuditLogCreateWithoutActorInput, AuditLogUncheckedCreateWithoutActorInput>;
   };
 
   export type AuditLogCreateManyActorInputEnvelope = {
@@ -37160,30 +33902,18 @@ export namespace Prisma {
 
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
     where: UserRoleWhereUniqueInput;
-    update: XOR<
-      UserRoleUpdateWithoutUserInput,
-      UserRoleUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      UserRoleCreateWithoutUserInput,
-      UserRoleUncheckedCreateWithoutUserInput
-    >;
+    update: XOR<UserRoleUpdateWithoutUserInput, UserRoleUncheckedUpdateWithoutUserInput>;
+    create: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>;
   };
 
   export type UserRoleUpdateWithWhereUniqueWithoutUserInput = {
     where: UserRoleWhereUniqueInput;
-    data: XOR<
-      UserRoleUpdateWithoutUserInput,
-      UserRoleUncheckedUpdateWithoutUserInput
-    >;
+    data: XOR<UserRoleUpdateWithoutUserInput, UserRoleUncheckedUpdateWithoutUserInput>;
   };
 
   export type UserRoleUpdateManyWithWhereWithoutUserInput = {
     where: UserRoleScalarWhereInput;
-    data: XOR<
-      UserRoleUpdateManyMutationInput,
-      UserRoleUncheckedUpdateManyWithoutUserInput
-    >;
+    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyWithoutUserInput>;
   };
 
   export type UserRoleScalarWhereInput = {
@@ -37197,30 +33927,18 @@ export namespace Prisma {
 
   export type AddressUpsertWithWhereUniqueWithoutUserInput = {
     where: AddressWhereUniqueInput;
-    update: XOR<
-      AddressUpdateWithoutUserInput,
-      AddressUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      AddressCreateWithoutUserInput,
-      AddressUncheckedCreateWithoutUserInput
-    >;
+    update: XOR<AddressUpdateWithoutUserInput, AddressUncheckedUpdateWithoutUserInput>;
+    create: XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput>;
   };
 
   export type AddressUpdateWithWhereUniqueWithoutUserInput = {
     where: AddressWhereUniqueInput;
-    data: XOR<
-      AddressUpdateWithoutUserInput,
-      AddressUncheckedUpdateWithoutUserInput
-    >;
+    data: XOR<AddressUpdateWithoutUserInput, AddressUncheckedUpdateWithoutUserInput>;
   };
 
   export type AddressUpdateManyWithWhereWithoutUserInput = {
     where: AddressScalarWhereInput;
-    data: XOR<
-      AddressUpdateManyMutationInput,
-      AddressUncheckedUpdateManyWithoutUserInput
-    >;
+    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyWithoutUserInput>;
   };
 
   export type AddressScalarWhereInput = {
@@ -37245,23 +33963,14 @@ export namespace Prisma {
   };
 
   export type WishlistUpsertWithoutUserInput = {
-    update: XOR<
-      WishlistUpdateWithoutUserInput,
-      WishlistUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      WishlistCreateWithoutUserInput,
-      WishlistUncheckedCreateWithoutUserInput
-    >;
+    update: XOR<WishlistUpdateWithoutUserInput, WishlistUncheckedUpdateWithoutUserInput>;
+    create: XOR<WishlistCreateWithoutUserInput, WishlistUncheckedCreateWithoutUserInput>;
     where?: WishlistWhereInput;
   };
 
   export type WishlistUpdateToOneWithWhereWithoutUserInput = {
     where?: WishlistWhereInput;
-    data: XOR<
-      WishlistUpdateWithoutUserInput,
-      WishlistUncheckedUpdateWithoutUserInput
-    >;
+    data: XOR<WishlistUpdateWithoutUserInput, WishlistUncheckedUpdateWithoutUserInput>;
   };
 
   export type WishlistUpdateWithoutUserInput = {
@@ -37279,30 +33988,18 @@ export namespace Prisma {
 
   export type ReviewUpsertWithWhereUniqueWithoutUserInput = {
     where: ReviewWhereUniqueInput;
-    update: XOR<
-      ReviewUpdateWithoutUserInput,
-      ReviewUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      ReviewCreateWithoutUserInput,
-      ReviewUncheckedCreateWithoutUserInput
-    >;
+    update: XOR<ReviewUpdateWithoutUserInput, ReviewUncheckedUpdateWithoutUserInput>;
+    create: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>;
   };
 
   export type ReviewUpdateWithWhereUniqueWithoutUserInput = {
     where: ReviewWhereUniqueInput;
-    data: XOR<
-      ReviewUpdateWithoutUserInput,
-      ReviewUncheckedUpdateWithoutUserInput
-    >;
+    data: XOR<ReviewUpdateWithoutUserInput, ReviewUncheckedUpdateWithoutUserInput>;
   };
 
   export type ReviewUpdateManyWithWhereWithoutUserInput = {
     where: ReviewScalarWhereInput;
-    data: XOR<
-      ReviewUpdateManyMutationInput,
-      ReviewUncheckedUpdateManyWithoutUserInput
-    >;
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutUserInput>;
   };
 
   export type ReviewScalarWhereInput = {
@@ -37322,30 +34019,18 @@ export namespace Prisma {
 
   export type OrderUpsertWithWhereUniqueWithoutUserInput = {
     where: OrderWhereUniqueInput;
-    update: XOR<
-      OrderUpdateWithoutUserInput,
-      OrderUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      OrderCreateWithoutUserInput,
-      OrderUncheckedCreateWithoutUserInput
-    >;
+    update: XOR<OrderUpdateWithoutUserInput, OrderUncheckedUpdateWithoutUserInput>;
+    create: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>;
   };
 
   export type OrderUpdateWithWhereUniqueWithoutUserInput = {
     where: OrderWhereUniqueInput;
-    data: XOR<
-      OrderUpdateWithoutUserInput,
-      OrderUncheckedUpdateWithoutUserInput
-    >;
+    data: XOR<OrderUpdateWithoutUserInput, OrderUncheckedUpdateWithoutUserInput>;
   };
 
   export type OrderUpdateManyWithWhereWithoutUserInput = {
     where: OrderScalarWhereInput;
-    data: XOR<
-      OrderUpdateManyMutationInput,
-      OrderUncheckedUpdateManyWithoutUserInput
-    >;
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutUserInput>;
   };
 
   export type OrderScalarWhereInput = {
@@ -37356,18 +34041,8 @@ export namespace Prisma {
     orderNumber?: StringFilter<"Order"> | string;
     userId?: IntNullableFilter<"Order"> | number | null;
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFilter<"Order">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     total?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod;
@@ -37380,30 +34055,18 @@ export namespace Prisma {
 
   export type AuditLogUpsertWithWhereUniqueWithoutActorInput = {
     where: AuditLogWhereUniqueInput;
-    update: XOR<
-      AuditLogUpdateWithoutActorInput,
-      AuditLogUncheckedUpdateWithoutActorInput
-    >;
-    create: XOR<
-      AuditLogCreateWithoutActorInput,
-      AuditLogUncheckedCreateWithoutActorInput
-    >;
+    update: XOR<AuditLogUpdateWithoutActorInput, AuditLogUncheckedUpdateWithoutActorInput>;
+    create: XOR<AuditLogCreateWithoutActorInput, AuditLogUncheckedCreateWithoutActorInput>;
   };
 
   export type AuditLogUpdateWithWhereUniqueWithoutActorInput = {
     where: AuditLogWhereUniqueInput;
-    data: XOR<
-      AuditLogUpdateWithoutActorInput,
-      AuditLogUncheckedUpdateWithoutActorInput
-    >;
+    data: XOR<AuditLogUpdateWithoutActorInput, AuditLogUncheckedUpdateWithoutActorInput>;
   };
 
   export type AuditLogUpdateManyWithWhereWithoutActorInput = {
     where: AuditLogScalarWhereInput;
-    data: XOR<
-      AuditLogUpdateManyMutationInput,
-      AuditLogUncheckedUpdateManyWithoutActorInput
-    >;
+    data: XOR<AuditLogUpdateManyMutationInput, AuditLogUncheckedUpdateManyWithoutActorInput>;
   };
 
   export type AuditLogScalarWhereInput = {
@@ -37432,10 +34095,7 @@ export namespace Prisma {
 
   export type UserRoleCreateOrConnectWithoutRoleInput = {
     where: UserRoleWhereUniqueInput;
-    create: XOR<
-      UserRoleCreateWithoutRoleInput,
-      UserRoleUncheckedCreateWithoutRoleInput
-    >;
+    create: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>;
   };
 
   export type UserRoleCreateManyRoleInputEnvelope = {
@@ -37445,30 +34105,18 @@ export namespace Prisma {
 
   export type UserRoleUpsertWithWhereUniqueWithoutRoleInput = {
     where: UserRoleWhereUniqueInput;
-    update: XOR<
-      UserRoleUpdateWithoutRoleInput,
-      UserRoleUncheckedUpdateWithoutRoleInput
-    >;
-    create: XOR<
-      UserRoleCreateWithoutRoleInput,
-      UserRoleUncheckedCreateWithoutRoleInput
-    >;
+    update: XOR<UserRoleUpdateWithoutRoleInput, UserRoleUncheckedUpdateWithoutRoleInput>;
+    create: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput>;
   };
 
   export type UserRoleUpdateWithWhereUniqueWithoutRoleInput = {
     where: UserRoleWhereUniqueInput;
-    data: XOR<
-      UserRoleUpdateWithoutRoleInput,
-      UserRoleUncheckedUpdateWithoutRoleInput
-    >;
+    data: XOR<UserRoleUpdateWithoutRoleInput, UserRoleUncheckedUpdateWithoutRoleInput>;
   };
 
   export type UserRoleUpdateManyWithWhereWithoutRoleInput = {
     where: UserRoleScalarWhereInput;
-    data: XOR<
-      UserRoleUpdateManyMutationInput,
-      UserRoleUncheckedUpdateManyWithoutRoleInput
-    >;
+    data: XOR<UserRoleUpdateManyMutationInput, UserRoleUncheckedUpdateManyWithoutRoleInput>;
   };
 
   export type UserCreateWithoutUserRolesInput = {
@@ -37504,10 +34152,7 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
     where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutUserRolesInput,
-      UserUncheckedCreateWithoutUserRolesInput
-    >;
+    create: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>;
   };
 
   export type RoleCreateWithoutUserRolesInput = {
@@ -37521,30 +34166,18 @@ export namespace Prisma {
 
   export type RoleCreateOrConnectWithoutUserRolesInput = {
     where: RoleWhereUniqueInput;
-    create: XOR<
-      RoleCreateWithoutUserRolesInput,
-      RoleUncheckedCreateWithoutUserRolesInput
-    >;
+    create: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>;
   };
 
   export type UserUpsertWithoutUserRolesInput = {
-    update: XOR<
-      UserUpdateWithoutUserRolesInput,
-      UserUncheckedUpdateWithoutUserRolesInput
-    >;
-    create: XOR<
-      UserCreateWithoutUserRolesInput,
-      UserUncheckedCreateWithoutUserRolesInput
-    >;
+    update: XOR<UserUpdateWithoutUserRolesInput, UserUncheckedUpdateWithoutUserRolesInput>;
+    create: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>;
     where?: UserWhereInput;
   };
 
   export type UserUpdateToOneWithWhereWithoutUserRolesInput = {
     where?: UserWhereInput;
-    data: XOR<
-      UserUpdateWithoutUserRolesInput,
-      UserUncheckedUpdateWithoutUserRolesInput
-    >;
+    data: XOR<UserUpdateWithoutUserRolesInput, UserUncheckedUpdateWithoutUserRolesInput>;
   };
 
   export type UserUpdateWithoutUserRolesInput = {
@@ -37554,11 +34187,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     addresses?: AddressUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
@@ -37574,11 +34203,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
@@ -37587,23 +34212,14 @@ export namespace Prisma {
   };
 
   export type RoleUpsertWithoutUserRolesInput = {
-    update: XOR<
-      RoleUpdateWithoutUserRolesInput,
-      RoleUncheckedUpdateWithoutUserRolesInput
-    >;
-    create: XOR<
-      RoleCreateWithoutUserRolesInput,
-      RoleUncheckedCreateWithoutUserRolesInput
-    >;
+    update: XOR<RoleUpdateWithoutUserRolesInput, RoleUncheckedUpdateWithoutUserRolesInput>;
+    create: XOR<RoleCreateWithoutUserRolesInput, RoleUncheckedCreateWithoutUserRolesInput>;
     where?: RoleWhereInput;
   };
 
   export type RoleUpdateToOneWithWhereWithoutUserRolesInput = {
     where?: RoleWhereInput;
-    data: XOR<
-      RoleUpdateWithoutUserRolesInput,
-      RoleUncheckedUpdateWithoutUserRolesInput
-    >;
+    data: XOR<RoleUpdateWithoutUserRolesInput, RoleUncheckedUpdateWithoutUserRolesInput>;
   };
 
   export type RoleUpdateWithoutUserRolesInput = {
@@ -37613,6 +34229,33 @@ export namespace Prisma {
   export type RoleUncheckedUpdateWithoutUserRolesInput = {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type ProductImageCreateWithoutProductInput = {
+    url: string;
+    alt?: string | null;
+    isPrimary?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type ProductImageUncheckedCreateWithoutProductInput = {
+    id?: number;
+    url: string;
+    alt?: string | null;
+    isPrimary?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type ProductImageCreateOrConnectWithoutProductInput = {
+    where: ProductImageWhereUniqueInput;
+    create: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>;
+  };
+
+  export type ProductImageCreateManyProductInputEnvelope = {
+    data: ProductImageCreateManyProductInput | ProductImageCreateManyProductInput[];
+    skipDuplicates?: boolean;
   };
 
   export type ProductVariantCreateWithoutProductInput = {
@@ -37642,16 +34285,11 @@ export namespace Prisma {
 
   export type ProductVariantCreateOrConnectWithoutProductInput = {
     where: ProductVariantWhereUniqueInput;
-    create: XOR<
-      ProductVariantCreateWithoutProductInput,
-      ProductVariantUncheckedCreateWithoutProductInput
-    >;
+    create: XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput>;
   };
 
   export type ProductVariantCreateManyProductInputEnvelope = {
-    data:
-      | ProductVariantCreateManyProductInput
-      | ProductVariantCreateManyProductInput[];
+    data: ProductVariantCreateManyProductInput | ProductVariantCreateManyProductInput[];
     skipDuplicates?: boolean;
   };
 
@@ -37678,10 +34316,7 @@ export namespace Prisma {
 
   export type ReviewCreateOrConnectWithoutProductInput = {
     where: ReviewWhereUniqueInput;
-    create: XOR<
-      ReviewCreateWithoutProductInput,
-      ReviewUncheckedCreateWithoutProductInput
-    >;
+    create: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>;
   };
 
   export type ReviewCreateManyProductInputEnvelope = {
@@ -37718,10 +34353,7 @@ export namespace Prisma {
 
   export type OrderItemCreateOrConnectWithoutProductInput = {
     where: OrderItemWhereUniqueInput;
-    create: XOR<
-      OrderItemCreateWithoutProductInput,
-      OrderItemUncheckedCreateWithoutProductInput
-    >;
+    create: XOR<OrderItemCreateWithoutProductInput, OrderItemUncheckedCreateWithoutProductInput>;
   };
 
   export type OrderItemCreateManyProductInputEnvelope = {
@@ -37744,45 +34376,57 @@ export namespace Prisma {
 
   export type WishlistItemCreateOrConnectWithoutProductInput = {
     where: WishlistItemWhereUniqueInput;
-    create: XOR<
-      WishlistItemCreateWithoutProductInput,
-      WishlistItemUncheckedCreateWithoutProductInput
-    >;
+    create: XOR<WishlistItemCreateWithoutProductInput, WishlistItemUncheckedCreateWithoutProductInput>;
   };
 
   export type WishlistItemCreateManyProductInputEnvelope = {
-    data:
-      | WishlistItemCreateManyProductInput
-      | WishlistItemCreateManyProductInput[];
+    data: WishlistItemCreateManyProductInput | WishlistItemCreateManyProductInput[];
     skipDuplicates?: boolean;
+  };
+
+  export type ProductImageUpsertWithWhereUniqueWithoutProductInput = {
+    where: ProductImageWhereUniqueInput;
+    update: XOR<ProductImageUpdateWithoutProductInput, ProductImageUncheckedUpdateWithoutProductInput>;
+    create: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>;
+  };
+
+  export type ProductImageUpdateWithWhereUniqueWithoutProductInput = {
+    where: ProductImageWhereUniqueInput;
+    data: XOR<ProductImageUpdateWithoutProductInput, ProductImageUncheckedUpdateWithoutProductInput>;
+  };
+
+  export type ProductImageUpdateManyWithWhereWithoutProductInput = {
+    where: ProductImageScalarWhereInput;
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyWithoutProductInput>;
+  };
+
+  export type ProductImageScalarWhereInput = {
+    AND?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[];
+    OR?: ProductImageScalarWhereInput[];
+    NOT?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[];
+    id?: IntFilter<"ProductImage"> | number;
+    url?: StringFilter<"ProductImage"> | string;
+    alt?: StringNullableFilter<"ProductImage"> | string | null;
+    isPrimary?: BoolFilter<"ProductImage"> | boolean;
+    productId?: IntFilter<"ProductImage"> | number;
+    createdAt?: DateTimeFilter<"ProductImage"> | Date | string;
+    updatedAt?: DateTimeFilter<"ProductImage"> | Date | string;
   };
 
   export type ProductVariantUpsertWithWhereUniqueWithoutProductInput = {
     where: ProductVariantWhereUniqueInput;
-    update: XOR<
-      ProductVariantUpdateWithoutProductInput,
-      ProductVariantUncheckedUpdateWithoutProductInput
-    >;
-    create: XOR<
-      ProductVariantCreateWithoutProductInput,
-      ProductVariantUncheckedCreateWithoutProductInput
-    >;
+    update: XOR<ProductVariantUpdateWithoutProductInput, ProductVariantUncheckedUpdateWithoutProductInput>;
+    create: XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput>;
   };
 
   export type ProductVariantUpdateWithWhereUniqueWithoutProductInput = {
     where: ProductVariantWhereUniqueInput;
-    data: XOR<
-      ProductVariantUpdateWithoutProductInput,
-      ProductVariantUncheckedUpdateWithoutProductInput
-    >;
+    data: XOR<ProductVariantUpdateWithoutProductInput, ProductVariantUncheckedUpdateWithoutProductInput>;
   };
 
   export type ProductVariantUpdateManyWithWhereWithoutProductInput = {
     where: ProductVariantScalarWhereInput;
-    data: XOR<
-      ProductVariantUpdateManyMutationInput,
-      ProductVariantUncheckedUpdateManyWithoutProductInput
-    >;
+    data: XOR<ProductVariantUpdateManyMutationInput, ProductVariantUncheckedUpdateManyWithoutProductInput>;
   };
 
   export type ProductVariantScalarWhereInput = {
@@ -37793,19 +34437,8 @@ export namespace Prisma {
     productId?: IntFilter<"ProductVariant"> | number;
     name?: StringFilter<"ProductVariant"> | string;
     skuPrefix?: StringNullableFilter<"ProductVariant"> | string | null;
-    price?:
-      | DecimalFilter<"ProductVariant">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | DecimalNullableFilter<"ProductVariant">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null;
     attributes?: JsonNullableFilter<"ProductVariant">;
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string;
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string;
@@ -37813,58 +34446,34 @@ export namespace Prisma {
 
   export type ReviewUpsertWithWhereUniqueWithoutProductInput = {
     where: ReviewWhereUniqueInput;
-    update: XOR<
-      ReviewUpdateWithoutProductInput,
-      ReviewUncheckedUpdateWithoutProductInput
-    >;
-    create: XOR<
-      ReviewCreateWithoutProductInput,
-      ReviewUncheckedCreateWithoutProductInput
-    >;
+    update: XOR<ReviewUpdateWithoutProductInput, ReviewUncheckedUpdateWithoutProductInput>;
+    create: XOR<ReviewCreateWithoutProductInput, ReviewUncheckedCreateWithoutProductInput>;
   };
 
   export type ReviewUpdateWithWhereUniqueWithoutProductInput = {
     where: ReviewWhereUniqueInput;
-    data: XOR<
-      ReviewUpdateWithoutProductInput,
-      ReviewUncheckedUpdateWithoutProductInput
-    >;
+    data: XOR<ReviewUpdateWithoutProductInput, ReviewUncheckedUpdateWithoutProductInput>;
   };
 
   export type ReviewUpdateManyWithWhereWithoutProductInput = {
     where: ReviewScalarWhereInput;
-    data: XOR<
-      ReviewUpdateManyMutationInput,
-      ReviewUncheckedUpdateManyWithoutProductInput
-    >;
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutProductInput>;
   };
 
   export type OrderItemUpsertWithWhereUniqueWithoutProductInput = {
     where: OrderItemWhereUniqueInput;
-    update: XOR<
-      OrderItemUpdateWithoutProductInput,
-      OrderItemUncheckedUpdateWithoutProductInput
-    >;
-    create: XOR<
-      OrderItemCreateWithoutProductInput,
-      OrderItemUncheckedCreateWithoutProductInput
-    >;
+    update: XOR<OrderItemUpdateWithoutProductInput, OrderItemUncheckedUpdateWithoutProductInput>;
+    create: XOR<OrderItemCreateWithoutProductInput, OrderItemUncheckedCreateWithoutProductInput>;
   };
 
   export type OrderItemUpdateWithWhereUniqueWithoutProductInput = {
     where: OrderItemWhereUniqueInput;
-    data: XOR<
-      OrderItemUpdateWithoutProductInput,
-      OrderItemUncheckedUpdateWithoutProductInput
-    >;
+    data: XOR<OrderItemUpdateWithoutProductInput, OrderItemUncheckedUpdateWithoutProductInput>;
   };
 
   export type OrderItemUpdateManyWithWhereWithoutProductInput = {
     where: OrderItemScalarWhereInput;
-    data: XOR<
-      OrderItemUpdateManyMutationInput,
-      OrderItemUncheckedUpdateManyWithoutProductInput
-    >;
+    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutProductInput>;
   };
 
   export type OrderItemScalarWhereInput = {
@@ -37877,49 +34486,27 @@ export namespace Prisma {
     variantId?: IntNullableFilter<"OrderItem"> | number | null;
     sku?: StringNullableFilter<"OrderItem"> | string | null;
     name?: StringFilter<"OrderItem"> | string;
-    price?:
-      | DecimalFilter<"OrderItem">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     quantity?: IntFilter<"OrderItem"> | number;
-    total?:
-      | DecimalFilter<"OrderItem">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     returned?: BoolFilter<"OrderItem"> | boolean;
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string;
   };
 
   export type WishlistItemUpsertWithWhereUniqueWithoutProductInput = {
     where: WishlistItemWhereUniqueInput;
-    update: XOR<
-      WishlistItemUpdateWithoutProductInput,
-      WishlistItemUncheckedUpdateWithoutProductInput
-    >;
-    create: XOR<
-      WishlistItemCreateWithoutProductInput,
-      WishlistItemUncheckedCreateWithoutProductInput
-    >;
+    update: XOR<WishlistItemUpdateWithoutProductInput, WishlistItemUncheckedUpdateWithoutProductInput>;
+    create: XOR<WishlistItemCreateWithoutProductInput, WishlistItemUncheckedCreateWithoutProductInput>;
   };
 
   export type WishlistItemUpdateWithWhereUniqueWithoutProductInput = {
     where: WishlistItemWhereUniqueInput;
-    data: XOR<
-      WishlistItemUpdateWithoutProductInput,
-      WishlistItemUncheckedUpdateWithoutProductInput
-    >;
+    data: XOR<WishlistItemUpdateWithoutProductInput, WishlistItemUncheckedUpdateWithoutProductInput>;
   };
 
   export type WishlistItemUpdateManyWithWhereWithoutProductInput = {
     where: WishlistItemScalarWhereInput;
-    data: XOR<
-      WishlistItemUpdateManyMutationInput,
-      WishlistItemUncheckedUpdateManyWithoutProductInput
-    >;
+    data: XOR<WishlistItemUpdateManyMutationInput, WishlistItemUncheckedUpdateManyWithoutProductInput>;
   };
 
   export type WishlistItemScalarWhereInput = {
@@ -37933,6 +34520,84 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"WishlistItem"> | Date | string;
   };
 
+  export type ProductCreateWithoutImagesInput = {
+    title: string;
+    slug: string;
+    shortDescription?: string | null;
+    description?: string | null;
+    status?: $Enums.ProductStatus;
+    metadata?: NullableJsonNullValueInput | InputJsonValue;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    variants?: ProductVariantCreateNestedManyWithoutProductInput;
+    reviews?: ReviewCreateNestedManyWithoutProductInput;
+    OrderItem?: OrderItemCreateNestedManyWithoutProductInput;
+    WishlistItem?: WishlistItemCreateNestedManyWithoutProductInput;
+  };
+
+  export type ProductUncheckedCreateWithoutImagesInput = {
+    id?: number;
+    title: string;
+    slug: string;
+    shortDescription?: string | null;
+    description?: string | null;
+    status?: $Enums.ProductStatus;
+    metadata?: NullableJsonNullValueInput | InputJsonValue;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
+    OrderItem?: OrderItemUncheckedCreateNestedManyWithoutProductInput;
+    WishlistItem?: WishlistItemUncheckedCreateNestedManyWithoutProductInput;
+  };
+
+  export type ProductCreateOrConnectWithoutImagesInput = {
+    where: ProductWhereUniqueInput;
+    create: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>;
+  };
+
+  export type ProductUpsertWithoutImagesInput = {
+    update: XOR<ProductUpdateWithoutImagesInput, ProductUncheckedUpdateWithoutImagesInput>;
+    create: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>;
+    where?: ProductWhereInput;
+  };
+
+  export type ProductUpdateToOneWithWhereWithoutImagesInput = {
+    where?: ProductWhereInput;
+    data: XOR<ProductUpdateWithoutImagesInput, ProductUncheckedUpdateWithoutImagesInput>;
+  };
+
+  export type ProductUpdateWithoutImagesInput = {
+    title?: StringFieldUpdateOperationsInput | string;
+    slug?: StringFieldUpdateOperationsInput | string;
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null;
+    description?: NullableStringFieldUpdateOperationsInput | string | null;
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus;
+    metadata?: NullableJsonNullValueInput | InputJsonValue;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    variants?: ProductVariantUpdateManyWithoutProductNestedInput;
+    reviews?: ReviewUpdateManyWithoutProductNestedInput;
+    OrderItem?: OrderItemUpdateManyWithoutProductNestedInput;
+    WishlistItem?: WishlistItemUpdateManyWithoutProductNestedInput;
+  };
+
+  export type ProductUncheckedUpdateWithoutImagesInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    title?: StringFieldUpdateOperationsInput | string;
+    slug?: StringFieldUpdateOperationsInput | string;
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null;
+    description?: NullableStringFieldUpdateOperationsInput | string | null;
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus;
+    metadata?: NullableJsonNullValueInput | InputJsonValue;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
+    OrderItem?: OrderItemUncheckedUpdateManyWithoutProductNestedInput;
+    WishlistItem?: WishlistItemUncheckedUpdateManyWithoutProductNestedInput;
+  };
+
   export type ProductCreateWithoutVariantsInput = {
     title: string;
     slug: string;
@@ -37942,6 +34607,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageCreateNestedManyWithoutProductInput;
     reviews?: ReviewCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemCreateNestedManyWithoutProductInput;
     WishlistItem?: WishlistItemCreateNestedManyWithoutProductInput;
@@ -37957,6 +34623,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput;
     reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutProductInput;
     WishlistItem?: WishlistItemUncheckedCreateNestedManyWithoutProductInput;
@@ -37964,10 +34631,7 @@ export namespace Prisma {
 
   export type ProductCreateOrConnectWithoutVariantsInput = {
     where: ProductWhereUniqueInput;
-    create: XOR<
-      ProductCreateWithoutVariantsInput,
-      ProductUncheckedCreateWithoutVariantsInput
-    >;
+    create: XOR<ProductCreateWithoutVariantsInput, ProductUncheckedCreateWithoutVariantsInput>;
   };
 
   export type InventoryCreateWithoutVariantInput = {
@@ -37993,10 +34657,7 @@ export namespace Prisma {
 
   export type InventoryCreateOrConnectWithoutVariantInput = {
     where: InventoryWhereUniqueInput;
-    create: XOR<
-      InventoryCreateWithoutVariantInput,
-      InventoryUncheckedCreateWithoutVariantInput
-    >;
+    create: XOR<InventoryCreateWithoutVariantInput, InventoryUncheckedCreateWithoutVariantInput>;
   };
 
   export type InventoryCreateManyVariantInputEnvelope = {
@@ -38033,10 +34694,7 @@ export namespace Prisma {
 
   export type OrderItemCreateOrConnectWithoutVariantInput = {
     where: OrderItemWhereUniqueInput;
-    create: XOR<
-      OrderItemCreateWithoutVariantInput,
-      OrderItemUncheckedCreateWithoutVariantInput
-    >;
+    create: XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput>;
   };
 
   export type OrderItemCreateManyVariantInputEnvelope = {
@@ -38045,23 +34703,14 @@ export namespace Prisma {
   };
 
   export type ProductUpsertWithoutVariantsInput = {
-    update: XOR<
-      ProductUpdateWithoutVariantsInput,
-      ProductUncheckedUpdateWithoutVariantsInput
-    >;
-    create: XOR<
-      ProductCreateWithoutVariantsInput,
-      ProductUncheckedCreateWithoutVariantsInput
-    >;
+    update: XOR<ProductUpdateWithoutVariantsInput, ProductUncheckedUpdateWithoutVariantsInput>;
+    create: XOR<ProductCreateWithoutVariantsInput, ProductUncheckedCreateWithoutVariantsInput>;
     where?: ProductWhereInput;
   };
 
   export type ProductUpdateToOneWithWhereWithoutVariantsInput = {
     where?: ProductWhereInput;
-    data: XOR<
-      ProductUpdateWithoutVariantsInput,
-      ProductUncheckedUpdateWithoutVariantsInput
-    >;
+    data: XOR<ProductUpdateWithoutVariantsInput, ProductUncheckedUpdateWithoutVariantsInput>;
   };
 
   export type ProductUpdateWithoutVariantsInput = {
@@ -38073,6 +34722,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUpdateManyWithoutProductNestedInput;
     WishlistItem?: WishlistItemUpdateManyWithoutProductNestedInput;
@@ -38088,6 +34738,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUncheckedUpdateManyWithoutProductNestedInput;
     WishlistItem?: WishlistItemUncheckedUpdateManyWithoutProductNestedInput;
@@ -38095,30 +34746,18 @@ export namespace Prisma {
 
   export type InventoryUpsertWithWhereUniqueWithoutVariantInput = {
     where: InventoryWhereUniqueInput;
-    update: XOR<
-      InventoryUpdateWithoutVariantInput,
-      InventoryUncheckedUpdateWithoutVariantInput
-    >;
-    create: XOR<
-      InventoryCreateWithoutVariantInput,
-      InventoryUncheckedCreateWithoutVariantInput
-    >;
+    update: XOR<InventoryUpdateWithoutVariantInput, InventoryUncheckedUpdateWithoutVariantInput>;
+    create: XOR<InventoryCreateWithoutVariantInput, InventoryUncheckedCreateWithoutVariantInput>;
   };
 
   export type InventoryUpdateWithWhereUniqueWithoutVariantInput = {
     where: InventoryWhereUniqueInput;
-    data: XOR<
-      InventoryUpdateWithoutVariantInput,
-      InventoryUncheckedUpdateWithoutVariantInput
-    >;
+    data: XOR<InventoryUpdateWithoutVariantInput, InventoryUncheckedUpdateWithoutVariantInput>;
   };
 
   export type InventoryUpdateManyWithWhereWithoutVariantInput = {
     where: InventoryScalarWhereInput;
-    data: XOR<
-      InventoryUpdateManyMutationInput,
-      InventoryUncheckedUpdateManyWithoutVariantInput
-    >;
+    data: XOR<InventoryUpdateManyMutationInput, InventoryUncheckedUpdateManyWithoutVariantInput>;
   };
 
   export type InventoryScalarWhereInput = {
@@ -38138,30 +34777,18 @@ export namespace Prisma {
 
   export type OrderItemUpsertWithWhereUniqueWithoutVariantInput = {
     where: OrderItemWhereUniqueInput;
-    update: XOR<
-      OrderItemUpdateWithoutVariantInput,
-      OrderItemUncheckedUpdateWithoutVariantInput
-    >;
-    create: XOR<
-      OrderItemCreateWithoutVariantInput,
-      OrderItemUncheckedCreateWithoutVariantInput
-    >;
+    update: XOR<OrderItemUpdateWithoutVariantInput, OrderItemUncheckedUpdateWithoutVariantInput>;
+    create: XOR<OrderItemCreateWithoutVariantInput, OrderItemUncheckedCreateWithoutVariantInput>;
   };
 
   export type OrderItemUpdateWithWhereUniqueWithoutVariantInput = {
     where: OrderItemWhereUniqueInput;
-    data: XOR<
-      OrderItemUpdateWithoutVariantInput,
-      OrderItemUncheckedUpdateWithoutVariantInput
-    >;
+    data: XOR<OrderItemUpdateWithoutVariantInput, OrderItemUncheckedUpdateWithoutVariantInput>;
   };
 
   export type OrderItemUpdateManyWithWhereWithoutVariantInput = {
     where: OrderItemScalarWhereInput;
-    data: XOR<
-      OrderItemUpdateManyMutationInput,
-      OrderItemUncheckedUpdateManyWithoutVariantInput
-    >;
+    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutVariantInput>;
   };
 
   export type ProductVariantCreateWithoutInventoryInput = {
@@ -38191,48 +34818,25 @@ export namespace Prisma {
 
   export type ProductVariantCreateOrConnectWithoutInventoryInput = {
     where: ProductVariantWhereUniqueInput;
-    create: XOR<
-      ProductVariantCreateWithoutInventoryInput,
-      ProductVariantUncheckedCreateWithoutInventoryInput
-    >;
+    create: XOR<ProductVariantCreateWithoutInventoryInput, ProductVariantUncheckedCreateWithoutInventoryInput>;
   };
 
   export type ProductVariantUpsertWithoutInventoryInput = {
-    update: XOR<
-      ProductVariantUpdateWithoutInventoryInput,
-      ProductVariantUncheckedUpdateWithoutInventoryInput
-    >;
-    create: XOR<
-      ProductVariantCreateWithoutInventoryInput,
-      ProductVariantUncheckedCreateWithoutInventoryInput
-    >;
+    update: XOR<ProductVariantUpdateWithoutInventoryInput, ProductVariantUncheckedUpdateWithoutInventoryInput>;
+    create: XOR<ProductVariantCreateWithoutInventoryInput, ProductVariantUncheckedCreateWithoutInventoryInput>;
     where?: ProductVariantWhereInput;
   };
 
   export type ProductVariantUpdateToOneWithWhereWithoutInventoryInput = {
     where?: ProductVariantWhereInput;
-    data: XOR<
-      ProductVariantUpdateWithoutInventoryInput,
-      ProductVariantUncheckedUpdateWithoutInventoryInput
-    >;
+    data: XOR<ProductVariantUpdateWithoutInventoryInput, ProductVariantUncheckedUpdateWithoutInventoryInput>;
   };
 
   export type ProductVariantUpdateWithoutInventoryInput = {
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -38245,19 +34849,8 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -38297,10 +34890,7 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutOrdersInput = {
     where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutOrdersInput,
-      UserUncheckedCreateWithoutOrdersInput
-    >;
+    create: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>;
   };
 
   export type PaymentMetaCreateWithoutOrderInput = {
@@ -38328,10 +34918,7 @@ export namespace Prisma {
 
   export type PaymentMetaCreateOrConnectWithoutOrderInput = {
     where: PaymentMetaWhereUniqueInput;
-    create: XOR<
-      PaymentMetaCreateWithoutOrderInput,
-      PaymentMetaUncheckedCreateWithoutOrderInput
-    >;
+    create: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
   };
 
   export type OrderItemCreateWithoutOrderInput = {
@@ -38363,10 +34950,7 @@ export namespace Prisma {
 
   export type OrderItemCreateOrConnectWithoutOrderInput = {
     where: OrderItemWhereUniqueInput;
-    create: XOR<
-      OrderItemCreateWithoutOrderInput,
-      OrderItemUncheckedCreateWithoutOrderInput
-    >;
+    create: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>;
   };
 
   export type OrderItemCreateManyOrderInputEnvelope = {
@@ -38413,10 +34997,7 @@ export namespace Prisma {
 
   export type AddressCreateOrConnectWithoutOrdersShippingInput = {
     where: AddressWhereUniqueInput;
-    create: XOR<
-      AddressCreateWithoutOrdersShippingInput,
-      AddressUncheckedCreateWithoutOrdersShippingInput
-    >;
+    create: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
   };
 
   export type AddressCreateWithoutOrdersBillingInput = {
@@ -38458,10 +35039,7 @@ export namespace Prisma {
 
   export type AddressCreateOrConnectWithoutOrdersBillingInput = {
     where: AddressWhereUniqueInput;
-    create: XOR<
-      AddressCreateWithoutOrdersBillingInput,
-      AddressUncheckedCreateWithoutOrdersBillingInput
-    >;
+    create: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
   };
 
   export type CouponCreateWithoutOrderInput = {
@@ -38501,10 +35079,7 @@ export namespace Prisma {
 
   export type CouponCreateOrConnectWithoutOrderInput = {
     where: CouponWhereUniqueInput;
-    create: XOR<
-      CouponCreateWithoutOrderInput,
-      CouponUncheckedCreateWithoutOrderInput
-    >;
+    create: XOR<CouponCreateWithoutOrderInput, CouponUncheckedCreateWithoutOrderInput>;
   };
 
   export type ReturnRequestCreateWithoutOrderInput = {
@@ -38532,16 +35107,11 @@ export namespace Prisma {
 
   export type ReturnRequestCreateOrConnectWithoutOrderInput = {
     where: ReturnRequestWhereUniqueInput;
-    create: XOR<
-      ReturnRequestCreateWithoutOrderInput,
-      ReturnRequestUncheckedCreateWithoutOrderInput
-    >;
+    create: XOR<ReturnRequestCreateWithoutOrderInput, ReturnRequestUncheckedCreateWithoutOrderInput>;
   };
 
   export type ReturnRequestCreateManyOrderInputEnvelope = {
-    data:
-      | ReturnRequestCreateManyOrderInput
-      | ReturnRequestCreateManyOrderInput[];
+    data: ReturnRequestCreateManyOrderInput | ReturnRequestCreateManyOrderInput[];
     skipDuplicates?: boolean;
   };
 
@@ -38570,10 +35140,7 @@ export namespace Prisma {
 
   export type RefundCreateOrConnectWithoutOrderInput = {
     where: RefundWhereUniqueInput;
-    create: XOR<
-      RefundCreateWithoutOrderInput,
-      RefundUncheckedCreateWithoutOrderInput
-    >;
+    create: XOR<RefundCreateWithoutOrderInput, RefundUncheckedCreateWithoutOrderInput>;
   };
 
   export type RefundCreateManyOrderInputEnvelope = {
@@ -38582,23 +35149,14 @@ export namespace Prisma {
   };
 
   export type UserUpsertWithoutOrdersInput = {
-    update: XOR<
-      UserUpdateWithoutOrdersInput,
-      UserUncheckedUpdateWithoutOrdersInput
-    >;
-    create: XOR<
-      UserCreateWithoutOrdersInput,
-      UserUncheckedCreateWithoutOrdersInput
-    >;
+    update: XOR<UserUpdateWithoutOrdersInput, UserUncheckedUpdateWithoutOrdersInput>;
+    create: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>;
     where?: UserWhereInput;
   };
 
   export type UserUpdateToOneWithWhereWithoutOrdersInput = {
     where?: UserWhereInput;
-    data: XOR<
-      UserUpdateWithoutOrdersInput,
-      UserUncheckedUpdateWithoutOrdersInput
-    >;
+    data: XOR<UserUpdateWithoutOrdersInput, UserUncheckedUpdateWithoutOrdersInput>;
   };
 
   export type UserUpdateWithoutOrdersInput = {
@@ -38608,11 +35166,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
     addresses?: AddressUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
@@ -38628,11 +35182,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
@@ -38641,41 +35191,23 @@ export namespace Prisma {
   };
 
   export type PaymentMetaUpsertWithoutOrderInput = {
-    update: XOR<
-      PaymentMetaUpdateWithoutOrderInput,
-      PaymentMetaUncheckedUpdateWithoutOrderInput
-    >;
-    create: XOR<
-      PaymentMetaCreateWithoutOrderInput,
-      PaymentMetaUncheckedCreateWithoutOrderInput
-    >;
+    update: XOR<PaymentMetaUpdateWithoutOrderInput, PaymentMetaUncheckedUpdateWithoutOrderInput>;
+    create: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     where?: PaymentMetaWhereInput;
   };
 
   export type PaymentMetaUpdateToOneWithWhereWithoutOrderInput = {
     where?: PaymentMetaWhereInput;
-    data: XOR<
-      PaymentMetaUpdateWithoutOrderInput,
-      PaymentMetaUncheckedUpdateWithoutOrderInput
-    >;
+    data: XOR<PaymentMetaUpdateWithoutOrderInput, PaymentMetaUncheckedUpdateWithoutOrderInput>;
   };
 
   export type PaymentMetaUpdateWithoutOrderInput = {
     provider?: StringFieldUpdateOperationsInput | string;
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: StringFieldUpdateOperationsInput | string;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -38685,68 +35217,38 @@ export namespace Prisma {
     provider?: StringFieldUpdateOperationsInput | string;
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: StringFieldUpdateOperationsInput | string;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type OrderItemUpsertWithWhereUniqueWithoutOrderInput = {
     where: OrderItemWhereUniqueInput;
-    update: XOR<
-      OrderItemUpdateWithoutOrderInput,
-      OrderItemUncheckedUpdateWithoutOrderInput
-    >;
-    create: XOR<
-      OrderItemCreateWithoutOrderInput,
-      OrderItemUncheckedCreateWithoutOrderInput
-    >;
+    update: XOR<OrderItemUpdateWithoutOrderInput, OrderItemUncheckedUpdateWithoutOrderInput>;
+    create: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>;
   };
 
   export type OrderItemUpdateWithWhereUniqueWithoutOrderInput = {
     where: OrderItemWhereUniqueInput;
-    data: XOR<
-      OrderItemUpdateWithoutOrderInput,
-      OrderItemUncheckedUpdateWithoutOrderInput
-    >;
+    data: XOR<OrderItemUpdateWithoutOrderInput, OrderItemUncheckedUpdateWithoutOrderInput>;
   };
 
   export type OrderItemUpdateManyWithWhereWithoutOrderInput = {
     where: OrderItemScalarWhereInput;
-    data: XOR<
-      OrderItemUpdateManyMutationInput,
-      OrderItemUncheckedUpdateManyWithoutOrderInput
-    >;
+    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutOrderInput>;
   };
 
   export type AddressUpsertWithoutOrdersShippingInput = {
-    update: XOR<
-      AddressUpdateWithoutOrdersShippingInput,
-      AddressUncheckedUpdateWithoutOrdersShippingInput
-    >;
-    create: XOR<
-      AddressCreateWithoutOrdersShippingInput,
-      AddressUncheckedCreateWithoutOrdersShippingInput
-    >;
+    update: XOR<AddressUpdateWithoutOrdersShippingInput, AddressUncheckedUpdateWithoutOrdersShippingInput>;
+    create: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
     where?: AddressWhereInput;
   };
 
   export type AddressUpdateToOneWithWhereWithoutOrdersShippingInput = {
     where?: AddressWhereInput;
-    data: XOR<
-      AddressUpdateWithoutOrdersShippingInput,
-      AddressUncheckedUpdateWithoutOrdersShippingInput
-    >;
+    data: XOR<AddressUpdateWithoutOrdersShippingInput, AddressUncheckedUpdateWithoutOrdersShippingInput>;
   };
 
   export type AddressUpdateWithoutOrdersShippingInput = {
@@ -38787,23 +35289,14 @@ export namespace Prisma {
   };
 
   export type AddressUpsertWithoutOrdersBillingInput = {
-    update: XOR<
-      AddressUpdateWithoutOrdersBillingInput,
-      AddressUncheckedUpdateWithoutOrdersBillingInput
-    >;
-    create: XOR<
-      AddressCreateWithoutOrdersBillingInput,
-      AddressUncheckedCreateWithoutOrdersBillingInput
-    >;
+    update: XOR<AddressUpdateWithoutOrdersBillingInput, AddressUncheckedUpdateWithoutOrdersBillingInput>;
+    create: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
     where?: AddressWhereInput;
   };
 
   export type AddressUpdateToOneWithWhereWithoutOrdersBillingInput = {
     where?: AddressWhereInput;
-    data: XOR<
-      AddressUpdateWithoutOrdersBillingInput,
-      AddressUncheckedUpdateWithoutOrdersBillingInput
-    >;
+    data: XOR<AddressUpdateWithoutOrdersBillingInput, AddressUncheckedUpdateWithoutOrdersBillingInput>;
   };
 
   export type AddressUpdateWithoutOrdersBillingInput = {
@@ -38844,47 +35337,24 @@ export namespace Prisma {
   };
 
   export type CouponUpsertWithoutOrderInput = {
-    update: XOR<
-      CouponUpdateWithoutOrderInput,
-      CouponUncheckedUpdateWithoutOrderInput
-    >;
-    create: XOR<
-      CouponCreateWithoutOrderInput,
-      CouponUncheckedCreateWithoutOrderInput
-    >;
+    update: XOR<CouponUpdateWithoutOrderInput, CouponUncheckedUpdateWithoutOrderInput>;
+    create: XOR<CouponCreateWithoutOrderInput, CouponUncheckedCreateWithoutOrderInput>;
     where?: CouponWhereInput;
   };
 
   export type CouponUpdateToOneWithWhereWithoutOrderInput = {
     where?: CouponWhereInput;
-    data: XOR<
-      CouponUpdateWithoutOrderInput,
-      CouponUncheckedUpdateWithoutOrderInput
-    >;
+    data: XOR<CouponUpdateWithoutOrderInput, CouponUncheckedUpdateWithoutOrderInput>;
   };
 
   export type CouponUpdateWithoutOrderInput = {
     code?: StringFieldUpdateOperationsInput | string;
     type?: EnumCouponTypeFieldUpdateOperationsInput | $Enums.CouponType;
-    amount?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     percent?: NullableIntFieldUpdateOperationsInput | number | null;
     description?: NullableStringFieldUpdateOperationsInput | string | null;
-    startsAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     usageLimit?: NullableIntFieldUpdateOperationsInput | number | null;
     usagePerUser?: NullableIntFieldUpdateOperationsInput | number | null;
     timesUsed?: IntFieldUpdateOperationsInput | number;
@@ -38898,25 +35368,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     code?: StringFieldUpdateOperationsInput | string;
     type?: EnumCouponTypeFieldUpdateOperationsInput | $Enums.CouponType;
-    amount?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     percent?: NullableIntFieldUpdateOperationsInput | number | null;
     description?: NullableStringFieldUpdateOperationsInput | string | null;
-    startsAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
-    expiresAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     usageLimit?: NullableIntFieldUpdateOperationsInput | number | null;
     usagePerUser?: NullableIntFieldUpdateOperationsInput | number | null;
     timesUsed?: IntFieldUpdateOperationsInput | number;
@@ -38928,30 +35384,18 @@ export namespace Prisma {
 
   export type ReturnRequestUpsertWithWhereUniqueWithoutOrderInput = {
     where: ReturnRequestWhereUniqueInput;
-    update: XOR<
-      ReturnRequestUpdateWithoutOrderInput,
-      ReturnRequestUncheckedUpdateWithoutOrderInput
-    >;
-    create: XOR<
-      ReturnRequestCreateWithoutOrderInput,
-      ReturnRequestUncheckedCreateWithoutOrderInput
-    >;
+    update: XOR<ReturnRequestUpdateWithoutOrderInput, ReturnRequestUncheckedUpdateWithoutOrderInput>;
+    create: XOR<ReturnRequestCreateWithoutOrderInput, ReturnRequestUncheckedCreateWithoutOrderInput>;
   };
 
   export type ReturnRequestUpdateWithWhereUniqueWithoutOrderInput = {
     where: ReturnRequestWhereUniqueInput;
-    data: XOR<
-      ReturnRequestUpdateWithoutOrderInput,
-      ReturnRequestUncheckedUpdateWithoutOrderInput
-    >;
+    data: XOR<ReturnRequestUpdateWithoutOrderInput, ReturnRequestUncheckedUpdateWithoutOrderInput>;
   };
 
   export type ReturnRequestUpdateManyWithWhereWithoutOrderInput = {
     where: ReturnRequestScalarWhereInput;
-    data: XOR<
-      ReturnRequestUpdateManyMutationInput,
-      ReturnRequestUncheckedUpdateManyWithoutOrderInput
-    >;
+    data: XOR<ReturnRequestUpdateManyMutationInput, ReturnRequestUncheckedUpdateManyWithoutOrderInput>;
   };
 
   export type ReturnRequestScalarWhereInput = {
@@ -38965,40 +35409,24 @@ export namespace Prisma {
     status?: EnumReturnStatusFilter<"ReturnRequest"> | $Enums.ReturnStatus;
     evidence?: JsonNullableFilter<"ReturnRequest">;
     requestedAt?: DateTimeFilter<"ReturnRequest"> | Date | string;
-    processedAt?:
-      | DateTimeNullableFilter<"ReturnRequest">
-      | Date
-      | string
-      | null;
+    processedAt?: DateTimeNullableFilter<"ReturnRequest"> | Date | string | null;
     metadata?: JsonNullableFilter<"ReturnRequest">;
   };
 
   export type RefundUpsertWithWhereUniqueWithoutOrderInput = {
     where: RefundWhereUniqueInput;
-    update: XOR<
-      RefundUpdateWithoutOrderInput,
-      RefundUncheckedUpdateWithoutOrderInput
-    >;
-    create: XOR<
-      RefundCreateWithoutOrderInput,
-      RefundUncheckedCreateWithoutOrderInput
-    >;
+    update: XOR<RefundUpdateWithoutOrderInput, RefundUncheckedUpdateWithoutOrderInput>;
+    create: XOR<RefundCreateWithoutOrderInput, RefundUncheckedCreateWithoutOrderInput>;
   };
 
   export type RefundUpdateWithWhereUniqueWithoutOrderInput = {
     where: RefundWhereUniqueInput;
-    data: XOR<
-      RefundUpdateWithoutOrderInput,
-      RefundUncheckedUpdateWithoutOrderInput
-    >;
+    data: XOR<RefundUpdateWithoutOrderInput, RefundUncheckedUpdateWithoutOrderInput>;
   };
 
   export type RefundUpdateManyWithWhereWithoutOrderInput = {
     where: RefundScalarWhereInput;
-    data: XOR<
-      RefundUpdateManyMutationInput,
-      RefundUncheckedUpdateManyWithoutOrderInput
-    >;
+    data: XOR<RefundUpdateManyMutationInput, RefundUncheckedUpdateManyWithoutOrderInput>;
   };
 
   export type RefundScalarWhereInput = {
@@ -39008,12 +35436,7 @@ export namespace Prisma {
     id?: IntFilter<"Refund"> | number;
     orderId?: IntFilter<"Refund"> | number;
     returnRequestId?: IntNullableFilter<"Refund"> | number | null;
-    amount?:
-      | DecimalFilter<"Refund">
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFilter<"Refund"> | Decimal | DecimalJsLike | number | string;
     method?: StringFilter<"Refund"> | string;
     status?: EnumRefundStatusFilter<"Refund"> | $Enums.RefundStatus;
     providerRef?: StringNullableFilter<"Refund"> | string | null;
@@ -39063,10 +35486,7 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutItemsInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutItemsInput,
-      OrderUncheckedCreateWithoutItemsInput
-    >;
+    create: XOR<OrderCreateWithoutItemsInput, OrderUncheckedCreateWithoutItemsInput>;
   };
 
   export type ProductCreateWithoutOrderItemInput = {
@@ -39078,6 +35498,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageCreateNestedManyWithoutProductInput;
     variants?: ProductVariantCreateNestedManyWithoutProductInput;
     reviews?: ReviewCreateNestedManyWithoutProductInput;
     WishlistItem?: WishlistItemCreateNestedManyWithoutProductInput;
@@ -39093,6 +35514,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput;
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput;
     reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
     WishlistItem?: WishlistItemUncheckedCreateNestedManyWithoutProductInput;
@@ -39100,10 +35522,7 @@ export namespace Prisma {
 
   export type ProductCreateOrConnectWithoutOrderItemInput = {
     where: ProductWhereUniqueInput;
-    create: XOR<
-      ProductCreateWithoutOrderItemInput,
-      ProductUncheckedCreateWithoutOrderItemInput
-    >;
+    create: XOR<ProductCreateWithoutOrderItemInput, ProductUncheckedCreateWithoutOrderItemInput>;
   };
 
   export type ProductVariantCreateWithoutOrderItemInput = {
@@ -39133,10 +35552,7 @@ export namespace Prisma {
 
   export type ProductVariantCreateOrConnectWithoutOrderItemInput = {
     where: ProductVariantWhereUniqueInput;
-    create: XOR<
-      ProductVariantCreateWithoutOrderItemInput,
-      ProductVariantUncheckedCreateWithoutOrderItemInput
-    >;
+    create: XOR<ProductVariantCreateWithoutOrderItemInput, ProductVariantUncheckedCreateWithoutOrderItemInput>;
   };
 
   export type ReturnRequestCreateWithoutOrderItemInput = {
@@ -39164,69 +35580,33 @@ export namespace Prisma {
 
   export type ReturnRequestCreateOrConnectWithoutOrderItemInput = {
     where: ReturnRequestWhereUniqueInput;
-    create: XOR<
-      ReturnRequestCreateWithoutOrderItemInput,
-      ReturnRequestUncheckedCreateWithoutOrderItemInput
-    >;
+    create: XOR<ReturnRequestCreateWithoutOrderItemInput, ReturnRequestUncheckedCreateWithoutOrderItemInput>;
   };
 
   export type ReturnRequestCreateManyOrderItemInputEnvelope = {
-    data:
-      | ReturnRequestCreateManyOrderItemInput
-      | ReturnRequestCreateManyOrderItemInput[];
+    data: ReturnRequestCreateManyOrderItemInput | ReturnRequestCreateManyOrderItemInput[];
     skipDuplicates?: boolean;
   };
 
   export type OrderUpsertWithoutItemsInput = {
-    update: XOR<
-      OrderUpdateWithoutItemsInput,
-      OrderUncheckedUpdateWithoutItemsInput
-    >;
-    create: XOR<
-      OrderCreateWithoutItemsInput,
-      OrderUncheckedCreateWithoutItemsInput
-    >;
+    update: XOR<OrderUpdateWithoutItemsInput, OrderUncheckedUpdateWithoutItemsInput>;
+    create: XOR<OrderCreateWithoutItemsInput, OrderUncheckedCreateWithoutItemsInput>;
     where?: OrderWhereInput;
   };
 
   export type OrderUpdateToOneWithWhereWithoutItemsInput = {
     where?: OrderWhereInput;
-    data: XOR<
-      OrderUpdateWithoutItemsInput,
-      OrderUncheckedUpdateWithoutItemsInput
-    >;
+    data: XOR<OrderUpdateWithoutItemsInput, OrderUncheckedUpdateWithoutItemsInput>;
   };
 
   export type OrderUpdateWithoutItemsInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -39243,33 +35623,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -39281,23 +35639,14 @@ export namespace Prisma {
   };
 
   export type ProductUpsertWithoutOrderItemInput = {
-    update: XOR<
-      ProductUpdateWithoutOrderItemInput,
-      ProductUncheckedUpdateWithoutOrderItemInput
-    >;
-    create: XOR<
-      ProductCreateWithoutOrderItemInput,
-      ProductUncheckedCreateWithoutOrderItemInput
-    >;
+    update: XOR<ProductUpdateWithoutOrderItemInput, ProductUncheckedUpdateWithoutOrderItemInput>;
+    create: XOR<ProductCreateWithoutOrderItemInput, ProductUncheckedCreateWithoutOrderItemInput>;
     where?: ProductWhereInput;
   };
 
   export type ProductUpdateToOneWithWhereWithoutOrderItemInput = {
     where?: ProductWhereInput;
-    data: XOR<
-      ProductUpdateWithoutOrderItemInput,
-      ProductUncheckedUpdateWithoutOrderItemInput
-    >;
+    data: XOR<ProductUpdateWithoutOrderItemInput, ProductUncheckedUpdateWithoutOrderItemInput>;
   };
 
   export type ProductUpdateWithoutOrderItemInput = {
@@ -39309,6 +35658,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUpdateManyWithoutProductNestedInput;
     WishlistItem?: WishlistItemUpdateManyWithoutProductNestedInput;
@@ -39324,47 +35674,28 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
     WishlistItem?: WishlistItemUncheckedUpdateManyWithoutProductNestedInput;
   };
 
   export type ProductVariantUpsertWithoutOrderItemInput = {
-    update: XOR<
-      ProductVariantUpdateWithoutOrderItemInput,
-      ProductVariantUncheckedUpdateWithoutOrderItemInput
-    >;
-    create: XOR<
-      ProductVariantCreateWithoutOrderItemInput,
-      ProductVariantUncheckedCreateWithoutOrderItemInput
-    >;
+    update: XOR<ProductVariantUpdateWithoutOrderItemInput, ProductVariantUncheckedUpdateWithoutOrderItemInput>;
+    create: XOR<ProductVariantCreateWithoutOrderItemInput, ProductVariantUncheckedCreateWithoutOrderItemInput>;
     where?: ProductVariantWhereInput;
   };
 
   export type ProductVariantUpdateToOneWithWhereWithoutOrderItemInput = {
     where?: ProductVariantWhereInput;
-    data: XOR<
-      ProductVariantUpdateWithoutOrderItemInput,
-      ProductVariantUncheckedUpdateWithoutOrderItemInput
-    >;
+    data: XOR<ProductVariantUpdateWithoutOrderItemInput, ProductVariantUncheckedUpdateWithoutOrderItemInput>;
   };
 
   export type ProductVariantUpdateWithoutOrderItemInput = {
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -39377,19 +35708,8 @@ export namespace Prisma {
     productId?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -39398,30 +35718,18 @@ export namespace Prisma {
 
   export type ReturnRequestUpsertWithWhereUniqueWithoutOrderItemInput = {
     where: ReturnRequestWhereUniqueInput;
-    update: XOR<
-      ReturnRequestUpdateWithoutOrderItemInput,
-      ReturnRequestUncheckedUpdateWithoutOrderItemInput
-    >;
-    create: XOR<
-      ReturnRequestCreateWithoutOrderItemInput,
-      ReturnRequestUncheckedCreateWithoutOrderItemInput
-    >;
+    update: XOR<ReturnRequestUpdateWithoutOrderItemInput, ReturnRequestUncheckedUpdateWithoutOrderItemInput>;
+    create: XOR<ReturnRequestCreateWithoutOrderItemInput, ReturnRequestUncheckedCreateWithoutOrderItemInput>;
   };
 
   export type ReturnRequestUpdateWithWhereUniqueWithoutOrderItemInput = {
     where: ReturnRequestWhereUniqueInput;
-    data: XOR<
-      ReturnRequestUpdateWithoutOrderItemInput,
-      ReturnRequestUncheckedUpdateWithoutOrderItemInput
-    >;
+    data: XOR<ReturnRequestUpdateWithoutOrderItemInput, ReturnRequestUncheckedUpdateWithoutOrderItemInput>;
   };
 
   export type ReturnRequestUpdateManyWithWhereWithoutOrderItemInput = {
     where: ReturnRequestScalarWhereInput;
-    data: XOR<
-      ReturnRequestUpdateManyMutationInput,
-      ReturnRequestUncheckedUpdateManyWithoutOrderItemInput
-    >;
+    data: XOR<ReturnRequestUpdateManyMutationInput, ReturnRequestUncheckedUpdateManyWithoutOrderItemInput>;
   };
 
   export type OrderCreateWithoutCouponInput = {
@@ -39465,10 +35773,7 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutCouponInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutCouponInput,
-      OrderUncheckedCreateWithoutCouponInput
-    >;
+    create: XOR<OrderCreateWithoutCouponInput, OrderUncheckedCreateWithoutCouponInput>;
   };
 
   export type OrderCreateManyCouponInputEnvelope = {
@@ -39478,30 +35783,18 @@ export namespace Prisma {
 
   export type OrderUpsertWithWhereUniqueWithoutCouponInput = {
     where: OrderWhereUniqueInput;
-    update: XOR<
-      OrderUpdateWithoutCouponInput,
-      OrderUncheckedUpdateWithoutCouponInput
-    >;
-    create: XOR<
-      OrderCreateWithoutCouponInput,
-      OrderUncheckedCreateWithoutCouponInput
-    >;
+    update: XOR<OrderUpdateWithoutCouponInput, OrderUncheckedUpdateWithoutCouponInput>;
+    create: XOR<OrderCreateWithoutCouponInput, OrderUncheckedCreateWithoutCouponInput>;
   };
 
   export type OrderUpdateWithWhereUniqueWithoutCouponInput = {
     where: OrderWhereUniqueInput;
-    data: XOR<
-      OrderUpdateWithoutCouponInput,
-      OrderUncheckedUpdateWithoutCouponInput
-    >;
+    data: XOR<OrderUpdateWithoutCouponInput, OrderUncheckedUpdateWithoutCouponInput>;
   };
 
   export type OrderUpdateManyWithWhereWithoutCouponInput = {
     where: OrderScalarWhereInput;
-    data: XOR<
-      OrderUpdateManyMutationInput,
-      OrderUncheckedUpdateManyWithoutCouponInput
-    >;
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutCouponInput>;
   };
 
   export type UserCreateWithoutReviewsInput = {
@@ -39537,10 +35830,7 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutReviewsInput = {
     where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutReviewsInput,
-      UserUncheckedCreateWithoutReviewsInput
-    >;
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>;
   };
 
   export type ProductCreateWithoutReviewsInput = {
@@ -39552,6 +35842,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageCreateNestedManyWithoutProductInput;
     variants?: ProductVariantCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemCreateNestedManyWithoutProductInput;
     WishlistItem?: WishlistItemCreateNestedManyWithoutProductInput;
@@ -39567,6 +35858,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput;
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutProductInput;
     WishlistItem?: WishlistItemUncheckedCreateNestedManyWithoutProductInput;
@@ -39574,30 +35866,18 @@ export namespace Prisma {
 
   export type ProductCreateOrConnectWithoutReviewsInput = {
     where: ProductWhereUniqueInput;
-    create: XOR<
-      ProductCreateWithoutReviewsInput,
-      ProductUncheckedCreateWithoutReviewsInput
-    >;
+    create: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>;
   };
 
   export type UserUpsertWithoutReviewsInput = {
-    update: XOR<
-      UserUpdateWithoutReviewsInput,
-      UserUncheckedUpdateWithoutReviewsInput
-    >;
-    create: XOR<
-      UserCreateWithoutReviewsInput,
-      UserUncheckedCreateWithoutReviewsInput
-    >;
+    update: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>;
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>;
     where?: UserWhereInput;
   };
 
   export type UserUpdateToOneWithWhereWithoutReviewsInput = {
     where?: UserWhereInput;
-    data: XOR<
-      UserUpdateWithoutReviewsInput,
-      UserUncheckedUpdateWithoutReviewsInput
-    >;
+    data: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>;
   };
 
   export type UserUpdateWithoutReviewsInput = {
@@ -39607,11 +35887,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
     addresses?: AddressUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
@@ -39627,11 +35903,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
@@ -39640,23 +35912,14 @@ export namespace Prisma {
   };
 
   export type ProductUpsertWithoutReviewsInput = {
-    update: XOR<
-      ProductUpdateWithoutReviewsInput,
-      ProductUncheckedUpdateWithoutReviewsInput
-    >;
-    create: XOR<
-      ProductCreateWithoutReviewsInput,
-      ProductUncheckedCreateWithoutReviewsInput
-    >;
+    update: XOR<ProductUpdateWithoutReviewsInput, ProductUncheckedUpdateWithoutReviewsInput>;
+    create: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>;
     where?: ProductWhereInput;
   };
 
   export type ProductUpdateToOneWithWhereWithoutReviewsInput = {
     where?: ProductWhereInput;
-    data: XOR<
-      ProductUpdateWithoutReviewsInput,
-      ProductUncheckedUpdateWithoutReviewsInput
-    >;
+    data: XOR<ProductUpdateWithoutReviewsInput, ProductUncheckedUpdateWithoutReviewsInput>;
   };
 
   export type ProductUpdateWithoutReviewsInput = {
@@ -39668,6 +35931,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUpdateManyWithoutProductNestedInput;
     WishlistItem?: WishlistItemUpdateManyWithoutProductNestedInput;
@@ -39683,6 +35947,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUncheckedUpdateManyWithoutProductNestedInput;
     WishlistItem?: WishlistItemUncheckedUpdateManyWithoutProductNestedInput;
@@ -39721,10 +35986,7 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutWishlistInput = {
     where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutWishlistInput,
-      UserUncheckedCreateWithoutWishlistInput
-    >;
+    create: XOR<UserCreateWithoutWishlistInput, UserUncheckedCreateWithoutWishlistInput>;
   };
 
   export type WishlistItemCreateWithoutWishlistInput = {
@@ -39742,37 +36004,23 @@ export namespace Prisma {
 
   export type WishlistItemCreateOrConnectWithoutWishlistInput = {
     where: WishlistItemWhereUniqueInput;
-    create: XOR<
-      WishlistItemCreateWithoutWishlistInput,
-      WishlistItemUncheckedCreateWithoutWishlistInput
-    >;
+    create: XOR<WishlistItemCreateWithoutWishlistInput, WishlistItemUncheckedCreateWithoutWishlistInput>;
   };
 
   export type WishlistItemCreateManyWishlistInputEnvelope = {
-    data:
-      | WishlistItemCreateManyWishlistInput
-      | WishlistItemCreateManyWishlistInput[];
+    data: WishlistItemCreateManyWishlistInput | WishlistItemCreateManyWishlistInput[];
     skipDuplicates?: boolean;
   };
 
   export type UserUpsertWithoutWishlistInput = {
-    update: XOR<
-      UserUpdateWithoutWishlistInput,
-      UserUncheckedUpdateWithoutWishlistInput
-    >;
-    create: XOR<
-      UserCreateWithoutWishlistInput,
-      UserUncheckedCreateWithoutWishlistInput
-    >;
+    update: XOR<UserUpdateWithoutWishlistInput, UserUncheckedUpdateWithoutWishlistInput>;
+    create: XOR<UserCreateWithoutWishlistInput, UserUncheckedCreateWithoutWishlistInput>;
     where?: UserWhereInput;
   };
 
   export type UserUpdateToOneWithWhereWithoutWishlistInput = {
     where?: UserWhereInput;
-    data: XOR<
-      UserUpdateWithoutWishlistInput,
-      UserUncheckedUpdateWithoutWishlistInput
-    >;
+    data: XOR<UserUpdateWithoutWishlistInput, UserUncheckedUpdateWithoutWishlistInput>;
   };
 
   export type UserUpdateWithoutWishlistInput = {
@@ -39782,11 +36030,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
     addresses?: AddressUpdateManyWithoutUserNestedInput;
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
@@ -39802,11 +36046,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
@@ -39816,30 +36056,18 @@ export namespace Prisma {
 
   export type WishlistItemUpsertWithWhereUniqueWithoutWishlistInput = {
     where: WishlistItemWhereUniqueInput;
-    update: XOR<
-      WishlistItemUpdateWithoutWishlistInput,
-      WishlistItemUncheckedUpdateWithoutWishlistInput
-    >;
-    create: XOR<
-      WishlistItemCreateWithoutWishlistInput,
-      WishlistItemUncheckedCreateWithoutWishlistInput
-    >;
+    update: XOR<WishlistItemUpdateWithoutWishlistInput, WishlistItemUncheckedUpdateWithoutWishlistInput>;
+    create: XOR<WishlistItemCreateWithoutWishlistInput, WishlistItemUncheckedCreateWithoutWishlistInput>;
   };
 
   export type WishlistItemUpdateWithWhereUniqueWithoutWishlistInput = {
     where: WishlistItemWhereUniqueInput;
-    data: XOR<
-      WishlistItemUpdateWithoutWishlistInput,
-      WishlistItemUncheckedUpdateWithoutWishlistInput
-    >;
+    data: XOR<WishlistItemUpdateWithoutWishlistInput, WishlistItemUncheckedUpdateWithoutWishlistInput>;
   };
 
   export type WishlistItemUpdateManyWithWhereWithoutWishlistInput = {
     where: WishlistItemScalarWhereInput;
-    data: XOR<
-      WishlistItemUpdateManyMutationInput,
-      WishlistItemUncheckedUpdateManyWithoutWishlistInput
-    >;
+    data: XOR<WishlistItemUpdateManyMutationInput, WishlistItemUncheckedUpdateManyWithoutWishlistInput>;
   };
 
   export type WishlistCreateWithoutItemsInput = {
@@ -39857,10 +36085,7 @@ export namespace Prisma {
 
   export type WishlistCreateOrConnectWithoutItemsInput = {
     where: WishlistWhereUniqueInput;
-    create: XOR<
-      WishlistCreateWithoutItemsInput,
-      WishlistUncheckedCreateWithoutItemsInput
-    >;
+    create: XOR<WishlistCreateWithoutItemsInput, WishlistUncheckedCreateWithoutItemsInput>;
   };
 
   export type ProductCreateWithoutWishlistItemInput = {
@@ -39872,6 +36097,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageCreateNestedManyWithoutProductInput;
     variants?: ProductVariantCreateNestedManyWithoutProductInput;
     reviews?: ReviewCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemCreateNestedManyWithoutProductInput;
@@ -39887,6 +36113,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput;
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput;
     reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput;
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutProductInput;
@@ -39894,30 +36121,18 @@ export namespace Prisma {
 
   export type ProductCreateOrConnectWithoutWishlistItemInput = {
     where: ProductWhereUniqueInput;
-    create: XOR<
-      ProductCreateWithoutWishlistItemInput,
-      ProductUncheckedCreateWithoutWishlistItemInput
-    >;
+    create: XOR<ProductCreateWithoutWishlistItemInput, ProductUncheckedCreateWithoutWishlistItemInput>;
   };
 
   export type WishlistUpsertWithoutItemsInput = {
-    update: XOR<
-      WishlistUpdateWithoutItemsInput,
-      WishlistUncheckedUpdateWithoutItemsInput
-    >;
-    create: XOR<
-      WishlistCreateWithoutItemsInput,
-      WishlistUncheckedCreateWithoutItemsInput
-    >;
+    update: XOR<WishlistUpdateWithoutItemsInput, WishlistUncheckedUpdateWithoutItemsInput>;
+    create: XOR<WishlistCreateWithoutItemsInput, WishlistUncheckedCreateWithoutItemsInput>;
     where?: WishlistWhereInput;
   };
 
   export type WishlistUpdateToOneWithWhereWithoutItemsInput = {
     where?: WishlistWhereInput;
-    data: XOR<
-      WishlistUpdateWithoutItemsInput,
-      WishlistUncheckedUpdateWithoutItemsInput
-    >;
+    data: XOR<WishlistUpdateWithoutItemsInput, WishlistUncheckedUpdateWithoutItemsInput>;
   };
 
   export type WishlistUpdateWithoutItemsInput = {
@@ -39934,23 +36149,14 @@ export namespace Prisma {
   };
 
   export type ProductUpsertWithoutWishlistItemInput = {
-    update: XOR<
-      ProductUpdateWithoutWishlistItemInput,
-      ProductUncheckedUpdateWithoutWishlistItemInput
-    >;
-    create: XOR<
-      ProductCreateWithoutWishlistItemInput,
-      ProductUncheckedCreateWithoutWishlistItemInput
-    >;
+    update: XOR<ProductUpdateWithoutWishlistItemInput, ProductUncheckedUpdateWithoutWishlistItemInput>;
+    create: XOR<ProductCreateWithoutWishlistItemInput, ProductUncheckedCreateWithoutWishlistItemInput>;
     where?: ProductWhereInput;
   };
 
   export type ProductUpdateToOneWithWhereWithoutWishlistItemInput = {
     where?: ProductWhereInput;
-    data: XOR<
-      ProductUpdateWithoutWishlistItemInput,
-      ProductUncheckedUpdateWithoutWishlistItemInput
-    >;
+    data: XOR<ProductUpdateWithoutWishlistItemInput, ProductUncheckedUpdateWithoutWishlistItemInput>;
   };
 
   export type ProductUpdateWithoutWishlistItemInput = {
@@ -39962,6 +36168,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUpdateManyWithoutProductNestedInput;
@@ -39977,6 +36184,7 @@ export namespace Prisma {
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput;
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput;
     OrderItem?: OrderItemUncheckedUpdateManyWithoutProductNestedInput;
@@ -40015,10 +36223,7 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutAddressesInput = {
     where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutAddressesInput,
-      UserUncheckedCreateWithoutAddressesInput
-    >;
+    create: XOR<UserCreateWithoutAddressesInput, UserUncheckedCreateWithoutAddressesInput>;
   };
 
   export type OrderCreateWithoutShippingAddressInput = {
@@ -40062,16 +36267,11 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutShippingAddressInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutShippingAddressInput,
-      OrderUncheckedCreateWithoutShippingAddressInput
-    >;
+    create: XOR<OrderCreateWithoutShippingAddressInput, OrderUncheckedCreateWithoutShippingAddressInput>;
   };
 
   export type OrderCreateManyShippingAddressInputEnvelope = {
-    data:
-      | OrderCreateManyShippingAddressInput
-      | OrderCreateManyShippingAddressInput[];
+    data: OrderCreateManyShippingAddressInput | OrderCreateManyShippingAddressInput[];
     skipDuplicates?: boolean;
   };
 
@@ -40116,37 +36316,23 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutBillingAddressInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutBillingAddressInput,
-      OrderUncheckedCreateWithoutBillingAddressInput
-    >;
+    create: XOR<OrderCreateWithoutBillingAddressInput, OrderUncheckedCreateWithoutBillingAddressInput>;
   };
 
   export type OrderCreateManyBillingAddressInputEnvelope = {
-    data:
-      | OrderCreateManyBillingAddressInput
-      | OrderCreateManyBillingAddressInput[];
+    data: OrderCreateManyBillingAddressInput | OrderCreateManyBillingAddressInput[];
     skipDuplicates?: boolean;
   };
 
   export type UserUpsertWithoutAddressesInput = {
-    update: XOR<
-      UserUpdateWithoutAddressesInput,
-      UserUncheckedUpdateWithoutAddressesInput
-    >;
-    create: XOR<
-      UserCreateWithoutAddressesInput,
-      UserUncheckedCreateWithoutAddressesInput
-    >;
+    update: XOR<UserUpdateWithoutAddressesInput, UserUncheckedUpdateWithoutAddressesInput>;
+    create: XOR<UserCreateWithoutAddressesInput, UserUncheckedCreateWithoutAddressesInput>;
     where?: UserWhereInput;
   };
 
   export type UserUpdateToOneWithWhereWithoutAddressesInput = {
     where?: UserWhereInput;
-    data: XOR<
-      UserUpdateWithoutAddressesInput,
-      UserUncheckedUpdateWithoutAddressesInput
-    >;
+    data: XOR<UserUpdateWithoutAddressesInput, UserUncheckedUpdateWithoutAddressesInput>;
   };
 
   export type UserUpdateWithoutAddressesInput = {
@@ -40156,11 +36342,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
@@ -40176,11 +36358,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
@@ -40190,58 +36368,34 @@ export namespace Prisma {
 
   export type OrderUpsertWithWhereUniqueWithoutShippingAddressInput = {
     where: OrderWhereUniqueInput;
-    update: XOR<
-      OrderUpdateWithoutShippingAddressInput,
-      OrderUncheckedUpdateWithoutShippingAddressInput
-    >;
-    create: XOR<
-      OrderCreateWithoutShippingAddressInput,
-      OrderUncheckedCreateWithoutShippingAddressInput
-    >;
+    update: XOR<OrderUpdateWithoutShippingAddressInput, OrderUncheckedUpdateWithoutShippingAddressInput>;
+    create: XOR<OrderCreateWithoutShippingAddressInput, OrderUncheckedCreateWithoutShippingAddressInput>;
   };
 
   export type OrderUpdateWithWhereUniqueWithoutShippingAddressInput = {
     where: OrderWhereUniqueInput;
-    data: XOR<
-      OrderUpdateWithoutShippingAddressInput,
-      OrderUncheckedUpdateWithoutShippingAddressInput
-    >;
+    data: XOR<OrderUpdateWithoutShippingAddressInput, OrderUncheckedUpdateWithoutShippingAddressInput>;
   };
 
   export type OrderUpdateManyWithWhereWithoutShippingAddressInput = {
     where: OrderScalarWhereInput;
-    data: XOR<
-      OrderUpdateManyMutationInput,
-      OrderUncheckedUpdateManyWithoutShippingAddressInput
-    >;
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutShippingAddressInput>;
   };
 
   export type OrderUpsertWithWhereUniqueWithoutBillingAddressInput = {
     where: OrderWhereUniqueInput;
-    update: XOR<
-      OrderUpdateWithoutBillingAddressInput,
-      OrderUncheckedUpdateWithoutBillingAddressInput
-    >;
-    create: XOR<
-      OrderCreateWithoutBillingAddressInput,
-      OrderUncheckedCreateWithoutBillingAddressInput
-    >;
+    update: XOR<OrderUpdateWithoutBillingAddressInput, OrderUncheckedUpdateWithoutBillingAddressInput>;
+    create: XOR<OrderCreateWithoutBillingAddressInput, OrderUncheckedCreateWithoutBillingAddressInput>;
   };
 
   export type OrderUpdateWithWhereUniqueWithoutBillingAddressInput = {
     where: OrderWhereUniqueInput;
-    data: XOR<
-      OrderUpdateWithoutBillingAddressInput,
-      OrderUncheckedUpdateWithoutBillingAddressInput
-    >;
+    data: XOR<OrderUpdateWithoutBillingAddressInput, OrderUncheckedUpdateWithoutBillingAddressInput>;
   };
 
   export type OrderUpdateManyWithWhereWithoutBillingAddressInput = {
     where: OrderScalarWhereInput;
-    data: XOR<
-      OrderUpdateManyMutationInput,
-      OrderUncheckedUpdateManyWithoutBillingAddressInput
-    >;
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutBillingAddressInput>;
   };
 
   export type UserCreateWithoutAuditLogInput = {
@@ -40277,30 +36431,18 @@ export namespace Prisma {
 
   export type UserCreateOrConnectWithoutAuditLogInput = {
     where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutAuditLogInput,
-      UserUncheckedCreateWithoutAuditLogInput
-    >;
+    create: XOR<UserCreateWithoutAuditLogInput, UserUncheckedCreateWithoutAuditLogInput>;
   };
 
   export type UserUpsertWithoutAuditLogInput = {
-    update: XOR<
-      UserUpdateWithoutAuditLogInput,
-      UserUncheckedUpdateWithoutAuditLogInput
-    >;
-    create: XOR<
-      UserCreateWithoutAuditLogInput,
-      UserUncheckedCreateWithoutAuditLogInput
-    >;
+    update: XOR<UserUpdateWithoutAuditLogInput, UserUncheckedUpdateWithoutAuditLogInput>;
+    create: XOR<UserCreateWithoutAuditLogInput, UserUncheckedCreateWithoutAuditLogInput>;
     where?: UserWhereInput;
   };
 
   export type UserUpdateToOneWithWhereWithoutAuditLogInput = {
     where?: UserWhereInput;
-    data: XOR<
-      UserUpdateWithoutAuditLogInput,
-      UserUncheckedUpdateWithoutAuditLogInput
-    >;
+    data: XOR<UserUpdateWithoutAuditLogInput, UserUncheckedUpdateWithoutAuditLogInput>;
   };
 
   export type UserUpdateWithoutAuditLogInput = {
@@ -40310,11 +36452,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
     addresses?: AddressUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
@@ -40330,11 +36468,7 @@ export namespace Prisma {
     displayName?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    lastLogin?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
@@ -40383,10 +36517,7 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutReturnRequestInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutReturnRequestInput,
-      OrderUncheckedCreateWithoutReturnRequestInput
-    >;
+    create: XOR<OrderCreateWithoutReturnRequestInput, OrderUncheckedCreateWithoutReturnRequestInput>;
   };
 
   export type OrderItemCreateWithoutReturnRequestInput = {
@@ -40418,10 +36549,7 @@ export namespace Prisma {
 
   export type OrderItemCreateOrConnectWithoutReturnRequestInput = {
     where: OrderItemWhereUniqueInput;
-    create: XOR<
-      OrderItemCreateWithoutReturnRequestInput,
-      OrderItemUncheckedCreateWithoutReturnRequestInput
-    >;
+    create: XOR<OrderItemCreateWithoutReturnRequestInput, OrderItemUncheckedCreateWithoutReturnRequestInput>;
   };
 
   export type RefundCreateWithoutReturnRequestInput = {
@@ -40449,62 +36577,28 @@ export namespace Prisma {
 
   export type RefundCreateOrConnectWithoutReturnRequestInput = {
     where: RefundWhereUniqueInput;
-    create: XOR<
-      RefundCreateWithoutReturnRequestInput,
-      RefundUncheckedCreateWithoutReturnRequestInput
-    >;
+    create: XOR<RefundCreateWithoutReturnRequestInput, RefundUncheckedCreateWithoutReturnRequestInput>;
   };
 
   export type OrderUpsertWithoutReturnRequestInput = {
-    update: XOR<
-      OrderUpdateWithoutReturnRequestInput,
-      OrderUncheckedUpdateWithoutReturnRequestInput
-    >;
-    create: XOR<
-      OrderCreateWithoutReturnRequestInput,
-      OrderUncheckedCreateWithoutReturnRequestInput
-    >;
+    update: XOR<OrderUpdateWithoutReturnRequestInput, OrderUncheckedUpdateWithoutReturnRequestInput>;
+    create: XOR<OrderCreateWithoutReturnRequestInput, OrderUncheckedCreateWithoutReturnRequestInput>;
     where?: OrderWhereInput;
   };
 
   export type OrderUpdateToOneWithWhereWithoutReturnRequestInput = {
     where?: OrderWhereInput;
-    data: XOR<
-      OrderUpdateWithoutReturnRequestInput,
-      OrderUncheckedUpdateWithoutReturnRequestInput
-    >;
+    data: XOR<OrderUpdateWithoutReturnRequestInput, OrderUncheckedUpdateWithoutReturnRequestInput>;
   };
 
   export type OrderUpdateWithoutReturnRequestInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -40521,33 +36615,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -40559,41 +36631,22 @@ export namespace Prisma {
   };
 
   export type OrderItemUpsertWithoutReturnRequestInput = {
-    update: XOR<
-      OrderItemUpdateWithoutReturnRequestInput,
-      OrderItemUncheckedUpdateWithoutReturnRequestInput
-    >;
-    create: XOR<
-      OrderItemCreateWithoutReturnRequestInput,
-      OrderItemUncheckedCreateWithoutReturnRequestInput
-    >;
+    update: XOR<OrderItemUpdateWithoutReturnRequestInput, OrderItemUncheckedUpdateWithoutReturnRequestInput>;
+    create: XOR<OrderItemCreateWithoutReturnRequestInput, OrderItemUncheckedCreateWithoutReturnRequestInput>;
     where?: OrderItemWhereInput;
   };
 
   export type OrderItemUpdateToOneWithWhereWithoutReturnRequestInput = {
     where?: OrderItemWhereInput;
-    data: XOR<
-      OrderItemUpdateWithoutReturnRequestInput,
-      OrderItemUncheckedUpdateWithoutReturnRequestInput
-    >;
+    data: XOR<OrderItemUpdateWithoutReturnRequestInput, OrderItemUncheckedUpdateWithoutReturnRequestInput>;
   };
 
   export type OrderItemUpdateWithoutReturnRequestInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput;
@@ -40608,82 +36661,45 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type RefundUpsertWithoutReturnRequestInput = {
-    update: XOR<
-      RefundUpdateWithoutReturnRequestInput,
-      RefundUncheckedUpdateWithoutReturnRequestInput
-    >;
-    create: XOR<
-      RefundCreateWithoutReturnRequestInput,
-      RefundUncheckedCreateWithoutReturnRequestInput
-    >;
+    update: XOR<RefundUpdateWithoutReturnRequestInput, RefundUncheckedUpdateWithoutReturnRequestInput>;
+    create: XOR<RefundCreateWithoutReturnRequestInput, RefundUncheckedCreateWithoutReturnRequestInput>;
     where?: RefundWhereInput;
   };
 
   export type RefundUpdateToOneWithWhereWithoutReturnRequestInput = {
     where?: RefundWhereInput;
-    data: XOR<
-      RefundUpdateWithoutReturnRequestInput,
-      RefundUncheckedUpdateWithoutReturnRequestInput
-    >;
+    data: XOR<RefundUpdateWithoutReturnRequestInput, RefundUncheckedUpdateWithoutReturnRequestInput>;
   };
 
   export type RefundUpdateWithoutReturnRequestInput = {
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     order?: OrderUpdateOneRequiredWithoutRefundNestedInput;
   };
 
   export type RefundUncheckedUpdateWithoutReturnRequestInput = {
     id?: IntFieldUpdateOperationsInput | number;
     orderId?: IntFieldUpdateOperationsInput | number;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type OrderCreateWithoutRefundInput = {
@@ -40727,10 +36743,7 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutRefundInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutRefundInput,
-      OrderUncheckedCreateWithoutRefundInput
-    >;
+    create: XOR<OrderCreateWithoutRefundInput, OrderUncheckedCreateWithoutRefundInput>;
   };
 
   export type ReturnRequestCreateWithoutRefundInput = {
@@ -40758,62 +36771,28 @@ export namespace Prisma {
 
   export type ReturnRequestCreateOrConnectWithoutRefundInput = {
     where: ReturnRequestWhereUniqueInput;
-    create: XOR<
-      ReturnRequestCreateWithoutRefundInput,
-      ReturnRequestUncheckedCreateWithoutRefundInput
-    >;
+    create: XOR<ReturnRequestCreateWithoutRefundInput, ReturnRequestUncheckedCreateWithoutRefundInput>;
   };
 
   export type OrderUpsertWithoutRefundInput = {
-    update: XOR<
-      OrderUpdateWithoutRefundInput,
-      OrderUncheckedUpdateWithoutRefundInput
-    >;
-    create: XOR<
-      OrderCreateWithoutRefundInput,
-      OrderUncheckedCreateWithoutRefundInput
-    >;
+    update: XOR<OrderUpdateWithoutRefundInput, OrderUncheckedUpdateWithoutRefundInput>;
+    create: XOR<OrderCreateWithoutRefundInput, OrderUncheckedCreateWithoutRefundInput>;
     where?: OrderWhereInput;
   };
 
   export type OrderUpdateToOneWithWhereWithoutRefundInput = {
     where?: OrderWhereInput;
-    data: XOR<
-      OrderUpdateWithoutRefundInput,
-      OrderUncheckedUpdateWithoutRefundInput
-    >;
+    data: XOR<OrderUpdateWithoutRefundInput, OrderUncheckedUpdateWithoutRefundInput>;
   };
 
   export type OrderUpdateWithoutRefundInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -40830,33 +36809,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -40868,23 +36825,14 @@ export namespace Prisma {
   };
 
   export type ReturnRequestUpsertWithoutRefundInput = {
-    update: XOR<
-      ReturnRequestUpdateWithoutRefundInput,
-      ReturnRequestUncheckedUpdateWithoutRefundInput
-    >;
-    create: XOR<
-      ReturnRequestCreateWithoutRefundInput,
-      ReturnRequestUncheckedCreateWithoutRefundInput
-    >;
+    update: XOR<ReturnRequestUpdateWithoutRefundInput, ReturnRequestUncheckedUpdateWithoutRefundInput>;
+    create: XOR<ReturnRequestCreateWithoutRefundInput, ReturnRequestUncheckedCreateWithoutRefundInput>;
     where?: ReturnRequestWhereInput;
   };
 
   export type ReturnRequestUpdateToOneWithWhereWithoutRefundInput = {
     where?: ReturnRequestWhereInput;
-    data: XOR<
-      ReturnRequestUpdateWithoutRefundInput,
-      ReturnRequestUncheckedUpdateWithoutRefundInput
-    >;
+    data: XOR<ReturnRequestUpdateWithoutRefundInput, ReturnRequestUncheckedUpdateWithoutRefundInput>;
   };
 
   export type ReturnRequestUpdateWithoutRefundInput = {
@@ -40892,11 +36840,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     order?: OrderUpdateOneRequiredWithoutReturnRequestNestedInput;
     orderItem?: OrderItemUpdateOneRequiredWithoutReturnRequestNestedInput;
@@ -40910,11 +36854,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
   };
 
@@ -40959,62 +36899,28 @@ export namespace Prisma {
 
   export type OrderCreateOrConnectWithoutPaymentMetaInput = {
     where: OrderWhereUniqueInput;
-    create: XOR<
-      OrderCreateWithoutPaymentMetaInput,
-      OrderUncheckedCreateWithoutPaymentMetaInput
-    >;
+    create: XOR<OrderCreateWithoutPaymentMetaInput, OrderUncheckedCreateWithoutPaymentMetaInput>;
   };
 
   export type OrderUpsertWithoutPaymentMetaInput = {
-    update: XOR<
-      OrderUpdateWithoutPaymentMetaInput,
-      OrderUncheckedUpdateWithoutPaymentMetaInput
-    >;
-    create: XOR<
-      OrderCreateWithoutPaymentMetaInput,
-      OrderUncheckedCreateWithoutPaymentMetaInput
-    >;
+    update: XOR<OrderUpdateWithoutPaymentMetaInput, OrderUncheckedUpdateWithoutPaymentMetaInput>;
+    create: XOR<OrderCreateWithoutPaymentMetaInput, OrderUncheckedCreateWithoutPaymentMetaInput>;
     where?: OrderWhereInput;
   };
 
   export type OrderUpdateToOneWithWhereWithoutPaymentMetaInput = {
     where?: OrderWhereInput;
-    data: XOR<
-      OrderUpdateWithoutPaymentMetaInput,
-      OrderUncheckedUpdateWithoutPaymentMetaInput
-    >;
+    data: XOR<OrderUpdateWithoutPaymentMetaInput, OrderUncheckedUpdateWithoutPaymentMetaInput>;
   };
 
   export type OrderUpdateWithoutPaymentMetaInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -41031,33 +36937,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -41231,33 +37115,11 @@ export namespace Prisma {
   export type OrderUpdateWithoutUserInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
@@ -41273,33 +37135,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -41315,33 +37155,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
@@ -41400,6 +37218,15 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number;
   };
 
+  export type ProductImageCreateManyProductInput = {
+    id?: number;
+    url: string;
+    alt?: string | null;
+    isPrimary?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
   export type ProductVariantCreateManyProductInput = {
     id?: number;
     name: string;
@@ -41442,22 +37269,37 @@ export namespace Prisma {
     createdAt?: Date | string;
   };
 
+  export type ProductImageUpdateWithoutProductInput = {
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type ProductImageUncheckedUpdateWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type ProductImageUncheckedUpdateManyWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    url?: StringFieldUpdateOperationsInput | string;
+    alt?: NullableStringFieldUpdateOperationsInput | string | null;
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
   export type ProductVariantUpdateWithoutProductInput = {
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -41469,19 +37311,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -41493,19 +37324,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     skuPrefix?: NullableStringFieldUpdateOperationsInput | string | null;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    compareAtPrice?:
-      | NullableDecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string
-      | null;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -41546,19 +37366,9 @@ export namespace Prisma {
   export type OrderItemUpdateWithoutProductInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput;
@@ -41572,19 +37382,9 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderItemNestedInput;
@@ -41596,19 +37396,9 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -41692,19 +37482,9 @@ export namespace Prisma {
   export type OrderItemUpdateWithoutVariantInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput;
@@ -41718,19 +37498,9 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderItemNestedInput;
@@ -41742,19 +37512,9 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -41798,19 +37558,9 @@ export namespace Prisma {
   export type OrderItemUpdateWithoutOrderInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     product?: ProductUpdateOneWithoutOrderItemNestedInput;
@@ -41824,19 +37574,9 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderItemNestedInput;
@@ -41848,19 +37588,9 @@ export namespace Prisma {
     variantId?: NullableIntFieldUpdateOperationsInput | number | null;
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
-    price?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     quantity?: IntFieldUpdateOperationsInput | number;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -41870,11 +37600,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     orderItem?: OrderItemUpdateOneRequiredWithoutReturnRequestNestedInput;
     refund?: RefundUpdateOneWithoutReturnRequestNestedInput;
@@ -41887,11 +37613,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     refund?: RefundUncheckedUpdateOneWithoutReturnRequestNestedInput;
   };
@@ -41903,74 +37625,43 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
   };
 
   export type RefundUpdateWithoutOrderInput = {
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     returnRequest?: ReturnRequestUpdateOneWithoutRefundNestedInput;
   };
 
   export type RefundUncheckedUpdateWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number;
     returnRequestId?: NullableIntFieldUpdateOperationsInput | number | null;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type RefundUncheckedUpdateManyWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number;
     returnRequestId?: NullableIntFieldUpdateOperationsInput | number | null;
-    amount?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     method?: StringFieldUpdateOperationsInput | string;
     status?: EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus;
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
   export type ReturnRequestCreateManyOrderItemInput = {
@@ -41989,11 +37680,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     order?: OrderUpdateOneRequiredWithoutReturnRequestNestedInput;
     refund?: RefundUpdateOneWithoutReturnRequestNestedInput;
@@ -42006,11 +37693,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
     refund?: RefundUncheckedUpdateOneWithoutReturnRequestNestedInput;
   };
@@ -42022,11 +37705,7 @@ export namespace Prisma {
     status?: EnumReturnStatusFieldUpdateOperationsInput | $Enums.ReturnStatus;
     evidence?: NullableJsonNullValueInput | InputJsonValue;
     requestedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    processedAt?:
-      | NullableDateTimeFieldUpdateOperationsInput
-      | Date
-      | string
-      | null;
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     metadata?: NullableJsonNullValueInput | InputJsonValue;
   };
 
@@ -42049,33 +37728,11 @@ export namespace Prisma {
   export type OrderUpdateWithoutCouponInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -42092,33 +37749,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42134,33 +37769,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42229,33 +37842,11 @@ export namespace Prisma {
   export type OrderUpdateWithoutShippingAddressInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -42272,33 +37863,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42314,33 +37883,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42350,33 +37897,11 @@ export namespace Prisma {
   export type OrderUpdateWithoutBillingAddressInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
@@ -42393,33 +37918,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42435,33 +37938,11 @@ export namespace Prisma {
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
-    subtotal?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    shipping?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    tax?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    total?:
-      | DecimalFieldUpdateOperationsInput
-      | Decimal
-      | DecimalJsLike
-      | number
-      | string;
-    paymentMethod?:
-      | EnumPaymentMethodFieldUpdateOperationsInput
-      | $Enums.PaymentMethod;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;

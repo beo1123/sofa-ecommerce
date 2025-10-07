@@ -12,10 +12,7 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  (
-    { children, cols = 1, gap = "md", responsive, className = "", ...props },
-    ref,
-  ) => {
+  ({ children, cols = 1, gap = "md", responsive, className = "", ...props }, ref) => {
     const baseClasses = "grid";
 
     // Gap classes
@@ -54,7 +51,7 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
         {children}
       </div>
     );
-  },
+  }
 );
 
 Grid.displayName = "Grid";
@@ -72,10 +69,7 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const GridItem = React.forwardRef<HTMLDivElement, GridItemProps>(
-  (
-    { children, colSpan, rowSpan, responsive, className = "", ...props },
-    ref,
-  ) => {
+  ({ children, colSpan, rowSpan, responsive, className = "", ...props }, ref) => {
     let classes = "";
 
     // Column span
@@ -86,22 +80,14 @@ export const GridItem = React.forwardRef<HTMLDivElement, GridItemProps>(
 
     // Responsive spans
     if (responsive) {
-      if (responsive.sm?.colSpan)
-        classes += ` sm:col-span-${responsive.sm.colSpan}`;
-      if (responsive.sm?.rowSpan)
-        classes += ` sm:row-span-${responsive.sm.rowSpan}`;
-      if (responsive.md?.colSpan)
-        classes += ` md:col-span-${responsive.md.colSpan}`;
-      if (responsive.md?.rowSpan)
-        classes += ` md:row-span-${responsive.md.rowSpan}`;
-      if (responsive.lg?.colSpan)
-        classes += ` lg:col-span-${responsive.lg.colSpan}`;
-      if (responsive.lg?.rowSpan)
-        classes += ` lg:row-span-${responsive.lg.rowSpan}`;
-      if (responsive.xl?.colSpan)
-        classes += ` xl:col-span-${responsive.xl.colSpan}`;
-      if (responsive.xl?.rowSpan)
-        classes += ` xl:row-span-${responsive.xl.rowSpan}`;
+      if (responsive.sm?.colSpan) classes += ` sm:col-span-${responsive.sm.colSpan}`;
+      if (responsive.sm?.rowSpan) classes += ` sm:row-span-${responsive.sm.rowSpan}`;
+      if (responsive.md?.colSpan) classes += ` md:col-span-${responsive.md.colSpan}`;
+      if (responsive.md?.rowSpan) classes += ` md:row-span-${responsive.md.rowSpan}`;
+      if (responsive.lg?.colSpan) classes += ` lg:col-span-${responsive.lg.colSpan}`;
+      if (responsive.lg?.rowSpan) classes += ` lg:row-span-${responsive.lg.rowSpan}`;
+      if (responsive.xl?.colSpan) classes += ` xl:col-span-${responsive.xl.colSpan}`;
+      if (responsive.xl?.rowSpan) classes += ` xl:row-span-${responsive.xl.rowSpan}`;
     }
 
     return (
@@ -109,7 +95,7 @@ export const GridItem = React.forwardRef<HTMLDivElement, GridItemProps>(
         {children}
       </div>
     );
-  },
+  }
 );
 
 GridItem.displayName = "GridItem";

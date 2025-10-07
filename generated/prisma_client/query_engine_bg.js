@@ -9,12 +9,7 @@ var B = (e, t) => {
   U = (e, t, n, r) => {
     if ((t && typeof t == "object") || typeof t == "function")
       for (let _ of D(t))
-        !R.call(e, _) &&
-          _ !== n &&
-          S(e, _, {
-            get: () => t[_],
-            enumerable: !(r = k(t, _)) || r.enumerable,
-          });
+        !R.call(e, _) && _ !== n && S(e, _, { get: () => t[_], enumerable: !(r = k(t, _)) || r.enumerable });
     return e;
   };
 var L = (e) => U(S({}, "__esModule", { value: !0 }), e);
@@ -124,15 +119,9 @@ function v(e) {
 let s = 0,
   h = null;
 function T() {
-  return (
-    (h === null || h.byteLength === 0) && (h = new Uint8Array(o.memory.buffer)),
-    h
-  );
+  return ((h === null || h.byteLength === 0) && (h = new Uint8Array(o.memory.buffer)), h);
 }
-const N =
-  typeof TextEncoder > "u"
-    ? (0, module.require)("util").TextEncoder
-    : TextEncoder;
+const N = typeof TextEncoder > "u" ? (0, module.require)("util").TextEncoder : TextEncoder;
 let q = new N("utf-8");
 const $ =
   typeof q.encodeInto == "function"
@@ -165,8 +154,7 @@ function f(e, t, n) {
     i[_ + c] = u;
   }
   if (c !== r) {
-    (c !== 0 && (e = e.slice(c)),
-      (_ = n(_, r, (r = c + e.length * 3), 1) >>> 0));
+    (c !== 0 && (e = e.slice(c)), (_ = n(_, r, (r = c + e.length * 3), 1) >>> 0));
     const u = T().subarray(_ + c, _ + r),
       a = $(e, u);
     ((c += a.written), (_ = n(_, r, c, 1) >>> 0));
@@ -176,9 +164,7 @@ function f(e, t, n) {
 let p = null;
 function l() {
   return (
-    (p === null ||
-      p.buffer.detached === !0 ||
-      (p.buffer.detached === void 0 && p.buffer !== o.memory.buffer)) &&
+    (p === null || p.buffer.detached === !0 || (p.buffer.detached === void 0 && p.buffer !== o.memory.buffer)) &&
       (p = new DataView(o.memory.buffer)),
     p
   );
@@ -195,10 +181,7 @@ function g(e, t) {
     o.__wbindgen_exn_store(r);
   }
 }
-const C =
-  typeof TextDecoder > "u"
-    ? (0, module.require)("util").TextDecoder
-    : TextDecoder;
+const C = typeof TextDecoder > "u" ? (0, module.require)("util").TextDecoder : TextDecoder;
 let I = new C("utf-8", { ignoreBOM: !0, fatal: !0 });
 I.decode();
 function w(e, t) {
@@ -222,9 +205,7 @@ function V(e, t, n, r) {
       try {
         return r(u, _.b, ...c);
       } finally {
-        --_.cnt === 0
-          ? (o.__wbindgen_export_5.get(_.dtor)(u, _.b), E.unregister(_))
-          : (_.a = u);
+        --_.cnt === 0 ? (o.__wbindgen_export_5.get(_.dtor)(u, _.b), E.unregister(_)) : (_.a = u);
       }
     };
   return ((i.original = _), E.register(i, _, _), i);
@@ -298,11 +279,7 @@ class Q {
   constructor(t, n, r) {
     const _ = o.queryengine_new(t, n, r);
     if (_[2]) throw O(_[1]);
-    return (
-      (this.__wbg_ptr = _[0] >>> 0),
-      F.register(this, this.__wbg_ptr, this),
-      this
-    );
+    return ((this.__wbg_ptr = _[0] >>> 0), F.register(this, this.__wbg_ptr, this), this);
   }
   connect(t, n) {
     const r = f(t, o.__wbindgen_malloc, o.__wbindgen_realloc),
@@ -515,7 +492,7 @@ function Se(e, t, n, r) {
   return new RegExp(w(e, t), w(n, r));
 }
 function Ae() {
-  return [];
+  return new Array();
 }
 function Ie(e) {
   return new Uint8Array(e);
@@ -642,8 +619,7 @@ function it(e) {
 function ut(e, t) {
   const n = t,
     r = typeof n == "bigint" ? n : void 0;
-  (l().setBigInt64(e + 8 * 1, b(r) ? BigInt(0) : r, !0),
-    l().setInt32(e + 4 * 0, !b(r), !0));
+  (l().setBigInt64(e + 8 * 1, b(r) ? BigInt(0) : r, !0), l().setInt32(e + 4 * 0, !b(r), !0));
 }
 function st(e) {
   const t = e;
@@ -671,11 +647,7 @@ function lt(e, t) {
 function dt() {
   const e = o.__wbindgen_export_4,
     t = e.grow(4);
-  (e.set(0, void 0),
-    e.set(t + 0, void 0),
-    e.set(t + 1, null),
-    e.set(t + 2, !0),
-    e.set(t + 3, !1));
+  (e.set(0, void 0), e.set(t + 0, void 0), e.set(t + 1, null), e.set(t + 2, !0), e.set(t + 3, !1));
 }
 function wt(e) {
   return typeof e == "bigint";
@@ -705,8 +677,7 @@ function qt() {
 function St(e, t) {
   const n = t,
     r = typeof n == "number" ? n : void 0;
-  (l().setFloat64(e + 8 * 1, b(r) ? 0 : r, !0),
-    l().setInt32(e + 4 * 0, !b(r), !0));
+  (l().setFloat64(e + 8 * 1, b(r) ? 0 : r, !0), l().setInt32(e + 4 * 0, !b(r), !0));
 }
 function At(e) {
   return e;

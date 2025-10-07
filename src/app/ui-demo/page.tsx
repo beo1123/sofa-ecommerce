@@ -47,10 +47,7 @@ export default function UIDemoPage() {
     <main className="min-h-screen bg-[var(--color-bg-muted)] text-[var(--color-text-default)] py-12">
       <Container className="space-y-16">
         {/* PAGE TITLE */}
-        <Heading
-          level={1}
-          className="text-[var(--color-brand-400)] mb-8 text-center"
-        >
+        <Heading level={1} className="text-[var(--color-brand-400)] mb-8 text-center">
           🎨 UI Components Demo
         </Heading>
 
@@ -88,11 +85,7 @@ export default function UIDemoPage() {
               helperText="Must be at least 8 characters"
               required
             />
-            <Input
-              label="Search"
-              rightIcon={<Search size={16} />}
-              placeholder="Search products..."
-            />
+            <Input label="Search" rightIcon={<Search size={16} />} placeholder="Search products..." />
             <Input label="Error Example" error="This field is required" />
           </div>
         </section>
@@ -131,10 +124,7 @@ export default function UIDemoPage() {
               <CardHeader>
                 <CardTitle>Elevated Card</CardTitle>
               </CardHeader>
-              <Text muted>
-                This card uses shadow for depth. Hover to see the subtle
-                elevation.
-              </Text>
+              <Text muted>This card uses shadow for depth. Hover to see the subtle elevation.</Text>
               <CardFooter>
                 <Button variant="secondary" size="sm">
                   Purchase
@@ -153,15 +143,10 @@ export default function UIDemoPage() {
           </Heading>
           <Button onClick={() => setOpenModal(true)}>Open Modal</Button>
 
-          <Modal
-            isOpen={openModal}
-            onClose={() => setOpenModal(false)}
-            title="Example Modal"
-            size="xl"
-          >
+          <Modal isOpen={openModal} onClose={() => setOpenModal(false)} title="Example Modal" size="xl">
             <Text>
-              This is an example modal. You can use it to display additional
-              information, forms, or confirmation dialogs.
+              This is an example modal. You can use it to display additional information, forms, or confirmation
+              dialogs.
             </Text>
             <div className="mt-6 flex justify-end gap-3">
               <Button variant="ghost" onClick={() => setOpenModal(false)}>
@@ -190,21 +175,9 @@ export default function UIDemoPage() {
 
           <div className="space-y-3">
             <Alert title="Info" description="This is a general info message." />
-            <Alert
-              variant="success"
-              title="Success"
-              description="Operation completed successfully."
-            />
-            <Alert
-              variant="warning"
-              title="Warning"
-              description="Please check the details carefully."
-            />
-            <Alert
-              variant="error"
-              title="Error"
-              description="Something went wrong. Try again."
-            />
+            <Alert variant="success" title="Success" description="Operation completed successfully." />
+            <Alert variant="warning" title="Warning" description="Please check the details carefully." />
+            <Alert variant="error" title="Error" description="Something went wrong. Try again." />
           </div>
         </section>
 
@@ -287,36 +260,19 @@ export default function UIDemoPage() {
             Grid cơ bản (3 cột, gap=md):
           </Text>
           <Grid cols={3} gap="md" className="mb-6">
-            <GridItem className="bg-blue-100 p-4 text-center rounded">
-              Item 1
-            </GridItem>
-            <GridItem className="bg-blue-200 p-4 text-center rounded">
-              Item 2
-            </GridItem>
-            <GridItem className="bg-blue-300 p-4 text-center rounded">
-              Item 3
-            </GridItem>
+            <GridItem className="bg-blue-100 p-4 text-center rounded">Item 1</GridItem>
+            <GridItem className="bg-blue-200 p-4 text-center rounded">Item 2</GridItem>
+            <GridItem className="bg-blue-300 p-4 text-center rounded">Item 3</GridItem>
           </Grid>
 
           {/* Responsive Grid */}
           <Text muted className="mb-2">
             Grid responsive (1 cột mobile → 3 cột desktop):
           </Text>
-          <Grid
-            cols={1}
-            responsive={{ md: 2, lg: 3 }}
-            gap="lg"
-            className="mb-6"
-          >
-            <GridItem className="bg-green-100 p-4 text-center rounded">
-              A
-            </GridItem>
-            <GridItem className="bg-green-200 p-4 text-center rounded">
-              B
-            </GridItem>
-            <GridItem className="bg-green-300 p-4 text-center rounded">
-              C
-            </GridItem>
+          <Grid cols={1} responsive={{ md: 2, lg: 3 }} gap="lg" className="mb-6">
+            <GridItem className="bg-green-100 p-4 text-center rounded">A</GridItem>
+            <GridItem className="bg-green-200 p-4 text-center rounded">B</GridItem>
+            <GridItem className="bg-green-300 p-4 text-center rounded">C</GridItem>
           </Grid>
 
           {/* GridItem span */}
@@ -324,30 +280,16 @@ export default function UIDemoPage() {
             GridItem colSpan & rowSpan:
           </Text>
           <Grid cols={4} gap="sm" className="mb-6">
-            <GridItem
-              colSpan={2}
-              className="bg-purple-200 p-4 text-center rounded"
-            >
+            <GridItem colSpan={2} className="bg-purple-200 p-4 text-center rounded">
               colSpan=2
             </GridItem>
-            <GridItem className="bg-purple-300 p-4 text-center rounded">
-              Normal
-            </GridItem>
-            <GridItem className="bg-purple-400 p-4 text-center rounded">
-              Normal
-            </GridItem>
-            <GridItem
-              rowSpan={2}
-              className="bg-purple-500 p-4 text-center rounded"
-            >
+            <GridItem className="bg-purple-300 p-4 text-center rounded">Normal</GridItem>
+            <GridItem className="bg-purple-400 p-4 text-center rounded">Normal</GridItem>
+            <GridItem rowSpan={2} className="bg-purple-500 p-4 text-center rounded">
               rowSpan=2
             </GridItem>
-            <GridItem className="bg-purple-600 p-4 text-center rounded">
-              Bottom
-            </GridItem>
-            <GridItem className="bg-purple-700 p-4 text-center rounded">
-              Bottom
-            </GridItem>
+            <GridItem className="bg-purple-600 p-4 text-center rounded">Bottom</GridItem>
+            <GridItem className="bg-purple-700 p-4 text-center rounded">Bottom</GridItem>
           </Grid>
 
           {/* Responsive GridItem */}
@@ -357,16 +299,11 @@ export default function UIDemoPage() {
           <Grid cols={3} gap="md">
             <GridItem
               responsive={{ sm: { colSpan: 3 }, md: { colSpan: 1 } }}
-              className="bg-red-200 p-4 text-center rounded"
-            >
+              className="bg-red-200 p-4 text-center rounded">
               Full width on sm, 1 col on md+
             </GridItem>
-            <GridItem className="bg-red-300 p-4 text-center rounded">
-              Item 2
-            </GridItem>
-            <GridItem className="bg-red-400 p-4 text-center rounded">
-              Item 3
-            </GridItem>
+            <GridItem className="bg-red-300 p-4 text-center rounded">Item 2</GridItem>
+            <GridItem className="bg-red-400 p-4 text-center rounded">Item 3</GridItem>
           </Grid>
         </section>
       </Container>

@@ -7,11 +7,7 @@ type Props = {
   className?: string;
 };
 
-export default function Heading({
-  children,
-  level = 2,
-  className = "",
-}: Props) {
+export default function Heading({ children, level = 2, className = "" }: Props) {
   const sizeMap: Record<number, string> = {
     1: "text-4xl font-bold",
     2: "text-3xl font-semibold",
@@ -21,11 +17,5 @@ export default function Heading({
     6: "text-base font-medium",
   };
 
-  return (
-    <div
-      className={`${sizeMap[level]} text-[var(--color-text-default)] ${className}`}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`${sizeMap[level]} text-[var(--color-text-default)] ${className}`}>{children}</div>;
 }

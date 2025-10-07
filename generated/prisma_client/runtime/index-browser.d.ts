@@ -210,10 +210,7 @@ export declare class Decimal {
   toPrecision(significantDigits: number, rounding: Decimal.Rounding): string;
 
   toSignificantDigits(significantDigits?: number): Decimal;
-  toSignificantDigits(
-    significantDigits: number,
-    rounding: Decimal.Rounding,
-  ): Decimal;
+  toSignificantDigits(significantDigits: number, rounding: Decimal.Rounding): Decimal;
   toSD(significantDigits?: number): Decimal;
   toSD(significantDigits: number, rounding: Decimal.Rounding): Decimal;
 
@@ -235,11 +232,7 @@ export declare class Decimal {
   static atan2(y: Decimal.Value, x: Decimal.Value): Decimal;
   static cbrt(n: Decimal.Value): Decimal;
   static ceil(n: Decimal.Value): Decimal;
-  static clamp(
-    n: Decimal.Value,
-    min: Decimal.Value,
-    max: Decimal.Value,
-  ): Decimal;
+  static clamp(n: Decimal.Value, min: Decimal.Value, max: Decimal.Value): Decimal;
   static clone(object?: Decimal.Config): Decimal.Constructor;
   static config(object: Decimal.Config): Decimal.Constructor;
   static cos(n: Decimal.Value): Decimal;
@@ -334,9 +327,7 @@ declare class JsonNull extends NullTypesEnumValue {
  * @param definition
  * @returns
  */
-export declare function makeStrictEnum<
-  T extends Record<PropertyKey, string | number>,
->(definition: T): T;
+export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
 
 declare type Narrowable = string | number | bigint | boolean | [];
 
@@ -398,33 +389,21 @@ declare namespace Public {
 }
 export { Public };
 
-declare type RuntimeName =
-  | "workerd"
-  | "deno"
-  | "netlify"
-  | "node"
-  | "bun"
-  | "edge-light"
-  | "";
+declare type RuntimeName = "workerd" | "deno" | "netlify" | "node" | "bun" | "edge-light" | "";
 
 declare function validator<V>(): <S>(select: Exact<S, V>) => S;
 
-declare function validator<
-  C,
-  M extends Exclude<keyof C, `$${string}`>,
-  O extends keyof C[M] & Operation,
->(client: C, model: M, operation: O): <S>(select: Exact<S, Args<C[M], O>>) => S;
+declare function validator<C, M extends Exclude<keyof C, `$${string}`>, O extends keyof C[M] & Operation>(
+  client: C,
+  model: M,
+  operation: O
+): <S>(select: Exact<S, Args<C[M], O>>) => S;
 
 declare function validator<
   C,
   M extends Exclude<keyof C, `$${string}`>,
   O extends keyof C[M] & Operation,
   P extends keyof Args<C[M], O>,
->(
-  client: C,
-  model: M,
-  operation: O,
-  prop: P,
-): <S>(select: Exact<S, Args<C[M], O>[P]>) => S;
+>(client: C, model: M, operation: O, prop: P): <S>(select: Exact<S, Args<C[M], O>[P]>) => S;
 
 export {};

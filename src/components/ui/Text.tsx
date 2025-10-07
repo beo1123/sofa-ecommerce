@@ -8,23 +8,14 @@ type Props = {
   className?: string;
 };
 
-export default function Text({
-  children,
-  muted = false,
-  size = "md",
-  className = "",
-}: Props) {
+export default function Text({ children, muted = false, size = "md", className = "" }: Props) {
   const sizeMap = {
     sm: "text-sm",
     md: "text-base",
     lg: "text-lg",
   };
 
-  const colorClass = muted
-    ? "text-[var(--color-text-muted)]"
-    : "text-[var(--color-text-default)]";
+  const colorClass = muted ? "text-[var(--color-text-muted)]" : "text-[var(--color-text-default)]";
 
-  return (
-    <p className={`${sizeMap[size]} ${colorClass} ${className}`}>{children}</p>
-  );
+  return <p className={`${sizeMap[size]} ${colorClass} ${className}`}>{children}</p>;
 }

@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: string;
   error?: string;
   helperText?: string;
@@ -35,7 +34,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onBlur,
       ...props
     },
-    ref,
+    ref
   ) => {
     const generatedId = React.useId();
     const inputId = id || generatedId;
@@ -58,10 +57,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={containerClass}>
         {/* LABEL */}
         {label && (
-          <label
-            htmlFor={inputId}
-            className="block text-sm font-medium text-[var(--color-text-default)] mb-1"
-          >
+          <label htmlFor={inputId} className="block text-sm font-medium text-[var(--color-text-default)] mb-1">
             {label}
             {required && (
               <span className="text-red-500 ml-1" aria-label="required">
@@ -86,9 +82,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             required={required}
             className={inputClasses}
             aria-invalid={hasError}
-            aria-describedby={
-              hasError ? errorId : helperText ? helperId : undefined
-            }
+            aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
             // ✅ Cho phép controlled & uncontrolled form
             value={value}
             onChange={onChange}
@@ -98,9 +92,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           {rightIcon && (
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-              <span className="text-[var(--color-text-muted)]">
-                {rightIcon}
-              </span>
+              <span className="text-[var(--color-text-muted)]">{rightIcon}</span>
             </div>
           )}
         </div>
@@ -112,16 +104,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </p>
         )}
         {helperText && !error && (
-          <p
-            id={helperId}
-            className="mt-1 text-sm text-[var(--color-text-muted)]"
-          >
+          <p id={helperId} className="mt-1 text-sm text-[var(--color-text-muted)]">
             {helperText}
           </p>
         )}
       </div>
     );
-  },
+  }
 );
 
 Input.displayName = "Input";

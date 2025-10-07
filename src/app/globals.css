@@ -50,9 +50,7 @@
   --color-bg-muted: #f7f5f3;
 
   /* Font families: map a named font var to the @font-face family above */
-  --font-sans:
-    MontserratLocal, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial;
+  --font-sans: MontserratLocal, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 
   /* Spacing scale */
   --spacing-xs: 0.25rem;
