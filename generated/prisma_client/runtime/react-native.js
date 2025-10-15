@@ -1191,11 +1191,7 @@ var Pi = Ve((nt) => {
     et[e] = class extends r {
       constructor() {
         (super(),
-          Object.defineProperty(this, "message", {
-            value: t.apply(this, arguments),
-            writable: !0,
-            configurable: !0,
-          }),
+          Object.defineProperty(this, "message", { value: t.apply(this, arguments), writable: !0, configurable: !0 }),
           (this.name = `${this.name} [${e}]`),
           this.stack,
           delete this.name);
@@ -1204,12 +1200,7 @@ var Pi = Ve((nt) => {
         return e;
       }
       set code(n) {
-        Object.defineProperty(this, "code", {
-          configurable: !0,
-          enumerable: !0,
-          value: n,
-          writable: !0,
-        });
+        Object.defineProperty(this, "code", { configurable: !0, enumerable: !0, value: n, writable: !0 });
       }
       toString() {
         return `${this.name} [${e}]: ${this.message}`;
@@ -1529,11 +1520,7 @@ var qi = Ve((Nf, Ul) => {
     description: "This package is intended for Prisma's internal use",
     main: "dist/index.js",
     types: "dist/index.d.ts",
-    repository: {
-      type: "git",
-      url: "https://github.com/prisma/prisma.git",
-      directory: "packages/internals",
-    },
+    repository: { type: "git", url: "https://github.com/prisma/prisma.git", directory: "packages/internals" },
     homepage: "https://www.prisma.io",
     author: "Tim Suchanek <suchanek@prisma.io>",
     bugs: "https://github.com/prisma/prisma/issues",
@@ -1993,13 +1980,7 @@ var Mt = {
   formatters: {},
 };
 function ml(e) {
-  let t = {
-      color: Ii[fl++ % Ii.length],
-      enabled: Mt.enabled(e),
-      namespace: e,
-      log: Mt.log,
-      extend: () => {},
-    },
+  let t = { color: Ii[fl++ % Ii.length], enabled: Mt.enabled(e), namespace: e, log: Mt.log, extend: () => {} },
     r = (...n) => {
       let { enabled: i, namespace: o, color: s, log: a } = t;
       if ((n.length !== 0 && Ft.push([o, ...n]), Ft.length > dl && Ft.shift(), Mt.enabled(o) || i)) {
@@ -2252,12 +2233,7 @@ c();
 p();
 d();
 f();
-var _t = {
-    error: Ge("prisma:error"),
-    warn: Ot("prisma:warn"),
-    info: Se("prisma:info"),
-    query: We("prisma:query"),
-  },
+var _t = { error: Ge("prisma:error"), warn: Ot("prisma:warn"), info: Se("prisma:info"), query: We("prisma:query") },
   Wi = { warn: () => !y.env.PRISMA_DISABLE_WARNINGS };
 function Wl(...e) {
   console.log(...e);
@@ -2564,16 +2540,7 @@ var at = 9e15,
     "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058",
   hr =
     "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789",
-  Sn = {
-    precision: 20,
-    rounding: 4,
-    modulo: 1,
-    toExpNeg: -7,
-    toExpPos: 21,
-    minE: -at,
-    maxE: at,
-    crypto: !1,
-  },
+  Sn = { precision: 20, rounding: 4, modulo: 1, toExpNeg: -7, toExpPos: 21, minE: -at, maxE: at, crypto: !1 },
   ro,
   Oe,
   D = !0,
@@ -4708,11 +4675,7 @@ N.languages.insertBefore("javascript", "keyword", {
       inside: N.languages.javascript,
     },
     { pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i, inside: N.languages.javascript },
-    {
-      pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
-      lookbehind: !0,
-      inside: N.languages.javascript,
-    },
+    { pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/, lookbehind: !0, inside: N.languages.javascript },
     {
       pattern:
         /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
@@ -4825,22 +4788,8 @@ var Pr = class e {
 `);
   }
 };
-var Hu = {
-    red: Ge,
-    gray: It,
-    dim: St,
-    bold: de,
-    underline: Rt,
-    highlightSource: (e) => e.highlight(),
-  },
-  Yu = {
-    red: (e) => e,
-    gray: (e) => e,
-    dim: (e) => e,
-    bold: (e) => e,
-    underline: (e) => e,
-    highlightSource: (e) => e,
-  };
+var Hu = { red: Ge, gray: It, dim: St, bold: de, underline: Rt, highlightSource: (e) => e.highlight() },
+  Yu = { red: (e) => e, gray: (e) => e, dim: (e) => e, bold: (e) => e, underline: (e) => e, highlightSource: (e) => e };
 function Zu({ message: e, originalMethod: t, isPanic: r, callArguments: n }) {
   return { functionName: `prisma.${t}()`, message: e, isPanic: r ?? !1, callArguments: n };
 }
@@ -4953,10 +4902,7 @@ function ic(e) {
     let i = `${n.selectionPath.join(".")}:${n.argumentPath.join(".")}`,
       o = t.get(i);
     o
-      ? t.set(i, {
-          ...n,
-          argument: { ...n.argument, typeNames: oc(o.argument.typeNames, n.argument.typeNames) },
-        })
+      ? t.set(i, { ...n, argument: { ...n.argument, typeNames: oc(o.argument.typeNames, n.argument.typeNames) } })
       : t.set(i, n);
   }
   return (r.push(...t.values()), r);
@@ -5891,13 +5837,7 @@ function Mr({ args: e, errors: t, errorFormat: r, callsite: n, originalMethod: i
   let a = yt(e);
   for (let h of t) Tr(h, a, s);
   let { message: l, args: u } = Fr(a, r),
-    g = vr({
-      message: l,
-      callsite: n,
-      originalMethod: i,
-      showColors: r === "pretty",
-      callArguments: u,
-    });
+    g = vr({ message: l, callsite: n, originalMethod: i, showColors: r === "pretty", callArguments: u });
   throw new te(g, { clientVersion: o });
 }
 m();
@@ -6321,11 +6261,7 @@ function Bc(e) {
 function Nn(e, t) {
   e === void 0 &&
     t.isPreviewFeatureOn("strictUndefinedChecks") &&
-    t.throwValidationError({
-      kind: "InvalidSelectionValue",
-      selectionPath: t.getSelectionPath(),
-      underlyingError: $o,
-    });
+    t.throwValidationError({ kind: "InvalidSelectionValue", selectionPath: t.getSelectionPath(), underlyingError: $o });
 }
 var Ln = class e {
   constructor(t) {
@@ -6382,11 +6318,7 @@ var Ln = class e {
   nestSelection(t) {
     let r = this.findField(t),
       n = r?.kind === "object" ? r.type : void 0;
-    return new e({
-      ...this.params,
-      modelName: n,
-      selectionPath: this.params.selectionPath.concat(t),
-    });
+    return new e({ ...this.params, modelName: n, selectionPath: this.params.selectionPath.concat(t) });
   }
   getGlobalOmit() {
     return this.params.modelName && this.shouldApplyGlobalOmit()
@@ -6716,10 +6648,7 @@ p();
 d();
 f();
 function Vr(e, t) {
-  return {
-    batch: e,
-    transaction: t?.kind === "batch" ? { isolationLevel: t.options.isolationLevel } : void 0,
-  };
+  return { batch: e, transaction: t?.kind === "batch" ? { isolationLevel: t.options.isolationLevel } : void 0 };
 }
 m();
 c();
@@ -6739,12 +6668,7 @@ f();
 var Vc = "P2037";
 function Qr({ error: e, user_facing_error: t }, r, n) {
   return t.error_code
-    ? new se(Qc(t, n), {
-        code: t.error_code,
-        clientVersion: r,
-        meta: t.meta,
-        batchRequestIdx: t.batch_request_idx,
-      })
+    ? new se(Qc(t, n), { code: t.error_code, clientVersion: r, meta: t.meta, batchRequestIdx: t.batch_request_idx })
     : new G(e, { clientVersion: r, batchRequestIdx: t.batch_request_idx });
 }
 function Qc(e, t) {
@@ -6816,13 +6740,7 @@ var Kc =
 function zc(e) {
   var t = Kc.exec(e);
   return t
-    ? {
-        file: t[2],
-        methodName: t[1] || Yt,
-        arguments: [],
-        lineNumber: +t[3],
-        column: t[4] ? +t[4] : null,
-      }
+    ? { file: t[2], methodName: t[1] || Yt, arguments: [], lineNumber: +t[3], column: t[4] ? +t[4] : null }
     : null;
 }
 var Hc =
@@ -6848,26 +6766,14 @@ var Xc = /^\s*(?:([^@]*)(?:\((.*?)\))?@)?(\S.*?):(\d+)(?::(\d+))?\s*$/i;
 function ep(e) {
   var t = Xc.exec(e);
   return t
-    ? {
-        file: t[3],
-        methodName: t[1] || Yt,
-        arguments: [],
-        lineNumber: +t[4],
-        column: t[5] ? +t[5] : null,
-      }
+    ? { file: t[3], methodName: t[1] || Yt, arguments: [], lineNumber: +t[4], column: t[5] ? +t[5] : null }
     : null;
 }
 var tp = /^\s*at (?:((?:\[object object\])?[^\\/]+(?: \[as \S+\])?) )?\(?(.*?):(\d+)(?::(\d+))?\)?\s*$/i;
 function rp(e) {
   var t = tp.exec(e);
   return t
-    ? {
-        file: t[2],
-        methodName: t[1] || Yt,
-        arguments: [],
-        lineNumber: +t[3],
-        column: t[4] ? +t[4] : null,
-      }
+    ? { file: t[2], methodName: t[1] || Yt, arguments: [], lineNumber: +t[3], column: t[4] ? +t[4] : null }
     : null;
 }
 var $n = class {
@@ -7205,22 +7111,8 @@ function Gr({ visitor: e, result: t, args: r, runtimeDataModel: n, modelName: i 
   }
   let o = e(t, i, r) ?? t;
   return (
-    r.include &&
-      ms({
-        includeOrSelect: r.include,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: e,
-      }),
-    r.select &&
-      ms({
-        includeOrSelect: r.select,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: e,
-      }),
+    r.include && ms({ includeOrSelect: r.include, result: o, parentModelName: i, runtimeDataModel: n, visitor: e }),
+    r.select && ms({ includeOrSelect: r.select, result: o, parentModelName: i, runtimeDataModel: n, visitor: e }),
     o
   );
 }
@@ -7303,12 +7195,7 @@ function Xt(e) {
     let t = {};
     for (let r in e)
       r === "__proto__"
-        ? Object.defineProperty(t, r, {
-            value: Xt(e[r]),
-            configurable: !0,
-            enumerable: !0,
-            writable: !0,
-          })
+        ? Object.defineProperty(t, r, { value: Xt(e[r]), configurable: !0, enumerable: !0, writable: !0 })
         : (t[r] = Xt(e[r]));
     return t;
   }
@@ -7599,11 +7486,7 @@ var Dp = {
 };
 function Ds() {
   let e = _p();
-  return {
-    id: e,
-    prettyName: Dp[e] || e,
-    isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e),
-  };
+  return { id: e, prettyName: Dp[e] || e, isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e) };
 }
 function Wr({ inlineDatasources: e, overrideDatasources: t, env: r, clientVersion: n }) {
   let i,
@@ -7799,11 +7682,7 @@ var er = class {
       o = JSON.stringify(r),
       s;
     if (t === "start") {
-      let l = JSON.stringify({
-        max_wait: n.maxWait,
-        timeout: n.timeout,
-        isolation_level: n.isolationLevel,
-      });
+      let l = JSON.stringify({ max_wait: n.maxWait, timeout: n.timeout, isolation_level: n.isolationLevel });
       s = await this.engine?.startTransaction(l, o);
     } else
       t === "commit"
@@ -7814,11 +7693,7 @@ var er = class {
       let l = this.getExternalAdapterError(a, i?.errorRegistry);
       throw l
         ? l.error
-        : new se(a.message, {
-            code: a.error_code,
-            clientVersion: this.config.clientVersion,
-            meta: a.meta,
-          });
+        : new se(a.message, { code: a.error_code, clientVersion: this.config.clientVersion, meta: a.meta });
     } else if (typeof a.message == "string") throw new G(a.message, { clientVersion: this.config.clientVersion });
     return a;
   }
@@ -7830,16 +7705,11 @@ var er = class {
   }
   async getCurrentBinaryTarget() {}
   parseEngineResponse(t) {
-    if (!t)
-      throw new G("Response from the Engine was empty", {
-        clientVersion: this.config.clientVersion,
-      });
+    if (!t) throw new G("Response from the Engine was empty", { clientVersion: this.config.clientVersion });
     try {
       return JSON.parse(t);
     } catch {
-      throw new G("Unable to JSON.parse response from engine", {
-        clientVersion: this.config.clientVersion,
-      });
+      throw new G("Unable to JSON.parse response from engine", { clientVersion: this.config.clientVersion });
     }
   }
   async loadEngine() {
@@ -7895,11 +7765,7 @@ var er = class {
               Hn(this, `${r.message}: ${r.reason} in ${r.file}:${r.line}:${r.column}`),
               this.config.clientVersion
             ))
-          : this.logEmitter.emit(r.level, {
-              timestamp: new Date(),
-              message: r.message,
-              target: r.module_path,
-            }));
+          : this.logEmitter.emit(r.level, { timestamp: new Date(), message: r.message, target: r.module_path }));
   }
   parseInitError(t) {
     try {
@@ -8650,11 +8516,7 @@ var Kp = z("prisma:client:request_handler"),
       } catch (r) {
         throw (
           this.logEmitter &&
-            this.logEmitter.emit("error", {
-              message: r.message,
-              target: t.clientMethod,
-              timestamp: new Date(),
-            }),
+            this.logEmitter.emit("error", { message: r.message, target: t.clientMethod, timestamp: new Date() }),
           r
         );
       }
@@ -8704,10 +8566,7 @@ var Kp = z("prisma:client:request_handler"),
       } else {
         if (t.isPanic) throw new ce(l, this.client._clientVersion);
         if (t instanceof G)
-          throw new G(l, {
-            clientVersion: this.client._clientVersion,
-            batchRequestIdx: t.batchRequestIdx,
-          });
+          throw new G(l, { clientVersion: this.client._clientVersion, batchRequestIdx: t.batchRequestIdx });
         if (t instanceof Q) throw new Q(l, this.client._clientVersion);
         if (t instanceof ce) throw new ce(l, this.client._clientVersion);
       }
@@ -9343,11 +9202,7 @@ function fa(e) {
         s = {
           operation: {
             name: "operation",
-            attributes: {
-              method: o.action,
-              model: o.model,
-              name: o.model ? `${o.model}.${o.action}` : o.action,
-            },
+            attributes: { method: o.action, model: o.model, name: o.model ? `${o.model}.${o.action}` : o.action },
           },
         },
         a = async (l) => {

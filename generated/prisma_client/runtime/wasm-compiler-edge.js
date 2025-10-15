@@ -1436,11 +1436,7 @@ var xs = me((Gy, zu) => {
     description: "This package is intended for Prisma's internal use",
     main: "dist/index.js",
     types: "dist/index.d.ts",
-    repository: {
-      type: "git",
-      url: "https://github.com/prisma/prisma.git",
-      directory: "packages/internals",
-    },
+    repository: { type: "git", url: "https://github.com/prisma/prisma.git", directory: "packages/internals" },
     homepage: "https://www.prisma.io",
     author: "Tim Suchanek <suchanek@prisma.io>",
     bugs: "https://github.com/prisma/prisma/issues",
@@ -2524,13 +2520,7 @@ var zt = {
   formatters: {},
 };
 function Tu(e) {
-  let t = {
-      color: us[Pu++ % us.length],
-      enabled: zt.enabled(e),
-      namespace: e,
-      log: zt.log,
-      extend: () => {},
-    },
+  let t = { color: us[Pu++ % us.length], enabled: zt.enabled(e), namespace: e, log: zt.log, extend: () => {} },
     r = (...n) => {
       let { enabled: i, namespace: o, color: s, log: a } = t;
       if ((n.length !== 0 && Kt.push([o, ...n]), Kt.length > xu && Kt.shift(), zt.enabled(o) || i)) {
@@ -2691,12 +2681,7 @@ p();
 m();
 d();
 l();
-var Xt = {
-    error: ft("prisma:error"),
-    warn: ss("prisma:warn"),
-    info: ls("prisma:info"),
-    query: as("prisma:query"),
-  },
+var Xt = { error: ft("prisma:error"), warn: ss("prisma:warn"), info: ls("prisma:info"), query: as("prisma:query") },
   Cs = { warn: () => !g.env.PRISMA_DISABLE_WARNINGS };
 function tp(...e) {
   console.log(...e);
@@ -3061,22 +3046,8 @@ var nr = ((B) => (
   B
 ))(nr || {});
 var ap = $e(Rs());
-var lp = {
-    red: ft,
-    gray: cs,
-    dim: en,
-    bold: Xr,
-    underline: tn,
-    highlightSource: (e) => e.highlight(),
-  },
-  cp = {
-    red: (e) => e,
-    gray: (e) => e,
-    dim: (e) => e,
-    bold: (e) => e,
-    underline: (e) => e,
-    highlightSource: (e) => e,
-  };
+var lp = { red: ft, gray: cs, dim: en, bold: Xr, underline: tn, highlightSource: (e) => e.highlight() },
+  cp = { red: (e) => e, gray: (e) => e, dim: (e) => e, bold: (e) => e, underline: (e) => e, highlightSource: (e) => e };
 function up({ message: e, originalMethod: t, isPanic: r, callArguments: n }) {
   return { functionName: `prisma.${t}()`, message: e, isPanic: r ?? !1, callArguments: n };
 }
@@ -3143,10 +3114,7 @@ function dp(e) {
     let i = `${n.selectionPath.join(".")}:${n.argumentPath.join(".")}`,
       o = t.get(i);
     o
-      ? t.set(i, {
-          ...n,
-          argument: { ...n.argument, typeNames: fp(o.argument.typeNames, n.argument.typeNames) },
-        })
+      ? t.set(i, { ...n, argument: { ...n.argument, typeNames: fp(o.argument.typeNames, n.argument.typeNames) } })
       : t.set(i, n);
   }
   return (r.push(...t.values()), r);
@@ -4096,13 +4064,7 @@ function Tn({ args: e, errors: t, errorFormat: r, callsite: n, originalMethod: i
   let a = Rt(e);
   for (let R of t) fn(R, a, s);
   let { message: f, args: E } = Pn(a, r),
-    A = dn({
-      message: f,
-      callsite: n,
-      originalMethod: i,
-      showColors: r === "pretty",
-      callArguments: E,
-    });
+    A = dn({ message: f, callsite: n, originalMethod: i, showColors: r === "pretty", callArguments: E });
   throw new ie(A, { clientVersion: o });
 }
 c();
@@ -4532,11 +4494,7 @@ function Wp(e) {
 function Mi(e, t) {
   e === void 0 &&
     t.isPreviewFeatureOn("strictUndefinedChecks") &&
-    t.throwValidationError({
-      kind: "InvalidSelectionValue",
-      selectionPath: t.getSelectionPath(),
-      underlyingError: na,
-    });
+    t.throwValidationError({ kind: "InvalidSelectionValue", selectionPath: t.getSelectionPath(), underlyingError: na });
 }
 var _i = class e {
   constructor(t) {
@@ -4593,11 +4551,7 @@ var _i = class e {
   nestSelection(t) {
     let r = this.findField(t),
       n = r?.kind === "object" ? r.type : void 0;
-    return new e({
-      ...this.params,
-      modelName: n,
-      selectionPath: this.params.selectionPath.concat(t),
-    });
+    return new e({ ...this.params, modelName: n, selectionPath: this.params.selectionPath.concat(t) });
   }
   getGlobalOmit() {
     return this.params.modelName && this.shouldApplyGlobalOmit()
@@ -4941,10 +4895,7 @@ m();
 d();
 l();
 function kt(e, t) {
-  return {
-    batch: e,
-    transaction: t?.kind === "batch" ? { isolationLevel: t.options.isolationLevel } : void 0,
-  };
+  return { batch: e, transaction: t?.kind === "batch" ? { isolationLevel: t.options.isolationLevel } : void 0 };
 }
 c();
 u();
@@ -4966,12 +4917,7 @@ l();
 var Yp = "P2037";
 function _n({ error: e, user_facing_error: t }, r, n) {
   return t.error_code
-    ? new X(Zp(t, n), {
-        code: t.error_code,
-        clientVersion: r,
-        meta: t.meta,
-        batchRequestIdx: t.batch_request_idx,
-      })
+    ? new X(Zp(t, n), { code: t.error_code, clientVersion: r, meta: t.meta, batchRequestIdx: t.batch_request_idx })
     : new ne(e, { clientVersion: r, batchRequestIdx: t.batch_request_idx });
 }
 function Zp(e, t) {
@@ -5328,22 +5274,8 @@ function Nn({ visitor: e, result: t, args: r, runtimeDataModel: n, modelName: i 
   }
   let o = e(t, i, r) ?? t;
   return (
-    r.include &&
-      Ca({
-        includeOrSelect: r.include,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: e,
-      }),
-    r.select &&
-      Ca({
-        includeOrSelect: r.select,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: e,
-      }),
+    r.include && Ca({ includeOrSelect: r.include, result: o, parentModelName: i, runtimeDataModel: n, visitor: e }),
+    r.select && Ca({ includeOrSelect: r.select, result: o, parentModelName: i, runtimeDataModel: n, visitor: e }),
     o
   );
 }
@@ -5430,12 +5362,7 @@ function hr(e) {
     let t = {};
     for (let r in e)
       r === "__proto__"
-        ? Object.defineProperty(t, r, {
-            value: hr(e[r]),
-            configurable: !0,
-            enumerable: !0,
-            writable: !0,
-          })
+        ? Object.defineProperty(t, r, { value: hr(e[r]), configurable: !0, enumerable: !0, writable: !0 })
         : (t[r] = hr(e[r]));
     return t;
   }
@@ -5788,12 +5715,7 @@ var ce = class extends Error {
   toQueryResponseErrorObject() {
     return {
       error: this.message,
-      user_facing_error: {
-        is_panic: !1,
-        message: this.message,
-        meta: this.meta,
-        error_code: this.code,
-      },
+      user_facing_error: { is_panic: !1, message: this.message, meta: this.meta, error_code: this.code },
     };
   }
 };
@@ -6190,11 +6112,7 @@ function Cm(e) {
 }
 async function Ln({ query: e, tracingHelper: t, provider: r, onQuery: n, execute: i }) {
   return await t.runInChildSpan(
-    {
-      name: "db_query",
-      kind: br.CLIENT,
-      attributes: { "db.query.text": e.sql, "db.system.name": Cm(r) },
-    },
+    { name: "db_query", kind: br.CLIENT, attributes: { "db.query.text": e.sql, "db.system.name": Cm(r) } },
     async () => {
       let o = new Date(),
         s = w.now(),
@@ -7145,10 +7063,7 @@ var Cr = class e {
           let f = await this.#u(a, r, () => r.queryRaw(a).catch((E) => (t.args.type === "rawSql" ? Gi(E) : _t(E))));
           s === void 0 ? (s = f) : (s.rows.push(...f.rows), (s.lastInsertId = f.lastInsertId));
         }
-        return {
-          value: t.args.type === "rawSql" ? this.#a(s) : this.#i(s),
-          lastInsertId: s?.lastInsertId,
-        };
+        return { value: t.args.type === "rawSql" ? this.#a(s) : this.#i(s), lastInsertId: s?.lastInsertId };
       }
       case "reverse": {
         let { value: o, lastInsertId: s } = await this.interpretNode(t.args, r, n, i);
@@ -7258,13 +7173,7 @@ var Cr = class e {
       }
   }
   #u(t, r, n) {
-    return Ln({
-      query: t,
-      execute: n,
-      provider: this.#o ?? r.provider,
-      tracingHelper: this.#s,
-      onQuery: this.#r,
-    });
+    return Ln({ query: t, execute: n, provider: this.#o ?? r.provider, tracingHelper: this.#s, onQuery: this.#r });
   }
 };
 function lc(e) {
@@ -7407,11 +7316,7 @@ var Jd = 100,
   Wd = () => ({ sql: "COMMIT", args: [], argTypes: [] }),
   Kd = () => ({ sql: "ROLLBACK", args: [], argTypes: [] }),
   zd = () => ({ sql: '-- Implicit "COMMIT" query via underlying driver', args: [], argTypes: [] }),
-  Yd = () => ({
-    sql: '-- Implicit "ROLLBACK" query via underlying driver',
-    args: [],
-    argTypes: [],
-  }),
+  Yd = () => ({ sql: '-- Implicit "ROLLBACK" query via underlying driver', args: [], argTypes: [] }),
   kr = class {
     transactions = new Map();
     closedTransactions = [];
@@ -7799,11 +7704,7 @@ var cf = {
 };
 function ei() {
   let e = lf();
-  return {
-    id: e,
-    prettyName: cf[e] || e,
-    isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e),
-  };
+  return { id: e, prettyName: cf[e] || e, isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e) };
 }
 function Vt({ inlineDatasources: e, overrideDatasources: t, env: r, clientVersion: n }) {
   let i,
@@ -8004,10 +7905,7 @@ var fc = K("prisma:client:clientEngine:remoteExecutor"),
       ).data;
     }
     async startTransaction(t) {
-      return {
-        ...(await this.#i({ path: "/transaction/start", method: "POST", body: t })),
-        payload: void 0,
-      };
+      return { ...(await this.#i({ path: "/transaction/start", method: "POST", body: t })), payload: void 0 };
     }
     async commitTransaction(t) {
       await this.#i({ path: `/transaction/${t.id}/commit`, method: "POST" });
@@ -8022,13 +7920,7 @@ var fc = K("prisma:client:clientEngine:remoteExecutor"),
       return this.#e.apiKey;
     }
     async #i({ path: t, method: r, body: n, fetch: i = globalThis.fetch, batchRequestIdx: o }) {
-      let s = await this.#r.request({
-        method: r,
-        path: t,
-        headers: this.#e.build(),
-        body: n,
-        fetch: i,
-      });
+      let s = await this.#r.request({ method: r, path: t, headers: this.#e.build(), body: n, fetch: i });
       s.ok || (await this.#a(s, o));
       let a = await s.json();
       return (typeof a.extensions == "object" && a.extensions !== null && this.#o(a.extensions), a);
@@ -8102,11 +7994,7 @@ var fc = K("prisma:client:clientEngine:remoteExecutor"),
       let s = new URL(r, this.#t),
         a = this.#n(s);
       (a && (n.Cookie = a), this.#r && (n["Accelerate-Query-Engine-Jwt"] = this.#r));
-      let f = await o(s.href, {
-        method: t,
-        body: i !== void 0 ? JSON.stringify(i) : void 0,
-        headers: n,
-      });
+      let f = await o(s.href, { method: t, body: i !== void 0 ? JSON.stringify(i) : void 0, headers: n });
       return (
         fc(t, s, f.status, f.statusText),
         (this.#r = f.headers.get("Accelerate-Query-Engine-Jwt") ?? void 0),
@@ -8286,11 +8174,7 @@ var Dr = class {
     if (t.code === "GenericFailure" && t.message?.startsWith("PANIC:"))
       return new ae(yc(this, t.message, r), this.config.clientVersion);
     if (t instanceof ce)
-      return new X(t.message, {
-        code: t.code,
-        meta: t.meta,
-        clientVersion: this.config.clientVersion,
-      });
+      return new X(t.message, { code: t.code, meta: t.meta, clientVersion: this.config.clientVersion });
     try {
       let n = JSON.parse(t);
       return new ne(
@@ -8509,10 +8393,7 @@ ${n.backtrace}`,
     return this.tracingHelper.runInChildSpan(
       {
         name: "compile",
-        attributes: {
-          models: t.map((n) => n.modelName).filter((n) => n !== void 0),
-          actions: t.map((n) => n.action),
-        },
+        attributes: { models: t.map((n) => n.modelName).filter((n) => n !== void 0), actions: t.map((n) => n.action) },
       },
       r
     );
@@ -8974,9 +8855,7 @@ async function hf(e, t) {
     }
     return C.version;
   }
-  throw new at("Only `major.minor.patch` versions are supported by Accelerate.", {
-    clientVersion: n,
-  });
+  throw new at("Only `major.minor.patch` versions are supported by Accelerate.", { clientVersion: n });
 }
 async function Tc(e, t) {
   let r = await hf(e, t);
@@ -9112,23 +8991,13 @@ var vc = 3,
       });
     }
     request(t, { traceparent: r, interactiveTransaction: n, customDataProxyFetch: i }) {
-      return this.requestInternal({
-        body: t,
-        traceparent: r,
-        interactiveTransaction: n,
-        customDataProxyFetch: i,
-      });
+      return this.requestInternal({ body: t, traceparent: r, interactiveTransaction: n, customDataProxyFetch: i });
     }
     async requestBatch(t, { traceparent: r, transaction: n, customDataProxyFetch: i }) {
       let o = n?.kind === "itx" ? n.options : void 0,
         s = kt(t, n);
       return (
-        await this.requestInternal({
-          body: s,
-          customDataProxyFetch: i,
-          interactiveTransaction: o,
-          traceparent: r,
-        })
+        await this.requestInternal({ body: s, customDataProxyFetch: i, interactiveTransaction: o, traceparent: r })
       ).map(
         (f) => (
           f.extensions && this.propagateResponseExtensions(f.extensions),
@@ -9166,11 +9035,7 @@ var vc = 3,
         actionGerund: `${i[t]} transaction`,
         callback: async ({ logHttpCall: o }) => {
           if (t === "start") {
-            let s = JSON.stringify({
-                max_wait: n.maxWait,
-                timeout: n.timeout,
-                isolation_level: n.isolationLevel,
-              }),
+            let s = JSON.stringify({ max_wait: n.maxWait, timeout: n.timeout, isolation_level: n.isolationLevel }),
               a = await this.url("transaction/start");
             o(a);
             let f = await ct(a, {
@@ -9212,18 +9077,12 @@ var vc = 3,
       });
     }
     metrics() {
-      throw new at("Metrics are not yet supported for Accelerate", {
-        clientVersion: this.clientVersion,
-      });
+      throw new at("Metrics are not yet supported for Accelerate", { clientVersion: this.clientVersion });
     }
     async withRetry(t) {
       for (let r = 0; ; r++) {
         let n = (i) => {
-          this.logEmitter.emit("info", {
-            message: `Calling ${i} (n=${r})`,
-            timestamp: new Date(),
-            target: "",
-          });
+          this.logEmitter.emit("info", { message: `Calling ${i} (n=${r})`, timestamp: new Date(), target: "" });
         };
         try {
           return await t.callback({ logHttpCall: n });
@@ -9236,11 +9095,7 @@ var vc = 3,
             target: "",
           });
           let o = await wc(r);
-          this.logEmitter.emit("warn", {
-            message: `Retrying after ${o}ms`,
-            timestamp: new Date(),
-            target: "",
-          });
+          this.logEmitter.emit("warn", { message: `Retrying after ${o}ms`, timestamp: new Date(), target: "" });
         }
       }
     }
@@ -9874,11 +9729,7 @@ var Af = K("prisma:client:request_handler"),
       } catch (r) {
         throw (
           this.logEmitter &&
-            this.logEmitter.emit("error", {
-              message: r.message,
-              target: t.clientMethod,
-              timestamp: new Date(),
-            }),
+            this.logEmitter.emit("error", { message: r.message, target: t.clientMethod, timestamp: new Date() }),
           r
         );
       }
@@ -9928,10 +9779,7 @@ var Af = K("prisma:client:request_handler"),
       } else {
         if (t.isPanic) throw new ae(f, this.client._clientVersion);
         if (t instanceof ne)
-          throw new ne(f, {
-            clientVersion: this.client._clientVersion,
-            batchRequestIdx: t.batchRequestIdx,
-          });
+          throw new ne(f, { clientVersion: this.client._clientVersion, batchRequestIdx: t.batchRequestIdx });
         if (t instanceof F) throw new F(f, this.client._clientVersion);
         if (t instanceof ae) throw new ae(f, this.client._clientVersion);
       }
@@ -10571,11 +10419,7 @@ function eu(e) {
         s = {
           operation: {
             name: "operation",
-            attributes: {
-              method: o.action,
-              model: o.model,
-              name: o.model ? `${o.model}.${o.action}` : o.action,
-            },
+            attributes: { method: o.action, model: o.model, name: o.model ? `${o.model}.${o.action}` : o.action },
           },
         },
         a = async (f) => {

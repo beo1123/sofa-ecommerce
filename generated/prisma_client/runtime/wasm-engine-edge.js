@@ -1426,11 +1426,7 @@ var Gn = Ot((sm, $s) => {
     description: "This package is intended for Prisma's internal use",
     main: "dist/index.js",
     types: "dist/index.d.ts",
-    repository: {
-      type: "git",
-      url: "https://github.com/prisma/prisma.git",
-      directory: "packages/internals",
-    },
+    repository: { type: "git", url: "https://github.com/prisma/prisma.git", directory: "packages/internals" },
     homepage: "https://www.prisma.io",
     author: "Tim Suchanek <suchanek@prisma.io>",
     bugs: "https://github.com/prisma/prisma/issues",
@@ -1835,13 +1831,7 @@ var it = {
   formatters: {},
 };
 function ys(t) {
-  let e = {
-      color: Un[gs++ % Un.length],
-      enabled: it.enabled(t),
-      namespace: t,
-      log: it.log,
-      extend: () => {},
-    },
+  let e = { color: Un[gs++ % Un.length], enabled: it.enabled(t), namespace: t, log: it.log, extend: () => {} },
     r = (...n) => {
       let { enabled: i, namespace: o, color: s, log: a } = e;
       if ((n.length !== 0 && Ft.push([o, ...n]), Ft.length > fs && Ft.shift(), it.enabled(o) || i)) {
@@ -2088,12 +2078,7 @@ m();
 p();
 d();
 l();
-var ot = {
-    error: Ue("prisma:error"),
-    warn: Mn("prisma:warn"),
-    info: Ln("prisma:info"),
-    query: _n("prisma:query"),
-  },
+var ot = { error: Ue("prisma:error"), warn: Mn("prisma:warn"), info: Ln("prisma:info"), query: _n("prisma:query") },
   Xn = { warn: () => !g.env.PRISMA_DISABLE_WARNINGS };
 function Hs(...t) {
   console.log(...t);
@@ -2470,22 +2455,8 @@ var ut = ((F) => (
   F
 ))(ut || {});
 var ta = kt(Yn());
-var ra = {
-    red: Ue,
-    gray: Fn,
-    dim: Lt,
-    bold: _t,
-    underline: Dn,
-    highlightSource: (t) => t.highlight(),
-  },
-  na = {
-    red: (t) => t,
-    gray: (t) => t,
-    dim: (t) => t,
-    bold: (t) => t,
-    underline: (t) => t,
-    highlightSource: (t) => t,
-  };
+var ra = { red: Ue, gray: Fn, dim: Lt, bold: _t, underline: Dn, highlightSource: (t) => t.highlight() },
+  na = { red: (t) => t, gray: (t) => t, dim: (t) => t, bold: (t) => t, underline: (t) => t, highlightSource: (t) => t };
 function ia({ message: t, originalMethod: e, isPanic: r, callArguments: n }) {
   return { functionName: `prisma.${e}()`, message: t, isPanic: r ?? !1, callArguments: n };
 }
@@ -2552,10 +2523,7 @@ function aa(t) {
     let i = `${n.selectionPath.join(".")}:${n.argumentPath.join(".")}`,
       o = e.get(i);
     o
-      ? e.set(i, {
-          ...n,
-          argument: { ...n.argument, typeNames: la(o.argument.typeNames, n.argument.typeNames) },
-        })
+      ? e.set(i, { ...n, argument: { ...n.argument, typeNames: la(o.argument.typeNames, n.argument.typeNames) } })
       : e.set(i, n);
   }
   return (r.push(...e.values()), r);
@@ -3505,13 +3473,7 @@ function Zt({ args: t, errors: e, errorFormat: r, callsite: n, originalMethod: i
   let a = We(t);
   for (let A of e) Qt(A, a, s);
   let { message: f, args: h } = Xt(a, r),
-    C = $t({
-      message: f,
-      callsite: n,
-      originalMethod: i,
-      showColors: r === "pretty",
-      callArguments: h,
-    });
+    C = $t({ message: f, callsite: n, originalMethod: i, showColors: r === "pretty", callArguments: h });
   throw new K(C, { clientVersion: o });
 }
 u();
@@ -3941,11 +3903,7 @@ function ja(t) {
 function Wr(t, e) {
   t === void 0 &&
     e.isPreviewFeatureOn("strictUndefinedChecks") &&
-    e.throwValidationError({
-      kind: "InvalidSelectionValue",
-      selectionPath: e.getSelectionPath(),
-      underlyingError: Ri,
-    });
+    e.throwValidationError({ kind: "InvalidSelectionValue", selectionPath: e.getSelectionPath(), underlyingError: Ri });
 }
 var Gr = class t {
   constructor(e) {
@@ -4002,11 +3960,7 @@ var Gr = class t {
   nestSelection(e) {
     let r = this.findField(e),
       n = r?.kind === "object" ? r.type : void 0;
-    return new t({
-      ...this.params,
-      modelName: n,
-      selectionPath: this.params.selectionPath.concat(e),
-    });
+    return new t({ ...this.params, modelName: n, selectionPath: this.params.selectionPath.concat(e) });
   }
   getGlobalOmit() {
     return this.params.modelName && this.shouldApplyGlobalOmit()
@@ -4350,10 +4304,7 @@ p();
 d();
 l();
 function ur(t, e) {
-  return {
-    batch: t,
-    transaction: e?.kind === "batch" ? { isolationLevel: e.options.isolationLevel } : void 0,
-  };
+  return { batch: t, transaction: e?.kind === "batch" ? { isolationLevel: e.options.isolationLevel } : void 0 };
 }
 u();
 c();
@@ -4375,12 +4326,7 @@ l();
 var Ga = "P2037";
 function cr({ error: t, user_facing_error: e }, r, n) {
   return e.error_code
-    ? new Z(Wa(e, n), {
-        code: e.error_code,
-        clientVersion: r,
-        meta: e.meta,
-        batchRequestIdx: e.batch_request_idx,
-      })
+    ? new Z(Wa(e, n), { code: e.error_code, clientVersion: r, meta: e.meta, batchRequestIdx: e.batch_request_idx })
     : new Q(t, { clientVersion: r, batchRequestIdx: e.batch_request_idx });
 }
 function Wa(t, e) {
@@ -4737,22 +4683,8 @@ function pr({ visitor: t, result: e, args: r, runtimeDataModel: n, modelName: i 
   }
   let o = t(e, i, r) ?? e;
   return (
-    r.include &&
-      Xi({
-        includeOrSelect: r.include,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: t,
-      }),
-    r.select &&
-      Xi({
-        includeOrSelect: r.select,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: t,
-      }),
+    r.include && Xi({ includeOrSelect: r.include, result: o, parentModelName: i, runtimeDataModel: n, visitor: t }),
+    r.select && Xi({ includeOrSelect: r.select, result: o, parentModelName: i, runtimeDataModel: n, visitor: t }),
     o
   );
 }
@@ -4839,12 +4771,7 @@ function vt(t) {
     let e = {};
     for (let r in t)
       r === "__proto__"
-        ? Object.defineProperty(e, r, {
-            value: vt(t[r]),
-            configurable: !0,
-            enumerable: !0,
-            writable: !0,
-          })
+        ? Object.defineProperty(e, r, { value: vt(t[r]), configurable: !0, enumerable: !0, writable: !0 })
         : (e[r] = vt(t[r]));
     return e;
   }
@@ -5052,11 +4979,7 @@ var Al = {
 };
 function Ze() {
   let t = Cl();
-  return {
-    id: t,
-    prettyName: Al[t] || t,
-    isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(t),
-  };
+  return { id: t, prettyName: Al[t] || t, isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(t) };
 }
 function dr({ inlineDatasources: t, overrideDatasources: e, env: r, clientVersion: n }) {
   let i,
@@ -5226,11 +5149,7 @@ var Tt = class {
       o = JSON.stringify(r),
       s;
     if (e === "start") {
-      let f = JSON.stringify({
-        max_wait: n.maxWait,
-        timeout: n.timeout,
-        isolation_level: n.isolationLevel,
-      });
+      let f = JSON.stringify({ max_wait: n.maxWait, timeout: n.timeout, isolation_level: n.isolationLevel });
       s = await this.engine?.startTransaction(f, o);
     } else
       e === "commit"
@@ -5241,11 +5160,7 @@ var Tt = class {
       let f = this.getExternalAdapterError(a, i?.errorRegistry);
       throw f
         ? f.error
-        : new Z(a.message, {
-            code: a.error_code,
-            clientVersion: this.config.clientVersion,
-            meta: a.meta,
-          });
+        : new Z(a.message, { code: a.error_code, clientVersion: this.config.clientVersion, meta: a.meta });
     } else if (typeof a.message == "string") throw new Q(a.message, { clientVersion: this.config.clientVersion });
     return a;
   }
@@ -5257,16 +5172,11 @@ var Tt = class {
   }
   async getCurrentBinaryTarget() {}
   parseEngineResponse(e) {
-    if (!e)
-      throw new Q("Response from the Engine was empty", {
-        clientVersion: this.config.clientVersion,
-      });
+    if (!e) throw new Q("Response from the Engine was empty", { clientVersion: this.config.clientVersion });
     try {
       return JSON.parse(e);
     } catch {
-      throw new Q("Unable to JSON.parse response from engine", {
-        clientVersion: this.config.clientVersion,
-      });
+      throw new Q("Unable to JSON.parse response from engine", { clientVersion: this.config.clientVersion });
     }
   }
   async loadEngine() {
@@ -5317,12 +5227,7 @@ var Tt = class {
             duration: Number(r.duration_ms),
             target: r.module_path,
           })
-        : (Ol(r),
-          this.logEmitter.emit(r.level, {
-            timestamp: new Date(),
-            message: r.message,
-            target: r.module_path,
-          })));
+        : (Ol(r), this.logEmitter.emit(r.level, { timestamp: new Date(), message: r.message, target: r.module_path })));
   }
   parseInitError(e) {
     try {
@@ -6148,11 +6053,7 @@ var ql = G("prisma:client:request_handler"),
       } catch (r) {
         throw (
           this.logEmitter &&
-            this.logEmitter.emit("error", {
-              message: r.message,
-              target: e.clientMethod,
-              timestamp: new Date(),
-            }),
+            this.logEmitter.emit("error", { message: r.message, target: e.clientMethod, timestamp: new Date() }),
           r
         );
       }
@@ -6202,10 +6103,7 @@ var ql = G("prisma:client:request_handler"),
       } else {
         if (e.isPanic) throw new xe(f, this.client._clientVersion);
         if (e instanceof Q)
-          throw new Q(f, {
-            clientVersion: this.client._clientVersion,
-            batchRequestIdx: e.batchRequestIdx,
-          });
+          throw new Q(f, { clientVersion: this.client._clientVersion, batchRequestIdx: e.batchRequestIdx });
         if (e instanceof I) throw new I(f, this.client._clientVersion);
         if (e instanceof xe) throw new xe(f, this.client._clientVersion);
       }
@@ -6845,11 +6743,7 @@ function Go(t) {
         s = {
           operation: {
             name: "operation",
-            attributes: {
-              method: o.action,
-              model: o.model,
-              name: o.model ? `${o.model}.${o.action}` : o.action,
-            },
+            attributes: { method: o.action, model: o.model, name: o.model ? `${o.model}.${o.action}` : o.action },
           },
         },
         a = async (f) => {

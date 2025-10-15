@@ -161,6 +161,7 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   price: "price",
   compareAtPrice: "compareAtPrice",
   attributes: "attributes",
+  image: "image",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
 };

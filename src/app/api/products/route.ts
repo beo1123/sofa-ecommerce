@@ -1,30 +1,34 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "../../../../generated/prisma_client";
-import { ok, normalizeError, parsePagination } from "@/server/utils/api";
+import { ProductService } from "@/services/products.service";
+import { normalizeError, ok, parsePagination } from "@/server/utils/api";
 
 const prisma = new PrismaClient();
 
 export async function GET(req: Request) {
   try {
-    const params = new URL(req.url).searchParams;
-    const { skip, take, page, perPage } = parsePagination(params);
+    const url = new URL(req.url);
+    const { page, perPage } = parsePagination(url.searchParams);
 
-    const [items, total] = await Promise.all([
-      prisma.product.findMany({
-        skip,
-        take,
-        orderBy: { createdAt: "desc" },
-        include: {
-          images: true,
-          variants: { include: { inventory: true } },
-        },
-      }),
-      prisma.product.count(),
-    ]);
+    const category = url.searchParams.get("category") ?? undefined;
+    const priceMin = url.searchParams.get("priceMin") ? Number(url.searchParams.get("priceMin")) : undefined;
+    const priceMax = url.searchParams.get("priceMax") ? Number(url.searchParams.get("priceMax")) : undefined;
+    const color = url.searchParams.get("color") ?? undefined;
 
-    return NextResponse.json(ok(items, { page, perPage, total, totalPages: Math.ceil(total / perPage) }));
+    const service = new ProductService(prisma);
+
+    const { items, meta } = await service.listProducts({
+      page,
+      perPage,
+      category,
+      priceMin,
+      priceMax,
+      color,
+    });
+
+    return NextResponse.json(ok(items, meta));
   } catch (err) {
-    const e = normalizeError(err);
-    return NextResponse.json(e.payload, { status: e.status });
+    const { status, payload } = normalizeError(err);
+    return NextResponse.json(payload, { status });
   }
 }

@@ -1179,11 +1179,7 @@ var Ti = Je((ze) => {
     Ke[e] = class extends r {
       constructor() {
         (super(),
-          Object.defineProperty(this, "message", {
-            value: t.apply(this, arguments),
-            writable: !0,
-            configurable: !0,
-          }),
+          Object.defineProperty(this, "message", { value: t.apply(this, arguments), writable: !0, configurable: !0 }),
           (this.name = `${this.name} [${e}]`),
           this.stack,
           delete this.name);
@@ -1192,12 +1188,7 @@ var Ti = Je((ze) => {
         return e;
       }
       set code(n) {
-        Object.defineProperty(this, "code", {
-          configurable: !0,
-          enumerable: !0,
-          value: n,
-          writable: !0,
-        });
+        Object.defineProperty(this, "code", { configurable: !0, enumerable: !0, value: n, writable: !0 });
       }
       toString() {
         return `${this.name} [${e}]: ${this.message}`;
@@ -1517,11 +1508,7 @@ var Hi = Je((wf, El) => {
     description: "This package is intended for Prisma's internal use",
     main: "dist/index.js",
     types: "dist/index.d.ts",
-    repository: {
-      type: "git",
-      url: "https://github.com/prisma/prisma.git",
-      directory: "packages/internals",
-    },
+    repository: { type: "git", url: "https://github.com/prisma/prisma.git", directory: "packages/internals" },
     homepage: "https://www.prisma.io",
     author: "Tim Suchanek <suchanek@prisma.io>",
     bugs: "https://github.com/prisma/prisma/issues",
@@ -1888,13 +1875,7 @@ var Pt = {
   formatters: {},
 };
 function Qa(e) {
-  let t = {
-      color: qi[Ja++ % qi.length],
-      enabled: Pt.enabled(e),
-      namespace: e,
-      log: Pt.log,
-      extend: () => {},
-    },
+  let t = { color: qi[Ja++ % qi.length], enabled: Pt.enabled(e), namespace: e, log: Pt.log, extend: () => {} },
     r = (...n) => {
       let { enabled: i, namespace: o, color: s, log: a } = t;
       if ((n.length !== 0 && cr.push([o, ...n]), cr.length > Ga && cr.shift(), Pt.enabled(o) || i)) {
@@ -1990,12 +1971,7 @@ u();
 c();
 p();
 m();
-var vt = {
-    error: Ye("prisma:error"),
-    warn: Fi("prisma:warn"),
-    info: Ui("prisma:info"),
-    query: Li("prisma:query"),
-  },
+var vt = { error: Ye("prisma:error"), warn: Fi("prisma:warn"), info: Ui("prisma:info"), query: Li("prisma:query") },
   eo = { warn: () => !y.env.PRISMA_DISABLE_WARNINGS };
 function Tl(...e) {
   console.log(...e);
@@ -2282,16 +2258,7 @@ var et = 9e15,
     "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058",
   xr =
     "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789",
-  Tn = {
-    precision: 20,
-    rounding: 4,
-    modulo: 1,
-    toExpNeg: -7,
-    toExpPos: 21,
-    minE: -et,
-    maxE: et,
-    crypto: !1,
-  },
+  Tn = { precision: 20, rounding: 4, modulo: 1, toExpNeg: -7, toExpPos: 21, minE: -et, maxE: et, crypto: !1 },
   ao,
   Pe,
   _ = !0,
@@ -4146,22 +4113,8 @@ var Ct = ((O) => (
   O
 ))(Ct || {});
 var Tu = Qe(Xi());
-var Au = {
-    red: Ye,
-    gray: Bi,
-    dim: ur,
-    bold: lr,
-    underline: _i,
-    highlightSource: (e) => e.highlight(),
-  },
-  Ru = {
-    red: (e) => e,
-    gray: (e) => e,
-    dim: (e) => e,
-    bold: (e) => e,
-    underline: (e) => e,
-    highlightSource: (e) => e,
-  };
+var Au = { red: Ye, gray: Bi, dim: ur, bold: lr, underline: _i, highlightSource: (e) => e.highlight() },
+  Ru = { red: (e) => e, gray: (e) => e, dim: (e) => e, bold: (e) => e, underline: (e) => e, highlightSource: (e) => e };
 function Cu({ message: e, originalMethod: t, isPanic: r, callArguments: n }) {
   return { functionName: `prisma.${t}()`, message: e, isPanic: r ?? !1, callArguments: n };
 }
@@ -4226,10 +4179,7 @@ function Ou(e) {
     let i = `${n.selectionPath.join(".")}:${n.argumentPath.join(".")}`,
       o = t.get(i);
     o
-      ? t.set(i, {
-          ...n,
-          argument: { ...n.argument, typeNames: ku(o.argument.typeNames, n.argument.typeNames) },
-        })
+      ? t.set(i, { ...n, argument: { ...n.argument, typeNames: ku(o.argument.typeNames, n.argument.typeNames) } })
       : t.set(i, n);
   }
   return (r.push(...t.values()), r);
@@ -5164,13 +5114,7 @@ function Fr({ args: e, errors: t, errorFormat: r, callsite: n, originalMethod: i
   let a = ut(e);
   for (let h of t) Sr(h, a, s);
   let { message: l, args: d } = Nr(a, r),
-    g = Cr({
-      message: l,
-      callsite: n,
-      originalMethod: i,
-      showColors: r === "pretty",
-      callArguments: d,
-    });
+    g = Cr({ message: l, callsite: n, originalMethod: i, showColors: r === "pretty", callArguments: d });
   throw new ee(g, { clientVersion: o });
 }
 f();
@@ -5594,11 +5538,7 @@ function mc(e) {
 function Ln(e, t) {
   e === void 0 &&
     t.isPreviewFeatureOn("strictUndefinedChecks") &&
-    t.throwValidationError({
-      kind: "InvalidSelectionValue",
-      selectionPath: t.getSelectionPath(),
-      underlyingError: $o,
-    });
+    t.throwValidationError({ kind: "InvalidSelectionValue", selectionPath: t.getSelectionPath(), underlyingError: $o });
 }
 var Nn = class e {
   constructor(t) {
@@ -5655,11 +5595,7 @@ var Nn = class e {
   nestSelection(t) {
     let r = this.findField(t),
       n = r?.kind === "object" ? r.type : void 0;
-    return new e({
-      ...this.params,
-      modelName: n,
-      selectionPath: this.params.selectionPath.concat(t),
-    });
+    return new e({ ...this.params, modelName: n, selectionPath: this.params.selectionPath.concat(t) });
   }
   getGlobalOmit() {
     return this.params.modelName && this.shouldApplyGlobalOmit()
@@ -5989,10 +5925,7 @@ c();
 p();
 m();
 function Gr(e, t) {
-  return {
-    batch: e,
-    transaction: t?.kind === "batch" ? { isolationLevel: t.options.isolationLevel } : void 0,
-  };
+  return { batch: e, transaction: t?.kind === "batch" ? { isolationLevel: t.options.isolationLevel } : void 0 };
 }
 f();
 u();
@@ -6012,12 +5945,7 @@ m();
 var Ec = "P2037";
 function Jr({ error: e, user_facing_error: t }, r, n) {
   return t.error_code
-    ? new se(bc(t, n), {
-        code: t.error_code,
-        clientVersion: r,
-        meta: t.meta,
-        batchRequestIdx: t.batch_request_idx,
-      })
+    ? new se(bc(t, n), { code: t.error_code, clientVersion: r, meta: t.meta, batchRequestIdx: t.batch_request_idx })
     : new ae(e, { clientVersion: r, batchRequestIdx: t.batch_request_idx });
 }
 function bc(e, t) {
@@ -6357,22 +6285,8 @@ function Kr({ visitor: e, result: t, args: r, runtimeDataModel: n, modelName: i 
   }
   let o = e(t, i, r) ?? t;
   return (
-    r.include &&
-      cs({
-        includeOrSelect: r.include,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: e,
-      }),
-    r.select &&
-      cs({
-        includeOrSelect: r.select,
-        result: o,
-        parentModelName: i,
-        runtimeDataModel: n,
-        visitor: e,
-      }),
+    r.include && cs({ includeOrSelect: r.include, result: o, parentModelName: i, runtimeDataModel: n, visitor: e }),
+    r.select && cs({ includeOrSelect: r.select, result: o, parentModelName: i, runtimeDataModel: n, visitor: e }),
     o
   );
 }
@@ -6455,12 +6369,7 @@ function Vt(e) {
     let t = {};
     for (let r in e)
       r === "__proto__"
-        ? Object.defineProperty(t, r, {
-            value: Vt(e[r]),
-            configurable: !0,
-            enumerable: !0,
-            writable: !0,
-          })
+        ? Object.defineProperty(t, r, { value: Vt(e[r]), configurable: !0, enumerable: !0, writable: !0 })
         : (t[r] = Vt(e[r]));
     return t;
   }
@@ -6662,11 +6571,7 @@ var Xc = {
 };
 function Jn() {
   let e = Zc();
-  return {
-    id: e,
-    prettyName: Xc[e] || e,
-    isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e),
-  };
+  return { id: e, prettyName: Xc[e] || e, isEdge: ["workerd", "deno", "netlify", "edge-light"].includes(e) };
 }
 function ft({ inlineDatasources: e, overrideDatasources: t, env: r, clientVersion: n }) {
   let i,
@@ -7237,9 +7142,7 @@ async function sp(e, t) {
     }
     return I.version;
   }
-  throw new Ve("Only `major.minor.patch` versions are supported by Accelerate.", {
-    clientVersion: n,
-  });
+  throw new Ve("Only `major.minor.patch` versions are supported by Accelerate.", { clientVersion: n });
 }
 async function Ms(e, t) {
   let r = await sp(e, t);
@@ -7375,23 +7278,13 @@ var _s = 3,
       });
     }
     request(t, { traceparent: r, interactiveTransaction: n, customDataProxyFetch: i }) {
-      return this.requestInternal({
-        body: t,
-        traceparent: r,
-        interactiveTransaction: n,
-        customDataProxyFetch: i,
-      });
+      return this.requestInternal({ body: t, traceparent: r, interactiveTransaction: n, customDataProxyFetch: i });
     }
     async requestBatch(t, { traceparent: r, transaction: n, customDataProxyFetch: i }) {
       let o = n?.kind === "itx" ? n.options : void 0,
         s = Gr(t, n);
       return (
-        await this.requestInternal({
-          body: s,
-          customDataProxyFetch: i,
-          interactiveTransaction: o,
-          traceparent: r,
-        })
+        await this.requestInternal({ body: s, customDataProxyFetch: i, interactiveTransaction: o, traceparent: r })
       ).map(
         (l) => (
           l.extensions && this.propagateResponseExtensions(l.extensions),
@@ -7429,11 +7322,7 @@ var _s = 3,
         actionGerund: `${i[t]} transaction`,
         callback: async ({ logHttpCall: o }) => {
           if (t === "start") {
-            let s = JSON.stringify({
-                max_wait: n.maxWait,
-                timeout: n.timeout,
-                isolation_level: n.isolationLevel,
-              }),
+            let s = JSON.stringify({ max_wait: n.maxWait, timeout: n.timeout, isolation_level: n.isolationLevel }),
               a = await this.url("transaction/start");
             o(a);
             let l = await je(a, {
@@ -7475,18 +7364,12 @@ var _s = 3,
       });
     }
     metrics() {
-      throw new Ve("Metrics are not yet supported for Accelerate", {
-        clientVersion: this.clientVersion,
-      });
+      throw new Ve("Metrics are not yet supported for Accelerate", { clientVersion: this.clientVersion });
     }
     async withRetry(t) {
       for (let r = 0; ; r++) {
         let n = (i) => {
-          this.logEmitter.emit("info", {
-            message: `Calling ${i} (n=${r})`,
-            timestamp: new Date(),
-            target: "",
-          });
+          this.logEmitter.emit("info", { message: `Calling ${i} (n=${r})`, timestamp: new Date(), target: "" });
         };
         try {
           return await t.callback({ logHttpCall: n });
@@ -7499,11 +7382,7 @@ var _s = 3,
             target: "",
           });
           let o = await Ss(r);
-          this.logEmitter.emit("warn", {
-            message: `Retrying after ${o}ms`,
-            timestamp: new Date(),
-            target: "",
-          });
+          this.logEmitter.emit("warn", { message: `Retrying after ${o}ms`, timestamp: new Date(), target: "" });
         }
       }
     }
@@ -8103,11 +7982,7 @@ var dp = Z("prisma:client:request_handler"),
       } catch (r) {
         throw (
           this.logEmitter &&
-            this.logEmitter.emit("error", {
-              message: r.message,
-              target: t.clientMethod,
-              timestamp: new Date(),
-            }),
+            this.logEmitter.emit("error", { message: r.message, target: t.clientMethod, timestamp: new Date() }),
           r
         );
       }
@@ -8157,10 +8032,7 @@ var dp = Z("prisma:client:request_handler"),
       } else {
         if (t.isPanic) throw new Ce(l, this.client._clientVersion);
         if (t instanceof ae)
-          throw new ae(l, {
-            clientVersion: this.client._clientVersion,
-            batchRequestIdx: t.batchRequestIdx,
-          });
+          throw new ae(l, { clientVersion: this.client._clientVersion, batchRequestIdx: t.batchRequestIdx });
         if (t instanceof Q) throw new Q(l, this.client._clientVersion);
         if (t instanceof Ce) throw new Ce(l, this.client._clientVersion);
       }
@@ -8796,11 +8668,7 @@ function Ap(e) {
         s = {
           operation: {
             name: "operation",
-            attributes: {
-              method: o.action,
-              model: o.model,
-              name: o.model ? `${o.model}.${o.action}` : o.action,
-            },
+            attributes: { method: o.action, model: o.model, name: o.model ? `${o.model}.${o.action}` : o.action },
           },
         },
         a = async (l) => {

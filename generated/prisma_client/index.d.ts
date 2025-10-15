@@ -309,11 +309,7 @@ export class PrismaClient<
 
   $transaction<R>(
     fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>,
-    options?: {
-      maxWait?: number;
-      timeout?: number;
-      isolationLevel?: Prisma.TransactionIsolationLevel;
-    }
+    options?: { maxWait?: number; timeout?: number; isolationLevel?: Prisma.TransactionIsolationLevel }
   ): $Utils.JsPromise<R>;
 
   $extends: $Extensions.ExtendsHook<
@@ -5743,10 +5739,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["UserRole"];
-      meta: { name: "UserRole" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["UserRole"]; meta: { name: "UserRole" } };
     /**
      * Find zero or one UserRole that matches the filter.
      * @param {UserRoleFindUniqueArgs} args - Arguments to find a UserRole
@@ -8353,10 +8346,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["ProductImage"];
-      meta: { name: "ProductImage" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["ProductImage"]; meta: { name: "ProductImage" } };
     /**
      * Find zero or one ProductImage that matches the filter.
      * @param {ProductImageFindUniqueArgs} args - Arguments to find a ProductImage
@@ -9303,6 +9293,7 @@ export namespace Prisma {
     skuPrefix: string | null;
     price: Decimal | null;
     compareAtPrice: Decimal | null;
+    image: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
   };
@@ -9314,6 +9305,7 @@ export namespace Prisma {
     skuPrefix: string | null;
     price: Decimal | null;
     compareAtPrice: Decimal | null;
+    image: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
   };
@@ -9326,6 +9318,7 @@ export namespace Prisma {
     price: number;
     compareAtPrice: number;
     attributes: number;
+    image: number;
     createdAt: number;
     updatedAt: number;
     _all: number;
@@ -9352,6 +9345,7 @@ export namespace Prisma {
     skuPrefix?: true;
     price?: true;
     compareAtPrice?: true;
+    image?: true;
     createdAt?: true;
     updatedAt?: true;
   };
@@ -9363,6 +9357,7 @@ export namespace Prisma {
     skuPrefix?: true;
     price?: true;
     compareAtPrice?: true;
+    image?: true;
     createdAt?: true;
     updatedAt?: true;
   };
@@ -9375,6 +9370,7 @@ export namespace Prisma {
     price?: true;
     compareAtPrice?: true;
     attributes?: true;
+    image?: true;
     createdAt?: true;
     updatedAt?: true;
     _all?: true;
@@ -9471,6 +9467,7 @@ export namespace Prisma {
     price: Decimal;
     compareAtPrice: Decimal | null;
     attributes: JsonValue | null;
+    image: string | null;
     createdAt: Date;
     updatedAt: Date;
     _count: ProductVariantCountAggregateOutputType | null;
@@ -9502,6 +9499,7 @@ export namespace Prisma {
         price?: boolean;
         compareAtPrice?: boolean;
         attributes?: boolean;
+        image?: boolean;
         createdAt?: boolean;
         updatedAt?: boolean;
         product?: boolean | ProductDefaultArgs<ExtArgs>;
@@ -9523,6 +9521,7 @@ export namespace Prisma {
       price?: boolean;
       compareAtPrice?: boolean;
       attributes?: boolean;
+      image?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
       product?: boolean | ProductDefaultArgs<ExtArgs>;
@@ -9541,6 +9540,7 @@ export namespace Prisma {
       price?: boolean;
       compareAtPrice?: boolean;
       attributes?: boolean;
+      image?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
       product?: boolean | ProductDefaultArgs<ExtArgs>;
@@ -9556,13 +9556,23 @@ export namespace Prisma {
     price?: boolean;
     compareAtPrice?: boolean;
     attributes?: boolean;
+    image?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
   };
 
   export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<
-      "id" | "productId" | "name" | "skuPrefix" | "price" | "compareAtPrice" | "attributes" | "createdAt" | "updatedAt",
+      | "id"
+      | "productId"
+      | "name"
+      | "skuPrefix"
+      | "price"
+      | "compareAtPrice"
+      | "attributes"
+      | "image"
+      | "createdAt"
+      | "updatedAt",
       ExtArgs["result"]["productVariant"]
     >;
   export type ProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9598,6 +9608,7 @@ export namespace Prisma {
         price: Prisma.Decimal;
         compareAtPrice: Prisma.Decimal | null;
         attributes: Prisma.JsonValue | null;
+        image: string | null;
         createdAt: Date;
         updatedAt: Date;
       },
@@ -9622,10 +9633,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["ProductVariant"];
-      meta: { name: "ProductVariant" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["ProductVariant"]; meta: { name: "ProductVariant" } };
     /**
      * Find zero or one ProductVariant that matches the filter.
      * @param {ProductVariantFindUniqueArgs} args - Arguments to find a ProductVariant
@@ -10137,6 +10145,7 @@ export namespace Prisma {
     readonly price: FieldRef<"ProductVariant", "Decimal">;
     readonly compareAtPrice: FieldRef<"ProductVariant", "Decimal">;
     readonly attributes: FieldRef<"ProductVariant", "Json">;
+    readonly image: FieldRef<"ProductVariant", "String">;
     readonly createdAt: FieldRef<"ProductVariant", "DateTime">;
     readonly updatedAt: FieldRef<"ProductVariant", "DateTime">;
   }
@@ -10943,10 +10952,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Inventory"];
-      meta: { name: "Inventory" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Inventory"]; meta: { name: "Inventory" } };
     /**
      * Find zero or one Inventory that matches the filter.
      * @param {InventoryFindUniqueArgs} args - Arguments to find a Inventory
@@ -13867,10 +13873,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["OrderItem"];
-      meta: { name: "OrderItem" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["OrderItem"]; meta: { name: "OrderItem" } };
     /**
      * Find zero or one OrderItem that matches the filter.
      * @param {OrderItemFindUniqueArgs} args - Arguments to find a OrderItem
@@ -17792,10 +17795,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["Wishlist"];
-      meta: { name: "Wishlist" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Wishlist"]; meta: { name: "Wishlist" } };
     /**
      * Find zero or one Wishlist that matches the filter.
      * @param {WishlistFindUniqueArgs} args - Arguments to find a Wishlist
@@ -19040,10 +19040,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["WishlistItem"];
-      meta: { name: "WishlistItem" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["WishlistItem"]; meta: { name: "WishlistItem" } };
     /**
      * Find zero or one WishlistItem that matches the filter.
      * @param {WishlistItemFindUniqueArgs} args - Arguments to find a WishlistItem
@@ -21707,10 +21704,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["AuditLog"];
-      meta: { name: "AuditLog" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["AuditLog"]; meta: { name: "AuditLog" } };
     /**
      * Find zero or one AuditLog that matches the filter.
      * @param {AuditLogFindUniqueArgs} args - Arguments to find a AuditLog
@@ -22989,10 +22983,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["ReturnRequest"];
-      meta: { name: "ReturnRequest" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["ReturnRequest"]; meta: { name: "ReturnRequest" } };
     /**
      * Find zero or one ReturnRequest that matches the filter.
      * @param {ReturnRequestFindUniqueArgs} args - Arguments to find a ReturnRequest
@@ -25607,10 +25598,7 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
     GlobalOmitOptions = {},
   > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>["model"]["PaymentMeta"];
-      meta: { name: "PaymentMeta" };
-    };
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["PaymentMeta"]; meta: { name: "PaymentMeta" } };
     /**
      * Find zero or one PaymentMeta that matches the filter.
      * @param {PaymentMetaFindUniqueArgs} args - Arguments to find a PaymentMeta
@@ -26601,6 +26589,7 @@ export namespace Prisma {
     price: "price";
     compareAtPrice: "compareAtPrice";
     attributes: "attributes";
+    image: "image";
     createdAt: "createdAt";
     updatedAt: "updatedAt";
   };
@@ -27321,6 +27310,7 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null;
     attributes?: JsonNullableFilter<"ProductVariant">;
+    image?: StringNullableFilter<"ProductVariant"> | string | null;
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string;
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string;
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>;
@@ -27336,6 +27326,7 @@ export namespace Prisma {
     price?: SortOrder;
     compareAtPrice?: SortOrderInput | SortOrder;
     attributes?: SortOrderInput | SortOrder;
+    image?: SortOrderInput | SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
     product?: ProductOrderByWithRelationInput;
@@ -27355,6 +27346,7 @@ export namespace Prisma {
       price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
       compareAtPrice?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null;
       attributes?: JsonNullableFilter<"ProductVariant">;
+      image?: StringNullableFilter<"ProductVariant"> | string | null;
       createdAt?: DateTimeFilter<"ProductVariant"> | Date | string;
       updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string;
       product?: XOR<ProductScalarRelationFilter, ProductWhereInput>;
@@ -27372,6 +27364,7 @@ export namespace Prisma {
     price?: SortOrder;
     compareAtPrice?: SortOrderInput | SortOrder;
     attributes?: SortOrderInput | SortOrder;
+    image?: SortOrderInput | SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
     _count?: ProductVariantCountOrderByAggregateInput;
@@ -27398,6 +27391,7 @@ export namespace Prisma {
       | string
       | null;
     attributes?: JsonNullableWithAggregatesFilter<"ProductVariant">;
+    image?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null;
     createdAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string;
     updatedAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string;
   };
@@ -28821,6 +28815,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     product: ProductCreateNestedOneWithoutVariantsInput;
@@ -28836,6 +28831,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     inventory?: InventoryUncheckedCreateNestedManyWithoutVariantInput;
@@ -28848,6 +28844,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput;
@@ -28863,6 +28860,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     inventory?: InventoryUncheckedUpdateManyWithoutVariantNestedInput;
@@ -28877,6 +28875,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
   };
@@ -28887,6 +28886,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -28899,6 +28899,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -30543,6 +30544,7 @@ export namespace Prisma {
     price?: SortOrder;
     compareAtPrice?: SortOrder;
     attributes?: SortOrder;
+    image?: SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
   };
@@ -30561,6 +30563,7 @@ export namespace Prisma {
     skuPrefix?: SortOrder;
     price?: SortOrder;
     compareAtPrice?: SortOrder;
+    image?: SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
   };
@@ -30572,6 +30575,7 @@ export namespace Prisma {
     skuPrefix?: SortOrder;
     price?: SortOrder;
     compareAtPrice?: SortOrder;
+    image?: SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
   };
@@ -34264,6 +34268,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     inventory?: InventoryCreateNestedManyWithoutVariantInput;
@@ -34277,6 +34282,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     inventory?: InventoryUncheckedCreateNestedManyWithoutVariantInput;
@@ -34440,6 +34446,7 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null;
     attributes?: JsonNullableFilter<"ProductVariant">;
+    image?: StringNullableFilter<"ProductVariant"> | string | null;
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string;
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string;
   };
@@ -34797,6 +34804,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     product: ProductCreateNestedOneWithoutVariantsInput;
@@ -34811,6 +34819,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutVariantInput;
@@ -34838,6 +34847,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput;
@@ -34852,6 +34862,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     OrderItem?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput;
@@ -35531,6 +35542,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     product: ProductCreateNestedOneWithoutVariantsInput;
@@ -35545,6 +35557,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     inventory?: InventoryUncheckedCreateNestedManyWithoutVariantInput;
@@ -35697,6 +35710,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput;
@@ -35711,6 +35725,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     inventory?: InventoryUncheckedUpdateManyWithoutVariantNestedInput;
@@ -37234,6 +37249,7 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string;
     compareAtPrice?: Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
   };
@@ -37301,6 +37317,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     inventory?: InventoryUpdateManyWithoutVariantNestedInput;
@@ -37314,6 +37331,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     inventory?: InventoryUncheckedUpdateManyWithoutVariantNestedInput;
@@ -37327,6 +37345,7 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     compareAtPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null;
     attributes?: NullableJsonNullValueInput | InputJsonValue;
+    image?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };

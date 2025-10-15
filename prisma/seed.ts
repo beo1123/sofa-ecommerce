@@ -24,7 +24,7 @@ async function main() {
   const adminPassword = bcrypt.hashSync("admin123", 10);
   const buyerPassword = bcrypt.hashSync("buyer123", 10);
 
-  const [admin, buyer] = await Promise.all([
+  await Promise.all([
     prisma.user.upsert({
       where: { email: "admin@sofa.local" },
       update: {},
@@ -49,7 +49,7 @@ async function main() {
     }),
   ]);
 
-  console.log("✅ Users and roles created");
+  console.log("✅ Users & roles created");
 
   // ===== 3. Sample Products =====
   const products = [
@@ -83,44 +83,53 @@ async function main() {
   const colors = ["gray", "beige", "brown"];
   const sizes = ["M", "L"];
 
-  // ===== 4. Create Products + Variants + Inventory + Images =====
-  for (const product of products) {
-    const created = await prisma.product.upsert({
-      where: { slug: product.slug },
+  let variantCount = 0;
+
+  // ===== 4. Create Products + Variants =====
+  for (const p of products) {
+    const product = await prisma.product.upsert({
+      where: { slug: p.slug },
       update: {},
       create: {
-        title: product.title,
-        slug: product.slug,
-        shortDescription: product.shortDescription,
-        description: product.description,
+        title: p.title,
+        slug: p.slug,
+        shortDescription: p.shortDescription,
+        description: p.description,
       },
     });
 
-    // Images
-    for (let i = 0; i < product.images.length; i++) {
+    // Product Images
+    for (let i = 0; i < p.images.length; i++) {
       await prisma.productImage.create({
         data: {
-          url: product.images[i],
-          alt: `${product.title} image ${i + 1}`,
+          url: p.images[i],
+          alt: `${p.title} ${i + 1}`,
           isPrimary: i === 0,
-          product: { connect: { id: created.id } },
+          product: { connect: { id: product.id } },
         },
       });
     }
 
-    // Variants
+    // Variants (each with 1 image)
     for (const m of materials) {
       for (const c of colors) {
         for (const s of sizes) {
+          const sku = `${p.slug}-${m.material}-${c}-${s}`.toUpperCase();
+          const variantName = `${s.toUpperCase()} / ${m.material} / ${c}`;
+          const variantImage = `https://picsum.photos/seed/${encodeURIComponent(sku)}/800/600`;
           const price = (m.priceBase + (s === "L" ? 2000000 : 0)).toFixed(2);
-          const sku = `${created.slug}-${m.material}-${c}-${s}`.toUpperCase();
+
+          // check if exists by SKU in Inventory
+          const exists = await prisma.inventory.findUnique({ where: { sku } });
+          if (exists) continue;
 
           await prisma.productVariant.create({
             data: {
-              product: { connect: { id: created.id } },
-              name: `${s.toUpperCase()} / ${m.material} / ${c}`,
+              product: { connect: { id: product.id } },
+              name: variantName,
               price,
               attributes: { color: c, material: m.material, size: s },
+              image: variantImage, // ✅ 1 hình từ lorem picsum
               inventory: {
                 create: {
                   sku,
@@ -130,13 +139,15 @@ async function main() {
               },
             },
           });
+
+          variantCount++;
         }
       }
     }
   }
 
-  console.log("✅ Products, images, variants, inventory created");
-  console.log("🌱 Database seed complete!");
+  console.log(`✅ Created ${variantCount} product variants (all have images)`);
+  console.log("🌱 Seed done!");
 }
 
 main()
