@@ -139,6 +139,15 @@ exports.Prisma.ProductScalarFieldEnum = {
   description: "description",
   status: "status",
   metadata: "metadata",
+  categoryId: "categoryId",
+  createdAt: "createdAt",
+  updatedAt: "updatedAt",
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: "id",
+  name: "name",
+  slug: "slug",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
 };
@@ -396,6 +405,7 @@ exports.Prisma.ModelName = {
   Role: "Role",
   UserRole: "UserRole",
   Product: "Product",
+  Category: "Category",
   ProductImage: "ProductImage",
   ProductVariant: "ProductVariant",
   Inventory: "Inventory",

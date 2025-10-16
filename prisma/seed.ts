@@ -1,153 +1,89 @@
+/* eslint-disable no-unused-vars */
 import { PrismaClient } from "../generated/prisma_client/index.js";
-import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 async function main() {
   console.log("🌱 Seeding database...");
 
-  // ===== 1. Roles =====
-  const [adminRole, customerRole] = await Promise.all([
-    prisma.role.upsert({
-      where: { name: "ADMIN" },
-      update: {},
-      create: { name: "ADMIN" },
-    }),
-    prisma.role.upsert({
-      where: { name: "CUSTOMER" },
-      update: {},
-      create: { name: "CUSTOMER" },
-    }),
-  ]);
+  // =====================================================
+  // 1️⃣ CATEGORY DATA (Danh mục tiếng Việt)
+  // =====================================================
+  const categories = [
+    { name: "Sofa da", slug: "sofa-da" },
+    { name: "Sofa vải nỉ", slug: "sofa-vai-ni" },
+    { name: "Sofa góc", slug: "sofa-goc" },
+  ];
 
-  // ===== 2. Users =====
-  const adminPassword = bcrypt.hashSync("admin123", 10);
-  const buyerPassword = bcrypt.hashSync("buyer123", 10);
+  // 👇 đổi id từ string → number
+  const createdCategories: Record<string, { id: number }> = {};
 
-  await Promise.all([
-    prisma.user.upsert({
-      where: { email: "admin@sofa.local" },
+  for (const c of categories) {
+    const category = await prisma.category.upsert({
+      where: { slug: c.slug },
       update: {},
       create: {
-        email: "admin@sofa.local",
-        username: "admin",
-        displayName: "Admin Sofa",
-        password: adminPassword,
-        userRoles: { create: [{ role: { connect: { id: adminRole.id } } }] },
+        name: c.name,
+        slug: c.slug,
       },
-    }),
-    prisma.user.upsert({
-      where: { email: "buyer@sofa.local" },
-      update: {},
-      create: {
-        email: "buyer@sofa.local",
-        username: "buyer",
-        displayName: "Buyer Sofa",
-        password: buyerPassword,
-        userRoles: { create: [{ role: { connect: { id: customerRole.id } } }] },
-      },
-    }),
-  ]);
+    });
+    createdCategories[c.slug] = { id: category.id };
+  }
 
-  console.log("✅ Users & roles created");
+  console.log("✅ Categories seeded:", Object.keys(createdCategories));
 
-  // ===== 3. Sample Products =====
+  // =====================================================
+  // 2️⃣ PRODUCT DATA (mỗi product thuộc 1 category)
+  // =====================================================
   const products = [
     {
-      title: "Sofa Da Cao Cấp",
+      title: "Sofa da cao cấp Italia",
       slug: "sofa-da-cao-cap",
-      shortDescription: "Sofa da thật sang trọng, khung gỗ sồi tự nhiên.",
-      description: "Thiết kế cao cấp, chất liệu da thật, phù hợp không gian phòng khách hiện đại.",
-      images: ["https://picsum.photos/seed/sofa1a/800/600", "https://picsum.photos/seed/sofa1b/800/600"],
+      shortDescription: "Sofa da thật nhập khẩu từ Ý, sang trọng và bền đẹp.",
+      description: "Chất liệu da bò 100%, khung gỗ tự nhiên, mang lại cảm giác êm ái và đẳng cấp cho phòng khách.",
+      categorySlug: "sofa-da",
     },
     {
-      title: "Sofa Vải Nỉ Hiện Đại",
+      title: "Sofa vải nỉ hiện đại",
       slug: "sofa-vai-ni-hien-dai",
-      shortDescription: "Sofa vải nỉ mềm mại, đa dạng màu sắc.",
-      description: "Vải nỉ cao cấp, dễ vệ sinh, khung gỗ chắc chắn, thiết kế tối giản hiện đại.",
-      images: ["https://picsum.photos/seed/sofa2a/800/600", "https://picsum.photos/seed/sofa2b/800/600"],
+      shortDescription: "Thiết kế trẻ trung, màu sắc đa dạng, phù hợp mọi không gian.",
+      description:
+        "Sử dụng vải nỉ cao cấp, dễ vệ sinh, có thể tháo rời bọc ghế. Kiểu dáng hiện đại, phù hợp căn hộ chung cư.",
+      categorySlug: "sofa-vai-ni",
     },
     {
-      title: "Sofa Góc L Shape",
+      title: "Sofa góc L-shape thông minh",
       slug: "sofa-goc-l-shape",
-      shortDescription: "Sofa góc lớn, phù hợp cho phòng khách rộng.",
-      description: "Sofa chữ L giúp tối ưu không gian, có thể đảo chiều linh hoạt, chất liệu cao cấp.",
-      images: ["https://picsum.photos/seed/sofa3a/800/600", "https://picsum.photos/seed/sofa3b/800/600"],
+      shortDescription: "Tối ưu không gian với thiết kế góc chữ L tiện lợi.",
+      description: "Sofa góc bọc vải nhung mịn, khung gỗ sồi chắc chắn, có hộc chứa đồ tiện lợi.",
+      categorySlug: "sofa-goc",
     },
   ];
 
-  const materials = [
-    { material: "leather", priceBase: 20000000 },
-    { material: "fabric", priceBase: 12000000 },
-  ];
-  const colors = ["gray", "beige", "brown"];
-  const sizes = ["M", "L"];
-
-  let variantCount = 0;
-
-  // ===== 4. Create Products + Variants =====
   for (const p of products) {
-    const product = await prisma.product.upsert({
+    const category = createdCategories[p.categorySlug];
+    if (!category) {
+      console.warn(`⚠️ Category not found for ${p.title}`);
+      continue;
+    }
+
+    await prisma.product.upsert({
       where: { slug: p.slug },
-      update: {},
+      update: {
+        category: { connect: { id: category.id } },
+        updatedAt: new Date(),
+      },
       create: {
         title: p.title,
         slug: p.slug,
         shortDescription: p.shortDescription,
         description: p.description,
+        category: { connect: { id: category.id } },
       },
     });
-
-    // Product Images
-    for (let i = 0; i < p.images.length; i++) {
-      await prisma.productImage.create({
-        data: {
-          url: p.images[i],
-          alt: `${p.title} ${i + 1}`,
-          isPrimary: i === 0,
-          product: { connect: { id: product.id } },
-        },
-      });
-    }
-
-    // Variants (each with 1 image)
-    for (const m of materials) {
-      for (const c of colors) {
-        for (const s of sizes) {
-          const sku = `${p.slug}-${m.material}-${c}-${s}`.toUpperCase();
-          const variantName = `${s.toUpperCase()} / ${m.material} / ${c}`;
-          const variantImage = `https://picsum.photos/seed/${encodeURIComponent(sku)}/800/600`;
-          const price = (m.priceBase + (s === "L" ? 2000000 : 0)).toFixed(2);
-
-          // check if exists by SKU in Inventory
-          const exists = await prisma.inventory.findUnique({ where: { sku } });
-          if (exists) continue;
-
-          await prisma.productVariant.create({
-            data: {
-              product: { connect: { id: product.id } },
-              name: variantName,
-              price,
-              attributes: { color: c, material: m.material, size: s },
-              image: variantImage, // ✅ 1 hình từ lorem picsum
-              inventory: {
-                create: {
-                  sku,
-                  quantity: 10,
-                  reserved: 0,
-                },
-              },
-            },
-          });
-
-          variantCount++;
-        }
-      }
-    }
   }
 
-  console.log(`✅ Created ${variantCount} product variants (all have images)`);
-  console.log("🌱 Seed done!");
+  console.log("✅ Products seeded successfully");
 }
 
 main()

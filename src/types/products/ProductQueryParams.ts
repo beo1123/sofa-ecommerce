@@ -5,4 +5,5 @@ export type ProductQueryParams = {
   priceMin?: number;
   priceMax?: number;
   color?: string;
+  material?: string;
 };

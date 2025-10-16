@@ -9,46 +9,47 @@ export class ProductService {
   // 📦 1. List products with filters + pagination
   // =====================================================
   async listProducts(params: ProductQueryParams) {
-    const { page, perPage, category, priceMin, priceMax, color } = params;
+    const { page, perPage, category, priceMin, priceMax, color, material } = params;
     const skip = (page - 1) * perPage;
 
     const where: Prisma.ProductWhereInput = {
       status: "PUBLISHED",
     };
 
-    // ✅ Filter by category
+    // ✅ Lọc theo category slug (từ bảng Category thực)
     if (category) {
-      where.metadata = {
-        path: ["category"],
-        equals: category,
-      };
+      where.category = { slug: category };
     }
 
-    // ✅ Filter by price
-    if (priceMin || priceMax) {
-      where.variants = {
-        some: {
-          price: {
-            ...(priceMin ? { gte: priceMin } : {}),
-            ...(priceMax ? { lte: priceMax } : {}),
-          },
-        },
-      };
+    // ✅ Lọc theo variant attributes & price
+    const variantAnd: Prisma.ProductVariantWhereInput[] = [];
+
+    if (priceMin !== undefined || priceMax !== undefined) {
+      const priceCond: Prisma.DecimalFilter = {};
+      if (priceMin !== undefined) priceCond.gte = Number(priceMin);
+      if (priceMax !== undefined) priceCond.lte = Number(priceMax);
+      variantAnd.push({ price: priceCond });
     }
 
-    // ✅ Filter by color
     if (color) {
+      variantAnd.push({
+        attributes: { path: ["color"], equals: color },
+      });
+    }
+
+    if (material) {
+      variantAnd.push({
+        attributes: { path: ["material"], equals: material },
+      });
+    }
+
+    if (variantAnd.length > 0) {
       where.variants = {
-        some: {
-          ...(where.variants?.some || {}),
-          attributes: {
-            path: ["color"],
-            equals: color,
-          },
-        },
+        some: variantAnd.length === 1 ? variantAnd[0] : { AND: variantAnd },
       };
     }
 
+    // ✅ Transaction: count + findMany
     const [total, products] = await this.prisma.$transaction([
       this.prisma.product.count({ where }),
       this.prisma.product.findMany({
@@ -61,6 +62,7 @@ export class ProductService {
           slug: true,
           title: true,
           shortDescription: true,
+          category: { select: { id: true, name: true, slug: true } }, // ✅ include category
           variants: { select: { price: true } },
           images: {
             where: { isPrimary: true },
@@ -71,6 +73,7 @@ export class ProductService {
       }),
     ]);
 
+    // ✅ Map lại output
     const items = products.map((p) => {
       const prices = p.variants.map((v) => Number(v.price));
       return {
@@ -82,6 +85,7 @@ export class ProductService {
         priceMax: prices.length ? Math.max(...prices) : null,
         primaryImage: p.images[0] ?? null,
         variantsCount: p.variants.length,
+        category: p.category ? { name: p.category.name, slug: p.category.slug } : null, // ✅ thêm category
       };
     });
 

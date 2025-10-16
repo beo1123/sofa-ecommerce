@@ -115,6 +115,8 @@ model Product {
   images           ProductImage[]
   variants         ProductVariant[]
   reviews          Review[]
+  category         Category?        @relation(fields: [categoryId], references: [id])
+  categoryId       Int?
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
   OrderItem        OrderItem[]
@@ -125,6 +127,18 @@ model Product {
   @@index([status], map: "idx_product_status")
   @@index([createdAt], map: "idx_product_createdAt")
   @@index([title, shortDescription], map: "idx_product_title_shortdesc")
+  @@index([categoryId], map: "idx_product_category")
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  slug      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([name], map: "idx_category_name")
 }
 
 model ProductImage {
