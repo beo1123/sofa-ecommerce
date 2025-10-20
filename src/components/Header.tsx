@@ -33,7 +33,7 @@ type HeaderProps = {
 
 const navLinks = [
   { href: "/", label: "Trang Chủ" },
-  { href: "/shop", label: "Sản Phẩm" },
+  { href: "/san-pham", label: "Sản Phẩm" },
   { href: "/about", label: "Giới Thiệu" },
   { href: "/news", label: "Tin Tức" },
   { href: "/contact", label: "Liên Hệ" },

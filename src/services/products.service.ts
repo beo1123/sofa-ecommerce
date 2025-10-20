@@ -160,11 +160,11 @@ export class ProductService {
   }
 
   // =====================================================
-  // 🪄 3. Related products by category
+  // 🪄 3. Related products by slug
   // =====================================================
-  async getRelatedProducts(id: number) {
+  async getRelatedProducts(slug: string) {
     const product = await this.prisma.product.findUnique({
-      where: { id },
+      where: { slug },
       select: { metadata: true },
     });
     if (!product) return [];
@@ -173,7 +173,7 @@ export class ProductService {
 
     const related = await this.prisma.product.findMany({
       where: {
-        id: { not: id },
+        slug: { not: slug },
         status: "PUBLISHED",
         ...(category
           ? {
