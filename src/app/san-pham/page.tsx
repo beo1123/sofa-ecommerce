@@ -1,7 +1,8 @@
-// app/(store)/san-pham/page.tsx
-import { getProductListSSR } from "@/lib/products/queries";
+import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { prefetchProductList, productKeys } from "@/lib/products/queries";
 import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
+import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 
 export const metadata: Metadata = {
   title: "Danh sách sản phẩm – Sofa Ecommerce",
@@ -18,29 +19,29 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const params = await searchParams;
-  const page = Number(params.page ?? 1);
-  const perPage = Number(params.perPage ?? 12);
+  const sp = await searchParams;
+  const page = Number(sp.page ?? 1);
+  const perPage = Number(sp.perPage ?? 12);
 
-  const { items, meta } = await getProductListSSR({
+  const filterParams: ProductQueryParams = {
     page,
     perPage,
-    category: params.category,
-    priceMin: params.priceMin ? Number(params.priceMin) : undefined,
-    priceMax: params.priceMax ? Number(params.priceMax) : undefined,
-    color: params.color,
-  });
+    category: sp.category,
+    priceMin: sp.priceMin ? Number(sp.priceMin) : undefined,
+    priceMax: sp.priceMax ? Number(sp.priceMax) : undefined,
+    color: sp.color,
+  };
 
+  const queryClient = new QueryClient();
+
+  await prefetchProductList(queryClient, filterParams);
+
+  const data: any = queryClient.getQueryData(productKeys.list(filterParams));
+
+  const dehydratedState = dehydrate(queryClient);
   return (
-    <ProductsPageClient
-      items={items}
-      meta={meta}
-      params={{
-        category: params.category ?? "",
-        priceMin: params.priceMin ?? "",
-        priceMax: params.priceMax ?? "",
-        color: params.color ?? "",
-      }}
-    />
+    <HydrationBoundary state={dehydratedState}>
+      <ProductsPageClient items={data.items} meta={data.meta} params={filterParams} />
+    </HydrationBoundary>
   );
 }

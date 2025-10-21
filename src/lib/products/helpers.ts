@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 export function formatFromPrice(variants: { price: any }[]) {
   if (!variants?.length) return { priceMin: null, priceMax: null };
   const prices = variants.map((v) => Number(v.price));
@@ -22,4 +24,14 @@ export function mapProductListItem(p: any) {
 export function formatCurrency(v: number | null | undefined) {
   if (v === null) return "Liên Hệ";
   return `${v?.toLocaleString("vi-VN")} VND`;
+}
+
+export function serializeData<T>(data: T): T {
+  return JSON.parse(
+    JSON.stringify(data, (_key, value) => {
+      if (typeof value === "bigint") return Number(value);
+      if (value instanceof Prisma.Decimal) return value.toNumber();
+      return value;
+    })
+  );
 }

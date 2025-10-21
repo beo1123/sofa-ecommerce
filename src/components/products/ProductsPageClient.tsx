@@ -6,11 +6,12 @@ import ProductFilters from "@/components/products/ProductFilters";
 import { Filter, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
+import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 
 type ProductsPageProps = {
   items: any[];
   meta: any;
-  params: Record<string, string>;
+  params: ProductQueryParams;
 };
 
 export default function ProductsPageClient({ items, meta, params }: ProductsPageProps) {

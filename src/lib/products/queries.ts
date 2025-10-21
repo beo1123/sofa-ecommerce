@@ -1,16 +1,33 @@
-import { PrismaClient } from "../../../generated/prisma_client";
-import { ProductService } from "@/services/products.service";
+import { QueryClient } from "@tanstack/react-query";
+import { getProductDetaiSSR, getProductListSSR } from "./productSSR";
 
-const service = new ProductService(new PrismaClient());
+export const productKeys = {
+  all: ["products"] as const,
+  list: (params?: Record<string, any>) => [...productKeys.all, "list", params] as const,
+  detail: (slug: string) => [...productKeys.all, "detail", slug] as const,
+};
 
-export async function getProductListSSR(params: any) {
-  return await service.listProducts(params);
+// Fetcher dùng được cả client & server
+export async function fetchProductList(params: any) {
+  return await getProductListSSR(params);
 }
 
-export async function getProductDetaiSSR(slug: string) {
-  const product = await service.getProductBySlug(slug);
-  if (!product) return null;
-  const related = await service.getRelatedProducts(slug);
-  if (!related) return null;
-  return { product, related };
+export async function fetchProductDetail(slug: string) {
+  return await getProductDetaiSSR(slug);
+}
+
+// Prefetch cho SSR
+export async function prefetchProductList(queryClient: QueryClient, params: any) {
+  const data = await queryClient.prefetchQuery({
+    queryKey: productKeys.list(params),
+    queryFn: () => fetchProductList(params),
+  });
+  return data;
+}
+
+export async function prefetchProductDetail(queryClient: QueryClient, slug: string) {
+  await queryClient.prefetchQuery({
+    queryKey: productKeys.detail(slug),
+    queryFn: () => fetchProductDetail(slug),
+  });
 }
