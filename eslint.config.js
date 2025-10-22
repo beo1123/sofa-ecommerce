@@ -94,6 +94,26 @@ export default [
     settings: { react: { version: "detect" } },
   },
 
+  // ================= Jest Config (⚡ thêm phần này) =================
+  {
+    files: ["**/*.test.{ts,tsx,js,jsx}"],
+    languageOptions: {
+      globals: {
+        // Jest globals
+        describe: "readonly",
+        it: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        jest: "readonly",
+      },
+    },
+    rules: {},
+  },
+
   // ================= Override config files (disable type-aware linting) =================
   {
     files: [
