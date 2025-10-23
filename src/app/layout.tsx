@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ReduxProvider>
           <ReactQueryProvider>
             {/* Header is a client component (handles mobile toggle) */}
-            <Header cartCount={3} />
+            <Header />
             {/* Page container */}
             <Container className="flex-1">
               <main>{children}</main>

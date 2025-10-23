@@ -1,4 +1,4 @@
-import cartReducer, { addItem, removeItem, updateQuantity, clearCart, replaceCart } from "../cartSlice";
+import cartReducer, { addItem, removeItem, updateQuantity, clearCart, replaceCart } from "../slice/cartSlice";
 
 const item = {
   productId: 1,

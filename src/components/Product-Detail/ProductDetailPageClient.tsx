@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ProductImageGallery } from "./ProductImageGallery";
 import { ProductInfo } from "./ProductInfo";
 import { ProductDescription } from "./ProductDescription";
+import MiniCartDrawer from "../cart/MiniCartDrawer";
 
 type ProductDetailClientProps = {
   product: any;
@@ -15,6 +16,7 @@ type ProductDetailClientProps = {
 
 export default function ProductDetailPageClient({ product, related }: ProductDetailClientProps) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0] || null);
+  const [isCartOpen, setCartOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-[var(--color-bg-muted)]">
@@ -46,7 +48,12 @@ export default function ProductDetailPageClient({ product, related }: ProductDet
           <ProductImageGallery images={product.images} title={product.title} />
 
           {/* Right: Product Info */}
-          <ProductInfo product={product} selectedVariant={selectedVariant} onVariantChange={setSelectedVariant} />
+          <ProductInfo
+            product={product}
+            selectedVariant={selectedVariant}
+            onVariantChange={setSelectedVariant}
+            onAddToCart={() => setCartOpen(true)}
+          />
         </motion.div>
 
         {/* Description Section */}
@@ -55,6 +62,7 @@ export default function ProductDetailPageClient({ product, related }: ProductDet
         {/* Related Products */}
         {related && related.length > 0 && <RelatedProducts items={related} />}
       </section>
+      <MiniCartDrawer isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
     </main>
   );
 }

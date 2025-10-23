@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search, ShoppingCart, Heart, BarChart3, User } from "lucide-react";
+import MiniCartDrawer from "./cart/MiniCartDrawer";
+import { useAppSelector } from "@/store/hook";
+import { selectCartItemCount } from "@/store/selector/cartSelectors";
 
 /**
  * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
@@ -26,10 +29,6 @@ import { Menu, X, Search, ShoppingCart, Heart, BarChart3, User } from "lucide-re
  * - Mobile search: lg:hidden
  * - Sidebar: lg:hidden (full responsive với calc width cho scrollbar)
  */
-
-type HeaderProps = {
-  cartCount?: number;
-};
 
 const navLinks = [
   { href: "/", label: "Trang Chủ" },
@@ -118,9 +117,11 @@ function useLockBodyScroll(active: boolean) {
   }, [active]);
 }
 
-export default function Header({ cartCount = 0 }: HeaderProps) {
+export default function Header() {
+  const cartCount = useAppSelector(selectCartItemCount);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [scrollBarWidth, setScrollBarWidth] = useState(0);
 
   useEffect(() => {
@@ -248,9 +249,9 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
                     <BarChart3 className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-brand-300)] transition-colors" />
                   </Link>
 
-                  <Link
-                    href="/cart"
-                    className="relative flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
+                  <button
+                    onClick={() => setIsCartOpen(true)}
+                    className="cursor-pointer relative flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
                     aria-label="Giỏ hàng">
                     <ShoppingCart className="w-5 h-5 text-[var(--color-text-default)] group-hover:text-[var(--color-brand-300)] transition-colors" />
                     {cartCount > 0 && (
@@ -258,8 +259,7 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
                         {cartCount}
                       </span>
                     )}
-                  </Link>
-
+                  </button>
                   <button
                     onClick={() => setIsMenuOpen(true)}
                     className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors"
@@ -458,6 +458,7 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           </>
         )}
       </AnimatePresence>
+      <MiniCartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 }

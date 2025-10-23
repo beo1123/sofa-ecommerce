@@ -5,16 +5,19 @@ import { useState, useMemo } from "react";
 import { ShoppingCart, Heart, Share2, Star } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { formatCurrency } from "@/lib/products/helpers";
+import { useAppDispatch } from "@/store/hook";
+import { addItem } from "@/store/slice/cartSlice";
 
 type ProductInfoProps = {
   product: any;
   selectedVariant: any;
   onVariantChange: (variant: any) => void;
+  onAddToCart?: () => void;
 };
 
-export function ProductInfo({ product, selectedVariant, onVariantChange }: ProductInfoProps) {
+export function ProductInfo({ product, selectedVariant, onVariantChange, onAddToCart }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
-
+  const dispatch = useAppDispatch();
   // Extract unique attributes
   const attributes = useMemo(() => {
     if (!product.variants) return {};
@@ -166,6 +169,21 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }: Produ
       <div className="space-y-3">
         <Button
           fullWidth
+          onClick={() => {
+            if (!selectedVariant) return;
+            dispatch(
+              addItem({
+                productId: product.id,
+                variantId: selectedVariant.id ?? null,
+                sku: selectedVariant.inventory?.[0]?.sku ?? null,
+                name: product.title,
+                price: Number(selectedVariant.price),
+                image: product.images?.[0]?.url ?? null,
+                quantity,
+              })
+            );
+            onAddToCart?.(); // 👈 mở MiniCart
+          }}
           leftIcon={<ShoppingCart size={20} />}
           className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white py-4 text-lg font-semibold rounded-xl"
           disabled={availableQty === 0}>

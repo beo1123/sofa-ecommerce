@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "outline" | "ghost" | "danger";
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   fullWidth?: boolean;
   loading?: boolean;
   leftIcon?: React.ReactNode;
@@ -42,6 +42,7 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
     };
 
     const sizeClasses = {
+      xs: "px-2 py-1 text-xs rounded",
       sm: "px-3 py-1.5 text-sm rounded",
       md: "px-4 py-2 text-base rounded-md",
       lg: "px-6 py-3 text-lg rounded-lg",
