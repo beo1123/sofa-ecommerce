@@ -4,10 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Search, ShoppingCart, Heart, BarChart3, User } from "lucide-react";
+import { Menu, X, ShoppingCart, Heart, BarChart3, User } from "lucide-react";
 import MiniCartDrawer from "./cart/MiniCartDrawer";
 import { useAppSelector } from "@/store/hook";
 import { selectCartItemCount } from "@/store/selector/cartSelectors";
+import SearchBox from "./Header/SearchBox";
 
 /**
  * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
@@ -198,23 +199,7 @@ export default function Header() {
               </nav>
 
               {/* Search Bar - Desktop: Hidden on mobile/tablet (xs, sm, md, lg-); Mobile version below */}
-              <div className="hidden lg:flex flex-1 lg:mx-6 xl:mx-8">
-                <form onSubmit={handleSearch} className="relative w-full">
-                  <input
-                    type="search"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Tìm kiếm sản phẩm..."
-                    className="w-full h-10 pl-4 pr-11 text-sm border-2 border-[var(--color-brand-50)] rounded-full bg-white text-[var(--color-text-default)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-100)] focus:border-[var(--color-brand-100)] transition-all"
-                  />
-                  <button
-                    type="submit"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors"
-                    aria-label="Tìm kiếm">
-                    <Search className="w-4 h-4" />
-                  </button>
-                </form>
-              </div>
+              <SearchBox className="hidden lg:flex flex-1 lg:mx-6 xl:mx-8" />
 
               {/* Right Actions - Responsive icons & profile */}
               <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0 ml-auto">
@@ -272,21 +257,7 @@ export default function Header() {
 
             {/* Mobile Search Bar - Hidden on desktop (lg+) */}
             <div className="lg:hidden pb-3 pt-1">
-              <form onSubmit={handleSearch} className="relative">
-                <input
-                  type="search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Tìm kiếm sản phẩm..."
-                  className="w-full h-10 pl-4 pr-11 text-sm border-2 border-[var(--color-brand-50)] rounded-full bg-white text-[var(--color-text-default)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-100)] focus:border-[var(--color-brand-100)]"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
-                  aria-label="Tìm kiếm">
-                  <Search className="w-4 h-4" />
-                </button>
-              </form>
+              <SearchBox className="relative" />
             </div>
           </div>
         </div>

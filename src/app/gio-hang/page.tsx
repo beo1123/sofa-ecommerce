@@ -213,7 +213,7 @@ export default function CartPage() {
               </div>
 
               <div className="space-y-2">
-                <Link href="/checkout">
+                <Link href="/thanh-toan">
                   <Button fullWidth variant="primary" className="mb-2">
                     Tiến hành thanh toán
                   </Button>

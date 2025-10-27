@@ -7,8 +7,12 @@ import prettierPlugin from "eslint-plugin-prettier";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 
+/**
+ * ESLint Configuration — Next.js + TypeScript + React Query + Redux Toolkit
+ * Includes: Prettier, Unused Imports, Jest, A11y
+ */
 export default [
-  // ================= Ignore các file build, config, generated =================
+  // ================= IGNORE build/config/generated =================
   {
     ignores: [
       "generated/**",
@@ -21,15 +25,15 @@ export default [
       "**/*.config.js",
       "**/*.config.cjs",
       "**/*.config.mjs",
-      "**/*.config.ts", // ignore all config ts files including next.config.ts
+      "**/*.config.ts",
       "commitlint.config.cjs",
     ],
   },
 
-  // ================= Config JS cơ bản =================
+  // ================= Base JS Config =================
   js.configs.recommended,
 
-  // ================= Config TS cho src files =================
+  // ================= TypeScript for src =================
   {
     files: ["src/**/*.{ts,tsx}"],
     languageOptions: {
@@ -37,7 +41,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: "module",
-        project: ["./tsconfig.json"], // type-aware linting chỉ cho src TS files
+        project: ["./tsconfig.json"], // enable type-aware linting for src
       },
       globals: {
         window: "readonly",
@@ -45,6 +49,7 @@ export default [
         alert: "readonly",
         setTimeout: "readonly",
         process: "readonly",
+        console: "readonly", // ✅ FIX console undefined
       },
     },
     plugins: {
@@ -53,10 +58,20 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      "no-console": "warn",
+      // ================= General Code Quality =================
+      "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+      "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+
+      // ================= TypeScript =================
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
+
+      // ================= Unused Imports =================
       "unused-imports/no-unused-imports": "warn",
+
+      // ================= Prettier Integration =================
       "prettier/prettier": [
         "error",
         {
@@ -74,7 +89,7 @@ export default [
     },
   },
 
-  // ================= React & Hooks & A11y =================
+  // ================= React, Hooks, A11y =================
   {
     files: ["src/**/*.{ts,tsx}"],
     plugins: {
@@ -83,23 +98,28 @@ export default [
       "jsx-a11y": jsxA11yPlugin,
     },
     rules: {
+      // React Hooks
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "jsx-a11y/alt-text": "warn",
+
+      // React JSX
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react/jsx-uses-vars": "error",
       "react/no-unknown-property": "error",
+
+      // Accessibility
+      "jsx-a11y/alt-text": "warn",
+      "jsx-a11y/anchor-is-valid": "warn",
     },
     settings: { react: { version: "detect" } },
   },
 
-  // ================= Jest Config (⚡ thêm phần này) =================
+  // ================= Jest / Testing =================
   {
     files: ["**/*.test.{ts,tsx,js,jsx}"],
     languageOptions: {
       globals: {
-        // Jest globals
         describe: "readonly",
         it: "readonly",
         test: "readonly",
@@ -114,7 +134,7 @@ export default [
     rules: {},
   },
 
-  // ================= Override config files (disable type-aware linting) =================
+  // ================= Config files (no type-aware linting) =================
   {
     files: [
       "*.config.js",
@@ -133,7 +153,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: "module",
-        project: undefined, // tắt type-aware linting cho config
+        project: undefined,
       },
       globals: {
         process: "readonly",

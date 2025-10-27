@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { PrismaClient, Prisma } from "../../generated/prisma_client";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 
@@ -212,5 +211,58 @@ export class ProductService {
         variantsCount: p.variants.length,
       };
     });
+  }
+
+  // =====================================================
+  // 🔍 4. Search products (ILIKE, paginated)
+  // =====================================================
+  async SearchProducts(q: string, page = 1, perPage = 12) {
+    const skip = (page - 1) * perPage;
+    const query = (q ?? "").trim();
+    const where: Prisma.ProductWhereInput = {
+      status: "PUBLISHED",
+    };
+
+    if (query) {
+      where.OR = [
+        { title: { contains: query, mode: "insensitive" } },
+        { shortDescription: { contains: query, mode: "insensitive" } },
+        { slug: { contains: query, mode: "insensitive" } },
+      ];
+    }
+    const [total, products] = await this.prisma.$transaction([
+      this.prisma.product.count({ where }),
+      this.prisma.product.findMany({
+        where,
+        skip,
+        take: perPage,
+        orderBy: { updatedAt: "desc" },
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          shortDescription: true,
+          variants: { select: { price: true } },
+          images: {
+            where: { isPrimary: true },
+            take: 1,
+            select: { url: true, alt: true },
+          },
+        },
+      }),
+    ]);
+    const items = products.map((p) => {
+      const prices = p.variants.map((v) => Number(v.price));
+      return {
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        shortDescription: p.shortDescription,
+        priceMin: prices.length ? Math.min(...prices) : null,
+        priceMax: prices.length ? Math.max(...prices) : null,
+        primaryImage: p.images[0] ?? null,
+      };
+    });
+    return { items, meta: { page, perPage, total } };
   }
 }

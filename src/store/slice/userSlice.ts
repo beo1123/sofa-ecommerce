@@ -1,12 +1,7 @@
 "use client";
 
+import { User } from "@/types/user/User";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export type User = {
-  id?: number;
-  email?: string;
-  name?: string;
-};
 
 export type UserState = User | null;
 

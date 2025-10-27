@@ -180,7 +180,7 @@ export default function MiniCartDrawer({ isOpen, onClose }: MiniCartDrawerProps)
                       Xem giỏ hàng
                     </Button>
                   </Link>
-                  <Link href="/checkout" onClick={onClose} className="flex-1">
+                  <Link href="/thanh-toan" onClick={onClose} className="flex-1">
                     <Button variant="primary" fullWidth>
                       Thanh toán
                     </Button>

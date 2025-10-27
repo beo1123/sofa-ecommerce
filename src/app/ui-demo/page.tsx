@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Grid, { GridItem } from "@/components/ui/Grid";
 import { zodResolver } from "@hookform/resolvers/zod";
+import RadioGroup from "@/components/ui/Radio";
 
 // ✅ Zod schema for validation example
 const formSchema = z.object({
@@ -28,6 +29,27 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function UIDemoPage() {
   const [openModal, setOpenModal] = useState(false);
+  const [selected, setSelected] = React.useState("standard");
+  const options = [
+    {
+      value: "standard",
+      label: "Giao hàng tiêu chuẩn",
+      description: "3–5 ngày làm việc",
+      price: "Miễn phí",
+    },
+    {
+      value: "express",
+      label: "Giao nhanh",
+      description: "1–2 ngày làm việc",
+      price: "+50,000₫",
+    },
+    {
+      value: "pickup",
+      label: "Nhận tại cửa hàng",
+      description: "Miễn phí, nhận trong 24h",
+      price: "Miễn phí",
+    },
+  ];
 
   const {
     register,
@@ -307,6 +329,24 @@ export default function UIDemoPage() {
           </Grid>
         </section>
       </Container>
+      <Divider />
+
+      {/* ================= RADIO GROUP ================= */}
+      <section>
+        <Heading level={2} className="mb-4">
+          🔘 Radio Group
+        </Heading>
+
+        <Text muted className="mb-3">
+          Component chọn 1 giá trị (radio), có thể dùng cho giao hàng, thanh toán, v.v.
+        </Text>
+        <div className="space-y-4">
+          <RadioGroup name="shipping" options={options} value={selected} onChange={setSelected} />
+          <Text muted className="mt-2">
+            Bạn đã chọn: <strong>{selected}</strong>
+          </Text>
+        </div>
+      </section>
     </main>
   );
 }
