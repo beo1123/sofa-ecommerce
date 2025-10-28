@@ -79,6 +79,7 @@ model User {
   updatedAt   DateTime   @updatedAt
   lastLogin   DateTime?
   AuditLog    AuditLog[]
+  orderStatusHistory OrderStatusHistory[]
 
   @@index([email], map: "idx_user_email")
 }
@@ -216,6 +217,7 @@ model Order {
   updatedAt         DateTime        @updatedAt
   ReturnRequest     ReturnRequest[]
   Refund            Refund[]
+  statusHistory     OrderStatusHistory[]
 
   @@index([orderNumber], map: "idx_order_number")
   @@index([userId], map: "idx_order_user")
@@ -243,6 +245,22 @@ model OrderItem {
   @@index([orderId], map: "idx_orderitem_order")
   @@index([productId], map: "idx_orderitem_product")
 }
+
+model OrderStatusHistory {
+  id         Int        @id @default(autoincrement())
+  order      Order      @relation(fields: [orderId], references: [id])
+  orderId    Int
+  fromStatus OrderStatus?
+  toStatus   OrderStatus
+  note       String?    // optional note (e.g. "Created by checkout API", "VNPAY success")
+  actorId    Int?       // optional user/admin id who triggered change
+  actor      User?      @relation(fields: [actorId], references: [id])
+  createdAt  DateTime   @default(now())
+
+  @@index([orderId], map: "idx_orderstatushistory_order")
+  @@index([toStatus], map: "idx_orderstatushistory_toStatus")
+}
+
 
 // =========================================================
 // COUPONS & PROMOTIONS

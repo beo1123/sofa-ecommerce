@@ -11,7 +11,7 @@ import Card, { CardHeader, CardTitle, CardFooter } from "@/components/ui/Card";
 import { useAppSelector } from "@/store/hook";
 import { selectCartItems, selectCartSubtotal, selectCartTotal } from "@/store/selector/cartSelectors";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
-import { formatCurrency } from "@/lib/products/helpers";
+import { formatCurrency } from "@/lib/helpers";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 

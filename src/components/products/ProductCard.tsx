@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCart, ShoppingBag, ImageIcon } from "lucide-react";
-import { formatCurrency } from "@/lib/products/helpers";
+import { formatCurrency } from "@/lib/helpers";
 import Button from "@/components/ui/Button";
 import Text from "@/components/ui/Text";
 import Heading from "@/components/ui/Heading";

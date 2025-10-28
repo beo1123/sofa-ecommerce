@@ -62,6 +62,11 @@ export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>;
  */
 export type OrderItem = $Result.DefaultSelection<Prisma.$OrderItemPayload>;
 /**
+ * Model OrderStatusHistory
+ *
+ */
+export type OrderStatusHistory = $Result.DefaultSelection<Prisma.$OrderStatusHistoryPayload>;
+/**
  * Model Coupon
  *
  */
@@ -428,6 +433,16 @@ export class PrismaClient<
    * ```
    */
   get orderItem(): Prisma.OrderItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.orderStatusHistory`: Exposes CRUD operations for the **OrderStatusHistory** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more OrderStatusHistories
+   * const orderStatusHistories = await prisma.orderStatusHistory.findMany()
+   * ```
+   */
+  get orderStatusHistory(): Prisma.OrderStatusHistoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.coupon`: Exposes CRUD operations for the **Coupon** model.
@@ -944,6 +959,7 @@ export namespace Prisma {
     Inventory: "Inventory";
     Order: "Order";
     OrderItem: "OrderItem";
+    OrderStatusHistory: "OrderStatusHistory";
     Coupon: "Coupon";
     Review: "Review";
     Wishlist: "Wishlist";
@@ -985,6 +1001,7 @@ export namespace Prisma {
         | "inventory"
         | "order"
         | "orderItem"
+        | "orderStatusHistory"
         | "coupon"
         | "review"
         | "wishlist"
@@ -1734,6 +1751,80 @@ export namespace Prisma {
           count: {
             args: Prisma.OrderItemCountArgs<ExtArgs>;
             result: $Utils.Optional<OrderItemCountAggregateOutputType> | number;
+          };
+        };
+      };
+      OrderStatusHistory: {
+        payload: Prisma.$OrderStatusHistoryPayload<ExtArgs>;
+        fields: Prisma.OrderStatusHistoryFieldRefs;
+        operations: {
+          findUnique: {
+            args: Prisma.OrderStatusHistoryFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload> | null;
+          };
+          findUniqueOrThrow: {
+            args: Prisma.OrderStatusHistoryFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>;
+          };
+          findFirst: {
+            args: Prisma.OrderStatusHistoryFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload> | null;
+          };
+          findFirstOrThrow: {
+            args: Prisma.OrderStatusHistoryFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>;
+          };
+          findMany: {
+            args: Prisma.OrderStatusHistoryFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>[];
+          };
+          create: {
+            args: Prisma.OrderStatusHistoryCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>;
+          };
+          createMany: {
+            args: Prisma.OrderStatusHistoryCreateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          createManyAndReturn: {
+            args: Prisma.OrderStatusHistoryCreateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>[];
+          };
+          delete: {
+            args: Prisma.OrderStatusHistoryDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>;
+          };
+          update: {
+            args: Prisma.OrderStatusHistoryUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>;
+          };
+          deleteMany: {
+            args: Prisma.OrderStatusHistoryDeleteManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateMany: {
+            args: Prisma.OrderStatusHistoryUpdateManyArgs<ExtArgs>;
+            result: BatchPayload;
+          };
+          updateManyAndReturn: {
+            args: Prisma.OrderStatusHistoryUpdateManyAndReturnArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>[];
+          };
+          upsert: {
+            args: Prisma.OrderStatusHistoryUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusHistoryPayload>;
+          };
+          aggregate: {
+            args: Prisma.OrderStatusHistoryAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateOrderStatusHistory>;
+          };
+          groupBy: {
+            args: Prisma.OrderStatusHistoryGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<OrderStatusHistoryGroupByOutputType>[];
+          };
+          count: {
+            args: Prisma.OrderStatusHistoryCountArgs<ExtArgs>;
+            result: $Utils.Optional<OrderStatusHistoryCountAggregateOutputType> | number;
           };
         };
       };
@@ -2509,6 +2600,7 @@ export namespace Prisma {
     inventory?: InventoryOmit;
     order?: OrderOmit;
     orderItem?: OrderItemOmit;
+    orderStatusHistory?: OrderStatusHistoryOmit;
     coupon?: CouponOmit;
     review?: ReviewOmit;
     wishlist?: WishlistOmit;
@@ -2597,6 +2689,7 @@ export namespace Prisma {
     reviews: number;
     orders: number;
     AuditLog: number;
+    orderStatusHistory: number;
   };
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2605,6 +2698,7 @@ export namespace Prisma {
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs;
     orders?: boolean | UserCountOutputTypeCountOrdersArgs;
     AuditLog?: boolean | UserCountOutputTypeCountAuditLogArgs;
+    orderStatusHistory?: boolean | UserCountOutputTypeCountOrderStatusHistoryArgs;
   };
 
   // Custom InputTypes
@@ -2658,6 +2752,15 @@ export namespace Prisma {
     {
       where?: AuditLogWhereInput;
     };
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOrderStatusHistoryArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: OrderStatusHistoryWhereInput;
+  };
 
   /**
    * Count Type RoleCountOutputType
@@ -2853,12 +2956,14 @@ export namespace Prisma {
     items: number;
     ReturnRequest: number;
     Refund: number;
+    statusHistory: number;
   };
 
   export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | OrderCountOutputTypeCountItemsArgs;
     ReturnRequest?: boolean | OrderCountOutputTypeCountReturnRequestArgs;
     Refund?: boolean | OrderCountOutputTypeCountRefundArgs;
+    statusHistory?: boolean | OrderCountOutputTypeCountStatusHistoryArgs;
   };
 
   // Custom InputTypes
@@ -2895,6 +3000,15 @@ export namespace Prisma {
     {
       where?: RefundWhereInput;
     };
+
+  /**
+   * OrderCountOutputType without action
+   */
+  export type OrderCountOutputTypeCountStatusHistoryArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: OrderStatusHistoryWhereInput;
+  };
 
   /**
    * Count Type OrderItemCountOutputType
@@ -3262,6 +3376,7 @@ export namespace Prisma {
       reviews?: boolean | User$reviewsArgs<ExtArgs>;
       orders?: boolean | User$ordersArgs<ExtArgs>;
       AuditLog?: boolean | User$AuditLogArgs<ExtArgs>;
+      orderStatusHistory?: boolean | User$orderStatusHistoryArgs<ExtArgs>;
       _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
     },
     ExtArgs["result"]["user"]
@@ -3319,6 +3434,7 @@ export namespace Prisma {
     reviews?: boolean | User$reviewsArgs<ExtArgs>;
     orders?: boolean | User$ordersArgs<ExtArgs>;
     AuditLog?: boolean | User$AuditLogArgs<ExtArgs>;
+    orderStatusHistory?: boolean | User$orderStatusHistoryArgs<ExtArgs>;
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>;
   };
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {};
@@ -3333,6 +3449,7 @@ export namespace Prisma {
       reviews: Prisma.$ReviewPayload<ExtArgs>[];
       orders: Prisma.$OrderPayload<ExtArgs>[];
       AuditLog: Prisma.$AuditLogPayload<ExtArgs>[];
+      orderStatusHistory: Prisma.$OrderStatusHistoryPayload<ExtArgs>[];
     };
     scalars: $Extensions.GetPayloadResult<
       {
@@ -3848,6 +3965,11 @@ export namespace Prisma {
       args?: Subset<T, User$AuditLogArgs<ExtArgs>>
     ): Prisma.PrismaPromise<
       $Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
+    >;
+    orderStatusHistory<T extends User$orderStatusHistoryArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$orderStatusHistoryArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4411,6 +4533,30 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     distinct?: AuditLogScalarFieldEnum | AuditLogScalarFieldEnum[];
+  };
+
+  /**
+   * User.orderStatusHistory
+   */
+  export type User$orderStatusHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    where?: OrderStatusHistoryWhereInput;
+    orderBy?: OrderStatusHistoryOrderByWithRelationInput | OrderStatusHistoryOrderByWithRelationInput[];
+    cursor?: OrderStatusHistoryWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: OrderStatusHistoryScalarFieldEnum | OrderStatusHistoryScalarFieldEnum[];
   };
 
   /**
@@ -13565,6 +13711,7 @@ export namespace Prisma {
       coupon?: boolean | Order$couponArgs<ExtArgs>;
       ReturnRequest?: boolean | Order$ReturnRequestArgs<ExtArgs>;
       Refund?: boolean | Order$RefundArgs<ExtArgs>;
+      statusHistory?: boolean | Order$statusHistoryArgs<ExtArgs>;
       _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>;
     },
     ExtArgs["result"]["order"]
@@ -13663,6 +13810,7 @@ export namespace Prisma {
     coupon?: boolean | Order$couponArgs<ExtArgs>;
     ReturnRequest?: boolean | Order$ReturnRequestArgs<ExtArgs>;
     Refund?: boolean | Order$RefundArgs<ExtArgs>;
+    statusHistory?: boolean | Order$statusHistoryArgs<ExtArgs>;
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>;
   };
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13689,6 +13837,7 @@ export namespace Prisma {
       coupon: Prisma.$CouponPayload<ExtArgs> | null;
       ReturnRequest: Prisma.$ReturnRequestPayload<ExtArgs>[];
       Refund: Prisma.$RefundPayload<ExtArgs>[];
+      statusHistory: Prisma.$OrderStatusHistoryPayload<ExtArgs>[];
     };
     scalars: $Extensions.GetPayloadResult<
       {
@@ -14235,6 +14384,11 @@ export namespace Prisma {
     Refund<T extends Order$RefundArgs<ExtArgs> = {}>(
       args?: Subset<T, Order$RefundArgs<ExtArgs>>
     ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    statusHistory<T extends Order$statusHistoryArgs<ExtArgs> = {}>(
+      args?: Subset<T, Order$statusHistoryArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
+    >;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14839,6 +14993,30 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     distinct?: RefundScalarFieldEnum | RefundScalarFieldEnum[];
+  };
+
+  /**
+   * Order.statusHistory
+   */
+  export type Order$statusHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    where?: OrderStatusHistoryWhereInput;
+    orderBy?: OrderStatusHistoryOrderByWithRelationInput | OrderStatusHistoryOrderByWithRelationInput[];
+    cursor?: OrderStatusHistoryWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: OrderStatusHistoryScalarFieldEnum | OrderStatusHistoryScalarFieldEnum[];
   };
 
   /**
@@ -16264,6 +16442,1283 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OrderItemInclude<ExtArgs> | null;
+  };
+
+  /**
+   * Model OrderStatusHistory
+   */
+
+  export type AggregateOrderStatusHistory = {
+    _count: OrderStatusHistoryCountAggregateOutputType | null;
+    _avg: OrderStatusHistoryAvgAggregateOutputType | null;
+    _sum: OrderStatusHistorySumAggregateOutputType | null;
+    _min: OrderStatusHistoryMinAggregateOutputType | null;
+    _max: OrderStatusHistoryMaxAggregateOutputType | null;
+  };
+
+  export type OrderStatusHistoryAvgAggregateOutputType = {
+    id: number | null;
+    orderId: number | null;
+    actorId: number | null;
+  };
+
+  export type OrderStatusHistorySumAggregateOutputType = {
+    id: number | null;
+    orderId: number | null;
+    actorId: number | null;
+  };
+
+  export type OrderStatusHistoryMinAggregateOutputType = {
+    id: number | null;
+    orderId: number | null;
+    fromStatus: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus | null;
+    note: string | null;
+    actorId: number | null;
+    createdAt: Date | null;
+  };
+
+  export type OrderStatusHistoryMaxAggregateOutputType = {
+    id: number | null;
+    orderId: number | null;
+    fromStatus: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus | null;
+    note: string | null;
+    actorId: number | null;
+    createdAt: Date | null;
+  };
+
+  export type OrderStatusHistoryCountAggregateOutputType = {
+    id: number;
+    orderId: number;
+    fromStatus: number;
+    toStatus: number;
+    note: number;
+    actorId: number;
+    createdAt: number;
+    _all: number;
+  };
+
+  export type OrderStatusHistoryAvgAggregateInputType = {
+    id?: true;
+    orderId?: true;
+    actorId?: true;
+  };
+
+  export type OrderStatusHistorySumAggregateInputType = {
+    id?: true;
+    orderId?: true;
+    actorId?: true;
+  };
+
+  export type OrderStatusHistoryMinAggregateInputType = {
+    id?: true;
+    orderId?: true;
+    fromStatus?: true;
+    toStatus?: true;
+    note?: true;
+    actorId?: true;
+    createdAt?: true;
+  };
+
+  export type OrderStatusHistoryMaxAggregateInputType = {
+    id?: true;
+    orderId?: true;
+    fromStatus?: true;
+    toStatus?: true;
+    note?: true;
+    actorId?: true;
+    createdAt?: true;
+  };
+
+  export type OrderStatusHistoryCountAggregateInputType = {
+    id?: true;
+    orderId?: true;
+    fromStatus?: true;
+    toStatus?: true;
+    note?: true;
+    actorId?: true;
+    createdAt?: true;
+    _all?: true;
+  };
+
+  export type OrderStatusHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrderStatusHistory to aggregate.
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of OrderStatusHistories to fetch.
+     */
+    orderBy?: OrderStatusHistoryOrderByWithRelationInput | OrderStatusHistoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: OrderStatusHistoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` OrderStatusHistories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` OrderStatusHistories.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned OrderStatusHistories
+     **/
+    _count?: true | OrderStatusHistoryCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: OrderStatusHistoryAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: OrderStatusHistorySumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: OrderStatusHistoryMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: OrderStatusHistoryMaxAggregateInputType;
+  };
+
+  export type GetOrderStatusHistoryAggregateType<T extends OrderStatusHistoryAggregateArgs> = {
+    [P in keyof T & keyof AggregateOrderStatusHistory]: P extends "_count" | "count"
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrderStatusHistory[P]>
+      : GetScalarType<T[P], AggregateOrderStatusHistory[P]>;
+  };
+
+  export type OrderStatusHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderStatusHistoryWhereInput;
+    orderBy?: OrderStatusHistoryOrderByWithAggregationInput | OrderStatusHistoryOrderByWithAggregationInput[];
+    by: OrderStatusHistoryScalarFieldEnum[] | OrderStatusHistoryScalarFieldEnum;
+    having?: OrderStatusHistoryScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: OrderStatusHistoryCountAggregateInputType | true;
+    _avg?: OrderStatusHistoryAvgAggregateInputType;
+    _sum?: OrderStatusHistorySumAggregateInputType;
+    _min?: OrderStatusHistoryMinAggregateInputType;
+    _max?: OrderStatusHistoryMaxAggregateInputType;
+  };
+
+  export type OrderStatusHistoryGroupByOutputType = {
+    id: number;
+    orderId: number;
+    fromStatus: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note: string | null;
+    actorId: number | null;
+    createdAt: Date;
+    _count: OrderStatusHistoryCountAggregateOutputType | null;
+    _avg: OrderStatusHistoryAvgAggregateOutputType | null;
+    _sum: OrderStatusHistorySumAggregateOutputType | null;
+    _min: OrderStatusHistoryMinAggregateOutputType | null;
+    _max: OrderStatusHistoryMaxAggregateOutputType | null;
+  };
+
+  type GetOrderStatusHistoryGroupByPayload<T extends OrderStatusHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrderStatusHistoryGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof OrderStatusHistoryGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], OrderStatusHistoryGroupByOutputType[P]>
+          : GetScalarType<T[P], OrderStatusHistoryGroupByOutputType[P]>;
+      }
+    >
+  >;
+
+  export type OrderStatusHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean;
+        orderId?: boolean;
+        fromStatus?: boolean;
+        toStatus?: boolean;
+        note?: boolean;
+        actorId?: boolean;
+        createdAt?: boolean;
+        order?: boolean | OrderDefaultArgs<ExtArgs>;
+        actor?: boolean | OrderStatusHistory$actorArgs<ExtArgs>;
+      },
+      ExtArgs["result"]["orderStatusHistory"]
+    >;
+
+  export type OrderStatusHistorySelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      orderId?: boolean;
+      fromStatus?: boolean;
+      toStatus?: boolean;
+      note?: boolean;
+      actorId?: boolean;
+      createdAt?: boolean;
+      order?: boolean | OrderDefaultArgs<ExtArgs>;
+      actor?: boolean | OrderStatusHistory$actorArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["orderStatusHistory"]
+  >;
+
+  export type OrderStatusHistorySelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean;
+      orderId?: boolean;
+      fromStatus?: boolean;
+      toStatus?: boolean;
+      note?: boolean;
+      actorId?: boolean;
+      createdAt?: boolean;
+      order?: boolean | OrderDefaultArgs<ExtArgs>;
+      actor?: boolean | OrderStatusHistory$actorArgs<ExtArgs>;
+    },
+    ExtArgs["result"]["orderStatusHistory"]
+  >;
+
+  export type OrderStatusHistorySelectScalar = {
+    id?: boolean;
+    orderId?: boolean;
+    fromStatus?: boolean;
+    toStatus?: boolean;
+    note?: boolean;
+    actorId?: boolean;
+    createdAt?: boolean;
+  };
+
+  export type OrderStatusHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      "id" | "orderId" | "fromStatus" | "toStatus" | "note" | "actorId" | "createdAt",
+      ExtArgs["result"]["orderStatusHistory"]
+    >;
+  export type OrderStatusHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | OrderDefaultArgs<ExtArgs>;
+    actor?: boolean | OrderStatusHistory$actorArgs<ExtArgs>;
+  };
+  export type OrderStatusHistoryIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    order?: boolean | OrderDefaultArgs<ExtArgs>;
+    actor?: boolean | OrderStatusHistory$actorArgs<ExtArgs>;
+  };
+  export type OrderStatusHistoryIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    order?: boolean | OrderDefaultArgs<ExtArgs>;
+    actor?: boolean | OrderStatusHistory$actorArgs<ExtArgs>;
+  };
+
+  export type $OrderStatusHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrderStatusHistory";
+    objects: {
+      order: Prisma.$OrderPayload<ExtArgs>;
+      actor: Prisma.$UserPayload<ExtArgs> | null;
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number;
+        orderId: number;
+        fromStatus: $Enums.OrderStatus | null;
+        toStatus: $Enums.OrderStatus;
+        note: string | null;
+        actorId: number | null;
+        createdAt: Date;
+      },
+      ExtArgs["result"]["orderStatusHistory"]
+    >;
+    composites: {};
+  };
+
+  type OrderStatusHistoryGetPayload<S extends boolean | null | undefined | OrderStatusHistoryDefaultArgs> =
+    $Result.GetResult<Prisma.$OrderStatusHistoryPayload, S>;
+
+  type OrderStatusHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    OrderStatusHistoryFindManyArgs,
+    "select" | "include" | "distinct" | "omit"
+  > & {
+    select?: OrderStatusHistoryCountAggregateInputType | true;
+  };
+
+  export interface OrderStatusHistoryDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>["model"]["OrderStatusHistory"];
+      meta: { name: "OrderStatusHistory" };
+    };
+    /**
+     * Find zero or one OrderStatusHistory that matches the filter.
+     * @param {OrderStatusHistoryFindUniqueArgs} args - Arguments to find a OrderStatusHistory
+     * @example
+     * // Get one OrderStatusHistory
+     * const orderStatusHistory = await prisma.orderStatusHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrderStatusHistoryFindUniqueArgs>(
+      args: SelectSubset<T, OrderStatusHistoryFindUniqueArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find one OrderStatusHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrderStatusHistoryFindUniqueOrThrowArgs} args - Arguments to find a OrderStatusHistory
+     * @example
+     * // Get one OrderStatusHistory
+     * const orderStatusHistory = await prisma.orderStatusHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrderStatusHistoryFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, OrderStatusHistoryFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first OrderStatusHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryFindFirstArgs} args - Arguments to find a OrderStatusHistory
+     * @example
+     * // Get one OrderStatusHistory
+     * const orderStatusHistory = await prisma.orderStatusHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrderStatusHistoryFindFirstArgs>(
+      args?: SelectSubset<T, OrderStatusHistoryFindFirstArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find the first OrderStatusHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryFindFirstOrThrowArgs} args - Arguments to find a OrderStatusHistory
+     * @example
+     * // Get one OrderStatusHistory
+     * const orderStatusHistory = await prisma.orderStatusHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrderStatusHistoryFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, OrderStatusHistoryFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Find zero or more OrderStatusHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OrderStatusHistories
+     * const orderStatusHistories = await prisma.orderStatusHistory.findMany()
+     *
+     * // Get first 10 OrderStatusHistories
+     * const orderStatusHistories = await prisma.orderStatusHistory.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const orderStatusHistoryWithIdOnly = await prisma.orderStatusHistory.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends OrderStatusHistoryFindManyArgs>(
+      args?: SelectSubset<T, OrderStatusHistoryFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>
+    >;
+
+    /**
+     * Create a OrderStatusHistory.
+     * @param {OrderStatusHistoryCreateArgs} args - Arguments to create a OrderStatusHistory.
+     * @example
+     * // Create one OrderStatusHistory
+     * const OrderStatusHistory = await prisma.orderStatusHistory.create({
+     *   data: {
+     *     // ... data to create a OrderStatusHistory
+     *   }
+     * })
+     *
+     */
+    create<T extends OrderStatusHistoryCreateArgs>(
+      args: SelectSubset<T, OrderStatusHistoryCreateArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Create many OrderStatusHistories.
+     * @param {OrderStatusHistoryCreateManyArgs} args - Arguments to create many OrderStatusHistories.
+     * @example
+     * // Create many OrderStatusHistories
+     * const orderStatusHistory = await prisma.orderStatusHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends OrderStatusHistoryCreateManyArgs>(
+      args?: SelectSubset<T, OrderStatusHistoryCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create many OrderStatusHistories and returns the data saved in the database.
+     * @param {OrderStatusHistoryCreateManyAndReturnArgs} args - Arguments to create many OrderStatusHistories.
+     * @example
+     * // Create many OrderStatusHistories
+     * const orderStatusHistory = await prisma.orderStatusHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many OrderStatusHistories and only return the `id`
+     * const orderStatusHistoryWithIdOnly = await prisma.orderStatusHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends OrderStatusHistoryCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, OrderStatusHistoryCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>
+    >;
+
+    /**
+     * Delete a OrderStatusHistory.
+     * @param {OrderStatusHistoryDeleteArgs} args - Arguments to delete one OrderStatusHistory.
+     * @example
+     * // Delete one OrderStatusHistory
+     * const OrderStatusHistory = await prisma.orderStatusHistory.delete({
+     *   where: {
+     *     // ... filter to delete one OrderStatusHistory
+     *   }
+     * })
+     *
+     */
+    delete<T extends OrderStatusHistoryDeleteArgs>(
+      args: SelectSubset<T, OrderStatusHistoryDeleteArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Update one OrderStatusHistory.
+     * @param {OrderStatusHistoryUpdateArgs} args - Arguments to update one OrderStatusHistory.
+     * @example
+     * // Update one OrderStatusHistory
+     * const orderStatusHistory = await prisma.orderStatusHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends OrderStatusHistoryUpdateArgs>(
+      args: SelectSubset<T, OrderStatusHistoryUpdateArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Delete zero or more OrderStatusHistories.
+     * @param {OrderStatusHistoryDeleteManyArgs} args - Arguments to filter OrderStatusHistories to delete.
+     * @example
+     * // Delete a few OrderStatusHistories
+     * const { count } = await prisma.orderStatusHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends OrderStatusHistoryDeleteManyArgs>(
+      args?: SelectSubset<T, OrderStatusHistoryDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more OrderStatusHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OrderStatusHistories
+     * const orderStatusHistory = await prisma.orderStatusHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends OrderStatusHistoryUpdateManyArgs>(
+      args: SelectSubset<T, OrderStatusHistoryUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more OrderStatusHistories and returns the data updated in the database.
+     * @param {OrderStatusHistoryUpdateManyAndReturnArgs} args - Arguments to update many OrderStatusHistories.
+     * @example
+     * // Update many OrderStatusHistories
+     * const orderStatusHistory = await prisma.orderStatusHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more OrderStatusHistories and only return the `id`
+     * const orderStatusHistoryWithIdOnly = await prisma.orderStatusHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends OrderStatusHistoryUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, OrderStatusHistoryUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>
+    >;
+
+    /**
+     * Create or update one OrderStatusHistory.
+     * @param {OrderStatusHistoryUpsertArgs} args - Arguments to update or create a OrderStatusHistory.
+     * @example
+     * // Update or create a OrderStatusHistory
+     * const orderStatusHistory = await prisma.orderStatusHistory.upsert({
+     *   create: {
+     *     // ... data to create a OrderStatusHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OrderStatusHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrderStatusHistoryUpsertArgs>(
+      args: SelectSubset<T, OrderStatusHistoryUpsertArgs<ExtArgs>>
+    ): Prisma__OrderStatusHistoryClient<
+      $Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+
+    /**
+     * Count the number of OrderStatusHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryCountArgs} args - Arguments to filter OrderStatusHistories to count.
+     * @example
+     * // Count the number of OrderStatusHistories
+     * const count = await prisma.orderStatusHistory.count({
+     *   where: {
+     *     // ... the filter for the OrderStatusHistories we want to count
+     *   }
+     * })
+     **/
+    count<T extends OrderStatusHistoryCountArgs>(
+      args?: Subset<T, OrderStatusHistoryCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
+          ? number
+          : GetScalarType<T["select"], OrderStatusHistoryCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a OrderStatusHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends OrderStatusHistoryAggregateArgs>(
+      args: Subset<T, OrderStatusHistoryAggregateArgs>
+    ): Prisma.PrismaPromise<GetOrderStatusHistoryAggregateType<T>>;
+
+    /**
+     * Group by OrderStatusHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends OrderStatusHistoryGroupByArgs,
+      HasSelectOrTake extends Or<Extends<"skip", Keys<T>>, Extends<"take", Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrderStatusHistoryGroupByArgs["orderBy"] }
+        : { orderBy?: OrderStatusHistoryGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T["having"]>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T["by"] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
+            }[HavingFields]
+          : "take" extends Keys<T>
+            ? "orderBy" extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : "skip" extends Keys<T>
+              ? "orderBy" extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, OrderStatusHistoryGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetOrderStatusHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the OrderStatusHistory model
+     */
+    readonly fields: OrderStatusHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OrderStatusHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrderStatusHistoryClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    order<T extends OrderDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, OrderDefaultArgs<ExtArgs>>
+    ): Prisma__OrderClient<
+      $Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    actor<T extends OrderStatusHistory$actorArgs<ExtArgs> = {}>(
+      args?: Subset<T, OrderStatusHistory$actorArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+  /**
+   * Fields of the OrderStatusHistory model
+   */
+  interface OrderStatusHistoryFieldRefs {
+    readonly id: FieldRef<"OrderStatusHistory", "Int">;
+    readonly orderId: FieldRef<"OrderStatusHistory", "Int">;
+    readonly fromStatus: FieldRef<"OrderStatusHistory", "OrderStatus">;
+    readonly toStatus: FieldRef<"OrderStatusHistory", "OrderStatus">;
+    readonly note: FieldRef<"OrderStatusHistory", "String">;
+    readonly actorId: FieldRef<"OrderStatusHistory", "Int">;
+    readonly createdAt: FieldRef<"OrderStatusHistory", "DateTime">;
+  }
+
+  // Custom InputTypes
+  /**
+   * OrderStatusHistory findUnique
+   */
+  export type OrderStatusHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * Filter, which OrderStatusHistory to fetch.
+     */
+    where: OrderStatusHistoryWhereUniqueInput;
+  };
+
+  /**
+   * OrderStatusHistory findUniqueOrThrow
+   */
+  export type OrderStatusHistoryFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * Filter, which OrderStatusHistory to fetch.
+     */
+    where: OrderStatusHistoryWhereUniqueInput;
+  };
+
+  /**
+   * OrderStatusHistory findFirst
+   */
+  export type OrderStatusHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * Filter, which OrderStatusHistory to fetch.
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of OrderStatusHistories to fetch.
+     */
+    orderBy?: OrderStatusHistoryOrderByWithRelationInput | OrderStatusHistoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for OrderStatusHistories.
+     */
+    cursor?: OrderStatusHistoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` OrderStatusHistories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` OrderStatusHistories.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of OrderStatusHistories.
+     */
+    distinct?: OrderStatusHistoryScalarFieldEnum | OrderStatusHistoryScalarFieldEnum[];
+  };
+
+  /**
+   * OrderStatusHistory findFirstOrThrow
+   */
+  export type OrderStatusHistoryFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * Filter, which OrderStatusHistory to fetch.
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of OrderStatusHistories to fetch.
+     */
+    orderBy?: OrderStatusHistoryOrderByWithRelationInput | OrderStatusHistoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for OrderStatusHistories.
+     */
+    cursor?: OrderStatusHistoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` OrderStatusHistories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` OrderStatusHistories.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of OrderStatusHistories.
+     */
+    distinct?: OrderStatusHistoryScalarFieldEnum | OrderStatusHistoryScalarFieldEnum[];
+  };
+
+  /**
+   * OrderStatusHistory findMany
+   */
+  export type OrderStatusHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * Filter, which OrderStatusHistories to fetch.
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of OrderStatusHistories to fetch.
+     */
+    orderBy?: OrderStatusHistoryOrderByWithRelationInput | OrderStatusHistoryOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing OrderStatusHistories.
+     */
+    cursor?: OrderStatusHistoryWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` OrderStatusHistories from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` OrderStatusHistories.
+     */
+    skip?: number;
+    distinct?: OrderStatusHistoryScalarFieldEnum | OrderStatusHistoryScalarFieldEnum[];
+  };
+
+  /**
+   * OrderStatusHistory create
+   */
+  export type OrderStatusHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a OrderStatusHistory.
+     */
+    data: XOR<OrderStatusHistoryCreateInput, OrderStatusHistoryUncheckedCreateInput>;
+  };
+
+  /**
+   * OrderStatusHistory createMany
+   */
+  export type OrderStatusHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OrderStatusHistories.
+     */
+    data: OrderStatusHistoryCreateManyInput | OrderStatusHistoryCreateManyInput[];
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * OrderStatusHistory createManyAndReturn
+   */
+  export type OrderStatusHistoryCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * The data used to create many OrderStatusHistories.
+     */
+    data: OrderStatusHistoryCreateManyInput | OrderStatusHistoryCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryIncludeCreateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * OrderStatusHistory update
+   */
+  export type OrderStatusHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a OrderStatusHistory.
+     */
+    data: XOR<OrderStatusHistoryUpdateInput, OrderStatusHistoryUncheckedUpdateInput>;
+    /**
+     * Choose, which OrderStatusHistory to update.
+     */
+    where: OrderStatusHistoryWhereUniqueInput;
+  };
+
+  /**
+   * OrderStatusHistory updateMany
+   */
+  export type OrderStatusHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OrderStatusHistories.
+     */
+    data: XOR<OrderStatusHistoryUpdateManyMutationInput, OrderStatusHistoryUncheckedUpdateManyInput>;
+    /**
+     * Filter which OrderStatusHistories to update
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * Limit how many OrderStatusHistories to update.
+     */
+    limit?: number;
+  };
+
+  /**
+   * OrderStatusHistory updateManyAndReturn
+   */
+  export type OrderStatusHistoryUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * The data used to update OrderStatusHistories.
+     */
+    data: XOR<OrderStatusHistoryUpdateManyMutationInput, OrderStatusHistoryUncheckedUpdateManyInput>;
+    /**
+     * Filter which OrderStatusHistories to update
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * Limit how many OrderStatusHistories to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryIncludeUpdateManyAndReturn<ExtArgs> | null;
+  };
+
+  /**
+   * OrderStatusHistory upsert
+   */
+  export type OrderStatusHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the OrderStatusHistory to update in case it exists.
+     */
+    where: OrderStatusHistoryWhereUniqueInput;
+    /**
+     * In case the OrderStatusHistory found by the `where` argument doesn't exist, create a new OrderStatusHistory with this data.
+     */
+    create: XOR<OrderStatusHistoryCreateInput, OrderStatusHistoryUncheckedCreateInput>;
+    /**
+     * In case the OrderStatusHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrderStatusHistoryUpdateInput, OrderStatusHistoryUncheckedUpdateInput>;
+  };
+
+  /**
+   * OrderStatusHistory delete
+   */
+  export type OrderStatusHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
+    /**
+     * Filter which OrderStatusHistory to delete.
+     */
+    where: OrderStatusHistoryWhereUniqueInput;
+  };
+
+  /**
+   * OrderStatusHistory deleteMany
+   */
+  export type OrderStatusHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrderStatusHistories to delete
+     */
+    where?: OrderStatusHistoryWhereInput;
+    /**
+     * Limit how many OrderStatusHistories to delete.
+     */
+    limit?: number;
+  };
+
+  /**
+   * OrderStatusHistory.actor
+   */
+  export type OrderStatusHistory$actorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null;
+    where?: UserWhereInput;
+  };
+
+  /**
+   * OrderStatusHistory without action
+   */
+  export type OrderStatusHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusHistory
+     */
+    select?: OrderStatusHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderStatusHistory
+     */
+    omit?: OrderStatusHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusHistoryInclude<ExtArgs> | null;
   };
 
   /**
@@ -28051,6 +29506,19 @@ export namespace Prisma {
 
   export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
 
+  export const OrderStatusHistoryScalarFieldEnum: {
+    id: "id";
+    orderId: "orderId";
+    fromStatus: "fromStatus";
+    toStatus: "toStatus";
+    note: "note";
+    actorId: "actorId";
+    createdAt: "createdAt";
+  };
+
+  export type OrderStatusHistoryScalarFieldEnum =
+    (typeof OrderStatusHistoryScalarFieldEnum)[keyof typeof OrderStatusHistoryScalarFieldEnum];
+
   export const CouponScalarFieldEnum: {
     id: "id";
     code: "code";
@@ -28371,6 +29839,7 @@ export namespace Prisma {
     reviews?: ReviewListRelationFilter;
     orders?: OrderListRelationFilter;
     AuditLog?: AuditLogListRelationFilter;
+    orderStatusHistory?: OrderStatusHistoryListRelationFilter;
   };
 
   export type UserOrderByWithRelationInput = {
@@ -28388,6 +29857,7 @@ export namespace Prisma {
     reviews?: ReviewOrderByRelationAggregateInput;
     orders?: OrderOrderByRelationAggregateInput;
     AuditLog?: AuditLogOrderByRelationAggregateInput;
+    orderStatusHistory?: OrderStatusHistoryOrderByRelationAggregateInput;
   };
 
   export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -28409,6 +29879,7 @@ export namespace Prisma {
       reviews?: ReviewListRelationFilter;
       orders?: OrderListRelationFilter;
       AuditLog?: AuditLogListRelationFilter;
+      orderStatusHistory?: OrderStatusHistoryListRelationFilter;
     },
     "id" | "email" | "username"
   >;
@@ -28975,6 +30446,7 @@ export namespace Prisma {
     coupon?: XOR<CouponNullableScalarRelationFilter, CouponWhereInput> | null;
     ReturnRequest?: ReturnRequestListRelationFilter;
     Refund?: RefundListRelationFilter;
+    statusHistory?: OrderStatusHistoryListRelationFilter;
   };
 
   export type OrderOrderByWithRelationInput = {
@@ -29000,6 +30472,7 @@ export namespace Prisma {
     coupon?: CouponOrderByWithRelationInput;
     ReturnRequest?: ReturnRequestOrderByRelationAggregateInput;
     Refund?: RefundOrderByRelationAggregateInput;
+    statusHistory?: OrderStatusHistoryOrderByRelationAggregateInput;
   };
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<
@@ -29029,6 +30502,7 @@ export namespace Prisma {
       coupon?: XOR<CouponNullableScalarRelationFilter, CouponWhereInput> | null;
       ReturnRequest?: ReturnRequestListRelationFilter;
       Refund?: RefundListRelationFilter;
+      statusHistory?: OrderStatusHistoryListRelationFilter;
     },
     "id" | "orderNumber"
   >;
@@ -29172,6 +30646,79 @@ export namespace Prisma {
     total?: DecimalWithAggregatesFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string;
     returned?: BoolWithAggregatesFilter<"OrderItem"> | boolean;
     createdAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string;
+  };
+
+  export type OrderStatusHistoryWhereInput = {
+    AND?: OrderStatusHistoryWhereInput | OrderStatusHistoryWhereInput[];
+    OR?: OrderStatusHistoryWhereInput[];
+    NOT?: OrderStatusHistoryWhereInput | OrderStatusHistoryWhereInput[];
+    id?: IntFilter<"OrderStatusHistory"> | number;
+    orderId?: IntFilter<"OrderStatusHistory"> | number;
+    fromStatus?: EnumOrderStatusNullableFilter<"OrderStatusHistory"> | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFilter<"OrderStatusHistory"> | $Enums.OrderStatus;
+    note?: StringNullableFilter<"OrderStatusHistory"> | string | null;
+    actorId?: IntNullableFilter<"OrderStatusHistory"> | number | null;
+    createdAt?: DateTimeFilter<"OrderStatusHistory"> | Date | string;
+    order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
+    actor?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
+  };
+
+  export type OrderStatusHistoryOrderByWithRelationInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    fromStatus?: SortOrderInput | SortOrder;
+    toStatus?: SortOrder;
+    note?: SortOrderInput | SortOrder;
+    actorId?: SortOrderInput | SortOrder;
+    createdAt?: SortOrder;
+    order?: OrderOrderByWithRelationInput;
+    actor?: UserOrderByWithRelationInput;
+  };
+
+  export type OrderStatusHistoryWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number;
+      AND?: OrderStatusHistoryWhereInput | OrderStatusHistoryWhereInput[];
+      OR?: OrderStatusHistoryWhereInput[];
+      NOT?: OrderStatusHistoryWhereInput | OrderStatusHistoryWhereInput[];
+      orderId?: IntFilter<"OrderStatusHistory"> | number;
+      fromStatus?: EnumOrderStatusNullableFilter<"OrderStatusHistory"> | $Enums.OrderStatus | null;
+      toStatus?: EnumOrderStatusFilter<"OrderStatusHistory"> | $Enums.OrderStatus;
+      note?: StringNullableFilter<"OrderStatusHistory"> | string | null;
+      actorId?: IntNullableFilter<"OrderStatusHistory"> | number | null;
+      createdAt?: DateTimeFilter<"OrderStatusHistory"> | Date | string;
+      order?: XOR<OrderScalarRelationFilter, OrderWhereInput>;
+      actor?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
+    },
+    "id"
+  >;
+
+  export type OrderStatusHistoryOrderByWithAggregationInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    fromStatus?: SortOrderInput | SortOrder;
+    toStatus?: SortOrder;
+    note?: SortOrderInput | SortOrder;
+    actorId?: SortOrderInput | SortOrder;
+    createdAt?: SortOrder;
+    _count?: OrderStatusHistoryCountOrderByAggregateInput;
+    _avg?: OrderStatusHistoryAvgOrderByAggregateInput;
+    _max?: OrderStatusHistoryMaxOrderByAggregateInput;
+    _min?: OrderStatusHistoryMinOrderByAggregateInput;
+    _sum?: OrderStatusHistorySumOrderByAggregateInput;
+  };
+
+  export type OrderStatusHistoryScalarWhereWithAggregatesInput = {
+    AND?: OrderStatusHistoryScalarWhereWithAggregatesInput | OrderStatusHistoryScalarWhereWithAggregatesInput[];
+    OR?: OrderStatusHistoryScalarWhereWithAggregatesInput[];
+    NOT?: OrderStatusHistoryScalarWhereWithAggregatesInput | OrderStatusHistoryScalarWhereWithAggregatesInput[];
+    id?: IntWithAggregatesFilter<"OrderStatusHistory"> | number;
+    orderId?: IntWithAggregatesFilter<"OrderStatusHistory"> | number;
+    fromStatus?: EnumOrderStatusNullableWithAggregatesFilter<"OrderStatusHistory"> | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusWithAggregatesFilter<"OrderStatusHistory"> | $Enums.OrderStatus;
+    note?: StringNullableWithAggregatesFilter<"OrderStatusHistory"> | string | null;
+    actorId?: IntNullableWithAggregatesFilter<"OrderStatusHistory"> | number | null;
+    createdAt?: DateTimeWithAggregatesFilter<"OrderStatusHistory"> | Date | string;
   };
 
   export type CouponWhereInput = {
@@ -29959,6 +31506,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutUserInput;
     orders?: OrderCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateInput = {
@@ -29976,6 +31524,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserUpdateInput = {
@@ -29992,6 +31541,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
     orders?: OrderUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateInput = {
@@ -30009,6 +31559,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type UserCreateManyInput = {
@@ -30538,6 +32089,7 @@ export namespace Prisma {
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateInput = {
@@ -30559,6 +32111,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUpdateInput = {
@@ -30579,6 +32132,7 @@ export namespace Prisma {
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateInput = {
@@ -30600,6 +32154,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderCreateManyInput = {
@@ -30741,6 +32296,71 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     returned?: BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderStatusHistoryCreateInput = {
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    createdAt?: Date | string;
+    order: OrderCreateNestedOneWithoutStatusHistoryInput;
+    actor?: UserCreateNestedOneWithoutOrderStatusHistoryInput;
+  };
+
+  export type OrderStatusHistoryUncheckedCreateInput = {
+    id?: number;
+    orderId: number;
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    actorId?: number | null;
+    createdAt?: Date | string;
+  };
+
+  export type OrderStatusHistoryUpdateInput = {
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    order?: OrderUpdateOneRequiredWithoutStatusHistoryNestedInput;
+    actor?: UserUpdateOneWithoutOrderStatusHistoryNestedInput;
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    orderId?: IntFieldUpdateOperationsInput | number;
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    actorId?: NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderStatusHistoryCreateManyInput = {
+    id?: number;
+    orderId: number;
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    actorId?: number | null;
+    createdAt?: Date | string;
+  };
+
+  export type OrderStatusHistoryUpdateManyMutationInput = {
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    orderId?: IntFieldUpdateOperationsInput | number;
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    actorId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
@@ -31614,6 +33234,12 @@ export namespace Prisma {
     none?: AuditLogWhereInput;
   };
 
+  export type OrderStatusHistoryListRelationFilter = {
+    every?: OrderStatusHistoryWhereInput;
+    some?: OrderStatusHistoryWhereInput;
+    none?: OrderStatusHistoryWhereInput;
+  };
+
   export type SortOrderInput = {
     sort: SortOrder;
     nulls?: NullsOrder;
@@ -31636,6 +33262,10 @@ export namespace Prisma {
   };
 
   export type AuditLogOrderByRelationAggregateInput = {
+    _count?: SortOrder;
+  };
+
+  export type OrderStatusHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
@@ -32513,6 +34143,65 @@ export namespace Prisma {
     total?: SortOrder;
   };
 
+  export type EnumOrderStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumOrderStatusNullableFilter<$PrismaModel> | $Enums.OrderStatus | null;
+  };
+
+  export type OrderStatusHistoryCountOrderByAggregateInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    fromStatus?: SortOrder;
+    toStatus?: SortOrder;
+    note?: SortOrder;
+    actorId?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type OrderStatusHistoryAvgOrderByAggregateInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    actorId?: SortOrder;
+  };
+
+  export type OrderStatusHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    fromStatus?: SortOrder;
+    toStatus?: SortOrder;
+    note?: SortOrder;
+    actorId?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type OrderStatusHistoryMinOrderByAggregateInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    fromStatus?: SortOrder;
+    toStatus?: SortOrder;
+    note?: SortOrder;
+    actorId?: SortOrder;
+    createdAt?: SortOrder;
+  };
+
+  export type OrderStatusHistorySumOrderByAggregateInput = {
+    id?: SortOrder;
+    orderId?: SortOrder;
+    actorId?: SortOrder;
+  };
+
+  export type EnumOrderStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumOrderStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedEnumOrderStatusNullableFilter<$PrismaModel>;
+    _max?: NestedEnumOrderStatusNullableFilter<$PrismaModel>;
+  };
+
   export type EnumCouponTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.CouponType | EnumCouponTypeFieldRefInput<$PrismaModel>;
     in?: $Enums.CouponType[] | ListEnumCouponTypeFieldRefInput<$PrismaModel>;
@@ -33090,6 +34779,18 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
   };
 
+  export type OrderStatusHistoryCreateNestedManyWithoutActorInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutActorInput, OrderStatusHistoryUncheckedCreateWithoutActorInput>
+      | OrderStatusHistoryCreateWithoutActorInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutActorInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput[];
+    createMany?: OrderStatusHistoryCreateManyActorInputEnvelope;
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+  };
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?:
       | XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput>
@@ -33144,6 +34845,18 @@ export namespace Prisma {
     connectOrCreate?: AuditLogCreateOrConnectWithoutActorInput | AuditLogCreateOrConnectWithoutActorInput[];
     createMany?: AuditLogCreateManyActorInputEnvelope;
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[];
+  };
+
+  export type OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutActorInput, OrderStatusHistoryUncheckedCreateWithoutActorInput>
+      | OrderStatusHistoryCreateWithoutActorInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutActorInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput[];
+    createMany?: OrderStatusHistoryCreateManyActorInputEnvelope;
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
   };
 
   export type StringFieldUpdateOperationsInput = {
@@ -33260,6 +34973,31 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[];
   };
 
+  export type OrderStatusHistoryUpdateManyWithoutActorNestedInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutActorInput, OrderStatusHistoryUncheckedCreateWithoutActorInput>
+      | OrderStatusHistoryCreateWithoutActorInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutActorInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput[];
+    upsert?:
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutActorInput
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutActorInput[];
+    createMany?: OrderStatusHistoryCreateManyActorInputEnvelope;
+    set?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    disconnect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    delete?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    update?:
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutActorInput
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutActorInput[];
+    updateMany?:
+      | OrderStatusHistoryUpdateManyWithWhereWithoutActorInput
+      | OrderStatusHistoryUpdateManyWithWhereWithoutActorInput[];
+    deleteMany?: OrderStatusHistoryScalarWhereInput | OrderStatusHistoryScalarWhereInput[];
+  };
+
   export type IntFieldUpdateOperationsInput = {
     set?: number;
     increment?: number;
@@ -33364,6 +35102,31 @@ export namespace Prisma {
     update?: AuditLogUpdateWithWhereUniqueWithoutActorInput | AuditLogUpdateWithWhereUniqueWithoutActorInput[];
     updateMany?: AuditLogUpdateManyWithWhereWithoutActorInput | AuditLogUpdateManyWithWhereWithoutActorInput[];
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[];
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutActorInput, OrderStatusHistoryUncheckedCreateWithoutActorInput>
+      | OrderStatusHistoryCreateWithoutActorInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutActorInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput
+      | OrderStatusHistoryCreateOrConnectWithoutActorInput[];
+    upsert?:
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutActorInput
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutActorInput[];
+    createMany?: OrderStatusHistoryCreateManyActorInputEnvelope;
+    set?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    disconnect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    delete?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    update?:
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutActorInput
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutActorInput[];
+    updateMany?:
+      | OrderStatusHistoryUpdateManyWithWhereWithoutActorInput
+      | OrderStatusHistoryUpdateManyWithWhereWithoutActorInput[];
+    deleteMany?: OrderStatusHistoryScalarWhereInput | OrderStatusHistoryScalarWhereInput[];
   };
 
   export type UserRoleCreateNestedManyWithoutRoleInput = {
@@ -34092,6 +35855,18 @@ export namespace Prisma {
     connect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
   };
 
+  export type OrderStatusHistoryCreateNestedManyWithoutOrderInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutOrderInput, OrderStatusHistoryUncheckedCreateWithoutOrderInput>
+      | OrderStatusHistoryCreateWithoutOrderInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutOrderInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput[];
+    createMany?: OrderStatusHistoryCreateManyOrderInputEnvelope;
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+  };
+
   export type PaymentMetaUncheckedCreateNestedOneWithoutOrderInput = {
     create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
@@ -34126,6 +35901,18 @@ export namespace Prisma {
     connectOrCreate?: RefundCreateOrConnectWithoutOrderInput | RefundCreateOrConnectWithoutOrderInput[];
     createMany?: RefundCreateManyOrderInputEnvelope;
     connect?: RefundWhereUniqueInput | RefundWhereUniqueInput[];
+  };
+
+  export type OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutOrderInput, OrderStatusHistoryUncheckedCreateWithoutOrderInput>
+      | OrderStatusHistoryCreateWithoutOrderInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutOrderInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput[];
+    createMany?: OrderStatusHistoryCreateManyOrderInputEnvelope;
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
   };
 
   export type EnumOrderStatusFieldUpdateOperationsInput = {
@@ -34258,6 +36045,31 @@ export namespace Prisma {
     deleteMany?: RefundScalarWhereInput | RefundScalarWhereInput[];
   };
 
+  export type OrderStatusHistoryUpdateManyWithoutOrderNestedInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutOrderInput, OrderStatusHistoryUncheckedCreateWithoutOrderInput>
+      | OrderStatusHistoryCreateWithoutOrderInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutOrderInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput[];
+    upsert?:
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutOrderInput
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutOrderInput[];
+    createMany?: OrderStatusHistoryCreateManyOrderInputEnvelope;
+    set?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    disconnect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    delete?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    update?:
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutOrderInput
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutOrderInput[];
+    updateMany?:
+      | OrderStatusHistoryUpdateManyWithWhereWithoutOrderInput
+      | OrderStatusHistoryUpdateManyWithWhereWithoutOrderInput[];
+    deleteMany?: OrderStatusHistoryScalarWhereInput | OrderStatusHistoryScalarWhereInput[];
+  };
+
   export type PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput = {
     create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
@@ -34326,6 +36138,31 @@ export namespace Prisma {
     update?: RefundUpdateWithWhereUniqueWithoutOrderInput | RefundUpdateWithWhereUniqueWithoutOrderInput[];
     updateMany?: RefundUpdateManyWithWhereWithoutOrderInput | RefundUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: RefundScalarWhereInput | RefundScalarWhereInput[];
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput = {
+    create?:
+      | XOR<OrderStatusHistoryCreateWithoutOrderInput, OrderStatusHistoryUncheckedCreateWithoutOrderInput>
+      | OrderStatusHistoryCreateWithoutOrderInput[]
+      | OrderStatusHistoryUncheckedCreateWithoutOrderInput[];
+    connectOrCreate?:
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput
+      | OrderStatusHistoryCreateOrConnectWithoutOrderInput[];
+    upsert?:
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutOrderInput
+      | OrderStatusHistoryUpsertWithWhereUniqueWithoutOrderInput[];
+    createMany?: OrderStatusHistoryCreateManyOrderInputEnvelope;
+    set?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    disconnect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    delete?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    connect?: OrderStatusHistoryWhereUniqueInput | OrderStatusHistoryWhereUniqueInput[];
+    update?:
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutOrderInput
+      | OrderStatusHistoryUpdateWithWhereUniqueWithoutOrderInput[];
+    updateMany?:
+      | OrderStatusHistoryUpdateManyWithWhereWithoutOrderInput
+      | OrderStatusHistoryUpdateManyWithWhereWithoutOrderInput[];
+    deleteMany?: OrderStatusHistoryScalarWhereInput | OrderStatusHistoryScalarWhereInput[];
   };
 
   export type OrderCreateNestedOneWithoutItemsInput = {
@@ -34455,6 +36292,46 @@ export namespace Prisma {
       | ReturnRequestUpdateManyWithWhereWithoutOrderItemInput
       | ReturnRequestUpdateManyWithWhereWithoutOrderItemInput[];
     deleteMany?: ReturnRequestScalarWhereInput | ReturnRequestScalarWhereInput[];
+  };
+
+  export type OrderCreateNestedOneWithoutStatusHistoryInput = {
+    create?: XOR<OrderCreateWithoutStatusHistoryInput, OrderUncheckedCreateWithoutStatusHistoryInput>;
+    connectOrCreate?: OrderCreateOrConnectWithoutStatusHistoryInput;
+    connect?: OrderWhereUniqueInput;
+  };
+
+  export type UserCreateNestedOneWithoutOrderStatusHistoryInput = {
+    create?: XOR<UserCreateWithoutOrderStatusHistoryInput, UserUncheckedCreateWithoutOrderStatusHistoryInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutOrderStatusHistoryInput;
+    connect?: UserWhereUniqueInput;
+  };
+
+  export type NullableEnumOrderStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OrderStatus | null;
+  };
+
+  export type OrderUpdateOneRequiredWithoutStatusHistoryNestedInput = {
+    create?: XOR<OrderCreateWithoutStatusHistoryInput, OrderUncheckedCreateWithoutStatusHistoryInput>;
+    connectOrCreate?: OrderCreateOrConnectWithoutStatusHistoryInput;
+    upsert?: OrderUpsertWithoutStatusHistoryInput;
+    connect?: OrderWhereUniqueInput;
+    update?: XOR<
+      XOR<OrderUpdateToOneWithWhereWithoutStatusHistoryInput, OrderUpdateWithoutStatusHistoryInput>,
+      OrderUncheckedUpdateWithoutStatusHistoryInput
+    >;
+  };
+
+  export type UserUpdateOneWithoutOrderStatusHistoryNestedInput = {
+    create?: XOR<UserCreateWithoutOrderStatusHistoryInput, UserUncheckedCreateWithoutOrderStatusHistoryInput>;
+    connectOrCreate?: UserCreateOrConnectWithoutOrderStatusHistoryInput;
+    upsert?: UserUpsertWithoutOrderStatusHistoryInput;
+    disconnect?: UserWhereInput | boolean;
+    delete?: UserWhereInput | boolean;
+    connect?: UserWhereUniqueInput;
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutOrderStatusHistoryInput, UserUpdateWithoutOrderStatusHistoryInput>,
+      UserUncheckedUpdateWithoutOrderStatusHistoryInput
+    >;
   };
 
   export type OrderCreateNestedManyWithoutCouponInput = {
@@ -35319,6 +37196,23 @@ export namespace Prisma {
     _max?: NestedEnumPaymentMethodFilter<$PrismaModel>;
   };
 
+  export type NestedEnumOrderStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumOrderStatusNullableFilter<$PrismaModel> | $Enums.OrderStatus | null;
+  };
+
+  export type NestedEnumOrderStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel> | null;
+    not?: NestedEnumOrderStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus | null;
+    _count?: NestedIntNullableFilter<$PrismaModel>;
+    _min?: NestedEnumOrderStatusNullableFilter<$PrismaModel>;
+    _max?: NestedEnumOrderStatusNullableFilter<$PrismaModel>;
+  };
+
   export type NestedEnumCouponTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.CouponType | EnumCouponTypeFieldRefInput<$PrismaModel>;
     in?: $Enums.CouponType[] | ListEnumCouponTypeFieldRefInput<$PrismaModel>;
@@ -35502,6 +37396,7 @@ export namespace Prisma {
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutUserInput = {
@@ -35522,6 +37417,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutUserInput = {
@@ -35562,6 +37458,33 @@ export namespace Prisma {
 
   export type AuditLogCreateManyActorInputEnvelope = {
     data: AuditLogCreateManyActorInput | AuditLogCreateManyActorInput[];
+    skipDuplicates?: boolean;
+  };
+
+  export type OrderStatusHistoryCreateWithoutActorInput = {
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    createdAt?: Date | string;
+    order: OrderCreateNestedOneWithoutStatusHistoryInput;
+  };
+
+  export type OrderStatusHistoryUncheckedCreateWithoutActorInput = {
+    id?: number;
+    orderId: number;
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    createdAt?: Date | string;
+  };
+
+  export type OrderStatusHistoryCreateOrConnectWithoutActorInput = {
+    where: OrderStatusHistoryWhereUniqueInput;
+    create: XOR<OrderStatusHistoryCreateWithoutActorInput, OrderStatusHistoryUncheckedCreateWithoutActorInput>;
+  };
+
+  export type OrderStatusHistoryCreateManyActorInputEnvelope = {
+    data: OrderStatusHistoryCreateManyActorInput | OrderStatusHistoryCreateManyActorInput[];
     skipDuplicates?: boolean;
   };
 
@@ -35749,6 +37672,35 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AuditLog"> | Date | string;
   };
 
+  export type OrderStatusHistoryUpsertWithWhereUniqueWithoutActorInput = {
+    where: OrderStatusHistoryWhereUniqueInput;
+    update: XOR<OrderStatusHistoryUpdateWithoutActorInput, OrderStatusHistoryUncheckedUpdateWithoutActorInput>;
+    create: XOR<OrderStatusHistoryCreateWithoutActorInput, OrderStatusHistoryUncheckedCreateWithoutActorInput>;
+  };
+
+  export type OrderStatusHistoryUpdateWithWhereUniqueWithoutActorInput = {
+    where: OrderStatusHistoryWhereUniqueInput;
+    data: XOR<OrderStatusHistoryUpdateWithoutActorInput, OrderStatusHistoryUncheckedUpdateWithoutActorInput>;
+  };
+
+  export type OrderStatusHistoryUpdateManyWithWhereWithoutActorInput = {
+    where: OrderStatusHistoryScalarWhereInput;
+    data: XOR<OrderStatusHistoryUpdateManyMutationInput, OrderStatusHistoryUncheckedUpdateManyWithoutActorInput>;
+  };
+
+  export type OrderStatusHistoryScalarWhereInput = {
+    AND?: OrderStatusHistoryScalarWhereInput | OrderStatusHistoryScalarWhereInput[];
+    OR?: OrderStatusHistoryScalarWhereInput[];
+    NOT?: OrderStatusHistoryScalarWhereInput | OrderStatusHistoryScalarWhereInput[];
+    id?: IntFilter<"OrderStatusHistory"> | number;
+    orderId?: IntFilter<"OrderStatusHistory"> | number;
+    fromStatus?: EnumOrderStatusNullableFilter<"OrderStatusHistory"> | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFilter<"OrderStatusHistory"> | $Enums.OrderStatus;
+    note?: StringNullableFilter<"OrderStatusHistory"> | string | null;
+    actorId?: IntNullableFilter<"OrderStatusHistory"> | number | null;
+    createdAt?: DateTimeFilter<"OrderStatusHistory"> | Date | string;
+  };
+
   export type UserRoleCreateWithoutRoleInput = {
     user: UserCreateNestedOneWithoutUserRolesInput;
   };
@@ -35797,6 +37749,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutUserInput;
     orders?: OrderCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -35813,6 +37766,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -35858,6 +37812,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
     orders?: OrderUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -35874,6 +37829,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -36671,6 +38627,7 @@ export namespace Prisma {
     wishlist?: WishlistCreateNestedOneWithoutUserInput;
     reviews?: ReviewCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -36687,6 +38644,7 @@ export namespace Prisma {
     wishlist?: WishlistUncheckedCreateNestedOneWithoutUserInput;
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -36949,6 +38907,33 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
+  export type OrderStatusHistoryCreateWithoutOrderInput = {
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    createdAt?: Date | string;
+    actor?: UserCreateNestedOneWithoutOrderStatusHistoryInput;
+  };
+
+  export type OrderStatusHistoryUncheckedCreateWithoutOrderInput = {
+    id?: number;
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    actorId?: number | null;
+    createdAt?: Date | string;
+  };
+
+  export type OrderStatusHistoryCreateOrConnectWithoutOrderInput = {
+    where: OrderStatusHistoryWhereUniqueInput;
+    create: XOR<OrderStatusHistoryCreateWithoutOrderInput, OrderStatusHistoryUncheckedCreateWithoutOrderInput>;
+  };
+
+  export type OrderStatusHistoryCreateManyOrderInputEnvelope = {
+    data: OrderStatusHistoryCreateManyOrderInput | OrderStatusHistoryCreateManyOrderInput[];
+    skipDuplicates?: boolean;
+  };
+
   export type UserUpsertWithoutOrdersInput = {
     update: XOR<UserUpdateWithoutOrdersInput, UserUncheckedUpdateWithoutOrdersInput>;
     create: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>;
@@ -36973,6 +38958,7 @@ export namespace Prisma {
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -36989,6 +38975,7 @@ export namespace Prisma {
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type PaymentMetaUpsertWithoutOrderInput = {
@@ -37246,6 +39233,22 @@ export namespace Prisma {
     processedAt?: DateTimeNullableFilter<"Refund"> | Date | string | null;
   };
 
+  export type OrderStatusHistoryUpsertWithWhereUniqueWithoutOrderInput = {
+    where: OrderStatusHistoryWhereUniqueInput;
+    update: XOR<OrderStatusHistoryUpdateWithoutOrderInput, OrderStatusHistoryUncheckedUpdateWithoutOrderInput>;
+    create: XOR<OrderStatusHistoryCreateWithoutOrderInput, OrderStatusHistoryUncheckedCreateWithoutOrderInput>;
+  };
+
+  export type OrderStatusHistoryUpdateWithWhereUniqueWithoutOrderInput = {
+    where: OrderStatusHistoryWhereUniqueInput;
+    data: XOR<OrderStatusHistoryUpdateWithoutOrderInput, OrderStatusHistoryUncheckedUpdateWithoutOrderInput>;
+  };
+
+  export type OrderStatusHistoryUpdateManyWithWhereWithoutOrderInput = {
+    where: OrderStatusHistoryScalarWhereInput;
+    data: XOR<OrderStatusHistoryUpdateManyMutationInput, OrderStatusHistoryUncheckedUpdateManyWithoutOrderInput>;
+  };
+
   export type OrderCreateWithoutItemsInput = {
     orderNumber: string;
     status?: $Enums.OrderStatus;
@@ -37263,6 +39266,7 @@ export namespace Prisma {
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutItemsInput = {
@@ -37283,6 +39287,7 @@ export namespace Prisma {
     paymentMeta?: PaymentMetaUncheckedCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutItemsInput = {
@@ -37421,6 +39426,7 @@ export namespace Prisma {
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutItemsInput = {
@@ -37441,6 +39447,7 @@ export namespace Prisma {
     paymentMeta?: PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type ProductUpsertWithoutOrderItemInput = {
@@ -37541,6 +39548,186 @@ export namespace Prisma {
     data: XOR<ReturnRequestUpdateManyMutationInput, ReturnRequestUncheckedUpdateManyWithoutOrderItemInput>;
   };
 
+  export type OrderCreateWithoutStatusHistoryInput = {
+    orderNumber: string;
+    status?: $Enums.OrderStatus;
+    subtotal: Decimal | DecimalJsLike | number | string;
+    shipping?: Decimal | DecimalJsLike | number | string;
+    tax?: Decimal | DecimalJsLike | number | string;
+    total: Decimal | DecimalJsLike | number | string;
+    paymentMethod: $Enums.PaymentMethod;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    user?: UserCreateNestedOneWithoutOrdersInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
+    shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
+    billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    coupon?: CouponCreateNestedOneWithoutOrderInput;
+    ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
+    Refund?: RefundCreateNestedManyWithoutOrderInput;
+  };
+
+  export type OrderUncheckedCreateWithoutStatusHistoryInput = {
+    id?: number;
+    orderNumber: string;
+    userId?: number | null;
+    status?: $Enums.OrderStatus;
+    subtotal: Decimal | DecimalJsLike | number | string;
+    shipping?: Decimal | DecimalJsLike | number | string;
+    tax?: Decimal | DecimalJsLike | number | string;
+    total: Decimal | DecimalJsLike | number | string;
+    paymentMethod: $Enums.PaymentMethod;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    couponId?: number | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    paymentMeta?: PaymentMetaUncheckedCreateNestedOneWithoutOrderInput;
+    items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
+    ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
+    Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+  };
+
+  export type OrderCreateOrConnectWithoutStatusHistoryInput = {
+    where: OrderWhereUniqueInput;
+    create: XOR<OrderCreateWithoutStatusHistoryInput, OrderUncheckedCreateWithoutStatusHistoryInput>;
+  };
+
+  export type UserCreateWithoutOrderStatusHistoryInput = {
+    email: string;
+    username?: string | null;
+    password?: string | null;
+    displayName?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    lastLogin?: Date | string | null;
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput;
+    addresses?: AddressCreateNestedManyWithoutUserInput;
+    wishlist?: WishlistCreateNestedOneWithoutUserInput;
+    reviews?: ReviewCreateNestedManyWithoutUserInput;
+    orders?: OrderCreateNestedManyWithoutUserInput;
+    AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+  };
+
+  export type UserUncheckedCreateWithoutOrderStatusHistoryInput = {
+    id?: number;
+    email: string;
+    username?: string | null;
+    password?: string | null;
+    displayName?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    lastLogin?: Date | string | null;
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput;
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput;
+    wishlist?: WishlistUncheckedCreateNestedOneWithoutUserInput;
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
+    AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+  };
+
+  export type UserCreateOrConnectWithoutOrderStatusHistoryInput = {
+    where: UserWhereUniqueInput;
+    create: XOR<UserCreateWithoutOrderStatusHistoryInput, UserUncheckedCreateWithoutOrderStatusHistoryInput>;
+  };
+
+  export type OrderUpsertWithoutStatusHistoryInput = {
+    update: XOR<OrderUpdateWithoutStatusHistoryInput, OrderUncheckedUpdateWithoutStatusHistoryInput>;
+    create: XOR<OrderCreateWithoutStatusHistoryInput, OrderUncheckedCreateWithoutStatusHistoryInput>;
+    where?: OrderWhereInput;
+  };
+
+  export type OrderUpdateToOneWithWhereWithoutStatusHistoryInput = {
+    where?: OrderWhereInput;
+    data: XOR<OrderUpdateWithoutStatusHistoryInput, OrderUncheckedUpdateWithoutStatusHistoryInput>;
+  };
+
+  export type OrderUpdateWithoutStatusHistoryInput = {
+    orderNumber?: StringFieldUpdateOperationsInput | string;
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: UserUpdateOneWithoutOrdersNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
+    shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
+    billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    coupon?: CouponUpdateOneWithoutOrderNestedInput;
+    ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
+    Refund?: RefundUpdateManyWithoutOrderNestedInput;
+  };
+
+  export type OrderUncheckedUpdateWithoutStatusHistoryInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    orderNumber?: StringFieldUpdateOperationsInput | string;
+    userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    couponId?: NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    paymentMeta?: PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
+    ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
+    Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+  };
+
+  export type UserUpsertWithoutOrderStatusHistoryInput = {
+    update: XOR<UserUpdateWithoutOrderStatusHistoryInput, UserUncheckedUpdateWithoutOrderStatusHistoryInput>;
+    create: XOR<UserCreateWithoutOrderStatusHistoryInput, UserUncheckedCreateWithoutOrderStatusHistoryInput>;
+    where?: UserWhereInput;
+  };
+
+  export type UserUpdateToOneWithWhereWithoutOrderStatusHistoryInput = {
+    where?: UserWhereInput;
+    data: XOR<UserUpdateWithoutOrderStatusHistoryInput, UserUncheckedUpdateWithoutOrderStatusHistoryInput>;
+  };
+
+  export type UserUpdateWithoutOrderStatusHistoryInput = {
+    email?: StringFieldUpdateOperationsInput | string;
+    username?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: NullableStringFieldUpdateOperationsInput | string | null;
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput;
+    addresses?: AddressUpdateManyWithoutUserNestedInput;
+    wishlist?: WishlistUpdateOneWithoutUserNestedInput;
+    reviews?: ReviewUpdateManyWithoutUserNestedInput;
+    orders?: OrderUpdateManyWithoutUserNestedInput;
+    AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+  };
+
+  export type UserUncheckedUpdateWithoutOrderStatusHistoryInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    email?: StringFieldUpdateOperationsInput | string;
+    username?: NullableStringFieldUpdateOperationsInput | string | null;
+    password?: NullableStringFieldUpdateOperationsInput | string | null;
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput;
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput;
+    wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
+    AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+  };
+
   export type OrderCreateWithoutCouponInput = {
     orderNumber: string;
     status?: $Enums.OrderStatus;
@@ -37558,6 +39745,7 @@ export namespace Prisma {
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutCouponInput = {
@@ -37578,6 +39766,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutCouponInput = {
@@ -37619,6 +39808,7 @@ export namespace Prisma {
     wishlist?: WishlistCreateNestedOneWithoutUserInput;
     orders?: OrderCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -37635,6 +39825,7 @@ export namespace Prisma {
     wishlist?: WishlistUncheckedCreateNestedOneWithoutUserInput;
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -37704,6 +39895,7 @@ export namespace Prisma {
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
     orders?: OrderUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -37720,6 +39912,7 @@ export namespace Prisma {
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type ProductUpsertWithoutReviewsInput = {
@@ -37779,6 +39972,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutUserInput;
     orders?: OrderCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateWithoutWishlistInput = {
@@ -37795,6 +39989,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserCreateOrConnectWithoutWishlistInput = {
@@ -37849,6 +40044,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
     orders?: OrderUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutWishlistInput = {
@@ -37865,6 +40061,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type WishlistItemUpsertWithWhereUniqueWithoutWishlistInput = {
@@ -38020,6 +40217,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutUserInput;
     orders?: OrderCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateWithoutAddressesInput = {
@@ -38036,6 +40234,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
     AuditLog?: AuditLogUncheckedCreateNestedManyWithoutActorInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserCreateOrConnectWithoutAddressesInput = {
@@ -38060,6 +40259,7 @@ export namespace Prisma {
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutShippingAddressInput = {
@@ -38080,6 +40280,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutShippingAddressInput = {
@@ -38109,6 +40310,7 @@ export namespace Prisma {
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutBillingAddressInput = {
@@ -38129,6 +40331,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutBillingAddressInput = {
@@ -38165,6 +40368,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
     orders?: OrderUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutAddressesInput = {
@@ -38181,6 +40385,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
     AuditLog?: AuditLogUncheckedUpdateManyWithoutActorNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type OrderUpsertWithWhereUniqueWithoutShippingAddressInput = {
@@ -38228,6 +40433,7 @@ export namespace Prisma {
     wishlist?: WishlistCreateNestedOneWithoutUserInput;
     reviews?: ReviewCreateNestedManyWithoutUserInput;
     orders?: OrderCreateNestedManyWithoutUserInput;
+    orderStatusHistory?: OrderStatusHistoryCreateNestedManyWithoutActorInput;
   };
 
   export type UserUncheckedCreateWithoutAuditLogInput = {
@@ -38244,6 +40450,7 @@ export namespace Prisma {
     wishlist?: WishlistUncheckedCreateNestedOneWithoutUserInput;
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutActorInput;
   };
 
   export type UserCreateOrConnectWithoutAuditLogInput = {
@@ -38275,6 +40482,7 @@ export namespace Prisma {
     wishlist?: WishlistUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
     orders?: OrderUpdateManyWithoutUserNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUpdateManyWithoutActorNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutAuditLogInput = {
@@ -38291,6 +40499,7 @@ export namespace Prisma {
     wishlist?: WishlistUncheckedUpdateOneWithoutUserNestedInput;
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput;
+    orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
   export type OrderCreateWithoutReturnRequestInput = {
@@ -38310,6 +40519,7 @@ export namespace Prisma {
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutReturnRequestInput = {
@@ -38330,6 +40540,7 @@ export namespace Prisma {
     paymentMeta?: PaymentMetaUncheckedCreateNestedOneWithoutOrderInput;
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutReturnRequestInput = {
@@ -38425,6 +40636,7 @@ export namespace Prisma {
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutReturnRequestInput = {
@@ -38445,6 +40657,7 @@ export namespace Prisma {
     paymentMeta?: PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput;
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderItemUpsertWithoutReturnRequestInput = {
@@ -38536,6 +40749,7 @@ export namespace Prisma {
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutRefundInput = {
@@ -38556,6 +40770,7 @@ export namespace Prisma {
     paymentMeta?: PaymentMetaUncheckedCreateNestedOneWithoutOrderInput;
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutRefundInput = {
@@ -38619,6 +40834,7 @@ export namespace Prisma {
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutRefundInput = {
@@ -38639,6 +40855,7 @@ export namespace Prisma {
     paymentMeta?: PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput;
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type ReturnRequestUpsertWithoutRefundInput = {
@@ -38692,6 +40909,7 @@ export namespace Prisma {
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderUncheckedCreateWithoutPaymentMetaInput = {
@@ -38712,6 +40930,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderInput;
     Refund?: RefundUncheckedCreateNestedManyWithoutOrderInput;
+    statusHistory?: OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput;
   };
 
   export type OrderCreateOrConnectWithoutPaymentMetaInput = {
@@ -38747,6 +40966,7 @@ export namespace Prisma {
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutPaymentMetaInput = {
@@ -38767,6 +40987,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type UserRoleCreateManyUserInput = {
@@ -38826,6 +41047,15 @@ export namespace Prisma {
     changes?: NullableJsonNullValueInput | InputJsonValue;
     ip?: string | null;
     userAgent?: string | null;
+    createdAt?: Date | string;
+  };
+
+  export type OrderStatusHistoryCreateManyActorInput = {
+    id?: number;
+    orderId: number;
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
     createdAt?: Date | string;
   };
 
@@ -38946,6 +41176,7 @@ export namespace Prisma {
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutUserInput = {
@@ -38966,6 +41197,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
@@ -39013,6 +41245,32 @@ export namespace Prisma {
     changes?: NullableJsonNullValueInput | InputJsonValue;
     ip?: NullableStringFieldUpdateOperationsInput | string | null;
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderStatusHistoryUpdateWithoutActorInput = {
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    order?: OrderUpdateOneRequiredWithoutStatusHistoryNestedInput;
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateWithoutActorInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    orderId?: IntFieldUpdateOperationsInput | number;
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateManyWithoutActorInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    orderId?: IntFieldUpdateOperationsInput | number;
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
@@ -39433,6 +41691,15 @@ export namespace Prisma {
     processedAt?: Date | string | null;
   };
 
+  export type OrderStatusHistoryCreateManyOrderInput = {
+    id?: number;
+    fromStatus?: $Enums.OrderStatus | null;
+    toStatus: $Enums.OrderStatus;
+    note?: string | null;
+    actorId?: number | null;
+    createdAt?: Date | string;
+  };
+
   export type OrderItemUpdateWithoutOrderInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null;
     name?: StringFieldUpdateOperationsInput | string;
@@ -39542,6 +41809,32 @@ export namespace Prisma {
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   };
 
+  export type OrderStatusHistoryUpdateWithoutOrderInput = {
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    actor?: UserUpdateOneWithoutOrderStatusHistoryNestedInput;
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateWithoutOrderInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    actorId?: NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderStatusHistoryUncheckedUpdateManyWithoutOrderInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    fromStatus?: NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null;
+    toStatus?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
+    note?: NullableStringFieldUpdateOperationsInput | string | null;
+    actorId?: NullableIntFieldUpdateOperationsInput | number | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
   export type ReturnRequestCreateManyOrderItemInput = {
     id?: number;
     orderId: number;
@@ -39620,6 +41913,7 @@ export namespace Prisma {
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutCouponInput = {
@@ -39640,6 +41934,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateManyWithoutCouponInput = {
@@ -39734,6 +42029,7 @@ export namespace Prisma {
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutShippingAddressInput = {
@@ -39754,6 +42050,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateManyWithoutShippingAddressInput = {
@@ -39789,6 +42086,7 @@ export namespace Prisma {
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateWithoutBillingAddressInput = {
@@ -39809,6 +42107,7 @@ export namespace Prisma {
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUncheckedUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUncheckedUpdateManyWithoutOrderNestedInput;
+    statusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput;
   };
 
   export type OrderUncheckedUpdateManyWithoutBillingAddressInput = {

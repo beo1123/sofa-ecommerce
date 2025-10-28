@@ -1,6 +1,6 @@
 import { PrismaClient } from "../../../generated/prisma_client";
 import { ProductService } from "@/services/products.service";
-import { serializeData } from "./helpers";
+import { serializeData } from "../helpers";
 
 const service = new ProductService(new PrismaClient());
 

@@ -218,6 +218,16 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   createdAt: "createdAt",
 };
 
+exports.Prisma.OrderStatusHistoryScalarFieldEnum = {
+  id: "id",
+  orderId: "orderId",
+  fromStatus: "fromStatus",
+  toStatus: "toStatus",
+  note: "note",
+  actorId: "actorId",
+  createdAt: "createdAt",
+};
+
 exports.Prisma.CouponScalarFieldEnum = {
   id: "id",
   code: "code",
@@ -411,6 +421,7 @@ exports.Prisma.ModelName = {
   Inventory: "Inventory",
   Order: "Order",
   OrderItem: "OrderItem",
+  OrderStatusHistory: "OrderStatusHistory",
   Coupon: "Coupon",
   Review: "Review",
   Wishlist: "Wishlist",

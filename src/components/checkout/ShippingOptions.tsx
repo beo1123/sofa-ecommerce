@@ -4,7 +4,7 @@ import Heading from "@/components/ui/Heading";
 import RadioGroup from "@/components/ui/Radio";
 import { UseFormRegister, UseFormWatch, UseFormSetValue } from "react-hook-form";
 import { CheckoutFormData } from "./CheckoutForm";
-import { formatCurrency } from "@/lib/products/helpers";
+import { formatCurrency } from "@/lib/helpers";
 
 type Props = {
   register: UseFormRegister<CheckoutFormData>;

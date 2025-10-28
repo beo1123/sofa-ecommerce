@@ -65,20 +65,21 @@ enum ReturnStatus {
 // =========================================================
 
 model User {
-  id          Int        @id @default(autoincrement())
-  email       String     @unique
-  username    String?    @unique
-  password    String? // hashed password (if using email/password)
-  displayName String?
-  userRoles   UserRole[]
-  addresses   Address[]
-  wishlist    Wishlist?
-  reviews     Review[]
-  orders      Order[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  lastLogin   DateTime?
-  AuditLog    AuditLog[]
+  id                 Int                  @id @default(autoincrement())
+  email              String               @unique
+  username           String?              @unique
+  password           String? // hashed password (if using email/password)
+  displayName        String?
+  userRoles          UserRole[]
+  addresses          Address[]
+  wishlist           Wishlist?
+  reviews            Review[]
+  orders             Order[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  lastLogin          DateTime?
+  AuditLog           AuditLog[]
+  orderStatusHistory OrderStatusHistory[]
 
   @@index([email], map: "idx_user_email")
 }
@@ -194,28 +195,29 @@ model Inventory {
 // =========================================================
 
 model Order {
-  id                Int             @id @default(autoincrement())
-  orderNumber       String          @unique
-  user              User?           @relation(fields: [userId], references: [id])
+  id                Int                  @id @default(autoincrement())
+  orderNumber       String               @unique
+  user              User?                @relation(fields: [userId], references: [id])
   userId            Int?
-  status            OrderStatus     @default(CREATED)
-  subtotal          Decimal         @db.Decimal(12, 2)
-  shipping          Decimal         @default(0) @db.Decimal(12, 2)
-  tax               Decimal         @default(0) @db.Decimal(12, 2)
-  total             Decimal         @db.Decimal(12, 2)
+  status            OrderStatus          @default(CREATED)
+  subtotal          Decimal              @db.Decimal(12, 2)
+  shipping          Decimal              @default(0) @db.Decimal(12, 2)
+  tax               Decimal              @default(0) @db.Decimal(12, 2)
+  total             Decimal              @db.Decimal(12, 2)
   paymentMethod     PaymentMethod
   paymentMeta       PaymentMeta?
   items             OrderItem[]
-  shippingAddress   Address?        @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  shippingAddress   Address?             @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
   shippingAddressId Int?
-  billingAddress    Address?        @relation("BillingAddress", fields: [billingAddressId], references: [id])
+  billingAddress    Address?             @relation("BillingAddress", fields: [billingAddressId], references: [id])
   billingAddressId  Int?
-  coupon            Coupon?         @relation(fields: [couponId], references: [id])
+  coupon            Coupon?              @relation(fields: [couponId], references: [id])
   couponId          Int?
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
   ReturnRequest     ReturnRequest[]
   Refund            Refund[]
+  statusHistory     OrderStatusHistory[]
 
   @@index([orderNumber], map: "idx_order_number")
   @@index([userId], map: "idx_order_user")
@@ -242,6 +244,21 @@ model OrderItem {
 
   @@index([orderId], map: "idx_orderitem_order")
   @@index([productId], map: "idx_orderitem_product")
+}
+
+model OrderStatusHistory {
+  id         Int          @id @default(autoincrement())
+  order      Order        @relation(fields: [orderId], references: [id])
+  orderId    Int
+  fromStatus OrderStatus?
+  toStatus   OrderStatus
+  note       String? // optional note (e.g. "Created by checkout API", "VNPAY success")
+  actorId    Int? // optional user/admin id who triggered change
+  actor      User?        @relation(fields: [actorId], references: [id])
+  createdAt  DateTime     @default(now())
+
+  @@index([orderId], map: "idx_orderstatushistory_order")
+  @@index([toStatus], map: "idx_orderstatushistory_toStatus")
 }
 
 // =========================================================

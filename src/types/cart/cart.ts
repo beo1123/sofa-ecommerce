@@ -13,3 +13,10 @@ export type CartState = {
   items: CartItem[];
   updatedAt?: string | null;
 };
+
+export type CartItemInput = {
+  productId: number;
+  variantId?: number | null;
+  sku?: string | null;
+  quantity: number;
+};

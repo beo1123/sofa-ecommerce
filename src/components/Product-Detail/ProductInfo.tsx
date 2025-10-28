@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { ShoppingCart, Heart, Share2, Star } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { formatCurrency } from "@/lib/products/helpers";
+import { formatCurrency } from "@/lib/helpers";
 import { useAppDispatch } from "@/store/hook";
 import { addItem } from "@/store/slice/cartSlice";
 

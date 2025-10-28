@@ -10,7 +10,7 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Spinner from "@/components/ui/Spinner";
 import { useSearch } from "@/hooks/products/useSearch";
-import { formatCurrency } from "@/lib/products/helpers";
+import { formatCurrency } from "@/lib/helpers";
 
 export default function SearchBox({ className = "" }: { className?: string }) {
   const [query, setQuery] = useState("");

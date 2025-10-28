@@ -2,7 +2,7 @@
 import React from "react";
 import Divider from "@/components/ui/Divider";
 import Text from "@/components/ui/Text";
-import { formatCurrency } from "@/lib/products/helpers";
+import { formatCurrency } from "@/lib/helpers";
 
 type Props = {
   subtotal: number;
