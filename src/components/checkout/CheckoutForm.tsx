@@ -1,18 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { selectCartSubtotal } from "@/store/selector/cartSelectors";
+
 import Card, { CardHeader, CardTitle, CardFooter } from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Alert from "@/components/ui/Alert";
-import { useAppSelector } from "@/store/hook";
-import { selectCartSubtotal } from "@/store/selector/cartSelectors";
+import Modal from "@/components/ui/Modal";
+import Text from "@/components/ui/Text";
 import RecipientForm from "./RecipientForm";
 import AddressForm from "./AddressForm";
 import ShippingOptions from "./ShippingOptions";
 import OrderSummary from "./OrderSummary";
+import { useCreateOrder } from "@/hooks/orders/useCreateOrder";
 
 const phoneRegex = /^(\+?\d{7,15})$/;
 
@@ -28,7 +31,7 @@ const newAddressSchema = z.object({
 const CheckoutSchema = z.object({
   recipientName: z.string().min(2, "Tên người nhận bắt buộc"),
   phone: z.string().regex(phoneRegex, "Số điện thoại không hợp lệ"),
-  email: z.email({ message: "Email không hợp lệ" }).optional(),
+  email: z.string().email("Email không hợp lệ").optional(),
   addressId: z.string().optional().nullable(),
   useNewAddress: z.boolean().optional(),
   newAddress: newAddressSchema.optional(),
@@ -41,13 +44,18 @@ export type CheckoutFormData = z.infer<typeof CheckoutSchema>;
 export default function CheckoutForm() {
   const subtotal = useAppSelector(selectCartSubtotal);
   const addresses = useAppSelector((s) => s.user?.addresses || []);
-  const [serverError, setServerError] = useState<string | null>(null);
+  const cartItems = useAppSelector((s) => s.cart.items);
+
+  const dispatch = useAppDispatch();
+  const { createOrder, loading, error } = useCreateOrder();
+
+  const [successModal, setSuccessModal] = useState<{ orderNumber: number | string } | null>(null);
 
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(CheckoutSchema),
@@ -68,47 +76,64 @@ export default function CheckoutForm() {
   }, [addresses, setValue, watch]);
 
   const onSubmit = async (data: CheckoutFormData) => {
-    setServerError(null);
-    try {
-      const payload = {
-        recipient: {
-          name: data.recipientName,
-          phone: data.phone,
-          email: data.email,
-        },
-        address: data.useNewAddress ? data.newAddress : { id: data.addressId },
-        shippingOption: data.shippingOption,
-        notes: data.notes,
-      };
+    // ✅ Nếu giỏ hàng trống thì chuyển hướng
+    if (!cartItems || cartItems.length === 0) {
+      window.location.href = "/san-pham"; // hoặc "/products"
+      return;
+    }
 
-      const res = await axios.post("/api/checkout", payload);
-      alert(`✅ Order created!\nOrder ID: ${res.data?.orderId || "demo"}`);
-    } catch (err: any) {
-      setServerError(err?.response?.data?.message || "Có lỗi xảy ra, thử lại sau.");
+    // ✅ Nếu có sản phẩm thì tiếp tục tạo order
+    const res = await createOrder(data);
+    if (res.success && res.orderNumber) {
+      setSuccessModal({ orderNumber: res.orderNumber });
     }
   };
 
   return (
-    <Card variant="elevated" className="max-w-3xl mx-auto bg-white">
-      <CardHeader>
-        <CardTitle>Thông tin giao hàng</CardTitle>
-      </CardHeader>
+    <>
+      <Card variant="elevated" className="max-w-3xl mx-auto bg-white">
+        <CardHeader>
+          <CardTitle>Thông tin giao hàng</CardTitle>
+        </CardHeader>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6">
-        <RecipientForm register={register} errors={errors} />
-        <AddressForm addresses={addresses} register={register} errors={errors} watch={watch} />
-        {/* ✅ Truyền setValue để fix lỗi thiếu prop */}
-        <ShippingOptions register={register} watch={watch} setValue={setValue} />
-        <OrderSummary subtotal={subtotal} shippingCost={shippingCost} />
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6">
+          <RecipientForm register={register} errors={errors} />
+          <AddressForm addresses={addresses} register={register} errors={errors} watch={watch} />
+          <ShippingOptions register={register} watch={watch} setValue={setValue} />
+          <OrderSummary subtotal={subtotal} shippingCost={shippingCost} />
 
-        {serverError && <Alert variant="error" title="Lỗi" description={serverError} />}
+          {error && <Alert variant="error" title="Lỗi" description={error} />}
 
-        <CardFooter>
-          <Button type="submit" fullWidth loading={isSubmitting} variant="primary" className="mt-2">
-            Đặt hàng
-          </Button>
-        </CardFooter>
-      </form>
-    </Card>
+          <CardFooter>
+            <Button type="submit" fullWidth loading={loading} variant="primary">
+              Đặt hàng
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
+
+      {/* ✅ Modal hiển thị khi order thành công */}
+      {successModal && (
+        <Modal isOpen={true} onClose={() => setSuccessModal(null)} title="🎉 Đặt hàng thành công" size="md">
+          <Text className="mb-2">Cảm ơn bạn đã đặt hàng!</Text>
+          <Text>
+            Mã đơn hàng của bạn là: <strong>#{successModal.orderNumber}</strong>
+          </Text>
+          <div className="mt-6 flex justify-end gap-3">
+            <Button variant="ghost" onClick={() => setSuccessModal(null)}>
+              Đóng
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setSuccessModal(null);
+                window.location.href = "/orders";
+              }}>
+              Xem đơn hàng
+            </Button>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 }

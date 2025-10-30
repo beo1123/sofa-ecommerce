@@ -62,7 +62,17 @@ export class ProductService {
           title: true,
           shortDescription: true,
           category: { select: { id: true, name: true, slug: true } }, // ✅ include category
-          variants: { select: { price: true } },
+          variants: {
+            select: {
+              id: true,
+              price: true,
+              skuPrefix: true, // ✅ thêm
+              inventory: {
+                take: 1, // chỉ cần sku đầu tiên
+                select: { sku: true },
+              },
+            },
+          },
           images: {
             where: { isPrimary: true },
             take: 1,
@@ -85,6 +95,12 @@ export class ProductService {
         primaryImage: p.images[0] ?? null,
         variantsCount: p.variants.length,
         category: p.category ? { name: p.category.name, slug: p.category.slug } : null, // ✅ thêm category
+        variants: p.variants.map((v) => ({
+          id: v.id,
+          skuPrefix: v.skuPrefix,
+          inventory: v.inventory,
+          price: Number(v.price),
+        })),
       };
     });
 
@@ -189,7 +205,17 @@ export class ProductService {
         slug: true,
         title: true,
         shortDescription: true,
-        variants: { select: { price: true } },
+        variants: {
+          select: {
+            id: true,
+            price: true,
+            skuPrefix: true, // ✅ thêm
+            inventory: {
+              take: 1, // chỉ cần sku đầu tiên
+              select: { sku: true },
+            },
+          },
+        },
         images: {
           where: { isPrimary: true },
           take: 1,
@@ -209,6 +235,12 @@ export class ProductService {
         priceMax: prices.length ? Math.max(...prices) : null,
         primaryImage: p.images[0] ?? null,
         variantsCount: p.variants.length,
+        variants: p.variants.map((v) => ({
+          id: v.id,
+          skuPrefix: v.skuPrefix,
+          inventory: v.inventory,
+          price: Number(v.price),
+        })),
       };
     });
   }

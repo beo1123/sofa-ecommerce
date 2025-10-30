@@ -47,7 +47,14 @@ export default function AddressForm({ addresses, register, errors, watch }: Prop
             error={errors.newAddress?.line1?.message}
             className="md:col-span-2"
           />
-          <Input label="Thành phố" {...register("newAddress.city")} error={errors.newAddress?.city?.message} />
+
+          <Input
+            label="Thành phố"
+            disabled
+            {...register("newAddress.city")}
+            defaultValue="TPHCM"
+            error={errors.newAddress?.city?.message}
+          />
           <Input
             label="Tỉnh / Quận"
             {...register("newAddress.province")}
@@ -55,6 +62,7 @@ export default function AddressForm({ addresses, register, errors, watch }: Prop
           />
           <Input
             label="Quốc gia"
+            disabled
             defaultValue="Việt Nam"
             {...register("newAddress.country")}
             error={errors.newAddress?.country?.message}

@@ -13446,6 +13446,7 @@ export namespace Prisma {
     id: number | null;
     orderNumber: string | null;
     userId: number | null;
+    guestToken: string | null;
     status: $Enums.OrderStatus | null;
     subtotal: Decimal | null;
     shipping: Decimal | null;
@@ -13463,6 +13464,7 @@ export namespace Prisma {
     id: number | null;
     orderNumber: string | null;
     userId: number | null;
+    guestToken: string | null;
     status: $Enums.OrderStatus | null;
     subtotal: Decimal | null;
     shipping: Decimal | null;
@@ -13480,6 +13482,7 @@ export namespace Prisma {
     id: number;
     orderNumber: number;
     userId: number;
+    guestToken: number;
     status: number;
     subtotal: number;
     shipping: number;
@@ -13522,6 +13525,7 @@ export namespace Prisma {
     id?: true;
     orderNumber?: true;
     userId?: true;
+    guestToken?: true;
     status?: true;
     subtotal?: true;
     shipping?: true;
@@ -13539,6 +13543,7 @@ export namespace Prisma {
     id?: true;
     orderNumber?: true;
     userId?: true;
+    guestToken?: true;
     status?: true;
     subtotal?: true;
     shipping?: true;
@@ -13556,6 +13561,7 @@ export namespace Prisma {
     id?: true;
     orderNumber?: true;
     userId?: true;
+    guestToken?: true;
     status?: true;
     subtotal?: true;
     shipping?: true;
@@ -13657,6 +13663,7 @@ export namespace Prisma {
     id: number;
     orderNumber: string;
     userId: number | null;
+    guestToken: string | null;
     status: $Enums.OrderStatus;
     subtotal: Decimal;
     shipping: Decimal;
@@ -13692,6 +13699,7 @@ export namespace Prisma {
       id?: boolean;
       orderNumber?: boolean;
       userId?: boolean;
+      guestToken?: boolean;
       status?: boolean;
       subtotal?: boolean;
       shipping?: boolean;
@@ -13723,6 +13731,7 @@ export namespace Prisma {
         id?: boolean;
         orderNumber?: boolean;
         userId?: boolean;
+        guestToken?: boolean;
         status?: boolean;
         subtotal?: boolean;
         shipping?: boolean;
@@ -13748,6 +13757,7 @@ export namespace Prisma {
         id?: boolean;
         orderNumber?: boolean;
         userId?: boolean;
+        guestToken?: boolean;
         status?: boolean;
         subtotal?: boolean;
         shipping?: boolean;
@@ -13771,6 +13781,7 @@ export namespace Prisma {
     id?: boolean;
     orderNumber?: boolean;
     userId?: boolean;
+    guestToken?: boolean;
     status?: boolean;
     subtotal?: boolean;
     shipping?: boolean;
@@ -13788,6 +13799,7 @@ export namespace Prisma {
     | "id"
     | "orderNumber"
     | "userId"
+    | "guestToken"
     | "status"
     | "subtotal"
     | "shipping"
@@ -13844,6 +13856,7 @@ export namespace Prisma {
         id: number;
         orderNumber: string;
         userId: number | null;
+        guestToken: string | null;
         status: $Enums.OrderStatus;
         subtotal: Prisma.Decimal;
         shipping: Prisma.Decimal;
@@ -14423,6 +14436,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Order", "Int">;
     readonly orderNumber: FieldRef<"Order", "String">;
     readonly userId: FieldRef<"Order", "Int">;
+    readonly guestToken: FieldRef<"Order", "String">;
     readonly status: FieldRef<"Order", "OrderStatus">;
     readonly subtotal: FieldRef<"Order", "Decimal">;
     readonly shipping: FieldRef<"Order", "Decimal">;
@@ -29475,6 +29489,7 @@ export namespace Prisma {
     id: "id";
     orderNumber: "orderNumber";
     userId: "userId";
+    guestToken: "guestToken";
     status: "status";
     subtotal: "subtotal";
     shipping: "shipping";
@@ -30427,6 +30442,7 @@ export namespace Prisma {
     id?: IntFilter<"Order"> | number;
     orderNumber?: StringFilter<"Order"> | string;
     userId?: IntNullableFilter<"Order"> | number | null;
+    guestToken?: StringNullableFilter<"Order"> | string | null;
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
@@ -30453,6 +30469,7 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrderInput | SortOrder;
+    guestToken?: SortOrderInput | SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
@@ -30479,6 +30496,7 @@ export namespace Prisma {
     {
       id?: number;
       orderNumber?: string;
+      guestToken?: string;
       AND?: OrderWhereInput | OrderWhereInput[];
       OR?: OrderWhereInput[];
       NOT?: OrderWhereInput | OrderWhereInput[];
@@ -30504,13 +30522,14 @@ export namespace Prisma {
       Refund?: RefundListRelationFilter;
       statusHistory?: OrderStatusHistoryListRelationFilter;
     },
-    "id" | "orderNumber"
+    "id" | "orderNumber" | "guestToken"
   >;
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrderInput | SortOrder;
+    guestToken?: SortOrderInput | SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
@@ -30536,6 +30555,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Order"> | number;
     orderNumber?: StringWithAggregatesFilter<"Order"> | string;
     userId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
+    guestToken?: StringNullableWithAggregatesFilter<"Order"> | string | null;
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus;
     subtotal?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
@@ -32073,6 +32093,7 @@ export namespace Prisma {
 
   export type OrderCreateInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -32096,6 +32117,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -32116,6 +32138,7 @@ export namespace Prisma {
 
   export type OrderUpdateInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -32139,6 +32162,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -32161,6 +32185,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -32176,6 +32201,7 @@ export namespace Prisma {
 
   export type OrderUpdateManyMutationInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -32190,6 +32216,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -33975,6 +34002,7 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrder;
+    guestToken?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
@@ -34004,6 +34032,7 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrder;
+    guestToken?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
@@ -34021,6 +34050,7 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrder;
+    guestToken?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
@@ -37381,6 +37411,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutUserInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -37402,6 +37433,7 @@ export namespace Prisma {
   export type OrderUncheckedCreateWithoutUserInput = {
     id?: number;
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -37628,6 +37660,7 @@ export namespace Prisma {
     id?: IntFilter<"Order"> | number;
     orderNumber?: StringFilter<"Order"> | string;
     userId?: IntNullableFilter<"Order"> | number | null;
+    guestToken?: StringNullableFilter<"Order"> | string | null;
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
@@ -39251,6 +39284,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutItemsInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39273,6 +39307,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39411,6 +39446,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutItemsInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -39433,6 +39469,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -39550,6 +39587,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutStatusHistoryInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39572,6 +39610,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39645,6 +39684,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutStatusHistoryInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -39667,6 +39707,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -39730,6 +39771,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutCouponInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39752,6 +39794,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40244,6 +40287,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutShippingAddressInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40266,6 +40310,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40295,6 +40340,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutBillingAddressInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40317,6 +40363,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40504,6 +40551,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutReturnRequestInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40526,6 +40574,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40621,6 +40670,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutReturnRequestInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40643,6 +40693,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40734,6 +40785,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutRefundInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40756,6 +40808,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40819,6 +40872,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutRefundInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40841,6 +40895,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40894,6 +40949,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutPaymentMetaInput = {
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40916,6 +40972,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40951,6 +41008,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutPaymentMetaInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40973,6 +41031,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41026,6 +41085,7 @@ export namespace Prisma {
   export type OrderCreateManyUserInput = {
     id?: number;
     orderNumber: string;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -41161,6 +41221,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutUserInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41182,6 +41243,7 @@ export namespace Prisma {
   export type OrderUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41203,6 +41265,7 @@ export namespace Prisma {
   export type OrderUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41884,6 +41947,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -41898,6 +41962,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutCouponInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41920,6 +41985,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41941,6 +42007,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41984,6 +42051,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -42000,6 +42068,7 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
+    guestToken?: string | null;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -42014,6 +42083,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutShippingAddressInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42036,6 +42106,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42057,6 +42128,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42071,6 +42143,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutBillingAddressInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42093,6 +42166,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42114,6 +42188,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
+    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;

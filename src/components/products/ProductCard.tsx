@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ShoppingCart, ShoppingBag, ImageIcon } from "lucide-react";
 import { formatCurrency } from "@/lib/helpers";
 import Button from "@/components/ui/Button";
@@ -21,28 +22,54 @@ type ProductCardProps = {
     shortDescription?: string;
     priceMin: number;
     primaryImage?: { url?: string; alt?: string };
+    variants?: {
+      id: number;
+      price: number;
+      compareAtPrice?: number | null;
+      image?: string | null;
+      attributes?: Record<string, string>;
+      inventory?: { sku: string; available?: number }[];
+    }[];
   };
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const [isCartOpen, setCartOpen] = useState(false);
 
   const routeLink = `/san-pham/${product.slug}`;
 
-  const handleAddToCart = () => {
+  const getFirstAvailableVariant = () => {
+    return product.variants?.find((v) => (v.inventory?.[0]?.available ?? 1) > 0) || product.variants?.[0] || null;
+  };
+
+  const addToCart = () => {
+    const variant = getFirstAvailableVariant();
+
     dispatch(
       addItem({
         productId: Number(product.id ?? 0),
+        variantId: variant?.id ?? null,
+        sku: variant?.inventory?.[0]?.sku ?? null,
         name: product.title,
-        price: Number(product.priceMin),
-        image: product.primaryImage?.url ?? null,
+        price: Number(variant?.price ?? product.priceMin),
+        image: variant?.image ?? product.primaryImage?.url ?? null,
         quantity: 1,
-        sku: null,
-        variantId: null,
       })
     );
+  };
+
+  // ✅ Giỏ hàng bình thường
+  const handleAddToCart = () => {
+    addToCart();
     setCartOpen(true);
+  };
+
+  // ✅ Mua ngay → thêm vào giỏ → chuyển đến /thanh-toan
+  const handleBuyNow = () => {
+    addToCart();
+    router.push("/gio-hang");
   };
 
   return (
@@ -100,7 +127,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               leftIcon={<ShoppingBag size={16} />}
               onClick={(e) => {
                 e.preventDefault();
-                handleAddToCart();
+                handleBuyNow();
               }}
               className="
                 flex-1 sm:flex-none min-w-[100px]
