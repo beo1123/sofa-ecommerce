@@ -45,5 +45,11 @@ export const CardFooter = ({ children, className = "", ...props }: React.HTMLAtt
   </div>
 );
 
+export const CardContent = ({ children, className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={`text-[var(--text-base)] leading-relaxed ${className}`} {...props}>
+    {children}
+  </div>
+);
+
 Card.displayName = "Card";
 export default Card;

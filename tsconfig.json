@@ -15,7 +15,7 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"] // ✅ Thêm dòng này
+    "types": ["jest", "node", "next-auth"]
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

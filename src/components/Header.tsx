@@ -210,11 +210,19 @@ export default function Header() {
                   </div>
                   <div className="text-sm min-w-0">
                     <p className="font-medium text-[var(--color-text-default)] truncate">Xin chào, Khách</p>
-                    <Link
-                      href="/account"
-                      className="text-xs text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)] whitespace-nowrap">
-                      Đăng nhập / Đăng ký
-                    </Link>
+                    <div className="text-xs whitespace-nowrap">
+                      <Link
+                        href="dang-nhap"
+                        className="text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)]">
+                        Đăng nhập
+                      </Link>
+                      <span className="text-[var(--color-text-muted)] mx-1">/</span>
+                      <Link
+                        href="dang-ky"
+                        className="text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)]">
+                        Đăng ký
+                      </Link>
+                    </div>
                   </div>
                 </div>
 
@@ -334,14 +342,14 @@ export default function Header() {
                       <p className="font-semibold text-[var(--color-text-default)]">Xin chào, Khách</p>
                       <div className="flex gap-3 mt-1">
                         <Link
-                          href="/account/login"
+                          href="dang-nhap"
                           onClick={closeMobileMenu}
                           className="text-sm text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)] font-medium">
                           Đăng nhập
                         </Link>
                         <span className="text-[var(--color-text-muted)]">|</span>
                         <Link
-                          href="/account/register"
+                          href="dang-ky"
                           onClick={closeMobileMenu}
                           className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-default)] font-medium">
                           Đăng ký

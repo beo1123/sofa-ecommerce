@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import Card, { CardHeader, CardTitle, CardFooter } from "@/components/ui/Card";
+import Card, { CardHeader, CardTitle, CardFooter, CardContent } from "@/components/ui/Card";
 import Modal from "@/components/ui/Modal";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
@@ -124,6 +124,9 @@ export default function UIDemoPage() {
               <CardHeader>
                 <CardTitle>Default Card</CardTitle>
               </CardHeader>
+              <CardContent>
+                <Text muted>This is a simple default card.</Text>
+              </CardContent>
               <Text muted>This is a simple default card.</Text>
               <CardFooter>
                 <Button size="sm">Action</Button>
