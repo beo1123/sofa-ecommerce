@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { useAppSelector } from "@/store/hook";
 import { selectCartSubtotal } from "@/store/selector/cartSelectors";
 
 import Card, { CardHeader, CardTitle, CardFooter } from "@/components/ui/Card";
@@ -31,7 +31,7 @@ const newAddressSchema = z.object({
 const CheckoutSchema = z.object({
   recipientName: z.string().min(2, "Tên người nhận bắt buộc"),
   phone: z.string().regex(phoneRegex, "Số điện thoại không hợp lệ"),
-  email: z.string().email("Email không hợp lệ").optional(),
+  email: z.email("Email không hợp lệ").optional(),
   addressId: z.string().optional().nullable(),
   useNewAddress: z.boolean().optional(),
   newAddress: newAddressSchema.optional(),
@@ -46,7 +46,6 @@ export default function CheckoutForm() {
   const addresses = useAppSelector((s) => s.user?.addresses || []);
   const cartItems = useAppSelector((s) => s.cart.items);
 
-  const dispatch = useAppDispatch();
   const { createOrder, loading, error } = useCreateOrder();
 
   const [successModal, setSuccessModal] = useState<{ orderNumber: number | string } | null>(null);

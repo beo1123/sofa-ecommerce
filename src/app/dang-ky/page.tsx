@@ -13,10 +13,10 @@ import Button from "@/components/ui/Button";
 
 const signupSchema = z
   .object({
-    email: z.string().email("Email không hợp lệ"),
+    email: z.email("Email không hợp lệ"),
     password: z.string().min(6, "Mật khẩu tối thiểu 6 ký tự"),
     passwordConfirm: z.string().min(6, "Nhập lại mật khẩu"),
-    displayName: z.string().optional(),
+    displayName: z.string().min(3, "Tên bắt buộc"),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "Mật khẩu không khớp",
@@ -41,7 +41,7 @@ export default function SignupPage() {
     const res = await signup({
       email: data.email,
       password: data.password,
-      displayName: data.displayName || "",
+      displayName: data.displayName,
     });
     if (res.success) router.push("/dang-nhap");
   };
@@ -73,8 +73,9 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Tên hiển thị (tuỳ chọn)</label>
+              <label className="block text-sm font-medium mb-1">Tên hiển thị </label>
               <Input {...register("displayName")} placeholder="Nguyễn Văn A" />
+              {errors.displayName && <p className="text-red-500 text-sm mt-1">{errors.displayName.message}</p>}
             </div>
 
             {error && <Alert variant="error" title="Lỗi" description={error} />}

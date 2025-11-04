@@ -12,6 +12,7 @@ export type Address = {
 export type User = {
   id?: number;
   email?: string;
-  name?: string;
-  addresses?: Address[];
+  displayName?: string;
+  roles?: string;
+  addresses: Address[];
 };

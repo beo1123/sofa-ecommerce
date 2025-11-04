@@ -4,11 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingCart, Heart, BarChart3, User } from "lucide-react";
+import { Menu, X, ShoppingCart, Heart, BarChart3 } from "lucide-react";
 import MiniCartDrawer from "./cart/MiniCartDrawer";
 import { useAppSelector } from "@/store/hook";
 import { selectCartItemCount } from "@/store/selector/cartSelectors";
 import SearchBox from "./Header/SearchBox";
+import HeaderUser from "./Header/HeaderUser";
+import HeaderUserMobile from "./Header/HeaderUserMobile";
 
 /**
  * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
@@ -204,27 +206,7 @@ export default function Header() {
               {/* Right Actions - Responsive icons & profile */}
               <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0 ml-auto">
                 {/* User Profile - Hidden on small screens (xs, sm, md, lg, xl-) */}
-                <div className="hidden xl:flex items-center gap-3 pr-4 border-r border-[var(--color-brand-50)]">
-                  <div className="w-10 h-10 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center flex-shrink-0">
-                    <User className="w-5 h-5 text-[var(--color-brand-400)]" />
-                  </div>
-                  <div className="text-sm min-w-0">
-                    <p className="font-medium text-[var(--color-text-default)] truncate">Xin chào, Khách</p>
-                    <div className="text-xs whitespace-nowrap">
-                      <Link
-                        href="dang-nhap"
-                        className="text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)]">
-                        Đăng nhập
-                      </Link>
-                      <span className="text-[var(--color-text-muted)] mx-1">/</span>
-                      <Link
-                        href="dang-ky"
-                        className="text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)]">
-                        Đăng ký
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                <HeaderUser />
 
                 {/* Icon Actions - Wishlist/Compare: Hidden on xs; Cart & Menu: Always on mobile */}
                 <div className="flex items-center gap-1 sm:gap-2">
@@ -334,29 +316,7 @@ export default function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.12, duration: 0.24 }}
                   className="p-4 border-b border-[var(--color-brand-50)] bg-[var(--color-bg-muted)] flex-shrink-0">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center shadow-sm flex-shrink-0">
-                      <User className="w-6 h-6 text-[var(--color-brand-400)]" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-[var(--color-text-default)]">Xin chào, Khách</p>
-                      <div className="flex gap-3 mt-1">
-                        <Link
-                          href="dang-nhap"
-                          onClick={closeMobileMenu}
-                          className="text-sm text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)] font-medium">
-                          Đăng nhập
-                        </Link>
-                        <span className="text-[var(--color-text-muted)]">|</span>
-                        <Link
-                          href="dang-ky"
-                          onClick={closeMobileMenu}
-                          className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-default)] font-medium">
-                          Đăng ký
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  <HeaderUserMobile onClose={closeMobileMenu} />
                 </motion.div>
 
                 {/* Navigation Links */}

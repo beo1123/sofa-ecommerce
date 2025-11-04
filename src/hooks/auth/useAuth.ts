@@ -13,9 +13,12 @@ export function useAuth() {
       const res = await axiosClient.post("/auth/signup", data);
       return { success: true, data: res.data?.data };
     } catch (err: any) {
-      const message = err.message || "Signup failed";
-      setError(message);
-      return { success: false, message };
+      const apiMessage =
+        err.response?.data?.error?.message === "Email already registered"
+          ? "Email đã được đăng ký"
+          : err.response?.data?.error?.message || "Đăng ký thất bại";
+      setError(apiMessage);
+      return { success: false, apiMessage };
     } finally {
       setLoading(false);
     }

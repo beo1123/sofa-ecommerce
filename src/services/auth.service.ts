@@ -15,9 +15,9 @@ export class AuthService {
 
   private async ensureCustomerRole(userId: number) {
     const role = await this.prisma.role.upsert({
-      where: { name: "CUSTOMER" },
+      where: { name: "Khách hàng" },
       update: {},
-      create: { name: "CUSTOMER" },
+      create: { name: "Khách hàng" },
     });
     await this.prisma.userRole.upsert({
       where: { userId_roleId: { userId, roleId: role.id } },
