@@ -20,18 +20,21 @@ import { useCreateOrder } from "@/hooks/orders/useCreateOrder";
 const phoneRegex = /^(\+?\d{7,15})$/;
 
 const newAddressSchema = z.object({
-  fullName: z.string().min(2, "Tên người nhận bắt buộc"),
   line1: z.string().min(3, "Địa chỉ bắt buộc"),
   city: z.string().min(2, "Thành phố bắt buộc"),
   province: z.string().optional(),
   country: z.string().min(2, "Quốc gia bắt buộc"),
-  phone: z.string().regex(phoneRegex, "Số điện thoại không hợp lệ"),
 });
 
 const CheckoutSchema = z.object({
   recipientName: z.string().min(2, "Tên người nhận bắt buộc"),
   phone: z.string().regex(phoneRegex, "Số điện thoại không hợp lệ"),
-  email: z.email("Email không hợp lệ").optional(),
+  email: z
+    .union([
+      z.string().trim().length(0), // cho phép rỗng
+      z.email({ message: "Email không hợp lệ" }),
+    ])
+    .optional(),
   addressId: z.string().optional().nullable(),
   useNewAddress: z.boolean().optional(),
   newAddress: newAddressSchema.optional(),
@@ -45,6 +48,7 @@ export default function CheckoutForm() {
   const subtotal = useAppSelector(selectCartSubtotal);
   const addresses = useAppSelector((s) => s.user?.addresses || []);
   const cartItems = useAppSelector((s) => s.cart.items);
+  const user = useAppSelector((s) => s.user);
 
   const { createOrder, loading, error } = useCreateOrder();
 
@@ -54,6 +58,7 @@ export default function CheckoutForm() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
     setValue,
   } = useForm<CheckoutFormData>({
@@ -62,6 +67,8 @@ export default function CheckoutForm() {
     defaultValues: {
       shippingOption: "standard",
       useNewAddress: !addresses.length,
+      recipientName: user?.displayName || "",
+      email: user?.email || "",
     },
   });
 
@@ -72,8 +79,21 @@ export default function CheckoutForm() {
     if (addresses.length && !watch("addressId")) {
       setValue("addressId", String(addresses[0].id));
     }
-  }, [addresses, setValue, watch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addresses, setValue]);
 
+  useEffect(() => {
+    if (user) {
+      const defaultAddr = user.addresses?.find((a) => a.isDefault) || user.addresses?.[0];
+      reset({
+        recipientName: user.displayName || "",
+        email: user.email || "",
+        addressId: defaultAddr ? String(defaultAddr.id) : undefined,
+        useNewAddress: !defaultAddr,
+        shippingOption: "standard",
+      });
+    }
+  }, [user, reset]);
   const onSubmit = async (data: CheckoutFormData) => {
     // ✅ Nếu giỏ hàng trống thì chuyển hướng
     if (!cartItems || cartItems.length === 0) {

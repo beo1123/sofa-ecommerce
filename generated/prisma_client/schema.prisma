@@ -195,35 +195,45 @@ model Inventory {
 // =========================================================
 
 model Order {
-  id                Int                  @id @default(autoincrement())
-  orderNumber       String               @unique
-  user              User?                @relation(fields: [userId], references: [id])
-  userId            Int?
-  guestToken        String?              @unique
-  status            OrderStatus          @default(CREATED)
-  subtotal          Decimal              @db.Decimal(12, 2)
-  shipping          Decimal              @default(0) @db.Decimal(12, 2)
-  tax               Decimal              @default(0) @db.Decimal(12, 2)
-  total             Decimal              @db.Decimal(12, 2)
-  paymentMethod     PaymentMethod
-  paymentMeta       PaymentMeta?
-  items             OrderItem[]
-  shippingAddress   Address?             @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
-  shippingAddressId Int?
-  billingAddress    Address?             @relation("BillingAddress", fields: [billingAddressId], references: [id])
-  billingAddressId  Int?
-  coupon            Coupon?              @relation(fields: [couponId], references: [id])
-  couponId          Int?
-  createdAt         DateTime             @default(now())
-  updatedAt         DateTime             @updatedAt
-  ReturnRequest     ReturnRequest[]
-  Refund            Refund[]
-  statusHistory     OrderStatusHistory[]
+  id          Int    @id @default(autoincrement())
+  orderNumber String @unique
 
-  @@index([orderNumber], map: "idx_order_number")
-  @@index([userId], map: "idx_order_user")
-  @@index([status], map: "idx_order_status")
-  @@index([createdAt], map: "idx_order_createdAt")
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id])
+
+  shippingAddressId Int?
+  shippingAddress   Address? @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+
+  billingAddressId Int?
+  billingAddress   Address? @relation("BillingAddress", fields: [billingAddressId], references: [id])
+
+  recipientName String
+  phone         String
+  email         String?
+  line1         String
+  city          String               @default("TPHCM")
+  province      String
+  country       String               @default("Việt Nam")
+  status        OrderStatus          @default(CREATED)
+  subtotal      Decimal              @db.Decimal(12, 2)
+  shipping      Decimal              @default(0) @db.Decimal(12, 2)
+  tax           Decimal              @default(0) @db.Decimal(12, 2)
+  total         Decimal              @db.Decimal(12, 2)
+  paymentMethod PaymentMethod
+  paymentMeta   PaymentMeta?
+  items         OrderItem[]
+  couponId      Int?
+  coupon        Coupon?              @relation(fields: [couponId], references: [id])
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  ReturnRequest ReturnRequest[]
+  Refund        Refund[]
+  statusHistory OrderStatusHistory[]
+
+  @@index([orderNumber])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
 }
 
 model OrderItem {

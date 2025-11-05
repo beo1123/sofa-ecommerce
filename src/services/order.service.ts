@@ -1,30 +1,43 @@
 import { PrismaClient, PaymentMethod, OrderStatus } from "../../generated/prisma_client";
 import { Decimal } from "@prisma/client/runtime/library";
-import { randomUUID } from "crypto";
+
+type CreateOrderPayload = {
+  userId?: number | null;
+  paymentMethod: PaymentMethod;
+  // giữ addressId để tương thích, nhưng Order vẫn snapshot fields
+  shipping: {
+    addressId?: number | null;
+    shippingCost?: number;
+    tax?: number;
+    line1: string;
+    city: string;
+    province: string;
+    country: string;
+  };
+  cart: {
+    items: {
+      sku: string;
+      quantity: number;
+      price: number;
+      productId: number;
+      variantId?: number | null;
+      name: string;
+    }[];
+    subtotal: number;
+  };
+  recipient: {
+    name: string;
+    phone: string;
+    email?: string | null;
+  };
+  couponId?: number | null;
+};
 
 export class OrderService {
   constructor(private prisma: PrismaClient) {}
 
-  async createOrder(payload: {
-    userId?: number | null;
-    guestEmail?: string | null;
-    guestToken?: string | null;
-    paymentMethod: PaymentMethod;
-    shipping: { addressId?: number | null; shippingCost?: number; tax?: number };
-    cart: {
-      items: {
-        sku: string;
-        quantity: number;
-        price: number;
-        productId: number;
-        variantId?: number | null;
-        name: string;
-      }[];
-      subtotal: number;
-    };
-    couponId?: number | null;
-  }) {
-    const { userId, guestEmail, paymentMethod, shipping, cart, couponId } = payload;
+  async createOrder(payload: CreateOrderPayload) {
+    const { userId, paymentMethod, shipping, cart, couponId, recipient } = payload;
 
     if (!cart?.items?.length) {
       throw { status: 400, body: { success: false, error: { message: "Cart is empty", code: "EMPTY_CART" } } };
@@ -60,31 +73,42 @@ export class OrderService {
       }
     }
 
-    // ✅ Guest token logic
-    let guestToken: string | null = payload.guestToken ?? null;
-    if (!userId && !guestToken && guestEmail) guestToken = randomUUID();
-
     try {
       const order = await this.prisma.$transaction(async (tx) => {
         const created = await tx.order.create({
           data: {
             orderNumber: `ORD-${Date.now()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`,
             userId: userId ?? undefined,
-            guestToken,
+
+            // status & money
             status: paymentMethod === "VNPAY" ? OrderStatus.PENDING_PAYMENT : OrderStatus.CREATED,
             subtotal: new Decimal(subtotal),
             shipping: new Decimal(shippingCost),
             tax: new Decimal(tax),
             total: new Decimal(total),
             paymentMethod,
+
+            // 🔥 snapshot recipient + address theo model mới
+            recipientName: recipient.name,
+            phone: recipient.phone,
+            email: recipient.email ?? null,
+            line1: shipping.line1,
+            city: shipping.city,
+            province: shipping.province,
+            country: shipping.country,
+
+            // để dành nếu cần tham chiếu ngoài (không bắt buộc dùng)
             shippingAddressId: shipping.addressId ?? undefined,
+
             couponId: couponId ?? undefined,
           },
         });
 
+        // items + reserve inventory
         for (const item of cart.items) {
           const inv = inventories.find((x) => x.sku === item.sku);
           if (!inv) continue;
+
           await tx.orderItem.create({
             data: {
               orderId: created.id,
@@ -97,6 +121,7 @@ export class OrderService {
               total: new Decimal(item.price * item.quantity),
             },
           });
+
           await tx.inventory.update({
             where: { id: inv.id },
             data: { reserved: { increment: item.quantity } },
@@ -124,7 +149,6 @@ export class OrderService {
           total: order.total,
           createdAt: order.createdAt,
         },
-        guestToken,
       };
     } catch (err: any) {
       console.error("OrderService.createOrder error:", err);
@@ -132,7 +156,7 @@ export class OrderService {
         status: 500,
         body: {
           success: false,
-          error: { message: "Failed to create order", code: "ORDER_TRANSACTION_FAILED", details: err.message },
+          error: { message: "Failed to create order", code: "ORDER_TRANSACTION_FAILED", details: err?.message },
         },
       };
     }

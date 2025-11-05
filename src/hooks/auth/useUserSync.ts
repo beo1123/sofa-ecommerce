@@ -21,6 +21,7 @@ export function useUserSync() {
         email: session.user.email!,
         displayName: session.user.name ?? "",
         roles: session.user.roles ?? "",
+        addresses: [],
       };
 
       if (!currentUser || currentUser.email !== user.email) {

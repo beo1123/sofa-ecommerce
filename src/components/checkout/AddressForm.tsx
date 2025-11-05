@@ -39,8 +39,6 @@ export default function AddressForm({ addresses, register, errors, watch }: Prop
 
       {useNewAddress && (
         <div className="grid md:grid-cols-2 gap-4 mt-4">
-          <Input label="Họ tên" {...register("newAddress.fullName")} error={errors.newAddress?.fullName?.message} />
-          <Input label="Số điện thoại" {...register("newAddress.phone")} error={errors.newAddress?.phone?.message} />
           <Input
             label="Địa chỉ"
             {...register("newAddress.line1")}
@@ -55,11 +53,7 @@ export default function AddressForm({ addresses, register, errors, watch }: Prop
             defaultValue="TPHCM"
             error={errors.newAddress?.city?.message}
           />
-          <Input
-            label="Tỉnh / Quận"
-            {...register("newAddress.province")}
-            error={errors.newAddress?.province?.message}
-          />
+          <Input label="Phường" {...register("newAddress.province")} error={errors.newAddress?.province?.message} />
           <Input
             label="Quốc gia"
             disabled

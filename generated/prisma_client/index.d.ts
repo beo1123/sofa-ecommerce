@@ -13421,24 +13421,24 @@ export namespace Prisma {
   export type OrderAvgAggregateOutputType = {
     id: number | null;
     userId: number | null;
+    shippingAddressId: number | null;
+    billingAddressId: number | null;
     subtotal: Decimal | null;
     shipping: Decimal | null;
     tax: Decimal | null;
     total: Decimal | null;
-    shippingAddressId: number | null;
-    billingAddressId: number | null;
     couponId: number | null;
   };
 
   export type OrderSumAggregateOutputType = {
     id: number | null;
     userId: number | null;
+    shippingAddressId: number | null;
+    billingAddressId: number | null;
     subtotal: Decimal | null;
     shipping: Decimal | null;
     tax: Decimal | null;
     total: Decimal | null;
-    shippingAddressId: number | null;
-    billingAddressId: number | null;
     couponId: number | null;
   };
 
@@ -13446,15 +13446,21 @@ export namespace Prisma {
     id: number | null;
     orderNumber: string | null;
     userId: number | null;
-    guestToken: string | null;
+    shippingAddressId: number | null;
+    billingAddressId: number | null;
+    recipientName: string | null;
+    phone: string | null;
+    email: string | null;
+    line1: string | null;
+    city: string | null;
+    province: string | null;
+    country: string | null;
     status: $Enums.OrderStatus | null;
     subtotal: Decimal | null;
     shipping: Decimal | null;
     tax: Decimal | null;
     total: Decimal | null;
     paymentMethod: $Enums.PaymentMethod | null;
-    shippingAddressId: number | null;
-    billingAddressId: number | null;
     couponId: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -13464,15 +13470,21 @@ export namespace Prisma {
     id: number | null;
     orderNumber: string | null;
     userId: number | null;
-    guestToken: string | null;
+    shippingAddressId: number | null;
+    billingAddressId: number | null;
+    recipientName: string | null;
+    phone: string | null;
+    email: string | null;
+    line1: string | null;
+    city: string | null;
+    province: string | null;
+    country: string | null;
     status: $Enums.OrderStatus | null;
     subtotal: Decimal | null;
     shipping: Decimal | null;
     tax: Decimal | null;
     total: Decimal | null;
     paymentMethod: $Enums.PaymentMethod | null;
-    shippingAddressId: number | null;
-    billingAddressId: number | null;
     couponId: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -13482,15 +13494,21 @@ export namespace Prisma {
     id: number;
     orderNumber: number;
     userId: number;
-    guestToken: number;
+    shippingAddressId: number;
+    billingAddressId: number;
+    recipientName: number;
+    phone: number;
+    email: number;
+    line1: number;
+    city: number;
+    province: number;
+    country: number;
     status: number;
     subtotal: number;
     shipping: number;
     tax: number;
     total: number;
     paymentMethod: number;
-    shippingAddressId: number;
-    billingAddressId: number;
     couponId: number;
     createdAt: number;
     updatedAt: number;
@@ -13500,24 +13518,24 @@ export namespace Prisma {
   export type OrderAvgAggregateInputType = {
     id?: true;
     userId?: true;
+    shippingAddressId?: true;
+    billingAddressId?: true;
     subtotal?: true;
     shipping?: true;
     tax?: true;
     total?: true;
-    shippingAddressId?: true;
-    billingAddressId?: true;
     couponId?: true;
   };
 
   export type OrderSumAggregateInputType = {
     id?: true;
     userId?: true;
+    shippingAddressId?: true;
+    billingAddressId?: true;
     subtotal?: true;
     shipping?: true;
     tax?: true;
     total?: true;
-    shippingAddressId?: true;
-    billingAddressId?: true;
     couponId?: true;
   };
 
@@ -13525,15 +13543,21 @@ export namespace Prisma {
     id?: true;
     orderNumber?: true;
     userId?: true;
-    guestToken?: true;
+    shippingAddressId?: true;
+    billingAddressId?: true;
+    recipientName?: true;
+    phone?: true;
+    email?: true;
+    line1?: true;
+    city?: true;
+    province?: true;
+    country?: true;
     status?: true;
     subtotal?: true;
     shipping?: true;
     tax?: true;
     total?: true;
     paymentMethod?: true;
-    shippingAddressId?: true;
-    billingAddressId?: true;
     couponId?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -13543,15 +13567,21 @@ export namespace Prisma {
     id?: true;
     orderNumber?: true;
     userId?: true;
-    guestToken?: true;
+    shippingAddressId?: true;
+    billingAddressId?: true;
+    recipientName?: true;
+    phone?: true;
+    email?: true;
+    line1?: true;
+    city?: true;
+    province?: true;
+    country?: true;
     status?: true;
     subtotal?: true;
     shipping?: true;
     tax?: true;
     total?: true;
     paymentMethod?: true;
-    shippingAddressId?: true;
-    billingAddressId?: true;
     couponId?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -13561,15 +13591,21 @@ export namespace Prisma {
     id?: true;
     orderNumber?: true;
     userId?: true;
-    guestToken?: true;
+    shippingAddressId?: true;
+    billingAddressId?: true;
+    recipientName?: true;
+    phone?: true;
+    email?: true;
+    line1?: true;
+    city?: true;
+    province?: true;
+    country?: true;
     status?: true;
     subtotal?: true;
     shipping?: true;
     tax?: true;
     total?: true;
     paymentMethod?: true;
-    shippingAddressId?: true;
-    billingAddressId?: true;
     couponId?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -13663,15 +13699,21 @@ export namespace Prisma {
     id: number;
     orderNumber: string;
     userId: number | null;
-    guestToken: string | null;
+    shippingAddressId: number | null;
+    billingAddressId: number | null;
+    recipientName: string;
+    phone: string;
+    email: string | null;
+    line1: string;
+    city: string;
+    province: string;
+    country: string;
     status: $Enums.OrderStatus;
     subtotal: Decimal;
     shipping: Decimal;
     tax: Decimal;
     total: Decimal;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId: number | null;
-    billingAddressId: number | null;
     couponId: number | null;
     createdAt: Date;
     updatedAt: Date;
@@ -13699,23 +13741,29 @@ export namespace Prisma {
       id?: boolean;
       orderNumber?: boolean;
       userId?: boolean;
-      guestToken?: boolean;
+      shippingAddressId?: boolean;
+      billingAddressId?: boolean;
+      recipientName?: boolean;
+      phone?: boolean;
+      email?: boolean;
+      line1?: boolean;
+      city?: boolean;
+      province?: boolean;
+      country?: boolean;
       status?: boolean;
       subtotal?: boolean;
       shipping?: boolean;
       tax?: boolean;
       total?: boolean;
       paymentMethod?: boolean;
-      shippingAddressId?: boolean;
-      billingAddressId?: boolean;
       couponId?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
       user?: boolean | Order$userArgs<ExtArgs>;
-      paymentMeta?: boolean | Order$paymentMetaArgs<ExtArgs>;
-      items?: boolean | Order$itemsArgs<ExtArgs>;
       shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
       billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
+      paymentMeta?: boolean | Order$paymentMetaArgs<ExtArgs>;
+      items?: boolean | Order$itemsArgs<ExtArgs>;
       coupon?: boolean | Order$couponArgs<ExtArgs>;
       ReturnRequest?: boolean | Order$ReturnRequestArgs<ExtArgs>;
       Refund?: boolean | Order$RefundArgs<ExtArgs>;
@@ -13731,15 +13779,21 @@ export namespace Prisma {
         id?: boolean;
         orderNumber?: boolean;
         userId?: boolean;
-        guestToken?: boolean;
+        shippingAddressId?: boolean;
+        billingAddressId?: boolean;
+        recipientName?: boolean;
+        phone?: boolean;
+        email?: boolean;
+        line1?: boolean;
+        city?: boolean;
+        province?: boolean;
+        country?: boolean;
         status?: boolean;
         subtotal?: boolean;
         shipping?: boolean;
         tax?: boolean;
         total?: boolean;
         paymentMethod?: boolean;
-        shippingAddressId?: boolean;
-        billingAddressId?: boolean;
         couponId?: boolean;
         createdAt?: boolean;
         updatedAt?: boolean;
@@ -13757,15 +13811,21 @@ export namespace Prisma {
         id?: boolean;
         orderNumber?: boolean;
         userId?: boolean;
-        guestToken?: boolean;
+        shippingAddressId?: boolean;
+        billingAddressId?: boolean;
+        recipientName?: boolean;
+        phone?: boolean;
+        email?: boolean;
+        line1?: boolean;
+        city?: boolean;
+        province?: boolean;
+        country?: boolean;
         status?: boolean;
         subtotal?: boolean;
         shipping?: boolean;
         tax?: boolean;
         total?: boolean;
         paymentMethod?: boolean;
-        shippingAddressId?: boolean;
-        billingAddressId?: boolean;
         couponId?: boolean;
         createdAt?: boolean;
         updatedAt?: boolean;
@@ -13781,15 +13841,21 @@ export namespace Prisma {
     id?: boolean;
     orderNumber?: boolean;
     userId?: boolean;
-    guestToken?: boolean;
+    shippingAddressId?: boolean;
+    billingAddressId?: boolean;
+    recipientName?: boolean;
+    phone?: boolean;
+    email?: boolean;
+    line1?: boolean;
+    city?: boolean;
+    province?: boolean;
+    country?: boolean;
     status?: boolean;
     subtotal?: boolean;
     shipping?: boolean;
     tax?: boolean;
     total?: boolean;
     paymentMethod?: boolean;
-    shippingAddressId?: boolean;
-    billingAddressId?: boolean;
     couponId?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -13799,15 +13865,21 @@ export namespace Prisma {
     | "id"
     | "orderNumber"
     | "userId"
-    | "guestToken"
+    | "shippingAddressId"
+    | "billingAddressId"
+    | "recipientName"
+    | "phone"
+    | "email"
+    | "line1"
+    | "city"
+    | "province"
+    | "country"
     | "status"
     | "subtotal"
     | "shipping"
     | "tax"
     | "total"
     | "paymentMethod"
-    | "shippingAddressId"
-    | "billingAddressId"
     | "couponId"
     | "createdAt"
     | "updatedAt",
@@ -13815,10 +13887,10 @@ export namespace Prisma {
   >;
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>;
-    paymentMeta?: boolean | Order$paymentMetaArgs<ExtArgs>;
-    items?: boolean | Order$itemsArgs<ExtArgs>;
     shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>;
     billingAddress?: boolean | Order$billingAddressArgs<ExtArgs>;
+    paymentMeta?: boolean | Order$paymentMetaArgs<ExtArgs>;
+    items?: boolean | Order$itemsArgs<ExtArgs>;
     coupon?: boolean | Order$couponArgs<ExtArgs>;
     ReturnRequest?: boolean | Order$ReturnRequestArgs<ExtArgs>;
     Refund?: boolean | Order$RefundArgs<ExtArgs>;
@@ -13842,10 +13914,10 @@ export namespace Prisma {
     name: "Order";
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null;
-      paymentMeta: Prisma.$PaymentMetaPayload<ExtArgs> | null;
-      items: Prisma.$OrderItemPayload<ExtArgs>[];
       shippingAddress: Prisma.$AddressPayload<ExtArgs> | null;
       billingAddress: Prisma.$AddressPayload<ExtArgs> | null;
+      paymentMeta: Prisma.$PaymentMetaPayload<ExtArgs> | null;
+      items: Prisma.$OrderItemPayload<ExtArgs>[];
       coupon: Prisma.$CouponPayload<ExtArgs> | null;
       ReturnRequest: Prisma.$ReturnRequestPayload<ExtArgs>[];
       Refund: Prisma.$RefundPayload<ExtArgs>[];
@@ -13856,15 +13928,21 @@ export namespace Prisma {
         id: number;
         orderNumber: string;
         userId: number | null;
-        guestToken: string | null;
+        shippingAddressId: number | null;
+        billingAddressId: number | null;
+        recipientName: string;
+        phone: string;
+        email: string | null;
+        line1: string;
+        city: string;
+        province: string;
+        country: string;
         status: $Enums.OrderStatus;
         subtotal: Prisma.Decimal;
         shipping: Prisma.Decimal;
         tax: Prisma.Decimal;
         total: Prisma.Decimal;
         paymentMethod: $Enums.PaymentMethod;
-        shippingAddressId: number | null;
-        billingAddressId: number | null;
         couponId: number | null;
         createdAt: Date;
         updatedAt: Date;
@@ -14352,19 +14430,6 @@ export namespace Prisma {
       ExtArgs,
       GlobalOmitOptions
     >;
-    paymentMeta<T extends Order$paymentMetaArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$paymentMetaArgs<ExtArgs>>
-    ): Prisma__PaymentMetaClient<
-      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >;
-    items<T extends Order$itemsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Order$itemsArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
-    >;
     shippingAddress<T extends Order$shippingAddressArgs<ExtArgs> = {}>(
       args?: Subset<T, Order$shippingAddressArgs<ExtArgs>>
     ): Prisma__AddressClient<
@@ -14380,6 +14445,19 @@ export namespace Prisma {
       null,
       ExtArgs,
       GlobalOmitOptions
+    >;
+    paymentMeta<T extends Order$paymentMetaArgs<ExtArgs> = {}>(
+      args?: Subset<T, Order$paymentMetaArgs<ExtArgs>>
+    ): Prisma__PaymentMetaClient<
+      $Result.GetResult<Prisma.$PaymentMetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >;
+    items<T extends Order$itemsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Order$itemsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null
     >;
     coupon<T extends Order$couponArgs<ExtArgs> = {}>(
       args?: Subset<T, Order$couponArgs<ExtArgs>>
@@ -14436,15 +14514,21 @@ export namespace Prisma {
     readonly id: FieldRef<"Order", "Int">;
     readonly orderNumber: FieldRef<"Order", "String">;
     readonly userId: FieldRef<"Order", "Int">;
-    readonly guestToken: FieldRef<"Order", "String">;
+    readonly shippingAddressId: FieldRef<"Order", "Int">;
+    readonly billingAddressId: FieldRef<"Order", "Int">;
+    readonly recipientName: FieldRef<"Order", "String">;
+    readonly phone: FieldRef<"Order", "String">;
+    readonly email: FieldRef<"Order", "String">;
+    readonly line1: FieldRef<"Order", "String">;
+    readonly city: FieldRef<"Order", "String">;
+    readonly province: FieldRef<"Order", "String">;
+    readonly country: FieldRef<"Order", "String">;
     readonly status: FieldRef<"Order", "OrderStatus">;
     readonly subtotal: FieldRef<"Order", "Decimal">;
     readonly shipping: FieldRef<"Order", "Decimal">;
     readonly tax: FieldRef<"Order", "Decimal">;
     readonly total: FieldRef<"Order", "Decimal">;
     readonly paymentMethod: FieldRef<"Order", "PaymentMethod">;
-    readonly shippingAddressId: FieldRef<"Order", "Int">;
-    readonly billingAddressId: FieldRef<"Order", "Int">;
     readonly couponId: FieldRef<"Order", "Int">;
     readonly createdAt: FieldRef<"Order", "DateTime">;
     readonly updatedAt: FieldRef<"Order", "DateTime">;
@@ -14862,6 +14946,44 @@ export namespace Prisma {
   };
 
   /**
+   * Order.shippingAddress
+   */
+  export type Order$shippingAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null;
+    where?: AddressWhereInput;
+  };
+
+  /**
+   * Order.billingAddress
+   */
+  export type Order$billingAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null;
+    where?: AddressWhereInput;
+  };
+
+  /**
    * Order.paymentMeta
    */
   export type Order$paymentMetaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14902,44 +15024,6 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     distinct?: OrderItemScalarFieldEnum | OrderItemScalarFieldEnum[];
-  };
-
-  /**
-   * Order.shippingAddress
-   */
-  export type Order$shippingAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null;
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null;
-    where?: AddressWhereInput;
-  };
-
-  /**
-   * Order.billingAddress
-   */
-  export type Order$billingAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null;
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null;
-    where?: AddressWhereInput;
   };
 
   /**
@@ -29489,15 +29573,21 @@ export namespace Prisma {
     id: "id";
     orderNumber: "orderNumber";
     userId: "userId";
-    guestToken: "guestToken";
+    shippingAddressId: "shippingAddressId";
+    billingAddressId: "billingAddressId";
+    recipientName: "recipientName";
+    phone: "phone";
+    email: "email";
+    line1: "line1";
+    city: "city";
+    province: "province";
+    country: "country";
     status: "status";
     subtotal: "subtotal";
     shipping: "shipping";
     tax: "tax";
     total: "total";
     paymentMethod: "paymentMethod";
-    shippingAddressId: "shippingAddressId";
-    billingAddressId: "billingAddressId";
     couponId: "couponId";
     createdAt: "createdAt";
     updatedAt: "updatedAt";
@@ -30442,23 +30532,29 @@ export namespace Prisma {
     id?: IntFilter<"Order"> | number;
     orderNumber?: StringFilter<"Order"> | string;
     userId?: IntNullableFilter<"Order"> | number | null;
-    guestToken?: StringNullableFilter<"Order"> | string | null;
+    shippingAddressId?: IntNullableFilter<"Order"> | number | null;
+    billingAddressId?: IntNullableFilter<"Order"> | number | null;
+    recipientName?: StringFilter<"Order"> | string;
+    phone?: StringFilter<"Order"> | string;
+    email?: StringNullableFilter<"Order"> | string | null;
+    line1?: StringFilter<"Order"> | string;
+    city?: StringFilter<"Order"> | string;
+    province?: StringFilter<"Order"> | string;
+    country?: StringFilter<"Order"> | string;
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     total?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod;
-    shippingAddressId?: IntNullableFilter<"Order"> | number | null;
-    billingAddressId?: IntNullableFilter<"Order"> | number | null;
     couponId?: IntNullableFilter<"Order"> | number | null;
     createdAt?: DateTimeFilter<"Order"> | Date | string;
     updatedAt?: DateTimeFilter<"Order"> | Date | string;
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
-    paymentMeta?: XOR<PaymentMetaNullableScalarRelationFilter, PaymentMetaWhereInput> | null;
-    items?: OrderItemListRelationFilter;
     shippingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
     billingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
+    paymentMeta?: XOR<PaymentMetaNullableScalarRelationFilter, PaymentMetaWhereInput> | null;
+    items?: OrderItemListRelationFilter;
     coupon?: XOR<CouponNullableScalarRelationFilter, CouponWhereInput> | null;
     ReturnRequest?: ReturnRequestListRelationFilter;
     Refund?: RefundListRelationFilter;
@@ -30469,23 +30565,29 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrderInput | SortOrder;
-    guestToken?: SortOrderInput | SortOrder;
+    shippingAddressId?: SortOrderInput | SortOrder;
+    billingAddressId?: SortOrderInput | SortOrder;
+    recipientName?: SortOrder;
+    phone?: SortOrder;
+    email?: SortOrderInput | SortOrder;
+    line1?: SortOrder;
+    city?: SortOrder;
+    province?: SortOrder;
+    country?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
     paymentMethod?: SortOrder;
-    shippingAddressId?: SortOrderInput | SortOrder;
-    billingAddressId?: SortOrderInput | SortOrder;
     couponId?: SortOrderInput | SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
     user?: UserOrderByWithRelationInput;
-    paymentMeta?: PaymentMetaOrderByWithRelationInput;
-    items?: OrderItemOrderByRelationAggregateInput;
     shippingAddress?: AddressOrderByWithRelationInput;
     billingAddress?: AddressOrderByWithRelationInput;
+    paymentMeta?: PaymentMetaOrderByWithRelationInput;
+    items?: OrderItemOrderByRelationAggregateInput;
     coupon?: CouponOrderByWithRelationInput;
     ReturnRequest?: ReturnRequestOrderByRelationAggregateInput;
     Refund?: RefundOrderByRelationAggregateInput;
@@ -30496,48 +30598,60 @@ export namespace Prisma {
     {
       id?: number;
       orderNumber?: string;
-      guestToken?: string;
       AND?: OrderWhereInput | OrderWhereInput[];
       OR?: OrderWhereInput[];
       NOT?: OrderWhereInput | OrderWhereInput[];
       userId?: IntNullableFilter<"Order"> | number | null;
+      shippingAddressId?: IntNullableFilter<"Order"> | number | null;
+      billingAddressId?: IntNullableFilter<"Order"> | number | null;
+      recipientName?: StringFilter<"Order"> | string;
+      phone?: StringFilter<"Order"> | string;
+      email?: StringNullableFilter<"Order"> | string | null;
+      line1?: StringFilter<"Order"> | string;
+      city?: StringFilter<"Order"> | string;
+      province?: StringFilter<"Order"> | string;
+      country?: StringFilter<"Order"> | string;
       status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
       subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
       shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
       tax?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
       total?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
       paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod;
-      shippingAddressId?: IntNullableFilter<"Order"> | number | null;
-      billingAddressId?: IntNullableFilter<"Order"> | number | null;
       couponId?: IntNullableFilter<"Order"> | number | null;
       createdAt?: DateTimeFilter<"Order"> | Date | string;
       updatedAt?: DateTimeFilter<"Order"> | Date | string;
       user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null;
-      paymentMeta?: XOR<PaymentMetaNullableScalarRelationFilter, PaymentMetaWhereInput> | null;
-      items?: OrderItemListRelationFilter;
       shippingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
       billingAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null;
+      paymentMeta?: XOR<PaymentMetaNullableScalarRelationFilter, PaymentMetaWhereInput> | null;
+      items?: OrderItemListRelationFilter;
       coupon?: XOR<CouponNullableScalarRelationFilter, CouponWhereInput> | null;
       ReturnRequest?: ReturnRequestListRelationFilter;
       Refund?: RefundListRelationFilter;
       statusHistory?: OrderStatusHistoryListRelationFilter;
     },
-    "id" | "orderNumber" | "guestToken"
+    "id" | "orderNumber"
   >;
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrderInput | SortOrder;
-    guestToken?: SortOrderInput | SortOrder;
+    shippingAddressId?: SortOrderInput | SortOrder;
+    billingAddressId?: SortOrderInput | SortOrder;
+    recipientName?: SortOrder;
+    phone?: SortOrder;
+    email?: SortOrderInput | SortOrder;
+    line1?: SortOrder;
+    city?: SortOrder;
+    province?: SortOrder;
+    country?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
     paymentMethod?: SortOrder;
-    shippingAddressId?: SortOrderInput | SortOrder;
-    billingAddressId?: SortOrderInput | SortOrder;
     couponId?: SortOrderInput | SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
@@ -30555,15 +30669,21 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Order"> | number;
     orderNumber?: StringWithAggregatesFilter<"Order"> | string;
     userId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
-    guestToken?: StringNullableWithAggregatesFilter<"Order"> | string | null;
+    shippingAddressId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
+    billingAddressId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
+    recipientName?: StringWithAggregatesFilter<"Order"> | string;
+    phone?: StringWithAggregatesFilter<"Order"> | string;
+    email?: StringNullableWithAggregatesFilter<"Order"> | string | null;
+    line1?: StringWithAggregatesFilter<"Order"> | string;
+    city?: StringWithAggregatesFilter<"Order"> | string;
+    province?: StringWithAggregatesFilter<"Order"> | string;
+    country?: StringWithAggregatesFilter<"Order"> | string;
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus;
     subtotal?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     tax?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     total?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodWithAggregatesFilter<"Order"> | $Enums.PaymentMethod;
-    shippingAddressId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
-    billingAddressId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
     couponId?: IntNullableWithAggregatesFilter<"Order"> | number | null;
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string;
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string;
@@ -32093,7 +32213,13 @@ export namespace Prisma {
 
   export type OrderCreateInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -32103,10 +32229,10 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -32117,15 +32243,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -32138,7 +32270,13 @@ export namespace Prisma {
 
   export type OrderUpdateInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -32148,10 +32286,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -32162,15 +32300,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -32185,15 +32329,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -32201,7 +32351,13 @@ export namespace Prisma {
 
   export type OrderUpdateManyMutationInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -32216,15 +32372,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -33963,14 +34125,14 @@ export namespace Prisma {
     isNot?: UserWhereInput | null;
   };
 
-  export type PaymentMetaNullableScalarRelationFilter = {
-    is?: PaymentMetaWhereInput | null;
-    isNot?: PaymentMetaWhereInput | null;
-  };
-
   export type AddressNullableScalarRelationFilter = {
     is?: AddressWhereInput | null;
     isNot?: AddressWhereInput | null;
+  };
+
+  export type PaymentMetaNullableScalarRelationFilter = {
+    is?: PaymentMetaWhereInput | null;
+    isNot?: PaymentMetaWhereInput | null;
   };
 
   export type CouponNullableScalarRelationFilter = {
@@ -34002,15 +34164,21 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrder;
-    guestToken?: SortOrder;
+    shippingAddressId?: SortOrder;
+    billingAddressId?: SortOrder;
+    recipientName?: SortOrder;
+    phone?: SortOrder;
+    email?: SortOrder;
+    line1?: SortOrder;
+    city?: SortOrder;
+    province?: SortOrder;
+    country?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
     paymentMethod?: SortOrder;
-    shippingAddressId?: SortOrder;
-    billingAddressId?: SortOrder;
     couponId?: SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
@@ -34019,12 +34187,12 @@ export namespace Prisma {
   export type OrderAvgOrderByAggregateInput = {
     id?: SortOrder;
     userId?: SortOrder;
+    shippingAddressId?: SortOrder;
+    billingAddressId?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
-    shippingAddressId?: SortOrder;
-    billingAddressId?: SortOrder;
     couponId?: SortOrder;
   };
 
@@ -34032,15 +34200,21 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrder;
-    guestToken?: SortOrder;
+    shippingAddressId?: SortOrder;
+    billingAddressId?: SortOrder;
+    recipientName?: SortOrder;
+    phone?: SortOrder;
+    email?: SortOrder;
+    line1?: SortOrder;
+    city?: SortOrder;
+    province?: SortOrder;
+    country?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
     paymentMethod?: SortOrder;
-    shippingAddressId?: SortOrder;
-    billingAddressId?: SortOrder;
     couponId?: SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
@@ -34050,15 +34224,21 @@ export namespace Prisma {
     id?: SortOrder;
     orderNumber?: SortOrder;
     userId?: SortOrder;
-    guestToken?: SortOrder;
+    shippingAddressId?: SortOrder;
+    billingAddressId?: SortOrder;
+    recipientName?: SortOrder;
+    phone?: SortOrder;
+    email?: SortOrder;
+    line1?: SortOrder;
+    city?: SortOrder;
+    province?: SortOrder;
+    country?: SortOrder;
     status?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
     paymentMethod?: SortOrder;
-    shippingAddressId?: SortOrder;
-    billingAddressId?: SortOrder;
     couponId?: SortOrder;
     createdAt?: SortOrder;
     updatedAt?: SortOrder;
@@ -34067,12 +34247,12 @@ export namespace Prisma {
   export type OrderSumOrderByAggregateInput = {
     id?: SortOrder;
     userId?: SortOrder;
+    shippingAddressId?: SortOrder;
+    billingAddressId?: SortOrder;
     subtotal?: SortOrder;
     shipping?: SortOrder;
     tax?: SortOrder;
     total?: SortOrder;
-    shippingAddressId?: SortOrder;
-    billingAddressId?: SortOrder;
     couponId?: SortOrder;
   };
 
@@ -35831,6 +36011,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput;
   };
 
+  export type AddressCreateNestedOneWithoutOrdersShippingInput = {
+    create?: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
+    connectOrCreate?: AddressCreateOrConnectWithoutOrdersShippingInput;
+    connect?: AddressWhereUniqueInput;
+  };
+
+  export type AddressCreateNestedOneWithoutOrdersBillingInput = {
+    create?: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
+    connectOrCreate?: AddressCreateOrConnectWithoutOrdersBillingInput;
+    connect?: AddressWhereUniqueInput;
+  };
+
   export type PaymentMetaCreateNestedOneWithoutOrderInput = {
     create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
@@ -35845,18 +36037,6 @@ export namespace Prisma {
     connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[];
     createMany?: OrderItemCreateManyOrderInputEnvelope;
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[];
-  };
-
-  export type AddressCreateNestedOneWithoutOrdersShippingInput = {
-    create?: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
-    connectOrCreate?: AddressCreateOrConnectWithoutOrdersShippingInput;
-    connect?: AddressWhereUniqueInput;
-  };
-
-  export type AddressCreateNestedOneWithoutOrdersBillingInput = {
-    create?: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
-    connectOrCreate?: AddressCreateOrConnectWithoutOrdersBillingInput;
-    connect?: AddressWhereUniqueInput;
   };
 
   export type CouponCreateNestedOneWithoutOrderInput = {
@@ -35966,6 +36146,32 @@ export namespace Prisma {
     >;
   };
 
+  export type AddressUpdateOneWithoutOrdersShippingNestedInput = {
+    create?: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
+    connectOrCreate?: AddressCreateOrConnectWithoutOrdersShippingInput;
+    upsert?: AddressUpsertWithoutOrdersShippingInput;
+    disconnect?: AddressWhereInput | boolean;
+    delete?: AddressWhereInput | boolean;
+    connect?: AddressWhereUniqueInput;
+    update?: XOR<
+      XOR<AddressUpdateToOneWithWhereWithoutOrdersShippingInput, AddressUpdateWithoutOrdersShippingInput>,
+      AddressUncheckedUpdateWithoutOrdersShippingInput
+    >;
+  };
+
+  export type AddressUpdateOneWithoutOrdersBillingNestedInput = {
+    create?: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
+    connectOrCreate?: AddressCreateOrConnectWithoutOrdersBillingInput;
+    upsert?: AddressUpsertWithoutOrdersBillingInput;
+    disconnect?: AddressWhereInput | boolean;
+    delete?: AddressWhereInput | boolean;
+    connect?: AddressWhereUniqueInput;
+    update?: XOR<
+      XOR<AddressUpdateToOneWithWhereWithoutOrdersBillingInput, AddressUpdateWithoutOrdersBillingInput>,
+      AddressUncheckedUpdateWithoutOrdersBillingInput
+    >;
+  };
+
   export type PaymentMetaUpdateOneWithoutOrderNestedInput = {
     create?: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
     connectOrCreate?: PaymentMetaCreateOrConnectWithoutOrderInput;
@@ -35994,32 +36200,6 @@ export namespace Prisma {
     update?: OrderItemUpdateWithWhereUniqueWithoutOrderInput | OrderItemUpdateWithWhereUniqueWithoutOrderInput[];
     updateMany?: OrderItemUpdateManyWithWhereWithoutOrderInput | OrderItemUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[];
-  };
-
-  export type AddressUpdateOneWithoutOrdersShippingNestedInput = {
-    create?: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
-    connectOrCreate?: AddressCreateOrConnectWithoutOrdersShippingInput;
-    upsert?: AddressUpsertWithoutOrdersShippingInput;
-    disconnect?: AddressWhereInput | boolean;
-    delete?: AddressWhereInput | boolean;
-    connect?: AddressWhereUniqueInput;
-    update?: XOR<
-      XOR<AddressUpdateToOneWithWhereWithoutOrdersShippingInput, AddressUpdateWithoutOrdersShippingInput>,
-      AddressUncheckedUpdateWithoutOrdersShippingInput
-    >;
-  };
-
-  export type AddressUpdateOneWithoutOrdersBillingNestedInput = {
-    create?: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
-    connectOrCreate?: AddressCreateOrConnectWithoutOrdersBillingInput;
-    upsert?: AddressUpsertWithoutOrdersBillingInput;
-    disconnect?: AddressWhereInput | boolean;
-    delete?: AddressWhereInput | boolean;
-    connect?: AddressWhereUniqueInput;
-    update?: XOR<
-      XOR<AddressUpdateToOneWithWhereWithoutOrdersBillingInput, AddressUpdateWithoutOrdersBillingInput>,
-      AddressUncheckedUpdateWithoutOrdersBillingInput
-    >;
   };
 
   export type CouponUpdateOneWithoutOrderNestedInput = {
@@ -37411,7 +37591,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutUserInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -37420,10 +37606,10 @@ export namespace Prisma {
     paymentMethod: $Enums.PaymentMethod;
     createdAt?: Date | string;
     updatedAt?: Date | string;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -37433,15 +37619,21 @@ export namespace Prisma {
   export type OrderUncheckedCreateWithoutUserInput = {
     id?: number;
     orderNumber: string;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -37660,15 +37852,21 @@ export namespace Prisma {
     id?: IntFilter<"Order"> | number;
     orderNumber?: StringFilter<"Order"> | string;
     userId?: IntNullableFilter<"Order"> | number | null;
-    guestToken?: StringNullableFilter<"Order"> | string | null;
+    shippingAddressId?: IntNullableFilter<"Order"> | number | null;
+    billingAddressId?: IntNullableFilter<"Order"> | number | null;
+    recipientName?: StringFilter<"Order"> | string;
+    phone?: StringFilter<"Order"> | string;
+    email?: StringNullableFilter<"Order"> | string | null;
+    line1?: StringFilter<"Order"> | string;
+    city?: StringFilter<"Order"> | string;
+    province?: StringFilter<"Order"> | string;
+    country?: StringFilter<"Order"> | string;
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     subtotal?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     total?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod;
-    shippingAddressId?: IntNullableFilter<"Order"> | number | null;
-    billingAddressId?: IntNullableFilter<"Order"> | number | null;
     couponId?: IntNullableFilter<"Order"> | number | null;
     createdAt?: DateTimeFilter<"Order"> | Date | string;
     updatedAt?: DateTimeFilter<"Order"> | Date | string;
@@ -38685,71 +38883,6 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>;
   };
 
-  export type PaymentMetaCreateWithoutOrderInput = {
-    provider: string;
-    transactionId?: string | null;
-    status: string;
-    amount: Decimal | DecimalJsLike | number | string;
-    raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?: Date | string | null;
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
-  };
-
-  export type PaymentMetaUncheckedCreateWithoutOrderInput = {
-    id?: number;
-    provider: string;
-    transactionId?: string | null;
-    status: string;
-    amount: Decimal | DecimalJsLike | number | string;
-    raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?: Date | string | null;
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
-  };
-
-  export type PaymentMetaCreateOrConnectWithoutOrderInput = {
-    where: PaymentMetaWhereUniqueInput;
-    create: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
-  };
-
-  export type OrderItemCreateWithoutOrderInput = {
-    sku?: string | null;
-    name: string;
-    price: Decimal | DecimalJsLike | number | string;
-    quantity: number;
-    total: Decimal | DecimalJsLike | number | string;
-    returned?: boolean;
-    createdAt?: Date | string;
-    product?: ProductCreateNestedOneWithoutOrderItemInput;
-    variant?: ProductVariantCreateNestedOneWithoutOrderItemInput;
-    ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderItemInput;
-  };
-
-  export type OrderItemUncheckedCreateWithoutOrderInput = {
-    id?: number;
-    productId?: number | null;
-    variantId?: number | null;
-    sku?: string | null;
-    name: string;
-    price: Decimal | DecimalJsLike | number | string;
-    quantity: number;
-    total: Decimal | DecimalJsLike | number | string;
-    returned?: boolean;
-    createdAt?: Date | string;
-    ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderItemInput;
-  };
-
-  export type OrderItemCreateOrConnectWithoutOrderInput = {
-    where: OrderItemWhereUniqueInput;
-    create: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>;
-  };
-
-  export type OrderItemCreateManyOrderInputEnvelope = {
-    data: OrderItemCreateManyOrderInput | OrderItemCreateManyOrderInput[];
-    skipDuplicates?: boolean;
-  };
-
   export type AddressCreateWithoutOrdersShippingInput = {
     fullName: string;
     line1: string;
@@ -38832,6 +38965,71 @@ export namespace Prisma {
   export type AddressCreateOrConnectWithoutOrdersBillingInput = {
     where: AddressWhereUniqueInput;
     create: XOR<AddressCreateWithoutOrdersBillingInput, AddressUncheckedCreateWithoutOrdersBillingInput>;
+  };
+
+  export type PaymentMetaCreateWithoutOrderInput = {
+    provider: string;
+    transactionId?: string | null;
+    status: string;
+    amount: Decimal | DecimalJsLike | number | string;
+    raw?: NullableJsonNullValueInput | InputJsonValue;
+    capturedAt?: Date | string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type PaymentMetaUncheckedCreateWithoutOrderInput = {
+    id?: number;
+    provider: string;
+    transactionId?: string | null;
+    status: string;
+    amount: Decimal | DecimalJsLike | number | string;
+    raw?: NullableJsonNullValueInput | InputJsonValue;
+    capturedAt?: Date | string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+  };
+
+  export type PaymentMetaCreateOrConnectWithoutOrderInput = {
+    where: PaymentMetaWhereUniqueInput;
+    create: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
+  };
+
+  export type OrderItemCreateWithoutOrderInput = {
+    sku?: string | null;
+    name: string;
+    price: Decimal | DecimalJsLike | number | string;
+    quantity: number;
+    total: Decimal | DecimalJsLike | number | string;
+    returned?: boolean;
+    createdAt?: Date | string;
+    product?: ProductCreateNestedOneWithoutOrderItemInput;
+    variant?: ProductVariantCreateNestedOneWithoutOrderItemInput;
+    ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderItemInput;
+  };
+
+  export type OrderItemUncheckedCreateWithoutOrderInput = {
+    id?: number;
+    productId?: number | null;
+    variantId?: number | null;
+    sku?: string | null;
+    name: string;
+    price: Decimal | DecimalJsLike | number | string;
+    quantity: number;
+    total: Decimal | DecimalJsLike | number | string;
+    returned?: boolean;
+    createdAt?: Date | string;
+    ReturnRequest?: ReturnRequestUncheckedCreateNestedManyWithoutOrderItemInput;
+  };
+
+  export type OrderItemCreateOrConnectWithoutOrderInput = {
+    where: OrderItemWhereUniqueInput;
+    create: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>;
+  };
+
+  export type OrderItemCreateManyOrderInputEnvelope = {
+    data: OrderItemCreateManyOrderInput | OrderItemCreateManyOrderInput[];
+    skipDuplicates?: boolean;
   };
 
   export type CouponCreateWithoutOrderInput = {
@@ -39011,56 +39209,6 @@ export namespace Prisma {
     orderStatusHistory?: OrderStatusHistoryUncheckedUpdateManyWithoutActorNestedInput;
   };
 
-  export type PaymentMetaUpsertWithoutOrderInput = {
-    update: XOR<PaymentMetaUpdateWithoutOrderInput, PaymentMetaUncheckedUpdateWithoutOrderInput>;
-    create: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
-    where?: PaymentMetaWhereInput;
-  };
-
-  export type PaymentMetaUpdateToOneWithWhereWithoutOrderInput = {
-    where?: PaymentMetaWhereInput;
-    data: XOR<PaymentMetaUpdateWithoutOrderInput, PaymentMetaUncheckedUpdateWithoutOrderInput>;
-  };
-
-  export type PaymentMetaUpdateWithoutOrderInput = {
-    provider?: StringFieldUpdateOperationsInput | string;
-    transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
-    status?: StringFieldUpdateOperationsInput | string;
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
-    raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-  };
-
-  export type PaymentMetaUncheckedUpdateWithoutOrderInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    provider?: StringFieldUpdateOperationsInput | string;
-    transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
-    status?: StringFieldUpdateOperationsInput | string;
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
-    raw?: NullableJsonNullValueInput | InputJsonValue;
-    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-  };
-
-  export type OrderItemUpsertWithWhereUniqueWithoutOrderInput = {
-    where: OrderItemWhereUniqueInput;
-    update: XOR<OrderItemUpdateWithoutOrderInput, OrderItemUncheckedUpdateWithoutOrderInput>;
-    create: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>;
-  };
-
-  export type OrderItemUpdateWithWhereUniqueWithoutOrderInput = {
-    where: OrderItemWhereUniqueInput;
-    data: XOR<OrderItemUpdateWithoutOrderInput, OrderItemUncheckedUpdateWithoutOrderInput>;
-  };
-
-  export type OrderItemUpdateManyWithWhereWithoutOrderInput = {
-    where: OrderItemScalarWhereInput;
-    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutOrderInput>;
-  };
-
   export type AddressUpsertWithoutOrdersShippingInput = {
     update: XOR<AddressUpdateWithoutOrdersShippingInput, AddressUncheckedUpdateWithoutOrdersShippingInput>;
     create: XOR<AddressCreateWithoutOrdersShippingInput, AddressUncheckedCreateWithoutOrdersShippingInput>;
@@ -39155,6 +39303,56 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     ordersShipping?: OrderUncheckedUpdateManyWithoutShippingAddressNestedInput;
+  };
+
+  export type PaymentMetaUpsertWithoutOrderInput = {
+    update: XOR<PaymentMetaUpdateWithoutOrderInput, PaymentMetaUncheckedUpdateWithoutOrderInput>;
+    create: XOR<PaymentMetaCreateWithoutOrderInput, PaymentMetaUncheckedCreateWithoutOrderInput>;
+    where?: PaymentMetaWhereInput;
+  };
+
+  export type PaymentMetaUpdateToOneWithWhereWithoutOrderInput = {
+    where?: PaymentMetaWhereInput;
+    data: XOR<PaymentMetaUpdateWithoutOrderInput, PaymentMetaUncheckedUpdateWithoutOrderInput>;
+  };
+
+  export type PaymentMetaUpdateWithoutOrderInput = {
+    provider?: StringFieldUpdateOperationsInput | string;
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
+    status?: StringFieldUpdateOperationsInput | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    raw?: NullableJsonNullValueInput | InputJsonValue;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type PaymentMetaUncheckedUpdateWithoutOrderInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+    provider?: StringFieldUpdateOperationsInput | string;
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null;
+    status?: StringFieldUpdateOperationsInput | string;
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
+    raw?: NullableJsonNullValueInput | InputJsonValue;
+    capturedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+  };
+
+  export type OrderItemUpsertWithWhereUniqueWithoutOrderInput = {
+    where: OrderItemWhereUniqueInput;
+    update: XOR<OrderItemUpdateWithoutOrderInput, OrderItemUncheckedUpdateWithoutOrderInput>;
+    create: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput>;
+  };
+
+  export type OrderItemUpdateWithWhereUniqueWithoutOrderInput = {
+    where: OrderItemWhereUniqueInput;
+    data: XOR<OrderItemUpdateWithoutOrderInput, OrderItemUncheckedUpdateWithoutOrderInput>;
+  };
+
+  export type OrderItemUpdateManyWithWhereWithoutOrderInput = {
+    where: OrderItemScalarWhereInput;
+    data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutOrderInput>;
   };
 
   export type CouponUpsertWithoutOrderInput = {
@@ -39284,7 +39482,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutItemsInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39294,9 +39498,9 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -39307,15 +39511,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -39446,7 +39656,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutItemsInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -39456,9 +39672,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -39469,15 +39685,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -39587,7 +39809,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutStatusHistoryInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39597,10 +39825,10 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -39610,15 +39838,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -39684,7 +39918,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutStatusHistoryInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -39694,10 +39934,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -39707,15 +39947,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -39771,7 +40017,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutCouponInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -39781,10 +40033,10 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
     statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
@@ -39794,15 +40046,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     paymentMeta?: PaymentMetaUncheckedCreateNestedOneWithoutOrderInput;
@@ -40287,7 +40545,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutShippingAddressInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40297,9 +40561,9 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
+    billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
     paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
     items?: OrderItemCreateNestedManyWithoutOrderInput;
-    billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -40310,14 +40574,20 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -40340,7 +40610,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutBillingAddressInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40350,9 +40626,9 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
+    shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
     items?: OrderItemCreateNestedManyWithoutOrderInput;
-    shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -40363,14 +40639,20 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -40551,7 +40833,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutReturnRequestInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40561,10 +40849,10 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
     statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
@@ -40574,15 +40862,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -40670,7 +40964,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutReturnRequestInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40680,10 +40980,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
     statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
@@ -40693,15 +40993,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -40785,7 +41091,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutRefundInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40795,10 +41107,10 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    paymentMeta?: PaymentMetaCreateNestedOneWithoutOrderInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     statusHistory?: OrderStatusHistoryCreateNestedManyWithoutOrderInput;
@@ -40808,15 +41120,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -40872,7 +41190,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutRefundInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -40882,10 +41206,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
@@ -40895,15 +41219,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -40949,7 +41279,13 @@ export namespace Prisma {
 
   export type OrderCreateWithoutPaymentMetaInput = {
     orderNumber: string;
-    guestToken?: string | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
@@ -40959,9 +41295,9 @@ export namespace Prisma {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user?: UserCreateNestedOneWithoutOrdersInput;
-    items?: OrderItemCreateNestedManyWithoutOrderInput;
     shippingAddress?: AddressCreateNestedOneWithoutOrdersShippingInput;
     billingAddress?: AddressCreateNestedOneWithoutOrdersBillingInput;
+    items?: OrderItemCreateNestedManyWithoutOrderInput;
     coupon?: CouponCreateNestedOneWithoutOrderInput;
     ReturnRequest?: ReturnRequestCreateNestedManyWithoutOrderInput;
     Refund?: RefundCreateNestedManyWithoutOrderInput;
@@ -40972,15 +41308,21 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -41008,7 +41350,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutPaymentMetaInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41018,9 +41366,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -41031,15 +41379,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -41085,15 +41439,21 @@ export namespace Prisma {
   export type OrderCreateManyUserInput = {
     id?: number;
     orderNumber: string;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -41221,7 +41581,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutUserInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41230,10 +41596,10 @@ export namespace Prisma {
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -41243,15 +41609,21 @@ export namespace Prisma {
   export type OrderUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -41265,15 +41637,21 @@ export namespace Prisma {
   export type OrderUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -41947,22 +42325,34 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
-    billingAddressId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
   };
 
   export type OrderUpdateWithoutCouponInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -41972,10 +42362,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
-    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
-    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
+    paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
+    items?: OrderItemUpdateManyWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
     statusHistory?: OrderStatusHistoryUpdateManyWithoutOrderNestedInput;
@@ -41985,15 +42375,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     paymentMeta?: PaymentMetaUncheckedUpdateOneWithoutOrderNestedInput;
@@ -42007,15 +42403,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
@@ -42051,14 +42453,20 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    billingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    billingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -42068,14 +42476,20 @@ export namespace Prisma {
     id?: number;
     orderNumber: string;
     userId?: number | null;
-    guestToken?: string | null;
+    shippingAddressId?: number | null;
+    recipientName: string;
+    phone: string;
+    email?: string | null;
+    line1: string;
+    city?: string;
+    province: string;
+    country?: string;
     status?: $Enums.OrderStatus;
     subtotal: Decimal | DecimalJsLike | number | string;
     shipping?: Decimal | DecimalJsLike | number | string;
     tax?: Decimal | DecimalJsLike | number | string;
     total: Decimal | DecimalJsLike | number | string;
     paymentMethod: $Enums.PaymentMethod;
-    shippingAddressId?: number | null;
     couponId?: number | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -42083,7 +42497,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutShippingAddressInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42093,9 +42513,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
+    billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
     paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
     items?: OrderItemUpdateManyWithoutOrderNestedInput;
-    billingAddress?: AddressUpdateOneWithoutOrdersBillingNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -42106,14 +42526,20 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42128,14 +42554,20 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    billingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42143,7 +42575,13 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutBillingAddressInput = {
     orderNumber?: StringFieldUpdateOperationsInput | string;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
@@ -42153,9 +42591,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneWithoutOrdersNestedInput;
+    shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     paymentMeta?: PaymentMetaUpdateOneWithoutOrderNestedInput;
     items?: OrderItemUpdateManyWithoutOrderNestedInput;
-    shippingAddress?: AddressUpdateOneWithoutOrdersShippingNestedInput;
     coupon?: CouponUpdateOneWithoutOrderNestedInput;
     ReturnRequest?: ReturnRequestUpdateManyWithoutOrderNestedInput;
     Refund?: RefundUpdateManyWithoutOrderNestedInput;
@@ -42166,14 +42604,20 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -42188,14 +42632,20 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     orderNumber?: StringFieldUpdateOperationsInput | string;
     userId?: NullableIntFieldUpdateOperationsInput | number | null;
-    guestToken?: NullableStringFieldUpdateOperationsInput | string | null;
+    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
+    recipientName?: StringFieldUpdateOperationsInput | string;
+    phone?: StringFieldUpdateOperationsInput | string;
+    email?: NullableStringFieldUpdateOperationsInput | string | null;
+    line1?: StringFieldUpdateOperationsInput | string;
+    city?: StringFieldUpdateOperationsInput | string;
+    province?: StringFieldUpdateOperationsInput | string;
+    country?: StringFieldUpdateOperationsInput | string;
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     shipping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string;
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod;
-    shippingAddressId?: NullableIntFieldUpdateOperationsInput | number | null;
     couponId?: NullableIntFieldUpdateOperationsInput | number | null;
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;

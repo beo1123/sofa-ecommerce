@@ -1,11 +1,9 @@
 export type Address = {
   id: number;
-  fullName: string;
-  phone: string;
-  street: string;
+  line1: string;
   city: string;
-  district: string;
-  ward: string;
+  province: string;
+  country: string;
   isDefault?: boolean;
 };
 
