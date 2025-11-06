@@ -6,8 +6,15 @@ import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query
 import { prefetchProductDetail, productKeys } from "@/lib/products/queries";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
+type ProductPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = params;
   const data = await getProductDetaiSSR(slug);
   if (!data?.product) {
@@ -38,7 +45,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 /* ------------------ PAGE COMPONENT (SSR + React Query Hydration) ------------------ */
-export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
+export default async function ProductDetailPage({ params }: ProductPageProps) {
   const queryClient = new QueryClient();
   const { slug } = params;
   await prefetchProductDetail(queryClient, slug);
