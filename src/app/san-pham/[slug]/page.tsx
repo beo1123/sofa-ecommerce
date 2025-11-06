@@ -12,7 +12,7 @@ type ProductPageProps = {
 
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug }: { slug: string } = await params;
   const data = getProductDetaiSSR(slug);
   if (!data?.product) {
     return {
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 /* ------------------ PAGE COMPONENT (SSR + React Query Hydration) ------------------ */
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const queryClient = new QueryClient();
-  const { slug } = await params;
+  const { slug }: { slug: string } = await params;
   await prefetchProductDetail(queryClient, slug);
 
   const data: any = queryClient.getQueryData(productKeys.detail(slug));
