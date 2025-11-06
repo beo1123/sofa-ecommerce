@@ -6,12 +6,16 @@ import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query
 import { prefetchProductDetail, productKeys } from "@/lib/products/queries";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
-export type paramsType = Promise<{ slug: string }>;
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
 
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
-export async function generateMetadata(props: { params: paramsType }): Promise<Metadata> {
-  const { slug }= = await props.params;
-  const data = getProductDetaiSSR(slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
+  const data = await getProductDetaiSSR(slug);
   if (!data?.product) {
     return {
       title: "Sản phẩm không tồn tại – Sofa Ecommerce",
@@ -39,9 +43,10 @@ export async function generateMetadata(props: { params: paramsType }): Promise<M
 }
 
 /* ------------------ PAGE COMPONENT (SSR + React Query Hydration) ------------------ */
-export default async function ProductDetailPage(props: { params: paramsType }) {
+export default async function ProductDetailPage({ params }: PageProps) {
   const queryClient = new QueryClient();
-  const { slug } = await props.params;
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   await prefetchProductDetail(queryClient, slug);
   const data: any = queryClient.getQueryData(productKeys.detail(slug));
   const dehydratedState = dehydrate(queryClient);
