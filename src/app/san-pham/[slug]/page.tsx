@@ -1,21 +1,20 @@
 // app/(store)/san-pham/[slug]/page.tsx
 import { getProductDetaiSSR } from "@/lib/products/productSSR";
 import Script from "next/script";
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { prefetchProductDetail, productKeys } from "@/lib/products/queries";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
-export async function generateMetadata( { params, searchParams }: PageProps,parent: ResolvingMetadata): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
+export async function generateMetadata(props: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
+  const slug = params.slug;
   const data = await getProductDetaiSSR(slug);
   if (!data?.product) {
     return {
@@ -44,13 +43,15 @@ export async function generateMetadata( { params, searchParams }: PageProps,pare
 }
 
 /* ------------------ PAGE COMPONENT (SSR + React Query Hydration) ------------------ */
-export default async function ProductDetailPage({ params }: PageProps) {
+export default async function ProductDetailPage(props: PageProps) {
   const queryClient = new QueryClient();
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
+  const params = await props.params;
+  const slug = params.slug;
+
   await prefetchProductDetail(queryClient, slug);
   const data: any = queryClient.getQueryData(productKeys.detail(slug));
   const dehydratedState = dehydrate(queryClient);
+
   if (!data?.product) {
     return (
       <main className="container mx-auto py-12">
