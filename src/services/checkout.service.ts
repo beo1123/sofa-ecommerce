@@ -1,6 +1,6 @@
 // src/services/checkout.service.ts
 import { CartItemInput } from "@/types/cart/cart";
-import { PrismaClient } from "../../generated/prisma_client";
+import { PrismaClient } from "@prisma/client";
 
 export class CheckoutService {
   constructor(private prisma: PrismaClient) {}

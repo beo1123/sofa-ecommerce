@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../../generated/prisma_client";
+import { PrismaClient } from "@prisma/client";
 import { ProductService } from "@/services/products.service";
 import { serializeData } from "../helpers";
 

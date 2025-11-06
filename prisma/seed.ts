@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { PrismaClient } from "../generated/prisma_client/index.js";
+
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 

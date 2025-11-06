@@ -1,17 +1,15 @@
+// lib/authOptions.ts
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthOptions, User } from "next-auth";
-import { PrismaClient as CustomPrismaClient } from "../../generated/prisma_client";
-import { PrismaClient as DefaultPrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { AuthService } from "@/services/auth.service";
 import { Adapter } from "next-auth/adapters";
 
-const prisma = new CustomPrismaClient();
 const authService = new AuthService(prisma);
-const adapterPrisma = new DefaultPrismaClient();
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(adapterPrisma) as unknown as Adapter,
+  adapter: PrismaAdapter(prisma) as unknown as Adapter,
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [

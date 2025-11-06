@@ -1,4 +1,4 @@
-import { PrismaClient, PaymentMethod, OrderStatus } from "../../generated/prisma_client";
+import { PrismaClient, PaymentMethod, OrderStatus } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
 
 type CreateOrderPayload = {

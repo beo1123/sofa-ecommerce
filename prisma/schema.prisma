@@ -1,10 +1,11 @@
 // =========================================================
-// Prisma Schema for Sofa E-commerce
+// Prisma Schema for Sofa E-commerce 
 // =========================================================
+
+//output   = "../generated/prisma_client"
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma_client"
 }
 
 datasource db {

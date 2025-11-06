@@ -1,6 +1,6 @@
 // src/app/api/checkout/route.ts
 import { NextResponse } from "next/server";
-import { PrismaClient } from "../../../../generated/prisma_client";
+import { PrismaClient } from "@prisma/client";
 import { CheckoutService } from "@/services/checkout.service";
 import { normalizeError, validateRequest } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";

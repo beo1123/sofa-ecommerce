@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "../../../../generated/prisma_client";
+import { PrismaClient } from "@prisma/client";
 import { OrderService } from "@/services/order.service";
 import { normalizeError, validateRequest } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";

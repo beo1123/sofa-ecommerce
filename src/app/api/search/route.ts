@@ -1,5 +1,5 @@
 import { ProductService } from "@/services/products.service";
-import { PrismaClient } from "../../../../generated/prisma_client";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { normalizeError, ok } from "@/server/utils/api";
 const prisma = new PrismaClient();

@@ -1,6 +1,6 @@
-import { PrismaClient } from "../../generated/prisma_client";
 import { fail, ok } from "@/server/utils/api";
 import { SignupInput } from "@/types/auth/signup";
+import { PrismaClient } from "@prisma/client";
 import { compare, hash } from "bcryptjs";
 
 export class AuthService {

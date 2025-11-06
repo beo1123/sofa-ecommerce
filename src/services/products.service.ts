@@ -1,5 +1,5 @@
-import { PrismaClient, Prisma } from "../../generated/prisma_client";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 export class ProductService {
   constructor(private prisma: PrismaClient) {}

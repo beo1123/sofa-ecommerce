@@ -1,5 +1,5 @@
 import { normalizeError, validateRequest } from "@/server/utils/api";
-import { PrismaClient } from "../../../../../generated/prisma_client";
+import { PrismaClient } from "@prisma/client";
 import { AuthService } from "@/services/auth.service";
 import { NextResponse } from "next/server";
 
