@@ -7,11 +7,8 @@ import { prefetchProductDetail, productKeys } from "@/lib/products/queries";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
 type ProductPageProps = {
-  params: {
-    Promise<{ slug: string }>;
-  };
+  params: Promise<{ slug: string }>;
 };
-
 
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
