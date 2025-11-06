@@ -81,7 +81,7 @@ export default [
           useTabs: false,
           trailingComma: "es5",
           printWidth: 120,
-          endOfLine: "crlf",
+          endOfLine: "lf",
           jsxSingleQuote: false,
           bracketSameLine: true,
         },

@@ -27,7 +27,7 @@ const lfStore = localForage.createInstance({
 
 // ---- migrations ----
 const PERSIST_VERSION = 1;
-// eslint-disable-next-line no-unused-vars
+
 const migrations: Record<number, (state: any) => any> = {
   1: (state) => {
     if (!state) return state;
