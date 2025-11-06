@@ -66,7 +66,7 @@ export class AuthService {
       id: user.id,
       email: user.email,
       displayName: user.displayName,
-      roles: user.userRoles.map((ur) => ur.role.name),
+      roles: user.userRoles[0]?.role.name,
     };
   }
 }

@@ -4,6 +4,10 @@ import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
 export const metadata: Metadata = {
   title: "Danh sách sản phẩm – Sofa Ecommerce",
   description: "Khám phá bộ sưu tập sofa cao cấp, nhiều kiểu dáng và màu sắc.",
@@ -18,18 +22,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ProductsPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const sp = await searchParams;
-  const page = Number(sp.page ?? 1);
-  const perPage = Number(sp.perPage ?? 12);
+export default async function ProductsPage(props: PageProps) {
+  const searchParams = await props.searchParams;
+
+  const page = Number(searchParams.page ?? 1);
+  const perPage = Number(searchParams.perPage ?? 12);
 
   const filterParams: ProductQueryParams = {
     page,
     perPage,
-    category: sp.category,
-    priceMin: sp.priceMin ? Number(sp.priceMin) : undefined,
-    priceMax: sp.priceMax ? Number(sp.priceMax) : undefined,
-    color: sp.color,
+    category: searchParams.category as string | undefined,
+    priceMin: searchParams.priceMin ? Number(searchParams.priceMin) : undefined,
+    priceMax: searchParams.priceMax ? Number(searchParams.priceMax) : undefined,
+    color: searchParams.color as string | undefined,
   };
 
   const queryClient = new QueryClient();

@@ -1,23 +1,24 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 import { PrismaClient as CustomPrismaClient } from "../../generated/prisma_client";
 import { PrismaClient as DefaultPrismaClient } from "@prisma/client";
 import { AuthService } from "@/services/auth.service";
+import { Adapter } from "next-auth/adapters";
 
 const prisma = new CustomPrismaClient();
 const authService = new AuthService(prisma);
 const adapterPrisma = new DefaultPrismaClient();
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(adapterPrisma),
+  adapter: PrismaAdapter(adapterPrisma) as unknown as Adapter,
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     Credentials({
       name: "Email & Password",
       credentials: { email: {}, password: {} },
-      async authorize(creds) {
+      async authorize(creds): Promise<User | null> {
         if (!creds?.email || !creds?.password) {
           throw new Error("Vui lòng nhập email và mật khẩu");
         }
@@ -45,20 +46,20 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = (user as any).id;
-        token.email = (user as any).email;
-        token.name = (user as any).name;
-        token.roles = (user as any).roles ?? [];
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.roles = user.roles;
       }
       return token;
     },
     async session({ session, token }) {
-      session.user = {
-        id: token.id,
-        email: token.email,
-        name: token.name,
-        roles: token.roles,
-      } as any;
+      if (session.user) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+        session.user.name = token.name;
+        session.user.roles = token.roles;
+      }
       return session;
     },
   },
