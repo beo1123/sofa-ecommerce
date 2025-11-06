@@ -8,6 +8,7 @@ import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPa
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
@@ -22,7 +23,6 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
   const { product } = data;
   const image = product.images?.[0]?.url;
-
   return {
     title: `${product.title} – Sofa Ecommerce`,
     description: product.shortDescription ?? product.description ?? "",
@@ -46,10 +46,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const queryClient = new QueryClient();
   const { slug }: { slug: string } = await params;
   await prefetchProductDetail(queryClient, slug);
-
   const data: any = queryClient.getQueryData(productKeys.detail(slug));
   const dehydratedState = dehydrate(queryClient);
-
   if (!data?.product) {
     return (
       <main className="container mx-auto py-12">
@@ -57,9 +55,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       </main>
     );
   }
-
   const { product, related } = data;
-
   return (
     <HydrationBoundary state={dehydratedState}>
       <Script id="product-jsonld" type="application/ld+json">
