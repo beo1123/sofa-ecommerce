@@ -13,7 +13,7 @@ type ProductPageProps = {
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const data = await getProductDetaiSSR(slug);
+  const data = getProductDetaiSSR(slug);
   if (!data?.product) {
     return {
       title: "Sản phẩm không tồn tại – Sofa Ecommerce",
