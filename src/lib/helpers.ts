@@ -1,5 +1,3 @@
-import { Decimal } from "@prisma/client/runtime/library";
-
 export function formatFromPrice(variants: { price: any }[]) {
   if (!variants?.length) return { priceMin: null, priceMax: null };
   const prices = variants.map((v) => Number(v.price));
@@ -30,7 +28,13 @@ export function serializeData<T>(data: T): T {
   return JSON.parse(
     JSON.stringify(data, (_key, value) => {
       if (typeof value === "bigint") return Number(value);
-      if (value instanceof Decimal) return value.toNumber();
+      if (value && typeof value.toNumber === "function") {
+        try {
+          return value.toNumber();
+        } catch {
+          return value;
+        }
+      }
       return value;
     })
   );
