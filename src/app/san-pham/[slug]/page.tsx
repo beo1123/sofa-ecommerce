@@ -8,14 +8,14 @@ import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPa
 
 type ProductPageProps = {
   params: {
-    slug: string;
+    Promise<{ slug: string }>;
   };
 };
 
 
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await getProductDetaiSSR(slug);
   if (!data?.product) {
     return {
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 /* ------------------ PAGE COMPONENT (SSR + React Query Hydration) ------------------ */
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const queryClient = new QueryClient();
-  const { slug } = params;
+  const { slug } = await params;
   await prefetchProductDetail(queryClient, slug);
 
   const data: any = queryClient.getQueryData(productKeys.detail(slug));
