@@ -1,18 +1,19 @@
 // app/(store)/san-pham/[slug]/page.tsx
 import { getProductDetaiSSR } from "@/lib/products/productSSR";
 import Script from "next/script";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from 'next'
 import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { prefetchProductDetail, productKeys } from "@/lib/products/queries";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 
 /* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata( { params, searchParams }: PageProps,parent: ResolvingMetadata): Promise<Metadata> {
   const resolvedParams = await params;
   const { slug } = resolvedParams;
   const data = await getProductDetaiSSR(slug);
