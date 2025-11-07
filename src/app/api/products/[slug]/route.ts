@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { ProductService } from "@/services/products.service";
 import { fail, normalizeError, ok } from "@/server/utils/api";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function GET(_: Request, context: { params: Promise<{ slug: string }> }) {
   try {

@@ -1,9 +1,8 @@
+import prisma from "@/lib/prisma";
 import { normalizeError, validateRequest } from "@/server/utils/api";
-import { PrismaClient } from "@prisma/client";
 import { AuthService } from "@/services/auth.service";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
 const authService = new AuthService(prisma);
 
 export async function POST(req: Request) {

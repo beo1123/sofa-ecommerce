@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { ProductService } from "@/services/products.service";
 import { serializeData } from "../helpers";
+import prisma from "../prisma";
 
-const service = new ProductService(new PrismaClient());
+const service = new ProductService(prisma);
 
 export async function getProductListSSR(params: any) {
   return await service.listProducts(params);

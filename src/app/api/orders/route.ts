@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { OrderService } from "@/services/order.service";
 import { normalizeError, validateRequest } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";
+import prisma from "@/lib/prisma";
 
-const prisma = new PrismaClient();
 const orderService = new OrderService(prisma);
 
 export async function POST(req: Request) {
