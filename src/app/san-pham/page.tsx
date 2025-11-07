@@ -1,4 +1,4 @@
-import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { prefetchProductList, productKeys } from "@/lib/products/queries";
 import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
@@ -43,10 +43,5 @@ export default async function ProductsPage(props: PageProps) {
 
   const data: any = queryClient.getQueryData(productKeys.list(filterParams));
 
-  const dehydratedState = dehydrate(queryClient);
-  return (
-    <HydrationBoundary state={dehydratedState}>
-      <ProductsPageClient items={data.items} meta={data.meta} params={filterParams} />
-    </HydrationBoundary>
-  );
+  return <ProductsPageClient items={data.items} meta={data.meta} params={filterParams} />;
 }

@@ -2,7 +2,7 @@
 import { getProductDetaiSSR } from "@/lib/products/productSSR";
 import Script from "next/script";
 import type { Metadata, ResolvingMetadata } from "next";
-import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { prefetchProductDetail, productKeys } from "@/lib/products/queries";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
@@ -50,7 +50,6 @@ export default async function ProductDetailPage(props: PageProps) {
 
   await prefetchProductDetail(queryClient, slug);
   const data: any = queryClient.getQueryData(productKeys.detail(slug));
-  const dehydratedState = dehydrate(queryClient);
 
   if (!data?.product) {
     return (
@@ -61,11 +60,11 @@ export default async function ProductDetailPage(props: PageProps) {
   }
   const { product, related } = data;
   return (
-    <HydrationBoundary state={dehydratedState}>
+    <>
       <Script id="product-jsonld" type="application/ld+json">
         {JSON.stringify(product.jsonLd)}
       </Script>
       <ProductDetailPageClient product={product} related={related} />
-    </HydrationBoundary>
+    </>
   );
 }
