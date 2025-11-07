@@ -1,97 +1,3 @@
-[![CI](https://github.com/beo1123/sofa-ecommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/beo1123/sofa-ecommerce/actions/workflows/ci.yml)
-
-# **Sofa Ecommerce** — Production-ready Ecommerce App
-
-Ứng dụng bán sofa **sẵn sàng triển khai**, xây dựng với **Next.js (App Router)** + **TypeScript**.  
-Tích hợp công cụ hiện đại, CI/CD, và quy trình đóng góp rõ ràng.
-
-## **Tech Stack**
-
-- **Next.js** (App Router)
-- **TypeScript**
-- **pnpm** (package manager)
-- **Redux Toolkit** (đang phát triển)
-- **Tailwind CSS** (đang phát triển)
-- **GitHub Actions** (CI/CD)
-- **Prisma ORM** + **PostgreSQL** (Local / Neon Cloud)
-
----
-
-## **Quick Start (Khởi động nhanh)**
-
-```bash
-# Cài đặt dependencies
-npm install
-# hoặc
-pnpm install
-
-# Chạy dev server
-npm run dev
-# hoặc
-pnpm dev
-
-# Kiểm tra code (lint)
-pnpm lint
-
-# Build production
-pnpm build
-
-# Chạy test (đang phát triển)
-pnpm test
-```
-
-## **Docker & Database Commands**
-
-```bash
-
-# Dừng và xóa container cũ (nếu có)
-
-docker compose -f docker-compose.postgres.yml down --remove-orphans
-
-# Khởi động PostgreSQL container
-
-docker compose -f docker-compose.postgres.yml up -d
-
-# Tắt PostgreSQL hệ thống (nếu chạy trên Windows)
-
-# → Dùng Services → tắt "PostgreSQL"
-
-# Kiểm tra IP của container (nếu cần kết nối trực tiếp)
-
-docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' sofa-ecommerce-db-1
-
-```
-
----
-
-## **Prisma Commands**
-
-```bash
-
-# Tạo client Prisma
-
-npx prisma generate
-
-# hoặc
-
-npm run prisma:generate
-
-# Tạo & áp dụng migration đầu tiên
-
-npx prisma migrate dev --name init --schema=prisma/schema.prisma
-
-# hoặc
-
-npm run prisma:migrate:dev
-
-# Mở Prisma Studio (giao diện quản lý DB)
-
-npx prisma studio
-
-```
-
----
-
 # **Hướng Dẫn Cài Đặt Dự Án Sofa Ecommerce**
 
 ## **Giới thiệu**
@@ -132,56 +38,6 @@ Hướng dẫn này cung cấp các bước cài đặt và thiết lập dự �
    - `-f` → Chỉ định file `docker-compose` cụ thể.
    - `up` → Khởi động các dịch vụ.
    - `-d` → Chạy ở chế độ ngầm.
-
-   ***
-
-   ### **Kiểm Tra Cổng 5432 đã bị chiếm dụng hay chưa**
-
-   Nếu gặp lỗi sau khi chạy:
-
-   ```
-   failed to bind host port for 0.0.0.0:5432 ... address already in use
-   ```
-
-   **Nguyên nhân**: Cổng **5432** đang bị chiếm dụng bởi một service khác (ví dụ PostgreSQL cài trực tiếp trên máy).
-
-   #### **Cách khắc phục**:
-   1. **Cách 1**: Tìm container hoặc service đang chiếm cổng và dừng nó:
-   - Kiểm tra các container đang chạy:
-
-     ```bash
-     sudo docker ps
-     ```
-
-   - Dừng container chiếm cổng:
-
-     ```bash
-     sudo docker stop <container_name>
-     ```
-
-   - Nếu PostgreSQL đang chạy trực tiếp trên máy:
-
-     ```bash
-     sudo systemctl status postgresql
-     sudo systemctl stop postgresql
-     ```
-   2. **Cách 2**: Thay đổi cổng trong file `docker-compose.postgres.yml`:
-   - Mở file và thay đổi `ports`:
-
-     ```yaml
-     ports:
-       - "5433:5432"
-     ```
-
-   - Sau đó, chạy lại container:
-
-     ```bash
-     sudo docker compose -f docker-compose.postgres.yml up -d
-     ```
-
-   PostgreSQL sẽ chạy trên cổng **5432** trong container, nhưng từ máy host, bạn sẽ kết nối qua cổng **5433**.
-
----
 
 </details>
 
@@ -252,7 +108,7 @@ Hướng dẫn này cung cấp các bước cài đặt và thiết lập dự �
 3. **Cấu hình `.env`**:
 
    ```env
-   DATABASE_URL="postgresql://postgres:1234@localhost:<your_port>/sofa?schema=public"
+   DATABASE_URL="postgresql://postgres:1234@localhost:5433/sofa?schema=public"
    ```
 
    Sau đó chạy lại migration.
@@ -284,7 +140,7 @@ Hướng dẫn này cung cấp các bước cài đặt và thiết lập dự �
 
 <details><summary><strong>2. Dump và Restore Database từ Local lên Neon</strong></summary>
 
-#### **Bước 1: Dump từ Local**
+#### **Bước A: Dump từ Local**
 
 ```bash
 pg_dump -U postgres -h localhost -Fc --no-owner --no-acl sofa > sofa.dump
@@ -293,7 +149,18 @@ pg_dump -U postgres -h localhost -Fc --no-owner --no-acl sofa > sofa.dump
 - `-Fc` → định dạng custom.
 - `--no-owner` / `--no-acl` → tránh lỗi quyền.
 
-#### **Bước 2: Import vào Neon**
+#### **Bước B: Restore vào Neon**
+
+```bash
+pg_restore --verbose --clean --no-owner --no-acl \
+  -h ep-bold-fire-a1kme9hr-pooler.ap-southeast-1.aws.neon.tech \
+  -U neondb_owner \
+  -d neondb sofa.dump
+```
+
+> Nhập password khi được yêu cầu.
+
+#### **Bước C: Dùng SQL Plain (tùy chọn)**
 
 Dump:
 
