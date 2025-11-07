@@ -1,3 +1,4 @@
+// components/products/ProductsPageClient.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,13 +10,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 
 type ProductsPageProps = {
-  items: any[];
-  meta: any;
-  params: ProductQueryParams;
+  initialItems: any[];
+  initialMeta: { page: number; perPage: number; total: number };
+  initialParams: ProductQueryParams;
 };
 
-export default function ProductsPageClient({ items, meta, params }: ProductsPageProps) {
+export default function ProductsPageClient({ initialItems, initialMeta, initialParams }: ProductsPageProps) {
   const [showMobileFilter, setShowMobileFilter] = useState(false);
+  // you can keep items in state if you plan to enable client-side filtering/pagination later
+  const [items] = useState(initialItems);
+  const [meta] = useState(initialMeta);
+  const params = initialParams;
 
   const currentFilters = {
     category: params.category ?? "",

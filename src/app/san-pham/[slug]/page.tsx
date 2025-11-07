@@ -1,8 +1,7 @@
-// app/(store)/san-pham/[slug]/page.tsx
 import { getProductDetaiSSR } from "@/lib/products/productSSR";
 import Script from "next/script";
 import type { Metadata, ResolvingMetadata } from "next";
-import { QueryClient } from "@tanstack/react-query";
+import { cache } from "react";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 
 interface PageProps {
@@ -10,19 +9,25 @@ interface PageProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-/* ------------------ DYNAMIC METADATA GENERATOR ------------------ */
+const getCachedProduct = cache(async (slug: string) => {
+  return await getProductDetaiSSR(slug);
+});
+
 export async function generateMetadata(props: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
   const params = await props.params;
   const slug = params.slug;
-  const data = await getProductDetaiSSR(slug);
+
+  const data = await getCachedProduct(slug);
   if (!data?.product) {
     return {
       title: "Sản phẩm không tồn tại – Sofa Ecommerce",
       description: "Không tìm thấy sản phẩm này trong cửa hàng.",
     };
   }
+
   const { product } = data;
   const image = product.images?.[0]?.url;
+
   return {
     title: `${product.title} – Sofa Ecommerce`,
     description: product.shortDescription ?? product.description ?? "",
@@ -30,7 +35,7 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
       title: `${product.title} – Sofa Ecommerce`,
       description: product.shortDescription ?? product.description ?? "",
       images: image ? [image] : [],
-      type: "website",
+      type: "website", // ✅ giữ chuẩn type Next.js
     },
     twitter: {
       card: "summary_large_image",
@@ -41,13 +46,14 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
   };
 }
 
-/* ------------------ PAGE COMPONENT (SSR + React Query Hydration) ------------------ */
+/* ------------------ PAGE COMPONENT ------------------ */
+export const revalidate = 60;
+
 export default async function ProductDetailPage(props: PageProps) {
-  const queryClient = new QueryClient();
   const params = await props.params;
   const slug = params.slug;
 
-  const data = await getProductDetaiSSR(slug);
+  const data = await getCachedProduct(slug);
 
   if (!data?.product) {
     return (
@@ -56,7 +62,9 @@ export default async function ProductDetailPage(props: PageProps) {
       </main>
     );
   }
+
   const { product, related } = data;
+
   return (
     <>
       <Script id="product-jsonld" type="application/ld+json">

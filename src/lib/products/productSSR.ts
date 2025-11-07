@@ -9,14 +9,12 @@ export async function getProductListSSR(params: any) {
 }
 
 export async function getProductDetaiSSR(slug: string) {
-  const product = await service.getProductBySlug(slug);
+  const [product, related] = await Promise.all([service.getProductBySlug(slug), service.getRelatedProducts(slug)]);
+
   if (!product) return null;
 
-  const related = await service.getRelatedProducts(slug);
-
-  // ✅ Serialize ở đây
-  const safeProduct = serializeData(product);
-  const safeRelated = serializeData(related);
-
-  return { product: safeProduct, related: safeRelated };
+  return {
+    product: serializeData(product),
+    related: serializeData(related),
+  };
 }
