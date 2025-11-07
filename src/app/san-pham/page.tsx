@@ -1,8 +1,7 @@
-import { QueryClient } from "@tanstack/react-query";
-import { prefetchProductList, productKeys } from "@/lib/products/queries";
 import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
+import { getProductListSSR } from "@/lib/products/productSSR";
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -37,11 +36,11 @@ export default async function ProductsPage(props: PageProps) {
     color: searchParams.color as string | undefined,
   };
 
-  const queryClient = new QueryClient();
+  const data = await getProductListSSR(filterParams);
 
-  await prefetchProductList(queryClient, filterParams);
-
-  const data: any = queryClient.getQueryData(productKeys.list(filterParams));
+  if (!data?.items) {
+    return <div className="text-center py-10 text-gray-500">Không có sản phẩm nào.</div>;
+  }
 
   return <ProductsPageClient items={data.items} meta={data.meta} params={filterParams} />;
 }
