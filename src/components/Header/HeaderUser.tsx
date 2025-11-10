@@ -164,7 +164,7 @@ export default function HeaderUser() {
                       </Button>
                     </Link>
 
-                    <Link href="/account/orders" className="block">
+                    <Link href="/tai-khoan/don-hang" className="block">
                       <Button variant="ghost" className="w-full justify-start gap-2 px-2 py-2">
                         <Box className="w-4 h-4" /> <span className="text-sm">Đơn hàng</span>
                         <span className="ml-auto text-xs text-[var(--color-text-muted)]">{/* optional */}</span>
@@ -228,7 +228,7 @@ export default function HeaderUser() {
                   Hồ sơ
                 </Button>
               </Link>
-              <Link href="/account/orders" className="block">
+              <Link href="//tai-khoan/don-hang" className="block">
                 <Button onClick={() => setOpenMobile(false)} variant="outline" fullWidth>
                   Đơn hàng
                 </Button>

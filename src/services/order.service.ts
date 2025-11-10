@@ -161,4 +161,37 @@ export class OrderService {
       };
     }
   }
+
+  async getUserOrders(userId: number) {
+    try {
+      const orders = await this.prisma.order.findMany({
+        where: { userId },
+        select: {
+          id: true,
+          orderNumber: true,
+          status: true,
+          total: true,
+          paymentMethod: true,
+          recipientName: true,
+          createdAt: true,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+
+      return { succes: true, data: orders };
+    } catch (err: any) {
+      console.error("OrderService.getUserOrders error:", err);
+      throw {
+        status: 500,
+        body: {
+          success: false,
+          error: {
+            message: "Failed to fetch orders",
+            code: "ORDERS_FETCH_FAILED",
+            details: err?.message,
+          },
+        },
+      };
+    }
+  }
 }

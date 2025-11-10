@@ -83,7 +83,7 @@ export default function HeaderUserMobile({ onClose }: Props) {
             </Button>
           </Link>
 
-          <Link href="/account/orders" onClick={onClose}>
+          <Link href="/tai-khoan/don-hang" onClick={onClose}>
             <Button variant="secondary" size="sm" leftIcon={<ShoppingBag size={14} />}>
               Đơn hàng
             </Button>

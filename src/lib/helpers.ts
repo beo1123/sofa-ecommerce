@@ -19,9 +19,14 @@ export function mapProductListItem(p: any) {
   };
 }
 
-export function formatCurrency(v: number | null | undefined) {
-  if (v === null) return "Liên Hệ";
-  return `${v?.toLocaleString("vi-VN")} VND`;
+export function formatCurrency(value?: number | null): string {
+  if (value == null) return "Liên hệ";
+
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    maximumFractionDigits: 0,
+  }).format(value);
 }
 
 export function serializeData<T>(data: T): T {
