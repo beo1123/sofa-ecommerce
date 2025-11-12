@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import {
@@ -21,6 +20,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Badge from "@/components/ui/Badge";
 import { ImageIcon } from "lucide-react";
+import { SafeImage } from "@/components/ui/SafeImage";
 
 type CouponForm = {
   code: string;
@@ -131,7 +131,7 @@ export default function CartPage() {
                     <div className="w-[96px] h-[96px] flex-shrink-0 rounded overflow-hidden bg-[var(--color-bg-muted)] flex items-center justify-center">
                       {it.image ? (
                         // next/image requires domains or remote patterns; for local/demo it's ok
-                        <Image src={it.image} alt={it.name} width={96} height={96} className="object-cover" />
+                        <SafeImage src={it.image} alt={it.name} width={96} height={96} className="object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <ImageIcon className="w-6 h-6 text-[var(--color-text-muted)]" />

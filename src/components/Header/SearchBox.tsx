@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ImageIcon, Search, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Card from "@/components/ui/Card";
@@ -11,6 +10,7 @@ import Button from "@/components/ui/Button";
 import Spinner from "@/components/ui/Spinner";
 import { useSearch } from "@/hooks/products/useSearch";
 import { formatCurrency } from "@/lib/helpers";
+import { SafeImage } from "../ui/SafeImage";
 
 export default function SearchBox({ className = "" }: { className?: string }) {
   const [query, setQuery] = useState("");
@@ -87,8 +87,8 @@ export default function SearchBox({ className = "" }: { className?: string }) {
                     className="flex items-center gap-3 p-3 hover:bg-gray-50 transition"
                     onClick={() => setOpen(false)}>
                     {product.primaryImage?.url ? (
-                      <Image
-                        src={product.primaryImage.url || "/placeholder.jpg"}
+                      <SafeImage
+                        src={product.primaryImage.url}
                         alt={product.primaryImage.alt}
                         width={40}
                         height={40}

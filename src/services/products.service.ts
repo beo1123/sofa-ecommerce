@@ -297,4 +297,72 @@ export class ProductService {
     });
     return { items, meta: { page, perPage, total } };
   }
+
+  // =====================================================
+  // 💰 Best-selling products (all-time, auto fallback)
+  // =====================================================
+  async getBestSellingProducts(limit = 8) {
+    const top = await this.prisma.orderItem.groupBy({
+      by: ["productId"],
+      where: {
+        productId: { not: null },
+        order: { status: { in: ["PAID", "FULFILLED", "COD_COMPLETED"] } },
+      },
+      _sum: { quantity: true },
+      orderBy: { _sum: { quantity: "desc" } },
+      take: limit,
+    });
+
+    const ids = top.map((p) => p.productId!);
+    const soldMap = Object.fromEntries(top.map((p) => [p.productId!, p._sum.quantity ?? 0]));
+
+    const products = await this.prisma.product.findMany({
+      where: {
+        status: "PUBLISHED",
+        ...(ids.length ? { id: { in: ids } } : {}),
+      },
+      orderBy: ids.length ? { id: "asc" } : { createdAt: "desc" },
+      take: limit,
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        shortDescription: true,
+        variants: { select: { price: true } },
+        images: { where: { isPrimary: true }, take: 1, select: { url: true, alt: true } },
+      },
+    });
+
+    // fallback nếu chưa đủ
+    if (products.length < limit) {
+      const fallback = await this.prisma.product.findMany({
+        where: { status: "PUBLISHED", id: { notIn: ids } },
+        orderBy: { createdAt: "desc" },
+        take: limit - products.length,
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          shortDescription: true,
+          variants: { select: { price: true } },
+          images: { where: { isPrimary: true }, take: 1, select: { url: true, alt: true } },
+        },
+      });
+      products.push(...fallback);
+    }
+
+    return products.map((p) => {
+      const prices = p.variants.map((v) => Number(v.price));
+      return {
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        shortDescription: p.shortDescription,
+        totalSold: soldMap[p.id] ?? 0,
+        priceMin: Math.min(...prices),
+        priceMax: Math.max(...prices),
+        primaryImage: p.images[0] ?? null,
+      };
+    });
+  }
 }

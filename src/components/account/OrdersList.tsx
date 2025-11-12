@@ -18,6 +18,7 @@ import { getOrderStatusLabel, getOrderStatusVariant } from "@/lib/order/orderUti
 export default function OrdersList() {
   const { orders, loading, error, refetch } = useOrders();
 
+  // ====== ⏳ Loading State ======
   if (loading) {
     return (
       <Container className="py-16 flex flex-col items-center justify-center text-center">
@@ -29,6 +30,7 @@ export default function OrdersList() {
     );
   }
 
+  // ====== ❌ Error State ======
   if (error) {
     return (
       <Container className="py-12">
@@ -46,10 +48,11 @@ export default function OrdersList() {
     );
   }
 
+  // ====== 🕳️ Empty State ======
   if (!orders.length) {
     return (
       <Container className="py-16 text-center">
-        <Card variant="bordered" className="max-w-lg mx-auto p-10">
+        <Card variant="bordered" className="mx-auto p-10">
           <PackageSearch size={64} className="mx-auto mb-4 text-[var(--color-brand-400)]" />
           <Text muted>Hiện tại bạn chưa có đơn hàng nào.</Text>
           <CardFooter className="mt-6 flex justify-center">
@@ -62,6 +65,7 @@ export default function OrdersList() {
     );
   }
 
+  // ====== ✅ Success State ======
   return (
     <Container>
       <Heading level={2} className="mb-8">
@@ -74,7 +78,12 @@ export default function OrdersList() {
             <CardHeader className="flex flex-wrap justify-between gap-3 items-start">
               <div>
                 <CardTitle className="text-lg font-semibold text-gray-800">Mã đơn: #{order.orderNumber}</CardTitle>
-                <Text muted>Ngày tạo: {new Date(order.createdAt).toLocaleString()}</Text>
+                <Text muted>
+                  Ngày tạo:{" "}
+                  {new Date(order.createdAt).toLocaleString("vi-VN", {
+                    hour12: false,
+                  })}
+                </Text>
                 {order.recipientName && <Text muted>Người nhận: {order.recipientName}</Text>}
                 {order.paymentMethod && <Text muted>Thanh toán: {order.paymentMethod}</Text>}
               </div>

@@ -178,7 +178,7 @@ export class OrderService {
         orderBy: { createdAt: "desc" },
       });
 
-      return { succes: true, data: orders };
+      return { success: true, data: orders };
     } catch (err: any) {
       console.error("OrderService.getUserOrders error:", err);
       throw {

@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect } from "react";
 import { ShoppingCart } from "lucide-react";
 import { ImageIcon } from "lucide-react";
@@ -15,6 +14,7 @@ import Text from "@/components/ui/Text";
 import Divider from "@/components/ui/Divider";
 import Badge from "@/components/ui/Badge";
 import Button from "../ui/Button";
+import { SafeImage } from "../ui/SafeImage";
 
 type MiniCartDrawerProps = {
   isOpen: boolean;
@@ -89,7 +89,13 @@ export default function MiniCartDrawer({ isOpen, onClose }: MiniCartDrawerProps)
                     className="flex gap-3 border-b border-gray-100 pb-3 last:border-none">
                     <div className="flex-shrink-0">
                       {it.image ? (
-                        <Image src={it.image} alt={it.name} width={80} height={80} className="rounded object-cover" />
+                        <SafeImage
+                          src={it.image}
+                          alt={it.name}
+                          width={80}
+                          height={80}
+                          className="rounded object-cover"
+                        />
                       ) : (
                         <div className="flex items-center justify-center w-[80px] h-[80px] bg-[var(--color-bg-muted)] rounded">
                           <ImageIcon className="w-6 h-6 text-[var(--color-text-muted)]" />

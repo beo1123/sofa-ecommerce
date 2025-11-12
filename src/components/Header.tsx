@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingCart, Heart, BarChart3 } from "lucide-react";
 import MiniCartDrawer from "./cart/MiniCartDrawer";
@@ -11,6 +10,7 @@ import { selectCartItemCount } from "@/store/selector/cartSelectors";
 import SearchBox from "./Header/SearchBox";
 import HeaderUser from "./Header/HeaderUser";
 import HeaderUserMobile from "./Header/HeaderUserMobile";
+import { SafeImage } from "./ui/SafeImage";
 
 /**
  * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
@@ -183,7 +183,7 @@ export default function Header() {
               {/* Logo - Always visible */}
               <Link href="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
                 <div className="w-20 h-20 lg:w-30 lg:h-30  flex items-center justify-center">
-                  <Image src="/images/logo-removebg-preview.png" width={120} height={120} alt="Logo phạm gia" />
+                  <SafeImage src="/images/logo-removebg-preview.png" width={120} height={120} alt="Logo phạm gia" />
                 </div>
               </Link>
 

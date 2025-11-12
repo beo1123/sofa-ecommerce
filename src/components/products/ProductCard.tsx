@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, ShoppingBag, ImageIcon } from "lucide-react";
 import { formatCurrency } from "@/lib/helpers";
@@ -13,6 +12,7 @@ import { useState } from "react";
 import MiniCartDrawer from "@/components/cart/MiniCartDrawer";
 import { useAppDispatch } from "@/store/hook";
 import { addItem } from "@/store/slice/cartSlice";
+import { SafeImage } from "../ui/SafeImage";
 
 type ProductCardProps = {
   product: {
@@ -78,7 +78,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* IMAGE */}
         <Link href={routeLink} className="block relative w-full aspect-square overflow-hidden flex-shrink-0">
           {product.primaryImage?.url ? (
-            <Image
+            <SafeImage
               src={product.primaryImage.url}
               alt={product.primaryImage.alt ?? product.title}
               fill

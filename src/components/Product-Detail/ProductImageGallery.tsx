@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { SafeImage } from "../ui/SafeImage";
 
 type ProductImageGalleryProps = {
   images: any[];
@@ -32,7 +32,7 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
     <div className="p-6 lg:p-8">
       {/* Main Image */}
       <div className="relative aspect-square bg-[var(--color-bg-muted)] rounded-2xl overflow-hidden group mb-4">
-        <Image
+        <SafeImage
           src={images[selectedImage].url}
           alt={images[selectedImage].alt || title}
           fill
@@ -74,7 +74,13 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
                 ? "border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
                 : "border-transparent hover:border-[var(--color-brand-200)]"
             }`}>
-            <Image src={img.url} alt={img.alt || `${title} ${idx + 1}`} fill className="object-cover" sizes="100px" />
+            <SafeImage
+              src={img.url}
+              alt={img.alt || `${title} ${idx + 1}`}
+              fill
+              className="object-cover"
+              sizes="100px"
+            />
           </button>
         ))}
       </div>

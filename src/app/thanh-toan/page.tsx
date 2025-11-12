@@ -12,8 +12,8 @@ import { useAppSelector } from "@/store/hook";
 import { selectCartItems, selectCartSubtotal, selectCartTotal } from "@/store/selector/cartSelectors";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
 import { formatCurrency } from "@/lib/helpers";
-import Image from "next/image";
 import { ImageIcon } from "lucide-react";
+import { SafeImage } from "@/components/ui/SafeImage";
 
 export default function CheckoutPage() {
   const items = useAppSelector(selectCartItems);
@@ -56,7 +56,7 @@ export default function CheckoutPage() {
                       className="flex gap-3 items-center border-b pb-3 last:border-none last:pb-0">
                       <div className="w-16 h-16 bg-[var(--color-bg-muted)] flex items-center justify-center rounded overflow-hidden flex-shrink-0">
                         {it.image ? (
-                          <Image src={it.image} alt={it.name} width={64} height={64} className="object-cover" />
+                          <SafeImage src={it.image} alt={it.name} width={64} height={64} className="object-cover" />
                         ) : (
                           <ImageIcon className="w-6 h-6 text-[var(--color-text-muted)]" />
                         )}
