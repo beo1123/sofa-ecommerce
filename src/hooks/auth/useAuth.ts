@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signIn, signOut } from "next-auth/react";
-import axiosClient from "@/lib/axiosClient";
+import axiosClient from "@/server/axiosClient";
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axiosClient from "@/lib/axiosClient";
+import axiosClient from "@/server/axiosClient";
 import { CheckoutFormData } from "@/components/checkout/CheckoutForm";
 import { useAppSelector, useAppDispatch } from "@/store/hook";
 import { selectCartItems, selectCartSubtotal } from "@/store/selector/cartSelectors";

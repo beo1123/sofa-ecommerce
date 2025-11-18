@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import axiosClient from "@/lib/axiosClient";
+import axiosClient from "@/server/axiosClient";
 import type { ApiResponse } from "@/server/utils/api";
 import type { UserOrder } from "@/types/order/order";
 

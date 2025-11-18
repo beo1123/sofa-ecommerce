@@ -1,32 +1,29 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
 import axiosClient from "@/server/axiosClient";
-import axios from "axios";
 import { ApiResponse } from "@/server/utils/api";
-import { BestSellerProduct } from "@/types/products/BestSellerProduct ";
+import { CategoryResponse } from "@/types/category/CategoryResponse";
+import axios from "axios";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export function useBestSellerProducts() {
-  const [products, setProducts] = useState<BestSellerProduct[]>([]);
+export function useCategories() {
+  const [categories, setCategories] = useState<CategoryResponse[]>([]);
+  const [meta, setMeta] = useState<Record<string, any> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
-  const fetchBestSellers = useCallback(async () => {
+  const fetchCategories = useCallback(async () => {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
-
-    setLoading(true);
+    setLoading(false);
     setError(null);
-
     try {
-      const res = await axiosClient.get<ApiResponse<BestSellerProduct[]>>("/products/bestsellers", {
-        signal: controller.signal,
-      });
-
+      const res = await axiosClient.get<ApiResponse<CategoryResponse[]>>("/categories", { signal: controller.signal });
       if (res.data.success) {
-        setProducts(res.data.data ?? []);
+        setCategories(res.data.data ?? []);
+        setMeta(res.data.meta ?? null);
       } else {
         setError(res.data.error?.message || "Unknown API error");
       }
@@ -39,21 +36,23 @@ export function useBestSellerProducts() {
 
       if (canceled) return;
 
-      setError(err?.message || "Error fetching best sellers");
+      setError(err?.message || "Error fetching categories");
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchBestSellers();
+    fetchCategories();
+
     return () => abortRef.current?.abort();
-  }, [fetchBestSellers]);
+  }, [fetchCategories]);
 
   return {
-    products,
+    categories,
+    meta,
     loading,
     error,
-    refetch: fetchBestSellers,
+    refetch: fetchCategories,
   };
 }

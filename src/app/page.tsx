@@ -1,9 +1,11 @@
-"use client";
-
 import React from "react";
 import Grid, { GridItem } from "@/components/ui/Grid";
 import { Hero } from "@/components/Home/Hero";
 import BestSellers from "@/components/Home/BestSellers";
+import BrowseByCategories from "@/components/Home/BrowseByCategories";
+
+export const revalidate = 600;
+
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -19,14 +21,7 @@ export default function Home() {
 
       {/* ================= BROWSE BY ROOMS ================= */}
       <section id="browse-by-rooms" className="p-xl rounded-lg bg-brand-100">
-        <h2 className="text-2xl font-semibold mb-lg">Khám phá theo không gian</h2>
-        <Grid cols={2} responsive={{ sm: 3, lg: 6 }} gap="md">
-          {["Phòng khách", "Phòng ngủ", "Phòng ăn", "Văn phòng", "Ngoài trời", "Chiếu sáng"].map((room) => (
-            <GridItem key={room} className="bg-white shadow rounded-md p-lg text-center hover:shadow-lg transition">
-              {room}
-            </GridItem>
-          ))}
-        </Grid>
+        <BrowseByCategories />
       </section>
 
       {/* ================= TOP SELLING FURNITURE ================= */}

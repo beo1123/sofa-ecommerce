@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "../common/useDebounce";
-import axiosClient from "@/lib/axiosClient";
+import axiosClient from "@/server/axiosClient";
 
 export function useSearch(query: string, opts?: { page?: Number; perPage?: Number; enabled?: boolean }) {
   const page = opts?.page ?? 1;
