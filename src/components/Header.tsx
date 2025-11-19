@@ -37,8 +37,8 @@ const navLinks = [
   { href: "/", label: "Trang Chủ" },
   { href: "/san-pham", label: "Sản Phẩm" },
   { href: "/gioi-thieu", label: "Giới Thiệu" },
-  { href: "/news", label: "Tin Tức" },
-  { href: "/contact", label: "Liên Hệ" },
+  { href: "/tin-tuc", label: "Tin Tức" },
+  { href: "/lien-he", label: "Liên Hệ" },
 ];
 
 /* Framer motion variants */
