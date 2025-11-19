@@ -30,8 +30,9 @@ async function main() {
   console.log("✅ Categories:", Object.keys(createdCategories));
 
   // =====================================================
-  // 2️⃣ PRODUCT DATA (24 sản phẩm)
+  // 2️⃣ PRODUCT DATA (24 products) — EACH PRODUCT USES sampleImages
   // =====================================================
+
   const colorCodes = ["#000000", "#808080", "#C0C0C0", "#8B4513", "#A0522D", "#FFFFFF"];
   const materials = ["leather", "fabric"];
 
@@ -43,26 +44,26 @@ async function main() {
     "https://images.unsplash.com/photo-1759722668224-43e1dae9049e?q=80&w=754&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://images.unsplash.com/photo-1757969704688-334b705ed486?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
-  const products = [];
 
+  const products: any[] = [];
+
+  // tạo 24 product
   for (const [slug, category] of Object.entries(createdCategories)) {
     for (let i = 1; i <= 4; i++) {
       const title = `${categories.find((c) => c.slug === slug)?.name} mẫu ${i}`;
-      const productSlug = `${slug}-mau-${i}`;
-      const shortDescription = `Mẫu ${i} của ${slug}, thiết kế hiện đại và sang trọng.`;
-      const description = `Sản phẩm ${title} được thiết kế với phong cách châu Âu, chất liệu cao cấp, phù hợp nhiều không gian.`;
 
       products.push({
         title,
-        slug: productSlug,
-        shortDescription,
-        description,
+        slug: `${slug}-mau-${i}`,
+        shortDescription: `Mẫu ${i} của ${slug}, thiết kế hiện đại và sang trọng.`,
+        description: `Sản phẩm ${title} được thiết kế với phong cách châu Âu, chất liệu cao cấp.`,
         categoryId: category.id,
       });
     }
   }
 
   for (const p of products) {
+    // CREATE PRODUCT
     const product = await prisma.product.upsert({
       where: { slug: p.slug },
       update: {},
@@ -72,15 +73,16 @@ async function main() {
         shortDescription: p.shortDescription,
         description: p.description,
         status: "PUBLISHED",
-        category: { connect: { id: p.categoryId } },
+        categoryId: p.categoryId,
       },
     });
 
     // =====================================================
-    // 3️⃣ PRODUCT VARIANTS
+    // 3️⃣ PRODUCT VARIANTS — WITHOUT IMAGES
     // =====================================================
-    const numVariants = 2 + Math.floor(Math.random() * 2);
-    for (let i = 0; i < numVariants; i++) {
+    const variantCount = 2 + Math.floor(Math.random() * 2);
+
+    for (let i = 0; i < variantCount; i++) {
       const color = colorCodes[Math.floor(Math.random() * colorCodes.length)];
       const material = materials[Math.floor(Math.random() * materials.length)];
       const price = 9000000 + Math.floor(Math.random() * 10000000);
@@ -95,35 +97,37 @@ async function main() {
         },
       });
 
-      // =====================================================
-      // 4️⃣ INVENTORY
-      // =====================================================
+      // INVENTORY
       await prisma.inventory.create({
         data: {
           variantId: variant.id,
           sku: `SKU-${variant.id}`,
-          quantity: 20 + Math.floor(Math.random() * 30),
+          quantity: 10 + Math.floor(Math.random() * 30),
           reserved: Math.floor(Math.random() * 5),
         },
       });
+    }
 
-      // =====================================================
-      // 5️⃣ IMAGES
-      // =====================================================
-      for (let j = 0; j < sampleImages.length; j++) {
-        await prisma.productImage.create({
-          data: {
-            productId: product.id,
-            url: `${sampleImages[j]}`,
-            alt: `${p.title} - ảnh ${j + 1}`,
-            isPrimary: j === 0,
-          },
-        });
-      }
+    // =====================================================
+    // 4️⃣ IMAGES — ONLY 1 SET FOR PRODUCT (NOT FOR EACH VARIANT)
+    // =====================================================
+
+    const shuffled = [...sampleImages].sort(() => Math.random() - 0.5);
+    const imagesToUse = [...shuffled.slice(0, 3)];
+
+    for (let i = 0; i < imagesToUse.length; i++) {
+      await prisma.productImage.create({
+        data: {
+          productId: product.id,
+          url: String(imagesToUse[i]), // ép chắc chắn là string
+          alt: `${p.title} - Image ${i + 1}`,
+          isPrimary: i === 0,
+        },
+      });
     }
   }
 
-  console.log(`✅ Seeded ${products.length} products successfully!`);
+  console.log(`🎉 Seeded ${products.length} products with images successfully!`);
 
   // =====================================================
   // 6️⃣ BLOG CATEGORIES
