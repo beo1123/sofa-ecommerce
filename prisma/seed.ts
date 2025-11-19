@@ -37,11 +37,11 @@ async function main() {
 
   const sampleImages = [
     "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
-    "https://images.unsplash.com/photo-1616627987555-1c3a2d9f7c1a",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-    "https://images.unsplash.com/photo-1598300056483-8e0c0b2e3c6c",
-    "https://images.unsplash.com/photo-1602526216437-31c1b49c2c3e",
-    "https://images.unsplash.com/photo-1598300056791-0e2a7f0c85f4",
+    "https://images.unsplash.com/photo-1484101403633-562f891dc89a?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?q=80&w=1109&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1757969687837-03c847fffa06?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1759722668224-43e1dae9049e?q=80&w=754&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1757969704688-334b705ed486?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
   const products = [];
 
@@ -101,7 +101,7 @@ async function main() {
       await prisma.inventory.create({
         data: {
           variantId: variant.id,
-          sku: `SKU-${product.id}-${i + 1}`,
+          sku: `SKU-${variant.id}`,
           quantity: 20 + Math.floor(Math.random() * 30),
           reserved: Math.floor(Math.random() * 5),
         },
@@ -110,11 +110,11 @@ async function main() {
       // =====================================================
       // 5️⃣ IMAGES
       // =====================================================
-      for (let j = 0; j < 2; j++) {
+      for (let j = 0; j < sampleImages.length; j++) {
         await prisma.productImage.create({
           data: {
             productId: product.id,
-            url: `${sampleImages[j]}?rand=${Math.random()}`,
+            url: `${sampleImages[j]}`,
             alt: `${p.title} - ảnh ${j + 1}`,
             isPrimary: j === 0,
           },
@@ -124,6 +124,93 @@ async function main() {
   }
 
   console.log(`✅ Seeded ${products.length} products successfully!`);
+
+  // =====================================================
+  // 6️⃣ BLOG CATEGORIES
+  // =====================================================
+
+  const blogCategories = [
+    { name: "Kiến thức thảm trải sàn", slug: "kien-thuc-tham" },
+    { name: "Mẹo vệ sinh & bảo quản", slug: "meo-ve-sinh" },
+    { name: "Phong cách & Trang trí", slug: "phong-cach-trang-tri" },
+  ];
+
+  const createdBlogCategories: Record<string, { id: number }> = {};
+
+  for (const bc of blogCategories) {
+    const category = await prisma.articleCategory.upsert({
+      where: { slug: bc.slug },
+      update: {},
+      create: { name: bc.name, slug: bc.slug },
+    });
+    createdBlogCategories[bc.slug] = { id: category.id };
+  }
+
+  console.log("✅ Blog categories:", Object.keys(createdBlogCategories));
+
+  // =====================================================
+  // 7️⃣ ARTICLES (similar to BLANC)
+  // =====================================================
+
+  const blogArticles = [
+    {
+      title: "Thảm trượt nước – Giải pháp hoàn hảo cho nhà có trẻ nhỏ",
+      slug: "tham-truot-nuoc-giai-phap-cho-nha-co-tre",
+      excerpt:
+        "Thảm trượt nước giúp chống trơn trượt, bảo vệ trẻ nhỏ và thú cưng. Giải pháp đáng cân nhắc cho mọi gia đình.",
+      thumbnail: "https://images.unsplash.com/photo-1598300056483-8e0c0b2e3c6c",
+      content: `
+      <h2>Thảm trượt nước là gì?</h2>
+      <p>Đây là loại thảm được thiết kế để giảm tối đa độ trơn trượt...</p>
+      <p>Phù hợp cho nhà có trẻ nhỏ và thú cưng...</p>
+    `,
+      categorySlug: "kien-thuc-tham",
+    },
+    {
+      title: "5 mẹo vệ sinh sofa da tại nhà hiệu quả",
+      slug: "5-meo-ve-sinh-sofa-da",
+      excerpt: "Chỉ với vài bước đơn giản, bạn có thể vệ sinh sofa da nhanh chóng, giữ được độ bóng đẹp lâu dài.",
+      thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+      content: `
+      <h2>Cách làm sạch sofa da đúng chuẩn</h2>
+      <p>Nên vệ sinh sofa da định kỳ để đảm bảo độ bền...</p>
+    `,
+      categorySlug: "meo-ve-sinh",
+    },
+    {
+      title: "Cách chọn sofa phù hợp với phong cách Scandinavian",
+      slug: "chon-sofa-phong-cach-scandinavian",
+      excerpt: "Phong cách Scandinavian nổi bật với sự tối giản, tự nhiên và tinh tế. Sofa đi kèm cũng cần chọn đúng.",
+      thumbnail: "https://images.unsplash.com/photo-1602526216437-31c1b49c2c3e",
+      content: `
+      <h2>Đặc trưng Scandinavian</h2>
+      <p>Màu sắc chủ đạo là trắng, xám, gỗ tự nhiên...</p>
+    `,
+      categorySlug: "phong-cach-trang-tri",
+    },
+  ];
+
+  for (const article of blogArticles) {
+    const categoryId = createdBlogCategories[article.categorySlug]?.id;
+
+    await prisma.article.upsert({
+      where: { slug: article.slug },
+      update: {},
+      create: {
+        title: article.title,
+        slug: article.slug,
+        excerpt: article.excerpt,
+        thumbnail: article.thumbnail,
+        content: article.content,
+        status: "PUBLISHED",
+        publishedAt: new Date(),
+        categoryId,
+        // authorId optional (null)
+      },
+    });
+  }
+
+  console.log(`✅ Seeded ${blogArticles.length} articles successfully!`);
 }
 
 main()

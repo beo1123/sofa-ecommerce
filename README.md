@@ -337,3 +337,9 @@ psql "postgresql://neondb_owner:<password>@ep-bold-fire-a1kme9hr-pooler.ap-south
 
 - **Docker + PostgreSQL trên Local**: Dễ dàng phát triển và thử nghiệm mà không cần cài đặt PostgreSQL thủ công.
 - **Neon (PostgreSQL Cloud Service)**: Giúp bạn dễ dàng quản lý database mà không cần cài đặt hoặc duy trì server riêng.
+
+//các bước làm nếu thêm bảng mới
+bước 1: npx prisma migrate reset
+bước 2 : npx prisma migrate dev --name "tên migrate của bạn"
+bước 3: npx prisma generate
+bước 3: npm run prisma:seed(chạy seed để gen data mẫu)
