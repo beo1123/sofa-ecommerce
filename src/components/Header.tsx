@@ -36,7 +36,7 @@ import { SafeImage } from "./ui/SafeImage";
 const navLinks = [
   { href: "/", label: "Trang Chủ" },
   { href: "/san-pham", label: "Sản Phẩm" },
-  { href: "/about", label: "Giới Thiệu" },
+  { href: "/gioi-thieu", label: "Giới Thiệu" },
   { href: "/news", label: "Tin Tức" },
   { href: "/contact", label: "Liên Hệ" },
 ];
