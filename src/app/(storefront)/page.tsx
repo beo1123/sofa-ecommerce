@@ -4,6 +4,11 @@ import { Hero } from "@/components/Home/Hero";
 import BestSellers from "@/components/Home/BestSellers";
 import BrowseByCategories from "@/components/Home/BrowseByCategories";
 
+export const metadata = {
+  title: "Trang Chủ – Home",
+  description: "Chào mừng bạn đến với Sofa Phạm Gia",
+};
+
 export const revalidate = 3600;
 
 export default function Home() {

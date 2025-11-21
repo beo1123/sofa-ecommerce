@@ -7,6 +7,11 @@ import Grid from "@/components/ui/Grid";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 
+export const metadata = {
+  title: "Liên Hệ – Contact",
+  description: "Liên hệ Sofa Phạm Gia để biết thêm thông tin chi tiết",
+};
+
 export default function ContactPage() {
   return (
     <main className="min-h-screen py-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
