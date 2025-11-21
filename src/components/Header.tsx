@@ -37,7 +37,7 @@ const navLinks = [
   { href: "/", label: "Trang Chủ" },
   { href: "/san-pham", label: "Sản Phẩm" },
   { href: "/gioi-thieu", label: "Giới Thiệu" },
-  { href: "/tin-tuc", label: "Tin Tức" },
+  { href: "/bai-viet", label: "Bài Viết" },
   { href: "/lien-he", label: "Liên Hệ" },
 ];
 

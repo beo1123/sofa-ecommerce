@@ -4,7 +4,7 @@ import { Hero } from "@/components/Home/Hero";
 import BestSellers from "@/components/Home/BestSellers";
 import BrowseByCategories from "@/components/Home/BrowseByCategories";
 
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export default function Home() {
   return (

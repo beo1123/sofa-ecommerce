@@ -35,7 +35,7 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
       title: `${product.title} – Sofa Ecommerce`,
       description: product.shortDescription ?? product.description ?? "",
       images: image ? [image] : [],
-      type: "website", // ✅ giữ chuẩn type Next.js
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
@@ -47,7 +47,7 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
 }
 
 /* ------------------ PAGE COMPONENT ------------------ */
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export default async function ProductDetailPage(props: PageProps) {
   const params = await props.params;
