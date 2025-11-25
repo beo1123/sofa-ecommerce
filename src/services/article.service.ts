@@ -140,4 +140,40 @@ export class ArticleService {
       data: article,
     };
   }
+  // get related article
+  async getRelatedArticleBySlug(slug: string) {
+    const article = await this.prisma.article.findUnique({
+      where: { slug },
+      select: {
+        id: true,
+        categoryId: true,
+        status: true,
+      },
+    });
+
+    if (!article || article.status !== ArticleStatus.PUBLISHED) {
+      throw {
+        status: 404,
+        body: {
+          success: false,
+          error: {
+            message: "Article not found",
+            code: "ARTICLE_NOT_FOUND",
+          },
+        },
+      };
+    }
+    const related = await this.prisma.article.findMany({
+      where: { slug: slug, categoryId: article.categoryId, status: ArticleStatus.PUBLISHED, id: { not: article.id } },
+      select: { id: true, title: true, slug: true, excerpt: true, thumbnail: true, publishedAt: true },
+      orderBy: { publishedAt: "desc" },
+      take: 3,
+    });
+    return {
+      success: true,
+      data: {
+        related,
+      },
+    };
+  }
 }

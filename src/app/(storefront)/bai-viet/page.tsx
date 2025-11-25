@@ -1,6 +1,6 @@
-import BlogCategoryFilter from "@/components/blog/BlogCategoryFilter";
-import BlogGrid from "@/components/blog/BlogGrid";
-import BlogHeader from "@/components/blog/BlogHeader";
+import BlogCategoryFilter from "@/components/blog/BlogList/BlogCategoryFilter";
+import BlogGrid from "@/components/blog/BlogList/BlogGrid";
+import BlogHeader from "@/components/blog/BlogList/BlogHeader";
 import Container from "@/components/ui/Container";
 import prisma from "@/lib/prisma";
 import { ArticleService } from "@/services/article.service";
