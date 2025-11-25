@@ -1,3 +1,4 @@
+// FILE: src/app/(storefront)/bai-viet/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -9,20 +10,26 @@ import ArticleHeader from "@/components/blog/BlogDetail/ArticleHeader";
 import ArticleContent from "@/components/blog/BlogDetail/ArticleContent";
 import RelatedArticles from "@/components/blog/BlogDetail/RelatedArticles";
 
+import type { blogDetail } from "@/types/blog/blogDetail";
+
 export const revalidate = 3600;
 
 const service = new ArticleService(prisma);
 
 type Params = { slug: string };
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+interface PageProps {
+  params: Promise<Params>;
+}
+
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
 
   try {
     const res = await service.getArticleBySlug(slug);
     if (!res?.success || !res.data) return {};
 
-    const a = res.data;
+    const a = res.data as blogDetail;
 
     return {
       title: a.title,
@@ -40,12 +47,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   }
 }
 
-export default async function ArticlePage({ params }: { params: Params }) {
-  const { slug } = await params;
+export default async function ArticlePage(props: PageProps) {
+  const { slug } = await props.params;
 
   const res = await service.getArticleBySlug(slug).catch(() => null);
   if (!res || !res.success || !res.data) return notFound();
-  const article = res.data;
+
+  const article = res.data as blogDetail;
 
   const relatedRes = await service.getRelatedArticleBySlug(slug).catch(() => null);
   const related = relatedRes?.success ? relatedRes.data.related : [];

@@ -1,7 +1,9 @@
+import type { ArticleStatus } from "@prisma/client";
+
 export type Category = {
   name: string;
   slug: string;
-};
+} | null;
 
 export type Author = {
   displayName: string;
@@ -12,10 +14,10 @@ export type blogDetail = {
   title: string;
   slug: string;
   excerpt: string | null;
-  content: string; // HTML string
-  thumbnail: string;
-  publishedAt: string; // ISO date string
-  status: "DRAFT" | "PUBLISHED";
+  content: string;
+  thumbnail: string | null;
+  publishedAt: string | Date | null;
+  status: ArticleStatus;
   category: Category;
   author: Author;
 };
