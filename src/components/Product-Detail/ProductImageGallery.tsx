@@ -1,26 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SafeImage } from "../ui/SafeImage";
+import Button from "../ui/Button";
 
 type ProductImageGalleryProps = {
-  images: any[];
+  images: { url: string; alt?: string }[];
   title: string;
 };
 
 export function ProductImageGallery({ images, title }: ProductImageGalleryProps) {
-  const [selectedImage, setSelectedImage] = useState(0);
+  const safeImages = Array.isArray(images) ? images : [];
+
+  const [selectedImage, setSelectedImage] = useState<string>(safeImages[0]?.url ?? "");
+  const currentIndex = safeImages.findIndex((img) => img.url === selectedImage);
 
   const nextImage = () => {
-    setSelectedImage((prev) => (prev + 1) % images.length);
+    const next = (currentIndex + 1) % safeImages.length;
+    setSelectedImage(safeImages[next].url);
   };
 
   const prevImage = () => {
-    setSelectedImage((prev) => (prev - 1 + images.length) % images.length);
+    const prev = (currentIndex - 1 + safeImages.length) % safeImages.length;
+    setSelectedImage(safeImages[prev].url);
   };
 
-  if (!images || images.length === 0) {
+  // --- Mobile Slide Handling ---
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(distance) < 50) return;
+
+    if (distance > 0) nextImage();
+    else prevImage();
+  };
+
+  if (safeImages.length === 0 || !selectedImage) {
     return (
       <div className="flex items-center justify-center h-96 bg-[var(--color-bg-muted)]">
         <p className="text-[var(--color-text-muted)]">Không có hình ảnh</p>
@@ -28,52 +55,70 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
     );
   }
 
+  const current = safeImages[currentIndex];
+
   return (
     <div className="p-6 lg:p-8">
       {/* Main Image */}
-      <div className="relative aspect-square bg-[var(--color-bg-muted)] rounded-2xl overflow-hidden group mb-4">
+      <div
+        className="
+          relative aspect-square bg-[var(--color-bg-muted)]
+          rounded-2xl overflow-hidden group mb-4
+        "
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}>
         <SafeImage
-          src={images[selectedImage].url}
-          alt={images[selectedImage].alt || title}
+          key={current.url}
+          src={current.url}
+          alt={current.alt || title}
           fill
-          className="object-cover"
+          className="object-cover transition-all duration-300"
           sizes="(max-width: 1024px) 100vw, 50vw"
           priority
         />
 
-        {/* Navigation Arrows */}
-        {images.length > 1 && (
+        {/* Navigation */}
+        {safeImages.length > 1 && (
           <>
-            <button
+            <Button
               onClick={prevImage}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+              size="sm"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
               <ChevronLeft size={20} />
-            </button>
-            <button
+            </Button>
+
+            <Button
               onClick={nextImage}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+              size="sm"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
               <ChevronRight size={20} />
-            </button>
+            </Button>
           </>
         )}
 
-        {/* Image Counter */}
+        {/* Counter */}
         <div className="absolute bottom-3 right-3 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
-          {selectedImage + 1} / {images.length}
+          {currentIndex + 1} / {safeImages.length}
         </div>
       </div>
 
-      {/* Thumbnail Gallery */}
-      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-4 gap-2">
-        {images.slice(0, 8).map((img, idx) => (
+      <div
+        className="
+          flex gap-3 overflow-x-auto no-scrollbar py-1
+        ">
+        {safeImages.map((img, idx) => (
           <button
             key={idx}
-            onClick={() => setSelectedImage(idx)}
-            className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-              selectedImage === idx
-                ? "border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
-                : "border-transparent hover:border-[var(--color-brand-200)]"
-            }`}>
+            onClick={() => setSelectedImage(img.url)}
+            className={`
+              relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all 
+              ${
+                selectedImage === img.url
+                  ? "border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
+                  : "border-transparent hover:border-[var(--color-brand-200)]"
+              }
+            `}>
             <SafeImage
               src={img.url}
               alt={img.alt || `${title} ${idx + 1}`}
