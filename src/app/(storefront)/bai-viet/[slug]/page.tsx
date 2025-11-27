@@ -12,7 +12,7 @@ import RelatedArticles from "@/components/blog/BlogDetail/RelatedArticles";
 
 import type { blogDetail } from "@/types/blog/blogDetail";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 const service = new ArticleService(prisma);
 

@@ -47,7 +47,7 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
 }
 
 /* ------------------ PAGE COMPONENT ------------------ */
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export default async function ProductDetailPage(props: PageProps) {
   const params = await props.params;

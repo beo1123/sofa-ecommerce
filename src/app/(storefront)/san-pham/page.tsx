@@ -26,7 +26,7 @@ const getCachedProducts = cache(async (params: ProductQueryParams) => {
   return await getProductListSSR(params);
 });
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export default async function ProductsPage(props: PageProps) {
   const searchParams = await props.searchParams;
