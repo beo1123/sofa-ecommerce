@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import prisma from "@lib/prisma";
+import { prisma } from "@lib/prisma";
 
 async function main() {
   console.log("🌱 Seeding database...");
