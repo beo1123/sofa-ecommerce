@@ -13,7 +13,7 @@ export const metadata = {
   description: "Tin tức, xu hướng nội thất, mẹo mua sắm và kiến thức hữu ích.",
 };
 
-export const revalidate = 3600;
+export const revalidate = 0;
 export default async function BlogPage(props: { searchParams: Promise<{ page?: string; category?: string }> }) {
   const searchParams = await props.searchParams;
 
