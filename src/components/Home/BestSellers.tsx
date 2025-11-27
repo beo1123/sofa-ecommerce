@@ -1,7 +1,7 @@
 import Grid, { GridItem } from "@/components/ui/Grid";
 import ProductCard from "@/components/products/ProductCard";
 import { ProductService } from "@/services/products.service";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 const productService = new ProductService(prisma);
 

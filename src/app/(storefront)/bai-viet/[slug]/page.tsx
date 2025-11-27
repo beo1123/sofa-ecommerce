@@ -4,13 +4,13 @@ import type { Metadata } from "next";
 
 import Container from "@/components/ui/Container";
 import { ArticleService } from "@/services/article.service";
-import prisma from "@/lib/prisma";
 
 import ArticleHeader from "@/components/blog/BlogDetail/ArticleHeader";
 import ArticleContent from "@/components/blog/BlogDetail/ArticleContent";
 import RelatedArticles from "@/components/blog/BlogDetail/RelatedArticles";
 
 import type { blogDetail } from "@/types/blog/blogDetail";
+import { prisma } from "@/lib/prisma";
 
 export const revalidate = 3600;
 

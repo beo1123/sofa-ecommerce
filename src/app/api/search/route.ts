@@ -1,7 +1,7 @@
 import { ProductService } from "@/services/products.service";
 import { NextRequest, NextResponse } from "next/server";
 import { normalizeError, ok } from "@/server/utils/api";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 const productService = new ProductService(prisma);
 
 export async function GET(req: NextRequest) {

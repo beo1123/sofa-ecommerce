@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { normalizeError, ok } from "@/server/utils/api";
 import { ArticleService } from "@/services/article.service";
 

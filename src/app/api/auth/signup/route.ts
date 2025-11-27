@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { normalizeError, validateRequest } from "@/server/utils/api";
 import { AuthService } from "@/services/auth.service";
 import { NextResponse } from "next/server";

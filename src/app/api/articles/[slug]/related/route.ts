@@ -1,6 +1,6 @@
 // FILE: src/app/api/articles/[slug]/related/route.ts
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { normalizeError, ok } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";
 import { ArticleService } from "@/services/article.service";

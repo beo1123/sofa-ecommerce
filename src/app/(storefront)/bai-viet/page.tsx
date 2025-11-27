@@ -2,7 +2,7 @@ import BlogCategoryFilter from "@/components/blog/BlogList/BlogCategoryFilter";
 import BlogGrid from "@/components/blog/BlogList/BlogGrid";
 import BlogHeader from "@/components/blog/BlogList/BlogHeader";
 import Container from "@/components/ui/Container";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { ArticleService } from "@/services/article.service";
 import { ArticleCategory } from "@/services/articleCategory.service";
 const articleService = new ArticleService(prisma);

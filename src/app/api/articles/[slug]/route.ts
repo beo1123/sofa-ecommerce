@@ -1,9 +1,9 @@
 // FILE: src/app/api/articles/[slug]/route.ts
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 import { normalizeError, ok } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";
 import { ArticleService } from "@/services/article.service";
+import { prisma } from "@/lib/prisma";
 
 const articleService = new ArticleService(prisma);
 

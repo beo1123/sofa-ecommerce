@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { OrderService } from "@/services/order.service";
 import { fail, normalizeError, validateRequest } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 

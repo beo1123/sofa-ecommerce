@@ -1,5 +1,5 @@
 import { serializeData } from "@/lib/helpers";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { normalizeError, parsePagination } from "@/server/utils/api";
 import { CategoryService } from "@/services/category.service";
 import { NextResponse } from "next/server";

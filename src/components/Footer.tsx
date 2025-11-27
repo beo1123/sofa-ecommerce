@@ -3,7 +3,7 @@ import React from "react";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import { CategoryService } from "@/services/category.service";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 const categoryService = new CategoryService(prisma);
 

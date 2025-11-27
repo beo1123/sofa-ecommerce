@@ -3,7 +3,7 @@ import Heading from "@/components/ui/Heading";
 import Grid, { GridItem } from "@/components/ui/Grid";
 import Link from "next/link";
 import { CategoryService } from "@/services/category.service";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 const categoryService = new CategoryService(prisma);
 

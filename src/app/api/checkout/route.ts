@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { CheckoutService } from "@/services/checkout.service";
 import { normalizeError, validateRequest } from "@/server/utils/api";
 import { serializeData } from "@/lib/helpers";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 const checkoutService = new CheckoutService(prisma);
 

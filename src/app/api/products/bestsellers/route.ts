@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ProductService } from "@/services/products.service";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { ok, fail, normalizeError } from "@/server/utils/api";
 
 export async function GET() {
