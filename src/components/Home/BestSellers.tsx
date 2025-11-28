@@ -11,7 +11,7 @@ export default async function BestSellers() {
     <>
       <h2 className="mb-lg text-2xl font-semibold">Sản phẩm bán chạy trong tuần</h2>
 
-      <div className="block md:hidden overflow-x-auto -mx-4 px-4 scrollbar-hide">
+      <div className="block md:hidden overflow-x-auto -mx-4 px-4 scrollbar-hide pb-5">
         <div className="flex gap-4">
           {products.map((product) => (
             <div key={product.id} className="min-w-[70%] sm:min-w-[50%]">
@@ -35,7 +35,7 @@ export default async function BestSellers() {
 
       <div className="hidden md:block">
         <Grid cols={1} responsive={{ sm: 2, md: 3, lg: 4 }} gap="lg">
-          {products.map((product) => (
+          {products.map((product, idx) => (
             <GridItem key={product.id}>
               <ProductCard
                 product={{

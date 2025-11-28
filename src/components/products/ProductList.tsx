@@ -20,7 +20,9 @@ export default function ProductList({ items = [], loading = false }: ProductList
     );
   }
 
-  if (!items.length) {
+  const safeItems = Array.isArray(items) ? items.filter(Boolean) : [];
+
+  if (!safeItems.length) {
     return (
       <div className="text-center py-16">
         <Text className="text-[var(--color-text-muted)] text-lg">
@@ -32,11 +34,10 @@ export default function ProductList({ items = [], loading = false }: ProductList
 
   return (
     <div className="w-full">
-      {/* Responsive grid: 1 → 2 → 3 → 4 cột */}
-      <div className="grid grid-cols-2 gap-4 sm:gap-6  [@media(min-width:640px)]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
-        {items.map((product, idx) => (
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 [@media(min-width:640px)]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+        {safeItems.map((product, idx) => (
           <motion.div
-            key={product.id ?? idx}
+            key={product?.id ?? product?.slug ?? `product-${idx}`}
             className="min-w-[170px] sm:min-w-0"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}

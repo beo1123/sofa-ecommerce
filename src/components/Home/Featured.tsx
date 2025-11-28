@@ -11,7 +11,7 @@ export default async function Featured() {
     <>
       <h2 className="mb-lg text-2xl font-semibold">Sản phẩm nổi bật</h2>
 
-      <div className="block md:hidden overflow-x-auto -mx-4 px-4 scrollbar-hide">
+      <div className="block md:hidden overflow-x-auto -mx-4 px-4 scrollbar-hide pb-5">
         <div className="flex gap-4">
           {products.map((product) => (
             <div key={product.id} className="min-w-[70%] sm:min-w-[50%]">
