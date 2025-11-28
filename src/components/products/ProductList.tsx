@@ -33,10 +33,11 @@ export default function ProductList({ items = [], loading = false }: ProductList
   return (
     <div className="w-full">
       {/* Responsive grid: 1 → 2 → 3 → 4 cột */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-6">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6  [@media(min-width:640px)]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
         {items.map((product, idx) => (
           <motion.div
             key={product.id ?? idx}
+            className="min-w-[170px] sm:min-w-0"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.04 }}>

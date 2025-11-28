@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ShoppingCart, ShoppingBag, ImageIcon } from "lucide-react";
+import { ImageIcon } from "lucide-react";
 import { formatCurrency } from "@/lib/helpers";
-import Button from "@/components/ui/Button";
 import Text from "@/components/ui/Text";
 import Heading from "@/components/ui/Heading";
 
@@ -97,7 +96,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
 
           {/* ✅ Floating Actions */}
-          <div
+          {/* <div
             className="
               absolute bottom-4 left-1/2 -translate-x-1/2
               flex flex-wrap justify-center gap-3
@@ -136,7 +135,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               ">
               Mua ngay
             </Button>
-          </div>
+          </div> */}
         </Link>
 
         {/* CONTENT */}

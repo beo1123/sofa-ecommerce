@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "../ui/Button";
 import Grid, { GridItem } from "../ui/Grid";
 import { SafeImage } from "../ui/SafeImage";
@@ -13,8 +14,9 @@ export function Hero() {
         <p className="text-text-muted">
           Khám phá những thiết kế nội thất tinh tế được chế tác từ vật liệu cao cấp và tay nghề thủ công.
         </p>
-
-        <Button className="px-lg py-md w-[30%]">Mua Ngay</Button>
+        <Link href="/san-pham">
+          <Button className="px-lg py-md w-[30%]">Mua Ngay</Button>
+        </Link>
       </GridItem>
       <GridItem className="relative rounded-md h-96 overflow-hidden">
         <SafeImage src={BANNER_URL} alt="Banner" fill className="object-cover object-center" priority />

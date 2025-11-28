@@ -5,11 +5,11 @@ import { prisma } from "@/lib/prisma";
 
 const productService = new ProductService(prisma);
 
-export default async function BestSellers() {
-  const products = await productService.getBestSellingProducts(8);
+export default async function Featured() {
+  const products = await productService.getFeaturedProducts(8);
   return (
     <>
-      <h2 className="mb-lg text-2xl font-semibold">Sản phẩm bán chạy trong tuần</h2>
+      <h2 className="mb-lg text-2xl font-semibold">Sản phẩm nổi bật</h2>
 
       <div className="block md:hidden overflow-x-auto -mx-4 px-4 scrollbar-hide">
         <div className="flex gap-4">

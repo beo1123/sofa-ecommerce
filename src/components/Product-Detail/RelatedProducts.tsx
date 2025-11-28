@@ -18,10 +18,16 @@ export default function RelatedProducts({ items }: { items: any[] }) {
       </div>
 
       {/* ===== GRID ===== */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8">
+      <div
+        className="
+    flex gap-5 overflow-x-auto pb-4
+    scrollbar-hide
+    sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible
+  ">
         {items.map((product, idx) => (
           <motion.div
             key={product.id}
+            className="min-w-[75%] sm:min-w-0" // quan trọng: để mobile scroll được
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

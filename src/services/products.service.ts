@@ -365,4 +365,83 @@ export class ProductService {
       };
     });
   }
+  // =====================================================
+  // 💰 Featured products (all-time, auto fallback)
+  // =====================================================
+  async getFeaturedProducts(limit = 8) {
+    const reviewAgg = await this.prisma.review.groupBy({
+      by: ["productId"],
+      where: { approved: true },
+      _avg: { rating: true },
+      _count: { rating: true },
+    });
+
+    const ratingMap = Object.fromEntries(
+      reviewAgg.map((r) => [
+        r.productId,
+        {
+          avg: r._avg.rating ?? 0,
+          count: r._count.rating ?? 0,
+        },
+      ])
+    );
+
+    const soldAgg = await this.prisma.orderItem.groupBy({
+      by: ["productId"],
+      where: {
+        productId: { not: null },
+        order: { status: { in: ["PAID", "FULFILLED", "COD_COMPLETED"] } },
+      },
+      _sum: { quantity: true },
+    });
+
+    const soldMap = Object.fromEntries(soldAgg.map((s) => [s.productId!, s._sum.quantity ?? 0]));
+
+    const products = await this.prisma.product.findMany({
+      where: { status: "PUBLISHED" },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        shortDescription: true,
+        createdAt: true,
+        variants: { select: { price: true } },
+        images: {
+          where: { isPrimary: true },
+          take: 1,
+          select: { url: true, alt: true },
+        },
+      },
+    });
+
+    const scored = products.map((p) => {
+      const r = ratingMap[p.id] ?? { avg: 0, count: 0 };
+      const sold = soldMap[p.id] ?? 0;
+
+      const score = (r.avg || 0) * 2 + Math.log((r.count || 0) + 1) + Math.log(sold + 1);
+
+      return { ...p, score };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+
+    const selected = scored.slice(0, limit);
+
+    return selected.map((p) => {
+      const prices = p.variants.map((v) => Number(v.price));
+      return {
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        shortDescription: p.shortDescription,
+        score: p.score,
+        avgRating: ratingMap[p.id]?.avg ?? 0,
+        reviewCount: ratingMap[p.id]?.count ?? 0,
+        totalSold: soldMap[p.id] ?? 0,
+        priceMin: Math.min(...prices),
+        priceMax: Math.max(...prices),
+        primaryImage: p.images[0] ?? null,
+      };
+    });
+  }
 }
