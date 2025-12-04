@@ -12,12 +12,14 @@ import Divider from "@/components/ui/Divider";
 import Badge from "@/components/ui/Badge";
 import Alert from "@/components/ui/Alert";
 import Spinner from "@/components/ui/Spinner";
-import { Search, ShoppingCart, User, Mail, Lock } from "lucide-react";
+import { Search, ShoppingCart, User, Mail, Lock, Truck, Zap, Store } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Grid, { GridItem } from "@/components/ui/Grid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RadioGroup from "@/components/ui/Radio";
+import Dropdown from "@/components/ui/Dropdown";
+import PriceRangeSlider from "@/components/ui/PriceRangeSlider";
 
 // ✅ Zod schema for validation example
 const formSchema = z.object({
@@ -30,6 +32,8 @@ type FormData = z.infer<typeof formSchema>;
 export default function UIDemoPage() {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = React.useState("standard");
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(20000000);
   const options = [
     {
       value: "standard",
@@ -331,25 +335,87 @@ export default function UIDemoPage() {
             <GridItem className="bg-red-400 p-4 text-center rounded">Item 3</GridItem>
           </Grid>
         </section>
-      </Container>
-      <Divider />
+        {/* ================= RADIO GROUP ================= */}
+        <section>
+          <Heading level={2} className="my-4">
+            🔘 Radio Group
+          </Heading>
 
-      {/* ================= RADIO GROUP ================= */}
-      <section>
-        <Heading level={2} className="mb-4">
-          🔘 Radio Group
-        </Heading>
-
-        <Text muted className="mb-3">
-          Component chọn 1 giá trị (radio), có thể dùng cho giao hàng, thanh toán, v.v.
-        </Text>
-        <div className="space-y-4">
-          <RadioGroup name="shipping" options={options} value={selected} onChange={setSelected} />
-          <Text muted className="mt-2">
-            Bạn đã chọn: <strong>{selected}</strong>
+          <Text muted className="mb-3">
+            Component chọn 1 giá trị (radio), có thể dùng cho giao hàng, thanh toán, v.v.
           </Text>
-        </div>
-      </section>
+          <div className="space-y-4">
+            <RadioGroup name="shipping" options={options} value={selected} onChange={setSelected} />
+            <Text muted className="mt-2">
+              Bạn đã chọn: <strong>{selected}</strong>
+            </Text>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ================= DROPDOWN ================= */}
+        <section>
+          <Heading level={2} className="my-4">
+            🟣 Dropdown
+          </Heading>
+
+          <div className="space-y-4">
+            <Dropdown
+              label="Chọn loại giao hàng"
+              placeholder="Select shipping option"
+              value={selected}
+              onChange={setSelected}
+              options={[
+                { label: "Giao tiêu chuẩn", value: "standard", icon: <Truck size={16} /> },
+                { label: "Giao nhanh", value: "express", icon: <Zap size={16} /> },
+                { label: "Nhận tại cửa hàng", value: "pickup", icon: <Store size={16} /> },
+              ]}
+            />
+
+            <Text muted>
+              Bạn đã chọn: <strong>{selected}</strong>
+            </Text>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ================= PRICE RANGE SLIDER ================= */}
+        <section>
+          <Heading level={2} className="mb-4">
+            💰 Price Range Slider
+          </Heading>
+
+          <div className="max-w-2xl">
+            <PriceRangeSlider
+              min={0}
+              max={50000000}
+              step={500000}
+              value={[priceMin, priceMax]}
+              onChange={(v) => {
+                setPriceMin(v[0]);
+                setPriceMax(v[1]);
+              }}
+            />
+
+            {/* <div className="grid grid-cols-2 gap-3 mt-4">
+              <Input
+                label="Giá từ"
+                type="number"
+                value={priceMin}
+                onChange={(e) => setPriceMin(Number(e.target.value))}
+              />
+              <Input
+                label="Giá đến"
+                type="number"
+                value={priceMax}
+                onChange={(e) => setPriceMax(Number(e.target.value))}
+              />
+            </div> */}
+          </div>
+        </section>
+      </Container>
     </main>
   );
 }

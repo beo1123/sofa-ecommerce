@@ -18,7 +18,7 @@ export default async function BrowseByCategories() {
 
       <Grid cols={2} responsive={{ sm: 3, lg: 6 }} gap="md">
         {categories.map((cat) => (
-          <Link key={cat.id} href={`/san-pham?category=${cat.slug}&page=1`}>
+          <Link key={cat.slug} href={`/san-pham?category=${cat.slug}&page=1`}>
             <GridItem
               className="
                 bg-white shadow rounded-md p-lg text-center

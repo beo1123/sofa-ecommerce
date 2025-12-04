@@ -14,17 +14,27 @@ type ProductsPageProps = {
   initialItems: any[];
   initialMeta: { page: number; perPage: number; total: number };
   initialParams: ProductQueryParams;
+  categories: { name: string; slug: string }[];
+  filtersData: {
+    materials: string[];
+    colors: string[];
+    priceMin: number;
+    priceMax: number;
+  };
 };
-
-export default function ProductsPageClient({ initialItems, initialMeta, initialParams }: ProductsPageProps) {
+export default function ProductsPageClient({
+  initialItems,
+  initialMeta,
+  initialParams,
+  categories,
+  filtersData,
+}: ProductsPageProps) {
   const [showMobileFilter, setShowMobileFilter] = useState(false);
   const params = initialParams;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useProductsInfinite(params);
 
   const items = data?.pages ? data.pages.flatMap((p) => p.items) : initialItems;
-
-  const meta = data?.pages?.[0]?.meta ?? initialMeta;
 
   const currentFilters = {
     category: params.category ?? "",
@@ -52,11 +62,15 @@ export default function ProductsPageClient({ initialItems, initialMeta, initialP
     <main className="min-h-screen bg-[var(--color-bg-muted)]">
       <section className="container mx-auto px-4 py-10">
         <h1 className="text-2xl font-semibold mb-8 text-center lg:text-left">Tất cả sản phẩm</h1>
-
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-10">
           <aside className="hidden lg:block">
-            <div className="sticky top-20">
-              <ProductFilters currentFilters={currentFilters} />
+            <div className="sticky top-40">
+              <ProductFilters
+                categories={categories}
+                filtersData={filtersData}
+                currentFilters={currentFilters}
+                onClose={() => setShowMobileFilter(false)}
+              />
             </div>
           </aside>
 
@@ -107,7 +121,12 @@ export default function ProductsPageClient({ initialItems, initialMeta, initialP
               </div>
 
               <div className="p-4">
-                <ProductFilters currentFilters={currentFilters} />
+                <ProductFilters
+                  categories={categories}
+                  filtersData={filtersData}
+                  currentFilters={currentFilters}
+                  onClose={() => setShowMobileFilter(false)}
+                />
               </div>
             </motion.div>
           </>

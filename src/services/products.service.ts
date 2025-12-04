@@ -199,7 +199,10 @@ export class ProductService {
             }
           : {}),
       },
-      take: 8,
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 4,
       select: {
         id: true,
         slug: true,
@@ -443,5 +446,66 @@ export class ProductService {
         primaryImage: p.images[0] ?? null,
       };
     });
+  }
+  // =====================================================
+  // 🎨 getFilters - lấy unique materials + colors từ ProductVariant.attributes
+  // =====================================================
+  async getFilters() {
+    const variants = await this.prisma.productVariant.findMany({
+      where: {
+        product: { status: "PUBLISHED" },
+      },
+      select: {
+        attributes: true,
+        price: true,
+      },
+    });
+
+    // Nếu không có variant → trả về rỗng
+    if (!variants.length) {
+      return {
+        materials: [],
+        colors: [],
+        priceMin: 0,
+        priceMax: 0,
+      };
+    }
+
+    const materialSet = new Set<string>();
+    const colorSet = new Set<string>();
+
+    let minPrice = Number.MAX_SAFE_INTEGER;
+    let maxPrice = 0;
+
+    for (const v of variants) {
+      const attrs = (v.attributes ?? {}) as Record<string, any>;
+
+      // MATERIAL
+      if (attrs.material) {
+        materialSet.add(String(attrs.material).trim());
+      }
+
+      // COLOR
+      if (attrs.color) {
+        colorSet.add(String(attrs.color).trim());
+      }
+
+      // PRICE
+      const price = Number(v.price);
+      if (!isNaN(price)) {
+        if (price < minPrice) minPrice = price;
+        if (price > maxPrice) maxPrice = price;
+      }
+    }
+
+    // Nếu minPrice vẫn là MAX_SAFE_INTEGER => không có price hợp lệ
+    if (minPrice === Number.MAX_SAFE_INTEGER) minPrice = 0;
+
+    return {
+      materials: Array.from(materialSet),
+      colors: Array.from(colorSet),
+      priceMin: minPrice,
+      priceMax: maxPrice,
+    };
   }
 }

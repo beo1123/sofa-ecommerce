@@ -46,7 +46,7 @@ export default async function Footer() {
             <h4 className="text-[var(--color-text-default)] font-semibold mb-3">Sản phẩm</h4>
             <ul className="space-y-2 text-sm">
               {categories.map((cat) => (
-                <li key={cat.id}>
+                <li key={cat.slug}>
                   <Link
                     href={`/san-pham?category=${cat.slug}&page=1`}
                     className="hover:text-[var(--color-brand-300)] transition-colors">

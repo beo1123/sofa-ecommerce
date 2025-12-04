@@ -34,7 +34,7 @@ export default function ProductList({ items = [], loading = false }: ProductList
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-2 gap-4 sm:gap-6 [@media(min-width:640px)]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {safeItems.map((product, idx) => (
           <motion.div
             key={product?.id ?? product?.slug ?? `product-${idx}`}

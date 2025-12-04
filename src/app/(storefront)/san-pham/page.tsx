@@ -3,6 +3,12 @@ import type { Metadata } from "next";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 import { getProductListSSR } from "@/lib/products/productSSR";
 import { cache } from "react";
+import { CategoryService } from "@/services/category.service";
+import { prisma } from "@/lib/prisma";
+import { ProductService } from "@/services/products.service";
+
+const categoryService = new CategoryService(prisma);
+const productService = new ProductService(prisma);
 
 export const metadata: Metadata = {
   title: "Danh sách sản phẩm – Sofa Ecommerce",
@@ -44,6 +50,8 @@ export default async function ProductsPage(props: PageProps) {
   };
 
   const data = await getCachedProducts(filterParams);
+  const categories = await categoryService.getAll(1, 50, 0);
+  const filtersData = await productService.getFilters();
 
   if (!data?.items?.length) {
     return (
@@ -55,5 +63,13 @@ export default async function ProductsPage(props: PageProps) {
     );
   }
 
-  return <ProductsPageClient initialItems={data.items} initialMeta={data.meta} initialParams={filterParams} />;
+  return (
+    <ProductsPageClient
+      initialItems={data.items}
+      initialMeta={data.meta}
+      initialParams={filterParams}
+      categories={categories.data}
+      filtersData={filtersData}
+    />
+  );
 }

@@ -2,73 +2,108 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import Input from "@/components/ui/Input";
+import Dropdown from "@/components/ui/Dropdown";
 import Button from "@/components/ui/Button";
-import Heading from "@/components/ui/Heading";
-import Divider from "@/components/ui/Divider";
-import { Filter } from "lucide-react";
+
+type Category = { name: string; slug: string };
+
+type FiltersData = {
+  materials: string[];
+  colors: string[];
+  priceMin: number;
+  priceMax: number;
+};
 
 type Filters = {
   category?: string;
   priceMin?: number;
   priceMax?: number;
+  material?: string;
   color?: string;
 };
 
-export default function ProductFilters({ currentFilters }: { currentFilters: Filters }) {
+export default function ProductFilters({
+  categories,
+  filtersData,
+  currentFilters,
+  onClose,
+}: {
+  categories: Category[];
+  filtersData: FiltersData;
+  currentFilters: Filters;
+  onClose?: () => void;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [category, setCategory] = useState(currentFilters.category ?? "");
-  const [priceMin, setPriceMin] = useState(currentFilters.priceMin ?? "");
-  const [priceMax, setPriceMax] = useState(currentFilters.priceMax ?? "");
+  const [material, setMaterial] = useState(currentFilters.material ?? "");
   const [color, setColor] = useState(currentFilters.color ?? "");
 
   const handleApply = () => {
     const params = new URLSearchParams(searchParams.toString());
     category ? params.set("category", category) : params.delete("category");
-    priceMin ? params.set("priceMin", String(priceMin)) : params.delete("priceMin");
-    priceMax ? params.set("priceMax", String(priceMax)) : params.delete("priceMax");
+    material ? params.set("material", material) : params.delete("material");
     color ? params.set("color", color) : params.delete("color");
-    params.set("page", "1");
+    onClose?.();
     router.push(`/san-pham?${params.toString()}`);
   };
 
   const handleReset = () => {
+    setCategory("");
+    setMaterial("");
+    setColor("");
+    onClose?.();
     router.push("/san-pham");
   };
 
   return (
-    <div className="bg-[var(--color-bg-muted)] rounded-2xl border border-[var(--color-brand-50)] p-5 space-y-6 sticky top-20">
-      <Heading level={3} className="text-lg font-semibold text-[var(--color-brand-400)] flex items-center gap-2">
-        <Filter size={18} /> Bộ lọc
-      </Heading>
-
-      <Divider />
-
-      <div className="space-y-4">
-        <Input
+    <div className="p-4 space-y-5 w-full bg-white rounded-xl border md:bg-white md:rounded-xl md:border-1 border-transparent md:border-gray-200">
+      <section className="space-y-2">
+        <Dropdown
           label="Danh mục"
-          placeholder="VD: Sofa góc"
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          fullWidth={true}
+          placeholder="Tất cả"
+          onChange={setCategory}
+          options={categories.map((c) => ({ label: c.name, value: c.slug }))}
         />
+      </section>
 
-        <div className="grid grid-cols-2 gap-3">
-          <Input label="Giá từ" type="number" value={priceMin} onChange={(e) => setPriceMin(e.target.value)} />
-          <Input label="Giá đến" type="number" value={priceMax} onChange={(e) => setPriceMax(e.target.value)} />
-        </div>
+      <section className="space-y-2">
+        <Dropdown
+          label="Chất liệu"
+          fullWidth={true}
+          value={material}
+          placeholder="Tất cả"
+          onChange={setMaterial}
+          options={filtersData.materials.map((m) => ({
+            label: m.charAt(0).toUpperCase() + m.slice(1),
+            value: m,
+          }))}
+        />
+      </section>
 
-        <Input label="Màu sắc" placeholder="VD: Xám, Nâu..." value={color} onChange={(e) => setColor(e.target.value)} />
-      </div>
+      <section className="space-y-2">
+        <Dropdown
+          label="Chọn màu"
+          placeholder="Tất cả"
+          value={color}
+          onChange={setColor}
+          fullWidth={true}
+          options={filtersData.colors.map((c) => ({
+            label: c.charAt(0).toUpperCase() + c.slice(1),
+            value: c,
+            icon: <div className="w-4 h-4 rounded-full border" style={{ backgroundColor: c }} />,
+          }))}
+        />
+      </section>
 
-      <Divider />
-
-      <div className="flex gap-3">
-        <Button className="flex-1" onClick={handleApply}>
+      <div className="flex gap-2 pt-2 md:pt-2 fixed bottom-0 left-0 right-0 bg-white p-4 md:static md:p-0 md:bg-transparent border-t md:border-none">
+        <Button className="flex-1" size="sm" onClick={handleApply}>
           Áp dụng
         </Button>
-        <Button variant="outline" className="flex-1" onClick={handleReset}>
+        <Button className="flex-1" size="sm" variant="outline" onClick={handleReset}>
           Đặt lại
         </Button>
       </div>
