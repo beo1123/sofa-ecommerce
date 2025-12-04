@@ -45,6 +45,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
   const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(1);
 
+  // Build attribute list (unique values for each attribute key)
   const attributes: Record<string, string[]> = useMemo(() => {
     const map: Record<string, string[]> = {};
     for (const v of product.variants) {
@@ -58,6 +59,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
     return map;
   }, [product.variants]);
 
+  // Local UI state for selected attributes (kept in sync with selectedVariant prop)
   const [selectedAttributes, setSelectedAttributes] = useState<VariantAttributes>(selectedVariant?.attributes || {});
 
   useEffect(() => {
@@ -66,78 +68,62 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
     }
   }, [selectedVariant]);
 
-  const getMatchedVariants = useCallback(
-    (attrs: VariantAttributes): ProductVariant[] => {
-      return product.variants.filter((v) =>
-        Object.keys(attrs).every((k) => attrs[k] === undefined || v.attributes[k] === attrs[k])
-      );
-    },
-    [product.variants]
-  );
-
+  // Main selection handler: choose the best matching variant and sync full attributes
   const handleAttributeSelect = useCallback(
     (attrKey: string, value: string) => {
-      let updated: VariantAttributes = { ...selectedAttributes, [attrKey]: value };
+      // 1) updated attributes if user picks this value
+      const updated: VariantAttributes = { ...selectedAttributes, [attrKey]: value };
 
-      const valueExists = product.variants.some((v) => v.attributes[attrKey] === value);
+      // 2) candidates that have attrKey === value
+      const candidates = product.variants.filter((v) => v.attributes[attrKey] === value);
 
-      if (!valueExists) {
+      if (candidates.length === 0) {
+        // No variant has this value — keep UI in sync with current selectedVariant
         setSelectedAttributes(selectedVariant.attributes);
         return;
       }
 
-      let matched = getMatchedVariants(updated);
-
-      if (matched.length === 1) {
-        const v = matched[0];
-        setSelectedAttributes(v.attributes);
-        onVariantChange(v);
+      // 3) try to find exact match (variant whose all keys present in updated match)
+      const exactMatch = candidates.find((v) =>
+        Object.keys(updated).every((k) => updated[k] === undefined || v.attributes[k] === updated[k])
+      );
+      if (exactMatch) {
+        setSelectedAttributes(exactMatch.attributes);
+        if (exactMatch.id !== selectedVariant.id) onVariantChange(exactMatch);
         return;
       }
 
-      if (matched.length > 1) {
-        let narrowed: VariantAttributes = { ...updated };
-        let loop = true;
+      // 4) score candidates by number of matching attributes with updated
+      const score = (variant: ProductVariant) =>
+        Object.keys(updated).reduce((s, k) => s + (variant.attributes[k] === updated[k] ? 1 : 0), 0);
 
-        while (loop) {
-          loop = false;
+      let best = candidates[0];
+      let bestScore = score(best);
 
-          for (const key of Object.keys(attributes)) {
-            if (narrowed[key] !== undefined) continue;
-
-            const values = new Set(matched.map((m) => m.attributes[key]));
-            if (values.size === 1) {
-              narrowed[key] = matched[0].attributes[key];
-              loop = true;
-            }
+      for (let i = 1; i < candidates.length; i++) {
+        const c = candidates[i];
+        const s = score(c);
+        if (s > bestScore) {
+          best = c;
+          bestScore = s;
+        } else if (s === bestScore) {
+          // tie-breaker: prefer available inventory > 0
+          const bestAvailable = (best.inventory?.[0]?.available ?? 0) > 0 ? 1 : 0;
+          const cAvailable = (c.inventory?.[0]?.available ?? 0) > 0 ? 1 : 0;
+          if (cAvailable > bestAvailable) {
+            best = c;
+            bestScore = s;
           }
-
-          matched = getMatchedVariants(narrowed);
-          if (matched.length === 1) break;
         }
-
-        if (matched.length === 1) {
-          const v = matched[0];
-          setSelectedAttributes(v.attributes);
-          onVariantChange(v);
-          return;
-        }
-
-        setSelectedAttributes(narrowed);
-        return;
       }
 
-      const fallback = product.variants.find((v) => v.attributes[attrKey] === value);
-
-      if (fallback) {
-        setSelectedAttributes(fallback.attributes);
-        onVariantChange(fallback);
-        return;
+      // 5) set UI and callback
+      setSelectedAttributes(best.attributes);
+      if (best.id !== selectedVariant.id) {
+        onVariantChange(best);
       }
-
-      setSelectedAttributes(selectedVariant.attributes);
     },
-    [selectedAttributes, selectedVariant, attributes, product.variants, getMatchedVariants, onVariantChange]
+    [product.variants, selectedAttributes, selectedVariant, onVariantChange]
   );
 
   const availableQty =
@@ -190,15 +176,18 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
                 {attributes[attrKey].map((value) => {
                   const isSelected = selectedAttributes[attrKey] === value;
                   const isColor = attrKey === "color";
+                  const available = product.variants.some((v) => v.attributes[attrKey] === value);
 
                   return (
                     <Button
                       key={value}
                       onClick={() => handleAttributeSelect(attrKey, value)}
                       variant={isSelected ? "primary" : "outline"}
+                      disabled={!available}
                       className={`border-2 rounded-xl p-0 overflow-hidden transition-all
-                ${isSelected ? "border-[var(--color-brand-400)]" : "border-gray-300 hover:border-[var(--color-brand-400)]"}
-              `}
+                        ${isSelected ? "border-[var(--color-brand-400)]" : "border-gray-300 hover:border-[var(--color-brand-400)]"}
+                        ${!available ? "opacity-40 cursor-not-allowed" : ""}
+                      `}
                       style={
                         isColor
                           ? {
