@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { ShoppingCart, Heart, Share2, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { formatCurrency } from "@/lib/helpers";
 import { useAppDispatch } from "@/store/hook";
-import { addItem } from "@/store/slice/cartSlice";
+import { PhoneIcon } from "../ui/Icon/PhoneIcon";
+import { ZaloIcon } from "../ui/Icon/ZaloIcon";
 
 type VariantAttributes = Record<string, string>;
 
@@ -238,7 +239,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
         </div>
       </div>
 
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         <Button
           fullWidth
           onClick={() => {
@@ -269,6 +270,22 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
             Chia sẻ
           </Button>
         </div>
+      </div> */}
+      <div className="space-y-3">
+        <Button
+          fullWidth
+          leftIcon={<PhoneIcon />}
+          variant="secondary"
+          className=" py-4 text-lg font-semibold rounded-xl">
+          <a href={`tel:${process.env.NEXT_PUBLIC_PHONE_URL}`}>Liên Hệ: {process.env.NEXT_PUBLIC_PHONE_URL}</a>
+        </Button>
+        <Button
+          fullWidth
+          leftIcon={<ZaloIcon />}
+          onClick={() => window.open(process.env.NEXT_PUBLIC_ZALO_URL, "_blank")}
+          className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white py-4 text-lg font-semibold rounded-xl">
+          Liên Hệ Zalo
+        </Button>
       </div>
     </div>
   );

@@ -91,7 +91,7 @@ export default function ContactForm() {
       </form>
 
       <CardFooter>
-        <Text muted>Hoặc gọi ngay: 0932 111 620</Text>
+        <Text muted>Hoặc gọi ngay: {process.env.NEXT_PUBLIC_PHONE_URL}</Text>
       </CardFooter>
     </Card>
   );

@@ -13,7 +13,7 @@ export default function CTASection() {
         </Text>
 
         <a
-          href="tel:0932111620"
+          href={`tel:${process.env.NEXT_PUBLIC_PHONE_URL}`}
           className="
             inline-block 
             text-3xl sm:text-4xl font-extrabold tracking-wide 
@@ -21,7 +21,7 @@ export default function CTASection() {
             hover:scale-105 active:scale-95
             transition-transform duration-300
           ">
-          0932 111 620
+          {process.env.NEXT_PUBLIC_PHONE_URL}
         </a>
 
         <p className="mt-5 text-sm text-[var(--color-text-muted)]">Hỗ trợ nhanh mỗi ngày mọi khung giờ</p>

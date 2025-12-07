@@ -3,14 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingCart, Heart, BarChart3 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import MiniCartDrawer from "./cart/MiniCartDrawer";
 import { useAppSelector } from "@/store/hook";
 import { selectCartItemCount } from "@/store/selector/cartSelectors";
 import SearchBox from "./Header/SearchBox";
-import HeaderUser from "./Header/HeaderUser";
-import HeaderUserMobile from "./Header/HeaderUserMobile";
 import { SafeImage } from "./ui/SafeImage";
+import SocialContact from "./Header/SocialContact";
 
 /**
  * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
@@ -160,24 +159,12 @@ export default function Header() {
               <p className="text-[var(--color-text-default)] text-xs">
                 Miễn phí giao hàng cho đơn hàng trên 2,000,000₫
               </p>
-              <div className="flex items-center gap-6">
-                <Link
-                  href="/help"
-                  className="text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors text-xs">
-                  Hỗ trợ
-                </Link>
-                <Link
-                  href="/account"
-                  className="text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors text-xs">
-                  Tài khoản
-                </Link>
-              </div>
             </div>
           </div>
         </div>
 
         {/* Main Header - Full responsive */}
-        <div className="bg-[var(--color-bg-page)] border-b border-[var(--color-brand-50)]">
+        <div className="bg-[var(--color-bg-page)] border-b border-[var(--color-brand-50)] py-1">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 sm:gap-4 h-16 lg:h-20">
               {/* Logo - Always visible */}
@@ -205,12 +192,14 @@ export default function Header() {
 
               {/* Right Actions - Responsive icons & profile */}
               <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0 ml-auto">
-                {/* User Profile - Hidden on small screens (xs, sm, md, lg, xl-) */}
-                <HeaderUser />
-
-                {/* Icon Actions - Wishlist/Compare: Hidden on xs; Cart & Menu: Always on mobile */}
+                {/* <HeaderUser /> */}
                 <div className="flex items-center gap-1 sm:gap-2">
-                  <Link
+                  <SocialContact
+                    facebookUrl={`${process.env.NEXT_PUBLIC_FACEBOOK_URL}`}
+                    zaloUrl={`${process.env.NEXT_PUBLIC_ZALO_URL}`}
+                    phoneNumber={`${process.env.NEXT_PUBLIC_PHONE_URL}`}
+                  />
+                  {/* <Link
                     href="/wishlist"
                     className="hidden sm:flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
                     aria-label="Yêu thích">
@@ -222,9 +211,9 @@ export default function Header() {
                     className="hidden sm:flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
                     aria-label="So sánh">
                     <BarChart3 className="w-5 h-5 text-[var(--color-text-muted)] group-hover:text-[var(--color-brand-300)] transition-colors" />
-                  </Link>
+                  </Link> */}
 
-                  <button
+                  {/* <button
                     onClick={() => setIsCartOpen(true)}
                     className="cursor-pointer relative flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors group"
                     aria-label="Giỏ hàng">
@@ -234,7 +223,7 @@ export default function Header() {
                         {cartCount}
                       </span>
                     )}
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => setIsMenuOpen(true)}
                     className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-muted)] transition-colors"
@@ -311,13 +300,13 @@ export default function Header() {
                 </motion.div>
 
                 {/* User Section */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.12, duration: 0.24 }}
                   className="p-4 border-b border-[var(--color-brand-50)] bg-[var(--color-bg-muted)] flex-shrink-0">
                   <HeaderUserMobile onClose={closeMobileMenu} />
-                </motion.div>
+                </motion.div> */}
 
                 {/* Navigation Links */}
                 <nav className="flex-1 overflow-y-auto p-4">
@@ -340,7 +329,7 @@ export default function Header() {
                   </ul>
 
                   {/* Additional Links */}
-                  <motion.div
+                  {/* <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.32, duration: 0.24 }}
@@ -379,7 +368,7 @@ export default function Header() {
                         </Link>
                       </li>
                     </ul>
-                  </motion.div>
+                  </motion.div> */}
                 </nav>
 
                 {/* Bottom Info */}

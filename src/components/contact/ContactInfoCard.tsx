@@ -13,7 +13,7 @@ export default function ContactInfoCard() {
           <div className="flex items-center gap-3">
             <Phone />
             <div>
-              <Text className="text-lg font-semibold">0932 111 620</Text>
+              <Text className="text-lg font-semibold">{process.env.NEXT_PUBLIC_PHONE_URL}</Text>
               <Text muted>7:00 — 21:00 (T2 — CN)</Text>
             </div>
           </div>
