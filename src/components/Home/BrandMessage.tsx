@@ -9,7 +9,7 @@ export function BrandMessage() {
       {/* IMAGE */}
       <GridItem className="bg-brand-50 h-80 rounded-md flex items-center justify-center overflow-hidden">
         <SafeImage
-          src="https://images.unsplash.com/photo-1684165610413-2401399e0e59?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0"
+          src="https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/Home/photo-1684165610413-2401399e0e59.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvSG9tZS9waG90by0xNjg0MTY1NjEwNDEzLTI0MDEzOTllMGU1OS5hdmlmIiwiaWF0IjoxNzY1MjAxNjM5LCJleHAiOjIwODA1NjE2Mzl9.cLf2omnuBs5IxVdt6uTwyjdKGiNN0delgp0kU0yyl28"
           alt="Hình ảnh thương hiệu"
           width={800}
           height={800}

@@ -7,6 +7,7 @@ const FALLBACK_URL = "/images/404.jpg";
 
 type SafeImageProps = ImageProps & {
   fallbackSrc?: string;
+  priority?: boolean;
 };
 
 export function SafeImage({
@@ -22,10 +23,11 @@ export function SafeImage({
 
   const handleError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     if (imgSrc !== fallbackSrc) setImgSrc(fallbackSrc);
-    if (onError) onError(event);
+    onError?.(event);
   };
 
-  const imageLoading = priority ? undefined : loading || "lazy";
+  const fetchPriority = priority ? "high" : undefined;
+  const loadingMode = priority ? undefined : loading || "lazy";
 
   return (
     <Image
@@ -33,8 +35,8 @@ export function SafeImage({
       src={imgSrc}
       alt={alt || "image"}
       onError={handleError}
-      priority={priority}
-      loading={imageLoading}
+      fetchPriority={fetchPriority}
+      loading={loadingMode}
       unoptimized={props.unoptimized ?? false}
     />
   );
