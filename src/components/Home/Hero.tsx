@@ -4,7 +4,7 @@ import Grid, { GridItem } from "../ui/Grid";
 import { SafeImage } from "../ui/SafeImage";
 
 const BANNER_URL =
-  "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687";
+  "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/Home/photo-1583847268964-b28dc8f51f92.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvSG9tZS9waG90by0xNTgzODQ3MjY4OTY0LWIyOGRjOGY1MWY5Mi5hdmlmIiwiaWF0IjoxNzY1MjAwNzYzLCJleHAiOjE3OTY3MzY3NjN9.D2JmnHPmkzRCcCa8EBaGlO_G3Mkd8mXvQna2Yrq1y88";
 
 export function Hero() {
   return (
