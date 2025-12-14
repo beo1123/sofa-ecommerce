@@ -2,6 +2,7 @@
 import "./globals.css"; // adjust path if you keep global css elsewhere
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import Container from "@/components/ui/Container";
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Header />
             {/* Page container */}
             <Container className="flex-1">
-              <main>{children}</main>
+              <main>
+                {children}
+                <Analytics />
+              </main>
             </Container>
             <Footer />
           </ReactQueryProvider>
