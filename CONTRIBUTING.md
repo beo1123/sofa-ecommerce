@@ -22,7 +22,7 @@ Husky + commitlint sẽ kiểm tra commit message. Đảm bảo `pnpm prepare` �
 
 - Chạy `pnpm lint` và fix warnings/errors.
 - Viết/ cập nhật tests nếu thay đổi logic.
-- Chạy `pnpm test` (nếu có).
+- Chạy `pnpm test` (nếu có)
 
 ## Pull Request checklist
 
