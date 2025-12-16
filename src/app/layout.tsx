@@ -24,14 +24,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Header />
             {/* Page container */}
             <Container className="flex-1">
-              <main>
-                {children}
-                <Analytics />
-              </main>
+              <main>{children}</main>
             </Container>
             <Footer />
           </ReactQueryProvider>
         </ReduxProvider>
+        <Analytics />
       </body>
     </html>
   );
