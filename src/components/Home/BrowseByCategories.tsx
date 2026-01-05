@@ -23,6 +23,7 @@ export default async function BrowseByCategories() {
               className="
                 bg-white shadow rounded-md p-lg text-center
                 cursor-pointer transition hover:shadow-lg hover:bg-brand-50
+                h-20 flex items-center justify-center
               ">
               {cat.name}
             </GridItem>
