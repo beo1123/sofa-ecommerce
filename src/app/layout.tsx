@@ -8,6 +8,7 @@ import Footer from "@components/Footer";
 import Container from "@/components/ui/Container";
 import ReactQueryProvider from "../providers/ReactQueryProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Sofa Ecommerce",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Footer />
           </ReactQueryProvider>
         </ReduxProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
