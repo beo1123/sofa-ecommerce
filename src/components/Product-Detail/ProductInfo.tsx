@@ -7,6 +7,7 @@ import { formatCurrency } from "@/lib/helpers";
 import { useAppDispatch } from "@/store/hook";
 import { PhoneIcon } from "../ui/Icon/PhoneIcon";
 import { ZaloIcon } from "../ui/Icon/ZaloIcon";
+import Text from "../ui/Text";
 
 type VariantAttributes = Record<string, string>;
 
@@ -136,7 +137,9 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
         <h1 className="text-3xl lg:text-4xl font-bold text-[var(--color-text-default)] mb-3">{product.title}</h1>
 
         {product.shortDescription && (
-          <p className="text-[var(--color-text-muted)] mb-4 text-lg">{product.shortDescription}</p>
+          <Text muted className="text-lg line-clamp-3 my-1">
+            {product.shortDescription}
+          </Text>
         )}
 
         <div className="flex items-center gap-3 mb-6">
@@ -161,9 +164,9 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
               </span>
             )}
           </div>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">
+          {/* <p className="text-sm text-[var(--color-text-muted)] mt-1">
             SKU: {selectedVariant.inventory?.[0]?.sku || "N/A"}
-          </p>
+          </p> */}
         </div>
 
         <div className="space-y-5 mb-6">
@@ -233,7 +236,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
             </div>
 
             <span className="text-sm text-[var(--color-text-muted)]">
-              {availableQty > 0 ? `${availableQty} sản phẩm có sẵn` : "Hết hàng"}
+              {availableQty > 0 ? `${availableQty} sản phẩm có sẵn` : "Liên Hệ"}
             </span>
           </div>
         </div>
