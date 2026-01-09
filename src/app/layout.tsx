@@ -9,16 +9,21 @@ import Container from "@/components/ui/Container";
 import ReactQueryProvider from "../providers/ReactQueryProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { baseMetadata } from "@/seo/baseMetadata";
+import { organizationSchema, websiteSchema } from "@/seo/schema";
 
-export const metadata: Metadata = {
-  title: "Sofa Ecommerce",
-  description: "Sofa Ecommerce — demo shop",
-};
+export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="vi">
       <body className="min-h-screen flex flex-col bg-white text-slate-900">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([websiteSchema, organizationSchema]),
+          }}
+        />
         <ReduxProvider>
           <ReactQueryProvider>
             {/* Header is a client component (handles mobile toggle) */}
