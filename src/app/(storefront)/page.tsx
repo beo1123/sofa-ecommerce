@@ -5,10 +5,10 @@ import BrowseByCategories from "@/components/Home/BrowseByCategories";
 import Featured from "@/components/Home/Featured";
 import { BrandMessage } from "@/components/Home/BrandMessage";
 
-export const metadata = {
-  title: "Trang Chủ – Home",
-  description: "Chào mừng bạn đến với Sofa Phạm Gia",
-};
+// export const metadata = {
+//   title: "Sofa Phạm Gia",
+//   description: "Chào mừng bạn đến với Sofa Phạm Gia",
+// };
 
 export const revalidate = 3600;
 
