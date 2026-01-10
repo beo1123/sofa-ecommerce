@@ -11,16 +11,16 @@ const categoryService = new CategoryService(prisma);
 const productService = new ProductService(prisma);
 
 export const metadata: Metadata = {
-  title: "Danh sách sản phẩm – Sofa Ecommerce",
+  title: "Danh sách sản phẩm – Sofa Phạm gia",
   description: "Khám phá bộ sưu tập sofa cao cấp, nhiều kiểu dáng và màu sắc.",
   openGraph: {
-    title: "Danh sách sản phẩm – Sofa Ecommerce",
+    title: "Danh sách sản phẩm – Phạm gia",
     description: "Tổng hợp các sản phẩm sofa mới nhất.",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Sofa Ecommerce – Danh sách sản phẩm",
+    title: "Sofa Phạm gia – Danh sách sản phẩm",
   },
 };
 

@@ -20,7 +20,7 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
   const data = await getCachedProduct(slug);
   if (!data?.product) {
     return {
-      title: "Sản phẩm không tồn tại – Sofa Ecommerce",
+      title: "Sản phẩm không tồn tại – Sofa Phạm gia",
       description: "Không tìm thấy sản phẩm này trong cửa hàng.",
     };
   }
@@ -29,10 +29,10 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
   const image = product.images?.[0]?.url;
 
   return {
-    title: `${product.title} – Sofa Ecommerce`,
+    title: `${product.title} – Sofa Phạm gia`,
     description: product.shortDescription ?? product.description ?? "",
     openGraph: {
-      title: `${product.title} – Sofa Ecommerce`,
+      title: `${product.title} – Sofa Phạm gia`,
       description: product.shortDescription ?? product.description ?? "",
       images: image ? [image] : [],
       type: "website",
