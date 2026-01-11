@@ -144,7 +144,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <Link href={routeLink}>
               <Heading
                 level={3}
-                className="text-base font-semibold line-clamp-2 text-[var(--color-text-default)] group-hover:text-[var(--color-brand-400)] transition-colors">
+                className="text-base font-semibold line-clamp-2 text-[var(--color-brand-400)] group-hover:text-[var(--color-brand-200)] transition-colors">
                 {product.title}
               </Heading>
             </Link>

@@ -17,5 +17,5 @@ export default function Heading({ children, level = 2, className = "" }: Props) 
     6: "text-base font-medium",
   };
 
-  return <div className={`${sizeMap[level]} text-[var(--color-text-default)] ${className}`}>{children}</div>;
+  return <div className={`${sizeMap[level]}  ${className}`}>{children}</div>;
 }
