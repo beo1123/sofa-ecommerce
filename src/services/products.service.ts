@@ -48,42 +48,69 @@ export class ProductService {
       };
     }
 
-    // ✅ Transaction: count + findMany
-    const [total, products] = await this.prisma.$transaction([
+    const variantWhere: Prisma.ProductVariantWhereInput = {
+      product: {
+        status: "PUBLISHED",
+        ...(category ? { category: { slug: category } } : {}),
+      },
+      ...(variantAnd.length > 0 ? { AND: variantAnd } : {}),
+    };
+
+    // ✅ Transaction: count + ranked product ids by min variant price (asc)
+    const [total, rankedProductIds] = await this.prisma.$transaction([
       this.prisma.product.count({ where }),
-      this.prisma.product.findMany({
-        where,
+      this.prisma.productVariant.groupBy({
+        by: ["productId"],
+        where: variantWhere,
+        _min: { price: true },
+        orderBy: [{ _min: { price: "asc" } }, { productId: "asc" }],
         skip,
         take: perPage,
-        orderBy: { createdAt: "desc" },
-        select: {
-          id: true,
-          slug: true,
-          title: true,
-          shortDescription: true,
-          category: { select: { id: true, name: true, slug: true } }, // ✅ include category
-          variants: {
-            select: {
-              id: true,
-              price: true,
-              skuPrefix: true, // ✅ thêm
-              inventory: {
-                take: 1, // chỉ cần sku đầu tiên
-                select: { sku: true },
-              },
-            },
-          },
-          images: {
-            where: { isPrimary: true },
-            take: 1,
-            select: { url: true, alt: true },
-          },
-        },
       }),
     ]);
 
+    const productIds = rankedProductIds.map((row) => row.productId);
+
+    if (productIds.length === 0) {
+      return { items: [], meta: { page, perPage, total } };
+    }
+
+    const products = await this.prisma.product.findMany({
+      where: {
+        id: { in: productIds },
+      },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        shortDescription: true,
+        category: { select: { id: true, name: true, slug: true } }, // ✅ include category
+        variants: {
+          select: {
+            id: true,
+            price: true,
+            skuPrefix: true, // ✅ thêm
+            inventory: {
+              take: 1, // chỉ cần sku đầu tiên
+              select: { sku: true },
+            },
+          },
+        },
+        images: {
+          where: { isPrimary: true },
+          take: 1,
+          select: { url: true, alt: true },
+        },
+      },
+    });
+
+    const productById = new Map(products.map((p) => [p.id, p]));
+    const orderedProducts = productIds
+      .map((id) => productById.get(id))
+      .filter((p): p is (typeof products)[number] => Boolean(p));
+
     // ✅ Map lại output
-    const items = products.map((p) => {
+    const items = orderedProducts.map((p) => {
       const prices = p.variants.map((v) => Number(v.price));
       return {
         id: p.id,
