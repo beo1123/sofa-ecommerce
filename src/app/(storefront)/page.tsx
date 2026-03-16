@@ -20,14 +20,13 @@ export default function Home() {
       <section id="hero" className="p-xl mt-5 rounded-lg bg-brand-50">
         <Hero />
       </section>
-
-      <section id="store-highlights" className="p-xl mt-5 rounded-lg bg-[var(--color-bg-page)]">
-        <StoreHighlights />
-      </section>
-
       {/* ================= BROWSE BY categories ================= */}
       <section id="browse-by-categories" className="p-xl mt-xl rounded-lg bg-brand-100">
         <BrowseByCategories />
+      </section>
+      {/* ================= store highlights ================= */}
+      <section id="store-highlights" className="p-xl mt-5 rounded-lg bg-[var(--color-bg-page)]">
+        <StoreHighlights />
       </section>
 
       {/* ================= BESTSELLERS ================= */}
