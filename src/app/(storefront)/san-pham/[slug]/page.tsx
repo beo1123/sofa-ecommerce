@@ -3,6 +3,9 @@ import Script from "next/script";
 import type { Metadata, ResolvingMetadata } from "next";
 import { cache } from "react";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
+import { buildBreadcrumbSchema } from "@/seo/schema";
+
+const BASE_URL = "https://sofaphamgia.com";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -65,8 +68,17 @@ export default async function ProductDetailPage(props: PageProps) {
 
   const { product, related } = data;
 
+  const breadcrumb = buildBreadcrumbSchema([
+    { name: "Trang chủ", url: BASE_URL },
+    { name: "Sản phẩm", url: `${BASE_URL}/san-pham` },
+    { name: product.title, url: `${BASE_URL}/san-pham/${slug}` },
+  ]);
+
   return (
     <>
+      <Script id="breadcrumb-jsonld" type="application/ld+json">
+        {JSON.stringify(breadcrumb)}
+      </Script>
       <Script id="product-jsonld" type="application/ld+json">
         {JSON.stringify(product.jsonLd)}
       </Script>

@@ -15,7 +15,7 @@ export function mapProductListItem(p: any) {
     priceMax,
     primaryImage: p.images[0] ?? null,
     variantsCount: p.variants.length,
-    category: p.category ? { name: p.category.name, slug: p.category.slug } : null,
+    category: p.category ? { name: p.category.name, slug: p.category.slug, image: p.category.image ?? null } : null,
   };
 }
 

@@ -8,6 +8,7 @@ import { ProductImageGallery } from "./ProductImageGallery";
 import { ProductInfo } from "./ProductInfo";
 import { ProductDescription } from "./ProductDescription";
 import MiniCartDrawer from "../cart/MiniCartDrawer";
+import StoreHighlights from "@/components/common/StoreHighlights";
 
 type ProductDetailClientProps = {
   product: any;
@@ -55,6 +56,13 @@ export default function ProductDetailPageClient({ product, related }: ProductDet
             onAddToCart={() => setCartOpen(true)}
           />
         </motion.div>
+
+        <div className="mt-8 lg:mt-10">
+          <StoreHighlights
+            title="Cam kết khi mua sofa tại Phạm Gia"
+            subtitle="Rõ ràng về chất lượng, linh hoạt trong thiết kế và luôn đồng hành cùng bạn trong suốt quá trình mua hàng."
+          />
+        </div>
 
         {/* Description Section */}
         <ProductDescription description={product.description} shortDescription={product.shortDescription} />

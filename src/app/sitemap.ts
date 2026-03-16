@@ -1,14 +1,12 @@
 import { MetadataRoute } from "next";
 import { PrismaClient } from "@prisma/client";
-import { ProductService } from "@/services/products.service";
-import { ArticleService } from "@/services/article.service";
 
 const prisma = new PrismaClient();
-const productService = new ProductService(prisma);
-const articleService = new ArticleService(prisma);
+
+const BASE_URL = "https://sofaphamgia.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://sofaphamgia.com";
+  const baseUrl = BASE_URL;
 
   // ===== PRODUCTS =====
   const products = await prisma.product.findMany({
@@ -20,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const productUrls = products.map((p) => ({
-    url: `${baseUrl}/products/${p.slug}`,
+    url: `${baseUrl}/san-pham/${p.slug}`,
     lastModified: p.updatedAt,
     changeFrequency: "weekly" as const,
     priority: 0.9,
@@ -36,29 +34,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const articleUrls = articles.map((a) => ({
-    url: `${baseUrl}/blog/${a.slug}`,
+    url: `${baseUrl}/bai-viet/${a.slug}`,
     lastModified: a.publishedAt ?? new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
+  // ===== CATEGORIES =====
+  const categories = await prisma.category.findMany({
+    select: { slug: true, updatedAt: true },
+  });
+
+  const categoryUrls = categories.map((c) => ({
+    url: `${baseUrl}/san-pham?category=${c.slug}`,
+    lastModified: c.updatedAt,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
   return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/products`,
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
+    { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
+    { url: `${baseUrl}/san-pham`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+    { url: `${baseUrl}/bai-viet`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/gioi-thieu`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/lien-he`, changeFrequency: "monthly", priority: 0.5 },
+    ...categoryUrls,
     ...productUrls,
     ...articleUrls,
   ];

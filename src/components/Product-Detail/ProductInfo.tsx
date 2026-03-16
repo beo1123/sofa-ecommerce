@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/store/hook";
 import { PhoneIcon } from "../ui/Icon/PhoneIcon";
 import { ZaloIcon } from "../ui/Icon/ZaloIcon";
 import Text from "../ui/Text";
+import ProductPromotions from "./ProductPromotions";
 
 type VariantAttributes = Record<string, string>;
 
@@ -168,8 +169,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
             SKU: {selectedVariant.inventory?.[0]?.sku || "N/A"}
           </p> */}
         </div>
-
-        <div className="space-y-5 mb-6">
+        {/* <div className="space-y-5 mb-6">
           {Object.keys(attributes).map((attrKey) => (
             <div key={attrKey}>
               <label className="block text-sm font-semibold text-[var(--color-text-default)] mb-2 capitalize">
@@ -208,9 +208,9 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
-        <div className="mb-6">
+        <div className=" mb-6">
           <label className="block text-sm font-semibold text-[var(--color-text-default)] mb-2">Số lượng</label>
           <div className="flex items-center gap-4">
             <div className="flex items-center select-none">
@@ -241,6 +241,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
           </div>
         </div>
       </div>
+      <ProductPromotions />
 
       {/* <div className="space-y-3">
         <Button

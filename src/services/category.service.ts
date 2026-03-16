@@ -10,8 +10,12 @@ export class CategoryService {
         take: perPage,
         orderBy: { createdAt: "desc" },
         select: {
+          id: true,
           name: true,
           slug: true,
+          image: true,
+          createdAt: true,
+          updatedAt: true,
         },
       }),
       this.prisma.category.count(),

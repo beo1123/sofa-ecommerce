@@ -4,6 +4,7 @@ import BestSellers from "@/components/Home/BestSellers";
 import BrowseByCategories from "@/components/Home/BrowseByCategories";
 import Featured from "@/components/Home/Featured";
 import { BrandMessage } from "@/components/Home/BrandMessage";
+import StoreHighlights from "@/components/common/StoreHighlights";
 
 // export const metadata = {
 //   title: "Sofa Phạm Gia",
@@ -20,14 +21,18 @@ export default function Home() {
         <Hero />
       </section>
 
-      {/* ================= BESTSELLERS ================= */}
-      <section id="bestsellers" className="p-xl bg-page">
-        <BestSellers />
+      <section id="store-highlights" className="p-xl mt-5 rounded-lg bg-[var(--color-bg-page)]">
+        <StoreHighlights />
       </section>
 
       {/* ================= BROWSE BY categories ================= */}
-      <section id="browse-by-categories" className="p-xl rounded-lg bg-brand-100">
+      <section id="browse-by-categories" className="p-xl mt-xl rounded-lg bg-brand-100">
         <BrowseByCategories />
+      </section>
+
+      {/* ================= BESTSELLERS ================= */}
+      <section id="bestsellers" className="p-xl bg-page">
+        <BestSellers />
       </section>
 
       {/* ================= Featured ================= */}
