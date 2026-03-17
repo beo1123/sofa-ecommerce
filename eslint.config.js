@@ -47,6 +47,7 @@ export default [
         window: "readonly",
         document: "readonly",
         alert: "readonly",
+        confirm: "readonly",
         setTimeout: "readonly",
         process: "readonly",
         console: "readonly", // ✅ FIX console undefined
