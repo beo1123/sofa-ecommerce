@@ -62,8 +62,8 @@ export default function AdminProductsPage() {
     try {
       await axiosClient.delete(`/admin/products/${id}`);
       await fetchProducts(meta.page);
-    } catch {
-      // Error handled silently
+    } catch (err: any) {
+      setError(err?.response?.data?.error?.message ?? "Xóa sản phẩm thất bại");
     } finally {
       setDeleting(null);
     }

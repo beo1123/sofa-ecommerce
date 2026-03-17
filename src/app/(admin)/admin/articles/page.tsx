@@ -62,8 +62,8 @@ export default function AdminArticlesPage() {
     try {
       await axiosClient.delete(`/admin/articles/${id}`);
       await fetchArticles(meta.page);
-    } catch {
-      // Error handled silently
+    } catch (err: any) {
+      setError(err?.response?.data?.error?.message ?? "Xóa bài viết thất bại");
     } finally {
       setDeleting(null);
     }

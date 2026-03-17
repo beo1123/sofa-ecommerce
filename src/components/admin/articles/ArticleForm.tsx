@@ -59,6 +59,7 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
 
   const [thumbnail, setThumbnail] = useState<string>(defaultValues?.thumbnail ?? "");
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const statusValue = watch("status") ?? "DRAFT";
 
@@ -86,6 +87,7 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
     if (!file) return;
 
     setUploading(true);
+    setUploadError(null);
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -98,8 +100,8 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
       if (res.data?.success) {
         setThumbnail(res.data.data.url);
       }
-    } catch {
-      // Error handled silently
+    } catch (err: any) {
+      setUploadError(err?.response?.data?.error?.message ?? "Upload ảnh thất bại");
     } finally {
       setUploading(false);
       e.target.value = "";
@@ -190,6 +192,11 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
               />
             </label>
           </div>
+          {uploadError && (
+            <p className="mt-2 text-sm text-red-600" role="alert">
+              {uploadError}
+            </p>
+          )}
         </CardContent>
       </Card>
 
