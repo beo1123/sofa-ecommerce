@@ -37,7 +37,7 @@ export default function NewProductPage() {
         shortDescription: data.shortDescription || undefined,
         description: data.description || undefined,
         status: data.status || "DRAFT",
-        categoryId: data.categoryId || undefined,
+        categoryId: typeof data.categoryId === "number" && data.categoryId > 0 ? data.categoryId : undefined,
         images: data.images,
         variants: data.variants.map((v: any) => ({
           name: v.name,

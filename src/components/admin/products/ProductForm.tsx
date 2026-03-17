@@ -123,7 +123,7 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
     setVariants(variants.filter((_, i) => i !== index));
   };
 
-  const updateVariant = (index: number, field: keyof VariantData, value: string | number) => {
+  const updateVariant = (index: number, field: keyof VariantData, value: string | number | undefined) => {
     const updated = [...variants];
     (updated[index] as any)[field] = value;
     setVariants(updated);
@@ -172,7 +172,7 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
               <Dropdown
                 label="Danh mục"
                 value={String(watch("categoryId") ?? "")}
-                onChange={(v) => setValue("categoryId", Number(v))}
+                onChange={(v) => setValue("categoryId", v ? Number(v) : undefined)}
                 options={categories.map((c) => ({ label: c.name, value: String(c.id) }))}
                 placeholder="Chọn danh mục"
                 fullWidth
@@ -254,7 +254,9 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
                     label="Giá so sánh"
                     type="number"
                     value={variant.compareAtPrice ?? ""}
-                    onChange={(e) => updateVariant(i, "compareAtPrice", Number(e.target.value))}
+                    onChange={(e) =>
+                      updateVariant(i, "compareAtPrice", e.target.value === "" ? undefined : Number(e.target.value))
+                    }
                   />
                   <Input
                     label="Số lượng tồn kho"

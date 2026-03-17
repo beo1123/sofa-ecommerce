@@ -8,9 +8,12 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: "DATABASE_URL not found" }, { status: 500 });
   }
 
+  const databaseUrl = new URL(connectionString);
+  const sslMode = databaseUrl.searchParams.get("sslmode");
+
   const client = new Client({
     connectionString,
-    ssl: { rejectUnauthorized: false },
+    ssl: sslMode === "require" ? { rejectUnauthorized: false } : undefined,
   });
 
   try {

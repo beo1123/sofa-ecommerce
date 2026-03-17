@@ -1,7 +1,7 @@
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { QueryClient } from "@tanstack/react-query";
 import { persistQueryClient } from "@tanstack/react-query-persist-client";
-import localforage from "localforage";
+import { safeAsyncStorage } from "@/lib/safeAsyncStorage";
 
 export function createQueryClient() {
   return new QueryClient({
@@ -20,7 +20,7 @@ export function createQueryClient() {
 
 export function setupQueryPersistance(queryClient: QueryClient) {
   const persister = createAsyncStoragePersister({
-    storage: localforage,
+    storage: safeAsyncStorage,
     key: "tanstack-react-query",
   });
 

@@ -13,6 +13,7 @@ export interface CreateProductInput {
   metadata?: Record<string, unknown>;
   images?: { url: string; alt?: string; isPrimary?: boolean }[];
   variants?: {
+    id?: number;
     name: string;
     skuPrefix?: string;
     price: number;
@@ -195,6 +196,80 @@ export class AdminProductService {
             alt: img.alt ?? product.title,
             isPrimary: img.isPrimary ?? i === 0,
           })),
+        });
+      }
+    }
+
+    if (input.variants) {
+      const existingVariants = await this.prisma.productVariant.findMany({
+        where: { productId: id },
+        include: { inventory: true },
+      });
+
+      const existingMap = new Map(existingVariants.map((variant) => [variant.id, variant]));
+
+      for (const variant of input.variants) {
+        if (variant.id && existingMap.has(variant.id)) {
+          const current = existingMap.get(variant.id)!;
+
+          await this.prisma.productVariant.update({
+            where: { id: current.id },
+            data: {
+              name: variant.name,
+              skuPrefix: variant.skuPrefix,
+              price: variant.price,
+              compareAtPrice: variant.compareAtPrice,
+              attributes: (variant.attributes as Prisma.InputJsonValue) ?? Prisma.JsonNull,
+              image: variant.image,
+            },
+          });
+
+          if (variant.inventory) {
+            const currentInventory = current.inventory[0];
+
+            if (currentInventory) {
+              await this.prisma.inventory.update({
+                where: { id: currentInventory.id },
+                data: {
+                  sku: variant.inventory.sku,
+                  quantity: variant.inventory.quantity ?? 0,
+                  location: variant.inventory.location,
+                },
+              });
+            } else {
+              await this.prisma.inventory.create({
+                data: {
+                  variantId: current.id,
+                  sku: variant.inventory.sku,
+                  quantity: variant.inventory.quantity ?? 0,
+                  location: variant.inventory.location,
+                },
+              });
+            }
+          }
+
+          continue;
+        }
+
+        await this.prisma.productVariant.create({
+          data: {
+            productId: id,
+            name: variant.name,
+            skuPrefix: variant.skuPrefix,
+            price: variant.price,
+            compareAtPrice: variant.compareAtPrice,
+            attributes: (variant.attributes as Prisma.InputJsonValue) ?? Prisma.JsonNull,
+            image: variant.image,
+            inventory: variant.inventory
+              ? {
+                  create: {
+                    sku: variant.inventory.sku,
+                    quantity: variant.inventory.quantity ?? 0,
+                    location: variant.inventory.location,
+                  },
+                }
+              : undefined,
+          },
         });
       }
     }

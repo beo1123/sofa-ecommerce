@@ -45,8 +45,19 @@ export default function EditProductPage() {
         shortDescription: data.shortDescription || undefined,
         description: data.description || undefined,
         status: data.status || "DRAFT",
-        categoryId: data.categoryId || undefined,
+        categoryId: typeof data.categoryId === "number" && data.categoryId > 0 ? data.categoryId : undefined,
         images: data.images,
+        variants: data.variants.map((v: any) => ({
+          id: v.id,
+          name: v.name,
+          price: Number(v.price),
+          compareAtPrice: v.compareAtPrice ? Number(v.compareAtPrice) : undefined,
+          attributes: {
+            ...(v.color ? { color: v.color } : {}),
+            ...(v.material ? { material: v.material } : {}),
+          },
+          inventory: v.sku ? { sku: v.sku, quantity: Number(v.quantity ?? 0) } : undefined,
+        })),
       };
 
       await axiosClient.put(`/admin/products/${productId}`, payload);

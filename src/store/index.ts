@@ -13,17 +13,10 @@ import {
   REGISTER,
   createMigrate,
 } from "redux-persist";
-import localForage from "localforage";
 
 import cartReducer from "./slice/cartSlice";
 import userReducer from "./slice/userSlice";
-
-// ---- localForage instance (custom config) ----
-const lfStore = localForage.createInstance({
-  name: "sofa-ecom",
-  storeName: "sofa_ecom_storage",
-  description: "Sofa Ecommerce persisted store (cart + user)",
-});
+import { safeAsyncStorage } from "@/lib/safeAsyncStorage";
 
 // ---- migrations ----
 const PERSIST_VERSION = 1;
@@ -41,7 +34,7 @@ const migrations: Record<number, (state: any) => any> = {
 const persistConfig = {
   key: "root",
   version: PERSIST_VERSION,
-  storage: lfStore,
+  storage: safeAsyncStorage,
   whitelist: ["cart", "user"], // chỉ persist cart + user
   migrate: createMigrate(migrations, { debug: false }),
 };

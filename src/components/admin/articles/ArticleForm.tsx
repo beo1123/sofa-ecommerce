@@ -147,7 +147,7 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
               <Dropdown
                 label="Danh mục"
                 value={String(watch("categoryId") ?? "")}
-                onChange={(v) => setValue("categoryId", Number(v))}
+                onChange={(v) => setValue("categoryId", v ? Number(v) : undefined)}
                 options={categories.map((c) => ({ label: c.name, value: String(c.id) }))}
                 placeholder="Chọn danh mục"
                 fullWidth
