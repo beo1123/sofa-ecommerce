@@ -50,6 +50,7 @@ export default [
         setTimeout: "readonly",
         process: "readonly",
         console: "readonly", // ✅ FIX console undefined
+        Buffer: "readonly", // Node.js Buffer (server-side API routes)
       },
     },
     plugins: {
