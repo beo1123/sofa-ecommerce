@@ -244,7 +244,8 @@ export class AdminProductService {
       if (!row.title || !row.slug) continue;
       const slug = String(row.slug).trim();
       if (!grouped.has(slug)) grouped.set(slug, []);
-      grouped.get(slug)!.push(row);
+      const group = grouped.get(slug);
+      if (group) group.push(row);
     }
 
     const results: { slug: string; status: "created" | "skipped"; reason?: string }[] = [];

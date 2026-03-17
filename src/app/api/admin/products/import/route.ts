@@ -12,8 +12,9 @@ const service = new AdminProductService(prisma);
  * Body: FormData với field "file" là file .xlsx
  *
  * Cấu trúc Excel (mỗi row = 1 variant):
- *   title | slug | shortDescription | description | status | category |
- *   imageUrl | variantName | sku | price | compareAtPrice | quantity | color | material
+ *   Required: title | slug | variantName | sku | price
+ *   Optional: shortDescription | description | status | category |
+ *             imageUrl | compareAtPrice | quantity | color | material
  */
 export async function POST(req: Request) {
   try {

@@ -11,8 +11,7 @@ const service = new AdminArticleService(prisma);
  */
 export async function GET(req: Request) {
   try {
-    const session = await requireAdmin();
-    void session;
+    await requireAdmin();
     const url = new URL(req.url);
     const { page, perPage } = parsePagination(url.searchParams);
     const result = await service.listArticles(page, perPage);
