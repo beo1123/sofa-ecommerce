@@ -19,7 +19,8 @@
 
 # production
 /build
-/prisma
+!/prisma
+/prisma/generated
 
 
 # misc
