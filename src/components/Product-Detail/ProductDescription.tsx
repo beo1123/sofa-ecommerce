@@ -25,7 +25,7 @@ export function ProductDescription({ description, shortDescription }: ProductDes
               }`}>
               Mô tả sản phẩm
             </button>
-            <button
+            {/* <button
               onClick={() => setActiveTab("specs")}
               className={`flex-1 py-3 px-6 text-center font-semibold rounded-xl transition-all ${
                 activeTab === "specs"
@@ -33,7 +33,7 @@ export function ProductDescription({ description, shortDescription }: ProductDes
                   : "text-[var(--color-text-muted)] hover:bg-gray-100"
               }`}>
               Thông số kỹ thuật
-            </button>
+            </button> */}
             <button
               onClick={() => setActiveTab("reviews")}
               className={`flex-1 py-3 px-6 text-center font-semibold rounded-xl transition-all ${
@@ -58,7 +58,7 @@ export function ProductDescription({ description, shortDescription }: ProductDes
             </div>
           )}
 
-          {activeTab === "specs" && (
+          {/* {activeTab === "specs" && (
             <div>
               <h3 className="text-xl font-semibold mb-4">Thông số kỹ thuật</h3>
               <div className="grid gap-3">
@@ -80,7 +80,7 @@ export function ProductDescription({ description, shortDescription }: ProductDes
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {activeTab === "reviews" && (
             <div className="text-center py-12">
