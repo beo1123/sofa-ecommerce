@@ -56,11 +56,18 @@ export default function AdminProductsPage() {
     fetchProducts();
   }, [fetchProducts]);
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("Bạn có chắc muốn lưu trữ (archive) sản phẩm này?")) return;
-    setDeleting(id);
+  const handleDelete = async (product: Product) => {
+    const isArchived = product.status === "ARCHIVED";
+    const confirmed = confirm(
+      isArchived
+        ? "Sản phẩm đang ở trạng thái lưu trữ. Bạn có chắc muốn XÓA VĨNH VIỄN sản phẩm này?"
+        : "Bạn có chắc muốn lưu trữ (archive) sản phẩm này?"
+    );
+    if (!confirmed) return;
+
+    setDeleting(product.id);
     try {
-      await axiosClient.delete(`/admin/products/${id}`);
+      await axiosClient.delete(`/admin/products/${product.id}`);
       await fetchProducts(meta.page);
     } catch (err: any) {
       setError(err?.response?.data?.error?.message ?? "Xóa sản phẩm thất bại");

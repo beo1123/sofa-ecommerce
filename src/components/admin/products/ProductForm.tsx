@@ -10,12 +10,13 @@ import Dropdown from "@/components/ui/Dropdown";
 import Card, { CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import Heading from "@/components/ui/Heading";
 import ImageUploader from "@/components/admin/products/ImageUploader";
+import RichTextEditor from "@/components/ui/RichTextEditor";
 import { Plus, Trash2 } from "lucide-react";
 
 // ─── Zod Schema ──────────────────────────────────────────
 const variantSchema = z.object({
   name: z.string().min(1, "Tên biến thể bắt buộc"),
-  sku: z.string().min(1, "SKU bắt buộc"),
+  sku: z.string().optional(),
   price: z.coerce.number().min(0, "Giá >= 0"),
   compareAtPrice: z.coerce.number().optional(),
   quantity: z.coerce.number().int().min(0).optional(),
@@ -34,6 +35,7 @@ const productSchema = z.object({
 
 export type ProductFormData = z.infer<typeof productSchema>;
 type VariantData = z.infer<typeof variantSchema>;
+type VariantFormData = VariantData & { id?: number };
 
 // ─── Props ───────────────────────────────────────────────
 interface Category {
@@ -51,7 +53,7 @@ interface ProductFormProps {
   onSubmit: (
     data: ProductFormData & {
       images: { url: string; alt?: string; isPrimary?: boolean }[];
-      variants: VariantData[];
+      variants: VariantFormData[];
     }
   ) => Promise<void>;
   submitLabel?: string;
@@ -81,8 +83,9 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
     defaultValues?.images ?? []
   );
 
-  const [variants, setVariants] = useState<VariantData[]>(
+  const [variants, setVariants] = useState<VariantFormData[]>(
     defaultValues?.variants?.map((v) => ({
+      id: v.id,
       name: v.name ?? "",
       sku: v.sku ?? "",
       price: v.price ?? 0,
@@ -94,6 +97,24 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
   );
 
   const statusValue = watch("status") ?? "DRAFT";
+  const slugValue = watch("slug") ?? "";
+  const titleValue = watch("title") ?? "";
+  const descriptionValue = watch("description") ?? "";
+
+  const makeFolderSafe = (value: string) =>
+    value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D")
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .trim();
+
+  const folderSegment = makeFolderSafe(slugValue || titleValue || "untitled-product");
+  const uploadFolder = `products/${folderSegment}`;
 
   // Auto-generate slug from title
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,7 +152,7 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
 
   const handleFormSubmit = async (data: ProductFormData) => {
     // Validate variants
-    const validVariants = variants.filter((v) => v.name && v.sku && v.price >= 0);
+    const validVariants = variants.filter((v) => v.name && v.price >= 0);
     await onSubmit({
       ...data,
       images,
@@ -182,10 +203,10 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
 
           <div className="mt-4">
             <label className="block text-sm font-medium text-[var(--color-text-default)] mb-1">Mô tả chi tiết</label>
-            <textarea
-              {...register("description")}
-              rows={5}
-              className="block w-full px-3 py-2 border border-[var(--color-brand-100)] rounded-md shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-300)] focus:border-[var(--color-brand-400)]"
+            <RichTextEditor
+              value={descriptionValue}
+              onChange={(html) => setValue("description", html, { shouldDirty: true })}
+              placeholder="Nhập mô tả sản phẩm (hỗ trợ lưu HTML)"
             />
           </div>
         </CardContent>
@@ -197,7 +218,7 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
           <CardTitle>Hình ảnh</CardTitle>
         </CardHeader>
         <CardContent>
-          <ImageUploader images={images} onChange={setImages} />
+          <ImageUploader images={images} onChange={setImages} folder={uploadFolder} />
         </CardContent>
       </Card>
 
@@ -241,7 +262,6 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
                     value={variant.sku}
                     onChange={(e) => updateVariant(i, "sku", e.target.value)}
                     placeholder="VD: SOFA-001-L"
-                    required
                   />
                   <Input
                     label="Giá (VND)"

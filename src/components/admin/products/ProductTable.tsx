@@ -19,7 +19,7 @@ interface Product {
 
 interface ProductTableProps {
   products: Product[];
-  onDelete: (id: number) => void;
+  onDelete: (product: Product) => void;
   deleting?: number | null;
 }
 
@@ -124,8 +124,8 @@ export default function ProductTable({ products, onDelete, deleting }: ProductTa
                       variant="danger"
                       leftIcon={<Trash2 size={14} />}
                       loading={deleting === product.id}
-                      onClick={() => onDelete(product.id)}>
-                      Xóa
+                      onClick={() => onDelete(product)}>
+                      {product.status === "ARCHIVED" ? "Xóa vĩnh viễn" : "Lưu trữ"}
                     </Button>
                   </div>
                 </td>

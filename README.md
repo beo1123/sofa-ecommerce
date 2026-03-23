@@ -338,6 +338,36 @@ psql "postgresql://neondb_owner:<password>@ep-bold-fire-a1kme9hr-pooler.ap-south
 - **Docker + PostgreSQL trên Local**: Dễ dàng phát triển và thử nghiệm mà không cần cài đặt PostgreSQL thủ công.
 - **Neon (PostgreSQL Cloud Service)**: Giúp bạn dễ dàng quản lý database mà không cần cài đặt hoặc duy trì server riêng.
 
+---
+
+## **III. Cấu hình Cloudinary (Upload ảnh Admin)**
+
+1. Đăng nhập Cloudinary Dashboard và lấy thông tin tại mục **API Environment variable**.
+2. Tạo file `.env.local` (hoặc cập nhật `.env`) và thêm 1 trong 2 cách:
+
+```env
+# Cách 1 (khuyến nghị)
+CLOUDINARY_URL=cloudinary://<API_KEY>:<API_SECRET>@<CLOUD_NAME>
+
+# Cách 2
+# CLOUDINARY_CLOUD_NAME=<YOUR_CLOUD_NAME>
+# CLOUDINARY_API_KEY=<YOUR_API_KEY>
+# CLOUDINARY_API_SECRET=<YOUR_API_SECRET>
+```
+
+3. Khởi động lại dev server:
+
+```bash
+npm run dev
+```
+
+4. Đăng nhập tài khoản admin rồi thử upload ảnh trong trang admin (API: `/api/admin/upload`).
+
+Lưu ý:
+
+- Nếu thiếu env Cloudinary, API upload sẽ báo lỗi cấu hình rõ ràng.
+- Ảnh trả về URL từ `res.cloudinary.com` và đã được allow trong `next.config.ts`.
+
 //các bước làm nếu thêm bảng mới
 bước 1: npx prisma migrate reset
 bước 2 : npx prisma migrate dev --name "tên migrate của bạn"

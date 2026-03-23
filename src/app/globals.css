@@ -6,28 +6,28 @@
 /* 3) Load local Montserrat font files via @font-face (local woff2s in /public/fonts) */
 @font-face {
   font-family: "MontserratLocal";
-  src: url("/fonts/Montserrat-Regular.ttf") format("ttf");
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "MontserratLocal";
-  src: url("/fonts/Montserrat-Medium.ttf") format("ttf");
+  src: url("/fonts/Montserrat-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "MontserratLocal";
-  src: url("/fonts/Montserrat-SemiBold.ttf") format("ttf");
+  src: url("/fonts/Montserrat-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "MontserratLocal";
-  src: url("/fonts/Montserrat-Bold.ttf") format("ttf");
+  src: url("/fonts/Montserrat-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -113,4 +113,53 @@ body {
   .animate-fadeIn {
     animation: fadeIn 0.12s ease-out;
   }
+}
+
+/* Tiptap editor content styles */
+.tiptap-editor-content {
+  min-height: 220px;
+  line-height: 1.6;
+  color: var(--color-text-default);
+  font-family: var(--app-font-sans);
+}
+
+.tiptap-editor-content p {
+  margin: 0.5rem 0;
+}
+
+.tiptap-editor-content h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0.9rem 0 0.6rem;
+}
+
+.tiptap-editor-content h3 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+  margin: 0.8rem 0 0.5rem;
+}
+
+.tiptap-editor-content ul,
+.tiptap-editor-content ol {
+  margin: 0.6rem 0;
+  padding-left: 1.4rem;
+}
+
+.tiptap-editor-content ul {
+  list-style: disc;
+}
+
+.tiptap-editor-content ol {
+  list-style: decimal;
+}
+
+.tiptap-editor-content li {
+  margin: 0.2rem 0;
+}
+
+.tiptap-editor-content a {
+  color: var(--color-brand-300);
+  text-decoration: underline;
 }

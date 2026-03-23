@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient, ProductStatus } from "@prisma/client";
 import { fail } from "@/server/utils/api";
+import { deleteFolderIfEmpty, deleteImageByUrl, getCloudinaryFolderFromUrl } from "@/lib/upload";
 import * as XLSX from "xlsx";
 
 // ─── Types ────────────────────────────────────────────────
@@ -284,6 +285,34 @@ export class AdminProductService {
     const existing = await this.prisma.product.findUnique({ where: { id } });
     if (!existing) {
       throw { status: 404, body: fail("Product not found", "NOT_FOUND") };
+    }
+
+    if (existing.status === "ARCHIVED") {
+      const productImages = await this.prisma.productImage.findMany({
+        where: { productId: id },
+        select: { url: true },
+      });
+
+      await Promise.all(productImages.map((img) => deleteImageByUrl(img.url)));
+
+      const folders = [...new Set(productImages.map((img) => getCloudinaryFolderFromUrl(img.url)).filter(Boolean))]
+        .map((f) => f as string)
+        .sort((a, b) => b.length - a.length);
+
+      await Promise.all(folders.map((folder) => deleteFolderIfEmpty(folder)));
+
+      await this.prisma.$transaction(async (tx) => {
+        await tx.wishlistItem.deleteMany({ where: { productId: id } });
+        await tx.review.deleteMany({ where: { productId: id } });
+
+        await tx.inventory.deleteMany({ where: { variant: { productId: id } } });
+        await tx.productVariant.deleteMany({ where: { productId: id } });
+        await tx.productImage.deleteMany({ where: { productId: id } });
+
+        await tx.product.delete({ where: { id } });
+      });
+
+      return { id, deleted: true };
     }
 
     await this.prisma.product.update({

@@ -7,9 +7,10 @@ import axiosClient from "@/server/axiosClient";
 interface ImageUploaderProps {
   images: { url: string; alt?: string; isPrimary?: boolean }[];
   onChange: (images: { url: string; alt?: string; isPrimary?: boolean }[]) => void;
+  folder?: string;
 }
 
-export default function ImageUploader({ images, onChange }: ImageUploaderProps) {
+export default function ImageUploader({ images, onChange, folder = "products" }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +27,7 @@ export default function ImageUploader({ images, onChange }: ImageUploaderProps) 
       for (let i = 0; i < files.length; i++) {
         const formData = new FormData();
         formData.append("file", files[i]);
-        formData.append("folder", "products");
+        formData.append("folder", folder);
 
         const res = await axiosClient.post("/admin/upload", formData, {
           headers: { "Content-Type": "multipart/form-data" },

@@ -49,7 +49,7 @@ export function ProductDescription({ description, shortDescription }: ProductDes
         {/* Tab Content */}
         <div className="p-6 lg:p-8">
           {activeTab === "description" && (
-            <div className="prose max-w-none">
+            <div className="tiptap-editor-content rich-html-content max-w-none">
               <div
                 dangerouslySetInnerHTML={{
                   __html: description || shortDescription || "Chưa có mô tả sản phẩm.",
