@@ -29,8 +29,8 @@ async function main() {
   });
 
   // 3. Tạo tài khoản admin
-  const email = process.env.ADMIN_EMAIL ?? "admin@sofa.vn";
-  const password = process.env.ADMIN_PASSWORD ?? "Admin@123";
+  const email = process.env.ADMIN_EMAIL ?? "";
+  const password = process.env.ADMIN_PASSWORD ?? "";
   const hashed = await hash(password, 10);
 
   const user = await prisma.user.upsert({
