@@ -7,24 +7,32 @@ type PromotionItem = {
 
 const PROMOTIONS: PromotionItem[] = [
   {
-    title: "Giao hàng toàn quốc miễn phí",
-    description: "Miễn phí vận chuyển cho đơn hàng từ 2.000.000 VND.",
+    title: "Giảm thêm 300.000đ cho khách sinh nhật trong tháng 🎂",
+    description: "Giảm ngay 300.000đ cho khách hàng có sinh nhật trong tháng này.",
   },
   {
-    title: "Bảo hành khung sofa",
-    description: "Bảo hành lên đến 24 tháng theo chính sách của cửa hàng.",
+    title: "Tặng voucher 500.000đ cho đơn hàng tiếp theo 🔥",
+    description: "Có thể nhận tiền mặt hoặc trừ vào giá sản phẩm sau.",
   },
   {
-    title: "Hỗ trợ đổi trả",
-    description: "Hỗ trợ đổi trả trong 7 ngày nếu lỗi do nhà sản xuất.",
+    title: "Tặng 2 gối ôm 45×45 trị giá 500.000đ 🎁",
+    description: "Quà tặng kèm theo khi mua sản phẩm.",
+  },
+  {
+    title: "Miễn phí giao hàng nội thành 🚚",
+    description: "Miễn phí giao hàng trong nội thành Thành phố Hồ Chí Minh.",
+  },
+  {
+    title: "Cam kết chất liệu ngoại nhập 100% ✅",
+    description: "Liên hệ đặt mua: 0932 111 620 (A. Giang).",
   },
 ];
 
 export default function ProductPromotions() {
   return (
-    <section className="mb-6 rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)] p-4">
+    <section className="mb-6 rounded-xl border border-[var(--color-brand-100)] bg-white p-4">
       <div className="flex items-center gap-2">
-        <h3 className="text-base font-semibold text-[var(--color-brand-400)]">Ưu đãi dành cho bạn</h3>
+        <h3 className="text-lg font-bold text-[var(--color-text-default)]">Ưu đãi dành cho bạn</h3>
       </div>
 
       <ul className="mt-3 space-y-3">

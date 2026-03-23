@@ -16,8 +16,10 @@ export default function Alert({ title, description, variant = "info", className 
     error: "bg-red-50 text-red-800 border-red-200",
   };
 
+  const baseStyles = className ? "" : variantStyles[variant];
+
   return (
-    <div role="alert" className={`border rounded-md p-4 ${variantStyles[variant]} ${className}`}>
+    <div role="alert" className={`border rounded-md p-4 ${baseStyles} ${className}`.trim()}>
       {title && <h4 className="font-semibold mb-1">{title}</h4>}
       {description && <p className="text-sm">{description}</p>}
     </div>
