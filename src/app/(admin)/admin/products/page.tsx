@@ -7,9 +7,11 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
 import Alert from "@/components/ui/Alert";
+import Input from "@/components/ui/Input";
+import Dropdown from "@/components/ui/Dropdown";
 import ProductTable from "@/components/admin/products/ProductTable";
 import ExcelImport from "@/components/admin/products/ExcelImport";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import axiosClient from "@/server/axiosClient";
 
 interface Product {
@@ -29,31 +31,80 @@ interface Meta {
   total: number;
 }
 
+interface Category {
+  id: number;
+  name: string;
+}
+
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [meta, setMeta] = useState<Meta>({ page: 1, perPage: 20, total: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<number | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const fetchProducts = useCallback(async (page = 1) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await axiosClient.get("/admin/products", { params: { page, perPage: 20 } });
-      if (res.data?.success) {
-        setProducts(res.data.data);
-        setMeta(res.data.meta);
-      }
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Không thể tải danh sách sản phẩm");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [categoryFilter, setCategoryFilter] = useState("ALL");
 
   useEffect(() => {
-    fetchProducts();
+    const timer = globalThis.setTimeout(() => setDebouncedSearch(searchInput.trim()), 350);
+    return () => globalThis.clearTimeout(timer);
+  }, [searchInput]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchCategories = async () => {
+      try {
+        const res = await axiosClient.get("/categories", { params: { page: 1, perPage: 100 } });
+        if (mounted && res.data?.success) {
+          setCategories(res.data.data ?? []);
+        }
+      } catch {
+        // Ignore category list error; product listing still works.
+      }
+    };
+
+    fetchCategories();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const fetchProducts = useCallback(
+    async (page = 1) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const categoryId = categoryFilter !== "ALL" ? Number(categoryFilter) : undefined;
+
+        const res = await axiosClient.get("/admin/products", {
+          params: {
+            page,
+            perPage: 20,
+            ...(debouncedSearch ? { q: debouncedSearch } : {}),
+            ...(statusFilter !== "ALL" ? { status: statusFilter } : {}),
+            ...(categoryId ? { categoryId } : {}),
+          },
+        });
+        if (res.data?.success) {
+          setProducts(res.data.data);
+          setMeta(res.data.meta);
+        }
+      } catch (err: any) {
+        setError(err?.response?.data?.error?.message ?? "Không thể tải danh sách sản phẩm");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [categoryFilter, debouncedSearch, statusFilter]
+  );
+
+  useEffect(() => {
+    fetchProducts(1);
   }, [fetchProducts]);
 
   const handleDelete = async (product: Product) => {
@@ -98,6 +149,36 @@ export default function AdminProductsPage() {
       {error && <Alert variant="error" title="Lỗi" description={error} />}
 
       <Card variant="elevated" padding="none">
+        <div className="p-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-3">
+          <Input
+            placeholder="Tìm theo tên hoặc slug..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            leftIcon={<Search size={16} />}
+            fullWidth
+          />
+          <Dropdown
+            value={categoryFilter}
+            onChange={setCategoryFilter}
+            options={[
+              { label: "Tất cả danh mục", value: "ALL" },
+              ...categories.map((cat) => ({ label: cat.name, value: String(cat.id) })),
+            ]}
+            fullWidth
+          />
+          <Dropdown
+            value={statusFilter}
+            onChange={setStatusFilter}
+            options={[
+              { label: "Tất cả trạng thái", value: "ALL" },
+              { label: "Nháp", value: "DRAFT" },
+              { label: "Đã đăng", value: "PUBLISHED" },
+              { label: "Đã lưu trữ", value: "ARCHIVED" },
+            ]}
+            fullWidth
+          />
+        </div>
+
         {loading ? (
           <div className="flex items-center justify-center py-16">
             <Spinner size={30} />

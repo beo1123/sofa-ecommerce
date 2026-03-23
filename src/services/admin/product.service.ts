@@ -44,6 +44,12 @@ export interface ExcelProductRow {
   material?: string;
 }
 
+export interface ProductListFilters {
+  q?: string;
+  status?: ProductStatus;
+  categoryId?: number;
+}
+
 // ─── Service ──────────────────────────────────────────────
 export class AdminProductService {
   constructor(private prisma: PrismaClient) {}
@@ -51,13 +57,25 @@ export class AdminProductService {
   /**
    * Danh sách sản phẩm (admin – bao gồm DRAFT / ARCHIVED)
    */
-  async listProducts(page: number, perPage: number) {
+  async listProducts(page: number, perPage: number, filters: ProductListFilters = {}) {
     const skip = (page - 1) * perPage;
+    const q = filters.q?.trim();
+
+    const where: Prisma.ProductWhereInput = {
+      ...(filters.status ? { status: filters.status } : {}),
+      ...(filters.categoryId ? { categoryId: filters.categoryId } : {}),
+      ...(q
+        ? {
+            OR: [{ title: { contains: q, mode: "insensitive" } }, { slug: { contains: q, mode: "insensitive" } }],
+          }
+        : {}),
+    };
 
     const [items, total] = await this.prisma.$transaction([
       this.prisma.product.findMany({
         skip,
         take: perPage,
+        where,
         orderBy: { updatedAt: "desc" },
         include: {
           images: { where: { isPrimary: true }, take: 1 },
@@ -65,7 +83,7 @@ export class AdminProductService {
           category: { select: { id: true, name: true, slug: true } },
         },
       }),
-      this.prisma.product.count(),
+      this.prisma.product.count({ where }),
     ]);
 
     return { items, meta: { page, perPage, total } };

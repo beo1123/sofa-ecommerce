@@ -14,7 +14,21 @@ export async function GET(req: Request) {
     await requireAdmin();
     const url = new URL(req.url);
     const { page, perPage } = parsePagination(url.searchParams);
-    const result = await service.listProducts(page, perPage);
+    const q = url.searchParams.get("q")?.trim() || undefined;
+    const statusRaw = url.searchParams.get("status")?.trim().toUpperCase();
+    const categoryIdRaw = url.searchParams.get("categoryId");
+
+    const allowedStatus = ["DRAFT", "PUBLISHED", "ARCHIVED"] as const;
+    const status =
+      statusRaw && allowedStatus.includes(statusRaw as (typeof allowedStatus)[number]) ? statusRaw : undefined;
+
+    const categoryId = categoryIdRaw ? Number(categoryIdRaw) : undefined;
+
+    const result = await service.listProducts(page, perPage, {
+      q,
+      status: status as "DRAFT" | "PUBLISHED" | "ARCHIVED" | undefined,
+      categoryId: categoryId && Number.isFinite(categoryId) ? categoryId : undefined,
+    });
     return NextResponse.json(ok(result.items, result.meta));
   } catch (err) {
     const { status, payload } = normalizeError(err);
