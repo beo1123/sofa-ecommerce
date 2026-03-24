@@ -8,8 +8,9 @@ import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 
 export const metadata = {
-  title: "Liên Hệ – Contact",
-  description: "Liên hệ Sofa Phạm Gia để biết thêm thông tin chi tiết",
+  title: "Liên hệ Sofa Phạm Gia",
+  description:
+    "Liên hệ Sofa Phạm Gia để được tư vấn sofa, nội thất cao cấp, giao hàng, lắp đặt và bảo hành nhanh chóng.",
 };
 
 export default function ContactPage() {

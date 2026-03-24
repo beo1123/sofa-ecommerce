@@ -7,18 +7,29 @@ import ReactQueryProvider from "../providers/ReactQueryProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { baseMetadata } from "@/seo/baseMetadata";
-import { organizationSchema, websiteSchema } from "@/seo/schema";
+import { prisma } from "@/lib/prisma";
+import { buildSiteNavigationSchema, organizationSchema, websiteSchema } from "@/seo/schema";
 
 export const metadata: Metadata = baseMetadata;
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const categories = await prisma.category.findMany({
+    orderBy: { createdAt: "desc" },
+    select: {
+      name: true,
+      slug: true,
+    },
+  });
+
+  const siteNavigationSchema = buildSiteNavigationSchema(categories);
+
   return (
     <html lang="vi">
       <body className="min-h-screen bg-white text-slate-900">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([websiteSchema, organizationSchema]),
+            __html: JSON.stringify([websiteSchema, organizationSchema, siteNavigationSchema]),
           }}
         />
         <ReduxProvider>

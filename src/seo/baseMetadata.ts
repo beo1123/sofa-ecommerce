@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 
+const SITE_NAME = "Sofa Phạm Gia - Nội thất cao cấp";
+const BRAND_NAME = "Sofa Phạm Gia";
+
 export const baseMetadata: Metadata = {
   metadataBase: new URL("https://sofaphamgia.com"),
   title: {
-    default: "Sofa Phạm Gia – Nội Thất Sofa Cao Cấp",
-    template: "%s | Sofa Phạm Gia",
+    default: SITE_NAME,
+    template: `%s | ${BRAND_NAME}`,
   },
   description:
     "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM. Chất liệu bền đẹp, thiết kế tinh tế, giao hàng toàn quốc, bảo hành chính hãng.",
@@ -20,7 +23,7 @@ export const baseMetadata: Metadata = {
     "sofa tphcm",
     "mua sofa",
   ],
-  applicationName: "Sofa Phạm Gia",
+  applicationName: SITE_NAME,
   verification: {
     google: "szWL9KSqiBBMMQ03bZxYnElo--gbw2QW7B3xA2XiJiI",
   },
@@ -39,9 +42,9 @@ export const baseMetadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    siteName: "Sofa Phạm Gia",
+    siteName: SITE_NAME,
     url: "https://sofaphamgia.com",
-    title: "Sofa Phạm Gia – Nội Thất Sofa Cao Cấp",
+    title: SITE_NAME,
     description:
       "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM. Chất liệu bền đẹp, thiết kế tinh tế, giao hàng toàn quốc.",
     images: [
@@ -49,14 +52,14 @@ export const baseMetadata: Metadata = {
         url: "/images/logo-removebg-preview.png",
         width: 1200,
         height: 630,
-        alt: "Sofa Phạm Gia – Nội thất cao cấp",
+        alt: SITE_NAME,
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Sofa Phạm Gia – Nội Thất Sofa Cao Cấp",
+    title: SITE_NAME,
     description: "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM.",
     images: ["/images/logo-removebg-preview.png"],
   },

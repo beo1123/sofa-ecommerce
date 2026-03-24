@@ -9,8 +9,8 @@ const articleService = new ArticleService(prisma);
 const categoryService = new ArticleCategory(prisma);
 
 export const metadata = {
-  title: "Bài viết – Blog",
-  description: "Tin tức, xu hướng nội thất, mẹo mua sắm và kiến thức hữu ích.",
+  title: "Bài viết nội thất Sofa Phạm Gia",
+  description: "Tin tức, xu hướng nội thất, kinh nghiệm chọn sofa và kiến thức hữu ích từ Sofa Phạm Gia.",
 };
 
 export const revalidate = 3600;

@@ -6,8 +6,9 @@ import MaterialsSection from "@/components/about/MaterialsSection";
 import WhyChooseSection from "@/components/about/WhyChooseSection";
 
 export const metadata = {
-  title: "Giới Thiệu – About",
-  description: "Giới thiệu về Sofa Phạm Gia",
+  title: "Giới thiệu Sofa Phạm Gia",
+  description:
+    "Tìm hiểu về Sofa Phạm Gia, định hướng thương hiệu, chất lượng sản phẩm và giá trị nội thất cao cấp mà chúng tôi theo đuổi.",
 };
 
 export default function AboutPage() {
