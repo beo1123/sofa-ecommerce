@@ -373,3 +373,86 @@ bước 1: npx prisma migrate reset
 bước 2 : npx prisma migrate dev --name "tên migrate của bạn"
 bước 3: npx prisma generate
 bước 3: npm run prisma:seed(chạy seed để gen data mẫu)
+
+---
+
+## **IV. Setup môi trường Development (Local)**
+
+1. Cài dependency:
+
+   ```bash
+   npm install
+   ```
+
+2. Tạo env local:
+
+   ```bash
+   # macOS / Linux
+   cp .env.example .env.local
+
+   # Windows PowerShell
+   Copy-Item .env.example .env.local
+   ```
+
+   Nếu dùng Docker Postgres local, đặt:
+
+   ```env
+   DATABASE_URL="postgresql://postgres:1234@localhost:5433/sofa?schema=public"
+   NEXTAUTH_URL="http://localhost:3000"
+   NEXT_PUBLIC_API_BASE_URL="http://localhost:3000/api"
+   ```
+
+3. Khởi động database:
+
+   ```bash
+   npm run db:up
+   ```
+
+4. Generate + migrate + seed:
+
+   ```bash
+   npm run prisma:generate
+   npm run prisma:migrate:dev
+   npm run prisma:seed
+   # optional admin user
+   npm run prisma:seed:admin
+   ```
+
+5. Chạy ứng dụng:
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## **V. Setup Production trên Vercel**
+
+1. Dùng PostgreSQL cloud (khuyến nghị Neon) cho `DATABASE_URL`.
+
+2. Trên Vercel, thêm các Environment Variables cho môi trường Production:
+   - `DATABASE_URL`
+   - `NEXTAUTH_URL` = domain production của bạn (ví dụ `https://your-domain.vercel.app`)
+   - `NEXTAUTH_SECRET`
+   - `NEXT_PUBLIC_API_BASE_URL` = `https://your-domain.vercel.app/api`
+   - `NEXT_PUBLIC_PHONE_URL`
+   - `NEXT_PUBLIC_ZALO_URL`
+   - `NEXT_PUBLIC_FACEBOOK_URL`
+   - `CLOUDINARY_URL` (hoặc 3 biến Cloudinary tách riêng)
+
+3. Build command trên Vercel:
+   - Đã cấu hình trong `vercel.json`: `next build`
+
+4. Sau khi deploy thành công, chạy migration production:
+
+   ```bash
+   npx prisma migrate deploy --schema=prisma/schema.prisma
+   ```
+
+   Hoặc dùng script:
+
+   ```bash
+   npm run prisma:migrate:deploy
+   ```
+
+5. Nếu cần seed production, chỉ chạy dữ liệu an toàn cho production.
