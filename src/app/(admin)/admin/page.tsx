@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Card, { CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import Heading from "@/components/ui/Heading";
-import { Package, FileText, Upload, ArrowRight } from "lucide-react";
+import { Package, FileText, Upload, ArrowRight, Tags, FolderTree } from "lucide-react";
 
 const QUICK_LINKS = [
   {
@@ -22,6 +22,20 @@ const QUICK_LINKS = [
     color: "bg-green-50 text-green-600",
   },
   {
+    title: "Danh mục sản phẩm",
+    description: "Tạo, chỉnh sửa và xóa danh mục cho sản phẩm.",
+    href: "/admin/categories",
+    icon: Tags,
+    color: "bg-amber-50 text-amber-600",
+  },
+  {
+    title: "Danh mục bài viết",
+    description: "Quản lý nhóm nội dung cho blog và bài viết.",
+    href: "/admin/article-categories",
+    icon: FolderTree,
+    color: "bg-cyan-50 text-cyan-600",
+  },
+  {
     title: "Upload ảnh",
     description: "Upload hình ảnh lên Cloudinary CDN để sử dụng cho sản phẩm & bài viết.",
     href: "/admin/products/new",
@@ -36,7 +50,7 @@ export default function AdminDashboard() {
       <Heading level={2}>Dashboard</Heading>
 
       {/* Quick Links */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {QUICK_LINKS.map((item) => {
           const Icon = item.icon;
           return (

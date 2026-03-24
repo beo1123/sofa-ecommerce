@@ -3,13 +3,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, FileText, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, FileText, ChevronLeft, ChevronRight, LogOut, Tags, FolderTree } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/products", label: "Sản phẩm", icon: Package },
+  { href: "/admin/categories", label: "Danh mục sản phẩm", icon: Tags },
   { href: "/admin/articles", label: "Bài viết", icon: FileText },
+  { href: "/admin/article-categories", label: "Danh mục bài viết", icon: FolderTree },
 ];
 
 export default function AdminSidebar() {

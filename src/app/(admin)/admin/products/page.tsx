@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import Heading from "@/components/ui/Heading";
 import Button from "@/components/ui/Button";
@@ -12,122 +12,27 @@ import Dropdown from "@/components/ui/Dropdown";
 import ProductTable from "@/components/admin/products/ProductTable";
 import ExcelImport from "@/components/admin/products/ExcelImport";
 import { Plus, Search } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
-
-interface Product {
-  id: number;
-  title: string;
-  slug: string;
-  status: string;
-  category?: { id: number; name: string; slug: string } | null;
-  images?: { url: string; alt?: string }[];
-  variants?: { id: number; name: string; price: number | string }[];
-  updatedAt: string;
-}
-
-interface Meta {
-  page: number;
-  perPage: number;
-  total: number;
-}
-
-interface Category {
-  id: number;
-  name: string;
-}
+import { useAdminProducts } from "@/hooks/products/useAdminProducts";
 
 export default function AdminProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [meta, setMeta] = useState<Meta>({ page: 1, perPage: 20, total: 0 });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [deleting, setDeleting] = useState<number | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  const [searchInput, setSearchInput] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("ALL");
-  const [categoryFilter, setCategoryFilter] = useState("ALL");
-
-  useEffect(() => {
-    const timer = globalThis.setTimeout(() => setDebouncedSearch(searchInput.trim()), 350);
-    return () => globalThis.clearTimeout(timer);
-  }, [searchInput]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchCategories = async () => {
-      try {
-        const res = await axiosClient.get("/categories", { params: { page: 1, perPage: 100 } });
-        if (mounted && res.data?.success) {
-          setCategories(res.data.data ?? []);
-        }
-      } catch {
-        // Ignore category list error; product listing still works.
-      }
-    };
-
-    fetchCategories();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  const fetchProducts = useCallback(
-    async (page = 1) => {
-      setLoading(true);
-      setError(null);
-      try {
-        const categoryId = categoryFilter !== "ALL" ? Number(categoryFilter) : undefined;
-
-        const res = await axiosClient.get("/admin/products", {
-          params: {
-            page,
-            perPage: 20,
-            ...(debouncedSearch ? { q: debouncedSearch } : {}),
-            ...(statusFilter !== "ALL" ? { status: statusFilter } : {}),
-            ...(categoryId ? { categoryId } : {}),
-          },
-        });
-        if (res.data?.success) {
-          setProducts(res.data.data);
-          setMeta(res.data.meta);
-        }
-      } catch (err: any) {
-        setError(err?.response?.data?.error?.message ?? "Không thể tải danh sách sản phẩm");
-      } finally {
-        setLoading(false);
-      }
-    },
-    [categoryFilter, debouncedSearch, statusFilter]
-  );
-
-  useEffect(() => {
-    fetchProducts(1);
-  }, [fetchProducts]);
-
-  const handleDelete = async (product: Product) => {
-    const isArchived = product.status === "ARCHIVED";
-    const confirmed = confirm(
-      isArchived
-        ? "Sản phẩm đang ở trạng thái lưu trữ. Bạn có chắc muốn XÓA VĨNH VIỄN sản phẩm này?"
-        : "Bạn có chắc muốn lưu trữ (archive) sản phẩm này?"
-    );
-    if (!confirmed) return;
-
-    setDeleting(product.id);
-    try {
-      await axiosClient.delete(`/admin/products/${product.id}`);
-      await fetchProducts(meta.page);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Xóa sản phẩm thất bại");
-    } finally {
-      setDeleting(null);
-    }
-  };
-
-  const totalPages = Math.ceil(meta.total / meta.perPage);
+  const {
+    products,
+    meta,
+    loading,
+    error,
+    deleting,
+    categories,
+    searchInput,
+    statusFilter,
+    categoryFilter,
+    totalPages,
+    setSearchInput,
+    setStatusFilter,
+    setCategoryFilter,
+    handleDelete,
+    goToPreviousPage,
+    goToNextPage,
+  } = useAdminProducts();
 
   return (
     <div className="space-y-6">
@@ -191,17 +96,13 @@ export default function AdminProductsPage() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2">
-          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={() => fetchProducts(meta.page - 1)}>
+          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
             Trước
           </Button>
           <span className="text-sm text-[var(--color-text-muted)]">
             Trang {meta.page} / {totalPages}
           </span>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={meta.page >= totalPages}
-            onClick={() => fetchProducts(meta.page + 1)}>
+          <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>
             Sau
           </Button>
         </div>

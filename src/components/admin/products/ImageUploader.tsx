@@ -8,9 +8,10 @@ interface ImageUploaderProps {
   images: { url: string; alt?: string; isPrimary?: boolean }[];
   onChange: (images: { url: string; alt?: string; isPrimary?: boolean }[]) => void;
   folder?: string;
+  multiple?: boolean;
 }
 
-export default function ImageUploader({ images, onChange, folder = "products" }: ImageUploaderProps) {
+export default function ImageUploader({ images, onChange, folder = "products", multiple = true }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,11 +23,15 @@ export default function ImageUploader({ images, onChange, folder = "products" }:
     setError(null);
 
     try {
-      const newImages = [...images];
+      const selectedFiles = multiple ? Array.from(files) : [files[0]];
+      const newImages = multiple ? [...images] : [];
 
-      for (let i = 0; i < files.length; i++) {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        if (!file) continue;
+
         const formData = new FormData();
-        formData.append("file", files[i]);
+        formData.append("file", file);
         formData.append("folder", folder);
 
         const res = await axiosClient.post("/admin/upload", formData, {
@@ -36,7 +41,7 @@ export default function ImageUploader({ images, onChange, folder = "products" }:
         if (res.data?.success) {
           newImages.push({
             url: res.data.data.url,
-            alt: files[i].name,
+            alt: file.name,
             isPrimary: newImages.length === 0,
           });
         }
@@ -132,7 +137,7 @@ export default function ImageUploader({ images, onChange, folder = "products" }:
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp,image/avif"
-          multiple
+          multiple={multiple}
           onChange={handleUpload}
           disabled={uploading}
           className="hidden"
