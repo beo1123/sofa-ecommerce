@@ -20,7 +20,7 @@ export const websiteSchema = {
   "@type": "WebSite",
   "@id": `${BASE_URL}/#website`,
   name: SITE_NAME,
-  alternateName: [BRAND_NAME, "sofaphamgia.com", "SofaPhamGia"],
+  alternateName: [BRAND_NAME, "Sofa Phạm Gia", "sofaphamgia.com"],
   url: BASE_URL,
   inLanguage: "vi-VN",
   description:
