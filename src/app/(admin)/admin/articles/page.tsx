@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import Heading from "@/components/ui/Heading";
 import Button from "@/components/ui/Button";
@@ -9,67 +9,11 @@ import Spinner from "@/components/ui/Spinner";
 import Alert from "@/components/ui/Alert";
 import ArticleTable from "@/components/admin/articles/ArticleTable";
 import { Plus } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
-
-interface Article {
-  id: number;
-  title: string;
-  slug: string;
-  status: string;
-  thumbnail?: string | null;
-  category?: { id: number; name: string; slug: string } | null;
-  author?: { id: number; displayName?: string | null } | null;
-  publishedAt?: string | null;
-  updatedAt: string;
-}
-
-interface Meta {
-  page: number;
-  perPage: number;
-  total: number;
-}
+import { useAdminArticles } from "@/hooks/articles/useAdminArticles";
 
 export default function AdminArticlesPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [meta, setMeta] = useState<Meta>({ page: 1, perPage: 20, total: 0 });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [deleting, setDeleting] = useState<number | null>(null);
-
-  const fetchArticles = useCallback(async (page = 1) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await axiosClient.get("/admin/articles", { params: { page, perPage: 20 } });
-      if (res.data?.success) {
-        setArticles(res.data.data);
-        setMeta(res.data.meta);
-      }
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Không thể tải danh sách bài viết");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchArticles();
-  }, [fetchArticles]);
-
-  const handleDelete = async (id: number) => {
-    if (!confirm("Bạn có chắc muốn lưu trữ (archive) bài viết này?")) return;
-    setDeleting(id);
-    try {
-      await axiosClient.delete(`/admin/articles/${id}`);
-      await fetchArticles(meta.page);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Xóa bài viết thất bại");
-    } finally {
-      setDeleting(null);
-    }
-  };
-
-  const totalPages = Math.ceil(meta.total / meta.perPage);
+  const { articles, meta, loading, error, deleting, totalPages, goToPreviousPage, goToNextPage, handleDelete } =
+    useAdminArticles();
 
   return (
     <div className="space-y-6">
@@ -100,17 +44,13 @@ export default function AdminArticlesPage() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2">
-          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={() => fetchArticles(meta.page - 1)}>
+          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
             Trước
           </Button>
           <span className="text-sm text-[var(--color-text-muted)]">
             Trang {meta.page} / {totalPages}
           </span>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={meta.page >= totalPages}
-            onClick={() => fetchArticles(meta.page + 1)}>
+          <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>
             Sau
           </Button>
         </div>

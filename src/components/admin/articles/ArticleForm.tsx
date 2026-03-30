@@ -8,8 +8,8 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Dropdown from "@/components/ui/Dropdown";
 import Card, { CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Upload, Loader2 } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
+import RichTextEditor from "@/components/ui/RichTextEditor";
+import ArticleImageUploader, { type ArticleImage } from "@/components/admin/articles/ArticleImageUploader";
 
 // ─── Zod Schema ──────────────────────────────────────────
 const articleSchema = z.object({
@@ -31,14 +31,37 @@ interface ArticleCategory {
 }
 
 interface ArticleFormProps {
-  defaultValues?: Partial<ArticleFormData> & { thumbnail?: string | null };
+  defaultValues?: Partial<ArticleFormData> & {
+    images?: ArticleImage[];
+  };
   categories: ArticleCategory[];
-  onSubmit: (data: ArticleFormData & { thumbnail?: string }) => Promise<void>;
+  onSubmit: (data: ArticleFormData & { images: ArticleImage[] }) => Promise<void>;
+  /** Present when editing – enables immediate per-image DB deletion */
+  articleId?: number;
   submitLabel?: string;
 }
 
+// ─── Helpers ─────────────────────────────────────────────
+const makeFolderSafe = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .trim();
+
 // ─── Component ───────────────────────────────────────────
-export default function ArticleForm({ defaultValues, categories, onSubmit, submitLabel = "Lưu" }: ArticleFormProps) {
+export default function ArticleForm({
+  defaultValues,
+  categories,
+  onSubmit,
+  articleId,
+  submitLabel = "Lưu",
+}: ArticleFormProps) {
   const {
     register,
     handleSubmit,
@@ -57,62 +80,29 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
     },
   });
 
-  const [thumbnail, setThumbnail] = useState<string>(defaultValues?.thumbnail ?? "");
-  const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [images, setImages] = useState<ArticleImage[]>(defaultValues?.images ?? []);
 
   const statusValue = watch("status") ?? "DRAFT";
+  const slugValue = watch("slug") ?? "";
+  const titleValue = watch("title") ?? "";
+  const contentValue = watch("content") ?? "";
 
-  // Auto-generate slug
+  // Compute upload folder from slug / title (like ProductForm)
+  const folderSegment = makeFolderSafe(slugValue || titleValue || "untitled-article");
+  const uploadFolder = `articles/${folderSegment}`;
+
+  // Auto-generate slug from title (only when creating)
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     register("title").onChange(e);
     const title = e.target.value;
     if (!defaultValues?.slug) {
-      const slug = title
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/đ/g, "d")
-        .replace(/Đ/g, "D")
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-")
-        .trim();
+      const slug = makeFolderSafe(title);
       setValue("slug", slug);
     }
   };
 
-  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
-    setUploadError(null);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("folder", "articles");
-
-      const res = await axiosClient.post("/admin/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      if (res.data?.success) {
-        setThumbnail(res.data.data.url);
-      }
-    } catch (err: any) {
-      setUploadError(err?.response?.data?.error?.message ?? "Upload ảnh thất bại");
-    } finally {
-      setUploading(false);
-      e.target.value = "";
-    }
-  };
-
   const handleFormSubmit = async (data: ArticleFormData) => {
-    await onSubmit({
-      ...data,
-      thumbnail: thumbnail || undefined,
-    });
+    await onSubmit({ ...data, images });
   };
 
   return (
@@ -158,59 +148,27 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
         </CardContent>
       </Card>
 
-      {/* Thumbnail */}
+      {/* Images */}
       <Card variant="elevated">
         <CardHeader>
-          <CardTitle>Ảnh đại diện</CardTitle>
+          <CardTitle>Hình ảnh</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-start gap-4">
-            {thumbnail ? (
-              <div className="relative w-40 h-28 rounded-lg overflow-hidden border border-gray-200">
-                <img src={thumbnail} alt="Thumbnail" className="w-full h-full object-cover" />
-                <button
-                  type="button"
-                  onClick={() => setThumbnail("")}
-                  className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600">
-                  ×
-                </button>
-              </div>
-            ) : null}
-            <label className="flex items-center gap-2 px-4 py-2 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[var(--color-brand-300)] transition-colors">
-              {uploading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                <Upload size={16} className="text-[var(--color-text-muted)]" />
-              )}
-              <span className="text-sm">{uploading ? "Đang upload..." : "Chọn ảnh"}</span>
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={handleThumbnailUpload}
-                disabled={uploading}
-                className="hidden"
-              />
-            </label>
-          </div>
-          {uploadError && (
-            <p className="mt-2 text-sm text-red-600" role="alert">
-              {uploadError}
-            </p>
-          )}
+          <ArticleImageUploader images={images} onChange={setImages} folder={uploadFolder} articleId={articleId} />
         </CardContent>
       </Card>
 
-      {/* Content */}
+      {/* Content – WYSIWYG editor */}
       <Card variant="elevated">
         <CardHeader>
           <CardTitle>Nội dung</CardTitle>
         </CardHeader>
         <CardContent>
-          <textarea
-            {...register("content")}
-            rows={15}
-            className="block w-full px-3 py-2 border border-[var(--color-brand-100)] rounded-md shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-300)] focus:border-[var(--color-brand-400)] font-mono text-sm"
-            placeholder="Viết nội dung bài viết (hỗ trợ HTML)..."
+          <RichTextEditor
+            value={contentValue}
+            onChange={(html) => setValue("content", html, { shouldValidate: true })}
+            placeholder="Viết nội dung bài viết..."
+            minHeight={320}
           />
           {errors.content?.message && (
             <p className="mt-1 text-sm text-red-600" role="alert">
