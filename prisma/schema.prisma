@@ -476,6 +476,8 @@ model Article {
   authorId Int?
   author   User? @relation(fields: [authorId], references: [id])
 
+  images    ArticleImage[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -483,6 +485,19 @@ model Article {
   @@index([status])
   @@index([categoryId])
   @@index([publishedAt])
+}
+
+model ArticleImage {
+  id        Int      @id @default(autoincrement())
+  url       String
+  alt       String?
+  isPrimary Boolean  @default(false)
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([articleId], map: "idx_articleimage_article")
 }
 
 enum ArticleStatus {

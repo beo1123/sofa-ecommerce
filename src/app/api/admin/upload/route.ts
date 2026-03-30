@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin";
 import { normalizeError, ok, fail } from "@/server/utils/api";
-import { uploadImage } from "@/lib/upload";
+import { uploadImage, deleteImageByUrl } from "@/lib/upload";
 
 /**
  * POST /api/admin/upload – Upload ảnh lên Cloudinary CDN
@@ -27,6 +27,32 @@ export async function POST(req: Request) {
 
     const result = await uploadImage(file, folder);
     return NextResponse.json(ok(result), { status: 201 });
+  } catch (err) {
+    const { status, payload } = normalizeError(err);
+    return NextResponse.json(payload, { status });
+  }
+}
+
+/**
+ * DELETE /api/admin/upload – Xóa ảnh khỏi Cloudinary ngay lập tức
+ *
+ * Body: { url: string }
+ *
+ * Response: { success: true, data: { deleted: true } }
+ */
+export async function DELETE(req: Request) {
+  try {
+    await requireAdmin();
+
+    const body = await req.json();
+    const url = body?.url;
+
+    if (!url || typeof url !== "string") {
+      throw { status: 400, body: fail("Missing image URL", "MISSING_URL") };
+    }
+
+    await deleteImageByUrl(url);
+    return NextResponse.json(ok({ deleted: true }));
   } catch (err) {
     const { status, payload } = normalizeError(err);
     return NextResponse.json(payload, { status });
