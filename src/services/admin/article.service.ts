@@ -174,14 +174,17 @@ export class AdminArticleService {
               where: { id: img.id! },
               data: { alt: img.alt, isPrimary: img.isPrimary ?? false },
             })),
-          // Add new images (no id)
+          // Add new images (no id); isPrimary falls back to first item when no existing images remain
           create: newImages
             .filter((img) => !img.id)
-            .map((img, i) => ({
-              url: img.url,
-              alt: img.alt,
-              isPrimary: img.isPrimary ?? (newImages.filter((x) => x.id).length === 0 && i === 0),
-            })),
+            .map((img, i) => {
+              const hasExistingImages = newImages.some((x) => x.id);
+              return {
+                url: img.url,
+                alt: img.alt,
+                isPrimary: img.isPrimary ?? (!hasExistingImages && i === 0),
+              };
+            }),
         },
       },
       include: {
