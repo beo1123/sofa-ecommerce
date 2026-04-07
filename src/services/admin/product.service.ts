@@ -96,7 +96,7 @@ export class AdminProductService {
     const product = await this.prisma.product.findUnique({
       where: { id },
       include: {
-        images: { orderBy: { isPrimary: "desc" } },
+        images: { orderBy: [{ isPrimary: "desc" }, { id: "asc" }] },
         variants: { include: { inventory: true } },
         category: true,
       },

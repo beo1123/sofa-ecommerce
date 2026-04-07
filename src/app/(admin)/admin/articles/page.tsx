@@ -1,75 +1,37 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import Heading from "@/components/ui/Heading";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
 import Alert from "@/components/ui/Alert";
+import Input from "@/components/ui/Input";
+import Dropdown from "@/components/ui/Dropdown";
 import ArticleTable from "@/components/admin/articles/ArticleTable";
-import { Plus } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
-
-interface Article {
-  id: number;
-  title: string;
-  slug: string;
-  status: string;
-  thumbnail?: string | null;
-  category?: { id: number; name: string; slug: string } | null;
-  author?: { id: number; displayName?: string | null } | null;
-  publishedAt?: string | null;
-  updatedAt: string;
-}
-
-interface Meta {
-  page: number;
-  perPage: number;
-  total: number;
-}
+import { Plus, Search } from "lucide-react";
+import { useAdminArticles } from "@/hooks/articles/useAdminArticles";
 
 export default function AdminArticlesPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [meta, setMeta] = useState<Meta>({ page: 1, perPage: 20, total: 0 });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [deleting, setDeleting] = useState<number | null>(null);
-
-  const fetchArticles = useCallback(async (page = 1) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await axiosClient.get("/admin/articles", { params: { page, perPage: 20 } });
-      if (res.data?.success) {
-        setArticles(res.data.data);
-        setMeta(res.data.meta);
-      }
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Không thể tải danh sách bài viết");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchArticles();
-  }, [fetchArticles]);
-
-  const handleDelete = async (id: number) => {
-    if (!confirm("Bạn có chắc muốn lưu trữ (archive) bài viết này?")) return;
-    setDeleting(id);
-    try {
-      await axiosClient.delete(`/admin/articles/${id}`);
-      await fetchArticles(meta.page);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Xóa bài viết thất bại");
-    } finally {
-      setDeleting(null);
-    }
-  };
-
-  const totalPages = Math.ceil(meta.total / meta.perPage);
+  const {
+    articles,
+    meta,
+    loading,
+    error,
+    deleting,
+    categories,
+    searchInput,
+    statusFilter,
+    categoryFilter,
+    totalPages,
+    setSearchInput,
+    setStatusFilter,
+    setCategoryFilter,
+    handleDelete,
+    goToPreviousPage,
+    goToNextPage,
+  } = useAdminArticles();
 
   return (
     <div className="space-y-6">
@@ -88,6 +50,36 @@ export default function AdminArticlesPage() {
       {error && <Alert variant="error" title="Lỗi" description={error} />}
 
       <Card variant="elevated" padding="none">
+        <div className="p-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-3">
+          <Input
+            placeholder="Tìm theo tiêu đề hoặc slug..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            leftIcon={<Search size={16} />}
+            fullWidth
+          />
+          <Dropdown
+            value={categoryFilter}
+            onChange={setCategoryFilter}
+            options={[
+              { label: "Tất cả danh mục", value: "ALL" },
+              ...categories.map((category) => ({ label: category.name, value: String(category.id) })),
+            ]}
+            fullWidth
+          />
+          <Dropdown
+            value={statusFilter}
+            onChange={setStatusFilter}
+            options={[
+              { label: "Tất cả trạng thái", value: "ALL" },
+              { label: "Nháp", value: "DRAFT" },
+              { label: "Đã đăng", value: "PUBLISHED" },
+              { label: "Đã lưu trữ", value: "ARCHIVED" },
+            ]}
+            fullWidth
+          />
+        </div>
+
         {loading ? (
           <div className="flex items-center justify-center py-16">
             <Spinner size={30} />
@@ -100,17 +92,13 @@ export default function AdminArticlesPage() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2">
-          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={() => fetchArticles(meta.page - 1)}>
+          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
             Trước
           </Button>
           <span className="text-sm text-[var(--color-text-muted)]">
             Trang {meta.page} / {totalPages}
           </span>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={meta.page >= totalPages}
-            onClick={() => fetchArticles(meta.page + 1)}>
+          <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>
             Sau
           </Button>
         </div>

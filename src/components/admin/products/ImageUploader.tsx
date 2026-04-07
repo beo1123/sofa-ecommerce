@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Upload, X, Loader2 } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { ArrowLeft, ArrowRight, Loader2, Star, Upload, X } from "lucide-react";
 import axiosClient from "@/server/axiosClient";
 
 interface ImageUploaderProps {
@@ -12,14 +13,38 @@ interface ImageUploaderProps {
 }
 
 export default function ImageUploader({ images, onChange, folder = "products", multiple = true }: ImageUploaderProps) {
-  const [uploading, setUploading] = useState(false);
+  const [activeRemoveIndex, setActiveRemoveIndex] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const uploadMutation = useMutation({
+    mutationFn: async ({ file, uploadFolder }: { file: File; uploadFolder: string }) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("folder", uploadFolder);
+
+      const res = await axiosClient.post("/admin/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      return res.data?.data;
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async ({ url }: { url: string }) => {
+      await axiosClient.delete("/admin/upload", {
+        data: { url },
+      });
+    },
+  });
+
+  const uploading = uploadMutation.isPending;
+  const removing = deleteMutation.isPending;
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    setUploading(true);
     setError(null);
 
     try {
@@ -30,17 +55,11 @@ export default function ImageUploader({ images, onChange, folder = "products", m
         const file = selectedFiles[i];
         if (!file) continue;
 
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("folder", folder);
+        const res = await uploadMutation.mutateAsync({ file, uploadFolder: folder });
 
-        const res = await axiosClient.post("/admin/upload", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-
-        if (res.data?.success) {
+        if (res?.url) {
           newImages.push({
-            url: res.data.data.url,
+            url: res.url,
             alt: file.name,
             isPrimary: newImages.length === 0,
           });
@@ -51,17 +70,30 @@ export default function ImageUploader({ images, onChange, folder = "products", m
     } catch (err: any) {
       setError(err?.response?.data?.error?.message ?? "Upload thất bại");
     } finally {
-      setUploading(false);
       e.target.value = "";
     }
   };
 
-  const handleRemove = (index: number) => {
-    const updated = images.filter((_, i) => i !== index);
-    if (updated.length > 0 && !updated.some((img) => img.isPrimary)) {
-      updated[0].isPrimary = true;
+  const handleRemove = async (index: number) => {
+    const image = images[index];
+    if (!image) return;
+
+    setError(null);
+    setActiveRemoveIndex(index);
+
+    try {
+      await deleteMutation.mutateAsync({ url: image.url });
+
+      const updated = images.filter((_, i) => i !== index);
+      if (updated.length > 0 && !updated.some((img) => img.isPrimary)) {
+        updated[0] = { ...updated[0], isPrimary: true };
+      }
+      onChange(updated);
+    } catch (err: any) {
+      setError(err?.response?.data?.error?.message ?? "Xóa ảnh thất bại");
+    } finally {
+      setActiveRemoveIndex(null);
     }
-    onChange(updated);
   };
 
   const handleSetPrimary = (index: number) => {
@@ -69,6 +101,19 @@ export default function ImageUploader({ images, onChange, folder = "products", m
       ...img,
       isPrimary: i === index,
     }));
+
+    const primaryImage = updated[index];
+    const remainingImages = updated.filter((_, i) => i !== index);
+    onChange([primaryImage, ...remainingImages]);
+  };
+
+  const handleMove = (index: number, direction: "left" | "right") => {
+    const targetIndex = direction === "left" ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= images.length) return;
+
+    const updated = [...images];
+    const [movedImage] = updated.splice(index, 1);
+    updated.splice(targetIndex, 0, movedImage);
     onChange(updated);
   };
 
@@ -88,20 +133,43 @@ export default function ImageUploader({ images, onChange, folder = "products", m
               <img src={img.url} alt={img.alt ?? ""} className="w-full h-full object-cover" />
 
               {/* Overlay actions */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 p-2">
+                {multiple && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleMove(i, "left")}
+                      disabled={i === 0}
+                      className="p-1 bg-white text-gray-800 rounded shadow hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+                      aria-label="Đưa ảnh sang trái">
+                      <ArrowLeft size={14} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleMove(i, "right")}
+                      disabled={i === images.length - 1}
+                      className="p-1 bg-white text-gray-800 rounded shadow hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+                      aria-label="Đưa ảnh sang phải">
+                      <ArrowRight size={14} />
+                    </button>
+                  </>
+                )}
                 {!img.isPrimary && (
                   <button
                     type="button"
                     onClick={() => handleSetPrimary(i)}
-                    className="px-2 py-1 text-xs bg-white text-gray-800 rounded shadow hover:bg-gray-100">
+                    className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-white text-gray-800 rounded shadow hover:bg-gray-100">
+                    <Star size={12} />
                     Ảnh chính
                   </button>
                 )}
                 <button
                   type="button"
-                  onClick={() => handleRemove(i)}
-                  className="p-1 bg-red-500 text-white rounded shadow hover:bg-red-600">
-                  <X size={14} />
+                  onClick={() => void handleRemove(i)}
+                  disabled={removing}
+                  className="p-1 bg-red-500 text-white rounded shadow hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+                  aria-label="Xóa ảnh">
+                  {activeRemoveIndex === i ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />}
                 </button>
               </div>
 
@@ -109,6 +177,12 @@ export default function ImageUploader({ images, onChange, folder = "products", m
               {img.isPrimary && (
                 <span className="absolute top-1 left-1 text-[10px] bg-[var(--color-brand-300)] text-white px-1.5 py-0.5 rounded">
                   Chính
+                </span>
+              )}
+
+              {multiple && (
+                <span className="absolute bottom-1 left-1 text-[10px] bg-black/70 text-white px-1.5 py-0.5 rounded">
+                  #{i + 1}
                 </span>
               )}
             </div>
@@ -139,7 +213,7 @@ export default function ImageUploader({ images, onChange, folder = "products", m
           accept="image/jpeg,image/png,image/webp,image/avif"
           multiple={multiple}
           onChange={handleUpload}
-          disabled={uploading}
+          disabled={uploading || removing}
           className="hidden"
         />
       </label>

@@ -1,17 +1,53 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { mergeAttributes, Node } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
 import { EditorContent, useEditor } from "@tiptap/react";
+import { NodeSelection } from "@tiptap/pm/state";
+import { ImageMinus, ImagePlus, Loader2 } from "lucide-react";
+
+const InlineImage = Node.create({
+  name: "inlineImage",
+  group: "block",
+  inline: false,
+  draggable: true,
+  selectable: true,
+
+  addAttributes() {
+    return {
+      src: { default: null },
+      alt: { default: "" },
+      title: { default: null },
+    };
+  },
+
+  parseHTML() {
+    return [{ tag: "img[src]" }];
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return [
+      "img",
+      mergeAttributes(HTMLAttributes, {
+        class: "my-4 h-auto max-w-full rounded-lg border border-gray-200",
+      }),
+    ];
+  },
+});
 
 interface RichTextEditorProps {
   value: string;
   onChange: (html: string) => void;
   placeholder?: string;
   minHeight?: number;
+  onImageUpload?: (file: File) => Promise<string>;
+  imageUploading?: boolean;
+  onImageRemove?: (url: string) => Promise<void>;
+  imageRemoving?: boolean;
 }
 
 export default function RichTextEditor({
@@ -19,11 +55,18 @@ export default function RichTextEditor({
   onChange,
   placeholder = "Nhập nội dung chi tiết...",
   minHeight = 220,
+  onImageUpload,
+  imageUploading = false,
+  onImageRemove,
+  imageRemoving = false,
 }: RichTextEditorProps) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
       StarterKit,
+      InlineImage,
       Underline,
       Link.configure({
         openOnClick: false,
@@ -54,6 +97,28 @@ export default function RichTextEditor({
     }
   }, [editor, value]);
 
+  useEffect(() => {
+    if (!editor) return;
+
+    const updateSelectedImage = () => {
+      const selection = editor.state.selection;
+      if (selection instanceof NodeSelection && selection.node.type.name === "inlineImage") {
+        setSelectedImageUrl((selection.node.attrs.src as string) || null);
+        return;
+      }
+      setSelectedImageUrl(null);
+    };
+
+    updateSelectedImage();
+    editor.on("selectionUpdate", updateSelectedImage);
+    editor.on("update", updateSelectedImage);
+
+    return () => {
+      editor.off("selectionUpdate", updateSelectedImage);
+      editor.off("update", updateSelectedImage);
+    };
+  }, [editor]);
+
   const setLink = () => {
     if (!editor) return;
     const previousUrl = editor.getAttributes("link").href as string | undefined;
@@ -79,6 +144,36 @@ export default function RichTextEditor({
       .focus()
       .insertContent(`<a href="${trimmedUrl}" target="_blank" rel="noopener noreferrer">${trimmedUrl}</a>`)
       .run();
+  };
+
+  const handleSelectImage = () => {
+    if (!onImageUpload || imageUploading) return;
+    fileInputRef.current?.click();
+  };
+
+  const handleImageFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editor || !onImageUpload) return;
+
+    try {
+      const imageUrl = await onImageUpload(file);
+      editor
+        .chain()
+        .focus()
+        .insertContent({ type: "inlineImage", attrs: { src: imageUrl, alt: file.name } })
+        .run();
+      editor.chain().focus().createParagraphNear().run();
+    } finally {
+      e.target.value = "";
+    }
+  };
+
+  const handleRemoveSelectedImage = async () => {
+    if (!editor || !selectedImageUrl || !onImageRemove) return;
+
+    await onImageRemove(selectedImageUrl);
+    editor.chain().focus().deleteSelection().run();
+    setSelectedImageUrl(null);
   };
 
   if (!editor) {
@@ -146,6 +241,35 @@ export default function RichTextEditor({
           className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
           Link
         </button>
+        {onImageUpload && (
+          <>
+            <button
+              type="button"
+              onClick={handleSelectImage}
+              disabled={imageUploading}
+              className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors disabled:cursor-not-allowed disabled:opacity-60">
+              {imageUploading ? <Loader2 size={14} className="animate-spin" /> : <ImagePlus size={14} />}
+              Ảnh
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/avif"
+              onChange={(e) => void handleImageFileChange(e)}
+              className="hidden"
+            />
+          </>
+        )}
+        {onImageRemove && (
+          <button
+            type="button"
+            onClick={() => void handleRemoveSelectedImage()}
+            disabled={!selectedImageUrl || imageRemoving}
+            className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors disabled:cursor-not-allowed disabled:opacity-60">
+            {imageRemoving ? <Loader2 size={14} className="animate-spin" /> : <ImageMinus size={14} />}
+            Xóa ảnh
+          </button>
+        )}
         <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}

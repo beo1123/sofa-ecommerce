@@ -152,6 +152,13 @@ export async function deleteImage(publicId: string) {
   return cloudinary.uploader.destroy(publicId);
 }
 
+/**
+ * Xóa toàn bộ assets theo prefix public_id, ví dụ articles/my-post
+ */
+export async function deleteResourcesByPrefix(prefix: string) {
+  return cloudinary.api.delete_resources_by_prefix(prefix);
+}
+
 function stripExtension(fileName: string) {
   const dotIndex = fileName.lastIndexOf(".");
   return dotIndex > 0 ? fileName.slice(0, dotIndex) : fileName;
@@ -223,7 +230,16 @@ export async function deleteFolderIfEmpty(folder: string) {
     return await cloudinary.api.delete_folder(folder);
   } catch (err: any) {
     const message = String(err?.message ?? "").toLowerCase();
-    if (message.includes("not empty") || message.includes("not found")) {
+    const httpCode = Number(err?.http_code ?? err?.error?.http_code ?? 0);
+    if (
+      httpCode === 400 ||
+      httpCode === 404 ||
+      message.includes("not empty") ||
+      message.includes("not found") ||
+      message.includes("can't delete") ||
+      message.includes("cannot delete") ||
+      message.includes("folder")
+    ) {
       return { skipped: true };
     }
     throw err;

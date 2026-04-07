@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ArticleStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
 import { normalizeError, ok, parsePagination, validateRequest } from "@/server/utils/api";
@@ -14,7 +15,18 @@ export async function GET(req: Request) {
     await requireAdmin();
     const url = new URL(req.url);
     const { page, perPage } = parsePagination(url.searchParams);
-    const result = await service.listArticles(page, perPage);
+    const q = url.searchParams.get("q")?.trim() || undefined;
+    const status = url.searchParams.get("status")?.trim();
+    const categoryIdParam = url.searchParams.get("categoryId")?.trim();
+    const categoryId = categoryIdParam ? Number(categoryIdParam) : undefined;
+
+    const result = await service.listArticles(page, perPage, {
+      ...(q ? { q } : {}),
+      ...(status && Object.values(ArticleStatus).includes(status as ArticleStatus)
+        ? { status: status as ArticleStatus }
+        : {}),
+      ...(categoryId && Number.isFinite(categoryId) ? { categoryId } : {}),
+    });
     return NextResponse.json(ok(result.items, result.meta));
   } catch (err) {
     const { status, payload } = normalizeError(err);

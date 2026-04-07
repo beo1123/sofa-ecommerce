@@ -20,7 +20,7 @@ interface Article {
 
 interface ArticleTableProps {
   articles: Article[];
-  onDelete: (id: number) => void;
+  onDelete: (article: Article) => void;
   deleting?: number | null;
 }
 
@@ -114,8 +114,8 @@ export default function ArticleTable({ articles, onDelete, deleting }: ArticleTa
                     variant="danger"
                     leftIcon={<Trash2 size={14} />}
                     loading={deleting === article.id}
-                    onClick={() => onDelete(article.id)}>
-                    Xóa
+                    onClick={() => onDelete(article)}>
+                    {article.status === "ARCHIVED" ? "Xóa vĩnh viễn" : "Lưu trữ"}
                   </Button>
                 </div>
               </td>

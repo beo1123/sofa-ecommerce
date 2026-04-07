@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,8 +8,11 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Dropdown from "@/components/ui/Dropdown";
 import Card, { CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Upload, Loader2 } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
+import RichTextEditor from "@/components/ui/RichTextEditor";
+import ArticleThumbnailUploader from "@/components/admin/articles/ArticleThumbnailUploader";
+import { makeAssetFolderSegment } from "@/lib/articles/adminArticleUtils";
+import { useArticleThumbnail } from "@/hooks/articles/useArticleThumbnail";
+import { useArticleContentImageUpload } from "@/hooks/articles/useArticleContentImageUpload";
 
 // ─── Zod Schema ──────────────────────────────────────────
 const articleSchema = z.object({
@@ -57,15 +60,28 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
     },
   });
 
-  const [thumbnail, setThumbnail] = useState<string>(defaultValues?.thumbnail ?? "");
-  const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
-
   const statusValue = watch("status") ?? "DRAFT";
+  const titleValue = watch("title") ?? "";
+  const slugValue = watch("slug") ?? "";
+  const contentValue = watch("content") ?? "";
+  const titleField = register("title");
+
+  const uploadFolder = `articles/${makeAssetFolderSegment(slugValue || titleValue || "untitled-article")}`;
+  const { thumbnail, uploadError, uploadThumbnail, removeThumbnail, isUploading, isDeleting } = useArticleThumbnail(
+    defaultValues?.thumbnail
+  );
+  const {
+    uploadImage: uploadContentImage,
+    removeImage: removeContentImage,
+    cleanupUnusedImages,
+    error: contentImageError,
+    isUploading: isUploadingContentImage,
+    isDeleting: isDeletingContentImage,
+  } = useArticleContentImageUpload();
 
   // Auto-generate slug
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    register("title").onChange(e);
+    titleField.onChange(e);
     const title = e.target.value;
     if (!defaultValues?.slug) {
       const slug = title
@@ -82,33 +98,9 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
     }
   };
 
-  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
-    setUploadError(null);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("folder", "articles");
-
-      const res = await axiosClient.post("/admin/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      if (res.data?.success) {
-        setThumbnail(res.data.data.url);
-      }
-    } catch (err: any) {
-      setUploadError(err?.response?.data?.error?.message ?? "Upload ảnh thất bại");
-    } finally {
-      setUploading(false);
-      e.target.value = "";
-    }
-  };
-
   const handleFormSubmit = async (data: ArticleFormData) => {
+    await cleanupUnusedImages(data.content, defaultValues?.content ?? "");
+
     await onSubmit({
       ...data,
       thumbnail: thumbnail || undefined,
@@ -126,7 +118,7 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               label="Tiêu đề"
-              {...register("title")}
+              {...titleField}
               onChange={handleTitleChange}
               error={errors.title?.message}
               required
@@ -153,7 +145,7 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
                 fullWidth
               />
             </div>
-            <Input label="Tóm tắt" {...register("excerpt")} />
+            <Input label="Tóm tắt" {...register("excerpt")} fullWidth />
           </div>
         </CardContent>
       </Card>
@@ -164,39 +156,14 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
           <CardTitle>Ảnh đại diện</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-start gap-4">
-            {thumbnail ? (
-              <div className="relative w-40 h-28 rounded-lg overflow-hidden border border-gray-200">
-                <img src={thumbnail} alt="Thumbnail" className="w-full h-full object-cover" />
-                <button
-                  type="button"
-                  onClick={() => setThumbnail("")}
-                  className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600">
-                  ×
-                </button>
-              </div>
-            ) : null}
-            <label className="flex items-center gap-2 px-4 py-2 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[var(--color-brand-300)] transition-colors">
-              {uploading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                <Upload size={16} className="text-[var(--color-text-muted)]" />
-              )}
-              <span className="text-sm">{uploading ? "Đang upload..." : "Chọn ảnh"}</span>
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={handleThumbnailUpload}
-                disabled={uploading}
-                className="hidden"
-              />
-            </label>
-          </div>
-          {uploadError && (
-            <p className="mt-2 text-sm text-red-600" role="alert">
-              {uploadError}
-            </p>
-          )}
+          <ArticleThumbnailUploader
+            thumbnail={thumbnail}
+            onUpload={(file) => uploadThumbnail(file, uploadFolder)}
+            onRemove={removeThumbnail}
+            uploading={isUploading}
+            deleting={isDeleting}
+            error={uploadError}
+          />
         </CardContent>
       </Card>
 
@@ -206,12 +173,21 @@ export default function ArticleForm({ defaultValues, categories, onSubmit, submi
           <CardTitle>Nội dung</CardTitle>
         </CardHeader>
         <CardContent>
-          <textarea
-            {...register("content")}
-            rows={15}
-            className="block w-full px-3 py-2 border border-[var(--color-brand-100)] rounded-md shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-300)] focus:border-[var(--color-brand-400)] font-mono text-sm"
-            placeholder="Viết nội dung bài viết (hỗ trợ HTML)..."
+          <RichTextEditor
+            value={contentValue}
+            onChange={(html) => setValue("content", html, { shouldDirty: true, shouldValidate: true })}
+            placeholder="Soạn nội dung bài viết với heading, danh sách, liên kết và định dạng nâng cao..."
+            minHeight={320}
+            onImageUpload={(file) => uploadContentImage(file, `${uploadFolder}/content`)}
+            imageUploading={isUploadingContentImage}
+            onImageRemove={removeContentImage}
+            imageRemoving={isDeletingContentImage}
           />
+          {contentImageError && (
+            <p className="mt-3 text-sm text-red-600" role="alert">
+              {contentImageError}
+            </p>
+          )}
           {errors.content?.message && (
             <p className="mt-1 text-sm text-red-600" role="alert">
               {errors.content.message}
