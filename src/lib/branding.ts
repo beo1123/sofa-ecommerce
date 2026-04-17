@@ -1,4 +1,4 @@
-const DEFAULT_HEADER_LOGO = "/images/logo-removebg-preview.png";
+const DEFAULT_HEADER_LOGO = "/images/LOGO_SOFA.png";
 
 export const headerLogoSrc = process.env.NEXT_PUBLIC_HEADER_LOGO || DEFAULT_HEADER_LOGO;
 
