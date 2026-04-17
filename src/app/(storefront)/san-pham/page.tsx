@@ -7,6 +7,7 @@ import { CategoryService } from "@/services/category.service";
 import { prisma } from "@/lib/prisma";
 import { ProductService } from "@/services/products.service";
 import Script from "next/script";
+import { headerLogoSrc } from "@/lib/branding";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/seo/schema";
 
 const BASE_URL = "https://sofaphamgia.com";
@@ -42,7 +43,7 @@ export async function generateMetadata(props: ProductsPageProps): Promise<Metada
       description,
       type: "website",
       url: pageUrl,
-      images: [{ url: "/images/logo-removebg-preview.png", width: 1200, height: 630, alt: title }],
+      images: [{ url: headerLogoSrc, width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image", title, description },
   };

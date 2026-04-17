@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headerLogoSrc } from "@/lib/branding";
 
 const SITE_NAME = "Sofa Phạm Gia - Nội thất cao cấp";
 const BRAND_NAME = "Sofa Phạm Gia";
@@ -49,7 +50,7 @@ export const baseMetadata: Metadata = {
       "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM. Chất liệu bền đẹp, thiết kế tinh tế, giao hàng toàn quốc.",
     images: [
       {
-        url: "/images/logo-removebg-preview.png",
+        url: headerLogoSrc,
         width: 1200,
         height: 630,
         alt: SITE_NAME,
@@ -61,7 +62,7 @@ export const baseMetadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM.",
-    images: ["/images/logo-removebg-preview.png"],
+    images: [headerLogoSrc],
   },
 
   robots: {

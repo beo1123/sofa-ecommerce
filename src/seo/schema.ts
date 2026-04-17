@@ -2,6 +2,8 @@ export const BASE_URL = "https://sofaphamgia.com";
 export const BRAND_NAME = "Sofa Phạm Gia";
 export const SITE_NAME = "Sofa Phạm Gia - Nội thất cao cấp";
 
+import { buildAbsoluteAssetUrl, headerLogoSrc } from "@/lib/branding";
+
 type CategoryNavItem = {
   name: string;
   slug: string;
@@ -45,8 +47,8 @@ export const organizationSchema = {
   name: BRAND_NAME,
   alternateName: SITE_NAME,
   url: BASE_URL,
-  logo: `${BASE_URL}/images/logo-removebg-preview.png`,
-  image: `${BASE_URL}/images/logo-removebg-preview.png`,
+  logo: buildAbsoluteAssetUrl(BASE_URL, headerLogoSrc),
+  image: buildAbsoluteAssetUrl(BASE_URL, headerLogoSrc),
   description:
     "Sofa Phạm Gia chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM, giao hàng toàn quốc với dịch vụ tư vấn, lắp đặt và bảo hành.",
   address: {
@@ -99,7 +101,7 @@ export function buildHomePageSchema() {
     },
     primaryImageOfPage: {
       "@type": "ImageObject",
-      url: `${BASE_URL}/images/logo-removebg-preview.png`,
+      url: buildAbsoluteAssetUrl(BASE_URL, headerLogoSrc),
     },
     breadcrumb: {
       "@id": `${BASE_URL}/#breadcrumb`,

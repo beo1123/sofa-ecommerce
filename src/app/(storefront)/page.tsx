@@ -7,6 +7,7 @@ import BrowseByCategories from "@/components/Home/BrowseByCategories";
 import Featured from "@/components/Home/Featured";
 import { BrandMessage } from "@/components/Home/BrandMessage";
 import StoreHighlights from "@/components/common/StoreHighlights";
+import { headerLogoSrc } from "@/lib/branding";
 import { BASE_URL, buildHomeBreadcrumbSchema, buildHomePageSchema, SITE_NAME } from "@/seo/schema";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/logo-removebg-preview.png",
+        url: headerLogoSrc,
         width: 1200,
         height: 630,
         alt: SITE_NAME,

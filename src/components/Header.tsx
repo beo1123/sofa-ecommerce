@@ -10,6 +10,7 @@ import { selectCartItemCount } from "@/store/selector/cartSelectors";
 import SearchBox from "./Header/SearchBox";
 import { SafeImage } from "./ui/SafeImage";
 import SocialContact from "./Header/SocialContact";
+import { headerLogoSrc } from "@/lib/branding";
 
 /**
  * Header.tsx — Responsive cho mọi màn hình, giữ nguyên nội dung & màu sắc gốc
@@ -166,11 +167,18 @@ export default function Header() {
         {/* Main Header - Full responsive */}
         <div className="bg-[var(--color-bg-page)] border-b border-[var(--color-brand-50)] py-1">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 sm:gap-4 h-16 lg:h-20">
+            <div className="flex items-center gap-3 sm:gap-4 h-20 lg:h-24">
               {/* Logo - Always visible */}
               <Link href="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
-                <div className="w-20 h-20 lg:w-30 lg:h-30  flex items-center justify-center">
-                  <SafeImage src="/images/logo-removebg-preview.png" width={120} height={120} alt="Logo phạm gia" />
+                <div className="flex h-16 w-24 items-center justify-center overflow-hidden sm:h-16 sm:w-28 lg:h-20 lg:w-32">
+                  <SafeImage
+                    src={headerLogoSrc}
+                    width={144}
+                    height={144}
+                    alt="Logo Phạm Gia"
+                    className="h-full w-full object-contain"
+                    priority
+                  />
                 </div>
               </Link>
 
@@ -273,23 +281,17 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.06, duration: 0.24 }}
                   className="flex items-center justify-between p-4 border-b border-[var(--color-brand-50)] flex-shrink-0">
-                  <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-lg bg-[var(--color-brand-50)] flex items-center justify-center shadow-sm">
-                      <svg
-                        className="w-5 h-5 text-[var(--color-brand-400)]"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3 10v6a1 1 0 001 1h1v2h2v-2h10v2h2v-2h1a1 1 0 001-1v-6H3z"
-                        />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 10V7a5 5 0 1110 0v3" />
-                      </svg>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-sm ring-1 ring-[var(--color-brand-50)]">
+                      <SafeImage
+                        src={headerLogoSrc}
+                        width={60}
+                        height={60}
+                        alt="Logo Phạm Gia"
+                        className="h-full w-full object-contain"
+                      />
                     </div>
-                    <span className="text-lg font-bold text-[var(--color-text-default)]">Nội Thất</span>
+                    <span className="text-lg font-bold text-[var(--color-text-default)]">Phạm Gia</span>
                   </div>
                   <button
                     onClick={closeMobileMenu}
