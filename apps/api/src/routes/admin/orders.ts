@@ -1,17 +1,17 @@
 // =========================================================
-// apps/api/src/routes/orders.ts
-// Public order routes
+// apps/api/src/routes/admin/orders.ts
+// Admin order routes
 // =========================================================
 
 import { Hono } from "hono";
-import { orderService } from "../services/order.service.js";
-import { ok, parsePagination, normalizeError } from "../lib/response.js";
+import { orderService } from "../../services/order.service.js";
+import { ok, parsePagination, normalizeError } from "../../lib/response.js";
 import type { OrderStatus } from "@repo/db";
 
-export const ordersRouter = new Hono();
+export const adminOrdersRouter = new Hono();
 
-// ── GET /api/v1/orders ────────────────────────────────────
-ordersRouter.get("/", async (c) => {
+// ── GET /api/admin/orders ─────────────────────────────────
+adminOrdersRouter.get("/", async (c) => {
   try {
     const query = c.req.query() as Record<string, string>;
     const { page, perPage } = parsePagination(query);
@@ -25,15 +25,12 @@ ordersRouter.get("/", async (c) => {
   }
 });
 
-// ── GET /api/v1/orders/:id ────────────────────────────────
-ordersRouter.get("/:id", async (c) => {
+// ── GET /api/admin/orders/:id ─────────────────────────────
+adminOrdersRouter.get("/:id", async (c) => {
   try {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) {
-      return c.json(
-        { success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const order = await orderService.adminGetOrder(id);
@@ -44,24 +41,18 @@ ordersRouter.get("/:id", async (c) => {
   }
 });
 
-// ── PATCH /api/v1/orders/:id/status ───────────────────────
-ordersRouter.patch("/:id/status", async (c) => {
+// ── PATCH /api/admin/orders/:id/status ────────────────────
+adminOrdersRouter.patch("/:id/status", async (c) => {
   try {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) {
-      return c.json(
-        { success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const body = await c.req.json<{ status: string; note?: string }>();
 
     if (!body.status) {
-      return c.json(
-        { success: false, error: { message: "Status is required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Status is required", code: "INVALID_BODY" } }, 400);
     }
 
     const order = await orderService.adminUpdateOrderStatus(id, body.status as OrderStatus, body.note);

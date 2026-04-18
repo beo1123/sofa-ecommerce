@@ -80,13 +80,22 @@ export type ProductDetail = {
   title: string;
   shortDescription: string | null;
   description: string | null;
-  images: Array<{ url: string; alt: string | null; isPrimary: boolean }>;
+  status?: ProductStatus;
+  images: Array<{ id?: number; url: string; alt: string | null; isPrimary: boolean }>;
   variants: ProductVariantItem[];
+  category?: { id: number; name: string; slug: string } | null;
   reviewsSummary: {
     average: number;
     count: number;
-    breakdown: Record<number, number>;
+    breakdown?: Record<number, number>;
   };
+};
+
+export type ProductImage = {
+  id?: number;
+  url: string;
+  alt?: string | null;
+  isPrimary?: boolean;
 };
 
 // -------------------------------------------------------
@@ -115,6 +124,140 @@ export type OrderListItem = {
   createdAt: string;
   recipientName: string;
   phone: string;
+  user?: { id: number; email: string; displayName: string | null } | null;
+};
+
+export type OrderItem = {
+  id: number;
+  sku?: string | null;
+  name: string;
+  price: number;
+  quantity: number;
+  total: number;
+  returned: boolean;
+  product?: { id: number; slug: string; title: string } | null;
+  variant?: { id: number; name: string } | null;
+};
+
+export type OrderDetail = {
+  id: number;
+  orderNumber: string;
+  status: OrderStatus;
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
+  paymentMethod: PaymentMethod;
+  recipientName: string;
+  phone: string;
+  email?: string | null;
+  line1: string;
+  city: string;
+  province: string;
+  country: string;
+  createdAt: string;
+  updatedAt: string;
+  items: OrderItem[];
+  user?: { id: number; email: string; displayName: string | null } | null;
+  paymentMeta?: Record<string, unknown> | null;
+  statusHistory?: Array<{
+    id: number;
+    fromStatus: OrderStatus | null;
+    toStatus: OrderStatus;
+    note?: string | null;
+    createdAt: string;
+  }>;
+};
+
+export type UserOrder = {
+  id: number;
+  orderNumber: string;
+  status: string;
+  total: number;
+  paymentMethod: string;
+  recipientName: string;
+  createdAt: string;
+};
+
+// -------------------------------------------------------
+// Categories
+// -------------------------------------------------------
+
+export type Category = {
+  id: number;
+  name: string;
+  slug: string;
+  image?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+  _count?: { products: number };
+};
+
+// -------------------------------------------------------
+// Articles / Blog
+// -------------------------------------------------------
+
+export type ArticleStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
+
+export type ArticleListItem = {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt?: string | null;
+  thumbnail?: string | null;
+  status: ArticleStatus;
+  publishedAt?: string | null;
+  category?: { id: number; name: string; slug: string } | null;
+  author?: { id: number; displayName: string | null } | null;
+};
+
+export type ArticleDetail = {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt?: string | null;
+  content: string;
+  thumbnail?: string | null;
+  status: ArticleStatus;
+  publishedAt?: string | null;
+  category?: { id: number; name: string; slug: string } | null;
+  author?: { id: number; displayName: string | null; email?: string } | null;
+};
+
+export type ArticleCategory = {
+  id: number;
+  name: string;
+  slug: string;
+  createdAt?: string;
+  updatedAt?: string;
+  _count?: { articles: number };
+};
+
+// -------------------------------------------------------
+// Cart
+// -------------------------------------------------------
+
+export type CartItem = {
+  productId: number;
+  variantId?: number | null;
+  sku?: string | null;
+  name: string;
+  price: number;
+  quantity: number;
+  image?: string | null;
+  metadata?: Record<string, unknown>;
+};
+
+export type CartState = {
+  items: CartItem[];
+  updatedAt?: string | null;
+};
+
+export type CartItemInput = {
+  productId: number;
+  variantId?: number | null;
+  sku?: string | null;
+  quantity: number;
 };
 
 // -------------------------------------------------------
@@ -143,4 +286,118 @@ export type ProductQueryParams = {
   priceMax?: number;
   color?: string;
   material?: string;
+};
+
+export type AdminProductFilters = {
+  q?: string;
+  status?: ProductStatus;
+  categoryId?: number;
+};
+
+export type AdminArticleFilters = {
+  q?: string;
+  status?: ArticleStatus;
+  categoryId?: number;
+};
+
+// -------------------------------------------------------
+// Admin Input Types
+// -------------------------------------------------------
+
+export type CreateProductInput = {
+  title: string;
+  slug: string;
+  shortDescription?: string;
+  description?: string;
+  status?: ProductStatus;
+  categoryId?: number;
+  metadata?: Record<string, unknown>;
+  images?: Array<{ url: string; alt?: string; isPrimary?: boolean }>;
+  variants?: Array<{
+    id?: number;
+    name: string;
+    skuPrefix?: string;
+    price: number;
+    compareAtPrice?: number;
+    attributes?: Record<string, unknown>;
+    image?: string;
+    inventory?: { sku: string; quantity?: number; location?: string };
+  }>;
+};
+
+export type UpdateProductInput = Partial<CreateProductInput>;
+
+export type CreateCategoryInput = {
+  name: string;
+  slug: string;
+  image?: string | null;
+};
+
+export type UpdateCategoryInput = Partial<CreateCategoryInput>;
+
+export type CreateArticleInput = {
+  title: string;
+  slug: string;
+  excerpt?: string;
+  content: string;
+  thumbnail?: string;
+  status?: ArticleStatus;
+  categoryId?: number;
+  authorId?: number;
+  publishedAt?: string;
+};
+
+export type UpdateArticleInput = Partial<CreateArticleInput>;
+
+export type CreateArticleCategoryInput = {
+  name: string;
+  slug: string;
+};
+
+export type UpdateArticleCategoryInput = Partial<CreateArticleCategoryInput>;
+
+// -------------------------------------------------------
+// Checkout
+// -------------------------------------------------------
+
+export type CheckoutPayload = {
+  userId?: number | null;
+  paymentMethod: PaymentMethod;
+  shipping: {
+    addressId?: number | null;
+    shippingCost?: number;
+    tax?: number;
+    line1: string;
+    city: string;
+    province: string;
+    country: string;
+  };
+  cart: {
+    items: Array<{
+      sku: string;
+      quantity: number;
+      price: number;
+      productId: number;
+      variantId?: number | null;
+      name: string;
+    }>;
+    subtotal: number;
+  };
+  recipient: {
+    name: string;
+    phone: string;
+    email?: string | null;
+  };
+  couponId?: number | null;
+};
+
+// -------------------------------------------------------
+// Filters
+// -------------------------------------------------------
+
+export type ProductFilters = {
+  materials: string[];
+  colors: string[];
+  priceMin: number;
+  priceMax: number;
 };

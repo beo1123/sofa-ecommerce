@@ -1,54 +1,33 @@
 // =========================================================
 // apps/api/src/routes/categories.ts
-// Category routes: GET /categories
+// Public category routes
 // =========================================================
 
 import { Hono } from "hono";
-import { prisma } from "@repo/db";
-import type { ApiSuccess } from "@repo/types";
+import { categoryService } from "../services/category.service.js";
+import { ok, normalizeError } from "../lib/response.js";
 
 export const categoriesRouter = new Hono();
 
+// ── GET /api/v1/categories ────────────────────────────────
 categoriesRouter.get("/", async (c) => {
-  const categories = await prisma.category.findMany({
-    orderBy: { name: "asc" },
-    select: { id: true, name: true, slug: true, image: true },
-  });
-
-  const response: ApiSuccess<typeof categories> = {
-    success: true,
-    data: categories,
-  };
-
-  return c.json(response);
+  try {
+    const categories = await categoryService.getAllCategories();
+    return c.json(ok(categories));
+  } catch (err) {
+    const { status, payload } = normalizeError(err);
+    return c.json(payload, status as 400 | 401 | 403 | 404 | 500);
+  }
 });
 
+// ── GET /api/v1/categories/:slug ──────────────────────────
 categoriesRouter.get("/:slug", async (c) => {
-  const slug = c.req.param("slug");
-
-  const category = await prisma.category.findUnique({
-    where: { slug },
-    include: {
-      products: {
-        where: { status: "PUBLISHED" },
-        select: {
-          id: true,
-          slug: true,
-          title: true,
-          images: { where: { isPrimary: true }, take: 1, select: { url: true, alt: true } },
-        },
-        take: 20,
-      },
-    },
-  });
-
-  if (!category) {
-    return c.json(
-      { success: false, error: { message: "Category not found", code: "NOT_FOUND" } },
-      404
-    );
+  try {
+    const slug = c.req.param("slug");
+    const category = await categoryService.getCategoryBySlug(slug);
+    return c.json(ok(category));
+  } catch (err) {
+    const { status, payload } = normalizeError(err);
+    return c.json(payload, status as 400 | 401 | 403 | 404 | 500);
   }
-
-  const response: ApiSuccess<typeof category> = { success: true, data: category };
-  return c.json(response);
 });
