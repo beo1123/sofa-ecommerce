@@ -34,6 +34,8 @@ const nextConfig = {
 
   typescript: { ignoreBuildErrors: false },
   eslint: { ignoreDuringBuilds: true },
+
+  transpilePackages: ["@repo/db", "@repo/types", "@repo/utils"],
 };
 
 export default nextConfig;

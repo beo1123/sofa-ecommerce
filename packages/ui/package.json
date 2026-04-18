@@ -1,0 +1,65 @@
+{
+  "name": "@repo/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    },
+    "./button": {
+      "types": "./src/Button.tsx",
+      "import": "./src/Button.tsx"
+    },
+    "./card": {
+      "types": "./src/Card.tsx",
+      "import": "./src/Card.tsx"
+    },
+    "./badge": {
+      "types": "./src/Badge.tsx",
+      "import": "./src/Badge.tsx"
+    },
+    "./spinner": {
+      "types": "./src/Spinner.tsx",
+      "import": "./src/Spinner.tsx"
+    },
+    "./input": {
+      "types": "./src/Input.tsx",
+      "import": "./src/Input.tsx"
+    },
+    "./heading": {
+      "types": "./src/Heading.tsx",
+      "import": "./src/Heading.tsx"
+    },
+    "./modal": {
+      "types": "./src/Modal.tsx",
+      "import": "./src/Modal.tsx"
+    },
+    "./dropdown": {
+      "types": "./src/Dropdown.tsx",
+      "import": "./src/Dropdown.tsx"
+    }
+  },
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.22",
+    "lucide-react": "^0.544.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.9.3"
+  }
+}

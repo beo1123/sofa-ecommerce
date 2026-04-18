@@ -1,24 +1,14 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"],
-      "@components/*": ["components/*"],
-      "@features/*": ["features/*"],
-      "@lib/*": ["lib/*"],
-      "@store/*": ["store/*"],
-      "@types/*": ["types/*"],
-      "@repo/db": ["../packages/db/src/index.ts"],
-      "@repo/types": ["../packages/types/src/index.ts"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "types": ["jest", "node", "next-auth"]
+      "@repo/db": ["packages/db/src/index.ts"],
+      "@repo/types": ["packages/types/src/index.ts"],
+      "@repo/utils": ["packages/utils/src/index.ts"],
+      "@repo/ui": ["packages/ui/src/index.ts"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [],
+  "exclude": ["node_modules", "apps", "packages"]
 }

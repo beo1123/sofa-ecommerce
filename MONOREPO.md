@@ -9,16 +9,17 @@ and one NeonDB database.
 ## Directory Structure
 
 ```
-sofa-ecommerce/                  ← root (also the web Next.js app)
+sofa-ecommerce/
 ├── apps/
-│   ├── admin/                   ← Next.js admin dashboard  (port 3001)
-│   └── api/                     ← Hono REST API            (port 4000)
+│   ├── web/                     ← @repo/web — Next.js user site     (port 3000)
+│   ├── admin/                   ← @repo/admin — Next.js admin       (port 3001)
+│   └── api/                     ← @repo/api — Hono REST API         (port 4000)
 ├── packages/
-│   ├── db/                      ← @repo/db  — shared Prisma client
+│   ├── db/                      ← @repo/db — shared Prisma client
+│   ├── ui/                      ← @repo/ui — shared UI components
 │   ├── types/                   ← @repo/types — shared TypeScript types
-│   └── utils/                   ← @repo/utils — shared utility functions
-├── prisma/                      ← original schema (still used by root web app)
-├── src/                         ← root Next.js web app (storefront)
+│   ├── utils/                   ← @repo/utils — shared utility functions
+│   └── config/                  ← @repo/config — shared ESLint/TSConfig
 ├── pnpm-workspace.yaml
 └── package.json
 ```
@@ -41,6 +42,24 @@ import { prisma } from "@repo/db";
 import { type Product, type Order } from "@repo/db";
 ```
 
+### `packages/ui` — `@repo/ui`
+
+Shared UI components used by web and admin apps.
+
+```ts
+import { Button, Card, Modal, Input, Badge, Spinner, Heading, Dropdown } from "@repo/ui";
+```
+
+**Components:**
+- `Button` - Primary, secondary, outline, ghost, danger variants
+- `Card` - With CardHeader, CardTitle, CardContent, CardFooter
+- `Modal` - Animated modal with framer-motion
+- `Input` - Form input with validation support
+- `Badge` - Status badges
+- `Spinner` - Loading indicator
+- `Heading` - Typography headings (h1-h6)
+- `Dropdown` - Select dropdown
+
 ### `packages/types` — `@repo/types`
 
 Shared response envelopes, pagination types, and domain DTOs used by all apps.
@@ -57,17 +76,34 @@ Shared utility functions for API responses, pagination, validation, formatting.
 import { ok, fail, parsePagination, formatPrice, formatDate } from "@repo/utils";
 ```
 
+### `packages/config` — `@repo/config`
+
+Shared ESLint and TypeScript configurations.
+
+```js
+// eslint.config.mjs
+import eslintNext from "@repo/config/eslint-next";
+export default eslintNext;
+```
+
+```json
+// tsconfig.json
+{
+  "extends": "@repo/config/tsconfig-next"
+}
+```
+
 ---
 
 ## Apps
 
-### Root (`/`) — Web Storefront
+### `apps/web` — Web Storefront
 
-The existing Next.js app. Runs on **port 3000**.
+The main Next.js user-facing app. Runs on **port 3000**.
 
 ```bash
-pnpm dev          # next dev
-pnpm build        # next build
+pnpm dev          # pnpm --filter @repo/web dev
+pnpm build        # pnpm --filter @repo/web build
 ```
 
 ### `apps/admin` — Admin Dashboard
@@ -149,8 +185,6 @@ pnpm build:api    # pnpm --filter @repo/api build
 ## Database (NeonDB + Prisma)
 
 The **canonical schema** lives in `packages/db/prisma/schema.prisma`.
-The root `prisma/schema.prisma` is kept for backwards compatibility with
-the existing Next.js app until it is migrated to import from `@repo/db`.
 
 ### Generate Prisma client (monorepo-aware)
 
@@ -216,13 +250,16 @@ pnpm dev:all
 | Script | Description |
 |--------|-------------|
 | `pnpm dev` | Run web storefront (port 3000) |
+| `pnpm dev:web` | Run web storefront (port 3000) |
 | `pnpm dev:admin` | Run admin dashboard (port 3001) |
 | `pnpm dev:api` | Run API server (port 4000) |
 | `pnpm dev:all` | Run all apps concurrently |
 | `pnpm build` | Build web storefront |
+| `pnpm build:web` | Build web storefront |
 | `pnpm build:admin` | Build admin dashboard |
 | `pnpm build:api` | Build API server |
 | `pnpm build:all` | Build all packages and apps |
+| `pnpm typecheck:all` | Type-check all apps |
 | `pnpm db:generate` | Generate Prisma client |
 | `pnpm db:migrate` | Run database migrations (dev) |
 | `pnpm db:migrate:deploy` | Run database migrations (prod) |
@@ -230,29 +267,21 @@ pnpm dev:all
 
 ---
 
-## Migration Guide — Updating Imports in the Web App
-
-When you're ready to migrate `src/lib/prisma.ts` to use the shared package:
-
-```ts
-// Before (standalone singleton):
-import { PrismaClient } from "@prisma/client";
-export const prisma = new PrismaClient();
-
-// After (shared singleton from @repo/db):
-export { prisma } from "@repo/db";
-```
-
----
-
 ## Deployment
 
 | App | Platform recommendation |
 |-----|------------------------|
-| Web storefront | Vercel (existing config in `vercel.json`) |
-| Admin dashboard | Vercel (separate project, `apps/admin`) |
+| Web storefront | Vercel (apps/web) |
+| Admin dashboard | Vercel (apps/admin) |
 | API server | Railway / Render / Fly.io / any Node host |
 | Database | NeonDB (existing — no changes required) |
+
+### Vercel Setup for Web
+
+1. Create a new Vercel project
+2. Set root directory to `apps/web`
+3. Set environment variables:
+   - `DATABASE_URL` (from NeonDB)
 
 ### Vercel Setup for Admin
 
