@@ -8,7 +8,9 @@
       "@features/*": ["features/*"],
       "@lib/*": ["lib/*"],
       "@store/*": ["store/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@repo/db": ["../packages/db/src/index.ts"],
+      "@repo/types": ["../packages/types/src/index.ts"]
     },
     "plugins": [
       {
