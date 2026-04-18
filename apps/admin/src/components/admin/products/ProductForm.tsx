@@ -218,7 +218,7 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
           <CardTitle>Hình ảnh</CardTitle>
         </CardHeader>
         <CardContent>
-          <ImageUploader images={images} onChange={setImages} folder={uploadFolder} />
+          <ImageUploader images={images} onChange={setImages} />
         </CardContent>
       </Card>
 

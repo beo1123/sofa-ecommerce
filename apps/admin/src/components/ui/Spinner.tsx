@@ -2,18 +2,26 @@
 import React from "react";
 
 type Props = {
-  size?: number;
+  size?: "sm" | "md" | "lg" | number;
   className?: string;
 };
 
-export default function Spinner({ size = 20, className = "" }: Props) {
+const sizeMap = {
+  sm: 16,
+  md: 24,
+  lg: 32,
+};
+
+export default function Spinner({ size = "md", className = "" }: Props) {
+  const pixelSize = typeof size === "number" ? size : sizeMap[size];
+  
   return (
     <svg
       className={`animate-spin text-[var(--color-brand-400)] ${className}`}
-      width={size}
-      height={size}
+      width={pixelSize}
+      height={pixelSize}
       viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
       <path
         className="opacity-75"
         fill="currentColor"

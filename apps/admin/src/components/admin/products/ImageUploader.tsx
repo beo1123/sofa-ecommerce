@@ -1,99 +1,54 @@
 "use client";
 
 import React, { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight, Loader2, Star, Upload, X } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
+import { ArrowLeft, ArrowRight, Star, Trash2, Plus } from "lucide-react";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 interface ImageUploaderProps {
   images: { url: string; alt?: string; isPrimary?: boolean }[];
   onChange: (images: { url: string; alt?: string; isPrimary?: boolean }[]) => void;
-  folder?: string;
   multiple?: boolean;
 }
 
-export default function ImageUploader({ images, onChange, folder = "products", multiple = true }: ImageUploaderProps) {
-  const [activeRemoveIndex, setActiveRemoveIndex] = useState<number | null>(null);
+/**
+ * Simple ImageUploader using URL input instead of file upload.
+ * For production, integrate with your upload API.
+ */
+export default function ImageUploader({ images, onChange, multiple = true }: ImageUploaderProps) {
+  const [urlInput, setUrlInput] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const uploadMutation = useMutation({
-    mutationFn: async ({ file, uploadFolder }: { file: File; uploadFolder: string }) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("folder", uploadFolder);
-
-      const res = await axiosClient.post("/admin/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      return res.data?.data;
-    },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: async ({ url }: { url: string }) => {
-      await axiosClient.delete("/admin/upload", {
-        data: { url },
-      });
-    },
-  });
-
-  const uploading = uploadMutation.isPending;
-  const removing = deleteMutation.isPending;
-
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    setError(null);
+  const handleAddImage = () => {
+    if (!urlInput.trim()) {
+      setError("Vui lòng nhập URL ảnh");
+      return;
+    }
 
     try {
-      const selectedFiles = multiple ? Array.from(files) : [files[0]];
-      const newImages = multiple ? [...images] : [];
-
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const file = selectedFiles[i];
-        if (!file) continue;
-
-        const res = await uploadMutation.mutateAsync({ file, uploadFolder: folder });
-
-        if (res?.url) {
-          newImages.push({
-            url: res.url,
-            alt: file.name,
-            isPrimary: newImages.length === 0,
-          });
-        }
-      }
-
-      onChange(newImages);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Upload thất bại");
-    } finally {
-      e.target.value = "";
+      new URL(urlInput); // Validate URL
+    } catch {
+      setError("URL không hợp lệ");
+      return;
     }
+
+    setError(null);
+    const newImages = multiple ? [...images] : [];
+    newImages.push({
+      url: urlInput.trim(),
+      alt: "",
+      isPrimary: newImages.length === 0,
+    });
+    onChange(newImages);
+    setUrlInput("");
   };
 
-  const handleRemove = async (index: number) => {
-    const image = images[index];
-    if (!image) return;
-
-    setError(null);
-    setActiveRemoveIndex(index);
-
-    try {
-      await deleteMutation.mutateAsync({ url: image.url });
-
-      const updated = images.filter((_, i) => i !== index);
-      if (updated.length > 0 && !updated.some((img) => img.isPrimary)) {
-        updated[0] = { ...updated[0], isPrimary: true };
-      }
-      onChange(updated);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Xóa ảnh thất bại");
-    } finally {
-      setActiveRemoveIndex(null);
+  const handleRemove = (index: number) => {
+    const updated = images.filter((_, i) => i !== index);
+    if (updated.length > 0 && !updated.some((img) => img.isPrimary)) {
+      updated[0] = { ...updated[0], isPrimary: true };
     }
+    onChange(updated);
   };
 
   const handleSetPrimary = (index: number) => {
@@ -101,7 +56,6 @@ export default function ImageUploader({ images, onChange, folder = "products", m
       ...img,
       isPrimary: i === index,
     }));
-
     const primaryImage = updated[index];
     const remainingImages = updated.filter((_, i) => i !== index);
     onChange([primaryImage, ...remainingImages]);
@@ -160,16 +114,15 @@ export default function ImageUploader({ images, onChange, folder = "products", m
                     onClick={() => handleSetPrimary(i)}
                     className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-white text-gray-800 rounded shadow hover:bg-gray-100">
                     <Star size={12} />
-                    Ảnh chính
+                    Chính
                   </button>
                 )}
                 <button
                   type="button"
-                  onClick={() => void handleRemove(i)}
-                  disabled={removing}
-                  className="p-1 bg-red-500 text-white rounded shadow hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+                  onClick={() => handleRemove(i)}
+                  className="p-1 bg-red-500 text-white rounded shadow hover:bg-red-600"
                   aria-label="Xóa ảnh">
-                  {activeRemoveIndex === i ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />}
+                  <Trash2 size={14} />
                 </button>
               </div>
 
@@ -190,33 +143,18 @@ export default function ImageUploader({ images, onChange, folder = "products", m
         </div>
       )}
 
-      {/* Upload button */}
-      <label
-        className={`flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
-          uploading
-            ? "border-gray-300 bg-gray-50"
-            : "border-gray-300 hover:border-[var(--color-brand-300)] hover:bg-[var(--color-brand-50)]/30"
-        }`}>
-        {uploading ? (
-          <>
-            <Loader2 size={24} className="animate-spin text-[var(--color-brand-300)]" />
-            <span className="text-sm text-[var(--color-text-muted)]">Đang upload...</span>
-          </>
-        ) : (
-          <>
-            <Upload size={24} className="text-[var(--color-text-muted)]" />
-            <span className="text-sm text-[var(--color-text-muted)]">Click để upload ảnh (JPEG, PNG, WebP)</span>
-          </>
-        )}
-        <input
-          type="file"
-          accept="image/jpeg,image/png,image/webp,image/avif"
-          multiple={multiple}
-          onChange={handleUpload}
-          disabled={uploading || removing}
-          className="hidden"
+      {/* Add image by URL */}
+      <div className="flex gap-2">
+        <Input
+          placeholder="Nhập URL ảnh (https://...)"
+          value={urlInput}
+          onChange={(e) => setUrlInput(e.target.value)}
+          fullWidth
         />
-      </label>
+        <Button type="button" onClick={handleAddImage} leftIcon={<Plus size={16} />}>
+          Thêm
+        </Button>
+      </div>
 
       {error && (
         <p className="text-sm text-red-600" role="alert">

@@ -3,7 +3,7 @@
 // Product service for public API and admin operations
 // =========================================================
 
-import { prisma, type Prisma, type ProductStatus, type PrismaClient } from "@repo/db";
+import { prisma, Prisma, type ProductStatus } from "@repo/db";
 import type {
   CreateProductInput,
   UpdateProductInput,
