@@ -1,11 +1,35 @@
-import XLSX from "xlsx";
+import ExcelJS from "exceljs";
 
-export function readExcel<T = any>(filePath: string): T[] {
-  const workbook = XLSX.readFile(filePath);
-  const sheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[sheetName];
+export async function readExcel<T = Record<string, unknown>>(filePath: string): Promise<T[]> {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  
+  const worksheet = workbook.worksheets[0];
+  if (!worksheet) {
+    return [];
+  }
 
-  return XLSX.utils.sheet_to_json(sheet, {
-    defval: null,
-  }) as T[];
+  const rows: T[] = [];
+  const headers: string[] = [];
+
+  worksheet.eachRow((row, rowNumber) => {
+    if (rowNumber === 1) {
+      // First row is headers
+      row.eachCell((cell, colNumber) => {
+        headers[colNumber - 1] = String(cell.value ?? "");
+      });
+    } else {
+      // Data rows
+      const rowData: Record<string, unknown> = {};
+      row.eachCell((cell, colNumber) => {
+        const header = headers[colNumber - 1];
+        if (header) {
+          rowData[header] = cell.value ?? null;
+        }
+      });
+      rows.push(rowData as T);
+    }
+  });
+
+  return rows;
 }

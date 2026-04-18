@@ -15,7 +15,7 @@ export async function seedCategories() {
   const __dirname = getDirname(import.meta.url);
   const file = path.join(__dirname, "../data/categories.xlsx");
 
-  const rows = readExcel<Row>(file);
+  const rows = await readExcel<Row>(file);
 
   for (const row of rows) {
     console.log("rows category", row);

@@ -1,7 +1,7 @@
 import { Prisma, PrismaClient, ProductStatus } from "@prisma/client";
 import { fail } from "@/server/utils/api";
 import { deleteFolderIfEmpty, deleteImageByUrl, getCloudinaryFolderFromUrl } from "@/lib/upload";
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 
 // ─── Types ────────────────────────────────────────────────
 export interface CreateProductInput {
@@ -349,13 +349,36 @@ export class AdminProductService {
    *                imageUrl, compareAtPrice, quantity, color, material
    */
   async importFromExcel(buffer: Buffer) {
-    const workbook = XLSX.read(buffer, { type: "buffer" });
-    const sheetName = workbook.SheetNames[0];
-    if (!sheetName) {
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(buffer);
+    
+    const worksheet = workbook.worksheets[0];
+    if (!worksheet) {
       throw { status: 400, body: fail("Excel file has no sheets", "INVALID_EXCEL") };
     }
 
-    const rows = XLSX.utils.sheet_to_json<ExcelProductRow>(workbook.Sheets[sheetName]);
+    // Parse headers from first row
+    const headers: string[] = [];
+    const firstRow = worksheet.getRow(1);
+    firstRow.eachCell((cell, colNumber) => {
+      headers[colNumber - 1] = String(cell.value ?? "");
+    });
+
+    // Parse data rows
+    const rows: ExcelProductRow[] = [];
+    worksheet.eachRow((row, rowNumber) => {
+      if (rowNumber === 1) return; // Skip header row
+      
+      const rowData: Record<string, unknown> = {};
+      row.eachCell((cell, colNumber) => {
+        const header = headers[colNumber - 1];
+        if (header) {
+          rowData[header] = cell.value ?? null;
+        }
+      });
+      rows.push(rowData as ExcelProductRow);
+    });
+
     if (!rows.length) {
       throw { status: 400, body: fail("Excel sheet is empty", "EMPTY_SHEET") };
     }

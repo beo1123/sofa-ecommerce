@@ -17,7 +17,7 @@ type Row = {
 export async function seedProducts() {
   const __dirname = getDirname(import.meta.url);
   const file = path.join(__dirname, "../data/products.xlsx");
-  const rows = readExcel<Row>(file);
+  const rows = await readExcel<Row>(file);
 
   for (const row of rows) {
     console.log("rows products", row);
