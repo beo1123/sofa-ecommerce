@@ -1,0 +1,65 @@
+/* apps/admin/src/app/globals.css */
+
+/* Import Tailwind (CSS-first) */
+@import "tailwindcss";
+
+/* THEME: define design tokens */
+@theme {
+  /* Colors */
+  --color-brand-50: #e5ddda;
+  --color-brand-100: #c1ae9f;
+  --color-brand-200: #a68d77;
+  --color-brand-300: #826851;
+  --color-brand-400: #57412c;
+
+  /* Semantic tokens */
+  --color-text-default: #111827;
+  --color-text-muted: #6b7280;
+  --color-bg-page: #ffffff;
+  --color-bg-muted: #f7f5f3;
+
+  /* Font families */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+  /* Spacing scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+:root {
+  --app-font-sans: var(--font-sans);
+}
+
+html,
+body {
+  font-family: var(--app-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-muted);
+    color: var(--color-text-default);
+  }
+}

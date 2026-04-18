@@ -17,7 +17,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@repo/db": ["../../packages/db/src/index.ts"],
-      "@repo/types": ["../../packages/types/src/index.ts"]
+      "@repo/types": ["../../packages/types/src/index.ts"],
+      "@repo/utils": ["../../packages/utils/src/index.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],

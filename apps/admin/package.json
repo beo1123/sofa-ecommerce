@@ -10,16 +10,31 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@repo/db": "workspace:*",
     "@repo/types": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "@tanstack/react-query": "^5.90.5",
+    "@tiptap/extension-link": "^3.20.4",
+    "@tiptap/extension-text-align": "^3.20.4",
+    "@tiptap/extension-underline": "^3.20.4",
+    "@tiptap/react": "^3.20.4",
+    "@tiptap/starter-kit": "^3.20.4",
+    "axios": "^1.12.2",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.544.0",
     "next": "^16.0.7",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.64.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
     "@types/node": "^20.19.19",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3"
   }
 }
