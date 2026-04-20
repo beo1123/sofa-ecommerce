@@ -58,13 +58,10 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
   const current = safeImages[currentIndex];
 
   return (
-    <div className="p-6 lg:p-8">
-      {/* Main Image */}
+    <div className="flex flex-col h-full">
+      {/* Main Image — full-bleed, taller on mobile, fills grid cell height on desktop */}
       <div
-        className="
-          relative aspect-square bg-[var(--color-bg-muted)]
-          rounded-2xl overflow-hidden group mb-4
-        "
+        className=" relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[4/3] bg-[var(--color-bg-muted)] overflow-hidden group"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}>
@@ -102,33 +99,32 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
           {currentIndex + 1} / {safeImages.length}
         </div>
       </div>
-
-      <div
-        className="
-          flex gap-3 overflow-x-auto no-scrollbar py-1
-        ">
-        {safeImages.map((img, idx) => (
-          <button
-            key={idx}
-            onClick={() => setSelectedImage(img.url)}
-            className={`
-              relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all 
-              ${
-                selectedImage === img.url
-                  ? "border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
-                  : "border-transparent hover:border-[var(--color-brand-200)]"
-              }
-            `}>
-            <SafeImage
-              src={img.url}
-              alt={img.alt || `${title} ${idx + 1}`}
-              fill
-              className="object-cover"
-              sizes="100px"
-            />
-          </button>
-        ))}
-      </div>
+      {/* Thumbnails strip */}
+      {safeImages.length > 1 && (
+        <div className="flex gap-2 px-3 py-2 overflow-x-auto no-scrollbar flex-shrink-0 bg-white">
+          {safeImages.map((img, idx) => (
+            <button
+              key={idx}
+              onClick={() => setSelectedImage(img.url)}
+              className={`
+                relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all 
+                ${
+                  selectedImage === img.url
+                    ? "border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
+                    : "border-transparent hover:border-[var(--color-brand-200)]"
+                }
+              `}>
+              <SafeImage
+                src={img.url}
+                alt={img.alt || `${title} ${idx + 1}`}
+                fill
+                className="object-cover"
+                sizes="80px"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
