@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -8,13 +8,9 @@ type BadgeProps = {
   className?: string;
 };
 
-export default function Badge({
-  children,
-  variant = "default",
-  className = "",
-}: BadgeProps) {
+export default function Badge({ children, variant = "default", className = "" }: BadgeProps) {
   const variantClasses = {
-    default: "bg-[var(--color-brand-50)] text-[var(--color-brand-400)]",
+    default: "bg-brand-50 text-brand-400",
     success: "bg-green-100 text-green-700",
     warning: "bg-yellow-100 text-yellow-700",
     danger: "bg-red-100 text-red-700",
@@ -22,8 +18,7 @@ export default function Badge({
 
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 text-sm font-medium rounded-md ${variantClasses[variant]} ${className}`}
-    >
+      className={`inline-flex items-center px-2 py-0.5 text-sm font-medium rounded-md ${variantClasses[variant]} ${className}`}>
       {children}
     </span>
   );

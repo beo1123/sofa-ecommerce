@@ -1,4 +1,4 @@
-import Alert from "@/components/ui/Alert";
+﻿import Alert from "@/components/ui/Alert";
 
 type PromotionItem = {
   title: string;
@@ -30,9 +30,9 @@ const PROMOTIONS: PromotionItem[] = [
 
 export default function ProductPromotions() {
   return (
-    <section className="mb-6 rounded-xl border border-[var(--color-brand-100)] bg-white p-4">
+    <section className="mb-6 rounded-xl border border-brand-100 bg-white p-4">
       <div className="flex items-center gap-2">
-        <h3 className="text-lg font-bold text-[var(--color-text-default)]">Ưu đãi dành cho bạn</h3>
+        <h3 className="text-lg font-bold text-text-default">Ưu đãi dành cho bạn</h3>
       </div>
 
       <ul className="mt-3 space-y-3">
@@ -41,7 +41,7 @@ export default function ProductPromotions() {
             <Alert
               title={item.title}
               description={item.description}
-              className="bg-[var(--color-brand-50)] text-[var(--color-text-default)] border-[var(--color-brand-100)]"
+              className="bg-brand-50 text-text-default border-brand-100"
             />
           </li>
         ))}

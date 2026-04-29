@@ -1,4 +1,4 @@
-import ProductsPageClient from "@/components/products/ProductsPageClient";
+﻿import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
 import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 import { getProductListSSR } from "@/lib/products/productSSR";
@@ -93,7 +93,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
         <Script id="breadcrumb-jsonld" type="application/ld+json">
           {JSON.stringify(buildBreadcrumbSchema(breadcrumbItems))}
         </Script>
-        <main className="min-h-screen bg-[var(--color-bg-muted)]">
+        <main className="min-h-screen bg-bg-muted">
           <section className="container mx-auto px-4 py-10">
             <div className="text-center py-10 text-gray-500">Không có sản phẩm nào.</div>
           </section>

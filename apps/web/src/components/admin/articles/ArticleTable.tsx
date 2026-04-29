@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -39,7 +39,7 @@ const STATUS_LABEL: Record<string, string> = {
 export default function ArticleTable({ articles, onDelete, deleting }: ArticleTableProps) {
   if (articles.length === 0) {
     return (
-      <div className="text-center py-12 text-[var(--color-text-muted)]">
+      <div className="text-center py-12 text-text-muted">
         <p>Chưa có bài viết nào.</p>
       </div>
     );
@@ -48,7 +48,7 @@ export default function ArticleTable({ articles, onDelete, deleting }: ArticleTa
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm text-left">
-        <thead className="bg-gray-50 text-[var(--color-text-muted)] uppercase text-xs">
+        <thead className="bg-gray-50 text-text-muted uppercase text-xs">
           <tr>
             <th className="px-4 py-3">Ảnh</th>
             <th className="px-4 py-3">Tiêu đề</th>
@@ -77,17 +77,17 @@ export default function ArticleTable({ articles, onDelete, deleting }: ArticleTa
               <td className="px-4 py-3">
                 <Link
                   href={`/admin/articles/${article.id}`}
-                  className="font-medium text-[var(--color-text-default)] hover:text-[var(--color-brand-300)] transition-colors">
+                  className="font-medium text-text-default hover:text-brand-300 transition-colors">
                   {article.title}
                 </Link>
-                <p className="text-xs text-[var(--color-text-muted)] mt-0.5">/{article.slug}</p>
+                <p className="text-xs text-text-muted mt-0.5">/{article.slug}</p>
               </td>
 
               {/* Category */}
-              <td className="px-4 py-3 text-[var(--color-text-muted)]">{article.category?.name ?? "—"}</td>
+              <td className="px-4 py-3 text-text-muted">{article.category?.name ?? "—"}</td>
 
               {/* Author */}
-              <td className="px-4 py-3 text-[var(--color-text-muted)]">{article.author?.displayName ?? "—"}</td>
+              <td className="px-4 py-3 text-text-muted">{article.author?.displayName ?? "—"}</td>
 
               {/* Status */}
               <td className="px-4 py-3">
@@ -97,7 +97,7 @@ export default function ArticleTable({ articles, onDelete, deleting }: ArticleTa
               </td>
 
               {/* Published date */}
-              <td className="px-4 py-3 text-[var(--color-text-muted)]">
+              <td className="px-4 py-3 text-text-muted">
                 {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("vi-VN") : "—"}
               </td>
 

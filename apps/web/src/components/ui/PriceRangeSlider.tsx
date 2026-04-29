@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Text from "@/components/ui/Text";
@@ -36,8 +36,8 @@ export default function PriceRangeSlider({ min = 0, max = 50000000, step = 50000
 
       {/* Display values */}
       <div className="flex justify-between text-sm mb-2">
-        <span className="font-semibold text-[var(--color-brand-400)]">{minVal.toLocaleString()} đ</span>
-        <span className="font-semibold text-[var(--color-brand-400)]">{maxVal.toLocaleString()} đ</span>
+        <span className="font-semibold text-brand-400">{minVal.toLocaleString()} đ</span>
+        <span className="font-semibold text-brand-400">{maxVal.toLocaleString()} đ</span>
       </div>
 
       {/* SLIDER */}
@@ -47,7 +47,7 @@ export default function PriceRangeSlider({ min = 0, max = 50000000, step = 50000
 
         {/* ACTIVE RANGE */}
         <div
-          className="absolute h-3 bg-[var(--color-brand-300)] rounded-full"
+          className="absolute h-3 bg-brand-300 rounded-full"
           style={{
             left: `${leftPercent}%`,
             right: `${rightPercent}%`,
@@ -72,12 +72,12 @@ export default function PriceRangeSlider({ min = 0, max = 50000000, step = 50000
             [&::-webkit-slider-thumb]:cursor-pointer
             [&::-webkit-slider-thumb]:bg-white
             [&::-webkit-slider-thumb]:border
-            [&::-webkit-slider-thumb]:border-[var(--color-brand-400)]
+            [&::-webkit-slider-thumb]:border-brand-400
             [&::-webkit-slider-thumb]:shadow
             [&::-webkit-slider-thumb]:transition
             [&::-webkit-slider-thumb]:duration-150
             [&::-webkit-slider-thumb]:hover:scale-110
-            [&::-webkit-slider-thumb]:mt-[-6px]
+            [&::-webkit-slider-thumb]:-mt-1.5
           "
           style={{ zIndex: minVal >= max - step * 2 ? 5 : 3 }}
         />
@@ -100,12 +100,12 @@ export default function PriceRangeSlider({ min = 0, max = 50000000, step = 50000
             [&::-webkit-slider-thumb]:cursor-pointer
             [&::-webkit-slider-thumb]:bg-white
             [&::-webkit-slider-thumb]:border
-            [&::-webkit-slider-thumb]:border-[var(--color-brand-400)]
+            [&::-webkit-slider-thumb]:border-brand-400
             [&::-webkit-slider-thumb]:shadow
             [&::-webkit-slider-thumb]:transition
             [&::-webkit-slider-thumb]:duration-150
             [&::-webkit-slider-thumb]:hover:scale-110
-            [&::-webkit-slider-thumb]:mt-[-6px]
+            [&::-webkit-slider-thumb]:-mt-1.5
           "
           style={{ zIndex: 4 }}
         />

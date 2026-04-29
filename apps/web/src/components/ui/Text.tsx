@@ -1,4 +1,4 @@
-// components/Text.tsx
+﻿// components/Text.tsx
 import React from "react";
 
 type Props = {
@@ -16,7 +16,7 @@ export default function Text({ children, muted = false, size = "md", as = "p", c
     lg: "text-lg",
   };
 
-  const colorClass = muted ? "text-[var(--color-text-muted)]" : "text-[var(--color-text-default)]";
+  const colorClass = muted ? "text-text-muted" : "text-text-default";
 
   const Component = as;
 

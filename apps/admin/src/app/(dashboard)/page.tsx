@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { adminApi } from "@/lib/api";
@@ -33,8 +33,8 @@ export default function AdminDashboardPage() {
 
   return (
     <main className="max-w-7xl mx-auto">
-      <h1 className="text-2xl font-bold text-[var(--color-text-default)] mb-6">Dashboard</h1>
-      <p className="text-[var(--color-text-muted)] mb-8">
+      <h1 className="text-2xl font-bold text-text-default mb-6">Dashboard</h1>
+      <p className="text-text-muted mb-8">
         Connected to API via <code className="bg-gray-100 px-1 py-0.5 rounded">@repo/api</code>
       </p>
 
@@ -55,11 +55,9 @@ export default function AdminDashboardPage() {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="p-6 rounded-lg border border-[var(--color-brand-50)] bg-white">
-      <p className="text-sm text-[var(--color-text-muted)]">{label}</p>
-      <p className="text-3xl font-bold text-[var(--color-text-default)] mt-2">
-        {value.toLocaleString("vi-VN")}
-      </p>
+    <div className="p-6 rounded-lg border border-brand-50 bg-white">
+      <p className="text-sm text-text-muted">{label}</p>
+      <p className="text-3xl font-bold text-text-default mt-2">{value.toLocaleString("vi-VN")}</p>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ProductCard from "../products/ProductCard";
@@ -11,10 +11,8 @@ export default function RelatedProducts({ items }: { items: any[] }) {
     <section className="mt-16 border-t border-gray-100 pt-10">
       {/* ===== HEADER ===== */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-lg sm:text-xl font-semibold text-[var(--color-brand-400)] tracking-tight">
-          Sản phẩm liên quan
-        </h2>
-        <div className="h-[1px] flex-1 ml-4 bg-gradient-to-r from-[var(--color-brand-100)] to-transparent" />
+        <h2 className="text-lg sm:text-xl font-semibold text-brand-400 tracking-tight">Sản phẩm liên quan</h2>
+        <div className="h-[1px] flex-1 ml-4 bg-gradient-to-r from-brand-100 to-transparent" />
       </div>
 
       {/* ===== GRID ===== */}

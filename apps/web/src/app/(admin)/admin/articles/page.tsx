@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -39,7 +39,7 @@ export default function AdminArticlesPage() {
       <div className="flex items-center justify-between">
         <div>
           <Heading level={2}>Quản lý bài viết</Heading>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">{meta.total} bài viết</p>
+          <p className="text-sm text-text-muted mt-1">{meta.total} bài viết</p>
         </div>
         <Link href="/admin/articles/new">
           <Button leftIcon={<Plus size={16} />}>Thêm bài viết</Button>
@@ -95,7 +95,7 @@ export default function AdminArticlesPage() {
           <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
             Trước
           </Button>
-          <span className="text-sm text-[var(--color-text-muted)]">
+          <span className="text-sm text-text-muted">
             Trang {meta.page} / {totalPages}
           </span>
           <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>

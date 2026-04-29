@@ -1,4 +1,4 @@
-// FILE: src/app/(storefront)/bai-viet/[slug]/page.tsx
+﻿// FILE: src/app/(storefront)/bai-viet/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -59,7 +59,7 @@ export default async function ArticlePage(props: PageProps) {
   const related = relatedRes?.success ? relatedRes.data.related : [];
 
   return (
-    <main className="p-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
+    <main className="p-12 bg-bg-muted text-text-default">
       <Container className="max-w-4xl mx-auto space-y-12">
         <ArticleHeader article={article} />
         <ArticleContent content={article.content} />

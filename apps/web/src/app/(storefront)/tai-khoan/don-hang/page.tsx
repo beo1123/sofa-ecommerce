@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+﻿import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/authOptions";
 import OrdersList from "@/components/account/OrdersList";
@@ -13,9 +13,9 @@ export default async function AccountOrdersPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-muted)] py-10">
+    <main className="min-h-screen bg-bg-muted py-10">
       <Container className="max-w-4xl space-y-10">
-        <Heading level={1} className="text-center text-[var(--color-brand-500)]">
+        <Heading level={1} className="text-center text-brand-500">
           🧾 Đơn hàng của tôi
         </Heading>
         <OrdersList />

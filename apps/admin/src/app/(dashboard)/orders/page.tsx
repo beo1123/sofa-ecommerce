@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -67,7 +67,7 @@ export default function OrdersPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[var(--color-text-default)]">Quản lý đơn hàng</h1>
+        <h1 className="text-2xl font-bold text-text-default">Quản lý đơn hàng</h1>
       </div>
 
       {/* Filters */}
@@ -93,15 +93,15 @@ export default function OrdersPage() {
           <p>Không thể tải danh sách đơn hàng</p>
         </div>
       ) : orders.length === 0 ? (
-        <div className="text-center py-12 text-[var(--color-text-muted)]">
+        <div className="text-center py-12 text-text-muted">
           <p>Chưa có đơn hàng nào.</p>
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-lg border border-[var(--color-brand-50)] overflow-hidden">
+          <div className="bg-white rounded-lg border border-brand-50 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-gray-50 text-[var(--color-text-muted)] uppercase text-xs">
+                <thead className="bg-gray-50 text-text-muted uppercase text-xs">
                   <tr>
                     <th className="px-4 py-3">Mã đơn</th>
                     <th className="px-4 py-3">Khách hàng</th>
@@ -118,14 +118,14 @@ export default function OrdersPage() {
                       <td className="px-4 py-3 font-medium">{order.orderNumber}</td>
                       <td className="px-4 py-3">
                         <div>{order.recipientName}</div>
-                        <div className="text-xs text-[var(--color-text-muted)]">{order.phone}</div>
+                        <div className="text-xs text-text-muted">{order.phone}</div>
                       </td>
                       <td className="px-4 py-3 font-medium">{formatPrice(order.total)}</td>
-                      <td className="px-4 py-3 text-[var(--color-text-muted)]">{order.paymentMethod}</td>
+                      <td className="px-4 py-3 text-text-muted">{order.paymentMethod}</td>
                       <td className="px-4 py-3">
                         <Badge variant={STATUS_BADGE[order.status] ?? "default"}>{order.status}</Badge>
                       </td>
-                      <td className="px-4 py-3 text-[var(--color-text-muted)]">{formatDate(order.createdAt)}</td>
+                      <td className="px-4 py-3 text-text-muted">{formatDate(order.createdAt)}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end">
                           <Link href={`/orders/${order.id}`}>

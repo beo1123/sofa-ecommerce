@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Button from "@/components/ui/Button";
@@ -48,11 +48,11 @@ export default function ExcelImport() {
   return (
     <div className="space-y-4">
       {/* Upload area */}
-      <label className="flex items-center gap-3 p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[var(--color-brand-300)] hover:bg-[var(--color-brand-50)]/30 transition-colors">
+      <label className="flex items-center gap-3 p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-300 hover:bg-brand-50/30 transition-colors">
         <FileSpreadsheet size={24} className="text-green-600 shrink-0" />
         <div className="flex-1">
           <p className="text-sm font-medium">Import từ Excel (.xlsx)</p>
-          <p className="text-xs text-[var(--color-text-muted)]">Cột bắt buộc: title, slug, variantName, sku, price</p>
+          <p className="text-xs text-text-muted">Cột bắt buộc: title, slug, variantName, sku, price</p>
         </div>
         <Button size="sm" variant="outline" leftIcon={<Upload size={14} />} loading={uploading} type="button">
           Chọn file

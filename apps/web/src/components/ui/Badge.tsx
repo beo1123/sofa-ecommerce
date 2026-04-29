@@ -1,4 +1,4 @@
-// components/Badge.tsx
+﻿// components/Badge.tsx
 import React from "react";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 export default function Badge({ children, variant = "default", className = "" }: Props) {
   const variantClasses = {
-    default: "bg-[var(--color-brand-50)] text-[var(--color-brand-400)]",
+    default: "bg-brand-50 text-brand-400",
     success: "bg-green-100 text-green-700",
     warning: "bg-yellow-100 text-yellow-700",
     danger: "bg-red-100 text-red-700",

@@ -1,10 +1,10 @@
-import Container from "@/components/ui/Container";
+﻿import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 
 export default function CTASection() {
   return (
-    <section className="py-20 text-center mt-10 rounded-2xl bg-[var(--color-bg-muted)]">
+    <section className="py-20 text-center mt-10 rounded-2xl bg-bg-muted">
       <Container>
         <Heading level={2}>Sẵn sàng nâng cấp phòng khách của bạn?</Heading>
 
@@ -17,14 +17,14 @@ export default function CTASection() {
           className="
             inline-block 
             text-3xl sm:text-4xl font-extrabold tracking-wide 
-            text-[var(--color-primary)] 
+            text-primary 
             hover:scale-105 active:scale-95
             transition-transform duration-300
           ">
           {process.env.NEXT_PUBLIC_PHONE_URL}
         </a>
 
-        <p className="mt-5 text-sm text-[var(--color-text-muted)]">Hỗ trợ nhanh mỗi ngày mọi khung giờ</p>
+        <p className="mt-5 text-sm text-text-muted">Hỗ trợ nhanh mỗi ngày mọi khung giờ</p>
       </Container>
     </section>
   );

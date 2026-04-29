@@ -1,17 +1,17 @@
-import Container from "@/components/ui/Container";
+﻿import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import { SafeImage } from "@/components/ui/SafeImage";
 import { sofaImages } from "./images";
 
 export default function GallerySection() {
   return (
-    <section className="py-10 rounded-2xl bg-[var(--color-bg-muted)]">
+    <section className="py-10 rounded-2xl bg-bg-muted">
       <Container>
         <Heading level={2} className="text-center mb-12 px-5">
           Gợi ý không gian từ khách hàng
         </Heading>
 
-        <p className="text-center px-5 text-[var(--color-text-muted)] max-w-2xl mx-auto mb-10">
+        <p className="text-center px-5 text-text-muted max-w-2xl mx-auto mb-10">
           Một số hình ảnh thực tế do khách hàng gửi về sau khi bố trí sofa trong nhiều phong cách nội thất khác nhau. Hy
           vọng giúp bạn hình dung rõ hơn về sản phẩm trong không gian sống của mình.
         </p>

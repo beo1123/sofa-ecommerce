@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { ArrowLeft, ArrowRight, Star, Trash2, Plus } from "lucide-react";
@@ -73,7 +73,7 @@ export default function ImageUploader({ images, onChange, multiple = true }: Ima
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-[var(--color-text-default)]">Hình ảnh sản phẩm</label>
+      <label className="block text-sm font-medium text-text-default">Hình ảnh sản phẩm</label>
 
       {/* Image Grid */}
       {images.length > 0 && (
@@ -82,7 +82,7 @@ export default function ImageUploader({ images, onChange, multiple = true }: Ima
             <div
               key={i}
               className={`relative group rounded-lg border-2 overflow-hidden aspect-square ${
-                img.isPrimary ? "border-[var(--color-brand-300)]" : "border-gray-200"
+                img.isPrimary ? "border-brand-300" : "border-gray-200"
               }`}>
               <img src={img.url} alt={img.alt ?? ""} className="w-full h-full object-cover" />
 
@@ -128,7 +128,7 @@ export default function ImageUploader({ images, onChange, multiple = true }: Ima
 
               {/* Primary badge */}
               {img.isPrimary && (
-                <span className="absolute top-1 left-1 text-[10px] bg-[var(--color-brand-300)] text-white px-1.5 py-0.5 rounded">
+                <span className="absolute top-1 left-1 text-[10px] bg-brand-300 text-white px-1.5 py-0.5 rounded">
                   Chính
                 </span>
               )}

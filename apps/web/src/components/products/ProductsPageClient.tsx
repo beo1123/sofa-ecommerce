@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import ProductList from "@/components/products/ProductList";
@@ -59,7 +59,7 @@ export default function ProductsPageClient({
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-muted)]">
+    <main className="min-h-screen bg-bg-muted">
       <section className="container mx-auto px-4 py-10">
         <h1 className="text-2xl font-semibold mb-8 text-center lg:text-left">Tất cả sản phẩm</h1>
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-10">
@@ -87,7 +87,7 @@ export default function ProductsPageClient({
       <div className="fixed bottom-6 right-6 z-40 lg:hidden">
         <Button
           onClick={() => setShowMobileFilter(true)}
-          className="rounded-full w-14 h-14 flex items-center justify-center bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white shadow-lg"
+          className="rounded-full w-14 h-14 flex items-center justify-center bg-brand-400 hover:bg-brand-300 text-white shadow-lg"
           aria-label="Mở bộ lọc">
           <Filter size={24} />
         </Button>
@@ -111,12 +111,12 @@ export default function ProductsPageClient({
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed right-0 top-0 bottom-0 w-full bg-white z-50 lg:hidden overflow-y-auto shadow-lg">
               <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-[var(--color-text-default)]">Bộ lọc</h2>
+                <h2 className="text-lg font-semibold text-text-default">Bộ lọc</h2>
                 <button
                   onClick={() => setShowMobileFilter(false)}
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                   aria-label="Đóng bộ lọc">
-                  <X size={24} className="text-[var(--color-text-default)]" />
+                  <X size={24} className="text-text-default" />
                 </button>
               </div>
 

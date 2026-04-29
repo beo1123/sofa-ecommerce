@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -44,8 +44,7 @@ export default function ArticleCategoriesPage() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: unknown }) =>
-      adminApi.articleCategories.update(id, data),
+    mutationFn: ({ id, data }: { id: number; data: unknown }) => adminApi.articleCategories.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "article-categories"] });
       setModalOpen(false);
@@ -100,7 +99,7 @@ export default function ArticleCategoriesPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[var(--color-text-default)]">Danh mục bài viết</h1>
+        <h1 className="text-2xl font-bold text-text-default">Danh mục bài viết</h1>
         <Button leftIcon={<Plus size={18} />} onClick={openCreateModal}>
           Thêm danh mục
         </Button>
@@ -125,14 +124,14 @@ export default function ArticleCategoriesPage() {
           <Spinner size="lg" />
         </div>
       ) : categories.length === 0 ? (
-        <div className="text-center py-12 text-[var(--color-text-muted)]">
+        <div className="text-center py-12 text-text-muted">
           <p>Chưa có danh mục nào.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg border border-[var(--color-brand-50)] overflow-hidden">
+        <div className="bg-white rounded-lg border border-brand-50 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
-              <thead className="bg-gray-50 text-[var(--color-text-muted)] uppercase text-xs">
+              <thead className="bg-gray-50 text-text-muted uppercase text-xs">
                 <tr>
                   <th className="px-4 py-3">Tên</th>
                   <th className="px-4 py-3">Slug</th>
@@ -144,18 +143,15 @@ export default function ArticleCategoriesPage() {
                 {categories.map((category: ArticleCategory) => (
                   <tr key={category.id} className="hover:bg-gray-50/50 transition-colors">
                     <td className="px-4 py-3 font-medium">{category.name}</td>
-                    <td className="px-4 py-3 text-[var(--color-text-muted)]">{category.slug}</td>
-                    <td className="px-4 py-3 text-[var(--color-text-muted)]">
-                      {category._count?.articles ?? 0}
-                    </td>
+                    <td className="px-4 py-3 text-text-muted">{category.slug}</td>
+                    <td className="px-4 py-3 text-text-muted">{category._count?.articles ?? 0}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-2">
                         <Button
                           size="xs"
                           variant="ghost"
                           leftIcon={<Pencil size={14} />}
-                          onClick={() => openEditModal(category)}
-                        >
+                          onClick={() => openEditModal(category)}>
                           Sửa
                         </Button>
                         <Button
@@ -163,8 +159,7 @@ export default function ArticleCategoriesPage() {
                           variant="danger"
                           leftIcon={<Trash2 size={14} />}
                           onClick={() => handleDelete(category)}
-                          loading={deleteMutation.isPending}
-                        >
+                          loading={deleteMutation.isPending}>
                           Xóa
                         </Button>
                       </div>
@@ -181,8 +176,7 @@ export default function ArticleCategoriesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingCategory ? "Sửa danh mục" : "Thêm danh mục"}
-      >
+        title={editingCategory ? "Sửa danh mục" : "Thêm danh mục"}>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             label="Tên danh mục"

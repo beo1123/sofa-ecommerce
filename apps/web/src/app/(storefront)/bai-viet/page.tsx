@@ -1,4 +1,4 @@
-import BlogCategoryFilter from "@/components/blog/BlogList/BlogCategoryFilter";
+﻿import BlogCategoryFilter from "@/components/blog/BlogList/BlogCategoryFilter";
 import BlogGrid from "@/components/blog/BlogList/BlogGrid";
 import BlogHeader from "@/components/blog/BlogList/BlogHeader";
 import Container from "@/components/ui/Container";
@@ -33,7 +33,7 @@ export default async function BlogPage(props: { searchParams: Promise<{ page?: s
   }
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-muted)] px-5">
+    <main className="min-h-screen bg-bg-muted px-5">
       <BlogHeader />
       <Container>
         <BlogCategoryFilter categories={categories.data} selected={categorySlug} />

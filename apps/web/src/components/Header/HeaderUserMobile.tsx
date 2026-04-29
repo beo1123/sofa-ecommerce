@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -22,7 +22,7 @@ export default function HeaderUserMobile({ onClose }: Props) {
 
   if (status === "loading") {
     return (
-      <Card variant="bordered" className="p-4 bg-[var(--color-bg-muted)]">
+      <Card variant="bordered" className="p-4 bg-bg-muted">
         <div className="flex items-center justify-center py-4">
           <Spinner size={28} />
           <Text muted className="ml-2">
@@ -36,10 +36,10 @@ export default function HeaderUserMobile({ onClose }: Props) {
   // ===================== GUEST =====================
   if (!user) {
     return (
-      <Card variant="elevated" className="p-4  bg-[var(--color-bg-muted)]">
+      <Card variant="elevated" className="p-4  bg-bg-muted">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <User size={20} className="text-[var(--color-brand-400)]" />
+            <User size={20} className="text-brand-400" />
             Xin chào, Khách 👋
           </CardTitle>
         </CardHeader>
@@ -63,10 +63,10 @@ export default function HeaderUserMobile({ onClose }: Props) {
 
   // ===================== LOGGED-IN =====================
   return (
-    <Card variant="elevated" className="p-4 bg-[var(--color-bg-muted)]">
+    <Card variant="elevated" className="p-4 bg-bg-muted">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <User size={20} className="text-[var(--color-brand-400)]" />
+          <User size={20} className="text-brand-400" />
           {user.displayName || user.email}
         </CardTitle>
       </CardHeader>

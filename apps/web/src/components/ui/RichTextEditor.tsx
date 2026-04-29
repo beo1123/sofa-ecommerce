@@ -66,7 +66,7 @@ export default function RichTextEditor({
     immediatelyRender: false,
     extensions: [
       StarterKit,
-      InlineImage,
+      InlineImage as unknown as typeof StarterKit,
       Underline,
       Link.configure({
         openOnClick: false,
@@ -178,67 +178,67 @@ export default function RichTextEditor({
 
   if (!editor) {
     return (
-      <div className="rounded-md border border-[var(--color-brand-100)] bg-white p-3 text-sm text-[var(--color-text-muted)]">
+      <div className="rounded-md border border-brand-100 bg-white p-3 text-sm text-text-muted">
         Đang tải trình soạn thảo...
       </div>
     );
   }
 
   return (
-    <div className="rounded-md border border-[var(--color-brand-100)] bg-white overflow-hidden">
-      <div className="flex flex-wrap items-center gap-2 border-b border-[var(--color-brand-100)] px-2 py-2 bg-[var(--color-brand-50)]/40">
+    <div className="rounded-md border border-brand-100 bg-white overflow-hidden">
+      <div className="flex flex-wrap items-center gap-2 border-b border-brand-100 px-2 py-2 bg-brand-50/40">
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           B
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           I
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           U
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           • List
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           1. List
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           H2
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           H3
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().setParagraph().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           P
         </button>
         <button
           type="button"
           onClick={setLink}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           Link
         </button>
         {onImageUpload && (
@@ -247,7 +247,7 @@ export default function RichTextEditor({
               type="button"
               onClick={handleSelectImage}
               disabled={imageUploading}
-              className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors disabled:cursor-not-allowed disabled:opacity-60">
+              className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors disabled:cursor-not-allowed disabled:opacity-60">
               {imageUploading ? <Loader2 size={14} className="animate-spin" /> : <ImagePlus size={14} />}
               Ảnh
             </button>
@@ -265,7 +265,7 @@ export default function RichTextEditor({
             type="button"
             onClick={() => void handleRemoveSelectedImage()}
             disabled={!selectedImageUrl || imageRemoving}
-            className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors disabled:cursor-not-allowed disabled:opacity-60">
+            className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors disabled:cursor-not-allowed disabled:opacity-60">
             {imageRemoving ? <Loader2 size={14} className="animate-spin" /> : <ImageMinus size={14} />}
             Xóa ảnh
           </button>
@@ -273,34 +273,32 @@ export default function RichTextEditor({
         <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           Left
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           Center
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           Right
         </button>
         <button
           type="button"
           onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}
-          className="px-2 py-1 text-xs border border-[var(--color-brand-100)] rounded bg-white hover:bg-[var(--color-brand-50)] transition-colors">
+          className="px-2 py-1 text-xs border border-brand-100 rounded bg-white hover:bg-brand-50 transition-colors">
           Clear
         </button>
       </div>
 
       <div className="relative">
         {!value?.replace(/<[^>]+>/g, "").trim() && (
-          <span className="absolute top-3 left-3 text-sm text-[var(--color-text-muted)] pointer-events-none">
-            {placeholder}
-          </span>
+          <span className="absolute top-3 left-3 text-sm text-text-muted pointer-events-none">{placeholder}</span>
         )}
         <EditorContent editor={editor} style={{ minHeight }} />
       </div>

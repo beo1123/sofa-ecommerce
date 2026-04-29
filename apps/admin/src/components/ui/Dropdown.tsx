@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
@@ -55,10 +55,10 @@ export default function Dropdown({
         onClick={() => setOpen(!open)}
         className={`
           border bg-white rounded-md px-3 py-2 flex items-center justify-between
-          hover:bg-[var(--color-bg-muted)]
+          hover:bg-bg-muted
           transition-colors cursor-pointer
           disabled:opacity-50 disabled:cursor-not-allowed
-          ${open ? "border-[var(--color-brand-300)]" : "border-gray-300"}
+          ${open ? "border-brand-300" : "border-gray-300"}
         `}>
         <span className="flex items-center gap-2 text-sm">
           {selectedOption?.icon}
@@ -85,10 +85,10 @@ export default function Dropdown({
               }}
               className={`
                 w-full px-3 py-2 text-left text-sm flex items-center gap-2
-                hover:bg-[var(--color-brand-50)]
+                hover:bg-brand-50
                 transition-colors
                 cursor-pointer
-                ${opt.value === value ? "bg-[var(--color-brand-100)]" : ""}
+                ${opt.value === value ? "bg-brand-100" : ""}
               `}>
               {opt.icon}
               {opt.label}

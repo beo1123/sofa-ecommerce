@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Hero } from "@/components/Home/Hero";
@@ -55,7 +55,7 @@ export default function Home() {
           <BrowseByCategories />
         </section>
         {/* ================= store highlights ================= */}
-        <section id="store-highlights" className="p-xl mt-5 rounded-lg bg-[var(--color-bg-page)]">
+        <section id="store-highlights" className="p-xl mt-5 rounded-lg bg-bg-page">
           <StoreHighlights />
         </section>
 
@@ -84,7 +84,7 @@ export default function Home() {
         </section> */}
 
         {/* ================= BRAND MESSAGE ================= */}
-        <section id="brand-message" className="p-xl rounded-lg mt-5 bg-[var(--color-bg-muted)]">
+        <section id="brand-message" className="p-xl rounded-lg mt-5 bg-bg-muted">
           <BrandMessage />
         </section>
       </div>

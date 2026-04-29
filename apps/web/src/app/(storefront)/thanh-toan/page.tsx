@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -21,11 +21,11 @@ export default function CheckoutPage() {
   const total = useAppSelector(selectCartTotal);
 
   return (
-    <main className="min-h-screen py-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
+    <main className="min-h-screen py-12 bg-bg-muted text-text-default">
       <Container className="space-y-8">
         {/* TITLE */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <Heading level={1} className="text-[var(--color-brand-400)]">
+          <Heading level={1} className="text-brand-400">
             Thanh toán
           </Heading>
           <Link href="/gio-hang">
@@ -54,11 +54,11 @@ export default function CheckoutPage() {
                     <div
                       key={`${it.productId}-${it.variantId ?? ""}-${it.sku ?? ""}`}
                       className="flex gap-3 items-center border-b pb-3 last:border-none last:pb-0">
-                      <div className="w-16 h-16 bg-[var(--color-bg-muted)] flex items-center justify-center rounded overflow-hidden flex-shrink-0">
+                      <div className="w-16 h-16 bg-bg-muted flex items-center justify-center rounded overflow-hidden shrink-0">
                         {it.image ? (
                           <SafeImage src={it.image} alt={it.name} width={64} height={64} className="object-cover" />
                         ) : (
-                          <ImageIcon className="w-6 h-6 text-[var(--color-text-muted)]" />
+                          <ImageIcon className="w-6 h-6 text-text-muted" />
                         )}
                       </div>
                       <div className="flex-1">

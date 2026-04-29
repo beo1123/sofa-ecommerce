@@ -202,7 +202,7 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-[var(--color-text-default)] mb-1">Mô tả chi tiết</label>
+            <label className="block text-sm font-medium text-text-default mb-1">Mô tả chi tiết</label>
             <RichTextEditor
               value={descriptionValue}
               onChange={(html) => setValue("description", html, { shouldDirty: true })}

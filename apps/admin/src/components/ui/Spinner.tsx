@@ -1,4 +1,4 @@
-// components/Spinner.tsx
+﻿// components/Spinner.tsx
 import React from "react";
 
 type Props = {
@@ -14,10 +14,10 @@ const sizeMap = {
 
 export default function Spinner({ size = "md", className = "" }: Props) {
   const pixelSize = typeof size === "number" ? size : sizeMap[size];
-  
+
   return (
     <svg
-      className={`animate-spin text-[var(--color-brand-400)] ${className}`}
+      className={`animate-spin text-brand-400 ${className}`}
       width={pixelSize}
       height={pixelSize}
       viewBox="0 0 24 24">

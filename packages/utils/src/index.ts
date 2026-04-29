@@ -64,8 +64,7 @@ export type PaginationParams = {
  * // => { page: 2, perPage: 10, skip: 10, take: 10 }
  */
 export function parsePagination(query: Record<string, unknown> | URLSearchParams): PaginationParams {
-  const get = (key: string): unknown =>
-    query instanceof URLSearchParams ? query.get(key) : query[key];
+  const get = (key: string): unknown => (query instanceof URLSearchParams ? query.get(key) : query[key]);
 
   const page = Math.max(1, Number(get("page") ?? 1));
   const perPage = Math.min(100, Math.max(1, Number(get("perPage") ?? 20)));
@@ -134,7 +133,7 @@ export function normalizeError(err: unknown): NormalizedError {
     if (typeof errObj.message === "string") {
       return {
         status: 500,
-        payload: fail(errObj.message, "INTERNAL_ERROR", (errObj as Error).stack),
+        payload: fail(errObj.message, "INTERNAL_ERROR", (errObj as unknown as Error).stack),
       };
     }
   }
@@ -282,10 +281,7 @@ export function compact<T extends Record<string, unknown>>(obj: T): Partial<T> {
 /**
  * Pick specific keys from an object
  */
-export function pick<T extends Record<string, unknown>, K extends keyof T>(
-  obj: T,
-  keys: K[]
-): Pick<T, K> {
+export function pick<T extends Record<string, unknown>, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
   const result = {} as Pick<T, K>;
   for (const key of keys) {
     if (key in obj) {
@@ -298,10 +294,7 @@ export function pick<T extends Record<string, unknown>, K extends keyof T>(
 /**
  * Omit specific keys from an object
  */
-export function omit<T extends Record<string, unknown>, K extends keyof T>(
-  obj: T,
-  keys: K[]
-): Omit<T, K> {
+export function omit<T extends Record<string, unknown>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
   const result = { ...obj };
   for (const key of keys) {
     delete result[key];

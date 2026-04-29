@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -73,9 +73,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <>
-      <div className="group relative rounded-3xl overflow-hidden bg-[var(--color-bg-page)] shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col">
+      <div className="group relative rounded-3xl overflow-hidden bg-bg-page shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col">
         {/* IMAGE */}
-        <Link href={routeLink} className="block relative w-full aspect-square overflow-hidden flex-shrink-0">
+        <Link href={routeLink} className="block relative w-full aspect-square overflow-hidden shrink-0">
           {product.primaryImage?.url ? (
             <SafeImage
               src={product.primaryImage.url}
@@ -85,9 +85,9 @@ export default function ProductCard({ product }: ProductCardProps) {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             />
           ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--color-bg-muted)] text-[var(--color-text-muted)]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-bg-muted text-text-muted">
               <div className="p-3 rounded-full bg-white/60 mb-2">
-                <ImageIcon className="w-8 h-8 text-[var(--color-text-muted)]" />
+                <ImageIcon className="w-8 h-8 text-text-muted" />
               </div>
               <span className="text-xs font-medium opacity-80">Không có hình</span>
             </div>
@@ -114,8 +114,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               }}
               className="
                 flex-1 sm:flex-none min-w-[100px]
-                px-4 py-2 rounded-full bg-white/90 text-[var(--color-brand-400)]
-                hover:bg-[var(--color-brand-400)] hover:text-white
+                px-4 py-2 rounded-full bg-white/90 text-brand-400
+                hover:bg-brand-400 hover:text-white
                 shadow-md text-sm font-medium transition-all
               ">
               Giỏ hàng
@@ -130,7 +130,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               }}
               className="
                 flex-1 sm:flex-none min-w-[100px]
-                px-4 py-2 rounded-full bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)]
+                px-4 py-2 rounded-full bg-brand-400 hover:bg-brand-300
                 shadow-md text-sm font-medium transition-all
               ">
               Mua ngay
@@ -144,7 +144,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <Link href={routeLink}>
               <Heading
                 level={3}
-                className="text-base font-semibold line-clamp-2 text-[var(--color-brand-400)] group-hover:text-[var(--color-brand-200)] transition-colors">
+                className="text-base font-semibold line-clamp-2 text-brand-400 group-hover:text-brand-200 transition-colors">
                 {product.title}
               </Heading>
             </Link>
@@ -155,9 +155,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
 
-          <Text className="text-lg font-semibold text-[var(--color-brand-400)] mt-2">
-            {formatCurrency(product.priceMin)}
-          </Text>
+          <Text className="text-lg font-semibold text-brand-400 mt-2">{formatCurrency(product.priceMin)}</Text>
         </div>
       </div>
 

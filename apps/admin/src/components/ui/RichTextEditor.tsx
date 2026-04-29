@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -17,12 +17,12 @@ export default function RichTextEditor({ value, onChange, placeholder }: Props) 
   return (
     <div className="space-y-2">
       <textarea
-        className="w-full min-h-[200px] p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-300)] focus:border-transparent resize-y"
+        className="w-full min-h-[200px] p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent resize-y"
         placeholder={placeholder ?? "Nhập nội dung..."}
         value={value ?? ""}
         onChange={(e) => onChange?.(e.target.value)}
       />
-      <p className="text-xs text-[var(--color-text-muted)]">
+      <p className="text-xs text-text-muted">
         Hỗ trợ HTML cơ bản. Để có trình soạn thảo đầy đủ, cần cài đặt thêm tiptap.
       </p>
     </div>

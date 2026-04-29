@@ -1,4 +1,4 @@
-// app/search/page.tsx
+﻿// app/search/page.tsx
 "use client";
 
 import { useSearchParams } from "next/navigation";
@@ -45,7 +45,7 @@ export default function SearchPage() {
       )}
 
       {!isLoading && items.length === 0 && (
-        <p className="text-center text-[var(--color-text-muted)]">Không tìm thấy sản phẩm nào phù hợp.</p>
+        <p className="text-center text-text-muted">Không tìm thấy sản phẩm nào phù hợp.</p>
       )}
 
       <div className="grid grid-cols-2 gap-4 sm:gap-6 [@media(min-width:640px)]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">

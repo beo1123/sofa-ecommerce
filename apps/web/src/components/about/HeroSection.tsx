@@ -1,4 +1,4 @@
-import Container from "@/components/ui/Container";
+﻿import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import Button from "@/components/ui/Button";
@@ -8,34 +8,34 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="py-5 rounded-2xl  bg-[var(--color-bg-muted)]">
+    <section className="py-5 rounded-2xl  bg-bg-muted">
       <Container className="grid lg:grid-cols-2 gap-12 items-center">
         {/* LEFT CONTENT */}
         <div className=" px-5 space-y-6">
-          <Heading level={1} className="text-[var(--color-brand-400)] leading-tight text-center">
+          <Heading level={1} className="text-brand-400 leading-tight text-center">
             Sofa chuẩn phong cách – Nâng tầm không gian sống
           </Heading>
 
-          <Text className="text-lg text-[var(--color-text-muted)]">
+          <Text className="text-lg text-text-muted">
             Chúng tôi thiết kế sofa với triết lý tối giản, tinh tế và bền bỉ. Mỗi sản phẩm đều được hoàn thiện thủ công
             từ chất liệu cao cấp, mang lại sự êm ái và vẻ đẹp lâu dài cho ngôi nhà của bạn.
           </Text>
 
           {/* Sub Content */}
           <div className="space-y-3">
-            <Text className="font-medium text-[var(--color-text-strong)]">Vì sao khách hàng chọn chúng tôi?</Text>
+            <Text className="font-medium text-text-strong">Vì sao khách hàng chọn chúng tôi?</Text>
 
-            <ul className="space-y-2 text-[var(--color-text-muted)]">
+            <ul className="space-y-2 text-text-muted">
               <li className="flex items-start gap-2">
-                <span className="mt-2.5 h-2 w-2 bg-[var(--color-brand-400)] rounded-full" />
+                <span className="mt-2.5 h-2 w-2 bg-brand-400 rounded-full" />
                 Chất liệu cao cấp – độ bền vượt trội theo thời gian.
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-2.5 h-2 w-2 bg-[var(--color-brand-400)] rounded-full" />
+                <span className="mt-2.5 h-2 w-2 bg-brand-400 rounded-full" />
                 Thiết kế tối giản, phù hợp nhiều phong cách nội thất.
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-2.5 h-2 w-2 bg-[var(--color-brand-400)] rounded-full" />
+                <span className="mt-2.5 h-2 w-2 bg-brand-400 rounded-full" />
                 Sản xuất thủ công, hoàn thiện tỉ mỉ từng chi tiết.
               </li>
             </ul>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Heading from "@/components/ui/Heading";
@@ -41,7 +41,7 @@ export default function AdminArticleCategoriesPage() {
       <div className="flex items-center justify-between">
         <div>
           <Heading level={2}>Danh mục bài viết</Heading>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">{meta.total} danh mục</p>
+          <p className="text-sm text-text-muted mt-1">{meta.total} danh mục</p>
         </div>
         <Button leftIcon={<Plus size={16} />} onClick={openCreateModal}>
           Thêm danh mục
@@ -66,13 +66,13 @@ export default function AdminArticleCategoriesPage() {
             <Spinner size={30} />
           </div>
         ) : categories.length === 0 ? (
-          <div className="text-center py-12 text-[var(--color-text-muted)]">
+          <div className="text-center py-12 text-text-muted">
             <p>Chưa có danh mục nào.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
-              <thead className="bg-gray-50 text-[var(--color-text-muted)] uppercase text-xs">
+              <thead className="bg-gray-50 text-text-muted uppercase text-xs">
                 <tr>
                   <th className="px-4 py-3">Tên</th>
                   <th className="px-4 py-3">Slug</th>
@@ -84,7 +84,7 @@ export default function AdminArticleCategoriesPage() {
                 {categories.map((category) => (
                   <tr key={category.id} className="hover:bg-gray-50/50 transition-colors">
                     <td className="px-4 py-3 font-medium">{category.name}</td>
-                    <td className="px-4 py-3 text-[var(--color-text-muted)]">/{category.slug}</td>
+                    <td className="px-4 py-3 text-text-muted">/{category.slug}</td>
                     <td className="px-4 py-3">{category._count?.articles ?? 0}</td>
                     <td className="px-4 py-3">
                       <div className="flex justify-end gap-2">
@@ -118,7 +118,7 @@ export default function AdminArticleCategoriesPage() {
           <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
             Trước
           </Button>
-          <span className="text-sm text-[var(--color-text-muted)]">
+          <span className="text-sm text-text-muted">
             Trang {meta.page} / {totalPages}
           </span>
           <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>

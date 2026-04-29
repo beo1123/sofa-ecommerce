@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -38,18 +38,18 @@ export default function HeaderUser() {
     return (
       <>
         {/* Desktop loading (xl+) */}
-        <div className="hidden xl:flex items-center gap-3 pr-4 border-r border-[var(--color-brand-50)]">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center">
+        <div className="hidden xl:flex items-center gap-3 pr-4 border-r border-brand-50">
+          <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center">
             <Spinner />
           </div>
           <div className="w-40">
-            <div className="h-4 bg-[var(--color-bg-muted)] rounded animate-pulse" />
+            <div className="h-4 bg-bg-muted rounded animate-pulse" />
           </div>
         </div>
 
         {/* Mobile loading: small spinner button */}
         <div className="flex xl:hidden items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center">
+          <div className="w-9 h-9 rounded-full bg-brand-50 flex items-center justify-center">
             <Spinner size={18} />
           </div>
         </div>
@@ -62,19 +62,17 @@ export default function HeaderUser() {
     return (
       <>
         {/* Desktop */}
-        <div className="hidden xl:flex items-center gap-3 pr-4 border-r border-[var(--color-brand-50)]">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center flex-shrink-0">
-            <UserIcon className="w-5 h-5 text-[var(--color-brand-400)]" />
+        <div className="hidden xl:flex items-center gap-3 pr-4 border-r border-brand-50">
+          <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center shrink-0">
+            <UserIcon className="w-5 h-5 text-brand-400" />
           </div>
           <div className="text-sm min-w-0">
-            <p className="font-medium text-[var(--color-text-default)] truncate">Xin chào, Khách</p>
+            <p className="font-medium text-text-default truncate">Xin chào, Khách</p>
             <div className="text-xs whitespace-nowrap">
-              <Link
-                href="/dang-nhap"
-                className="text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)] mr-2">
+              <Link href="/dang-nhap" className="text-brand-300 hover:text-brand-400 mr-2">
                 Đăng nhập
               </Link>
-              <Link href="/dang-ky" className="text-[var(--color-brand-300)] hover:text-[var(--color-brand-400)]">
+              <Link href="/dang-ky" className="text-brand-300 hover:text-brand-400">
                 Đăng ký
               </Link>
             </div>
@@ -90,8 +88,8 @@ export default function HeaderUser() {
           <Modal isOpen={openMobile} onClose={() => setOpenMobile(false)} title="Tài khoản">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center">
-                  <UserIcon className="w-6 h-6 text-[var(--color-brand-400)]" />
+                <div className="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center">
+                  <UserIcon className="w-6 h-6 text-brand-400" />
                 </div>
                 <div>
                   <Text className="font-medium">Xin chào, Khách</Text>
@@ -124,25 +122,23 @@ export default function HeaderUser() {
   return (
     <>
       {/* Desktop */}
-      <div
-        ref={ref}
-        className="hidden xl:flex items-center gap-3 pr-4 border-r border-[var(--color-brand-50)] relative">
+      <div ref={ref} className="hidden xl:flex items-center gap-3 pr-4 border-r border-brand-50 relative">
         <Button
           variant="ghost"
           onClick={() => setOpen((v) => !v)}
           className="flex items-center gap-3 focus:outline-none"
           aria-haspopup="true"
           aria-expanded={open}>
-          <div className="w-10 h-10 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center flex-shrink-0">
-            <UserIcon className="w-5 h-5 text-[var(--color-brand-400)]" />
+          <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center shrink-0">
+            <UserIcon className="w-5 h-5 text-brand-400" />
           </div>
           <div className="text-sm min-w-0 text-left">
-            <p className="font-medium text-[var(--color-text-default)] truncate">{user.displayName || user.email}</p>
-            <p className="text-xs text-[var(--color-text-muted)] truncate">
+            <p className="font-medium text-text-default truncate">{user.displayName || user.email}</p>
+            <p className="text-xs text-text-muted truncate">
               {user.roles && user.roles.length > 0 ? user.roles : "Khách hàng"}
             </p>
           </div>
-          <ChevronDown className="w-4 h-4 text-[var(--color-text-muted)] ml-2" />
+          <ChevronDown className="w-4 h-4 text-text-muted ml-2" />
         </Button>
 
         {/* Dropdown (Card) */}
@@ -167,7 +163,7 @@ export default function HeaderUser() {
                     <Link href="/tai-khoan/don-hang" className="block">
                       <Button variant="ghost" className="w-full justify-start gap-2 px-2 py-2">
                         <Box className="w-4 h-4" /> <span className="text-sm">Đơn hàng</span>
-                        <span className="ml-auto text-xs text-[var(--color-text-muted)]">{/* optional */}</span>
+                        <span className="ml-auto text-xs text-text-muted">{/* optional */}</span>
                       </Button>
                     </Link>
 
@@ -180,12 +176,12 @@ export default function HeaderUser() {
                     <Link href="/gio-hang" className="block">
                       <Button variant="ghost" className="w-full justify-start gap-2 px-2 py-2">
                         <ShoppingCart className="w-4 h-4" /> <span className="text-sm">Giỏ hàng</span>
-                        <span className="ml-auto text-xs text-[var(--color-text-muted)]">{cartCount ?? 0}</span>
+                        <span className="ml-auto text-xs text-text-muted">{cartCount ?? 0}</span>
                       </Button>
                     </Link>
                   </div>
 
-                  <div className="border-t border-[var(--color-brand-50)] mt-2 pt-2">
+                  <div className="border-t border-brand-50 mt-2 pt-2">
                     <Button
                       variant="danger"
                       className="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm"
@@ -211,8 +207,8 @@ export default function HeaderUser() {
         <Modal isOpen={openMobile} onClose={() => setOpenMobile(false)} title="Tài khoản">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[var(--color-brand-50)] flex items-center justify-center">
-                <UserIcon className="w-6 h-6 text-[var(--color-brand-400)]" />
+              <div className="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center">
+                <UserIcon className="w-6 h-6 text-brand-400" />
               </div>
               <div>
                 <Text className="font-medium">{user.displayName || user.email}</Text>

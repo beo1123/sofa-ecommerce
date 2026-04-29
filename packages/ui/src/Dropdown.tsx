@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
@@ -45,10 +45,7 @@ export default function Dropdown({
   const selectedOption = options.find((opt) => opt.value === value);
 
   return (
-    <div
-      className={`relative flex flex-col gap-1 ${fullWidth ? "w-full" : "w-64"}`}
-      ref={ref}
-    >
+    <div className={`relative flex flex-col gap-1 ${fullWidth ? "w-full" : "w-64"}`} ref={ref}>
       {label && <label className="text-sm font-medium">{label}</label>}
 
       {/* Trigger */}
@@ -58,24 +55,16 @@ export default function Dropdown({
         onClick={() => setOpen(!open)}
         className={`
           border bg-white rounded-md px-3 py-2 flex items-center justify-between
-          hover:bg-[var(--color-bg-muted)]
+          hover:bg-bg-muted
           transition-colors cursor-pointer
           disabled:opacity-50 disabled:cursor-not-allowed
-          ${open ? "border-[var(--color-brand-300)]" : "border-gray-300"}
-        `}
-      >
+          ${open ? "border-brand-300" : "border-gray-300"}
+        `}>
         <span className="flex items-center gap-2 text-sm">
           {selectedOption?.icon}
-          {selectedOption ? (
-            selectedOption.label
-          ) : (
-            <span className="text-gray-400">{placeholder}</span>
-          )}
+          {selectedOption ? selectedOption.label : <span className="text-gray-400">{placeholder}</span>}
         </span>
-        <ChevronDown
-          size={18}
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
-        />
+        <ChevronDown size={18} className={`transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
 
       {/* Options Overlay (ABSOLUTE, FLOATING, Z-INDEX HIGH) */}
@@ -85,8 +74,7 @@ export default function Dropdown({
             absolute left-0 top-full mt-1 w-full
             border bg-white rounded-md shadow-lg z-50
             animate-fadeIn overflow-hidden cursor-pointer
-          "
-        >
+          ">
           {options.map((opt) => (
             <button
               key={opt.value}
@@ -97,12 +85,11 @@ export default function Dropdown({
               }}
               className={`
                 w-full px-3 py-2 text-left text-sm flex items-center gap-2
-                hover:bg-[var(--color-brand-50)]
+                hover:bg-brand-50
                 transition-colors
                 cursor-pointer
-                ${opt.value === value ? "bg-[var(--color-brand-100)]" : ""}
-              `}
-            >
+                ${opt.value === value ? "bg-brand-100" : ""}
+              `}>
               {opt.icon}
               {opt.label}
             </button>

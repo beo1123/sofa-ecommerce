@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -65,8 +65,8 @@ export default function AdminDashboard() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-[var(--color-text-muted)] mb-3">{item.description}</p>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-brand-300)]">
+                  <p className="text-sm text-text-muted mb-3">{item.description}</p>
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-300">
                     Truy cập <ArrowRight size={14} />
                   </span>
                 </CardContent>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -38,7 +38,7 @@ const STATUS_LABEL: Record<string, string> = {
 export default function ProductTable({ products, onDelete, deleting }: ProductTableProps) {
   if (products.length === 0) {
     return (
-      <div className="text-center py-12 text-[var(--color-text-muted)]">
+      <div className="text-center py-12 text-text-muted">
         <p>Chưa có sản phẩm nào.</p>
       </div>
     );
@@ -47,7 +47,7 @@ export default function ProductTable({ products, onDelete, deleting }: ProductTa
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm text-left">
-        <thead className="bg-gray-50 text-[var(--color-text-muted)] uppercase text-xs">
+        <thead className="bg-gray-50 text-text-muted uppercase text-xs">
           <tr>
             <th className="px-4 py-3">Ảnh</th>
             <th className="px-4 py-3">Tên sản phẩm</th>
@@ -85,14 +85,14 @@ export default function ProductTable({ products, onDelete, deleting }: ProductTa
                 <td className="px-4 py-3">
                   <Link
                     href={`/products/${product.id}`}
-                    className="font-medium text-[var(--color-text-default)] hover:text-[var(--color-brand-300)] transition-colors">
+                    className="font-medium text-text-default hover:text-brand-300 transition-colors">
                     {product.title}
                   </Link>
-                  <p className="text-xs text-[var(--color-text-muted)] mt-0.5">/{product.slug}</p>
+                  <p className="text-xs text-text-muted mt-0.5">/{product.slug}</p>
                 </td>
 
                 {/* Category */}
-                <td className="px-4 py-3 text-[var(--color-text-muted)]">{product.category?.name ?? "—"}</td>
+                <td className="px-4 py-3 text-text-muted">{product.category?.name ?? "—"}</td>
 
                 {/* Status */}
                 <td className="px-4 py-3">
@@ -102,7 +102,7 @@ export default function ProductTable({ products, onDelete, deleting }: ProductTa
                 </td>
 
                 {/* Variants count */}
-                <td className="px-4 py-3 text-[var(--color-text-muted)]">{product.variants?.length ?? 0}</td>
+                <td className="px-4 py-3 text-text-muted">{product.variants?.length ?? 0}</td>
 
                 {/* Min price */}
                 <td className="px-4 py-3 font-medium">

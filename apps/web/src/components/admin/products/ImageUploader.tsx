@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -119,7 +119,7 @@ export default function ImageUploader({ images, onChange, folder = "products", m
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-[var(--color-text-default)]">Hình ảnh sản phẩm</label>
+      <label className="block text-sm font-medium text-text-default">Hình ảnh sản phẩm</label>
 
       {/* Image Grid */}
       {images.length > 0 && (
@@ -128,7 +128,7 @@ export default function ImageUploader({ images, onChange, folder = "products", m
             <div
               key={i}
               className={`relative group rounded-lg border-2 overflow-hidden aspect-square ${
-                img.isPrimary ? "border-[var(--color-brand-300)]" : "border-gray-200"
+                img.isPrimary ? "border-brand-300" : "border-gray-200"
               }`}>
               <img src={img.url} alt={img.alt ?? ""} className="w-full h-full object-cover" />
 
@@ -175,7 +175,7 @@ export default function ImageUploader({ images, onChange, folder = "products", m
 
               {/* Primary badge */}
               {img.isPrimary && (
-                <span className="absolute top-1 left-1 text-[10px] bg-[var(--color-brand-300)] text-white px-1.5 py-0.5 rounded">
+                <span className="absolute top-1 left-1 text-[10px] bg-brand-300 text-white px-1.5 py-0.5 rounded">
                   Chính
                 </span>
               )}
@@ -193,19 +193,17 @@ export default function ImageUploader({ images, onChange, folder = "products", m
       {/* Upload button */}
       <label
         className={`flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
-          uploading
-            ? "border-gray-300 bg-gray-50"
-            : "border-gray-300 hover:border-[var(--color-brand-300)] hover:bg-[var(--color-brand-50)]/30"
+          uploading ? "border-gray-300 bg-gray-50" : "border-gray-300 hover:border-brand-300 hover:bg-brand-50/30"
         }`}>
         {uploading ? (
           <>
-            <Loader2 size={24} className="animate-spin text-[var(--color-brand-300)]" />
-            <span className="text-sm text-[var(--color-text-muted)]">Đang upload...</span>
+            <Loader2 size={24} className="animate-spin text-brand-300" />
+            <span className="text-sm text-text-muted">Đang upload...</span>
           </>
         ) : (
           <>
-            <Upload size={24} className="text-[var(--color-text-muted)]" />
-            <span className="text-sm text-[var(--color-text-muted)]">Click để upload ảnh (JPEG, PNG, WebP)</span>
+            <Upload size={24} className="text-text-muted" />
+            <span className="text-sm text-text-muted">Click để upload ảnh (JPEG, PNG, WebP)</span>
           </>
         )}
         <input

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ProductCard from "./ProductCard";
@@ -25,9 +25,7 @@ export default function ProductList({ items = [], loading = false }: ProductList
   if (!safeItems.length) {
     return (
       <div className="text-center py-16">
-        <Text className="text-[var(--color-text-muted)] text-lg">
-          😕 Không có sản phẩm nào phù hợp với bộ lọc hiện tại.
-        </Text>
+        <Text className="text-text-muted text-lg">😕 Không có sản phẩm nào phù hợp với bộ lọc hiện tại.</Text>
       </div>
     );
   }

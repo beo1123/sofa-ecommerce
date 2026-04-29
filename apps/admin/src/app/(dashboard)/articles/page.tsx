@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -69,7 +69,7 @@ export default function ArticlesPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[var(--color-text-default)]">Quản lý bài viết</h1>
+        <h1 className="text-2xl font-bold text-text-default">Quản lý bài viết</h1>
         <Link href="/articles/new">
           <Button leftIcon={<Plus size={18} />}>Thêm bài viết</Button>
         </Link>
@@ -112,15 +112,15 @@ export default function ArticlesPage() {
           <p>Không thể tải danh sách bài viết</p>
         </div>
       ) : articles.length === 0 ? (
-        <div className="text-center py-12 text-[var(--color-text-muted)]">
+        <div className="text-center py-12 text-text-muted">
           <p>Chưa có bài viết nào.</p>
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-lg border border-[var(--color-brand-50)] overflow-hidden">
+          <div className="bg-white rounded-lg border border-brand-50 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-gray-50 text-[var(--color-text-muted)] uppercase text-xs">
+                <thead className="bg-gray-50 text-text-muted uppercase text-xs">
                   <tr>
                     <th className="px-4 py-3">Ảnh</th>
                     <th className="px-4 py-3">Tiêu đề</th>
@@ -135,11 +135,7 @@ export default function ArticlesPage() {
                     <tr key={article.id} className="hover:bg-gray-50/50 transition-colors">
                       <td className="px-4 py-3">
                         {article.thumbnail ? (
-                          <img
-                            src={article.thumbnail}
-                            alt={article.title}
-                            className="w-16 h-10 object-cover rounded"
-                          />
+                          <img src={article.thumbnail} alt={article.title} className="w-16 h-10 object-cover rounded" />
                         ) : (
                           <div className="w-16 h-10 bg-gray-100 rounded flex items-center justify-center text-xs text-gray-400">
                             N/A
@@ -149,23 +145,16 @@ export default function ArticlesPage() {
                       <td className="px-4 py-3">
                         <Link
                           href={`/articles/${article.id}`}
-                          className="font-medium text-[var(--color-text-default)] hover:text-[var(--color-brand-300)] transition-colors"
-                        >
+                          className="font-medium text-text-default hover:text-brand-300 transition-colors">
                           {article.title}
                         </Link>
-                        <p className="text-xs text-[var(--color-text-muted)] mt-0.5">/{article.slug}</p>
+                        <p className="text-xs text-text-muted mt-0.5">/{article.slug}</p>
                       </td>
-                      <td className="px-4 py-3 text-[var(--color-text-muted)]">
-                        {article.category?.name ?? "—"}
-                      </td>
+                      <td className="px-4 py-3 text-text-muted">{article.category?.name ?? "—"}</td>
                       <td className="px-4 py-3">
-                        <Badge variant={STATUS_BADGE[article.status] ?? "default"}>
-                          {article.status}
-                        </Badge>
+                        <Badge variant={STATUS_BADGE[article.status] ?? "default"}>{article.status}</Badge>
                       </td>
-                      <td className="px-4 py-3 text-[var(--color-text-muted)]">
-                        {formatDate(article.publishedAt)}
-                      </td>
+                      <td className="px-4 py-3 text-text-muted">{formatDate(article.publishedAt)}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end gap-2">
                           <Link href={`/articles/${article.id}`}>
@@ -178,8 +167,7 @@ export default function ArticlesPage() {
                             variant="danger"
                             leftIcon={<Trash2 size={14} />}
                             loading={deleting === article.id}
-                            onClick={() => handleDelete(article)}
-                          >
+                            onClick={() => handleDelete(article)}>
                             {article.status === "ARCHIVED" ? "Xóa" : "Lưu trữ"}
                           </Button>
                         </div>

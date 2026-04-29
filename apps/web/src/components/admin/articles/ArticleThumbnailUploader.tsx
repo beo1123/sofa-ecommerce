@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { Loader2, Upload, X } from "lucide-react";
@@ -47,7 +47,7 @@ export default function ArticleThumbnailUploader({
             </button>
           </div>
         ) : (
-          <div className="flex h-40 w-full items-center justify-center rounded-xl border border-dashed border-gray-300 bg-gray-50 text-sm text-[var(--color-text-muted)] sm:w-64">
+          <div className="flex h-40 w-full items-center justify-center rounded-xl border border-dashed border-gray-300 bg-gray-50 text-sm text-text-muted sm:w-64">
             Chưa có ảnh đại diện
           </div>
         )}
@@ -56,20 +56,20 @@ export default function ArticleThumbnailUploader({
           className={`flex min-h-40 flex-1 cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed px-5 py-6 text-center transition-colors ${
             uploading || deleting
               ? "border-gray-300 bg-gray-50"
-              : "border-gray-300 hover:border-[var(--color-brand-300)] hover:bg-[var(--color-brand-50)]/30"
+              : "border-gray-300 hover:border-brand-300 hover:bg-brand-50/30"
           }`}>
           {uploading ? (
             <>
-              <Loader2 size={22} className="animate-spin text-[var(--color-brand-300)]" />
-              <span className="text-sm text-[var(--color-text-muted)]">Đang tải ảnh lên Cloudinary...</span>
+              <Loader2 size={22} className="animate-spin text-brand-300" />
+              <span className="text-sm text-text-muted">Đang tải ảnh lên Cloudinary...</span>
             </>
           ) : (
             <>
-              <Upload size={22} className="text-[var(--color-text-muted)]" />
-              <span className="text-sm font-medium text-[var(--color-text-default)]">
+              <Upload size={22} className="text-text-muted" />
+              <span className="text-sm font-medium text-text-default">
                 {thumbnail ? "Thay ảnh đại diện" : "Tải ảnh đại diện"}
               </span>
-              <span className="text-xs text-[var(--color-text-muted)]">
+              <span className="text-xs text-text-muted">
                 JPEG, PNG, WebP hoặc AVIF. Ảnh sẽ được lưu theo folder riêng của bài viết.
               </span>
             </>

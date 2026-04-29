@@ -1,458 +1,268 @@
 [![CI](https://github.com/beo1123/sofa-ecommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/beo1123/sofa-ecommerce/actions/workflows/ci.yml)
 
-# **Sofa Ecommerce** — Production-ready Ecommerce App
+# Sofa Ecommerce Monorepo
 
-Ứng dụng bán sofa **sẵn sàng triển khai**, xây dựng với **Next.js (App Router)** + **TypeScript**.  
-Tích hợp công cụ hiện đại, CI/CD, và quy trình đóng góp rõ ràng.
+Monorepo nay dung pnpm workspace gom 3 app va cac package dung chung:
 
-## **Tech Stack**
+- apps/web: Next.js storefront (mac dinh 3000)
+- apps/admin: Next.js admin (3001)
+- apps/api: Hono API (4000)
+- packages/db: Prisma schema + client wrapper
+- packages/types: shared TypeScript types
+- packages/utils: shared utilities
+- packages/ui: shared UI components (source package, khong co build script)
+- packages/config: shared eslint/tsconfig package
 
-- **Next.js** (App Router)
-- **TypeScript**
-- **pnpm** (package manager)
-- **Redux Toolkit** (đang phát triển)
-- **Tailwind CSS** (đang phát triển)
-- **GitHub Actions** (CI/CD)
-- **Prisma ORM** + **PostgreSQL** (Local / Neon Cloud)
+Tai lieu chi tiet kien truc: xem MONOREPO.md.
 
----
+## 1) Yeu cau moi truong
 
-## **Quick Start (Khởi động nhanh)**
+- Node.js 20+
+- pnpm 9+
+- Docker Desktop (neu dung local Postgres)
 
-```bash
-# Cài đặt dependencies
-npm install
-# hoặc
-pnpm install
+Kiem tra nhanh:
 
-# Chạy dev server
-npm run dev
-# hoặc
-pnpm dev
+    node -v
+    pnpm -v
+    docker -v
 
-# Kiểm tra code (lint)
-pnpm lint
+## 2) Cai dat va khoi tao
 
-# Build production
-pnpm build
+1. Cai dependency:
 
-# Chạy test (đang phát triển)
-pnpm test
-```
+   pnpm install
 
-## **Docker & Database Commands**
+2. Tao file env tu mau:
 
-```bash
-
-# Dừng và xóa container cũ (nếu có)
-
-docker compose -f docker-compose.postgres.yml down --remove-orphans
-
-# Khởi động PostgreSQL container
-
-docker compose -f docker-compose.postgres.yml up -d
-
-# Tắt PostgreSQL hệ thống (nếu chạy trên Windows)
-
-# → Dùng Services → tắt "PostgreSQL"
-
-# Kiểm tra IP của container (nếu cần kết nối trực tiếp)
-
-docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' sofa-ecommerce-db-1
-
-```
-
----
-
-## **Prisma Commands**
-
-```bash
-
-# Tạo client Prisma
-
-npx prisma generate
-
-# hoặc
-
-npm run prisma:generate
-
-# Tạo & áp dụng migration đầu tiên
-
-npx prisma migrate dev --name init --schema=prisma/schema.prisma
-
-# hoặc
-
-npm run prisma:migrate:dev
-
-# Mở Prisma Studio (giao diện quản lý DB)
-
-npx prisma studio
-
-```
-
----
-
-# **Hướng Dẫn Cài Đặt Dự Án Sofa Ecommerce**
-
-## **Giới thiệu**
-
-Hướng dẫn này cung cấp các bước cài đặt và thiết lập dự án Sofa Ecommerce sau khi clone về. Bạn có thể chọn sử dụng database **PostgreSQL** trên máy local hoặc sử dụng **Neon** (dịch vụ PostgreSQL đám mây).
-
----
-
-## **I. Cài Đặt Database PostgreSQL trên Máy Local**
-
-<details><summary><strong>1. Cài Đặt Docker và Docker Compose</strong></summary>
-
-1. **Cài Docker trên Ubuntu**
-
-   ```bash
-   sudo apt update
-   sudo apt install docker docker-compose -y
-   ```
-
-2. **Cài Docker trên Windows/macOS**: Tải và cài đặt **[Docker Desktop](https://www.docker.com/products/docker-desktop)**.
-
-</details>
-
-<details><summary><strong>2. Khởi Động Container PostgreSQL</strong></summary>
-
-1. Vào thư mục chứa file cấu hình Docker:
-
-   ```bash
-   cd /path/to/your/project
-   ```
-
-2. **Chạy Docker Compose**:
-
-   ```bash
-   docker compose -f docker-compose.postgres.yml up -d
-   ```
-
-   - `-f` → Chỉ định file `docker-compose` cụ thể.
-   - `up` → Khởi động các dịch vụ.
-   - `-d` → Chạy ở chế độ ngầm.
-
-   ***
-
-   ### **Kiểm Tra Cổng 5432 đã bị chiếm dụng hay chưa**
-
-   Nếu gặp lỗi sau khi chạy:
-
-   ```
-   failed to bind host port for 0.0.0.0:5432 ... address already in use
-   ```
-
-   **Nguyên nhân**: Cổng **5432** đang bị chiếm dụng bởi một service khác (ví dụ PostgreSQL cài trực tiếp trên máy).
-
-   #### **Cách khắc phục**:
-   1. **Cách 1**: Tìm container hoặc service đang chiếm cổng và dừng nó:
-   - Kiểm tra các container đang chạy:
-
-     ```bash
-     sudo docker ps
-     ```
-
-   - Dừng container chiếm cổng:
-
-     ```bash
-     sudo docker stop <container_name>
-     ```
-
-   - Nếu PostgreSQL đang chạy trực tiếp trên máy:
-
-     ```bash
-     sudo systemctl status postgresql
-     sudo systemctl stop postgresql
-     ```
-   2. **Cách 2**: Thay đổi cổng trong file `docker-compose.postgres.yml`:
-   - Mở file và thay đổi `ports`:
-
-     ```yaml
-     ports:
-       - "5433:5432"
-     ```
-
-   - Sau đó, chạy lại container:
-
-     ```bash
-     sudo docker compose -f docker-compose.postgres.yml up -d
-     ```
-
-   PostgreSQL sẽ chạy trên cổng **5432** trong container, nhưng từ máy host, bạn sẽ kết nối qua cổng **5433**.
-
----
-
-</details>
-
-<details><summary><strong>3. Kiểm Tra Container</strong></summary>
-
-1. **Kiểm tra container đang chạy**:
-
-   ```bash
-   docker ps
-   ```
-
-   Nếu thấy container PostgreSQL (postgres:15 hoặc tên bạn đã đặt) → thành công ✅.
-
-2. **Xem log**:
-
-   ```bash
-   docker compose -f docker-compose.postgres.yml logs -f
-   ```
-
-</details>
-
-<details><summary><strong>4. Dừng và Xóa Container</strong></summary>
-
-1. **Dừng container**:
-
-   ```bash
-   docker compose -f docker-compose.postgres.yml down
-   ```
-
-2. **Xóa container + volume (cẩn thận)**:
-
-   ```bash
-   docker compose -f docker-compose.postgres.yml down -v
-   ```
-
-</details>
-
-<details><summary><strong>5. Kết Nối và Sử Dụng PostgreSQL</strong></summary>
-
-#### **Kết nối vào PostgreSQL**
-
-1. **Kết nối vào container**:
-
-   ```bash
-   sudo docker exec -it sofa-ecommerce-postgres-1 psql -U postgres -d sofa
-   ```
-
-2. **Xem danh sách bảng**:
-
-   ```sql
-   \dt
-   ```
-
-#### **Tạo Bảng & Migrate với Prisma**
-
-1. **Chạy migration**:
-
-   ```bash
-   npx prisma migrate dev
-   ```
-
-2. **Hoặc dùng `db push`**:
-
-   ```bash
-   npx prisma db push
-   ```
-
-3. **Cấu hình `.env`**:
-
-   ```env
-   DATABASE_URL="postgresql://postgres:1234@localhost:<your_port>/sofa?schema=public"
-   ```
-
-   Sau đó chạy lại migration.
-
-4. **Seed dữ liệu** (đổi trong `package.json`):
-
-   ```json
-   "scripts": {
-     "seed": "node --loader ts-node/esm prisma/seed.ts"
-   }
-   ```
-
-   ```bash
-   npx prisma db seed
-   ```
-
-</details>
-
----
-
-## **II. Sử Dụng Neon (PostgreSQL Cloud Service)**
-
-<details><summary><strong>1. Đăng Ký và Tạo Dự Án trên Neon</strong></summary>
-
-1. Tạo tài khoản tại: [Neon](https://neon.tech/)
-2. Tạo database mới → lưu **host, user, password**.
-
-</details>
-
-<details><summary><strong>2. Dump và Restore Database từ Local lên Neon</strong></summary>
-
-#### **Bước 1: Dump từ Local**
-
-```bash
-pg_dump -U postgres -h localhost -Fc --no-owner --no-acl sofa > sofa.dump
-```
-
-- `-Fc` → định dạng custom.
-- `--no-owner` / `--no-acl` → tránh lỗi quyền.
-
-#### **Bước 2: Import vào Neon**
-
-Dump:
-
-```bash
-pg_dump -U postgres -h localhost --no-owner --no-acl -f sofa_dump.sql sofa
-```
-
-Import:
-
-```bash
-psql "postgresql://neondb_owner:<password>@ep-bold-fire-a1kme9hr-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require" -f sofa_dump.sql
-```
-
-</details>
-
-<details><summary><strong>3. Tạo Bảng & Migrate trên Neon</strong></summary>
-
-1. **Cấu hình `.env`**:
-
-   ```env
-   DATABASE_URL="postgresql://neondb_owner:<password>@ep-bold-fire-a1kme9hr-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
-   ```
-
-2. **Chạy migration**:
-
-   ```bash
-   npx prisma migrate dev
-   ```
-
-3. **Seed dữ liệu** (nếu cần):
-
-   ```bash
-   npx prisma db seed
-   ```
-
-</details>
-
----
-
-## **Tóm Tắt**
-
-- **Docker + PostgreSQL trên Local**: Dễ dàng phát triển và thử nghiệm mà không cần cài đặt PostgreSQL thủ công.
-- **Neon (PostgreSQL Cloud Service)**: Giúp bạn dễ dàng quản lý database mà không cần cài đặt hoặc duy trì server riêng.
-
----
-
-## **III. Cấu hình Cloudinary (Upload ảnh Admin)**
-
-1. Đăng nhập Cloudinary Dashboard và lấy thông tin tại mục **API Environment variable**.
-2. Tạo file `.env.local` (hoặc cập nhật `.env`) và thêm 1 trong 2 cách:
-
-```env
-# Cách 1 (khuyến nghị)
-CLOUDINARY_URL=cloudinary://<API_KEY>:<API_SECRET>@<CLOUD_NAME>
-
-# Cách 2
-# CLOUDINARY_CLOUD_NAME=<YOUR_CLOUD_NAME>
-# CLOUDINARY_API_KEY=<YOUR_API_KEY>
-# CLOUDINARY_API_SECRET=<YOUR_API_SECRET>
-```
-
-3. Khởi động lại dev server:
-
-```bash
-npm run dev
-```
-
-4. Đăng nhập tài khoản admin rồi thử upload ảnh trong trang admin (API: `/api/admin/upload`).
-
-Lưu ý:
-
-- Nếu thiếu env Cloudinary, API upload sẽ báo lỗi cấu hình rõ ràng.
-- Ảnh trả về URL từ `res.cloudinary.com` và đã được allow trong `next.config.ts`.
-
-//các bước làm nếu thêm bảng mới
-bước 1: npx prisma migrate reset
-bước 2 : npx prisma migrate dev --name "tên migrate của bạn"
-bước 3: npx prisma generate
-bước 3: npm run prisma:seed(chạy seed để gen data mẫu)
-
----
-
-## **IV. Setup môi trường Development (Local)**
-
-1. Cài dependency:
-
-   ```bash
-   npm install
-   ```
-
-2. Tạo env local:
-
-   ```bash
-   # macOS / Linux
-   cp .env.example .env.local
-
-   # Windows PowerShell
    Copy-Item .env.example .env.local
-   ```
 
-   Nếu dùng Docker Postgres local, đặt:
+3. Neu dung Postgres local bang Docker, dat DATABASE_URL trong .env.local:
 
-   ```env
    DATABASE_URL="postgresql://postgres:1234@localhost:5433/sofa?schema=public"
-   NEXTAUTH_URL="http://localhost:3000"
-   NEXT_PUBLIC_API_BASE_URL="http://localhost:3000/api"
-   ```
 
-3. Khởi động database:
+4. Khoi dong DB local:
 
-   ```bash
-   npm run db:up
-   ```
+   pnpm db:up
 
-4. Generate + migrate + seed:
+5. Tao Prisma client + migrate + seed:
 
-   ```bash
-   npm run prisma:generate
-   npm run prisma:migrate:dev
-   npm run prisma:seed
-   # optional admin user
-   npm run prisma:seed:admin
-   ```
+   pnpm db:generate
+   pnpm db:migrate
+   pnpm db:seed
 
-5. Chạy ứng dụng:
+## 3) Chay development
 
-   ```bash
-   npm run dev
-   ```
+- Chay rieng web:
 
----
+      pnpm dev:web
 
-## **V. Setup Production trên Vercel**
+- Chay rieng admin:
 
-1. Dùng PostgreSQL cloud (khuyến nghị Neon) cho `DATABASE_URL`.
+      pnpm dev:admin
 
-2. Trên Vercel, thêm các Environment Variables cho môi trường Production:
-   - `DATABASE_URL`
-   - `NEXTAUTH_URL` = domain production của bạn (ví dụ `https://your-domain.vercel.app`)
-   - `NEXTAUTH_SECRET`
-   - `NEXT_PUBLIC_API_BASE_URL` = `https://your-domain.vercel.app/api`
-   - `NEXT_PUBLIC_PHONE_URL`
-   - `NEXT_PUBLIC_ZALO_URL`
-   - `NEXT_PUBLIC_FACEBOOK_URL`
-   - `CLOUDINARY_URL` (hoặc 3 biến Cloudinary tách riêng)
+- Chay rieng api:
 
-3. Build command trên Vercel:
-   - Đã cấu hình trong `vercel.json`: `next build`
+      pnpm dev:api
 
-4. Sau khi deploy thành công, chạy migration production:
+- Chay ca 3 service cung luc:
 
-   ```bash
-   npx prisma migrate deploy --schema=prisma/schema.prisma
-   ```
+      pnpm dev:all
 
-   Hoặc dùng script:
+## 4) Build toan bo du an
 
-   ```bash
-   npm run prisma:migrate:deploy
-   ```
+Lenh hien tai trong repo:
 
-5. Nếu cần seed production, chỉ chạy dữ liệu an toàn cho production.
+    pnpm build:all
+
+Lenh nay se chay:
+
+1. build:packages (types, utils, db)
+2. build:web
+3. build:api
+4. build:admin
+
+Build mac dinh (shortcut):
+
+    pnpm build
+
+Lenh nay chi build web app.
+
+## 5) Build tung package/workspace
+
+### Apps
+
+- @repo/web
+
+      pnpm --filter @repo/web build
+
+- @repo/admin
+
+      pnpm --filter @repo/admin build
+
+- @repo/api
+
+      pnpm --filter @repo/api build
+
+### Shared packages
+
+- @repo/types
+
+      pnpm --filter @repo/types build
+
+- @repo/utils
+
+      pnpm --filter @repo/utils build
+
+- @repo/db
+
+      pnpm --filter @repo/db build
+
+- @repo/ui
+
+  Khong co script build; package nay xuat truc tiep source TypeScript/TSX qua exports.
+
+- @repo/config
+
+  Khong co script build; package nay chi chua file cau hinh (eslint/tsconfig).
+
+## 6) Typecheck, lint, start
+
+- Typecheck tat ca workspace:
+
+      pnpm typecheck:all
+
+- Typecheck tung app:
+
+      pnpm typecheck:web
+      pnpm typecheck:api
+      pnpm typecheck:admin
+
+- Lint toan repo:
+
+      pnpm lint
+
+- Start production mode tung service sau khi da build:
+
+      pnpm start:web
+      pnpm start:api
+      pnpm start:admin
+
+## 7) Database commands (root scripts)
+
+- Bat/tat/reset DB local:
+
+      pnpm db:up
+      pnpm db:down
+      pnpm db:reset
+
+- Xem logs postgres:
+
+      pnpm db:logs
+
+- Prisma workflow:
+
+      pnpm db:generate
+      pnpm db:migrate
+      pnpm db:migrate:deploy
+      pnpm db:studio
+      pnpm db:seed
+
+## 8) Co nhanh hon singleton setup khong?
+
+Tra loi ngan gon: nhanh hon trong vong doi phat trien va CI khi du an lon, nhung khong luon nhanh hon cho cold start ban dau.
+
+### Diem nhanh hon
+
+1. Incremental work theo scope:
+   - Co the chi build/chay package can thiet bang filter, khong can chay lai ca he thong.
+   - Vi du sua API thi chay @repo/api thay vi boot ca web/admin.
+
+2. Tai su dung package dung chung:
+   - types/utils/db/ui dung lai cho nhieu app, giam duplicate code.
+   - Sua 1 cho, tat ca app dung chung duoc cap nhat.
+
+3. CI/CD de toi uu theo workspace:
+   - Co the tach job build/test theo app-package.
+   - Tranh build toan bo neu thay doi chi nam o mot scope nho.
+
+### Diem co the cham hon
+
+1. Cai dependency lan dau thuong nang hon singleton:
+   - Nhieu workspace, nhieu dependency khac nhau.
+
+2. Quan ly script va thu tu build phuc tap hon:
+   - Can ro rang dependency graph giua package va app.
+
+3. Neu script tong chua toi uu, build all co the chay thua:
+   - Nen giu build:packages dong bo dependency dung chung (types, utils, db) truoc apps.
+   - Co the tiep tuc toi uu bang cach chi build scope bi thay doi trong CI.
+
+### Ket luan practical
+
+- Neu team nho, 1 app, release don gian: singleton de van hanh, toc do bat dau nhanh hon.
+- Neu co nhieu app (web + admin + api) va package dung chung: monorepo la lua chon hop ly, nhanh hon o quy mo trung-lon nho kha nang chia nho va tai su dung.
+
+## 9) Lenh de xac minh nhanh sau setup
+
+    pnpm lint
+    pnpm typecheck:all
+    pnpm build:all
+
+Neu 3 lenh tren xanh, workflow build co ban da san sang.
+
+## 10) Benchmark nhanh (Apr 29, 2026)
+
+Do tren workspace hien tai, bang cach do thoi gian thuc thi lenh bang PowerShell Stopwatch.
+
+Ket qua sau khi fix cac blocker code/config:
+
+| Command             | Time (s) | Status | Ghi chu ngan                              |
+| ------------------- | -------: | ------ | ----------------------------------------- |
+| pnpm build:packages |     3.80 | Pass   | build types + utils + db                  |
+| pnpm build:web      |    22.23 | Pass   | can env Cloudinary                        |
+| pnpm build:api      |     2.58 | Pass   | da pass sau khi dieu chinh tsconfig.build |
+| pnpm build:admin    |    10.72 | Pass   | pass on dinh                              |
+| pnpm build:all      |    37.74 | Pass   | pass khi co env Cloudinary                |
+| pnpm typecheck:all  |     3.86 | Pass   | all workspace xanh                        |
+
+Luu y:
+
+- Build web/all can co mot trong 2 cau hinh env: CLOUDINARY_URL hoac CLOUDINARY_CLOUD_NAME + CLOUDINARY_API_KEY + CLOUDINARY_API_SECRET.
+- Trong lan do benchmark nay da set env demo de xac minh pipeline build.
+- Co canh bao Next.js ve key cu trong next.config.ts (experimental.serverComponentsExternalPackages, eslint), nhung chi la warning, khong chan build.
+
+## 11) Cach benchmark chuan: singleton vs monorepo
+
+De so sanh cong bang, dung cung may, cung Node/pnpm version, cung du lieu va cung bo testcase.
+
+Kich ban nen do:
+
+1. Cold install + cold build:
+   - Xoa cache, cai dep tu dau, build production.
+2. Warm build:
+   - Build lan 2 ngay sau lan 1 (khong doi code).
+3. Incremental build:
+   - Sua nho trong 1 scope (vi du 1 file api) va do lai.
+4. Typecheck all.
+5. Dev startup:
+   - Thoi gian tu luc chay lenh dev den luc app san sang.
+
+Chi so goi y:
+
+- T_install: thoi gian cai dependency
+- T_build_cold: thoi gian build lan dau
+- T_build_warm: thoi gian build lan 2
+- T_build_incremental: thoi gian build sau thay doi nho
+- T_typecheck: thoi gian typecheck
+- T_dev_ready: thoi gian startup dev
+
+Cong thuc danh gia nhanh:
+
+- Lien tuc phat trien: T_build_incremental + T_typecheck
+- CI thong thuong: T_build_cold + T_typecheck
+
+Ky vong thuong gap:
+
+- Singleton thuong nhanh hon o T_install va setup ban dau.
+- Monorepo thuong nhanh hon o T_build_incremental neu tan dung filter/scope tot.

@@ -1,4 +1,4 @@
-import Container from "@/components/ui/Container";
+﻿import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { SafeImage } from "@/components/ui/SafeImage";
@@ -26,7 +26,7 @@ export default function MaterialsSection() {
             với cả không gian sang trọng lẫn phong cách tối giản.
           </Text>
 
-          <ul className="list-disc ml-5 space-y-2 text-[var(--color-text-muted)]">
+          <ul className="list-disc ml-5 space-y-2 text-text-muted">
             <li>Vải woven chống phai màu, chống bám bụi</li>
             <li>Da microfiber mềm, thoáng khí, dễ lau sạch</li>
             <li>Khung gỗ sồi kiln-dried hạn chế cong vênh</li>

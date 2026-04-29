@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -97,10 +97,10 @@ export default function CartPage() {
   };
 
   return (
-    <main className="min-h-screen py-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
+    <main className="min-h-screen py-12 bg-bg-muted text-text-default">
       <Container className="space-y-8">
         <div className="flex items-center justify-between gap-4">
-          <Heading level={1} className="ml-3 text-[var(--color-brand-400)]">
+          <Heading level={1} className="ml-3 text-brand-400">
             Giỏ hàng
           </Heading>
           <Badge className="mr-3" variant="default">
@@ -113,8 +113,8 @@ export default function CartPage() {
           <div className="lg:col-span-2 space-y-4">
             {items.length === 0 ? (
               <div className="p-8 bg-white rounded shadow text-center">
-                <div className="mx-auto mb-4 w-24 h-24 flex items-center justify-center rounded-full bg-[var(--color-bg-page)]">
-                  <ImageIcon className="w-8 h-8 text-[var(--color-text-muted)]" />
+                <div className="mx-auto mb-4 w-24 h-24 flex items-center justify-center rounded-full bg-bg-page">
+                  <ImageIcon className="w-8 h-8 text-text-muted" />
                 </div>
                 <Heading level={3}>Giỏ hàng trống</Heading>
                 <Text muted className="mb-4">
@@ -128,13 +128,13 @@ export default function CartPage() {
               <div className="bg-white rounded shadow divide-y">
                 {items.map((it) => (
                   <div key={`${it.productId}-${it.variantId ?? ""}-${it.sku ?? ""}`} className="p-4 flex gap-4">
-                    <div className="w-[96px] h-[96px] flex-shrink-0 rounded overflow-hidden bg-[var(--color-bg-muted)] flex items-center justify-center">
+                    <div className="w-24 h-24 shrink-0 rounded overflow-hidden bg-bg-muted flex items-center justify-center">
                       {it.image ? (
                         // next/image requires domains or remote patterns; for local/demo it's ok
                         <SafeImage src={it.image} alt={it.name} width={96} height={96} className="object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <ImageIcon className="w-6 h-6 text-[var(--color-text-muted)]" />
+                          <ImageIcon className="w-6 h-6 text-text-muted" />
                         </div>
                       )}
                     </div>
@@ -157,7 +157,7 @@ export default function CartPage() {
                             aria-label={`Giảm số lượng ${it.name}`}>
                             −
                           </Button>
-                          <Text className="min-w-[36px] text-center">{it.quantity}</Text>
+                          <Text className="min-w-9 text-center">{it.quantity}</Text>
                           <Button
                             size="xs"
                             variant="outline"
@@ -175,7 +175,7 @@ export default function CartPage() {
                         </div>
 
                         <div className="text-right">
-                          <Text className="text-sm line-through text-[var(--color-text-muted)]">
+                          <Text className="text-sm line-through text-text-muted">
                             nếu có compareAtPrice, có thể hiển thị
                           </Text>
                           <Text className="font-semibold">{(it.price * it.quantity).toLocaleString("vi-VN")}₫</Text>

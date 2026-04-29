@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -96,7 +96,7 @@ export default function SearchBox({ className = "" }: { className?: string }) {
                       />
                     ) : (
                       <div className="p-3 rounded-full bg-white/60 mb-2">
-                        <ImageIcon className="w-8 h-8 text-[var(--color-text-muted)]" />
+                        <ImageIcon className="w-8 h-8 text-text-muted" />
                       </div>
                     )}
                     <div className="flex flex-col">

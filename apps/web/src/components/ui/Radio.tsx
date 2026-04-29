@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Text from "./Text";
@@ -29,9 +29,7 @@ export default function RadioGroup({ name, options, value, onChange, error }: Ra
             key={opt.value}
             className={clsx(
               "flex items-center justify-between gap-4 rounded-xl border px-4 py-3 cursor-pointer transition-all",
-              checked
-                ? "border-[var(--color-brand-300)] bg-[var(--color-brand-50)]"
-                : "border-gray-300 hover:border-[var(--color-brand-200)]"
+              checked ? "border-brand-300 bg-brand-50" : "border-gray-300 hover:border-brand-200"
             )}>
             <div className="flex items-center gap-3">
               <input
@@ -40,7 +38,7 @@ export default function RadioGroup({ name, options, value, onChange, error }: Ra
                 value={opt.value}
                 checked={checked}
                 onChange={() => onChange?.(opt.value)}
-                className="h-4 w-4 text-[var(--color-brand-400)] accent-[var(--color-brand-400)] focus:ring-[var(--color-brand-300)]"
+                className="h-4 w-4 text-brand-400 accent-brand-400 focus:ring-brand-300"
               />
               <div>
                 <Text className="font-medium">{opt.label}</Text>

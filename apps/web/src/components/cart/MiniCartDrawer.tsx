@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
@@ -73,8 +73,8 @@ export default function MiniCartDrawer({ isOpen, onClose }: MiniCartDrawerProps)
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-3">
-                  <div className="mb-4 p-4 rounded-full bg-[var(--color-bg-muted)]">
-                    <ShoppingCart className="w-12 h-12 text-[var(--color-brand-300)]" />
+                  <div className="mb-4 p-4 rounded-full bg-bg-muted">
+                    <ShoppingCart className="w-12 h-12 text-brand-300" />
                   </div>
                   <Heading level={4}>Giỏ hàng trống</Heading>
                   <Text muted>Hãy thêm sản phẩm vào giỏ để bắt đầu mua sắm nhé.</Text>
@@ -87,7 +87,7 @@ export default function MiniCartDrawer({ isOpen, onClose }: MiniCartDrawerProps)
                   <div
                     key={`${it.productId}-${it.variantId ?? ""}-${it.sku ?? ""}`}
                     className="flex gap-3 border-b border-gray-100 pb-3 last:border-none">
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       {it.image ? (
                         <SafeImage
                           src={it.image}
@@ -97,8 +97,8 @@ export default function MiniCartDrawer({ isOpen, onClose }: MiniCartDrawerProps)
                           className="rounded object-cover"
                         />
                       ) : (
-                        <div className="flex items-center justify-center w-[80px] h-[80px] bg-[var(--color-bg-muted)] rounded">
-                          <ImageIcon className="w-6 h-6 text-[var(--color-text-muted)]" />
+                        <div className="flex items-center justify-center w-[80px] h-[80px] bg-bg-muted rounded">
+                          <ImageIcon className="w-6 h-6 text-text-muted" />
                         </div>
                       )}
                     </div>

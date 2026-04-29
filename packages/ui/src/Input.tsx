@@ -1,9 +1,8 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: string;
   error?: string;
   helperText?: string;
@@ -50,7 +49,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const stateClasses = hasError
       ? "border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500"
-      : "border-[var(--color-brand-100)] focus:ring-[var(--color-brand-300)] focus:border-[var(--color-brand-400)]";
+      : "border-brand-100 focus:ring-brand-300 focus:border-brand-400";
 
     const iconPadding = leftIcon ? "pl-10" : rightIcon ? "pr-10" : "";
     const inputClasses = `${baseInputClasses} ${stateClasses} ${iconPadding} ${className}`;
@@ -59,10 +58,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={containerClass}>
         {/* LABEL */}
         {label && (
-          <label
-            htmlFor={inputId}
-            className="block text-sm font-medium text-[var(--color-text-default)] mb-1"
-          >
+          <label htmlFor={inputId} className="block text-sm font-medium text-text-default mb-1">
             {label}
             {required && (
               <span className="text-red-500 ml-1" aria-label="required">
@@ -76,7 +72,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           {leftIcon && (
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-[var(--color-text-muted)]">{leftIcon}</span>
+              <span className="text-text-muted">{leftIcon}</span>
             </div>
           )}
 
@@ -87,9 +83,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             required={required}
             className={inputClasses}
             aria-invalid={hasError}
-            aria-describedby={
-              hasError ? errorId : helperText ? helperId : undefined
-            }
+            aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
@@ -98,9 +92,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           {rightIcon && (
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-auto">
-              <span className="text-[var(--color-text-muted)]">
-                {rightIcon}
-              </span>
+              <span className="text-text-muted">{rightIcon}</span>
             </div>
           )}
         </div>
@@ -112,10 +104,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </p>
         )}
         {helperText && !error && (
-          <p
-            id={helperId}
-            className="mt-1 text-sm text-[var(--color-text-muted)]"
-          >
+          <p id={helperId} className="mt-1 text-sm text-text-muted">
             {helperText}
           </p>
         )}

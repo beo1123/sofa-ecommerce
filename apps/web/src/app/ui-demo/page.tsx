@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Container from "@/components/ui/Container";
@@ -70,10 +70,10 @@ export default function UIDemoPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-muted)] text-[var(--color-text-default)] py-12">
+    <main className="min-h-screen bg-bg-muted text-text-default py-12">
       <Container className="space-y-16">
         {/* PAGE TITLE */}
-        <Heading level={1} className="text-[var(--color-brand-400)] mb-8 text-center">
+        <Heading level={1} className="text-brand-400 mb-8 text-center">
           🎨 UI Components Demo
         </Heading>
 

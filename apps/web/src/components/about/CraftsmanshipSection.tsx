@@ -1,4 +1,4 @@
-import Container from "@/components/ui/Container";
+﻿import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { SafeImage } from "@/components/ui/SafeImage";
@@ -6,7 +6,7 @@ import { sofaImages } from "./images";
 
 export default function CraftsmanshipSection() {
   return (
-    <section className="py-10 rounded-2xl bg-[var(--color-bg-muted)]">
+    <section className="py-10 rounded-2xl bg-bg-muted">
       <Container className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="px-5">
           <SafeImage
@@ -36,7 +36,7 @@ export default function CraftsmanshipSection() {
             Châu Âu và vải bọc thân thiện với môi trường.
           </Text>
 
-          <ul className="list-disc ml-5 space-y-2 text-[var(--color-text-muted)]">
+          <ul className="list-disc ml-5 space-y-2 text-text-muted">
             <li>Kiểm định chất lượng 5 bước trước khi xuất xưởng</li>
             <li>Đường may kép chống bung, chống xù</li>
             <li>Khung gỗ hardwood chống mối mọt</li>

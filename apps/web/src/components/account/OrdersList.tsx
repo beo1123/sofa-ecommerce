@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -53,7 +53,7 @@ export default function OrdersList() {
     return (
       <Container className="py-16 text-center">
         <Card variant="bordered" className="mx-auto p-10">
-          <PackageSearch size={64} className="mx-auto mb-4 text-[var(--color-brand-400)]" />
+          <PackageSearch size={64} className="mx-auto mb-4 text-brand-400" />
           <Text muted>Hiện tại bạn chưa có đơn hàng nào.</Text>
           <CardFooter className="mt-6 flex justify-center">
             <Link href="/san-pham">
@@ -89,9 +89,7 @@ export default function OrdersList() {
               </div>
 
               <div className="text-right">
-                <Text className="font-semibold text-[var(--color-brand-600)] text-lg">
-                  {formatCurrency(order.total)}
-                </Text>
+                <Text className="font-semibold text-brand-600 text-lg">{formatCurrency(order.total)}</Text>
                 <Badge variant={getOrderStatusVariant(order.status)} className="mt-1 capitalize">
                   {getOrderStatusLabel(order.status)}
                 </Badge>

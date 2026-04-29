@@ -350,8 +350,8 @@ export class AdminProductService {
    */
   async importFromExcel(buffer: Buffer) {
     const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(buffer);
-    
+    await workbook.xlsx.load(buffer as unknown as any);
+
     const worksheet = workbook.worksheets[0];
     if (!worksheet) {
       throw { status: 400, body: fail("Excel file has no sheets", "INVALID_EXCEL") };
@@ -368,7 +368,7 @@ export class AdminProductService {
     const rows: ExcelProductRow[] = [];
     worksheet.eachRow((row, rowNumber) => {
       if (rowNumber === 1) return; // Skip header row
-      
+
       const rowData: Record<string, unknown> = {};
       row.eachCell((cell, colNumber) => {
         const header = headers[colNumber - 1];
@@ -376,7 +376,7 @@ export class AdminProductService {
           rowData[header] = cell.value ?? null;
         }
       });
-      rows.push(rowData as ExcelProductRow);
+      rows.push(rowData as unknown as ExcelProductRow);
     });
 
     if (!rows.length) {

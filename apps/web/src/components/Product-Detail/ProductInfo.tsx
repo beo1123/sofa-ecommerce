@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Star } from "lucide-react";
@@ -135,7 +135,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
   return (
     <div className="p-6 lg:p-8 flex flex-col justify-between">
       <div>
-        <h1 className="text-3xl lg:text-4xl font-bold text-[var(--color-text-default)] mb-3">{product.title}</h1>
+        <h1 className="text-3xl lg:text-4xl font-bold text-text-default mb-3">{product.title}</h1>
 
         {product.shortDescription && (
           <Text muted className="text-lg line-clamp-3 my-1">
@@ -148,31 +148,29 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
             <Star size={18} fill="#FCD34D" stroke="#FCD34D" />
             <span className="font-semibold">{product.reviewsSummary?.average?.toFixed(1) || "0.0"}</span>
           </div>
-          <span className="text-[var(--color-text-muted)] text-sm">
-            ({product.reviewsSummary?.count || 0} đánh giá)
-          </span>
+          <span className="text-text-muted text-sm">({product.reviewsSummary?.count || 0} đánh giá)</span>
         </div>
 
         <div className="mb-6">
           <div className="flex flex-wrap items-baseline gap-2 sm:gap-3">
-            <span className="font-bold text-[var(--color-brand-400)] text-2xl sm:text-4xl">
+            <span className="font-bold text-brand-400 text-2xl sm:text-4xl">
               {formatCurrency(Number(selectedVariant.price))}
             </span>
 
             {selectedVariant.compareAtPrice && (
-              <span className="line-through text-[var(--color-text-muted)] text-base sm:text-xl">
+              <span className="line-through text-text-muted text-base sm:text-xl">
                 {formatCurrency(Number(selectedVariant.compareAtPrice))}
               </span>
             )}
           </div>
-          {/* <p className="text-sm text-[var(--color-text-muted)] mt-1">
+          {/* <p className="text-sm text-text-muted mt-1">
             SKU: {selectedVariant.inventory?.[0]?.sku || "N/A"}
           </p> */}
         </div>
         {/* <div className="space-y-5 mb-6">
           {Object.keys(attributes).map((attrKey) => (
             <div key={attrKey}>
-              <label className="block text-sm font-semibold text-[var(--color-text-default)] mb-2 capitalize">
+              <label className="block text-sm font-semibold text-text-default mb-2 capitalize">
                 {attrKey === "color" ? "Màu sắc" : attrKey === "material" ? "Chất liệu" : attrKey}
               </label>
 
@@ -189,7 +187,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
                       variant={isSelected ? "primary" : "outline"}
                       disabled={!available}
                       className={`border-2 rounded-xl p-0 overflow-hidden transition-all
-                        ${isSelected ? "border-[var(--color-brand-400)]" : "border-gray-300 hover:border-[var(--color-brand-400)]"}
+                        ${isSelected ? "border-brand-400" : "border-gray-300 hover:border-brand-400"}
                         ${!available ? "opacity-40 cursor-not-allowed" : ""}
                       `}
                       style={
@@ -201,7 +199,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
                             }
                           : undefined
                       }>
-                      {!isColor && <span className="px-4 py-2 block text-[var(--color-text-default)]">{value}</span>}
+                      {!isColor && <span className="px-4 py-2 block text-text-default">{value}</span>}
                     </Button>
                   );
                 })}
@@ -211,7 +209,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
         </div> */}
 
         <div className=" mb-6">
-          <label className="block text-sm font-semibold text-[var(--color-text-default)] mb-2">Số lượng</label>
+          <label className="block text-sm font-semibold text-text-default mb-2">Số lượng</label>
           <div className="flex items-center gap-4">
             <div className="flex items-center select-none">
               <Button
@@ -219,23 +217,23 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
                 size="sm"
                 onClick={() => setQuantity((p) => Math.max(1, p - 1))}
                 disabled={quantity <= 1}
-                className="rounded-none border-none !px-4 hover:bg-[var(--color-brand-50)]">
+                className="rounded-none border-none !px-4 hover:bg-brand-50">
                 −
               </Button>
 
-              <span className="w-16 text-center py-2 font-medium text-[var(--color-text-default)]">{quantity}</span>
+              <span className="w-16 text-center py-2 font-medium text-text-default">{quantity}</span>
 
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setQuantity((p) => Math.min(availableQty, p + 1))}
                 disabled={quantity >= availableQty}
-                className="rounded-none border-none !px-4 hover:bg-[var(--color-brand-50)]">
+                className="rounded-none border-none !px-4 hover:bg-brand-50">
                 +
               </Button>
             </div>
 
-            <span className="text-sm text-[var(--color-text-muted)]">
+            <span className="text-sm text-text-muted">
               {availableQty > 0 ? `${availableQty} sản phẩm có sẵn` : "Liên Hệ"}
             </span>
           </div>
@@ -261,7 +259,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
             onAddToCart?.();
           }}
           leftIcon={<ShoppingCart size={20} />}
-          className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white py-4 text-lg font-semibold rounded-xl"
+          className="bg-brand-400 hover:bg-brand-300 text-white py-4 text-lg font-semibold rounded-xl"
           disabled={availableQty === 0}>
           Thêm vào giỏ hàng
         </Button>
@@ -287,7 +285,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
           fullWidth
           leftIcon={<ZaloIcon />}
           onClick={() => window.open(process.env.NEXT_PUBLIC_ZALO_URL, "_blank")}
-          className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white py-4 text-lg font-semibold rounded-xl">
+          className="bg-brand-400 hover:bg-brand-300 text-white py-4 text-lg font-semibold rounded-xl">
           Liên Hệ Zalo
         </Button>
       </div>

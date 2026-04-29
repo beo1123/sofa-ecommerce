@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -49,8 +49,8 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
 
   if (safeImages.length === 0 || !selectedImage) {
     return (
-      <div className="flex items-center justify-center h-96 bg-[var(--color-bg-muted)]">
-        <p className="text-[var(--color-text-muted)]">Không có hình ảnh</p>
+      <div className="flex items-center justify-center h-96 bg-bg-muted">
+        <p className="text-text-muted">Không có hình ảnh</p>
       </div>
     );
   }
@@ -62,7 +62,7 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
       {/* Main Image */}
       <div
         className="
-          relative aspect-square bg-[var(--color-bg-muted)]
+          relative aspect-square bg-bg-muted
           rounded-2xl overflow-hidden group mb-4
         "
         onTouchStart={onTouchStart}
@@ -112,11 +112,11 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
             key={idx}
             onClick={() => setSelectedImage(img.url)}
             className={`
-              relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all 
+              relative w-20 h-20 shrink-0 rounded-lg overflow-hidden border-2 transition-all 
               ${
                 selectedImage === img.url
-                  ? "border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
-                  : "border-transparent hover:border-[var(--color-brand-200)]"
+                  ? "border-brand-400 ring-2 ring-brand-200"
+                  : "border-transparent hover:border-brand-200"
               }
             `}>
             <SafeImage

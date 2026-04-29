@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -25,9 +25,7 @@ export default function AdminSidebar() {
 
   return (
     <aside
-      className={`flex flex-col bg-[var(--color-brand-400)] text-white transition-all duration-300 ${
-        collapsed ? "w-16" : "w-60"
-      }`}>
+      className={`flex flex-col bg-brand-400 text-white transition-all duration-300 ${collapsed ? "w-16" : "w-60"}`}>
       {/* Logo */}
       <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
         {!collapsed && <span className="text-lg font-bold tracking-wide">Sofa Admin</span>}

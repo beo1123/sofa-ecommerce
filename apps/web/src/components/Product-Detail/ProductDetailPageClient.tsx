@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -20,20 +20,20 @@ export default function ProductDetailPageClient({ product, related }: ProductDet
   const [isCartOpen, setCartOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-muted)]">
+    <main className="min-h-screen bg-bg-muted">
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
-            <a href="/" className="hover:text-[var(--color-brand-400)]">
+          <div className="flex items-center gap-2 text-sm text-text-muted">
+            <a href="/" className="hover:text-brand-400">
               Trang chủ
             </a>
             <span>/</span>
-            <a href="/san-pham" className="hover:text-[var(--color-brand-400)]">
+            <a href="/san-pham" className="hover:text-brand-400">
               Sản phẩm
             </a>
             <span>/</span>
-            <span className="text-[var(--color-text-default)]">{product.title}</span>
+            <span className="text-text-default">{product.title}</span>
           </div>
         </div>
       </div>

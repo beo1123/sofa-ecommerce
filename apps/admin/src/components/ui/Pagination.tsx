@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Button from "@/components/ui/Button";
 
@@ -13,23 +13,15 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pr
 
   return (
     <div className="flex justify-center items-center gap-2 mt-8">
-      <Button
-        variant="outline"
-        disabled={currentPage === 1}
-        onClick={() => onPageChange(currentPage - 1)}
-      >
+      <Button variant="outline" disabled={currentPage === 1} onClick={() => onPageChange(currentPage - 1)}>
         Trước
       </Button>
 
-      <span className="text-sm text-[var(--color-text-muted)]">
+      <span className="text-sm text-text-muted">
         Trang {currentPage} / {totalPages}
       </span>
 
-      <Button
-        variant="outline"
-        disabled={currentPage === totalPages}
-        onClick={() => onPageChange(currentPage + 1)}
-      >
+      <Button variant="outline" disabled={currentPage === totalPages} onClick={() => onPageChange(currentPage + 1)}>
         Sau
       </Button>
     </div>

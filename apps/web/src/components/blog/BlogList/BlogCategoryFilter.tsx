@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { BlogArticleCategory } from "@/types/blog/blog";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function BlogCategoryFilter({
 }) {
   const base = "px-4 py-2 rounded-full border text-sm font-medium transition-all whitespace-nowrap text-center";
 
-  const active = "bg-[var(--color-brand-400)] border-[var(--color-brand-400)] text-white shadow-sm";
+  const active = "bg-brand-400 border-brand-400 text-white shadow-sm";
 
   const inactive = "bg-white text-gray-700 border-gray-300 hover:bg-gray-100";
 

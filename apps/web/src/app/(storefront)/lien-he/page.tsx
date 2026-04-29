@@ -1,4 +1,4 @@
-import ContactForm from "@/components/contact/ContactForm";
+﻿import ContactForm from "@/components/contact/ContactForm";
 import ContactInfoCard from "@/components/contact/ContactInfoCard";
 import ContactMap from "@/components/contact/ContactMap";
 import Container from "@/components/ui/Container";
@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen py-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
+    <main className="min-h-screen py-12 bg-bg-muted text-text-default">
       <Container className="space-y-8 ">
         <div className="text-center max-w-2xl mx-auto">
           <Heading level={1}>Liên hệ Sofa Phạm Gia</Heading>

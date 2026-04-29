@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -54,7 +54,7 @@ export default function ProductsPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[var(--color-text-default)]">Quản lý sản phẩm</h1>
+        <h1 className="text-2xl font-bold text-text-default">Quản lý sản phẩm</h1>
         <Link href="/products/new">
           <Button leftIcon={<Plus size={18} />}>Thêm sản phẩm</Button>
         </Link>
@@ -98,18 +98,14 @@ export default function ProductsPage() {
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-lg border border-[var(--color-brand-50)] overflow-hidden">
+          <div className="bg-white rounded-lg border border-brand-50 overflow-hidden">
             <ProductTable products={products} onDelete={handleDelete} deleting={deleting} />
           </div>
 
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-6 flex justify-center">
-              <Pagination
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={setPage}
-              />
+              <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
             </div>
           )}
         </>
