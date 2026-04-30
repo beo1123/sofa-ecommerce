@@ -2,16 +2,11 @@
 import BlogGrid from "@/components/blog/BlogList/BlogGrid";
 import BlogHeader from "@/components/blog/BlogList/BlogHeader";
 import Container from "@/components/ui/Container";
-import { prisma } from "@/lib/prisma";
-import { ArticleService } from "@/services/article.service";
-import { ArticleCategory } from "@/services/articleCategory.service";
-const articleService = new ArticleService(prisma);
-const categoryService = new ArticleCategory(prisma);
+import { sdk } from "@repo/sdk";
+import { generateArticlesMetadata } from "@repo/seo";
+import type { BlogArticle } from "@/types/blog/blog";
 
-export const metadata = {
-  title: "Bài viết nội thất Sofa Phạm Gia",
-  description: "Tin tức, xu hướng nội thất, kinh nghiệm chọn sofa và kiến thức hữu ích từ Sofa Phạm Gia.",
-};
+export const metadata = generateArticlesMetadata();
 
 export const revalidate = 3600;
 export default async function BlogPage(props: { searchParams: Promise<{ page?: string; category?: string }> }) {
@@ -19,25 +14,28 @@ export default async function BlogPage(props: { searchParams: Promise<{ page?: s
 
   const page = Number(searchParams.page) || 1;
   const perPage = 9;
-  const skip = (page - 1) * perPage;
   const categorySlug = searchParams.category;
 
-  const categories = await categoryService.getAllArticleCategory(1, 100, 0);
+  const categories = await sdk.articleCategories.getAll();
+  const rawItems = categorySlug
+    ? (await sdk.articles.listByCategory(categorySlug)).articles
+    : (await sdk.articles.list(page, perPage)).items;
 
-  let articles: any;
-
-  if (categorySlug) {
-    articles = await articleService.getArticleByCategory(categorySlug);
-  } else {
-    articles = await articleService.getAllArticle(page, perPage, skip);
-  }
+  const items: BlogArticle[] = rawItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    slug: item.slug,
+    excerpt: item.excerpt ?? "",
+    thumbnail: item.thumbnail ?? "/images/404.jpg",
+    publishedAt: item.publishedAt ?? new Date().toISOString(),
+  }));
 
   return (
     <main className="min-h-screen bg-bg-muted px-5">
       <BlogHeader />
       <Container>
-        <BlogCategoryFilter categories={categories.data} selected={categorySlug} />
-        <BlogGrid items={categorySlug ? articles.data.articles : articles.data} />
+        <BlogCategoryFilter categories={categories} selected={categorySlug} />
+        <BlogGrid items={items} />
       </Container>
     </main>
   );

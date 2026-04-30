@@ -17,9 +17,11 @@ sofa-ecommerce/
 ├── packages/
 │   ├── db/                      ← @repo/db — shared Prisma client
 │   ├── ui/                      ← @repo/ui — shared UI components
+│   ├── sdk/                     ← @repo/sdk — shared API client for frontend apps
 │   ├── types/                   ← @repo/types — shared TypeScript types
 │   ├── utils/                   ← @repo/utils — shared utility functions
-│   └── config/                  ← @repo/config — shared ESLint/TSConfig
+│   ├── config/                  ← @repo/config — shared ESLint/TSConfig
+│   └── seo/                     ← @repo/seo — pure SEO metadata + schema transformers
 ├── pnpm-workspace.yaml
 └── package.json
 ```
@@ -30,10 +32,10 @@ sofa-ecommerce/
 
 ### `packages/db` — `@repo/db`
 
-| File | Purpose |
-|------|---------|
-| `prisma/schema.prisma` | Single source of truth for the DB schema |
-| `src/index.ts` | Prisma singleton + re-exports all `@prisma/client` types |
+| File                   | Purpose                                                  |
+| ---------------------- | -------------------------------------------------------- |
+| `prisma/schema.prisma` | Single source of truth for the DB schema                 |
+| `src/index.ts`         | Prisma singleton + re-exports all `@prisma/client` types |
 
 **Import anywhere:**
 
@@ -51,6 +53,7 @@ import { Button, Card, Modal, Input, Badge, Spinner, Heading, Dropdown } from "@
 ```
 
 **Components:**
+
 - `Button` - Primary, secondary, outline, ghost, danger variants
 - `Card` - With CardHeader, CardTitle, CardContent, CardFooter
 - `Modal` - Animated modal with framer-motion
@@ -66,6 +69,15 @@ Shared response envelopes, pagination types, and domain DTOs used by all apps.
 
 ```ts
 import { type ApiSuccess, type PaginationMeta, type ProductListItem } from "@repo/types";
+```
+
+### `packages/sdk` — `@repo/sdk`
+
+Typed frontend SDK for calling API routes. Frontend apps consume data through this package.
+
+```ts
+import { sdk } from "@repo/sdk";
+const product = await sdk.products.getBySlug("sofa-da-cao-cap");
 ```
 
 ### `packages/utils` — `@repo/utils`
@@ -93,6 +105,15 @@ export default eslintNext;
 }
 ```
 
+### `packages/seo` — `@repo/seo`
+
+Pure SEO transformation layer: receives data and returns metadata / JSON-LD.  
+No fetching, no database access, no business logic.
+
+```ts
+import { generateProductMetadata, buildProductSchema } from "@repo/seo";
+```
+
 ---
 
 ## Apps
@@ -116,6 +137,7 @@ pnpm build:admin  # pnpm --filter @repo/admin build
 ```
 
 **Features:**
+
 - Dashboard with stats
 - Product management (CRUD)
 - Category management (CRUD)
@@ -134,50 +156,50 @@ pnpm build:api    # pnpm --filter @repo/api build
 
 **Public Endpoints:**
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/health` | Health check |
-| `GET` | `/api/v1/products` | List products (paginated, filterable) |
-| `GET` | `/api/v1/products/:slug` | Product detail |
-| `GET` | `/api/v1/products/bestsellers` | Best-selling products |
-| `GET` | `/api/v1/products/featured` | Featured products |
-| `GET` | `/api/v1/products/filters` | Product filters |
-| `GET` | `/api/v1/products/:slug/related` | Related products |
-| `GET` | `/api/v1/categories` | List categories |
-| `GET` | `/api/v1/categories/:slug` | Category + products |
-| `GET` | `/api/v1/articles` | List articles |
-| `GET` | `/api/v1/articles/:slug` | Article detail |
-| `GET` | `/api/v1/articles/latest` | Latest articles |
-| `GET` | `/api/v1/search` | Search products |
-| `POST` | `/api/v1/checkout` | Create order |
-| `GET` | `/api/v1/orders` | List orders |
-| `GET` | `/api/v1/orders/:id` | Order detail |
-| `PATCH` | `/api/v1/orders/:id/status` | Update order status |
+| Method  | Path                             | Description                           |
+| ------- | -------------------------------- | ------------------------------------- |
+| `GET`   | `/health`                        | Health check                          |
+| `GET`   | `/api/v1/products`               | List products (paginated, filterable) |
+| `GET`   | `/api/v1/products/:slug`         | Product detail                        |
+| `GET`   | `/api/v1/products/bestsellers`   | Best-selling products                 |
+| `GET`   | `/api/v1/products/featured`      | Featured products                     |
+| `GET`   | `/api/v1/products/filters`       | Product filters                       |
+| `GET`   | `/api/v1/products/:slug/related` | Related products                      |
+| `GET`   | `/api/v1/categories`             | List categories                       |
+| `GET`   | `/api/v1/categories/:slug`       | Category + products                   |
+| `GET`   | `/api/v1/articles`               | List articles                         |
+| `GET`   | `/api/v1/articles/:slug`         | Article detail                        |
+| `GET`   | `/api/v1/articles/latest`        | Latest articles                       |
+| `GET`   | `/api/v1/search`                 | Search products                       |
+| `POST`  | `/api/v1/checkout`               | Create order                          |
+| `GET`   | `/api/v1/orders`                 | List orders                           |
+| `GET`   | `/api/v1/orders/:id`             | Order detail                          |
+| `PATCH` | `/api/v1/orders/:id/status`      | Update order status                   |
 
 **Admin Endpoints:**
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/api/admin/products` | List products (admin) |
-| `GET` | `/api/admin/products/:id` | Get product by ID |
-| `POST` | `/api/admin/products` | Create product |
-| `PUT` | `/api/admin/products/:id` | Update product |
-| `DELETE` | `/api/admin/products/:id` | Delete product |
-| `GET` | `/api/admin/categories` | List categories |
-| `POST` | `/api/admin/categories` | Create category |
-| `PUT` | `/api/admin/categories/:id` | Update category |
-| `DELETE` | `/api/admin/categories/:id` | Delete category |
-| `GET` | `/api/admin/orders` | List orders |
-| `GET` | `/api/admin/orders/:id` | Get order by ID |
-| `PATCH` | `/api/admin/orders/:id/status` | Update order status |
-| `GET` | `/api/admin/articles` | List articles |
-| `GET` | `/api/admin/articles/:id` | Get article by ID |
-| `POST` | `/api/admin/articles` | Create article |
-| `PUT` | `/api/admin/articles/:id` | Update article |
-| `DELETE` | `/api/admin/articles/:id` | Delete article |
-| `GET` | `/api/admin/article-categories` | List article categories |
-| `POST` | `/api/admin/article-categories` | Create article category |
-| `PUT` | `/api/admin/article-categories/:id` | Update article category |
+| Method   | Path                                | Description             |
+| -------- | ----------------------------------- | ----------------------- |
+| `GET`    | `/api/admin/products`               | List products (admin)   |
+| `GET`    | `/api/admin/products/:id`           | Get product by ID       |
+| `POST`   | `/api/admin/products`               | Create product          |
+| `PUT`    | `/api/admin/products/:id`           | Update product          |
+| `DELETE` | `/api/admin/products/:id`           | Delete product          |
+| `GET`    | `/api/admin/categories`             | List categories         |
+| `POST`   | `/api/admin/categories`             | Create category         |
+| `PUT`    | `/api/admin/categories/:id`         | Update category         |
+| `DELETE` | `/api/admin/categories/:id`         | Delete category         |
+| `GET`    | `/api/admin/orders`                 | List orders             |
+| `GET`    | `/api/admin/orders/:id`             | Get order by ID         |
+| `PATCH`  | `/api/admin/orders/:id/status`      | Update order status     |
+| `GET`    | `/api/admin/articles`               | List articles           |
+| `GET`    | `/api/admin/articles/:id`           | Get article by ID       |
+| `POST`   | `/api/admin/articles`               | Create article          |
+| `PUT`    | `/api/admin/articles/:id`           | Update article          |
+| `DELETE` | `/api/admin/articles/:id`           | Delete article          |
+| `GET`    | `/api/admin/article-categories`     | List article categories |
+| `POST`   | `/api/admin/article-categories`     | Create article category |
+| `PUT`    | `/api/admin/article-categories/:id` | Update article category |
 | `DELETE` | `/api/admin/article-categories/:id` | Delete article category |
 
 ---
@@ -247,34 +269,34 @@ pnpm dev:all
 
 ## Scripts Reference
 
-| Script | Description |
-|--------|-------------|
-| `pnpm dev` | Run web storefront (port 3000) |
-| `pnpm dev:web` | Run web storefront (port 3000) |
-| `pnpm dev:admin` | Run admin dashboard (port 3001) |
-| `pnpm dev:api` | Run API server (port 4000) |
-| `pnpm dev:all` | Run all apps concurrently |
-| `pnpm build` | Build web storefront |
-| `pnpm build:web` | Build web storefront |
-| `pnpm build:admin` | Build admin dashboard |
-| `pnpm build:api` | Build API server |
-| `pnpm build:all` | Build all packages and apps |
-| `pnpm typecheck:all` | Type-check all apps |
-| `pnpm db:generate` | Generate Prisma client |
-| `pnpm db:migrate` | Run database migrations (dev) |
-| `pnpm db:migrate:deploy` | Run database migrations (prod) |
-| `pnpm db:studio` | Open Prisma Studio |
+| Script                   | Description                     |
+| ------------------------ | ------------------------------- |
+| `pnpm dev`               | Run web storefront (port 3000)  |
+| `pnpm dev:web`           | Run web storefront (port 3000)  |
+| `pnpm dev:admin`         | Run admin dashboard (port 3001) |
+| `pnpm dev:api`           | Run API server (port 4000)      |
+| `pnpm dev:all`           | Run all apps concurrently       |
+| `pnpm build`             | Build web storefront            |
+| `pnpm build:web`         | Build web storefront            |
+| `pnpm build:admin`       | Build admin dashboard           |
+| `pnpm build:api`         | Build API server                |
+| `pnpm build:all`         | Build all packages and apps     |
+| `pnpm typecheck:all`     | Type-check all apps             |
+| `pnpm db:generate`       | Generate Prisma client          |
+| `pnpm db:migrate`        | Run database migrations (dev)   |
+| `pnpm db:migrate:deploy` | Run database migrations (prod)  |
+| `pnpm db:studio`         | Open Prisma Studio              |
 
 ---
 
 ## Deployment
 
-| App | Platform recommendation |
-|-----|------------------------|
-| Web storefront | Vercel (apps/web) |
-| Admin dashboard | Vercel (apps/admin) |
-| API server | Railway / Render / Fly.io / any Node host |
-| Database | NeonDB (existing — no changes required) |
+| App             | Platform recommendation                   |
+| --------------- | ----------------------------------------- |
+| Web storefront  | Vercel (apps/web)                         |
+| Admin dashboard | Vercel (apps/admin)                       |
+| API server      | Railway / Render / Fly.io / any Node host |
+| Database        | NeonDB (existing — no changes required)   |
 
 ### Vercel Setup for Web
 

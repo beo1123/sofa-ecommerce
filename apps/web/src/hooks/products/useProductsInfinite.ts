@@ -1,7 +1,7 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 
 export function useProductsInfinite(initialParams: any) {
   const { page = 1, perPage = 12, ...filters } = initialParams;
@@ -12,15 +12,15 @@ export function useProductsInfinite(initialParams: any) {
     initialPageParam: page,
 
     queryFn: async ({ pageParam }) => {
-      const res = await axiosClient.get("/products", {
-        params: { ...filters, page: pageParam, perPage },
+      const result = await sdk.products.list({
+        ...filters,
+        page: Number(pageParam),
+        perPage,
       });
 
-      const body = res.data;
-
       return {
-        items: body.data,
-        meta: body.meta,
+        items: result.items,
+        meta: result.meta,
       };
     },
 

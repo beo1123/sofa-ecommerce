@@ -1,12 +1,9 @@
 import Grid, { GridItem } from "@/components/ui/Grid";
 import ProductCard from "@/components/products/ProductCard";
-import { ProductService } from "@/services/products.service";
-import { prisma } from "@/lib/prisma";
-
-const productService = new ProductService(prisma);
+import { sdk } from "@repo/sdk";
 
 export default async function BestSellers() {
-  const products = await productService.getBestSellingProducts(8);
+  const products = await sdk.products.getBestSellers(8);
   return (
     <>
       <h2 className="mb-lg text-2xl font-semibold">Sản phẩm bán chạy trong tuần</h2>
@@ -21,7 +18,7 @@ export default async function BestSellers() {
                   slug: product.slug,
                   title: product.title,
                   shortDescription: product.shortDescription ?? "",
-                  priceMin: product.priceMin,
+                  priceMin: product.priceMin ?? 0,
                   primaryImage: {
                     url: product.primaryImage?.url ?? undefined,
                     alt: product.primaryImage?.alt ?? product.title,
@@ -35,7 +32,7 @@ export default async function BestSellers() {
 
       <div className="hidden md:block">
         <Grid cols={1} responsive={{ sm: 2, md: 3, lg: 4 }} gap="lg">
-          {products.map((product, idx) => (
+          {products.map((product) => (
             <GridItem key={product.id}>
               <ProductCard
                 product={{
@@ -43,7 +40,7 @@ export default async function BestSellers() {
                   slug: product.slug,
                   title: product.title,
                   shortDescription: product.shortDescription ?? "",
-                  priceMin: product.priceMin,
+                  priceMin: product.priceMin ?? 0,
                   primaryImage: {
                     url: product.primaryImage?.url ?? undefined,
                     alt: product.primaryImage?.alt ?? product.title,

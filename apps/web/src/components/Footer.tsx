@@ -1,21 +1,16 @@
-﻿// components/Footer.tsx
+// components/Footer.tsx
 import React from "react";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
-import { CategoryService } from "@/services/category.service";
-import { prisma } from "@/lib/prisma";
-
-const categoryService = new CategoryService(prisma);
+import { sdk } from "@repo/sdk";
 
 export default async function Footer() {
-  // Fetch categories
-  const { data: categories } = await categoryService.getAll(1, 100, 0);
+  const categories = await sdk.categories.getAll();
 
   return (
     <footer className="bg-bg-muted text-text-muted mt-12 border-t border-brand-50">
       <Container>
         <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-5">
-          {/* 1. Giới thiệu */}
           <div className="order-1 lg:order-none">
             <h4 className="text-text-default font-semibold mb-3">Nội Thất</h4>
             <p className="text-sm leading-6">
@@ -24,7 +19,6 @@ export default async function Footer() {
             </p>
           </div>
 
-          {/* 2. Kết nối */}
           <div className="order-2 sm:order-none">
             <h4 className="text-text-default font-semibold mb-3">Kết nối với chúng tôi</h4>
             <div className="flex flex-col gap-2 text-sm">
@@ -41,7 +35,6 @@ export default async function Footer() {
             </div>
           </div>
 
-          {/* 3. Sản phẩm - **Dynamic categories** */}
           <div className="order-3">
             <h4 className="text-text-default font-semibold mb-3">Sản phẩm</h4>
             <ul className="space-y-2 text-sm">
@@ -57,7 +50,6 @@ export default async function Footer() {
             </ul>
           </div>
 
-          {/* 4. Hỗ trợ */}
           <div className="order-4">
             <h4 className="text-text-default font-semibold mb-3">Hỗ trợ khách hàng</h4>
             <ul className="space-y-2 text-sm">
@@ -77,7 +69,6 @@ export default async function Footer() {
           </div>
         </div>
 
-        {/* Bản quyền */}
         <div className="py-6 text-center text-xs sm:text-sm text-text-muted border-t border-brand-50">
           © {new Date().getFullYear()} Nội Thất — Bảo lưu mọi quyền.
           <br />

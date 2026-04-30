@@ -1,4 +1,4 @@
-import type { ArticleStatus } from "@prisma/client";
+import type { ArticleStatus } from "@repo/types";
 
 export type Category = {
   name: string;
@@ -6,7 +6,7 @@ export type Category = {
 } | null;
 
 export type Author = {
-  displayName: string;
+  displayName: string | null;
 } | null;
 
 export type blogDetail = {

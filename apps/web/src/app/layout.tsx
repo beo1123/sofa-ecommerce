@@ -6,22 +6,22 @@ import { Analytics } from "@vercel/analytics/next";
 import ReactQueryProvider from "../providers/ReactQueryProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { baseMetadata } from "@/seo/baseMetadata";
-import { prisma } from "@/lib/prisma";
-import { buildSiteNavigationSchema, organizationSchema, websiteSchema } from "@/seo/schema";
+import {
+  buildOrganizationSchema,
+  buildSiteNavigationSchema,
+  buildWebsiteSchema,
+  generateBaseMetadata,
+} from "@repo/seo";
+import { sdk } from "@repo/sdk";
 
-export const metadata: Metadata = baseMetadata;
+export const metadata: Metadata = generateBaseMetadata();
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const categories = await prisma.category.findMany({
-    orderBy: { createdAt: "desc" },
-    select: {
-      name: true,
-      slug: true,
-    },
-  });
+  const categories = await sdk.categories.getAll();
 
   const siteNavigationSchema = buildSiteNavigationSchema(categories);
+  const websiteSchema = buildWebsiteSchema();
+  const organizationSchema = buildOrganizationSchema();
 
   return (
     <html lang="vi">

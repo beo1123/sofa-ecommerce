@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
@@ -10,9 +9,11 @@
       "@lib/*": ["lib/*"],
       "@store/*": ["store/*"],
       "@types/*": ["types/*"],
-      "@repo/db": ["../../packages/db/src/index.ts"],
-      "@repo/types": ["../../packages/types/src/index.ts"],
-      "@repo/utils": ["../../packages/utils/src/index.ts"]
+      "@repo/db": ["../../../packages/db/src/index.ts"],
+      "@repo/seo": ["../../../packages/seo/src/index.ts"],
+      "@repo/sdk": ["../../../packages/sdk/src/index.ts"],
+      "@repo/types": ["../../../packages/types/src/index.ts"],
+      "@repo/utils": ["../../../packages/utils/src/index.ts"]
     },
     "plugins": [
       {

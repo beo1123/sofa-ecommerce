@@ -1,11 +1,9 @@
 import { getProductDetaiSSR } from "@/lib/products/productSSR";
 import Script from "next/script";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { cache } from "react";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
-import { buildBreadcrumbSchema } from "@/seo/schema";
-
-const BASE_URL = "https://sofaphamgia.com";
+import { buildProductBreadcrumbSchema, buildProductSchema, generateProductMetadata } from "@repo/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,7 +14,7 @@ const getCachedProduct = cache(async (slug: string) => {
   return await getProductDetaiSSR(slug);
 });
 
-export async function generateMetadata(props: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
   const slug = params.slug;
 
@@ -28,25 +26,7 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
     };
   }
 
-  const { product } = data;
-  const image = product.images?.[0]?.url;
-
-  return {
-    title: `${product.title} – Sofa Phạm gia`,
-    description: product.shortDescription ?? product.description ?? "",
-    openGraph: {
-      title: `${product.title} – Sofa Phạm gia`,
-      description: product.shortDescription ?? product.description ?? "",
-      images: image ? [image] : [],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: product.title,
-      description: product.shortDescription ?? "",
-      images: image ? [image] : [],
-    },
-  };
+  return generateProductMetadata(data.product);
 }
 
 /* ------------------ PAGE COMPONENT ------------------ */
@@ -68,19 +48,13 @@ export default async function ProductDetailPage(props: PageProps) {
 
   const { product, related } = data;
 
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: "Trang chủ", url: BASE_URL },
-    { name: "Sản phẩm", url: `${BASE_URL}/san-pham` },
-    { name: product.title, url: `${BASE_URL}/san-pham/${slug}` },
-  ]);
-
   return (
     <>
       <Script id="breadcrumb-jsonld" type="application/ld+json">
-        {JSON.stringify(breadcrumb)}
+        {JSON.stringify(buildProductBreadcrumbSchema(product))}
       </Script>
       <Script id="product-jsonld" type="application/ld+json">
-        {JSON.stringify(product.jsonLd)}
+        {JSON.stringify(buildProductSchema(product))}
       </Script>
       <ProductDetailPageClient product={product} related={related} />
     </>

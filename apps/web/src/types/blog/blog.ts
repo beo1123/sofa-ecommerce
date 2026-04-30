@@ -4,7 +4,7 @@ export interface BlogArticle {
   slug: string;
   excerpt: string;
   thumbnail: string;
-  publishedAt: Date;
+  publishedAt: string | Date;
 }
 
 export interface BlogArticleCategory {

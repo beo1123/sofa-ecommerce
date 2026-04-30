@@ -1,20 +1,14 @@
-import { ProductService } from "@/services/products.service";
-import { serializeData } from "../helpers";
-import { prisma } from "../prisma";
+import { sdk } from "@repo/sdk";
+import { ProductQueryParams } from "@/types/products/ProductQueryParams";
 
-const service = new ProductService(prisma);
-
-export async function getProductListSSR(params: any) {
-  return await service.listProducts(params);
+export async function getProductListSSR(params: ProductQueryParams) {
+  return await sdk.products.list(params);
 }
 
 export async function getProductDetaiSSR(slug: string) {
-  const [product, related] = await Promise.all([service.getProductBySlug(slug), service.getRelatedProducts(slug)]);
-
+  const product = await sdk.products.getBySlug(slug).catch(() => null);
   if (!product) return null;
+  const related = await sdk.products.getRelated(slug).catch(() => []);
 
-  return {
-    product: serializeData(product),
-    related: serializeData(related),
-  };
+  return { product, related };
 }
