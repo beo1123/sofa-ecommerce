@@ -6,11 +6,7 @@ export const metadata = {
   description: "Administration dashboard for Sofa E-commerce platform",
 };
 
-export default function AdminRootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
       <body>

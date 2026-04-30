@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Grid, { GridItem } from "../ui/Grid";
-import { SafeImage } from "../ui/SafeImage";
-import Button from "../ui/Button";
+import Grid, { GridItem } from "@repo/ui/Grid";
+import { SafeImage } from "@repo/ui/SafeImage";
+import Button from "@repo/ui/Button";
 
 export function BrandMessage() {
   return (

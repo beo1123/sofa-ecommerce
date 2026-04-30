@@ -1,7 +1,7 @@
-import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card";
-import Text from "@/components/ui/Text";
+import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@repo/ui/Card";
+import Text from "@repo/ui/Text";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "@repo/ui/Button";
 export default function ContactInfoCard() {
   return (
     <div className="space-y-4">

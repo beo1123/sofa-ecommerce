@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "@/components/ui/Button";
-import { FacebookIcon } from "../ui/Icon/FacebookIcon";
-import { ZaloIcon } from "../ui/Icon/ZaloIcon";
-import { PhoneIcon } from "../ui/Icon/PhoneIcon";
+import Button from "@repo/ui/Button";
+import { FacebookIcon } from "@repo/ui/Icon/FacebookIcon";
+import { ZaloIcon } from "@repo/ui/Icon/ZaloIcon";
+import { PhoneIcon } from "@repo/ui/Icon/PhoneIcon";
 
 type Props = {
   facebookUrl: string;

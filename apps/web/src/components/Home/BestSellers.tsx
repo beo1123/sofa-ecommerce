@@ -1,4 +1,4 @@
-import Grid, { GridItem } from "@/components/ui/Grid";
+import Grid, { GridItem } from "@repo/ui/Grid";
 import ProductCard from "@/components/products/ProductCard";
 import { sdk } from "@repo/sdk";
 

@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
-import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card";
-import Text from "@/components/ui/Text";
+import Input from "@repo/ui/Input";
+import Button from "@repo/ui/Button";
+import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@repo/ui/Card";
+import Text from "@repo/ui/Text";
 import ContactReasonSelect from "./ContactReasonSelect";
 
 const formSchema = z.object({

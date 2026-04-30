@@ -6,11 +6,11 @@ import { User, LogOut, ShoppingBag } from "lucide-react";
 import { useUserSync } from "@/hooks/auth/useUserSync";
 import { useAuth } from "@/hooks/auth/useAuth";
 
-import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
-import Text from "@/components/ui/Text";
-import Divider from "@/components/ui/Divider";
-import Spinner from "@/components/ui/Spinner";
+import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@repo/ui/Card";
+import Button from "@repo/ui/Button";
+import Text from "@repo/ui/Text";
+import Divider from "@repo/ui/Divider";
+import Spinner from "@repo/ui/Spinner";
 
 type Props = {
   onClose?: () => void;

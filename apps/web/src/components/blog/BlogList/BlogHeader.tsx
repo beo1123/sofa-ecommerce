@@ -1,7 +1,7 @@
-﻿import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import Badge from "@/components/ui/Badge";
+﻿import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import Badge from "@repo/ui/Badge";
 
 export default function BlogHeader() {
   return (

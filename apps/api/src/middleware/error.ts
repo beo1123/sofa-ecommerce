@@ -18,8 +18,7 @@ export async function errorMiddleware(c: Context, next: Next) {
       error: {
         message: error.message ?? "Internal server error",
         code: status === 500 ? "INTERNAL_ERROR" : "REQUEST_ERROR",
-        details:
-          process.env.NODE_ENV !== "production" ? error.stack : undefined,
+        details: process.env.NODE_ENV !== "production" ? error.stack : undefined,
       },
     };
 

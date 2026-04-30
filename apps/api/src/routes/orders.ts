@@ -30,10 +30,7 @@ ordersRouter.get("/:id", async (c) => {
   try {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) {
-      return c.json(
-        { success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const order = await orderService.adminGetOrder(id);
@@ -49,19 +46,13 @@ ordersRouter.patch("/:id/status", async (c) => {
   try {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) {
-      return c.json(
-        { success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid order ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const body = await c.req.json<{ status: string; note?: string }>();
 
     if (!body.status) {
-      return c.json(
-        { success: false, error: { message: "Status is required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Status is required", code: "INVALID_BODY" } }, 400);
     }
 
     const order = await orderService.adminUpdateOrderStatus(id, body.status as OrderStatus, body.note);

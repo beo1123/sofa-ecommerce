@@ -12,15 +12,15 @@ import {
   selectCartItemCount,
 } from "@/store/selector/cartSelectors";
 import { updateQuantity, removeItem } from "@/store/slice/cartSlice";
-import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import Divider from "@/components/ui/Divider";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import Badge from "@/components/ui/Badge";
+import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import Divider from "@repo/ui/Divider";
+import Button from "@repo/ui/Button";
+import Input from "@repo/ui/Input";
+import Badge from "@repo/ui/Badge";
 import { ImageIcon } from "lucide-react";
-import { SafeImage } from "@/components/ui/SafeImage";
+import { SafeImage } from "@repo/ui/SafeImage";
 
 type CouponForm = {
   code: string;

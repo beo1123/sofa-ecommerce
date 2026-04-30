@@ -13,7 +13,9 @@
       "@repo/seo": ["../../../packages/seo/src/index.ts"],
       "@repo/sdk": ["../../../packages/sdk/src/index.ts"],
       "@repo/types": ["../../../packages/types/src/index.ts"],
-      "@repo/utils": ["../../../packages/utils/src/index.ts"]
+      "@repo/utils": ["../../../packages/utils/src/index.ts"],
+      "@repo/ui": ["../../../packages/ui/src/index.ts"],
+      "@repo/ui/*": ["../../../packages/ui/src/*"]
     },
     "plugins": [
       {
@@ -22,6 +24,12 @@
     ],
     "types": ["jest", "node", "next-auth"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "../../packages/types/src/next-auth.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

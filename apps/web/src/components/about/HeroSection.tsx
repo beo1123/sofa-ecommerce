@@ -1,8 +1,8 @@
-﻿import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import Button from "@/components/ui/Button";
-import { SafeImage } from "@/components/ui/SafeImage";
+﻿import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import Button from "@repo/ui/Button";
+import { SafeImage } from "@repo/ui/SafeImage";
 import { sofaImages } from "./images";
 import Link from "next/link";
 

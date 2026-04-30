@@ -28,10 +28,7 @@ export class ArticleCategoryService {
 
     const where: Prisma.ArticleCategoryWhereInput = q
       ? {
-          OR: [
-            { name: { contains: q, mode: "insensitive" } },
-            { slug: { contains: q, mode: "insensitive" } },
-          ],
+          OR: [{ name: { contains: q, mode: "insensitive" } }, { slug: { contains: q, mode: "insensitive" } }],
         }
       : {};
 

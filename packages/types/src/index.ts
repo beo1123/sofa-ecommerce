@@ -401,3 +401,90 @@ export type ProductFilters = {
   priceMin: number;
   priceMax: number;
 };
+
+// -------------------------------------------------------
+// Frontend Shared View Types
+// -------------------------------------------------------
+
+export type BestSellerProduct = {
+  id: number;
+  slug: string;
+  title: string;
+  shortDescription?: string;
+  totalSold: number;
+  priceMin: number;
+  priceMax: number;
+  primaryImage?: {
+    url?: string;
+    alt?: string;
+  };
+};
+
+export type BlogArticle = {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  thumbnail: string;
+  publishedAt: string | Date;
+};
+
+export type BlogArticleCategory = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+export type BlogCategory = {
+  name: string;
+  slug: string;
+} | null;
+
+export type BlogAuthor = {
+  displayName: string | null;
+} | null;
+
+export type blogDetail = {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string;
+  thumbnail: string | null;
+  publishedAt: string | Date | null;
+  status: ArticleStatus;
+  category: BlogCategory;
+  author: BlogAuthor;
+};
+
+export type SignupInput = {
+  email: string;
+  password: string;
+  displayName: string | null;
+};
+
+export type CategoryResponse = {
+  id: number;
+  name: string;
+  slug: string;
+  image: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Address = {
+  id: number;
+  line1: string;
+  city: string;
+  province: string;
+  country: string;
+  isDefault?: boolean;
+};
+
+export type User = {
+  id?: number;
+  email?: string;
+  displayName?: string;
+  roles?: string;
+  addresses: Address[];
+};

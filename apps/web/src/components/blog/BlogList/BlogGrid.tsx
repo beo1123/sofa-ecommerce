@@ -1,6 +1,6 @@
-import Grid, { GridItem } from "@/components/ui/Grid";
+import Grid, { GridItem } from "@repo/ui/Grid";
 import BlogArticleCard from "./BlogArticleCard";
-import { BlogArticle } from "@/types/blog/blog";
+import { BlogArticle } from "@repo/types";
 
 export default function BlogGrid({ items }: { items: BlogArticle[] }) {
   return (

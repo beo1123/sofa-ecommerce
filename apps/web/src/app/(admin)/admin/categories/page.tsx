@@ -1,13 +1,13 @@
 ﻿"use client";
 
 import React from "react";
-import Heading from "@/components/ui/Heading";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import Alert from "@/components/ui/Alert";
-import Spinner from "@/components/ui/Spinner";
-import Modal from "@/components/ui/Modal";
+import Heading from "@repo/ui/Heading";
+import Card from "@repo/ui/Card";
+import Button from "@repo/ui/Button";
+import Input from "@repo/ui/Input";
+import Alert from "@repo/ui/Alert";
+import Spinner from "@repo/ui/Spinner";
+import Modal from "@repo/ui/Modal";
 import ImageUploader from "@/components/admin/products/ImageUploader";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import { useAdminCategories } from "@/hooks/category/useAdminCategories";

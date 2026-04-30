@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { adminApi } from "@/lib/api";
-import { Button, Spinner, Input, Dropdown, Pagination, Badge } from "@/components/ui";
+import { sdk } from "@repo/sdk";
+import { Button, Spinner, Input, Dropdown, Pagination, Badge } from "@repo/ui";
 
 const STATUS_BADGE: Record<string, "default" | "success" | "warning" | "danger"> = {
   PUBLISHED: "success",
@@ -24,7 +24,7 @@ export default function ArticlesPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "articles", page, perPage, search, status],
     queryFn: async () => {
-      const res = await adminApi.articles.list({
+      const res = await sdk.adminApi.articles.list({
         page,
         perPage,
         q: search || undefined,
@@ -35,7 +35,7 @@ export default function ArticlesPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => adminApi.articles.delete(id),
+    mutationFn: (id: number) => sdk.adminApi.articles.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "articles"] });
       setDeleting(null);

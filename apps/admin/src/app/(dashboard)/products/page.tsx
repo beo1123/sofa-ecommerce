@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
-import { adminApi } from "@/lib/api";
-import { Button, Spinner, Input, Dropdown, Pagination } from "@/components/ui";
+import { sdk } from "@repo/sdk";
+import { Button, Spinner, Input, Dropdown, Pagination } from "@repo/ui";
 import ProductTable from "@/components/admin/products/ProductTable";
 
 export default function ProductsPage() {
@@ -19,7 +19,7 @@ export default function ProductsPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "products", page, perPage, search, status],
     queryFn: async () => {
-      const res = await adminApi.products.list({
+      const res = await sdk.adminApi.products.list({
         page,
         perPage,
         q: search || undefined,
@@ -30,7 +30,7 @@ export default function ProductsPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => adminApi.products.delete(id),
+    mutationFn: (id: number) => sdk.adminApi.products.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "products"] });
       setDeleting(null);

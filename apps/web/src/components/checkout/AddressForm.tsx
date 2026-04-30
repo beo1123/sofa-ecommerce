@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Input from "@/components/ui/Input";
-import Heading from "@/components/ui/Heading";
-import Divider from "@/components/ui/Divider";
+import Input from "@repo/ui/Input";
+import Heading from "@repo/ui/Heading";
+import Divider from "@repo/ui/Divider";
 import { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
 import { CheckoutFormData } from "./CheckoutForm";
 

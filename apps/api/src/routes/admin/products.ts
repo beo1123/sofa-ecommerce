@@ -62,10 +62,7 @@ adminProductsRouter.post("/", async (c) => {
     const body = await c.req.json();
 
     if (!body.title || !body.slug) {
-      return c.json(
-        { success: false, error: { message: "Title and slug are required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Title and slug are required", code: "INVALID_BODY" } }, 400);
     }
 
     const product = await productService.adminCreateProduct(body);

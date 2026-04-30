@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import RadioGroup from "@/components/ui/Radio";
+import RadioGroup from "@repo/ui/Radio";
 
 const options = [
   { value: "general", label: "Tư vấn sản phẩm", description: "Kích thước, chất liệu, màu sắc" },

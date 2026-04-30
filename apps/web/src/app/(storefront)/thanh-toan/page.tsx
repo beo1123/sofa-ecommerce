@@ -2,18 +2,18 @@
 
 import React from "react";
 import Link from "next/link";
-import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
-import Divider from "@/components/ui/Divider";
-import Text from "@/components/ui/Text";
-import Button from "@/components/ui/Button";
-import Card, { CardHeader, CardTitle, CardFooter } from "@/components/ui/Card";
+import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
+import Divider from "@repo/ui/Divider";
+import Text from "@repo/ui/Text";
+import Button from "@repo/ui/Button";
+import Card, { CardHeader, CardTitle, CardFooter } from "@repo/ui/Card";
 import { useAppSelector } from "@/store/hook";
 import { selectCartItems, selectCartSubtotal, selectCartTotal } from "@/store/selector/cartSelectors";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
 import { formatCurrency } from "@/lib/helpers";
 import { ImageIcon } from "lucide-react";
-import { SafeImage } from "@/components/ui/SafeImage";
+import { SafeImage } from "@repo/ui/SafeImage";
 
 export default function CheckoutPage() {
   const items = useAppSelector(selectCartItems);

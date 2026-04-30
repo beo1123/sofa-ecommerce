@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form";
 import { useAppSelector } from "@/store/hook";
 import { selectCartSubtotal } from "@/store/selector/cartSelectors";
 
-import Card, { CardHeader, CardTitle, CardFooter } from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
-import Alert from "@/components/ui/Alert";
-import Modal from "@/components/ui/Modal";
-import Text from "@/components/ui/Text";
+import Card, { CardHeader, CardTitle, CardFooter } from "@repo/ui/Card";
+import Button from "@repo/ui/Button";
+import Alert from "@repo/ui/Alert";
+import Modal from "@repo/ui/Modal";
+import Text from "@repo/ui/Text";
 import RecipientForm from "./RecipientForm";
 import AddressForm from "./AddressForm";
 import ShippingOptions from "./ShippingOptions";

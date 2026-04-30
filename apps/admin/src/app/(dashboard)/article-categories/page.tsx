@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { adminApi } from "@/lib/api";
-import { Button, Spinner, Input, Modal } from "@/components/ui";
+import { sdk } from "@repo/sdk";
+import { Button, Spinner, Input, Modal } from "@repo/ui";
 
 interface ArticleCategory {
   id: number;
@@ -25,7 +25,7 @@ export default function ArticleCategoriesPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "article-categories", page, perPage, search],
     queryFn: async () => {
-      const res = await adminApi.articleCategories.list({
+      const res = await sdk.adminApi.articleCategories.list({
         page,
         perPage,
         q: search || undefined,
@@ -35,7 +35,7 @@ export default function ArticleCategoriesPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data: unknown) => adminApi.articleCategories.create(data),
+    mutationFn: (data: unknown) => sdk.adminApi.articleCategories.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "article-categories"] });
       setModalOpen(false);
@@ -44,7 +44,7 @@ export default function ArticleCategoriesPage() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: unknown }) => adminApi.articleCategories.update(id, data),
+    mutationFn: ({ id, data }: { id: number; data: unknown }) => sdk.adminApi.articleCategories.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "article-categories"] });
       setModalOpen(false);
@@ -53,7 +53,7 @@ export default function ArticleCategoriesPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => adminApi.articleCategories.delete(id),
+    mutationFn: (id: number) => sdk.adminApi.articleCategories.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "article-categories"] });
     },

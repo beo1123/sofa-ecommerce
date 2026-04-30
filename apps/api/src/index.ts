@@ -18,6 +18,7 @@ import { articlesRouter } from "./routes/articles.js";
 import { articleCategoriesRouter } from "./routes/article-categories.js";
 import { searchRouter } from "./routes/search.js";
 import { checkoutRouter } from "./routes/checkout.js";
+import { authRouter } from "./routes/auth.js";
 
 // Admin Routes
 import { adminProductsRouter } from "./routes/admin/products.js";
@@ -33,10 +34,7 @@ app.use("*", logger());
 app.use(
   "*",
   cors({
-    origin: [
-      process.env.WEB_URL ?? "http://localhost:3000",
-      process.env.ADMIN_URL ?? "http://localhost:3001",
-    ],
+    origin: [process.env.WEB_URL ?? "http://localhost:3000", process.env.ADMIN_URL ?? "http://localhost:3001"],
     credentials: true,
   })
 );
@@ -54,6 +52,7 @@ v1.route("/articles", articlesRouter);
 v1.route("/article-categories", articleCategoriesRouter);
 v1.route("/search", searchRouter);
 v1.route("/checkout", checkoutRouter);
+v1.route("/auth", authRouter);
 
 app.route("/api/v1", v1);
 

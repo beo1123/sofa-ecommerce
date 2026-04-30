@@ -1,10 +1,10 @@
 ﻿import BlogCategoryFilter from "@/components/blog/BlogList/BlogCategoryFilter";
 import BlogGrid from "@/components/blog/BlogList/BlogGrid";
 import BlogHeader from "@/components/blog/BlogList/BlogHeader";
-import Container from "@/components/ui/Container";
+import Container from "@repo/ui/Container";
 import { sdk } from "@repo/sdk";
 import { generateArticlesMetadata } from "@repo/seo";
-import type { BlogArticle } from "@/types/blog/blog";
+import type { BlogArticle } from "@repo/types";
 
 export const metadata = generateArticlesMetadata();
 

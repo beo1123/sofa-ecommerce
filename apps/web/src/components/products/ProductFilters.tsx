@@ -2,8 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import Dropdown from "@/components/ui/Dropdown";
-import Button from "@/components/ui/Button";
+import Dropdown from "@repo/ui/Dropdown";
+import Button from "@repo/ui/Button";
 
 type Category = { name: string; slug: string };
 

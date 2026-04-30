@@ -1,6 +1,6 @@
 import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
-import { ProductQueryParams } from "@/types/products/ProductQueryParams";
+import { ProductQueryParams } from "@repo/types";
 import { getProductListSSR } from "@/lib/products/productSSR";
 import { cache } from "react";
 import Script from "next/script";

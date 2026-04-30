@@ -4,12 +4,7 @@
 // =========================================================
 
 import { prisma, Prisma, type ProductStatus } from "@repo/db";
-import type {
-  CreateProductInput,
-  UpdateProductInput,
-  AdminProductFilters,
-  ProductQueryParams,
-} from "@repo/types";
+import type { CreateProductInput, UpdateProductInput, AdminProductFilters, ProductQueryParams } from "@repo/types";
 import { fail } from "../lib/response.js";
 
 // ─── Service ──────────────────────────────────────────────
@@ -122,9 +117,7 @@ export class ProductService {
         priceMax: prices.length ? Math.max(...prices) : null,
         primaryImage: p.images[0] ?? null,
         variantsCount: p.variants.length,
-        category: p.category
-          ? { name: p.category.name, slug: p.category.slug, image: p.category.image }
-          : null,
+        category: p.category ? { name: p.category.name, slug: p.category.slug, image: p.category.image } : null,
         variants: p.variants.map((v) => ({
           id: v.id,
           skuPrefix: v.skuPrefix,
@@ -154,8 +147,7 @@ export class ProductService {
     if (!p) return null;
 
     const reviewCount = p.reviews.length;
-    const average =
-      reviewCount > 0 ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount : 0;
+    const average = reviewCount > 0 ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount : 0;
 
     const breakdown = p.reviews.reduce<Record<number, number>>((acc, r) => {
       acc[r.rating] = (acc[r.rating] || 0) + 1;
@@ -340,9 +332,7 @@ export class ProductService {
     });
 
     const ids = top.map((p) => p.productId!);
-    const soldMap = Object.fromEntries(
-      top.map((p) => [p.productId!, p._sum.quantity ?? 0])
-    );
+    const soldMap = Object.fromEntries(top.map((p) => [p.productId!, p._sum.quantity ?? 0]));
 
     const products = await prisma.product.findMany({
       where: {
@@ -406,10 +396,7 @@ export class ProductService {
     });
 
     const ratingMap = Object.fromEntries(
-      reviewAgg.map((r) => [
-        r.productId,
-        { avg: r._avg.rating ?? 0, count: r._count.rating ?? 0 },
-      ])
+      reviewAgg.map((r) => [r.productId, { avg: r._avg.rating ?? 0, count: r._count.rating ?? 0 }])
     );
 
     const soldAgg = await prisma.orderItem.groupBy({
@@ -421,9 +408,7 @@ export class ProductService {
       _sum: { quantity: true },
     });
 
-    const soldMap = Object.fromEntries(
-      soldAgg.map((s) => [s.productId!, s._sum.quantity ?? 0])
-    );
+    const soldMap = Object.fromEntries(soldAgg.map((s) => [s.productId!, s._sum.quantity ?? 0]));
 
     const products = await prisma.product.findMany({
       where: { status: "PUBLISHED" },
@@ -521,10 +506,7 @@ export class ProductService {
       ...(filters.categoryId ? { categoryId: filters.categoryId } : {}),
       ...(q
         ? {
-            OR: [
-              { title: { contains: q, mode: "insensitive" } },
-              { slug: { contains: q, mode: "insensitive" } },
-            ],
+            OR: [{ title: { contains: q, mode: "insensitive" } }, { slug: { contains: q, mode: "insensitive" } }],
           }
         : {}),
     };

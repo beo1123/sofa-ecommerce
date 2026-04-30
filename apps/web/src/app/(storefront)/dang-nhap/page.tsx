@@ -6,11 +6,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
-import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card";
+import Card, { CardHeader, CardTitle, CardContent, CardFooter } from "@repo/ui/Card";
 import { useAuth } from "@/hooks/auth/useAuth";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
-import Alert from "@/components/ui/Alert";
+import Input from "@repo/ui/Input";
+import Button from "@repo/ui/Button";
+import Alert from "@repo/ui/Alert";
 
 // ✅ Schema
 const loginSchema = z.object({

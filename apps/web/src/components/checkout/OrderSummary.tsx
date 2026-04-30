@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Divider from "@/components/ui/Divider";
-import Text from "@/components/ui/Text";
+import Divider from "@repo/ui/Divider";
+import Text from "@repo/ui/Text";
 import { formatCurrency } from "@/lib/helpers";
 
 type Props = {

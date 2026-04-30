@@ -8,7 +8,7 @@ import MiniCartDrawer from "./cart/MiniCartDrawer";
 import { useAppSelector } from "@/store/hook";
 import { selectCartItemCount } from "@/store/selector/cartSelectors";
 import SearchBox from "./Header/SearchBox";
-import { SafeImage } from "./ui/SafeImage";
+import { SafeImage } from "@repo/ui/SafeImage";
 import SocialContact from "./Header/SocialContact";
 import { headerLogoSrc } from "@/lib/branding";
 

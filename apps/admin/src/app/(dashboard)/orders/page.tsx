@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Eye } from "lucide-react";
-import { adminApi } from "@/lib/api";
-import { Button, Spinner, Dropdown, Pagination, Badge } from "@/components/ui";
+import { sdk } from "@repo/sdk";
+import { Button, Spinner, Dropdown, Pagination, Badge } from "@repo/ui";
 
 const STATUS_OPTIONS = [
   { value: "", label: "Tất cả trạng thái" },
@@ -39,7 +39,7 @@ export default function OrdersPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "orders", page, perPage, status],
     queryFn: async () => {
-      const res = await adminApi.orders.list({
+      const res = await sdk.adminApi.orders.list({
         page,
         perPage,
         status: status || undefined,

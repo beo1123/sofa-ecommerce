@@ -1,5 +1,5 @@
 import { sdk } from "@repo/sdk";
-import { ProductQueryParams } from "@/types/products/ProductQueryParams";
+import { ProductQueryParams } from "@repo/types";
 
 export async function getProductListSSR(params: ProductQueryParams) {
   return await sdk.products.list(params);

@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
-import Badge from "@/components/ui/Badge";
+import Button from "@repo/ui/Button";
+import Badge from "@repo/ui/Badge";
 import { Pencil, Trash2 } from "lucide-react";
 
 interface Product {

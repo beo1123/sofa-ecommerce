@@ -1,4 +1,4 @@
-﻿import Card from "@/components/ui/Card";
+﻿import Card from "@repo/ui/Card";
 import { BadgeCheck, Headset, PencilRuler, Truck } from "lucide-react";
 
 type StoreHighlightsProps = {

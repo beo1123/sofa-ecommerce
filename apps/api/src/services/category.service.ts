@@ -55,10 +55,7 @@ export class CategoryService {
 
     const where: Prisma.CategoryWhereInput = q
       ? {
-          OR: [
-            { name: { contains: q, mode: "insensitive" } },
-            { slug: { contains: q, mode: "insensitive" } },
-          ],
+          OR: [{ name: { contains: q, mode: "insensitive" } }, { slug: { contains: q, mode: "insensitive" } }],
         }
       : {};
 
@@ -175,10 +172,7 @@ export class CategoryService {
     if (existing._count.products > 0) {
       throw {
         status: 400,
-        body: fail(
-          "Category has related products. Reassign or remove products before deleting.",
-          "CATEGORY_IN_USE"
-        ),
+        body: fail("Category has related products. Reassign or remove products before deleting.", "CATEGORY_IN_USE"),
       };
     }
 

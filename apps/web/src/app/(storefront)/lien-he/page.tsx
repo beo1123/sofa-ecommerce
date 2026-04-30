@@ -1,11 +1,11 @@
 ﻿import ContactForm from "@/components/contact/ContactForm";
 import ContactInfoCard from "@/components/contact/ContactInfoCard";
 import ContactMap from "@/components/contact/ContactMap";
-import Container from "@/components/ui/Container";
-import Divider from "@/components/ui/Divider";
-import Grid from "@/components/ui/Grid";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
+import Container from "@repo/ui/Container";
+import Divider from "@repo/ui/Divider";
+import Grid from "@repo/ui/Grid";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
 
 export const metadata = {
   title: "Liên hệ Sofa Phạm Gia",

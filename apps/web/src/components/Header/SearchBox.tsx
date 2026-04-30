@@ -4,13 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ImageIcon, Search, X } from "lucide-react";
 import Link from "next/link";
-import Input from "@/components/ui/Input";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
-import Spinner from "@/components/ui/Spinner";
+import Input from "@repo/ui/Input";
+import Card from "@repo/ui/Card";
+import Button from "@repo/ui/Button";
+import Spinner from "@repo/ui/Spinner";
 import { useSearch } from "@/hooks/products/useSearch";
 import { formatCurrency } from "@/lib/helpers";
-import { SafeImage } from "../ui/SafeImage";
+import { SafeImage } from "@repo/ui/SafeImage";
 
 export default function SearchBox({ className = "" }: { className?: string }) {
   const [query, setQuery] = useState("");

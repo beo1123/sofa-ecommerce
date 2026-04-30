@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Input from "@/components/ui/Input";
-import Heading from "@/components/ui/Heading";
+import Input from "@repo/ui/Input";
+import Heading from "@repo/ui/Heading";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { CheckoutFormData } from "./CheckoutForm";
 

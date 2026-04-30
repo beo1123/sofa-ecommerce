@@ -4,11 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import ProductList from "@/components/products/ProductList";
 import ProductFilters from "@/components/products/ProductFilters";
 import { Filter, X } from "lucide-react";
-import Button from "@/components/ui/Button";
+import Button from "@repo/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProductQueryParams } from "@/types/products/ProductQueryParams";
+import { ProductQueryParams } from "@repo/types";
 import { useProductsInfinite } from "@/hooks/products/useProductsInfinite";
-import Spinner from "@/components/ui/Spinner";
+import Spinner from "@repo/ui/Spinner";
 
 type ProductsPageProps = {
   initialItems: any[];

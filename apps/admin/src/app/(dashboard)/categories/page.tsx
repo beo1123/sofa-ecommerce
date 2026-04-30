@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { adminApi } from "@/lib/api";
-import { Button, Spinner, Input, Modal } from "@/components/ui";
+import { sdk } from "@repo/sdk";
+import { Button, Spinner, Input, Modal } from "@repo/ui";
 
 interface Category {
   id: number;
@@ -26,7 +26,7 @@ export default function CategoriesPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "categories", page, perPage, search],
     queryFn: async () => {
-      const res = await adminApi.categories.list({
+      const res = await sdk.adminApi.categories.list({
         page,
         perPage,
         q: search || undefined,
@@ -36,7 +36,7 @@ export default function CategoriesPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data: unknown) => adminApi.categories.create(data),
+    mutationFn: (data: unknown) => sdk.adminApi.categories.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "categories"] });
       setModalOpen(false);
@@ -45,7 +45,7 @@ export default function CategoriesPage() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: unknown }) => adminApi.categories.update(id, data),
+    mutationFn: ({ id, data }: { id: number; data: unknown }) => sdk.adminApi.categories.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "categories"] });
       setModalOpen(false);
@@ -54,7 +54,7 @@ export default function CategoriesPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => adminApi.categories.delete(id),
+    mutationFn: (id: number) => sdk.adminApi.categories.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "categories"] });
     },

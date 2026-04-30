@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { BlogArticleCategory } from "@/types/blog/blog";
+import { BlogArticleCategory } from "@repo/types";
 import Link from "next/link";
 
 export default function BlogCategoryFilter({

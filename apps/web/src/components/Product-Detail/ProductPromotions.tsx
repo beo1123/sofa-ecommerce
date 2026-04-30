@@ -1,4 +1,4 @@
-﻿import Alert from "@/components/ui/Alert";
+﻿import Alert from "@repo/ui/Alert";
 
 type PromotionItem = {
   title: string;

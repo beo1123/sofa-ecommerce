@@ -1,7 +1,7 @@
-﻿import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import Card, { CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+﻿import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import Card, { CardContent, CardHeader, CardTitle } from "@repo/ui/Card";
 import { Brush, Layers, Hammer } from "lucide-react";
 
 const reasons = [

@@ -80,10 +80,7 @@ productsRouter.get("/:slug", async (c) => {
     const product = await productService.getProductBySlug(slug);
 
     if (!product) {
-      return c.json(
-        { success: false, error: { message: "Product not found", code: "NOT_FOUND" } },
-        404
-      );
+      return c.json({ success: false, error: { message: "Product not found", code: "NOT_FOUND" } }, 404);
     }
 
     return c.json(ok(product));

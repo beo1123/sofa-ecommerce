@@ -2,8 +2,8 @@
 
 import React from "react";
 import ProductCard from "./ProductCard";
-import Spinner from "@/components/ui/Spinner";
-import Text from "@/components/ui/Text";
+import Spinner from "@repo/ui/Spinner";
+import Text from "@repo/ui/Text";
 import { motion } from "framer-motion";
 
 type ProductListProps = {

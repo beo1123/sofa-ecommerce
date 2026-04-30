@@ -1,5 +1,4 @@
 ﻿"use client";
-
 import React from "react";
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -84,6 +83,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={inputClasses}
             aria-invalid={hasError}
             aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
+            // ✅ Cho phép controlled & uncontrolled form
             value={value}
             onChange={onChange}
             onBlur={onBlur}

@@ -2,12 +2,12 @@
 
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Star } from "lucide-react";
-import Button from "@/components/ui/Button";
+import Button from "@repo/ui/Button";
 import { formatCurrency } from "@/lib/helpers";
 import { useAppDispatch } from "@/store/hook";
-import { PhoneIcon } from "../ui/Icon/PhoneIcon";
-import { ZaloIcon } from "../ui/Icon/ZaloIcon";
-import Text from "../ui/Text";
+import { PhoneIcon } from "@repo/ui/Icon/PhoneIcon";
+import { ZaloIcon } from "@repo/ui/Icon/ZaloIcon";
+import Text from "@repo/ui/Text";
 import ProductPromotions from "./ProductPromotions";
 
 type VariantAttributes = Record<string, string>;

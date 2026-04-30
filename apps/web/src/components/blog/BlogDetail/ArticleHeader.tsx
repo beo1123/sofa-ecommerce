@@ -1,11 +1,11 @@
 // FILE: components/blog/BlogDetail/ArticleHeader.tsx
 
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
 import Link from "next/link";
 import { formatVNDate } from "@/lib/helpers";
-import { SafeImage } from "@/components/ui/SafeImage";
-import { blogDetail } from "@/types/blog/blogDetail";
+import { SafeImage } from "@repo/ui/SafeImage";
+import { blogDetail } from "@repo/types";
 
 export default function ArticleHeader({ article }: { article: blogDetail }) {
   return (

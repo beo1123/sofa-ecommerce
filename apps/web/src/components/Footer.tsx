@@ -1,6 +1,6 @@
 // components/Footer.tsx
 import React from "react";
-import Container from "@/components/ui/Container";
+import Container from "@repo/ui/Container";
 import Link from "next/link";
 import { sdk } from "@repo/sdk";
 

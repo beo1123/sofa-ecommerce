@@ -2,13 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import Heading from "@/components/ui/Heading";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
-import Input from "@/components/ui/Input";
-import Dropdown from "@/components/ui/Dropdown";
+import Heading from "@repo/ui/Heading";
+import Button from "@repo/ui/Button";
+import Card from "@repo/ui/Card";
+import Spinner from "@repo/ui/Spinner";
+import Alert from "@repo/ui/Alert";
+import Input from "@repo/ui/Input";
+import Dropdown from "@repo/ui/Dropdown";
 import ProductTable from "@/components/admin/products/ProductTable";
 import ExcelImport from "@/components/admin/products/ExcelImport";
 import { Plus, Search } from "lucide-react";

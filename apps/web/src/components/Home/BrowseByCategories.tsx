@@ -1,5 +1,5 @@
-import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
+import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
 import Link from "next/link";
 import { sdk } from "@repo/sdk";
 

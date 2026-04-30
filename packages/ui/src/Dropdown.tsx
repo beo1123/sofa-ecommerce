@@ -9,7 +9,7 @@ type Option = {
   icon?: React.ReactNode;
 };
 
-type DropdownProps = {
+type Props = {
   label?: string;
   placeholder?: string;
   options: Option[];
@@ -27,7 +27,7 @@ export default function Dropdown({
   onChange,
   fullWidth,
   disabled,
-}: DropdownProps) {
+}: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

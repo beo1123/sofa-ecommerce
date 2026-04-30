@@ -2,9 +2,9 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import Heading from "@/components/ui/Heading";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
+import Heading from "@repo/ui/Heading";
+import Spinner from "@repo/ui/Spinner";
+import Alert from "@repo/ui/Alert";
 import ProductForm from "@/components/admin/products/ProductForm";
 import { useAdminProductEdit } from "@/hooks/products/useAdminProductEdit";
 

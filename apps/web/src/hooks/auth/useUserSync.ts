@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/store/hook";
 import { clearUser, setUser } from "@/store/slice/userSlice";
-import { User } from "@/types/user/User";
+import { User } from "@repo/types";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

@@ -4,8 +4,8 @@
 import { useSearchParams } from "next/navigation";
 import { useSearchInfinite } from "@/hooks/products/useSearchInfinite";
 import ProductCard from "@/components/products/ProductCard";
-import Heading from "@/components/ui/Heading";
-import Spinner from "@/components/ui/Spinner";
+import Heading from "@repo/ui/Heading";
+import Spinner from "@repo/ui/Spinner";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 

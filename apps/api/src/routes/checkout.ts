@@ -16,10 +16,7 @@ checkoutRouter.post("/", async (c) => {
     const body = await c.req.json<CheckoutPayload>();
 
     if (!body.cart?.items?.length) {
-      return c.json(
-        { success: false, error: { message: "Cart is empty", code: "EMPTY_CART" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Cart is empty", code: "EMPTY_CART" } }, 400);
     }
 
     if (!body.recipient?.name || !body.recipient?.phone) {
@@ -30,17 +27,11 @@ checkoutRouter.post("/", async (c) => {
     }
 
     if (!body.shipping?.line1 || !body.shipping?.city || !body.shipping?.province) {
-      return c.json(
-        { success: false, error: { message: "Shipping address is required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Shipping address is required", code: "INVALID_BODY" } }, 400);
     }
 
     if (!body.paymentMethod) {
-      return c.json(
-        { success: false, error: { message: "Payment method is required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Payment method is required", code: "INVALID_BODY" } }, 400);
     }
 
     const result = await orderService.createOrder(body);
@@ -56,10 +47,7 @@ checkoutRouter.get("/user-orders/:userId", async (c) => {
   try {
     const userId = Number(c.req.param("userId"));
     if (isNaN(userId)) {
-      return c.json(
-        { success: false, error: { message: "Invalid user ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid user ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const orders = await orderService.getUserOrders(userId);

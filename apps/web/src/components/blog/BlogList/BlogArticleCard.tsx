@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { SafeImage } from "@/components/ui/SafeImage";
-import Text from "@/components/ui/Text";
+import { SafeImage } from "@repo/ui/SafeImage";
+import Text from "@repo/ui/Text";
 import { formatVNDate } from "@/lib/helpers";
-import { BlogArticle } from "@/types/blog/blog";
+import { BlogArticle } from "@repo/types";
 
 export default function BlogArticleCard({ item }: { item: BlogArticle }) {
   return (

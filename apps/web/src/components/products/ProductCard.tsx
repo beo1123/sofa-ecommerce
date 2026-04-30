@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ImageIcon } from "lucide-react";
 import { formatCurrency } from "@/lib/helpers";
-import Text from "@/components/ui/Text";
-import Heading from "@/components/ui/Heading";
+import Text from "@repo/ui/Text";
+import Heading from "@repo/ui/Heading";
 
 import { useState } from "react";
 import MiniCartDrawer from "@/components/cart/MiniCartDrawer";
 import { useAppDispatch } from "@/store/hook";
 import { addItem } from "@/store/slice/cartSlice";
-import { SafeImage } from "../ui/SafeImage";
+import { SafeImage } from "@repo/ui/SafeImage";
 
 type ProductCardProps = {
   product: {

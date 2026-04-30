@@ -9,12 +9,12 @@ import { ImageIcon } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { selectCartItemCount, selectCartItems, selectCartSubtotal } from "@/store/selector/cartSelectors";
 import { removeItem, updateQuantity } from "@/store/slice/cartSlice";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import Divider from "@/components/ui/Divider";
-import Badge from "@/components/ui/Badge";
-import Button from "../ui/Button";
-import { SafeImage } from "../ui/SafeImage";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import Divider from "@repo/ui/Divider";
+import Badge from "@repo/ui/Badge";
+import Button from "@repo/ui/Button";
+import { SafeImage } from "@repo/ui/SafeImage";
 
 type MiniCartDrawerProps = {
   isOpen: boolean;

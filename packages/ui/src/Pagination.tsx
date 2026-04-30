@@ -1,23 +1,40 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Button from "@/components/ui/Button";
+import Button from "./Button";
 
 type Props = {
   currentPage: number;
-  totalItems: number;
-  perPage: number;
-  basePath: string;
+  totalItems?: number;
+  perPage?: number;
+  basePath?: string;
   currentFilters?: Record<string, any>;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
 };
 
-export default function Pagination({ currentPage, totalItems, perPage, basePath, currentFilters = {} }: Props) {
+export default function Pagination({
+  currentPage,
+  totalItems,
+  perPage,
+  basePath,
+  currentFilters = {},
+  totalPages: totalPagesFromProps,
+  onPageChange,
+}: Props) {
   const router = useRouter();
-  const totalPages = Math.ceil(totalItems / perPage);
+  const totalPages =
+    totalPagesFromProps ??
+    (typeof totalItems === "number" && typeof perPage === "number" ? Math.ceil(totalItems / perPage) : 1);
 
   // if (totalPages <= 1) return null;
 
   const handleChangePage = (page: number) => {
+    if (onPageChange) {
+      onPageChange(page);
+      return;
+    }
+    if (!basePath || !perPage) return;
     const params = new URLSearchParams();
     Object.entries(currentFilters).forEach(([key, value]) => {
       if (value) params.set(key, String(value));

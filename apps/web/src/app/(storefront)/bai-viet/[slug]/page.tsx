@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import Container from "@/components/ui/Container";
+import Container from "@repo/ui/Container";
 import { sdk } from "@repo/sdk";
 
 import ArticleHeader from "@/components/blog/BlogDetail/ArticleHeader";

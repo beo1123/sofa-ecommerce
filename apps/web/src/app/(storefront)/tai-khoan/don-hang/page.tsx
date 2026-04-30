@@ -2,8 +2,8 @@
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/authOptions";
 import OrdersList from "@/components/account/OrdersList";
-import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
+import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
 
 export default async function AccountOrdersPage() {
   const session = await getServerSession(authOptions);

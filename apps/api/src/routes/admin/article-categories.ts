@@ -30,10 +30,7 @@ adminArticleCategoriesRouter.post("/", async (c) => {
     const body = await c.req.json();
 
     if (!body.name || !body.slug) {
-      return c.json(
-        { success: false, error: { message: "Name and slug are required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Name and slug are required", code: "INVALID_BODY" } }, 400);
     }
 
     const category = await articleCategoryService.adminCreateArticleCategory(body);
@@ -49,10 +46,7 @@ adminArticleCategoriesRouter.put("/:id", async (c) => {
   try {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) {
-      return c.json(
-        { success: false, error: { message: "Invalid article category ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid article category ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const body = await c.req.json();
@@ -69,10 +63,7 @@ adminArticleCategoriesRouter.delete("/:id", async (c) => {
   try {
     const id = Number(c.req.param("id"));
     if (isNaN(id)) {
-      return c.json(
-        { success: false, error: { message: "Invalid article category ID", code: "BAD_REQUEST" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Invalid article category ID", code: "BAD_REQUEST" } }, 400);
     }
 
     const result = await articleCategoryService.adminDeleteArticleCategory(id);

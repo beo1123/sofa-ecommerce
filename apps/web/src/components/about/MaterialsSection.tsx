@@ -1,7 +1,7 @@
-﻿import Container from "@/components/ui/Container";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import { SafeImage } from "@/components/ui/SafeImage";
+﻿import Container from "@repo/ui/Container";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import { SafeImage } from "@repo/ui/SafeImage";
 import { sofaImages } from "./images";
 
 export default function MaterialsSection() {

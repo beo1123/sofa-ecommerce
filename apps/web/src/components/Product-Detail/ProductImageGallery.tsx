@@ -2,8 +2,8 @@
 
 import React, { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { SafeImage } from "../ui/SafeImage";
-import Button from "../ui/Button";
+import { SafeImage } from "@repo/ui/SafeImage";
+import Button from "@repo/ui/Button";
 
 type ProductImageGalleryProps = {
   images: { url: string; alt?: string }[];

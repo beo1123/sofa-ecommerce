@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { ArrowLeft, ArrowRight, Star, Trash2, Plus } from "lucide-react";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
+import Input from "@repo/ui/Input";
+import Button from "@repo/ui/Button";
 
 interface ImageUploaderProps {
   images: { url: string; alt?: string; isPrimary?: boolean }[];

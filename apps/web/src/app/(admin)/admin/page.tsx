@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import Card, { CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import Heading from "@/components/ui/Heading";
+import Card, { CardContent, CardHeader, CardTitle } from "@repo/ui/Card";
+import Heading from "@repo/ui/Heading";
 import { Package, FileText, Upload, ArrowRight, Tags, FolderTree } from "lucide-react";
 
 const QUICK_LINKS = [

@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import React, { useState } from "react";
-import Text from "@/components/ui/Text";
+import Text from "./Text";
 
 type Props = {
   min?: number;

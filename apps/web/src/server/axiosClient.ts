@@ -1,29 +1,69 @@
-import axios from "axios";
+import { sdk } from "@repo/sdk";
 
-const axiosClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api",
-  timeout: 10000,
-  headers: { "Content-Type": "application/json" },
-});
+type RequestConfig = {
+  params?: Record<string, unknown>;
+  signal?: AbortSignal;
+  headers?: Record<string, string>;
+  data?: unknown;
+};
 
-axiosClient.interceptors.request.use(
-  (config) => {
-    if (typeof window !== "undefined") {
-      // eslint-disable-next-line no-undef
-      const token = localStorage.getItem("token");
-      if (token) config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+function toApiPath(path: string) {
+  if (path.startsWith("/api/")) return path;
+  if (path.startsWith("/admin/")) return `/api${path}`;
+  if (path.startsWith("/auth/")) return `/api/v1${path}`;
+  return `/api/v1${path}`;
+}
 
-axiosClient.interceptors.response.use(
-  (res) => res,
-  (err) => {
-    const message = err.response?.data?.message || err.response?.statusText || err.message || "Unknown error";
-    return Promise.reject({ ...err, message });
+function toQuery(params?: Record<string, unknown>) {
+  if (!params) return undefined;
+  const query: Record<string, string | number | boolean | undefined> = {};
+  for (const [key, value] of Object.entries(params)) {
+    if (value === null || value === undefined) continue;
+    query[key] = value as string | number | boolean;
   }
-);
+  return query;
+}
+
+async function withEnvelope<T = any>(executor: () => Promise<T>) {
+  const data = await executor();
+  return { data };
+}
+
+const axiosClient = {
+  get: <T = any>(path: string, config?: RequestConfig) =>
+    withEnvelope<T>(() => sdk.http.get<T>(toApiPath(path), toQuery(config?.params))),
+
+  post: <T = any>(path: string, body?: unknown, config?: RequestConfig) =>
+    withEnvelope<T>(() =>
+      sdk.http.post<T>(toApiPath(path), body, {
+        signal: config?.signal,
+        headers: config?.headers,
+      })
+    ),
+
+  put: <T = any>(path: string, body?: unknown, config?: RequestConfig) =>
+    withEnvelope<T>(() =>
+      sdk.http.put<T>(toApiPath(path), body, {
+        signal: config?.signal,
+        headers: config?.headers,
+      })
+    ),
+
+  patch: <T = any>(path: string, body?: unknown, config?: RequestConfig) =>
+    withEnvelope<T>(() =>
+      sdk.http.patch<T>(toApiPath(path), body, {
+        signal: config?.signal,
+        headers: config?.headers,
+      })
+    ),
+
+  delete: <T = any>(path: string, config?: RequestConfig) =>
+    withEnvelope<T>(() =>
+      sdk.http.delete<T>(toApiPath(path), config?.data, {
+        signal: config?.signal,
+        headers: config?.headers,
+      })
+    ),
+};
 
 export default axiosClient;

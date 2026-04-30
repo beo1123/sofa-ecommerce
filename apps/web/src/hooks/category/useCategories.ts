@@ -2,7 +2,7 @@
 
 import axiosClient from "@/server/axiosClient";
 import { ApiResponse } from "@/server/utils/api";
-import { CategoryResponse } from "@/types/category/CategoryResponse";
+import { CategoryResponse } from "@repo/types";
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
 

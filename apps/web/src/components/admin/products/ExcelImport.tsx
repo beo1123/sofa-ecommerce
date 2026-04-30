@@ -1,8 +1,8 @@
 ﻿"use client";
 
 import React, { useState } from "react";
-import Button from "@/components/ui/Button";
-import Alert from "@/components/ui/Alert";
+import Button from "@repo/ui/Button";
+import Alert from "@repo/ui/Alert";
 import { Upload, FileSpreadsheet } from "lucide-react";
 import axiosClient from "@/server/axiosClient";
 

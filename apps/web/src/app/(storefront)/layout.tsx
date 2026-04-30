@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Container from "@/components/ui/Container";
+import Container from "@repo/ui/Container";
 
 export default function StorefrontLayout({ children }: { children: ReactNode }) {
   return (

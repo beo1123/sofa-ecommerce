@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Heading from "@/components/ui/Heading";
-import RadioGroup from "@/components/ui/Radio";
+import Heading from "@repo/ui/Heading";
+import RadioGroup from "@repo/ui/Radio";
 import { UseFormRegister, UseFormWatch, UseFormSetValue } from "react-hook-form";
 import { CheckoutFormData } from "./CheckoutForm";
 import { formatCurrency } from "@/lib/helpers";

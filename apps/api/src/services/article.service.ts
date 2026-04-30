@@ -158,10 +158,7 @@ export class ArticleService {
       ...(filters.categoryId ? { categoryId: filters.categoryId } : {}),
       ...(q
         ? {
-            OR: [
-              { title: { contains: q, mode: "insensitive" } },
-              { slug: { contains: q, mode: "insensitive" } },
-            ],
+            OR: [{ title: { contains: q, mode: "insensitive" } }, { slug: { contains: q, mode: "insensitive" } }],
           }
         : {}),
     };
@@ -221,11 +218,7 @@ export class ArticleService {
         status: (input.status as ArticleStatus) ?? "DRAFT",
         categoryId: input.categoryId,
         authorId: input.authorId,
-        publishedAt: input.publishedAt
-          ? new Date(input.publishedAt)
-          : input.status === "PUBLISHED"
-            ? new Date()
-            : null,
+        publishedAt: input.publishedAt ? new Date(input.publishedAt) : input.status === "PUBLISHED" ? new Date() : null,
       },
       include: {
         category: true,

@@ -1,18 +1,13 @@
-"use client";
-
+// components/Heading.tsx
 import React from "react";
 
-type HeadingProps = {
+type Props = {
   children: React.ReactNode;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   className?: string;
 };
 
-export default function Heading({
-  children,
-  level = 2,
-  className = "",
-}: HeadingProps) {
+export default function Heading({ children, level = 2, className = "" }: Props) {
   const sizeMap: Record<number, string> = {
     1: "text-4xl font-bold",
     2: "text-3xl font-semibold",
@@ -22,5 +17,5 @@ export default function Heading({
     6: "text-base font-medium",
   };
 
-  return <div className={`${sizeMap[level]} ${className}`}>{children}</div>;
+  return <div className={`${sizeMap[level]}  ${className}`}>{children}</div>;
 }

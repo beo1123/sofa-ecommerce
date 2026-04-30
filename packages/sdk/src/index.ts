@@ -21,6 +21,11 @@ type SuccessResponse<T> = {
   meta?: PaginationMeta | Record<string, unknown>;
 };
 
+type RequestOptions = {
+  query?: Query;
+  init?: RequestInit;
+};
+
 const DEFAULT_API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? process.env.API_URL ?? "http://localhost:4000";
 
 function getApiBaseUrl() {
@@ -42,7 +47,7 @@ function buildUrl(path: string, query?: Query) {
   return url.toString();
 }
 
-async function request<T>(path: string, options?: { query?: Query; init?: RequestInit }): Promise<SuccessResponse<T>> {
+async function request<T>(path: string, options?: RequestOptions): Promise<SuccessResponse<T>> {
   const response = await fetch(buildUrl(path, options?.query), {
     ...options?.init,
     headers: {
@@ -68,11 +73,52 @@ async function request<T>(path: string, options?: { query?: Query; init?: Reques
   return payload as SuccessResponse<T>;
 }
 
+async function requestData<T>(path: string, options?: RequestOptions) {
+  const response = await request<T>(path, options);
+  return response.data;
+}
+
+async function requestEnvelope<T>(path: string, options?: RequestOptions) {
+  return request<T>(path, options);
+}
+
+async function asAxiosLikeResponse(path: string, options?: RequestOptions): Promise<{ data: any }> {
+  const payload = await requestEnvelope<any>(path, options);
+  return { data: payload };
+}
+
+function withJsonBody(body: unknown, init?: RequestInit): RequestInit {
+  return {
+    ...init,
+    headers: {
+      "Content-Type": "application/json",
+      ...(init?.headers ?? {}),
+    },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  };
+}
+
 export const sdk = {
+  http: {
+    get: async <T>(path: string, query?: Query) => requestData<T>(path, { query }),
+    post: async <T>(path: string, body?: unknown, init?: RequestInit) =>
+      requestData<T>(path, { init: withJsonBody(body, { ...(init ?? {}), method: "POST" }) }),
+    put: async <T>(path: string, body?: unknown, init?: RequestInit) =>
+      requestData<T>(path, { init: withJsonBody(body, { ...(init ?? {}), method: "PUT" }) }),
+    patch: async <T>(path: string, body?: unknown, init?: RequestInit) =>
+      requestData<T>(path, { init: withJsonBody(body, { ...(init ?? {}), method: "PATCH" }) }),
+    delete: async <T>(path: string, body?: unknown, init?: RequestInit) =>
+      requestData<T>(
+        path,
+        body === undefined
+          ? { init: { ...(init ?? {}), method: "DELETE" } }
+          : { init: withJsonBody(body, { ...(init ?? {}), method: "DELETE" }) }
+      ),
+  },
+
   categories: {
     async getAll() {
-      const res = await request<Category[]>("/api/v1/categories");
-      return res.data;
+      return requestData<Category[]>("/api/v1/categories");
     },
   },
 
@@ -101,28 +147,23 @@ export const sdk = {
     },
 
     async getBySlug(slug: string) {
-      const res = await request<ProductDetail>(`/api/v1/products/${slug}`);
-      return res.data;
+      return requestData<ProductDetail>(`/api/v1/products/${slug}`);
     },
 
     async getRelated(slug: string) {
-      const res = await request<ProductListItem[]>(`/api/v1/products/${slug}/related`);
-      return res.data;
+      return requestData<ProductListItem[]>(`/api/v1/products/${slug}/related`);
     },
 
     async getFeatured(limit = 8) {
-      const res = await request<ProductListItem[]>("/api/v1/products/featured", { query: { limit } });
-      return res.data;
+      return requestData<ProductListItem[]>("/api/v1/products/featured", { query: { limit } });
     },
 
     async getBestSellers(limit = 8) {
-      const res = await request<ProductListItem[]>("/api/v1/products/bestsellers", { query: { limit } });
-      return res.data;
+      return requestData<ProductListItem[]>("/api/v1/products/bestsellers", { query: { limit } });
     },
 
     async getFilters() {
-      const res = await request<ProductFilters>("/api/v1/products/filters");
-      return res.data;
+      return requestData<ProductFilters>("/api/v1/products/filters");
     },
   },
 
@@ -136,27 +177,76 @@ export const sdk = {
     },
 
     async listByCategory(slug: string) {
-      const res = await request<{ category: { id: number; name: string }; articles: ArticleListItem[] }>(
+      return requestData<{ category: { id: number; name: string }; articles: ArticleListItem[] }>(
         `/api/v1/articles/category/${slug}`
       );
-      return res.data;
     },
 
     async getBySlug(slug: string) {
-      const res = await request<ArticleDetail>(`/api/v1/articles/${slug}`);
-      return res.data;
+      return requestData<ArticleDetail>(`/api/v1/articles/${slug}`);
     },
 
     async getRelated(slug: string) {
-      const res = await request<ArticleListItem[]>(`/api/v1/articles/${slug}/related`);
-      return res.data;
+      return requestData<ArticleListItem[]>(`/api/v1/articles/${slug}/related`);
     },
   },
 
   articleCategories: {
     async getAll() {
-      const res = await request<ArticleCategory[]>("/api/v1/article-categories");
-      return res.data;
+      return requestData<ArticleCategory[]>("/api/v1/article-categories");
+    },
+  },
+
+  auth: {
+    signup: (payload: unknown) =>
+      sdk.http.post<{ id: string; email: string; displayName: string | null }>("/api/v1/auth/signup", payload),
+  },
+
+  adminApi: {
+    products: {
+      list: (params?: Query) => asAxiosLikeResponse("/api/admin/products", { query: params }),
+      get: (id: number) => asAxiosLikeResponse(`/api/admin/products/${id}`),
+      create: (data: unknown) =>
+        asAxiosLikeResponse("/api/admin/products", { init: withJsonBody(data, { method: "POST" }) }),
+      update: (id: number, data: unknown) =>
+        asAxiosLikeResponse(`/api/admin/products/${id}`, { init: withJsonBody(data, { method: "PUT" }) }),
+      delete: (id: number) => asAxiosLikeResponse(`/api/admin/products/${id}`, { init: { method: "DELETE" } }),
+    },
+    categories: {
+      list: (params?: Query) => asAxiosLikeResponse("/api/admin/categories", { query: params }),
+      create: (data: unknown) =>
+        asAxiosLikeResponse("/api/admin/categories", { init: withJsonBody(data, { method: "POST" }) }),
+      update: (id: number, data: unknown) =>
+        asAxiosLikeResponse(`/api/admin/categories/${id}`, { init: withJsonBody(data, { method: "PUT" }) }),
+      delete: (id: number) => asAxiosLikeResponse(`/api/admin/categories/${id}`, { init: { method: "DELETE" } }),
+    },
+    orders: {
+      list: (params?: Query) => asAxiosLikeResponse("/api/admin/orders", { query: params }),
+      get: (id: number) => asAxiosLikeResponse(`/api/admin/orders/${id}`),
+      updateStatus: (id: number, data: { status: string; note?: string }) =>
+        asAxiosLikeResponse(`/api/admin/orders/${id}/status`, {
+          init: withJsonBody(data, { method: "PATCH" }),
+        }),
+    },
+    articles: {
+      list: (params?: Query) => asAxiosLikeResponse("/api/admin/articles", { query: params }),
+      get: (id: number) => asAxiosLikeResponse(`/api/admin/articles/${id}`),
+      create: (data: unknown) =>
+        asAxiosLikeResponse("/api/admin/articles", { init: withJsonBody(data, { method: "POST" }) }),
+      update: (id: number, data: unknown) =>
+        asAxiosLikeResponse(`/api/admin/articles/${id}`, { init: withJsonBody(data, { method: "PUT" }) }),
+      delete: (id: number) => asAxiosLikeResponse(`/api/admin/articles/${id}`, { init: { method: "DELETE" } }),
+    },
+    articleCategories: {
+      list: (params?: Query) => asAxiosLikeResponse("/api/admin/article-categories", { query: params }),
+      create: (data: unknown) =>
+        asAxiosLikeResponse("/api/admin/article-categories", { init: withJsonBody(data, { method: "POST" }) }),
+      update: (id: number, data: unknown) =>
+        asAxiosLikeResponse(`/api/admin/article-categories/${id}`, {
+          init: withJsonBody(data, { method: "PUT" }),
+        }),
+      delete: (id: number) =>
+        asAxiosLikeResponse(`/api/admin/article-categories/${id}`, { init: { method: "DELETE" } }),
     },
   },
 };

@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import axiosClient from "@/server/axiosClient";
 import axios from "axios";
 import { ApiResponse } from "@/server/utils/api";
-import { BestSellerProduct } from "@/types/products/BestSellerProduct ";
+import { BestSellerProduct } from "@repo/types";
 
 export function useBestSellerProducts() {
   const [products, setProducts] = useState<BestSellerProduct[]>([]);

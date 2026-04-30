@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import axiosClient from "@/server/axiosClient";
 import type { ApiResponse } from "@/server/utils/api";
-import type { UserOrder } from "@/types/order/order";
+import type { UserOrder } from "@repo/types";
 
 export function useOrders() {
   const [orders, setOrders] = useState<UserOrder[]>([]);

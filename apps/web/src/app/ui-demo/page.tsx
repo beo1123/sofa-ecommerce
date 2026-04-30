@@ -1,25 +1,25 @@
 ﻿"use client";
 
 import React, { useState } from "react";
-import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import Card, { CardHeader, CardTitle, CardFooter, CardContent } from "@/components/ui/Card";
-import Modal from "@/components/ui/Modal";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import Divider from "@/components/ui/Divider";
-import Badge from "@/components/ui/Badge";
-import Alert from "@/components/ui/Alert";
-import Spinner from "@/components/ui/Spinner";
+import Container from "@repo/ui/Container";
+import Button from "@repo/ui/Button";
+import Input from "@repo/ui/Input";
+import Card, { CardHeader, CardTitle, CardFooter, CardContent } from "@repo/ui/Card";
+import Modal from "@repo/ui/Modal";
+import Heading from "@repo/ui/Heading";
+import Text from "@repo/ui/Text";
+import Divider from "@repo/ui/Divider";
+import Badge from "@repo/ui/Badge";
+import Alert from "@repo/ui/Alert";
+import Spinner from "@repo/ui/Spinner";
 import { Search, ShoppingCart, User, Mail, Lock, Truck, Zap, Store } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Grid, { GridItem } from "@/components/ui/Grid";
+import Grid, { GridItem } from "@repo/ui/Grid";
 import { zodResolver } from "@hookform/resolvers/zod";
-import RadioGroup from "@/components/ui/Radio";
-import Dropdown from "@/components/ui/Dropdown";
-import PriceRangeSlider from "@/components/ui/PriceRangeSlider";
+import RadioGroup from "@repo/ui/Radio";
+import Dropdown from "@repo/ui/Dropdown";
+import PriceRangeSlider from "@repo/ui/PriceRangeSlider";
 
 // ✅ Zod schema for validation example
 const formSchema = z.object({

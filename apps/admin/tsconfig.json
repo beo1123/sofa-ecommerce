@@ -17,6 +17,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@repo/db": ["../../packages/db/src/index.ts"],
+      "@repo/sdk": ["../../packages/sdk/src/index.ts"],
+      "@repo/ui": ["../../packages/ui/src/index.ts"],
+      "@repo/ui/*": ["../../packages/ui/src/*"],
       "@repo/types": ["../../packages/types/src/index.ts"],
       "@repo/utils": ["../../packages/utils/src/index.ts"]
     }

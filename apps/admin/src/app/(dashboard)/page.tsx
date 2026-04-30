@@ -1,14 +1,14 @@
 ﻿"use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { adminApi } from "@/lib/api";
-import { Spinner } from "@/components/ui";
+import { sdk } from "@repo/sdk";
+import { Spinner } from "@repo/ui";
 
 export default function AdminDashboardPage() {
   const { data: products, isLoading: loadingProducts } = useQuery({
     queryKey: ["admin", "products", "count"],
     queryFn: async () => {
-      const res = await adminApi.products.list({ perPage: 1 });
+      const res = await sdk.adminApi.products.list({ perPage: 1 });
       return res.data;
     },
   });
@@ -16,7 +16,7 @@ export default function AdminDashboardPage() {
   const { data: orders, isLoading: loadingOrders } = useQuery({
     queryKey: ["admin", "orders", "count"],
     queryFn: async () => {
-      const res = await adminApi.orders.list({ perPage: 1 });
+      const res = await sdk.adminApi.orders.list({ perPage: 1 });
       return res.data;
     },
   });
@@ -24,7 +24,7 @@ export default function AdminDashboardPage() {
   const { data: articles, isLoading: loadingArticles } = useQuery({
     queryKey: ["admin", "articles", "count"],
     queryFn: async () => {
-      const res = await adminApi.articles.list({ perPage: 1 });
+      const res = await sdk.adminApi.articles.list({ perPage: 1 });
       return res.data;
     },
   });

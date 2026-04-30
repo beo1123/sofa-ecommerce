@@ -1,14 +1,13 @@
-﻿"use client";
-
+﻿// components/Badge.tsx
 import React from "react";
 
-type BadgeProps = {
+type Props = {
   children: React.ReactNode;
   variant?: "default" | "success" | "warning" | "danger";
   className?: string;
 };
 
-export default function Badge({ children, variant = "default", className = "" }: BadgeProps) {
+export default function Badge({ children, variant = "default", className = "" }: Props) {
   const variantClasses = {
     default: "bg-brand-50 text-brand-400",
     success: "bg-green-100 text-green-700",

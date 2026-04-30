@@ -1,4 +1,4 @@
-import Heading from "@/components/ui/Heading";
+import Heading from "@repo/ui/Heading";
 import BlogArticleCard from "../BlogList/BlogArticleCard";
 
 export default function RelatedArticles({ related }: { related: any[] }) {

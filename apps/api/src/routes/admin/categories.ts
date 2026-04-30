@@ -30,10 +30,7 @@ adminCategoriesRouter.post("/", async (c) => {
     const body = await c.req.json();
 
     if (!body.name || !body.slug) {
-      return c.json(
-        { success: false, error: { message: "Name and slug are required", code: "INVALID_BODY" } },
-        400
-      );
+      return c.json({ success: false, error: { message: "Name and slug are required", code: "INVALID_BODY" } }, 400);
     }
 
     const category = await categoryService.adminCreateCategory(body);
