@@ -26,6 +26,13 @@ type RequestOptions = {
   init?: RequestInit;
 };
 
+type ClientConfig = {
+  params?: Record<string, unknown>;
+  signal?: AbortSignal;
+  headers?: Record<string, string>;
+  data?: unknown;
+};
+
 const DEFAULT_API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? process.env.API_URL ?? "http://localhost:4000";
 
 function getApiBaseUrl() {
@@ -95,6 +102,57 @@ function withJsonBody(body: unknown, init?: RequestInit): RequestInit {
       ...(init?.headers ?? {}),
     },
     body: body === undefined ? undefined : JSON.stringify(body),
+  };
+}
+
+function mapClientPath(path: string) {
+  if (path.startsWith("/api/")) return path;
+  if (path.startsWith("/admin/")) return `/api${path}`;
+  if (path.startsWith("/auth/")) return `/api/v1${path}`;
+  return `/api/v1${path}`;
+}
+
+function mapClientQuery(params?: Record<string, unknown>) {
+  if (!params) return undefined;
+  const query: Query = {};
+  for (const [key, value] of Object.entries(params)) {
+    if (value === null || value === undefined) continue;
+    query[key] = value as QueryValue;
+  }
+  return query;
+}
+
+function buildClientInit(method: string, body: unknown, config?: ClientConfig): RequestInit {
+  const headers = {
+    ...(config?.headers ?? {}),
+  };
+
+  if (body === undefined) {
+    return {
+      method,
+      signal: config?.signal,
+      headers,
+    };
+  }
+
+  const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
+  if (isFormData) {
+    return {
+      method,
+      signal: config?.signal,
+      headers,
+      body: body as FormData,
+    };
+  }
+
+  return {
+    method,
+    signal: config?.signal,
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    },
+    body: JSON.stringify(body),
   };
 }
 
@@ -200,6 +258,57 @@ export const sdk = {
   auth: {
     signup: (payload: unknown) =>
       sdk.http.post<{ id: string; email: string; displayName: string | null }>("/api/v1/auth/signup", payload),
+    login: (payload: unknown) =>
+      sdk.http.post<{ id: string; email: string; displayName: string | null; roles?: string }>(
+        "/api/v1/auth/login",
+        payload
+      ),
+  },
+
+  client: {
+    get: async (path: string, config?: ClientConfig): Promise<{ data: any }> => ({
+      data: await requestEnvelope<any>(mapClientPath(path), { query: mapClientQuery(config?.params) }),
+    }),
+    post: async (path: string, body?: unknown, config?: ClientConfig): Promise<{ data: any }> => ({
+      data: await requestEnvelope<any>(mapClientPath(path), { init: buildClientInit("POST", body, config) }),
+    }),
+    put: async (path: string, body?: unknown, config?: ClientConfig): Promise<{ data: any }> => ({
+      data: await requestEnvelope<any>(mapClientPath(path), { init: buildClientInit("PUT", body, config) }),
+    }),
+    patch: async (path: string, body?: unknown, config?: ClientConfig): Promise<{ data: any }> => ({
+      data: await requestEnvelope<any>(mapClientPath(path), { init: buildClientInit("PATCH", body, config) }),
+    }),
+    delete: async (path: string, config?: ClientConfig): Promise<{ data: any }> => ({
+      data: await requestEnvelope<any>(mapClientPath(path), { init: buildClientInit("DELETE", config?.data, config) }),
+    }),
+  },
+
+  productApi: {
+    list: (params: ProductQueryParams) => sdk.products.list(params),
+    detail: (slug: string) => sdk.products.getBySlug(slug),
+    related: (slug: string) => sdk.products.getRelated(slug),
+    featured: (limit?: number) => sdk.products.getFeatured(limit),
+    bestSellers: (limit?: number) => sdk.products.getBestSellers(limit),
+    filters: () => sdk.products.getFilters(),
+  },
+
+  articleApi: {
+    list: (page?: number, perPage?: number) => sdk.articles.list(page, perPage),
+    detail: (slug: string) => sdk.articles.getBySlug(slug),
+    related: (slug: string) => sdk.articles.getRelated(slug),
+    byCategory: (slug: string) => sdk.articles.listByCategory(slug),
+  },
+
+  categoryApi: {
+    list: () => sdk.categories.getAll(),
+    articleCategories: () => sdk.articleCategories.getAll(),
+  },
+
+  orderApi: {
+    list: (params?: Query) => asAxiosLikeResponse("/api/v1/orders", { query: params }),
+    detail: (id: number) => asAxiosLikeResponse(`/api/v1/orders/${id}`),
+    updateStatus: (id: number, data: { status: string; note?: string }) =>
+      asAxiosLikeResponse(`/api/v1/orders/${id}/status`, { init: withJsonBody(data, { method: "PATCH" }) }),
   },
 
   adminApi: {
@@ -252,3 +361,7 @@ export const sdk = {
 };
 
 export type StorefrontSdk = typeof sdk;
+export { productApi } from "./product.api";
+export { orderApi } from "./order.api";
+export { articleApi } from "./article.api";
+export { categoryApi } from "./category.api";

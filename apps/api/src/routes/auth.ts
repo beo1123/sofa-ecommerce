@@ -14,3 +14,14 @@ authRouter.post("/signup", async (c) => {
     return c.json(payload, status as 400 | 401 | 403 | 404 | 500);
   }
 });
+
+authRouter.post("/login", async (c) => {
+  try {
+    const payload = await c.req.json();
+    const user = await authService.login(payload);
+    return c.json(ok(user));
+  } catch (err) {
+    const { status, payload } = normalizeError(err);
+    return c.json(payload, status as 400 | 401 | 403 | 404 | 500);
+  }
+});

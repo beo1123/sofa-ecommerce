@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import { buildAdminProductPayload, type AdminCategory, getApiErrorMessage } from "@/lib/products/adminProductUtils";
 import type { ProductFormData } from "@/components/admin/products/ProductForm";
 
@@ -27,7 +27,7 @@ export function useAdminProductCreate() {
   const categoriesQuery = useQuery({
     queryKey: ["admin-products", "categories"],
     queryFn: async (): Promise<AdminCategory[]> => {
-      const res = await axiosClient.get("/categories");
+      const res = await sdk.client.get("/categories");
       return res.data?.data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -36,7 +36,7 @@ export function useAdminProductCreate() {
   const createMutation = useMutation({
     mutationFn: async (data: ProductSubmitData) => {
       const payload = buildAdminProductPayload(data);
-      await axiosClient.post("/admin/products", payload);
+      await sdk.client.post("/admin/products", payload);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["admin-products"] });

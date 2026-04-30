@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import { useDebounce } from "@/hooks/common/useDebounce";
 import {
   type AdminCategory,
@@ -42,7 +42,7 @@ export function useAdminProducts() {
   const categoriesQuery = useQuery({
     queryKey: adminProductsKeys.categories(),
     queryFn: async (): Promise<AdminCategory[]> => {
-      const res = await axiosClient.get("/categories", { params: { page: 1, perPage: 100 } });
+      const res = await sdk.client.get("/categories", { params: { page: 1, perPage: 100 } });
       return res.data?.data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -57,7 +57,7 @@ export function useAdminProducts() {
       categoryFilter,
     }),
     queryFn: async (): Promise<ListResponse> => {
-      const res = await axiosClient.get("/admin/products", {
+      const res = await sdk.client.get("/admin/products", {
         params: {
           page,
           perPage: PER_PAGE,
@@ -77,7 +77,7 @@ export function useAdminProducts() {
 
   const deleteMutation = useMutation({
     mutationFn: async (productId: number) => {
-      await axiosClient.delete(`/admin/products/${productId}`);
+      await sdk.client.delete(`/admin/products/${productId}`);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: adminProductsKeys.all });

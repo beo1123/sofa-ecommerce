@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import { CheckoutFormData } from "@/components/checkout/CheckoutForm";
 import { useAppSelector, useAppDispatch } from "@/store/hook";
 import { selectCartItems, selectCartSubtotal } from "@/store/selector/cartSelectors";
@@ -82,7 +82,7 @@ export function useCreateOrder() {
         // couponId: ... (nếu có)
       };
 
-      const res = await axiosClient.post("/orders", payload);
+      const res = await sdk.client.post("/orders", payload);
 
       const order = res.data?.order || res.data?.data || {};
       const orderId = order.id || res.data?.orderId || null;

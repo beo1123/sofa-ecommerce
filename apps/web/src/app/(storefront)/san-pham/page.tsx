@@ -1,7 +1,6 @@
 import ProductsPageClient from "@/components/products/ProductsPageClient";
 import type { Metadata } from "next";
 import { ProductQueryParams } from "@repo/types";
-import { getProductListSSR } from "@/lib/products/productSSR";
 import { cache } from "react";
 import Script from "next/script";
 import { sdk } from "@repo/sdk";
@@ -25,7 +24,7 @@ export async function generateMetadata(props: ProductsPageProps): Promise<Metada
 }
 
 const getCachedProducts = cache(async (params: ProductQueryParams) => {
-  return await getProductListSSR(params);
+  return await sdk.productApi.list(params);
 });
 
 export const revalidate = 3600;

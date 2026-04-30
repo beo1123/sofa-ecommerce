@@ -1,9 +1,9 @@
-import { getProductDetaiSSR } from "@/lib/products/productSSR";
 import Script from "next/script";
 import type { Metadata } from "next";
 import { cache } from "react";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 import { buildProductBreadcrumbSchema, buildProductSchema, generateProductMetadata } from "@repo/seo";
+import { sdk } from "@repo/sdk";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +11,10 @@ interface PageProps {
 }
 
 const getCachedProduct = cache(async (slug: string) => {
-  return await getProductDetaiSSR(slug);
+  const product = await sdk.productApi.detail(slug).catch(() => null);
+  if (!product) return null;
+  const related = await sdk.productApi.related(slug).catch(() => []);
+  return { product, related };
 });
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {

@@ -1,7 +1,5 @@
 import { MetadataRoute } from "next";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { sdk } from "@repo/sdk";
 
 const BASE_URL = "https://sofaphamgia.com";
 
@@ -9,31 +7,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = BASE_URL;
 
   // ===== PRODUCTS =====
-  const products = await prisma.product.findMany({
-    where: { status: "PUBLISHED" },
-    select: {
-      slug: true,
-      updatedAt: true,
-    },
-  });
+  const productsResponse = await sdk.productApi.list({ page: 1, perPage: 200 });
+  const products = productsResponse.items;
 
-  const productUrls = products.map((p) => ({
+  const productUrls = products.map((p: any) => ({
     url: `${baseUrl}/san-pham/${p.slug}`,
-    lastModified: p.updatedAt,
+    lastModified: p.updatedAt ?? new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
 
   // ===== ARTICLES =====
-  const articles = await prisma.article.findMany({
-    where: { status: "PUBLISHED" },
-    select: {
-      slug: true,
-      publishedAt: true,
-    },
-  });
+  const articleResponse = await sdk.articleApi.list(1, 200);
+  const articles = articleResponse.items;
 
-  const articleUrls = articles.map((a) => ({
+  const articleUrls = articles.map((a: any) => ({
     url: `${baseUrl}/bai-viet/${a.slug}`,
     lastModified: a.publishedAt ?? new Date(),
     changeFrequency: "monthly" as const,
@@ -41,13 +29,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ===== CATEGORIES =====
-  const categories = await prisma.category.findMany({
-    select: { slug: true, updatedAt: true },
-  });
+  const categories = await sdk.categoryApi.list();
 
-  const categoryUrls = categories.map((c) => ({
+  const categoryUrls = categories.map((c: any) => ({
     url: `${baseUrl}/san-pham?category=${c.slug}`,
-    lastModified: c.updatedAt,
+    lastModified: c.updatedAt ?? new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));

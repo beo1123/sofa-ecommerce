@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import { getApiErrorMessage } from "@/lib/articles/adminArticleUtils";
 
 interface UploadResponse {
@@ -28,7 +28,7 @@ export function useArticleThumbnail(initialThumbnail?: string | null) {
       formData.append("file", file);
       formData.append("folder", folder);
 
-      const res = await axiosClient.post("/admin/upload", formData, {
+      const res = await sdk.client.post("/admin/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -38,7 +38,7 @@ export function useArticleThumbnail(initialThumbnail?: string | null) {
 
   const deleteMutation = useMutation({
     mutationFn: async ({ url }: { url: string }) => {
-      await axiosClient.delete("/admin/upload", {
+      await sdk.client.delete("/admin/upload", {
         data: { url },
       });
     },

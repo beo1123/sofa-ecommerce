@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signIn, signOut } from "next-auth/react";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const res = await axiosClient.post("/auth/signup", data);
+      const res = await sdk.client.post("/auth/signup", data);
       return { success: true, data: res.data?.data };
     } catch (err: any) {
       const apiMessage =

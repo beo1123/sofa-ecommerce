@@ -2,7 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useDebounce } from "../common/useDebounce";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 
 export function useSearchInfinite(query: string, opts?: { perPage?: number }) {
   const perPage = opts?.perPage ?? 12;
@@ -19,7 +19,7 @@ export function useSearchInfinite(query: string, opts?: { perPage?: number }) {
           meta: { page: 1, perPage, total: 0 },
         };
 
-      const res = await axiosClient.get("/search", {
+      const res = await sdk.client.get("/search", {
         params: { q: debounced, page: pageParam, perPage },
       });
 

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, Loader2, Star, Upload, X } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 
 interface ImageUploaderProps {
   images: { url: string; alt?: string; isPrimary?: boolean }[];
@@ -22,7 +22,7 @@ export default function ImageUploader({ images, onChange, folder = "products", m
       formData.append("file", file);
       formData.append("folder", uploadFolder);
 
-      const res = await axiosClient.post("/admin/upload", formData, {
+      const res = await sdk.client.post("/admin/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -32,7 +32,7 @@ export default function ImageUploader({ images, onChange, folder = "products", m
 
   const deleteMutation = useMutation({
     mutationFn: async ({ url }: { url: string }) => {
-      await axiosClient.delete("/admin/upload", {
+      await sdk.client.delete("/admin/upload", {
         data: { url },
       });
     },

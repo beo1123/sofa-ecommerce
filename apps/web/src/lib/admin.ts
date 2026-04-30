@@ -1,8 +1,14 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-import { fail } from "@/server/utils/api";
 
 const ADMIN_ROLE = "Admin";
+
+function fail(message: string, code?: string) {
+  return {
+    success: false as const,
+    error: { message, code },
+  };
+}
 
 /**
  * Kiểm tra session hiện tại có phải admin không.

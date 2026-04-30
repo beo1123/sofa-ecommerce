@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import axiosClient from "@/server/axiosClient";
-import axios from "axios";
-import { ApiResponse } from "@/server/utils/api";
+import { sdk } from "@repo/sdk";
 import { BestSellerProduct } from "@repo/types";
 
 export function useBestSellerProducts() {
@@ -21,7 +19,7 @@ export function useBestSellerProducts() {
     setError(null);
 
     try {
-      const res = await axiosClient.get<ApiResponse<BestSellerProduct[]>>("/products/bestsellers", {
+      const res = await sdk.client.get("/products/bestsellers", {
         signal: controller.signal,
       });
 
@@ -31,11 +29,7 @@ export function useBestSellerProducts() {
         setError(res.data.error?.message || "Unknown API error");
       }
     } catch (err: any) {
-      const canceled =
-        err?.name === "CanceledError" ||
-        err?.message === "canceled" ||
-        err?.code === "ERR_CANCELED" ||
-        axios.isCancel(err);
+      const canceled = err?.name === "AbortError" || err?.name === "CanceledError" || err?.message === "canceled";
 
       if (canceled) return;
 

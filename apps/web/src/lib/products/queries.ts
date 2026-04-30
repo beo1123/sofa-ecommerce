@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { getProductDetaiSSR, getProductListSSR } from "./productSSR";
+import { sdk } from "@repo/sdk";
 
 export const productKeys = {
   all: ["products"] as const,
@@ -9,11 +9,14 @@ export const productKeys = {
 
 // Fetcher dùng được cả client & server
 export async function fetchProductList(params: any) {
-  return await getProductListSSR(params);
+  return await sdk.productApi.list(params);
 }
 
 export async function fetchProductDetail(slug: string) {
-  return await getProductDetaiSSR(slug);
+  const product = await sdk.productApi.detail(slug).catch(() => null);
+  if (!product) return null;
+  const related = await sdk.productApi.related(slug).catch(() => []);
+  return { product, related };
 }
 
 // Prefetch cho SSR

@@ -1,9 +1,7 @@
 "use client";
 
-import axiosClient from "@/server/axiosClient";
-import { ApiResponse } from "@/server/utils/api";
+import { sdk } from "@repo/sdk";
 import { CategoryResponse } from "@repo/types";
-import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useCategories() {
@@ -20,7 +18,7 @@ export function useCategories() {
     setLoading(false);
     setError(null);
     try {
-      const res = await axiosClient.get<ApiResponse<CategoryResponse[]>>("/categories", { signal: controller.signal });
+      const res = await sdk.client.get("/categories", { signal: controller.signal });
       if (res.data.success) {
         setCategories(res.data.data ?? []);
         setMeta(res.data.meta ?? null);
@@ -28,11 +26,7 @@ export function useCategories() {
         setError(res.data.error?.message || "Unknown API error");
       }
     } catch (err: any) {
-      const canceled =
-        err?.name === "CanceledError" ||
-        err?.message === "canceled" ||
-        err?.code === "ERR_CANCELED" ||
-        axios.isCancel(err);
+      const canceled = err?.name === "AbortError" || err?.name === "CanceledError" || err?.message === "canceled";
 
       if (canceled) return;
 

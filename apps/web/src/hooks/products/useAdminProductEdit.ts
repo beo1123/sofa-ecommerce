@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import {
   buildAdminProductPayload,
   getApiErrorMessage,
@@ -35,7 +35,7 @@ export function useAdminProductEdit(productId: string) {
     queryKey: ["admin-products", "detail", productId],
     enabled: Boolean(productId),
     queryFn: async (): Promise<AdminProductDetail | null> => {
-      const res = await axiosClient.get(`/admin/products/${productId}`);
+      const res = await sdk.client.get(`/admin/products/${productId}`);
       if (!res.data?.success) return null;
       return res.data.data as AdminProductDetail;
     },
@@ -44,7 +44,7 @@ export function useAdminProductEdit(productId: string) {
   const categoriesQuery = useQuery({
     queryKey: ["admin-products", "categories"],
     queryFn: async (): Promise<AdminCategory[]> => {
-      const res = await axiosClient.get("/categories");
+      const res = await sdk.client.get("/categories");
       return res.data?.data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -53,7 +53,7 @@ export function useAdminProductEdit(productId: string) {
   const updateMutation = useMutation({
     mutationFn: async (data: ProductSubmitData) => {
       const payload = buildAdminProductPayload(data, true);
-      await axiosClient.put(`/admin/products/${productId}`, payload);
+      await sdk.client.put(`/admin/products/${productId}`, payload);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["admin-products"] });

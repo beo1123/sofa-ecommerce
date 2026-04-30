@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import {
   buildAdminArticlePayload,
   getApiErrorMessage,
@@ -25,7 +25,7 @@ export function useAdminArticleEdit(articleId: string) {
     queryKey: ["admin-articles", "detail", articleId],
     enabled: Boolean(articleId),
     queryFn: async (): Promise<AdminArticleDetail | null> => {
-      const res = await axiosClient.get(`/admin/articles/${articleId}`);
+      const res = await sdk.client.get(`/admin/articles/${articleId}`);
       if (!res.data?.success) return null;
       return res.data.data as AdminArticleDetail;
     },
@@ -34,7 +34,7 @@ export function useAdminArticleEdit(articleId: string) {
   const categoriesQuery = useQuery({
     queryKey: ["admin-articles", "categories"],
     queryFn: async (): Promise<AdminArticleCategory[]> => {
-      const res = await axiosClient.get("/article-categories");
+      const res = await sdk.client.get("/article-categories");
       return res.data?.data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -43,7 +43,7 @@ export function useAdminArticleEdit(articleId: string) {
   const updateMutation = useMutation({
     mutationFn: async (data: ArticleSubmitData) => {
       const payload = buildAdminArticlePayload(data);
-      await axiosClient.put(`/admin/articles/${articleId}`, payload);
+      await sdk.client.put(`/admin/articles/${articleId}`, payload);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["admin-articles"] });

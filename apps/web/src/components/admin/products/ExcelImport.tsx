@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Button from "@repo/ui/Button";
 import Alert from "@repo/ui/Alert";
 import { Upload, FileSpreadsheet } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 
 interface ImportResult {
   total: number;
@@ -30,7 +30,7 @@ export default function ExcelImport() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await axiosClient.post("/admin/products/import", formData, {
+      const res = await sdk.client.post("/admin/products/import", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import axiosClient from "@/server/axiosClient";
-import type { ApiResponse } from "@/server/utils/api";
+import { sdk } from "@repo/sdk";
 import type { UserOrder } from "@repo/types";
 
 export function useOrders() {
@@ -20,7 +19,7 @@ export function useOrders() {
     setError(null);
 
     try {
-      const res = await axiosClient.get<ApiResponse<UserOrder[]>>("/orders", {
+      const res = await sdk.client.get("/orders", {
         signal: controller.signal,
       });
       console.log("API raw response:", res.data);

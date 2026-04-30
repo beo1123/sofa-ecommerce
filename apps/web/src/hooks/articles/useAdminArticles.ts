@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import { useDebounce } from "@/hooks/common/useDebounce";
 import {
   getApiErrorMessage,
@@ -42,7 +42,7 @@ export function useAdminArticles() {
   const categoriesQuery = useQuery({
     queryKey: adminArticlesKeys.categories(),
     queryFn: async (): Promise<AdminArticleCategory[]> => {
-      const res = await axiosClient.get("/article-categories", { params: { page: 1, perPage: 100 } });
+      const res = await sdk.client.get("/article-categories", { params: { page: 1, perPage: 100 } });
       return res.data?.data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -57,7 +57,7 @@ export function useAdminArticles() {
       categoryFilter,
     }),
     queryFn: async (): Promise<ListResponse> => {
-      const res = await axiosClient.get("/admin/articles", {
+      const res = await sdk.client.get("/admin/articles", {
         params: {
           page,
           perPage: PER_PAGE,
@@ -77,7 +77,7 @@ export function useAdminArticles() {
 
   const deleteMutation = useMutation({
     mutationFn: async (articleId: number) => {
-      await axiosClient.delete(`/admin/articles/${articleId}`);
+      await sdk.client.delete(`/admin/articles/${articleId}`);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: adminArticlesKeys.all });

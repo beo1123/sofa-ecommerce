@@ -1,34 +1,9 @@
 // lib/authOptions.ts
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthOptions, User } from "next-auth";
-import { prisma } from "@/lib/prisma";
-import { Adapter } from "next-auth/adapters";
-import { compare } from "bcryptjs";
-
-async function verifyCredentials(email: string, password: string) {
-  const user = await prisma.user.findUnique({
-    where: { email },
-    include: { userRoles: { include: { role: true } } },
-  });
-  if (!user?.password) {
-    throw new Error("INVALID_CREDENTIALS");
-  }
-  const valid = await compare(password, user.password);
-  if (!valid) {
-    throw new Error("INVALID_CREDENTIALS");
-  }
-  prisma.user.update({ where: { id: user.id }, data: { lastLogin: new Date() } }).catch(() => {});
-  return {
-    id: user.id,
-    email: user.email,
-    displayName: user.displayName,
-    roles: user.userRoles[0]?.role.name,
-  };
-}
+import { sdk } from "@repo/sdk";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as unknown as Adapter,
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -41,15 +16,18 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const user = await verifyCredentials(creds.email, creds.password);
+          const user = await sdk.auth.login({
+            email: creds.email,
+            password: creds.password,
+          });
           return {
             id: String(user.id),
             email: user.email,
             name: user.displayName,
-            roles: user.roles,
+            roles: user.roles ?? "",
           };
         } catch (err) {
-          if (err instanceof Error && err.message === "INVALID_CREDENTIALS") {
+          if (err instanceof Error && err.message.includes("Sai email hoặc mật khẩu")) {
             throw new Error("Sai email hoặc mật khẩu");
           }
           throw new Error("Đăng nhập thất bại, vui lòng thử lại sau");

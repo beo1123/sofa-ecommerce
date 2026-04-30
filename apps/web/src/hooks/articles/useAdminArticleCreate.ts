@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosClient from "@/server/axiosClient";
+import { sdk } from "@repo/sdk";
 import {
   buildAdminArticlePayload,
   getApiErrorMessage,
@@ -21,7 +21,7 @@ export function useAdminArticleCreate() {
   const categoriesQuery = useQuery({
     queryKey: ["admin-articles", "categories"],
     queryFn: async (): Promise<AdminArticleCategory[]> => {
-      const res = await axiosClient.get("/article-categories");
+      const res = await sdk.client.get("/article-categories");
       return res.data?.data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -30,7 +30,7 @@ export function useAdminArticleCreate() {
   const createMutation = useMutation({
     mutationFn: async (data: ArticleSubmitData) => {
       const payload = buildAdminArticlePayload(data);
-      await axiosClient.post("/admin/articles", payload);
+      await sdk.client.post("/admin/articles", payload);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["admin-articles"] });
