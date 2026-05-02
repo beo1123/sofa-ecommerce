@@ -1,5 +1,5 @@
 // app/layout.tsx
-import "./globals.css"; // adjust path if you keep global css elsewhere
+import "./globals.css";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
