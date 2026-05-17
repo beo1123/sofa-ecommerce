@@ -107,7 +107,7 @@ export default eslintNext;
 
 ### `packages/seo` — `@repo/seo`
 
-Pure SEO transformation layer: receives data and returns metadata / JSON-LD.  
+Pure SEO transformation layer: receives data and returns metadata / JSON-LD.
 No fetching, no database access, no business logic.
 
 ```ts

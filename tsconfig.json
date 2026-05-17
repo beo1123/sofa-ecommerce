@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@repo/db": ["packages/db/src/index.ts"],
@@ -12,6 +13,6 @@
       "@repo/seo": ["packages/seo/src/index.ts"]
     }
   },
-  "include": [],
+  "include": ["next-env.d.ts"],
   "exclude": ["node_modules", "apps", "packages"]
 }
