@@ -14,10 +14,11 @@ import {
 } from "@repo/seo";
 import { sdk } from "@repo/sdk";
 
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = generateBaseMetadata();
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const categories = await sdk.categories.getAll();
+  const categories = await sdk.categories.getAll().catch(() => []);
 
   const siteNavigationSchema = buildSiteNavigationSchema(categories);
   const websiteSchema = buildWebsiteSchema();

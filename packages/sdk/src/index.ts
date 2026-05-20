@@ -361,7 +361,3 @@ export const sdk = {
 };
 
 export type StorefrontSdk = typeof sdk;
-export { productApi } from "./product.api";
-export { orderApi } from "./order.api";
-export { articleApi } from "./article.api";
-export { categoryApi } from "./category.api";

@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = BASE_URL;
 
   // ===== PRODUCTS =====
-  const productsResponse = await sdk.productApi.list({ page: 1, perPage: 200 });
+  const productsResponse = await sdk.productApi.list({ page: 1, perPage: 200 }).catch(() => ({ items: [] as any[] }));
   const products = productsResponse.items;
 
   const productUrls = products.map((p: any) => ({
@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ===== ARTICLES =====
-  const articleResponse = await sdk.articleApi.list(1, 200);
+  const articleResponse = await sdk.articleApi.list(1, 200).catch(() => ({ items: [] as any[] }));
   const articles = articleResponse.items;
 
   const articleUrls = articles.map((a: any) => ({
@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ===== CATEGORIES =====
-  const categories = await sdk.categoryApi.list();
+  const categories = await sdk.categoryApi.list().catch(() => [] as any[]);
 
   const categoryUrls = categories.map((c: any) => ({
     url: `${baseUrl}/san-pham?category=${c.slug}`,

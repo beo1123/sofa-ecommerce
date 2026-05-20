@@ -17,11 +17,19 @@
 # next.js
 /.next/
 /out/
+**/.next/
+**/out/
 
 # production
 /build
+**/build/
+**/dist/
 !/prisma
 /prisma/generated
+
+# monorepo build caches
+.turbo/
+**/.turbo/
 
 
 # misc
