@@ -1,15 +1,15 @@
 export const sofaImages = {
-  hero: "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/About/photo-1586105251261-72a756497a11.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvQWJvdXQvcGhvdG8tMTU4NjEwNTI1MTI2MS03MmE3NTY0OTdhMTEuYXZpZiIsImlhdCI6MTc2NTIwMTgwMiwiZXhwIjoyMDgwNTYxODAyfQ.qGx5I9FAelNASeV_fDK7lpSXpV0Ya22SKkyIQuyumVY",
+  hero: "https://res.cloudinary.com/dujhkokxp/image/upload/v1780828167/photo-1586105251261-72a756497a11_wfjmxi.avif",
 
   craftsmanship:
-    "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/About/photo-1555041469-a586c61ea9bc.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvQWJvdXQvcGhvdG8tMTU1NTA0MTQ2OS1hNTg2YzYxZWE5YmMuYXZpZiIsImlhdCI6MTc2NTIwMjI1OCwiZXhwIjoyMDgwNTYyMjU4fQ.HFmFq9yP-rmkbTc1kRTn83__xMh7z_yDCwhctTeTm6U",
+    "https://res.cloudinary.com/dujhkokxp/image/upload/v1780828164/photo-1595526114035-0d45ed16cfbf_ydxmny.avif",
 
   materials:
-    "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/About/photo-1567016432779-094069958ea5.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvQWJvdXQvcGhvdG8tMTU2NzAxNjQzMjc3OS0wOTQwNjk5NThlYTUuYXZpZiIsImlhdCI6MTc2NTIwMjMxNiwiZXhwIjoyMDgwNTYyMzE2fQ.VJY4uAWDsK8zbH7FVnLOz6NEjPeJID1Ep1XbHBeP8aw",
+    "https://res.cloudinary.com/dujhkokxp/image/upload/v1780828164/photo-1567016432779-094069958ea5_kqdvfl.avif",
 
   gallery: [
-    "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/About/photo-1484101403633-562f891dc89a.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvQWJvdXQvcGhvdG8tMTQ4NDEwMTQwMzYzMy01NjJmODkxZGM4OWEuYXZpZiIsImlhdCI6MTc2NTIwMjM1OSwiZXhwIjoyMDgwNTYyMzU5fQ.zeVBZJ591FmO6LcNkgNPvzSwvK6zrAoeygVgAaxo5HM",
-    "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/About/photo-1694032102808-a52b2bda2a4a%20(1).avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvQWJvdXQvcGhvdG8tMTY5NDAzMjEwMjgwOC1hNTJiMmJkYTJhNGEgKDEpLmF2aWYiLCJpYXQiOjE3NjUyMDI1MjksImV4cCI6MjA4MDU2MjUyOX0.MkM0Sg58yl3VSHf3_HcXEliRhzaezzuI5VocUOiZxZc",
-    "https://iffiqyzsfyvlpebvzurn.supabase.co/storage/v1/object/sign/images/About/photo-1595526114035-0d45ed16cfbf.avif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81ZjI4MDk1My1iM2EzLTRkNmItOGJlNC05NjIwZWY5NzIzOWQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvQWJvdXQvcGhvdG8tMTU5NTUyNjExNDAzNS0wZDQ1ZWQxNmNmYmYuYXZpZiIsImlhdCI6MTc2NTIwMjQ1NCwiZXhwIjoyMDgwNTYyNDU0fQ.hq63esBUpKXQMSRlfdEysZYisdeHZMSTVWmAFrRXY84",
+    "https://res.cloudinary.com/dujhkokxp/image/upload/v1780828161/photo-1555041469-a586c61ea9bc_roarli.avif",
+    "https://res.cloudinary.com/dujhkokxp/image/upload/v1780828161/photo-1484101403633-562f891dc89a_mk1zdf.avif",
+    "https://res.cloudinary.com/dujhkokxp/image/upload/v1780828160/photo-1694032102808-a52b2bda2a4a_1_agwqml.avif",
   ],
 };
