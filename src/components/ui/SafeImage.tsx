@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { ImageProps } from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const FALLBACK_URL = "/images/404.jpg";
 
@@ -20,6 +20,10 @@ export function SafeImage({
   ...props
 }: SafeImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
+
+  useEffect(() => {
+    setImgSrc(src);
+  }, [src]);
 
   const handleError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     if (imgSrc !== fallbackSrc) setImgSrc(fallbackSrc);
