@@ -30,6 +30,7 @@ export interface AdminProductDetail {
   shortDescription?: string | null;
   description?: string | null;
   status: string;
+  metadata?: Record<string, unknown> | null;
   category?: { id: number; name: string; slug: string } | null;
   images?: { url: string; alt?: string; isPrimary?: boolean }[];
   variants?: {
@@ -68,6 +69,11 @@ export function buildAdminProductPayload(data: ProductFormSubmitData, includeVar
     description: data.description || undefined,
     status: data.status || "DRAFT",
     categoryId: typeof data.categoryId === "number" && data.categoryId > 0 ? data.categoryId : undefined,
+    metadata: {
+      ...(data.height ? { height: data.height } : {}),
+      ...(data.width ? { width: data.width } : {}),
+      ...(data.customizationNote ? { customizationNote: data.customizationNote } : {}),
+    },
     images: data.images,
     variants: data.variants.map((variant) => ({
       ...(includeVariantId && variant.id ? { id: variant.id } : {}),
@@ -91,6 +97,10 @@ export function mapAdminProductToFormDefaults(product: AdminProductDetail) {
     description: product.description ?? "",
     status: product.status,
     categoryId: product.category?.id,
+    height: typeof product.metadata?.height === "string" ? product.metadata.height : "",
+    width: typeof product.metadata?.width === "string" ? product.metadata.width : "",
+    customizationNote:
+      typeof product.metadata?.customizationNote === "string" ? product.metadata.customizationNote : "",
     images:
       product.images?.map((image) => ({
         url: image.url,

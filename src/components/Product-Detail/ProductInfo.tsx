@@ -7,7 +7,6 @@ import { formatCurrency } from "@/lib/helpers";
 import { useAppDispatch } from "@/store/hook";
 import { PhoneIcon } from "../ui/Icon/PhoneIcon";
 import { ZaloIcon } from "../ui/Icon/ZaloIcon";
-import Text from "../ui/Text";
 import ProductPromotions from "./ProductPromotions";
 
 type VariantAttributes = Record<string, string>;
@@ -32,7 +31,9 @@ interface Product {
   id: number;
   title: string;
   shortDescription?: string;
+  description?: string;
   reviewsSummary?: any;
+  metadata?: Record<string, unknown> | null;
   images?: { url: string }[];
   variants: ProductVariant[];
 }
@@ -132,15 +133,122 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
   const availableQty =
     selectedVariant?.inventory?.[0]?.available !== undefined ? selectedVariant.inventory[0].available : 0;
 
+  const metadata = (product.metadata ?? {}) as Record<string, string | undefined>;
+  const hasDimensions = Boolean(metadata.height || metadata.width);
+  const hasCustomizationNote = Boolean(metadata.customizationNote);
+  const heightText = metadata.height ?? "";
+  const widthText = metadata.width ?? "";
+  const colorOptions = useMemo(() => {
+    const values = new Set<string>();
+    product.variants.forEach((variant) => {
+      const value = variant.attributes?.color?.trim();
+      if (value) values.add(value);
+    });
+    return Array.from(values);
+  }, [product.variants]);
+
+  const materialOptions = useMemo(() => {
+    const values = new Set<string>();
+    product.variants.forEach((variant) => {
+      const value = variant.attributes?.material?.trim();
+      if (value) values.add(value);
+    });
+    return Array.from(values);
+  }, [product.variants]);
+
   return (
     <div className="p-6 lg:p-8 flex flex-col justify-between">
       <div>
-        <h1 className="text-3xl lg:text-4xl font-bold text-[var(--color-text-default)] mb-3">{product.title}</h1>
+        <h1 className="hidden sm:block text-3xl lg:text-4xl font-bold text-[var(--color-text-default)] mb-3">
+          {product.title}
+        </h1>
 
-        {product.shortDescription && (
-          <Text muted className="text-lg line-clamp-3 my-1">
-            {product.shortDescription}
-          </Text>
+        {(hasDimensions || hasCustomizationNote || colorOptions.length > 0 || materialOptions.length > 0) && (
+          <div className="mb-6 rounded-[24px] border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/80 p-4 shadow-sm sm:p-5 lg:p-6">
+            <div className="flex flex-col gap-4">
+              {hasDimensions && (
+                <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
+                  <p className="text-sm sm:text-base font-semibold text-[var(--color-brand-400)]">Kích thước</p>
+                  <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    {heightText && (
+                      <div className="rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/70 p-3">
+                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều cao</p>
+                        <p className="mt-1 text-base font-semibold text-[var(--color-text-default)]">{heightText} m</p>
+                      </div>
+                    )}
+                    {widthText && (
+                      <div className="rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/70 p-3">
+                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều dài</p>
+                        <p className="mt-1 text-base font-semibold text-[var(--color-text-default)]">{widthText} m</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {(colorOptions.length > 0 || materialOptions.length > 0) && (
+                <div className="grid gap-3 md:grid-cols-2">
+                  {colorOptions.length > 0 && (
+                    <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
+                      <p className="text-sm sm:text-base font-semibold text-[var(--color-text-default)]">
+                        Màu sắc có sẵn
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {colorOptions.map((color) => {
+                          const safeColor = color.trim();
+                          const isHexColor = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(safeColor);
+
+                          return (
+                            <span
+                              key={color}
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-brand-100)] shadow-sm"
+                              style={{ backgroundColor: isHexColor ? safeColor : "var(--color-brand-100)" }}
+                              aria-label={color}
+                              title={color}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {materialOptions.length > 0 && (
+                    <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
+                      <p className="text-sm sm:text-base font-semibold text-[var(--color-text-default)]">
+                        Chất liệu có sẵn
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {materialOptions.map((material) => (
+                          <span
+                            key={material}
+                            className="rounded-full border border-[var(--color-brand-100)] bg-[var(--color-brand-50)] px-3 py-1.5 text-sm font-medium text-[var(--color-text-default)]">
+                            {material}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {hasCustomizationNote && (
+                <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
+                  <p className="text-sm sm:text-base font-semibold text-[var(--color-brand-400)]">Tùy chỉnh</p>
+                  <p className="mt-2 text-sm sm:text-base leading-7 text-[var(--color-text-muted)]">
+                    {metadata.customizationNote}
+                  </p>
+                </div>
+              )}
+
+              {!hasCustomizationNote && (colorOptions.length > 0 || materialOptions.length > 0 || hasDimensions) && (
+                <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
+                  <p className="text-sm sm:text-base leading-7 text-[var(--color-text-muted)]">
+                    Quý khách có thể tùy chỉnh màu sắc, chất liệu và kích thước theo ý muốn.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
         )}
 
         <div className="flex items-center gap-3 mb-6">
@@ -165,9 +273,6 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
               </span>
             )}
           </div>
-          {/* <p className="text-sm text-[var(--color-text-muted)] mt-1">
-            SKU: {selectedVariant.inventory?.[0]?.sku || "N/A"}
-          </p> */}
         </div>
         {/* <div className="space-y-5 mb-6">
           {Object.keys(attributes).map((attrKey) => (

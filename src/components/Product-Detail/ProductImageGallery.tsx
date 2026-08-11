@@ -11,9 +11,10 @@ import type { ProductGalleryImage } from "../../types/products/ProductImageGalle
 type ProductImageGalleryProps = {
   images: ProductGalleryImage[];
   title: string;
+  shortDescription?: string;
 };
 
-export function ProductImageGallery({ images, title }: ProductImageGalleryProps) {
+export function ProductImageGallery({ images, title, shortDescription }: ProductImageGalleryProps) {
   const safeImages = useMemo(() => (Array.isArray(images) ? images : []), [images]);
 
   const [selectedImage, setSelectedImage] = useState<string>(safeImages[0]?.url ?? "");
@@ -239,6 +240,7 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
           {currentIndex + 1} / {safeImages.length}
         </div>
       </div>
+
       <ProductGalleryThumbnails
         images={safeImages}
         title={title}
@@ -252,6 +254,17 @@ export function ProductImageGallery({ images, title }: ProductImageGalleryProps)
         selectedClassName="border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
         idleClassName="border-transparent hover:border-[var(--color-brand-200)]"
       />
+
+      {shortDescription && (
+        <div className="border-t border-[var(--color-brand-100)] bg-white px-4 py-3 sm:px-6 sm:py-4">
+          <h2 className="text-lg font-semibold text-[var(--color-text-default)]">Mô tả nhanh</h2>
+
+          <div className="sm:hidden">
+            <h2 className="text-lg font-semibold text-[var(--color-text-default)]">{title}</h2>
+          </div>
+          <p className="mt-2 text-sm sm:text-lg leading-7 text-[var(--color-text-muted)]">{shortDescription}</p>
+        </div>
+      )}
 
       <ProductGalleryLightbox
         isOpen={isLightboxOpen}

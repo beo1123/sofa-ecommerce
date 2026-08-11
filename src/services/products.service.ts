@@ -194,6 +194,7 @@ export class ProductService {
       title: p.title,
       shortDescription: p.shortDescription,
       description: p.description,
+      metadata: p.metadata,
       images: p.images,
       variants,
       reviewsSummary: { average, count: reviewCount, breakdown },

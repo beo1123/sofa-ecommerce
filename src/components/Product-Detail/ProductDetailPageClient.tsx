@@ -46,7 +46,13 @@ export default function ProductDetailPageClient({ product, related }: ProductDet
           transition={{ duration: 0.5 }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-2 bg-white rounded-3xl shadow-lg overflow-hidden">
           {/* Left: Image Gallery */}
-          <ProductImageGallery images={product.images} title={product.title} />
+          <div className="flex flex-col">
+            <ProductImageGallery
+              images={product.images}
+              title={product.title}
+              shortDescription={product.shortDescription}
+            />
+          </div>
 
           {/* Right: Product Info */}
           <ProductInfo

@@ -89,7 +89,7 @@ export default function AdminProductsPage() {
             <Spinner size={30} />
           </div>
         ) : (
-          <ProductTable products={products} onDelete={handleDelete} deleting={deleting} />
+          <ProductTable products={products} totalCount={meta.total} onDelete={handleDelete} deleting={deleting} />
         )}
       </Card>
 

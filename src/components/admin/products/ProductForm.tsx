@@ -31,6 +31,9 @@ const productSchema = z.object({
   description: z.string().optional(),
   status: z.string().optional(),
   categoryId: z.number().optional(),
+  height: z.string().optional(),
+  width: z.string().optional(),
+  customizationNote: z.string().optional(),
 });
 
 export type ProductFormData = z.infer<typeof productSchema>;
@@ -76,6 +79,10 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
       description: defaultValues?.description ?? "",
       status: defaultValues?.status ?? "DRAFT",
       categoryId: defaultValues?.categoryId,
+      height: defaultValues?.height ?? "",
+      width: defaultValues?.width ?? "",
+      customizationNote:
+        defaultValues?.customizationNote ?? "Quý khách có thể tùy chỉnh màu sắc, chất liệu và kích thước theo ý muốn.",
     },
   });
 
@@ -136,7 +143,17 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
   };
 
   const addVariant = () => {
-    setVariants([...variants, { name: "", sku: "", price: 0, quantity: 0, color: "", material: "" }]);
+    setVariants([
+      ...variants,
+      {
+        name: "Mẫu mới",
+        sku: "",
+        price: 0,
+        quantity: 0,
+        color: "Nâu đất",
+        material: "Da thật",
+      },
+    ]);
   };
 
   const removeVariant = (index: number) => {
@@ -199,6 +216,28 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
                 fullWidth
               />
             </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Input
+              label="Chiều cao (m)"
+              type="text"
+              placeholder="VD: 2.5"
+              {...register("height")}
+              helperText="Nhập đơn vị mét"
+            />
+            <Input
+              label="Chiều ngang (m)"
+              type="text"
+              placeholder="VD: 1.8"
+              {...register("width")}
+              helperText="Nhập đơn vị mét"
+            />
+            <Input
+              label="Lời nhắn tùy chỉnh"
+              placeholder="VD: Quý khách có thể tùy chỉnh màu sắc, chất liệu và kích thước theo ý muốn"
+              {...register("customizationNote")}
+            />
           </div>
 
           <div className="mt-4">
