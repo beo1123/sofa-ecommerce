@@ -220,14 +220,14 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
 
           <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
             <Input
-              label="Chiều cao (m)"
+              label="Chiều dài (m)"
               type="text"
               placeholder="VD: 2.5"
               {...register("height")}
               helperText="Nhập đơn vị mét"
             />
             <Input
-              label="Chiều ngang (m)"
+              label="Chiều rộng (sâu) (m)"
               type="text"
               placeholder="VD: 1.8"
               {...register("width")}

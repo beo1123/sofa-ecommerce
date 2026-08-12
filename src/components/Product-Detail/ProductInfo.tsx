@@ -172,13 +172,15 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
                   <div className="mt-2 grid gap-2 sm:grid-cols-2">
                     {heightText && (
                       <div className="rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/70 p-3">
-                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều cao</p>
+                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều dài</p>
                         <p className="mt-1 text-base font-semibold text-[var(--color-text-default)]">{heightText} m</p>
                       </div>
                     )}
                     {widthText && (
                       <div className="rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/70 p-3">
-                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều dài</p>
+                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                          Chiều rộng (sâu)
+                        </p>
                         <p className="mt-1 text-base font-semibold text-[var(--color-text-default)]">{widthText} m</p>
                       </div>
                     )}
