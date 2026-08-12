@@ -223,14 +223,14 @@ export default function ProductForm({ defaultValues, categories, onSubmit, submi
               label="Chiều dài (m)"
               type="text"
               placeholder="VD: 2.5"
-              {...register("height")}
+              {...register("width")}
               helperText="Nhập đơn vị mét"
             />
             <Input
-              label="Chiều rộng (sâu) (m)"
+              label="Chiều sâu (m)"
               type="text"
               placeholder="VD: 1.8"
-              {...register("width")}
+              {...register("height")}
               helperText="Nhập đơn vị mét"
             />
             <Input
