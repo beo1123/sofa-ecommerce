@@ -126,7 +126,6 @@ export function buildHomeBreadcrumbSchema() {
   };
 }
 
-/** Tạo BreadcrumbList JSON-LD: hiển thị đường dẫn breadcrumb trên Google */
 export function buildBreadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -140,7 +139,6 @@ export function buildBreadcrumbSchema(items: { name: string; url: string }[]) {
   };
 }
 
-/** Tạo ItemList JSON-LD: hiển thị danh sách sản phẩm trên Google */
 export function buildItemListSchema(name: string, url: string, items: { slug: string; title: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -156,3 +154,5 @@ export function buildItemListSchema(name: string, url: string, items: { slug: st
     })),
   };
 }
+
+export * from "./schema/index";

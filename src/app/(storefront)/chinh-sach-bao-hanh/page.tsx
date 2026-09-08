@@ -1,24 +1,16 @@
-import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
+import { generatePageMetadata } from "@/seo/generators/generateMetadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Chính sách bảo hành",
   description: "Thông tin chi tiết về điều kiện, thời gian và quy trình bảo hành sản phẩm Sofa Phạm Gia.",
+  slug: "/chinh-sach-bao-hanh",
+  type: "article",
   keywords: ["chính sách bảo hành", "bảo hành sofa", "bảo hành Sofa Phạm Gia", "khung sofa", "đệm sofa"],
-  alternates: {
-    canonical: "/chinh-sach-bao-hanh",
-  },
-  openGraph: {
-    title: "Chính sách bảo hành | Sofa Phạm Gia",
-    description: "Điều kiện bảo hành, trường hợp miễn phí và quy trình xử lý bảo hành tại Sofa Phạm Gia.",
-    type: "article",
-    locale: "vi_VN",
-    url: "https://sofaphamgia.com/chinh-sach-bao-hanh",
-  },
-};
+});
 
 const conditions = [
   "Bảo hành chỉ áp dụng cho sản phẩm mới 100%, mua chính hãng tại Sofa Phạm Gia (sofaphamgia.com).",

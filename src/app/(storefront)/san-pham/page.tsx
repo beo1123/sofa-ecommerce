@@ -7,8 +7,8 @@ import { CategoryService } from "@/services/category.service";
 import { prisma } from "@/lib/prisma";
 import { ProductService } from "@/services/products.service";
 import Script from "next/script";
-import { headerLogoSrc } from "@/lib/branding";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/seo/schema";
+import { generateCategoryMetadata } from "@/seo/generators/generateMetadata";
 
 const BASE_URL = "https://sofaphamgia.com";
 const categoryService = new CategoryService(prisma);
@@ -22,31 +22,31 @@ export async function generateMetadata(props: ProductsPageProps): Promise<Metada
   const searchParams = await props.searchParams;
   const categorySlug = searchParams.category as string | undefined;
 
-  let categoryName: string | undefined;
-  if (categorySlug) {
-    const result = await categoryService.getAll(1, 100, 0);
-    categoryName = result.data.find((c) => c.slug === categorySlug)?.name;
+  if (!categorySlug) {
+    return {
+      title: "Sofa Phòng Khách Cao Cấp | Sofa Phạm Gia",
+      description:
+        "Khám phá bộ sưu tập sofa phòng khách, sofa băng, sofa góc, sofa da và sofa vải cao cấp của Sofa Phạm Gia.",
+      alternates: { canonical: `${BASE_URL}/san-pham` },
+    };
   }
 
-  const title = categoryName ? `Sofa ${categoryName} – Sofa Phạm Gia` : "Tất cả sản phẩm Sofa – Sofa Phạm Gia";
-  const description = categoryName
-    ? `Khám phá bộ sưu tập ${categoryName} cao cấp tại Sofa Phạm Gia. Chất liệu bền đẹp, thiết kế tinh tế, nhiều mẫu mã đa dạng.`
-    : "Khám phá toàn bộ bộ sưu tập sofa cao cấp tại Sofa Phạm Gia. Nhiều kiểu dáng, màu sắc và chất liệu đa dạng, phù hợp mọi không gian.";
-  const pageUrl = categorySlug ? `${BASE_URL}/san-pham?category=${categorySlug}` : `${BASE_URL}/san-pham`;
+  const result = await categoryService.getAll(1, 100, 0);
+  const category = result.data.find((c) => c.slug === categorySlug);
 
-  return {
-    title,
-    description,
-    alternates: { canonical: pageUrl },
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      url: pageUrl,
-      images: [{ url: headerLogoSrc, width: 1200, height: 630, alt: title }],
-    },
-    twitter: { card: "summary_large_image", title, description },
-  };
+  if (!category) {
+    return {
+      title: "Sản phẩm | Sofa Phạm Gia",
+      description: "Khám phá các mẫu sofa và nội thất cao cấp của Sofa Phạm Gia.",
+      alternates: { canonical: `${BASE_URL}/san-pham` },
+    };
+  }
+
+  return generateCategoryMetadata({
+    name: category.name,
+    slug: category.slug,
+    description: `Bộ sưu tập ${category.name} với thiết kế hiện đại, chất liệu bền đẹp và phù hợp nhiều không gian sống.`,
+  });
 }
 
 const getCachedProducts = cache(async (params: ProductQueryParams) => {

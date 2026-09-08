@@ -1,24 +1,16 @@
-import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
+import { generatePageMetadata } from "@/seo/generators/generateMetadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Chính sách đổi trả hàng",
   description: "Chính sách đổi trả rõ ràng, minh bạch của Sofa Phạm Gia để bảo vệ quyền lợi khách hàng.",
+  slug: "/chinh-sach-doi-tra",
+  type: "article",
   keywords: ["chính sách đổi trả", "đổi trả sofa", "hoàn tiền", "Sofa Phạm Gia", "đổi trả nội thất"],
-  alternates: {
-    canonical: "/chinh-sach-doi-tra",
-  },
-  openGraph: {
-    title: "Chính sách đổi trả hàng | Sofa Phạm Gia",
-    description: "Điều kiện đổi trả, quy trình xử lý và chính sách hoàn tiền tại Sofa Phạm Gia.",
-    type: "article",
-    locale: "vi_VN",
-    url: "https://sofaphamgia.com/chinh-sach-doi-tra",
-  },
-};
+});
 
 const returnConditions = [
   "Sản phẩm bị lỗi kỹ thuật do nhà sản xuất (hỏng hóc, sai mẫu, sai màu, sai kích thước, thiếu phụ kiện...).",

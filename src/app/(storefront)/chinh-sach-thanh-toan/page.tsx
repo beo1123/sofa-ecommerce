@@ -1,25 +1,16 @@
-import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
+import { generatePageMetadata } from "@/seo/generators/generateMetadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Chính sách thanh toán",
   description: "Sofa Phạm Gia hỗ trợ đa dạng hình thức thanh toán an toàn, minh bạch và tiện lợi cho khách hàng.",
+  slug: "/chinh-sach-thanh-toan",
+  type: "article",
   keywords: ["chính sách thanh toán", "thanh toán sofa", "thanh toán chuyển khoản", "COD", "Sofa Phạm Gia"],
-  alternates: {
-    canonical: "/chinh-sach-thanh-toan",
-  },
-  openGraph: {
-    title: "Chính sách thanh toán | Sofa Phạm Gia",
-    description:
-      "Thông tin chi tiết về hình thức thanh toán, chính sách đặt cọc và xác nhận thanh toán tại Sofa Phạm Gia.",
-    type: "article",
-    locale: "vi_VN",
-    url: "https://sofaphamgia.com/chinh-sach-thanh-toan",
-  },
-};
+});
 
 const paymentMethods = [
   "Thanh toán trực tiếp (COD): Thanh toán bằng tiền mặt cho nhân viên giao hàng khi nhận sản phẩm.",

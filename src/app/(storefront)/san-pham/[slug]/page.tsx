@@ -4,6 +4,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { cache } from "react";
 import ProductDetailPageClient from "@/components/Product-Detail/ProductDetailPageClient";
 import { buildBreadcrumbSchema } from "@/seo/schema";
+import { generateProductMetadata } from "@/seo/generators/generateMetadata";
 
 const BASE_URL = "https://sofaphamgia.com";
 
@@ -31,22 +32,13 @@ export async function generateMetadata(props: PageProps, parent: ResolvingMetada
   const { product } = data;
   const image = product.images?.[0]?.url;
 
-  return {
-    title: `${product.title} – Sofa Phạm gia`,
-    description: product.shortDescription ?? product.description ?? "",
-    openGraph: {
-      title: `${product.title} – Sofa Phạm gia`,
-      description: product.shortDescription ?? product.description ?? "",
-      images: image ? [image] : [],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: product.title,
-      description: product.shortDescription ?? "",
-      images: image ? [image] : [],
-    },
-  };
+  return generateProductMetadata({
+    name: product.title,
+    slug: product.slug,
+    description: product.description,
+    shortDescription: product.shortDescription,
+    image,
+  });
 }
 
 /* ------------------ PAGE COMPONENT ------------------ */

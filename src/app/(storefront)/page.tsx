@@ -7,32 +7,10 @@ import BrowseByCategories from "@/components/Home/BrowseByCategories";
 import Featured from "@/components/Home/Featured";
 import { BrandMessage } from "@/components/Home/BrandMessage";
 import StoreHighlights from "@/components/common/StoreHighlights";
-import { headerLogoSrc } from "@/lib/branding";
-import { BASE_URL, buildHomeBreadcrumbSchema, buildHomePageSchema, SITE_NAME } from "@/seo/schema";
+import { buildHomeBreadcrumbSchema, buildHomePageSchema } from "@/seo/schema";
+import { generateHomeMetadata } from "@/seo/generators/generateMetadata";
 
-export const metadata: Metadata = {
-  title: SITE_NAME,
-  description:
-    "Sofa Phạm Gia mang đến sofa và nội thất cao cấp với thiết kế tinh tế, chất liệu bền đẹp, giao hàng toàn quốc và hỗ trợ tận tâm.",
-  alternates: {
-    canonical: BASE_URL,
-  },
-  openGraph: {
-    title: SITE_NAME,
-    description:
-      "Sofa Phạm Gia mang đến sofa và nội thất cao cấp với thiết kế tinh tế, chất liệu bền đẹp và dịch vụ giao hàng toàn quốc.",
-    url: BASE_URL,
-    type: "website",
-    images: [
-      {
-        url: headerLogoSrc,
-        width: 1200,
-        height: 630,
-        alt: SITE_NAME,
-      },
-    ],
-  },
-};
+export const metadata: Metadata = generateHomeMetadata();
 
 export const revalidate = 3600;
 

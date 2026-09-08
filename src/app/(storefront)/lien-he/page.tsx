@@ -6,12 +6,16 @@ import Divider from "@/components/ui/Divider";
 import Grid from "@/components/ui/Grid";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
+import { generatePageMetadata } from "@/seo/generators/generateMetadata";
 
-export const metadata = {
-  title: "Liên hệ Sofa Phạm Gia",
+export const metadata = generatePageMetadata({
+  title: "Liên hệ",
   description:
     "Liên hệ Sofa Phạm Gia để được tư vấn sofa, nội thất cao cấp, giao hàng, lắp đặt và bảo hành nhanh chóng.",
-};
+  slug: "/lien-he",
+  type: "website",
+  keywords: ["liên hệ sofa", "tư vấn sofa", "đặt sofa theo yêu cầu", "Sofa Phạm Gia"],
+});
 
 export default function ContactPage() {
   return (

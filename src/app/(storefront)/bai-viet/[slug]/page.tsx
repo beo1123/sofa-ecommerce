@@ -11,6 +11,7 @@ import RelatedArticles from "@/components/blog/BlogDetail/RelatedArticles";
 
 import type { blogDetail } from "@/types/blog/blogDetail";
 import { prisma } from "@/lib/prisma";
+import { generateArticleMetadata } from "@/seo/generators/generateMetadata";
 
 export const revalidate = 3600;
 
@@ -31,17 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
     const a = res.data as blogDetail;
 
-    return {
+    return generateArticleMetadata({
       title: a.title,
-      description: a.excerpt ?? undefined,
-      openGraph: {
-        title: a.title,
-        description: a.excerpt ?? undefined,
-        images: a.thumbnail ? [a.thumbnail] : undefined,
-        type: "article",
-        publishedTime: a.publishedAt ? new Date(a.publishedAt).toISOString() : undefined,
-      },
-    };
+      slug: a.slug,
+      excerpt: a.excerpt,
+      thumbnail: a.thumbnail,
+      publishedAt: a.publishedAt,
+    });
   } catch {
     return {};
   }

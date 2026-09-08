@@ -1,34 +1,29 @@
 import type { Metadata } from "next";
-import { headerLogoSrc } from "@/lib/branding";
-
-const SITE_NAME = "Sofa Phạm Gia - Nội thất cao cấp";
-const BRAND_NAME = "Sofa Phạm Gia";
+import {
+  BRAND_NAME,
+  DEFAULT_OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  siteSocialLinks,
+} from "@/seo/config/site";
+import { PRIMARY_KEYWORDS, SECONDARY_KEYWORDS } from "@/seo/config/keywords";
 
 export const baseMetadata: Metadata = {
-  metadataBase: new URL("https://sofaphamgia.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_NAME,
     template: `%s | ${BRAND_NAME}`,
   },
-  description:
-    "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM. Chất liệu bền đẹp, thiết kế tinh tế, giao hàng toàn quốc, bảo hành chính hãng.",
-  keywords: [
-    "sofa",
-    "sofa cao cấp",
-    "nội thất",
-    "sofa phòng khách",
-    "sofa góc",
-    "sofa da",
-    "ghế sofa",
-    "Phạm Gia",
-    "sofa tphcm",
-    "mua sofa",
-  ],
-  applicationName: SITE_NAME,
-  verification: {
-    google: "szWL9KSqiBBMMQ03bZxYnElo--gbw2QW7B3xA2XiJiI",
+  description: SITE_DESCRIPTION,
+  keywords: [...PRIMARY_KEYWORDS, ...SECONDARY_KEYWORDS],
+  applicationName: BRAND_NAME,
+  alternates: {
+    canonical: SITE_URL,
   },
-
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || "",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -37,34 +32,29 @@ export const baseMetadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-
   manifest: "/site.webmanifest",
-
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    siteName: SITE_NAME,
-    url: "https://sofaphamgia.com",
+    siteName: BRAND_NAME,
+    url: SITE_URL,
     title: SITE_NAME,
-    description:
-      "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM. Chất liệu bền đẹp, thiết kế tinh tế, giao hàng toàn quốc.",
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: headerLogoSrc,
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: SITE_NAME,
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: SITE_NAME,
-    description: "Chuyên cung cấp sofa và nội thất cao cấp tại TP.HCM.",
-    images: [headerLogoSrc],
+    description: SITE_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
   },
-
   robots: {
     index: true,
     follow: true,
@@ -75,5 +65,9 @@ export const baseMetadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
+  },
+  other: {
+    "og:site_name": BRAND_NAME,
+    "article:publisher": siteSocialLinks[0] || SITE_URL,
   },
 };

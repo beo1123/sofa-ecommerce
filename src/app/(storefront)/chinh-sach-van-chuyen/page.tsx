@@ -1,25 +1,17 @@
-import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
+import { generatePageMetadata } from "@/seo/generators/generateMetadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Chính sách vận chuyển",
   description:
     "Thông tin về phạm vi giao hàng, thời gian vận chuyển, chi phí và quy trình nhận hàng tại Sofa Phạm Gia.",
+  slug: "/chinh-sach-van-chuyen",
+  type: "article",
   keywords: ["chính sách vận chuyển", "giao hàng sofa", "phí vận chuyển", "Sofa Phạm Gia"],
-  alternates: {
-    canonical: "/chinh-sach-van-chuyen",
-  },
-  openGraph: {
-    title: "Chính sách vận chuyển | Sofa Phạm Gia",
-    description: "Phạm vi giao hàng, thời gian dự kiến, chi phí vận chuyển và lưu ý khi nhận hàng tại Sofa Phạm Gia.",
-    type: "article",
-    locale: "vi_VN",
-    url: "https://sofaphamgia.com/chinh-sach-van-chuyen",
-  },
-};
+});
 
 const shippingRules = [
   "Sofa Phạm Gia hỗ trợ giao hàng nội thành TP.HCM và các tỉnh thành trên toàn quốc.",

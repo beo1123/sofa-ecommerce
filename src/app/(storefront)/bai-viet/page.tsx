@@ -3,12 +3,14 @@ import BlogGrid from "@/components/blog/BlogList/BlogGrid";
 import BlogHeader from "@/components/blog/BlogList/BlogHeader";
 import Container from "@/components/ui/Container";
 import { prisma } from "@/lib/prisma";
+import { generateHomeMetadata } from "@/seo/generators/generateMetadata";
 import { ArticleService } from "@/services/article.service";
 import { ArticleCategory } from "@/services/articleCategory.service";
 const articleService = new ArticleService(prisma);
 const categoryService = new ArticleCategory(prisma);
 
 export const metadata = {
+  ...generateHomeMetadata(),
   title: "Bài viết nội thất Sofa Phạm Gia",
   description: "Tin tức, xu hướng nội thất, kinh nghiệm chọn sofa và kiến thức hữu ích từ Sofa Phạm Gia.",
 };
