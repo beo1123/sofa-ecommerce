@@ -202,9 +202,9 @@ export function ProductImageGallery({ images, title, shortDescription }: Product
           duration={0.24}
         />
 
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent px-4 py-4 text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity pointer-events-none">
-          <span className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-sm backdrop-blur-sm">
-            Chạm để xem lớn
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--color-text-default)]/50 via-[var(--color-text-default)]/10 to-transparent px-4 py-4 text-[var(--color-bg-page)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity pointer-events-none">
+          <span className="inline-flex items-center rounded-full bg-[var(--color-bg-page)]/20 px-3 py-1 text-xs font-medium backdrop-blur-sm">
+            Chạm để phóng to
           </span>
         </div>
 
@@ -236,7 +236,7 @@ export function ProductImageGallery({ images, title, shortDescription }: Product
         )}
 
         {/* Counter */}
-        <div className="absolute bottom-3 right-3 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+        <div className="absolute bottom-3 right-3 bg-[var(--color-text-default)]/65 backdrop-blur-sm text-[var(--color-bg-page)] px-3 py-1 rounded-full text-xs font-semibold">
           {currentIndex + 1} / {safeImages.length}
         </div>
       </div>
@@ -249,20 +249,20 @@ export function ProductImageGallery({ images, title, shortDescription }: Product
           setGalleryDirection(index >= currentIndex ? 1 : -1);
           setSelectedImage(imageUrl);
         }}
-        containerClassName="flex flex-shrink-0 gap-2 overflow-x-auto bg-white px-3 py-2 no-scrollbar"
-        buttonClassName="relative h-16 w-16 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all"
+        containerClassName="flex flex-shrink-0 gap-2.5 overflow-x-auto bg-[var(--color-bg-page)] px-4 py-3 no-scrollbar"
+        buttonClassName="relative h-16 w-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all"
         selectedClassName="border-[var(--color-brand-400)] ring-2 ring-[var(--color-brand-200)]"
         idleClassName="border-transparent hover:border-[var(--color-brand-200)]"
       />
 
       {shortDescription && (
-        <div className="border-t border-[var(--color-brand-100)] bg-white px-4 py-3 sm:px-6 sm:py-4">
-          <h2 className="text-lg font-semibold text-[var(--color-text-default)]">Mô tả nhanh</h2>
-
-          <div className="sm:hidden">
-            <h2 className="text-lg font-semibold text-[var(--color-text-default)]">{title}</h2>
-          </div>
-          <p className="mt-2 text-sm sm:text-lg leading-7 text-[var(--color-text-muted)]">{shortDescription}</p>
+        <div className="border-t border-[var(--color-brand-50)] bg-[var(--color-bg-muted)]/60 px-5 py-4 sm:px-6 sm:py-5">
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-300)]">
+            Điểm nhấn thiết kế
+          </span>
+          <p className="mt-1.5 text-sm sm:text-base leading-relaxed text-[var(--color-text-muted)]">
+            {shortDescription}
+          </p>
         </div>
       )}
 

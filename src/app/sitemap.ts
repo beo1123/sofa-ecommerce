@@ -1,7 +1,5 @@
 import { MetadataRoute } from "next";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 const BASE_URL = "https://sofaphamgia.com";
 

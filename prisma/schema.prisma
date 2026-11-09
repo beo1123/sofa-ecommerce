@@ -176,6 +176,7 @@ model ProductVariant {
 
   @@index([productId], map: "idx_variant_product")
   @@index([name], map: "idx_variant_name")
+  @@index([price], map: "idx_variant_price")
 }
 
 model Inventory {

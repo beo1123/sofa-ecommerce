@@ -24,6 +24,16 @@ export function setupQueryPersistance(queryClient: QueryClient) {
     key: "tanstack-react-query",
   });
 
-  persistQueryClient({ queryClient, persister, maxAge: 1000 * 60 * 60 * 2 });
+  persistQueryClient({
+    queryClient,
+    persister,
+    maxAge: 1000 * 60 * 60 * 2,
+    dehydrateOptions: {
+      shouldDehydrateQuery: (query) => {
+        const rootKey = query.queryKey[0];
+        return rootKey !== "products-infinite" && rootKey !== "search-infinite";
+      },
+    },
+  });
   return { queryClient, persister };
 }

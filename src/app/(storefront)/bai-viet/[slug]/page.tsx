@@ -2,7 +2,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import Container from "@/components/ui/Container";
 import { ArticleService } from "@/services/article.service";
 
 import ArticleHeader from "@/components/blog/BlogDetail/ArticleHeader";
@@ -56,12 +55,14 @@ export default async function ArticlePage(props: PageProps) {
   const related = relatedRes?.success ? relatedRes.data.related : [];
 
   return (
-    <main className="p-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
-      <Container className="max-w-4xl mx-auto space-y-12">
-        <ArticleHeader article={article} />
-        <ArticleContent content={article.content} />
+    <div className="py-5 sm:py-10 lg:py-12 text-[var(--color-text-default)]">
+      <div className="max-w-4xl mx-auto space-y-8 sm:space-y-10">
+        <div className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-page)] p-4 sm:p-8 lg:p-10 ring-1 ring-[var(--color-brand-50)] shadow-[0_12px_40px_-16px_color-mix(in_srgb,var(--color-brand-400)_10%,transparent)] space-y-6 sm:space-y-8">
+          <ArticleHeader article={article} />
+          <ArticleContent content={article.content} />
+        </div>
         <RelatedArticles related={related} />
-      </Container>
-    </main>
+      </div>
+    </div>
   );
 }

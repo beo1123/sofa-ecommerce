@@ -27,14 +27,17 @@ export default function ArticleContent({ content }: { content: string }) {
 
         [&_blockquote]:my-6
         [&_blockquote]:border-l-4
-        [&_blockquote]:border-gray-400
-        [&_blockquote]:pl-5
+        [&_blockquote]:border-[var(--color-brand-300)]
+        [&_blockquote]:bg-[var(--color-bg-muted)]
+        [&_blockquote]:p-4
+        [&_blockquote]:rounded-r-2xl
         [&_blockquote]:italic
 
         [&_hr]:my-8
-        [&_a]:text-blue-600 [&_a]:underline
+        [&_hr]:border-[var(--color-brand-50)]
+        [&_a]:text-[var(--color-brand-400)] [&_a]:underline
         [&_img]:my-6 [&_img]:block [&_img]:h-auto [&_img]:w-full
-        [&_img]:rounded-xl [&_img]:object-contain
+        [&_img]:rounded-2xl [&_img]:object-contain
       "
       dangerouslySetInnerHTML={{ __html: content }}
     />

@@ -49,7 +49,6 @@ pnpm test
 docker compose -f docker-compose.postgres.yml down --remove-orphans
 
 # Khởi động PostgreSQL container
-
 docker compose -f docker-compose.postgres.yml up -d
 
 # Tắt PostgreSQL hệ thống (nếu chạy trên Windows)
@@ -61,6 +60,14 @@ docker compose -f docker-compose.postgres.yml up -d
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' sofa-ecommerce-db-1
 
 ```
+
+Với cấu hình trên, PostgreSQL chỉ được mở trên máy local tại cổng `5433`. Trong `.env`, dùng:
+
+```env
+DATABASE_URL="postgresql://postgres:1234@localhost:5433/sofa?schema=public"
+```
+
+Sau khi khởi động DB, áp dụng schema bằng `npm run prisma:migrate:deploy`. Không dùng mật khẩu mặc định này cho môi trường production.
 
 ---
 

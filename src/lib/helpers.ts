@@ -1,7 +1,7 @@
 export function formatFromPrice(variants: { price: any }[]) {
   if (!variants?.length) return { priceMin: null, priceMax: null };
   const prices = variants.map((v) => Number(v.price));
-  return { PriceMin: Math.min(...prices), PriceMax: Math.max(...prices) };
+  return { priceMin: Math.min(...prices), priceMax: Math.max(...prices) };
 }
 
 export function mapProductListItem(p: any) {

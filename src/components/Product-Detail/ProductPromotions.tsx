@@ -30,18 +30,18 @@ const PROMOTIONS: PromotionItem[] = [
 
 export default function ProductPromotions() {
   return (
-    <section className="mb-6 rounded-xl border border-[var(--color-brand-100)] bg-white p-4">
-      <div className="flex items-center gap-2">
-        <h3 className="text-lg font-bold text-[var(--color-text-default)]">Ưu đãi dành cho bạn</h3>
+    <section className="rounded-3xl bg-[var(--color-bg-muted)]/60 p-4 sm:p-5 ring-1 ring-[var(--color-brand-50)]">
+      <div className="flex items-center gap-2 mb-3">
+        <h3 className="text-base font-bold text-[var(--color-text-default)]">Đặc quyền & Ưu đãi đi kèm</h3>
       </div>
 
-      <ul className="mt-3 space-y-3">
+      <ul className="space-y-2.5">
         {PROMOTIONS.map((item) => (
           <li key={item.title}>
             <Alert
               title={item.title}
               description={item.description}
-              className="bg-[var(--color-brand-50)] text-[var(--color-text-default)] border-[var(--color-brand-100)]"
+              className="rounded-2xl bg-[var(--color-bg-page)] text-[var(--color-text-default)] border-[var(--color-brand-50)] p-3.5"
             />
           </li>
         ))}

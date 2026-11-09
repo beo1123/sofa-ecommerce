@@ -55,19 +55,24 @@ export default function SearchBox({ className = "" }: { className?: string }) {
       <form onSubmit={handleSubmit}>
         <Input
           ref={inputRef}
-          placeholder="Tìm kiếm sản phẩm..."
+          placeholder="Tìm kiếm sofa, chất liệu, danh mục..."
           value={query}
           onFocus={() => setOpen(true)}
           onChange={(e) => {
             setQuery(e.target.value);
             if (!open) setOpen(true);
           }}
+          className="rounded-full bg-[var(--color-bg-muted)] border-[var(--color-brand-50)] focus:bg-[var(--color-bg-page)]"
           leftIcon={<Search size={16} />}
           rightIcon={
             isFetching ? (
               <Spinner size={16} />
             ) : query ? (
-              <X size={16} className="cursor-pointer hover:text-red-500 transition" onClick={handleClear} />
+              <X
+                size={16}
+                className="cursor-pointer hover:text-[var(--color-brand-400)] transition"
+                onClick={handleClear}
+              />
             ) : undefined
           }
         />
@@ -75,50 +80,59 @@ export default function SearchBox({ className = "" }: { className?: string }) {
 
       {/* DROPDOWN */}
       {showDropdown && (
-        <Card variant="elevated" className="absolute top-full left-0 mt-2 w-full rounded-xl shadow-xl z-50">
+        <Card
+          variant="elevated"
+          padding="none"
+          className="absolute top-full left-0 mt-2 w-full rounded-2xl border border-[var(--color-brand-50)] bg-[var(--color-bg-page)] shadow-[0_20px_50px_-15px_color-mix(in_srgb,var(--color-brand-400)_20%,transparent)] z-50 overflow-hidden">
           {isLoading || isFetching ? (
-            <div className="p-4 text-center text-sm text-gray-400">Đang tải...</div>
+            <div className="p-5 text-center text-sm text-[var(--color-text-muted)]">Đang tìm kiếm...</div>
           ) : data?.items?.length ? (
-            <ul className="max-h-64 overflow-y-auto divide-y divide-gray-100">
+            <ul className="max-h-72 overflow-y-auto divide-y divide-[var(--color-brand-50)]">
               {data.items.slice(0, 6).map((product: any) => (
                 <li key={product.id}>
                   <Link
                     href={`/san-pham/${product.slug}`}
-                    className="flex items-center gap-3 p-3 hover:bg-gray-50 transition"
+                    className="flex items-center gap-3.5 p-3.5 hover:bg-[var(--color-bg-muted)] transition-colors"
                     onClick={() => setOpen(false)}>
                     {product.primaryImage?.url ? (
                       <SafeImage
                         src={product.primaryImage.url}
-                        alt={product.primaryImage.alt}
-                        width={40}
-                        height={40}
-                        className="rounded-md object-cover"
+                        alt={product.primaryImage.alt || product.title}
+                        width={44}
+                        height={44}
+                        className="h-11 w-11 rounded-xl object-cover ring-1 ring-[var(--color-brand-50)]"
                       />
                     ) : (
-                      <div className="p-3 rounded-full bg-white/60 mb-2">
-                        <ImageIcon className="w-8 h-8 text-[var(--color-text-muted)]" />
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-bg-muted)] ring-1 ring-[var(--color-brand-50)]">
+                        <ImageIcon className="w-5 h-5 text-[var(--color-text-muted)]" />
                       </div>
                     )}
-                    <div className="flex flex-col">
-                      <span className="text-sm font-medium text-gray-800 line-clamp-1">{product.title}</span>
-                      <span className="text-xs text-gray-500">{formatCurrency(product.priceMin)}</span>
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-sm font-semibold text-[var(--color-text-default)] line-clamp-1">
+                        {product.title}
+                      </span>
+                      <span className="text-xs font-medium text-[var(--color-brand-400)]">
+                        {formatCurrency(product.priceMin)}
+                      </span>
                     </div>
                   </Link>
                 </li>
               ))}
             </ul>
           ) : (
-            <div className="p-4 text-center text-sm text-gray-400">Không tìm thấy sản phẩm</div>
+            <div className="p-5 text-center text-sm text-[var(--color-text-muted)]">
+              Không tìm thấy sản phẩm phù hợp
+            </div>
           )}
 
           {/* Footer: View All */}
           {query.trim() && (
-            <div className="border-t p-2 text-center">
+            <div className="border-t border-[var(--color-brand-50)] bg-[var(--color-bg-muted)] p-2.5 text-center">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleSubmit}
-                className="text-xs text-gray-600 hover:text-primary">
+                className="text-xs font-semibold text-[var(--color-brand-400)] hover:text-[var(--color-brand-300)]">
                 Xem tất cả kết quả cho “{query}”
               </Button>
             </div>

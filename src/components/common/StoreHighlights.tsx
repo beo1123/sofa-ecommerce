@@ -37,9 +37,12 @@ export default function StoreHighlights({
 }: StoreHighlightsProps) {
   return (
     <section className={className}>
-      <div className="mb-6 text-center">
-        <h2 className="text-2xl font-semibold text-[var(--color-brand-400)] sm:text-3xl">{title}</h2>
-        <p className="mx-auto mt-2 max-w-3xl text-sm text-[var(--color-text-muted)] sm:text-base">{subtitle}</p>
+      <div className="mb-8 text-center">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-brand-50)] px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-400)] mb-3">
+          Giá trị cốt lõi
+        </span>
+        <h2 className="text-2xl font-bold tracking-tight text-[var(--color-text-default)] sm:text-3xl">{title}</h2>
+        <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--color-text-muted)] sm:text-base">{subtitle}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -52,14 +55,14 @@ export default function StoreHighlights({
               variant="default"
               padding="lg"
               hoverable
-              className="h-full rounded-2xl border-[var(--color-brand-100)] bg-white shadow-sm">
+              className="group h-full rounded-3xl border-[var(--color-brand-50)] bg-[var(--color-bg-page)] shadow-[0_8px_30px_-12px_color-mix(in_srgb,var(--color-brand-400)_8%,transparent)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-brand-200)]">
               <div className="flex h-full flex-col gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-brand-50)] text-[var(--color-brand-400)]">
-                  <Icon size={22} strokeWidth={2.2} />
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-bg-muted)] text-[var(--color-brand-400)] ring-1 ring-[var(--color-brand-50)] transition-colors duration-300 group-hover:bg-[var(--color-brand-400)] group-hover:text-[var(--color-bg-page)]">
+                  <Icon size={22} strokeWidth={2} />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold text-[var(--color-text-default)]">{item.title}</h3>
-                  <p className="text-sm leading-6 text-[var(--color-text-muted)]">{item.description}</p>
+                  <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">{item.description}</p>
                 </div>
               </div>
             </Card>

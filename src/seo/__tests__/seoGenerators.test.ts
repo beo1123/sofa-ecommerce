@@ -27,7 +27,7 @@ describe("SEO generators", () => {
       description: "Bộ sưu tập sofa băng phòng khách hiện đại.",
     });
 
-    expect(metadata.title).toBe("Sofa Băng Phòng Khách Hiện Đại | Sofa Phạm Gia");
+    expect(metadata.title).toBe("Sofa Băng | Sofa Phạm Gia");
     expect(metadata.alternates?.canonical).toBe("https://sofaphamgia.com/san-pham?category=sofa-bang");
   });
 

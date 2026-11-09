@@ -8,8 +8,23 @@ export class ProductService {
   // 📦 1. List products with filters + pagination
   // =====================================================
   async listProducts(params: ProductQueryParams) {
-    const { page, perPage, category, priceMin, priceMax, color, material } = params;
+    const rawPage = Number(params.page ?? 1);
+    const rawPerPage = Number(params.perPage ?? 12);
+    const page = Number.isFinite(rawPage) && rawPage >= 1 ? Math.floor(rawPage) : 1;
+    const perPage = Number.isFinite(rawPerPage) && rawPerPage >= 1 ? Math.min(100, Math.floor(rawPerPage)) : 12;
     const skip = (page - 1) * perPage;
+
+    const category = params.category?.trim() || undefined;
+    const color = params.color?.trim() || undefined;
+    const material = params.material?.trim() || undefined;
+    const priceMin =
+      params.priceMin !== undefined && Number.isFinite(Number(params.priceMin)) && Number(params.priceMin) >= 0
+        ? Number(params.priceMin)
+        : undefined;
+    const priceMax =
+      params.priceMax !== undefined && Number.isFinite(Number(params.priceMax)) && Number(params.priceMax) >= 0
+        ? Number(params.priceMax)
+        : undefined;
 
     const where: Prisma.ProductWhereInput = {
       status: "PUBLISHED",
@@ -25,8 +40,8 @@ export class ProductService {
 
     if (priceMin !== undefined || priceMax !== undefined) {
       const priceCond: Prisma.DecimalFilter = {};
-      if (priceMin !== undefined) priceCond.gte = Number(priceMin);
-      if (priceMax !== undefined) priceCond.lte = Number(priceMax);
+      if (priceMin !== undefined) priceCond.gte = priceMin;
+      if (priceMax !== undefined) priceCond.lte = priceMax;
       variantAnd.push({ price: priceCond });
     }
 
@@ -42,11 +57,13 @@ export class ProductService {
       });
     }
 
-    if (variantAnd.length > 0) {
-      where.variants = {
-        some: variantAnd.length === 1 ? variantAnd[0] : { AND: variantAnd },
-      };
-    }
+    const variantFilter: Prisma.ProductVariantWhereInput =
+      variantAnd.length === 0 ? {} : variantAnd.length === 1 ? variantAnd[0] : { AND: variantAnd };
+
+    // Đảm bảo product.count và productVariant.groupBy luôn đếm cùng tập sản phẩm có variant khớp
+    where.variants = {
+      some: variantFilter,
+    };
 
     const variantWhere: Prisma.ProductVariantWhereInput = {
       product: {
@@ -86,9 +103,12 @@ export class ProductService {
         shortDescription: true,
         category: { select: { id: true, name: true, slug: true, image: true } }, // ✅ include category
         variants: {
+          where: variantAnd.length > 0 ? variantFilter : undefined,
           select: {
             id: true,
             price: true,
+            compareAtPrice: true,
+            attributes: true,
             skuPrefix: true, // ✅ thêm
             inventory: {
               take: 1, // chỉ cần sku đầu tiên
@@ -127,6 +147,8 @@ export class ProductService {
           skuPrefix: v.skuPrefix,
           inventory: v.inventory,
           price: Number(v.price),
+          compareAtPrice: v.compareAtPrice != null ? Number(v.compareAtPrice) : null,
+          attributes: (v.attributes as Record<string, string> | null) ?? undefined,
         })),
       };
     });
@@ -173,6 +195,7 @@ export class ProductService {
 
     const allPrices = p.variants.map((v) => Number(v.price));
     const lowestPrice = allPrices.length ? Math.min(...allPrices) : null;
+    const hasStock = variants.some((v) => v.inventory.some((i) => i.available > 0));
 
     const jsonLd = {
       "@context": "https://schema.org/",
@@ -184,7 +207,7 @@ export class ProductService {
         "@type": "Offer",
         price: lowestPrice,
         priceCurrency: "VND",
-        availability: "https://schema.org/InStock",
+        availability: hasStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       },
     };
 
@@ -208,24 +231,15 @@ export class ProductService {
   async getRelatedProducts(slug: string) {
     const product = await this.prisma.product.findUnique({
       where: { slug },
-      select: { metadata: true },
+      select: { categoryId: true },
     });
     if (!product) return [];
-
-    const category = (product.metadata as any)?.category ?? null;
 
     const related = await this.prisma.product.findMany({
       where: {
         slug: { not: slug },
         status: "PUBLISHED",
-        ...(category
-          ? {
-              metadata: {
-                path: ["category"],
-                equals: category,
-              },
-            }
-          : {}),
+        ...(product.categoryId ? { categoryId: product.categoryId } : {}),
       },
       orderBy: {
         createdAt: "desc",
@@ -390,8 +404,8 @@ export class ProductService {
         title: p.title,
         shortDescription: p.shortDescription,
         totalSold: soldMap[p.id] ?? 0,
-        priceMin: Math.min(...prices),
-        priceMax: Math.max(...prices),
+        priceMin: prices.length ? Math.min(...prices) : null,
+        priceMax: prices.length ? Math.max(...prices) : null,
         primaryImage: p.images[0] ?? null,
       };
     });
@@ -469,8 +483,8 @@ export class ProductService {
         avgRating: ratingMap[p.id]?.avg ?? 0,
         reviewCount: ratingMap[p.id]?.count ?? 0,
         totalSold: soldMap[p.id] ?? 0,
-        priceMin: Math.min(...prices),
-        priceMax: Math.max(...prices),
+        priceMin: prices.length ? Math.min(...prices) : null,
+        priceMax: prices.length ? Math.max(...prices) : null,
         primaryImage: p.images[0] ?? null,
       };
     });
@@ -499,8 +513,8 @@ export class ProductService {
       };
     }
 
-    const materialSet = new Set<string>();
-    const colorSet = new Set<string>();
+    const materialMap = new Map<string, string>();
+    const colorMap = new Map<string, string>();
 
     let minPrice = Number.MAX_SAFE_INTEGER;
     let maxPrice = 0;
@@ -509,13 +523,21 @@ export class ProductService {
       const attrs = (v.attributes ?? {}) as Record<string, any>;
 
       // MATERIAL
-      if (attrs.material) {
-        materialSet.add(String(attrs.material).trim());
+      if (attrs.material !== undefined && attrs.material !== null) {
+        const trimmed = String(attrs.material).trim();
+        if (trimmed) {
+          const key = trimmed.toLowerCase();
+          if (!materialMap.has(key)) materialMap.set(key, trimmed);
+        }
       }
 
       // COLOR
-      if (attrs.color) {
-        colorSet.add(String(attrs.color).trim());
+      if (attrs.color !== undefined && attrs.color !== null) {
+        const trimmed = String(attrs.color).trim();
+        if (trimmed) {
+          const key = trimmed.toLowerCase();
+          if (!colorMap.has(key)) colorMap.set(key, trimmed);
+        }
       }
 
       // PRICE
@@ -530,8 +552,8 @@ export class ProductService {
     if (minPrice === Number.MAX_SAFE_INTEGER) minPrice = 0;
 
     return {
-      materials: Array.from(materialSet),
-      colors: Array.from(colorSet),
+      materials: Array.from(materialMap.values()),
+      colors: Array.from(colorMap.values()),
       priceMin: minPrice,
       priceMax: maxPrice,
     };

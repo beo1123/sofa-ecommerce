@@ -5,7 +5,7 @@ import Container from "@/components/ui/Container";
 
 export default function StorefrontLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[var(--color-bg-page)] text-[var(--color-text-default)]">
       <Header />
       <Container className="flex-1">
         <main>{children}</main>

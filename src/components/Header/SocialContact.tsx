@@ -11,26 +11,31 @@ type Props = {
 };
 
 export default function SocialContact({ facebookUrl, zaloUrl, phoneNumber }: Props) {
+  const phone = phoneNumber && phoneNumber !== "undefined" ? phoneNumber : "0932111620";
+
   return (
-    <div className="flex items-center gap-2 overflow-hidden">
+    <div className="flex items-center gap-1.5 sm:gap-2">
       <Button
         variant="secondary"
-        className="scale-90 sm:scale-100 shrink-0"
+        aria-label="Facebook"
+        className="!p-2 sm:!px-3 sm:!py-2 rounded-full shrink-0"
         onClick={() => window.open(facebookUrl, "_blank")}>
         <FacebookIcon />
       </Button>
 
       <Button
         variant="secondary"
-        className="scale-90 sm:scale-100 shrink-0"
+        aria-label="Zalo"
+        className="!p-2 sm:!px-3 sm:!py-2 rounded-full shrink-0"
         onClick={() => window.open(zaloUrl, "_blank")}>
         <ZaloIcon />
       </Button>
 
       <Button
         variant="secondary"
-        className="px-2 py-1 text-xs sm:px-4 sm:py-2 sm:text-base scale-90 sm:scale-100 shrink-0"
-        onClick={() => (window.location.href = `tel:${phoneNumber}`)}>
+        aria-label="Gọi điện"
+        className="!p-2 sm:!px-3 sm:!py-2 rounded-full shrink-0"
+        onClick={() => (window.location.href = `tel:${phone}`)}>
         <PhoneIcon />
       </Button>
     </div>

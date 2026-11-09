@@ -1,11 +1,14 @@
 // app/search/page.tsx
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
 import { useSearchInfinite } from "@/hooks/products/useSearchInfinite";
 import ProductCard from "@/components/products/ProductCard";
 import Heading from "@/components/ui/Heading";
 import Spinner from "@/components/ui/Spinner";
+import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
@@ -31,12 +34,29 @@ export default function SearchPage() {
   }, [hasNextPage, fetchNextPage]);
 
   const items = data?.pages.flatMap((p) => p.items) ?? [];
+  const totalCount = data?.pages?.[0]?.meta?.total ?? items.length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <Heading level={2} className="text-2xl font-semibold mb-6">
-        Kết quả tìm kiếm cho: “{query}”
-      </Heading>
+    <div className="py-4 sm:py-8 lg:py-10 space-y-6 sm:space-y-8">
+      {/* Bento Search Hero */}
+      <div className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)] p-4 sm:p-8 lg:p-10 ring-1 ring-[var(--color-brand-50)] flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div className="space-y-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-bg-page)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-400)] ring-1 ring-[var(--color-brand-50)]">
+            <Search size={13} />
+            <span>Tìm kiếm sản phẩm</span>
+          </span>
+          <Heading level={1} className="text-xl sm:text-2xl lg:text-3xl text-[var(--color-text-default)]">
+            Kết quả cho: “{query}”
+          </Heading>
+        </div>
+
+        {!isLoading && (
+          <div className="rounded-2xl bg-[var(--color-bg-page)] px-4 py-3 ring-1 ring-[var(--color-brand-50)]">
+            <p className="text-xs text-[var(--color-text-muted)]">Tìm thấy</p>
+            <p className="text-lg font-bold text-[var(--color-brand-400)]">{totalCount} thiết kế</p>
+          </div>
+        )}
+      </div>
 
       {isLoading && (
         <div className="flex justify-center py-20">
@@ -45,14 +65,30 @@ export default function SearchPage() {
       )}
 
       {!isLoading && items.length === 0 && (
-        <p className="text-center text-[var(--color-text-muted)]">Không tìm thấy sản phẩm nào phù hợp.</p>
+        <div className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)] p-6 sm:p-12 lg:p-14 text-center ring-1 ring-[var(--color-brand-50)] space-y-4">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-bg-page)] text-[var(--color-brand-300)] ring-1 ring-[var(--color-brand-50)]">
+            <Search size={24} />
+          </div>
+          <h2 className="text-xl font-bold text-[var(--color-text-default)]">
+            Không tìm thấy sản phẩm nào khớp với “{query}”
+          </h2>
+          <p className="mx-auto max-w-2xl text-sm sm:text-base font-medium text-[var(--color-text-muted)]">
+            Hãy thử tìm bằng từ khóa ngắn gọn hơn hoặc khám phá toàn bộ danh mục sản phẩm của Sofa Phạm Gia.
+          </p>
+          <div className="pt-2">
+            <Link href="/san-pham">
+              <Button className="rounded-full bg-[var(--color-brand-400)] px-6 py-2.5 text-sm font-semibold text-[var(--color-bg-page)] hover:bg-[var(--color-brand-300)]">
+                Xem tất cả sản phẩm
+              </Button>
+            </Link>
+          </div>
+        </div>
       )}
 
-      <div className="grid grid-cols-2 gap-4 sm:gap-6 [@media(min-width:640px)]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {items.map((product: any, idx: number) => (
           <motion.div
             key={product.id ?? idx}
-            className="min-w-[170px] sm:min-w-0"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.02 }}>

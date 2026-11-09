@@ -27,26 +27,34 @@ export default function ArticleHeader({ article }: { article: blogDetail }) {
       </Heading>
 
       {/* Meta info */}
-      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
+      <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-text-muted)] pb-4 border-b border-[var(--color-brand-50)]">
         {/* Category */}
         {article.category ? (
-          <Link href={`/bai-viet?category=${article.category.slug}`} className="text-brand-600 hover:underline">
+          <Link
+            href={`/bai-viet?category=${article.category.slug}`}
+            className="rounded-full bg-[var(--color-brand-50)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-400)] hover:bg-[var(--color-brand-100)] transition-colors">
             {article.category.name}
           </Link>
         ) : (
-          <Text muted>Không có danh mục</Text>
+          <Text muted size="sm">
+            Chuyên mục chung
+          </Text>
         )}
 
         <span>•</span>
 
         {/* Published date */}
-        <Text muted>{article.publishedAt ? formatVNDate(article.publishedAt) : "—"}</Text>
+        <Text muted size="sm">
+          {article.publishedAt ? formatVNDate(article.publishedAt) : "—"}
+        </Text>
 
         {/* Author */}
         {article.author && (
           <>
             <span>•</span>
-            <Text muted>By {article.author.displayName}</Text>
+            <Text muted size="sm">
+              Tác giả: {article.author.displayName}
+            </Text>
           </>
         )}
       </div>

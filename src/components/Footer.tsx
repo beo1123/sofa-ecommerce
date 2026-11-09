@@ -19,7 +19,7 @@ export default async function Footer() {
   return (
     <footer className="bg-[var(--color-bg-muted)] text-[var(--color-text-muted)] mt-12 border-t border-[var(--color-brand-50)]">
       <Container>
-        <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-5">
+        <div className="py-8 sm:py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* 1. Giới thiệu */}
           <div className="order-1 lg:order-none">
             <h4 className="text-[var(--color-text-default)] font-semibold mb-3">Sofa Phạm Gia</h4>

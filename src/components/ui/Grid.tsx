@@ -25,7 +25,7 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       xl: "gap-8",
     };
 
-    // Column classes
+    // Column classes (static maps so Tailwind CSS v4 scans every class)
     const colClasses = {
       1: "grid-cols-1",
       2: "grid-cols-2",
@@ -35,13 +35,49 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       12: "grid-cols-12",
     };
 
+    const smColClasses = {
+      1: "sm:grid-cols-1",
+      2: "sm:grid-cols-2",
+      3: "sm:grid-cols-3",
+      4: "sm:grid-cols-4",
+      6: "sm:grid-cols-6",
+      12: "sm:grid-cols-12",
+    };
+
+    const mdColClasses = {
+      1: "md:grid-cols-1",
+      2: "md:grid-cols-2",
+      3: "md:grid-cols-3",
+      4: "md:grid-cols-4",
+      6: "md:grid-cols-6",
+      12: "md:grid-cols-12",
+    };
+
+    const lgColClasses = {
+      1: "lg:grid-cols-1",
+      2: "lg:grid-cols-2",
+      3: "lg:grid-cols-3",
+      4: "lg:grid-cols-4",
+      6: "lg:grid-cols-6",
+      12: "lg:grid-cols-12",
+    };
+
+    const xlColClasses = {
+      1: "xl:grid-cols-1",
+      2: "xl:grid-cols-2",
+      3: "xl:grid-cols-3",
+      4: "xl:grid-cols-4",
+      6: "xl:grid-cols-6",
+      12: "xl:grid-cols-12",
+    };
+
     // Build responsive classes
     let responsiveClasses = "";
     if (responsive) {
-      if (responsive.sm) responsiveClasses += ` sm:grid-cols-${responsive.sm}`;
-      if (responsive.md) responsiveClasses += ` md:grid-cols-${responsive.md}`;
-      if (responsive.lg) responsiveClasses += ` lg:grid-cols-${responsive.lg}`;
-      if (responsive.xl) responsiveClasses += ` xl:grid-cols-${responsive.xl}`;
+      if (responsive.sm) responsiveClasses += ` ${smColClasses[responsive.sm]}`;
+      if (responsive.md) responsiveClasses += ` ${mdColClasses[responsive.md]}`;
+      if (responsive.lg) responsiveClasses += ` ${lgColClasses[responsive.lg]}`;
+      if (responsive.xl) responsiveClasses += ` ${xlColClasses[responsive.xl]}`;
     }
 
     const classes = `${baseClasses} ${colClasses[cols]} ${gapClasses[gap]}${responsiveClasses} ${className}`;

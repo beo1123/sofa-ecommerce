@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { Star } from "lucide-react";
+import { Star, Ruler, Palette, Layers, Sparkles, CheckCircle2, Check } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { formatCurrency } from "@/lib/helpers";
-import { useAppDispatch } from "@/store/hook";
+import { formatColorLabel, isLightColorSwatch, resolveColorSwatch } from "@/components/products/ProductFilters";
 import { PhoneIcon } from "../ui/Icon/PhoneIcon";
 import { ZaloIcon } from "../ui/Icon/ZaloIcon";
 import ProductPromotions from "./ProductPromotions";
@@ -32,7 +32,7 @@ interface Product {
   title: string;
   shortDescription?: string;
   description?: string;
-  reviewsSummary?: any;
+  reviewsSummary?: { count?: number; average?: number } | null;
   metadata?: Record<string, unknown> | null;
   images?: { url: string }[];
   variants: ProductVariant[];
@@ -40,30 +40,28 @@ interface Product {
 
 interface ProductInfoProps {
   product: Product;
-  selectedVariant: ProductVariant;
+  selectedVariant: ProductVariant | null;
   onVariantChange: (variant: ProductVariant) => void;
   onAddToCart?: () => void;
 }
 
-export function ProductInfo({ product, selectedVariant, onVariantChange, onAddToCart }: ProductInfoProps) {
-  const dispatch = useAppDispatch();
-  const [quantity, setQuantity] = useState(1);
-
+export function ProductInfo({ product, selectedVariant, onVariantChange }: ProductInfoProps) {
   // Build attribute list (unique values for each attribute key)
   const attributes: Record<string, string[]> = useMemo(() => {
     const map: Record<string, string[]> = {};
     for (const v of product.variants) {
       for (const key in v.attributes) {
+        const val = v.attributes[key]?.trim();
+        if (!val) continue;
         if (!map[key]) map[key] = [];
-        if (!map[key].includes(v.attributes[key])) {
-          map[key].push(v.attributes[key]);
+        if (!map[key].includes(val)) {
+          map[key].push(val);
         }
       }
     }
     return map;
   }, [product.variants]);
 
-  // Local UI state for selected attributes (kept in sync with selectedVariant prop)
   const [selectedAttributes, setSelectedAttributes] = useState<VariantAttributes>(selectedVariant?.attributes || {});
 
   useEffect(() => {
@@ -72,34 +70,27 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
     }
   }, [selectedVariant]);
 
-  // Main selection handler: choose the best matching variant and sync full attributes
   const handleAttributeSelect = useCallback(
     (attrKey: string, value: string) => {
-      // 1) updated attributes if user picks this value
       const updated: VariantAttributes = { ...selectedAttributes, [attrKey]: value };
-
-      // 2) candidates that have attrKey === value
-      const candidates = product.variants.filter((v) => v.attributes[attrKey] === value);
+      const candidates = product.variants.filter((v) => v.attributes[attrKey]?.trim() === value);
 
       if (candidates.length === 0) {
-        // No variant has this value — keep UI in sync with current selectedVariant
-        setSelectedAttributes(selectedVariant.attributes);
+        if (selectedVariant?.attributes) setSelectedAttributes(selectedVariant.attributes);
         return;
       }
 
-      // 3) try to find exact match (variant whose all keys present in updated match)
       const exactMatch = candidates.find((v) =>
-        Object.keys(updated).every((k) => updated[k] === undefined || v.attributes[k] === updated[k])
+        Object.keys(updated).every((k) => updated[k] === undefined || v.attributes[k]?.trim() === updated[k]?.trim())
       );
       if (exactMatch) {
         setSelectedAttributes(exactMatch.attributes);
-        if (exactMatch.id !== selectedVariant.id) onVariantChange(exactMatch);
+        if (exactMatch.id !== selectedVariant?.id) onVariantChange(exactMatch);
         return;
       }
 
-      // 4) score candidates by number of matching attributes with updated
       const score = (variant: ProductVariant) =>
-        Object.keys(updated).reduce((s, k) => s + (variant.attributes[k] === updated[k] ? 1 : 0), 0);
+        Object.keys(updated).reduce((s, k) => s + (variant.attributes[k]?.trim() === updated[k]?.trim() ? 1 : 0), 0);
 
       let best = candidates[0];
       let bestScore = score(best);
@@ -111,7 +102,6 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
           best = c;
           bestScore = s;
         } else if (s === bestScore) {
-          // tie-breaker: prefer available inventory > 0
           const bestAvailable = (best.inventory?.[0]?.available ?? 0) > 0 ? 1 : 0;
           const cAvailable = (c.inventory?.[0]?.available ?? 0) > 0 ? 1 : 0;
           if (cAvailable > bestAvailable) {
@@ -121,9 +111,8 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
         }
       }
 
-      // 5) set UI and callback
       setSelectedAttributes(best.attributes);
-      if (best.id !== selectedVariant.id) {
+      if (best.id !== selectedVariant?.id) {
         onVariantChange(best);
       }
     },
@@ -138,262 +127,218 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, onAddTo
   const hasCustomizationNote = Boolean(metadata.customizationNote);
   const heightText = metadata.height ?? "";
   const widthText = metadata.width ?? "";
-  const colorOptions = useMemo(() => {
-    const values = new Set<string>();
-    product.variants.forEach((variant) => {
-      const value = variant.attributes?.color?.trim();
-      if (value) values.add(value);
-    });
-    return Array.from(values);
-  }, [product.variants]);
+  const colorOptions = attributes.color ?? [];
+  const materialOptions = attributes.material ?? [];
 
-  const materialOptions = useMemo(() => {
-    const values = new Set<string>();
-    product.variants.forEach((variant) => {
-      const value = variant.attributes?.material?.trim();
-      if (value) values.add(value);
-    });
-    return Array.from(values);
-  }, [product.variants]);
+  const currentPrice = selectedVariant?.price != null ? Number(selectedVariant.price) : null;
+  const compareAtPrice = selectedVariant?.compareAtPrice != null ? Number(selectedVariant.compareAtPrice) : null;
+  const hasDiscount = currentPrice != null && compareAtPrice != null && compareAtPrice > currentPrice;
+  const discountPercent = hasDiscount ? Math.round(((compareAtPrice - currentPrice) / compareAtPrice) * 100) : 0;
+
+  const reviewCount = Number(product.reviewsSummary?.count ?? 0);
+  const reviewAverage = Number(product.reviewsSummary?.average ?? 0);
+
+  const phone = process.env.NEXT_PUBLIC_PHONE_URL || "0932 111 620";
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col justify-between">
-      <div>
-        <h1 className="hidden sm:block text-3xl lg:text-4xl font-bold text-[var(--color-text-default)] mb-3">
-          {product.title}
-        </h1>
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col justify-between gap-5 sm:gap-6">
+      <div className="space-y-5 sm:space-y-6">
+        {/* Header & Inventory Status */}
+        <div className="space-y-2.5">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-bg-muted)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-400)] ring-1 ring-[var(--color-brand-50)]">
+              <CheckCircle2 size={13} />
+              {availableQty > 0 ? `Sẵn hàng (${availableQty} sản phẩm)` : "Đặt chế tác theo yêu cầu"}
+            </span>
+            {selectedVariant?.inventory?.[0]?.sku && (
+              <span className="rounded-full bg-[var(--color-bg-muted)] px-3 py-1 text-xs text-[var(--color-text-muted)]">
+                Mã: {selectedVariant.inventory[0].sku}
+              </span>
+            )}
+            {reviewCount > 0 && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-brand-50)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-400)]">
+                <Star size={13} fill="var(--color-brand-300)" stroke="var(--color-brand-300)" />
+                {reviewAverage.toFixed(1)} ({reviewCount} đánh giá)
+              </span>
+            )}
+          </div>
 
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-[var(--color-text-default)] leading-snug">
+            {product.title}
+          </h1>
+        </div>
+
+        {/* Price Block */}
+        <div className="rounded-2xl bg-[var(--color-bg-muted)] p-3.5 sm:p-4 ring-1 ring-[var(--color-brand-50)]">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)] mb-1">
+            Giá niêm yết
+          </p>
+          <div className="flex flex-wrap items-baseline gap-2.5 sm:gap-3">
+            <span className="font-bold text-[var(--color-brand-400)] text-2xl sm:text-3xl">
+              {formatCurrency(currentPrice)}
+            </span>
+
+            {hasDiscount && (
+              <>
+                <span className="line-through text-[var(--color-text-muted)] text-sm sm:text-base">
+                  {formatCurrency(compareAtPrice)}
+                </span>
+                <span className="rounded-full bg-[var(--color-brand-400)] px-2.5 py-0.5 text-xs font-semibold text-[var(--color-bg-page)]">
+                  -{discountPercent}%
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Bento Specifications & Variant Selector */}
         {(hasDimensions || hasCustomizationNote || colorOptions.length > 0 || materialOptions.length > 0) && (
-          <div className="mb-6 rounded-[24px] border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/80 p-4 shadow-sm sm:p-5 lg:p-6">
-            <div className="flex flex-col gap-4">
-              {hasDimensions && (
-                <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
-                  <p className="text-sm sm:text-base font-semibold text-[var(--color-brand-400)]">Kích thước</p>
-                  <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                    {widthText && (
-                      <div className="rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/70 p-3">
-                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều dài</p>
-                        <p className="mt-1 text-base font-semibold text-[var(--color-text-default)]">{widthText} m</p>
-                      </div>
-                    )}
-                    {heightText && (
-                      <div className="rounded-xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/70 p-3">
-                        <p className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">Chiều sâu</p>
-                        <p className="mt-1 text-base font-semibold text-[var(--color-text-default)]">{heightText} m</p>
-                      </div>
-                    )}
-                  </div>
+          <div className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)]/70 p-3.5 sm:p-5 ring-1 ring-[var(--color-brand-50)] space-y-3.5 sm:space-y-4">
+            {/* Dimensions Bento Row */}
+            {hasDimensions && (
+              <div className="rounded-2xl bg-[var(--color-bg-page)] p-3.5 ring-1 ring-[var(--color-brand-50)]">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-400)]">
+                  <Ruler size={14} />
+                  <span>Kích thước tiêu chuẩn</span>
                 </div>
-              )}
-
-              {(colorOptions.length > 0 || materialOptions.length > 0) && (
-                <div className="grid gap-3 md:grid-cols-2">
-                  {colorOptions.length > 0 && (
-                    <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
-                      <p className="text-sm sm:text-base font-semibold text-[var(--color-text-default)]">
-                        Màu sắc có sẵn
+                <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+                  {widthText && (
+                    <div className="rounded-xl bg-[var(--color-bg-muted)] p-2.5 sm:p-3 ring-1 ring-[var(--color-brand-50)]">
+                      <p className="text-xs text-[var(--color-text-muted)]">Chiều dài</p>
+                      <p className="mt-0.5 text-sm sm:text-base font-bold text-[var(--color-text-default)]">
+                        {widthText} m
                       </p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {colorOptions.map((color) => {
-                          const safeColor = color.trim();
-                          const isHexColor = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(safeColor);
+                    </div>
+                  )}
+                  {heightText && (
+                    <div className="rounded-xl bg-[var(--color-bg-muted)] p-2.5 sm:p-3 ring-1 ring-[var(--color-brand-50)]">
+                      <p className="text-xs text-[var(--color-text-muted)]">Chiều sâu</p>
+                      <p className="mt-0.5 text-sm sm:text-base font-bold text-[var(--color-text-default)]">
+                        {heightText} m
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
+            {/* Color & Material Interactive Bento Cells */}
+            {(colorOptions.length > 0 || materialOptions.length > 0) && (
+              <div className="grid gap-3.5 grid-cols-1">
+                {colorOptions.length > 0 && (
+                  <div className="rounded-2xl bg-[var(--color-bg-page)] p-4 ring-1 ring-[var(--color-brand-50)]">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-default)] whitespace-nowrap">
+                        <Palette size={15} className="text-[var(--color-brand-300)] shrink-0" />
+                        <span>Màu sắc</span>
+                      </div>
+                      {selectedAttributes.color && (
+                        <span className="rounded-full bg-[var(--color-brand-50)] px-2.5 py-0.5 text-xs font-semibold text-[var(--color-brand-400)] whitespace-nowrap">
+                          {formatColorLabel(selectedAttributes.color)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-3 rounded-xl bg-[var(--color-bg-muted)] p-3 ring-1 ring-[var(--color-brand-50)]">
+                      <div className="flex flex-wrap items-center gap-3.5 max-h-32 overflow-y-auto p-1.5">
+                        {colorOptions.map((color) => {
+                          const isSelected = selectedAttributes.color?.trim() === color;
+                          const label = formatColorLabel(color);
+                          const isLight = isLightColorSwatch(color);
                           return (
-                            <span
+                            <button
                               key={color}
-                              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-brand-100)] shadow-sm"
-                              style={{ backgroundColor: isHexColor ? safeColor : "var(--color-brand-100)" }}
-                              aria-label={color}
-                              title={color}
-                            />
+                              type="button"
+                              onClick={() => handleAttributeSelect("color", color)}
+                              aria-label={`Chọn màu ${label}`}
+                              aria-pressed={isSelected}
+                              title={label}
+                              style={{ backgroundColor: resolveColorSwatch(color) }}
+                              className={`relative h-8 w-8 shrink-0 rounded-full flex items-center justify-center transition-all duration-150 cursor-pointer border border-[var(--color-brand-200)] shadow-xs ${
+                                isSelected
+                                  ? "ring-2 ring-offset-2 ring-offset-[var(--color-bg-muted)] ring-[var(--color-brand-400)] scale-105"
+                                  : "hover:scale-105 hover:ring-2 hover:ring-[var(--color-brand-200)]"
+                              }`}>
+                              {isSelected && (
+                                <Check
+                                  size={14}
+                                  strokeWidth={3}
+                                  className={
+                                    isLight ? "text-[var(--color-text-default)]" : "text-[var(--color-bg-page)]"
+                                  }
+                                />
+                              )}
+                            </button>
                           );
                         })}
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {materialOptions.length > 0 && (
-                    <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
-                      <p className="text-sm sm:text-base font-semibold text-[var(--color-text-default)]">
-                        Chất liệu có sẵn
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {materialOptions.map((material) => (
-                          <span
-                            key={material}
-                            className="rounded-full border border-[var(--color-brand-100)] bg-[var(--color-brand-50)] px-3 py-1.5 text-sm font-medium text-[var(--color-text-default)]">
-                            {material}
-                          </span>
-                        ))}
-                      </div>
+                {materialOptions.length > 0 && (
+                  <div className="rounded-2xl bg-[var(--color-bg-page)] p-4 ring-1 ring-[var(--color-brand-50)]">
+                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-default)]">
+                      <Layers size={15} className="text-[var(--color-brand-300)] shrink-0" />
+                      <span>Chất liệu</span>
                     </div>
-                  )}
-                </div>
-              )}
+                    <div className="mt-3 flex flex-wrap gap-2.5">
+                      {materialOptions.map((material) => {
+                        const isSelected = selectedAttributes.material?.trim() === material;
+                        return (
+                          <button
+                            key={material}
+                            type="button"
+                            onClick={() => handleAttributeSelect("material", material)}
+                            aria-pressed={isSelected}
+                            className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+                              isSelected
+                                ? "bg-[var(--color-brand-400)] text-[var(--color-bg-page)] shadow-sm ring-2 ring-[var(--color-brand-200)]"
+                                : "bg-[var(--color-bg-muted)] text-[var(--color-text-default)] ring-1 ring-[var(--color-brand-100)] hover:ring-[var(--color-brand-300)]"
+                            }`}>
+                            {material}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
-              {hasCustomizationNote && (
-                <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
-                  <p className="text-sm sm:text-base font-semibold text-[var(--color-brand-400)]">Tùy chỉnh</p>
-                  <p className="mt-2 text-sm sm:text-base leading-7 text-[var(--color-text-muted)]">
-                    {metadata.customizationNote}
-                  </p>
-                </div>
-              )}
-
-              {!hasCustomizationNote && (colorOptions.length > 0 || materialOptions.length > 0 || hasDimensions) && (
-                <div className="rounded-2xl bg-white/80 p-3 sm:p-4">
-                  <p className="text-sm sm:text-base leading-7 text-[var(--color-text-muted)]">
-                    Quý khách có thể tùy chỉnh màu sắc, chất liệu và kích thước theo ý muốn.
-                  </p>
-                </div>
-              )}
+            {/* Customization Note */}
+            <div className="rounded-2xl bg-[var(--color-bg-page)] p-3.5 ring-1 ring-[var(--color-brand-50)]">
+              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-400)]">
+                <Sparkles size={14} />
+                <span>Tùy chỉnh theo không gian</span>
+              </div>
+              <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-text-muted)]">
+                {hasCustomizationNote
+                  ? metadata.customizationNote
+                  : "Quý khách có thể tùy chỉnh màu sắc, chất liệu và kích thước theo yêu cầu riêng."}
+              </p>
             </div>
           </div>
         )}
-
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex items-center gap-1">
-            <Star size={18} fill="#FCD34D" stroke="#FCD34D" />
-            <span className="font-semibold">{product.reviewsSummary?.average?.toFixed(1) || "0.0"}</span>
-          </div>
-          <span className="text-[var(--color-text-muted)] text-sm">
-            ({product.reviewsSummary?.count || 0} đánh giá)
-          </span>
-        </div>
-
-        <div className="mb-6">
-          <div className="flex flex-wrap items-baseline gap-2 sm:gap-3">
-            <span className="font-bold text-[var(--color-brand-400)] text-2xl sm:text-4xl">
-              {formatCurrency(Number(selectedVariant.price))}
-            </span>
-
-            {selectedVariant.compareAtPrice && (
-              <span className="line-through text-[var(--color-text-muted)] text-base sm:text-xl">
-                {formatCurrency(Number(selectedVariant.compareAtPrice))}
-              </span>
-            )}
-          </div>
-        </div>
-        {/* <div className="space-y-5 mb-6">
-          {Object.keys(attributes).map((attrKey) => (
-            <div key={attrKey}>
-              <label className="block text-sm font-semibold text-[var(--color-text-default)] mb-2 capitalize">
-                {attrKey === "color" ? "Màu sắc" : attrKey === "material" ? "Chất liệu" : attrKey}
-              </label>
-
-              <div className="flex flex-wrap gap-3">
-                {attributes[attrKey].map((value) => {
-                  const isSelected = selectedAttributes[attrKey] === value;
-                  const isColor = attrKey === "color";
-                  const available = product.variants.some((v) => v.attributes[attrKey] === value);
-
-                  return (
-                    <Button
-                      key={value}
-                      onClick={() => handleAttributeSelect(attrKey, value)}
-                      variant={isSelected ? "primary" : "outline"}
-                      disabled={!available}
-                      className={`border-2 rounded-xl p-0 overflow-hidden transition-all
-                        ${isSelected ? "border-[var(--color-brand-400)]" : "border-gray-300 hover:border-[var(--color-brand-400)]"}
-                        ${!available ? "opacity-40 cursor-not-allowed" : ""}
-                      `}
-                      style={
-                        isColor
-                          ? {
-                              backgroundColor: value,
-                              width: "36px",
-                              height: "36px",
-                            }
-                          : undefined
-                      }>
-                      {!isColor && <span className="px-4 py-2 block text-[var(--color-text-default)]">{value}</span>}
-                    </Button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div> */}
-
-        <div className=" mb-6">
-          <label className="block text-sm font-semibold text-[var(--color-text-default)] mb-2">Số lượng</label>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center select-none">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setQuantity((p) => Math.max(1, p - 1))}
-                disabled={quantity <= 1}
-                className="rounded-none border-none !px-4 hover:bg-[var(--color-brand-50)]">
-                −
-              </Button>
-
-              <span className="w-16 text-center py-2 font-medium text-[var(--color-text-default)]">{quantity}</span>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setQuantity((p) => Math.min(availableQty, p + 1))}
-                disabled={quantity >= availableQty}
-                className="rounded-none border-none !px-4 hover:bg-[var(--color-brand-50)]">
-                +
-              </Button>
-            </div>
-
-            <span className="text-sm text-[var(--color-text-muted)]">
-              {availableQty > 0 ? `${availableQty} sản phẩm có sẵn` : "Liên Hệ"}
-            </span>
-          </div>
-        </div>
       </div>
+
       <ProductPromotions />
 
-      {/* <div className="space-y-3">
-        <Button
-          fullWidth
-          onClick={() => {
-            dispatch(
-              addItem({
-                productId: product.id,
-                variantId: selectedVariant.id,
-                sku: selectedVariant.inventory?.[0]?.sku,
-                name: product.title,
-                price: Number(selectedVariant.price),
-                image: product.images?.[0]?.url,
-                quantity,
-              })
-            );
-            onAddToCart?.();
-          }}
-          leftIcon={<ShoppingCart size={20} />}
-          className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white py-4 text-lg font-semibold rounded-xl"
-          disabled={availableQty === 0}>
-          Thêm vào giỏ hàng
-        </Button>
-
-        <div className="grid grid-cols-2 gap-3">
-          <Button variant="outline" leftIcon={<Heart size={18} />} className="py-3 rounded-xl">
-            Yêu thích
-          </Button>
-          <Button variant="outline" leftIcon={<Share2 size={18} />} className="py-3 rounded-xl">
-            Chia sẻ
-          </Button>
-        </div>
-      </div> */}
-      <div className="space-y-3">
-        <Button
-          fullWidth
-          leftIcon={<PhoneIcon />}
-          variant="secondary"
-          className=" py-4 text-lg font-semibold rounded-xl">
-          <a href={`tel:${process.env.NEXT_PUBLIC_PHONE_URL}`}>Liên Hệ: {process.env.NEXT_PUBLIC_PHONE_URL}</a>
-        </Button>
+      {/* Contact / Consultation CTA */}
+      <div className="space-y-2.5 sm:space-y-3 pt-1">
+        <a
+          href={`tel:${phone}`}
+          className="w-full inline-flex items-center justify-center font-semibold transition-all bg-[var(--color-brand-50)] text-[var(--color-brand-400)] hover:bg-[var(--color-brand-100)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-brand-300)] px-4 py-3 sm:py-3.5 text-sm sm:text-base lg:text-lg rounded-2xl ring-1 ring-[var(--color-brand-100)]">
+          <span className="mr-2 shrink-0">
+            <PhoneIcon />
+          </span>
+          <span>Gọi tư vấn: {phone}</span>
+        </a>
         <Button
           fullWidth
           leftIcon={<ZaloIcon />}
           onClick={() => window.open(process.env.NEXT_PUBLIC_ZALO_URL, "_blank")}
-          className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-white py-4 text-lg font-semibold rounded-xl">
-          Liên Hệ Zalo
+          className="bg-[var(--color-brand-400)] hover:bg-[var(--color-brand-300)] text-[var(--color-bg-page)] py-3 sm:py-3.5 text-sm sm:text-base lg:text-lg font-semibold rounded-2xl shadow-sm">
+          Nhắn Zalo Nhận Báo Giá & Mẫu Vải
         </Button>
       </div>
     </div>

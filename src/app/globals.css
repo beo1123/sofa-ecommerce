@@ -10,6 +10,7 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+  font-variation-settings: "wght" 450;
 }
 @font-face {
   font-family: "MontserratLocal";
@@ -17,6 +18,7 @@
   font-weight: 500;
   font-style: normal;
   font-display: swap;
+  font-variation-settings: "wght" 500;
 }
 @font-face {
   font-family: "MontserratLocal";
@@ -24,6 +26,7 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
+  font-variation-settings: "wght" 600;
 }
 @font-face {
   font-family: "MontserratLocal";
@@ -31,6 +34,7 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  font-variation-settings: "wght" 700;
 }
 
 /* 4) THEME: define design tokens using @theme (this instructs Tailwind to generate utilities)
@@ -112,6 +116,23 @@ body {
   }
   .animate-fadeIn {
     animation: fadeIn 0.12s ease-out;
+  }
+
+  /* Prevent --spacing-xs..xl from collapsing max-w-xs..xl to 4px..32px in Tailwind v4 */
+  .max-w-xs {
+    max-width: 20rem;
+  }
+  .max-w-sm {
+    max-width: 24rem;
+  }
+  .max-w-md {
+    max-width: 28rem;
+  }
+  .max-w-lg {
+    max-width: 32rem;
+  }
+  .max-w-xl {
+    max-width: 36rem;
   }
 }
 

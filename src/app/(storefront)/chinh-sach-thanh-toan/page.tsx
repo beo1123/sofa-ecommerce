@@ -1,4 +1,3 @@
-import Container from "@/components/ui/Container";
 import Divider from "@/components/ui/Divider";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
@@ -37,70 +36,79 @@ const importantNotes = [
 
 export default function PaymentPolicyPage() {
   return (
-    <main className="min-h-screen py-12 bg-[var(--color-bg-muted)] text-[var(--color-text-default)]">
-      <Container className="space-y-8 px-5">
-        <div className="max-w-3xl space-y-3">
-          <Heading level={1}>Chính sách thanh toán</Heading>
-          <Text muted>
+    <div className="py-5 sm:py-10 lg:py-12 text-[var(--color-text-default)]">
+      <div className="max-w-4xl mx-auto">
+        <div className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)] p-5 sm:p-8 lg:p-10 ring-1 ring-[var(--color-brand-50)] mb-6 sm:mb-8 space-y-2.5 sm:space-y-3">
+          <span className="inline-flex items-center rounded-full bg-[var(--color-bg-page)] px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-400)] ring-1 ring-[var(--color-brand-50)]">
+            Hỗ trợ khách hàng
+          </span>
+          <Heading level={1} className="text-2xl sm:text-3xl lg:text-4xl">
+            Chính sách thanh toán
+          </Heading>
+          <Text muted className="text-sm sm:text-base">
             Sofa Phạm Gia hỗ trợ đa dạng các hình thức thanh toán tiện lợi, an toàn và minh bạch để Quý khách dễ dàng
             lựa chọn.
           </Text>
         </div>
 
-        <section className="space-y-3">
-          <Heading level={3}>1. Các hình thức thanh toán</Heading>
-          <ul className="list-disc pl-5 space-y-2">
-            {paymentMethods.map((item) => (
-              <li key={item}>
-                <Text>{item}</Text>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <div className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-page)] p-5 sm:p-8 lg:p-10 ring-1 ring-[var(--color-brand-50)] shadow-[0_12px_40px_-16px_color-mix(in_srgb,var(--color-brand-400)_10%,transparent)] space-y-6 sm:space-y-8">
+          <section className="space-y-3">
+            <Heading level={3}>1. Các hình thức thanh toán</Heading>
+            <ul className="list-disc pl-5 space-y-2">
+              {paymentMethods.map((item) => (
+                <li key={item}>
+                  <Text>{item}</Text>
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <Divider />
+          <Divider />
 
-        <section className="space-y-3">
-          <Heading level={3}>2. Chính sách thanh toán</Heading>
-          <ul className="list-disc pl-5 space-y-2">
-            {paymentPolicies.map((item) => (
-              <li key={item}>
-                <Text>{item}</Text>
-              </li>
-            ))}
-          </ul>
-        </section>
+          <section className="space-y-3">
+            <Heading level={3}>2. Chính sách thanh toán</Heading>
+            <ul className="list-disc pl-5 space-y-2">
+              {paymentPolicies.map((item) => (
+                <li key={item}>
+                  <Text>{item}</Text>
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <Divider />
+          <Divider />
 
-        <section className="space-y-3">
-          <Heading level={3}>3. Xác nhận thanh toán</Heading>
-          <ul className="list-disc pl-5 space-y-2">
-            {confirmationNotes.map((item) => (
-              <li key={item}>
-                <Text>{item}</Text>
-              </li>
-            ))}
-          </ul>
-        </section>
+          <section className="space-y-3">
+            <Heading level={3}>3. Xác nhận thanh toán</Heading>
+            <ul className="list-disc pl-5 space-y-2">
+              {confirmationNotes.map((item) => (
+                <li key={item}>
+                  <Text>{item}</Text>
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <Divider />
+          <Divider />
 
-        <section className="space-y-3">
-          <Heading level={3}>4. Lưu ý quan trọng</Heading>
-          <ul className="list-disc pl-5 space-y-2">
-            {importantNotes.map((item) => (
-              <li key={item}>
-                <Text>{item}</Text>
-              </li>
-            ))}
-          </ul>
-        </section>
+          <section className="space-y-3">
+            <Heading level={3}>4. Lưu ý quan trọng</Heading>
+            <ul className="list-disc pl-5 space-y-2">
+              {importantNotes.map((item) => (
+                <li key={item}>
+                  <Text>{item}</Text>
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <Divider />
+          <Divider />
 
-        <Text className="font-medium">Hotline hỗ trợ thanh toán & tư vấn: 0932 111 620 (Mr. Giang)</Text>
-      </Container>
-    </main>
+          <Text className="font-semibold text-[var(--color-brand-400)]">
+            Hotline hỗ trợ thanh toán & tư vấn: 0932 111 620 (Mr. Giang)
+          </Text>
+        </div>
+      </div>
+    </div>
   );
 }

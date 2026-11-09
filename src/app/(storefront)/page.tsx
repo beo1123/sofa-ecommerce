@@ -23,46 +23,40 @@ export default function Home() {
       <Script id="home-breadcrumb-jsonld" type="application/ld+json">
         {JSON.stringify(buildHomeBreadcrumbSchema())}
       </Script>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col gap-6 sm:gap-10 lg:gap-14 py-4 sm:py-8 lg:py-10">
         {/* ================= HERO ================= */}
-        <section id="hero" className="p-xl mt-5 rounded-lg bg-brand-50">
+        <section
+          id="hero"
+          className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)] p-4 sm:p-8 lg:p-12 ring-1 ring-[var(--color-brand-50)] shadow-[0_12px_40px_-16px_color-mix(in_srgb,var(--color-brand-400)_12%,transparent)]">
           <Hero />
         </section>
-        {/* ================= BROWSE BY categories ================= */}
-        <section id="browse-by-categories" className="p-xl mt-xl rounded-lg bg-brand-100">
+
+        {/* ================= BROWSE BY CATEGORIES ================= */}
+        <section
+          id="browse-by-categories"
+          className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)]/60 p-4 sm:p-8 lg:p-10 ring-1 ring-[var(--color-brand-50)]">
           <BrowseByCategories />
         </section>
-        {/* ================= store highlights ================= */}
-        <section id="store-highlights" className="p-xl mt-5 rounded-lg bg-[var(--color-bg-page)]">
+
+        {/* ================= STORE HIGHLIGHTS ================= */}
+        <section id="store-highlights" className="py-1 sm:py-2">
           <StoreHighlights />
         </section>
 
         {/* ================= BESTSELLERS ================= */}
-        <section id="bestsellers" className="p-xl bg-page">
+        <section id="bestsellers" className="py-1 sm:py-2">
           <BestSellers />
         </section>
 
-        {/* ================= Featured ================= */}
-        <section id="Featured" className="p-xl bg-page">
+        {/* ================= FEATURED ================= */}
+        <section id="Featured" className="py-1 sm:py-2">
           <Featured />
         </section>
 
-        {/* ================= PROMO / OFFERS ================= */}
-        {/* <section id="promos" className="p-xl rounded-lg mt-5 bg-brand-200">
-          <h2 className="text-2xl font-semibold mb-lg text-white">Ưu đãi đặc biệt</h2>
-          <Grid cols={1} responsive={{ sm: 2, lg: 3 }} gap="md">
-            {["Giảm 30% Sofa", "Khuyến mãi đèn chiếu sáng tuần này", "Sale nội thất ngoài trời"].map((offer) => (
-              <GridItem
-                key={offer}
-                className="bg-brand-300 text-white rounded-md p-xl text-center font-medium hover:bg-brand-400 transition">
-                {offer}
-              </GridItem>
-            ))}
-          </Grid>
-        </section> */}
-
         {/* ================= BRAND MESSAGE ================= */}
-        <section id="brand-message" className="p-xl rounded-lg mt-5 bg-[var(--color-bg-muted)]">
+        <section
+          id="brand-message"
+          className="rounded-2xl sm:rounded-3xl bg-[var(--color-bg-muted)] p-4 sm:p-8 lg:p-12 ring-1 ring-[var(--color-brand-50)] shadow-[0_12px_40px_-16px_color-mix(in_srgb,var(--color-brand-400)_10%,transparent)]">
           <BrandMessage />
         </section>
       </div>

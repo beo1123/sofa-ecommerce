@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "test": "echo \"No tests yet\"",
+    "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
@@ -21,7 +21,7 @@
     "prisma:migrate:dev": "prisma migrate dev --name init --schema=prisma/schema.prisma",
     "prisma:migrate:deploy": "prisma migrate deploy --schema=prisma/schema.prisma",
     "prisma:studio": "prisma studio",
-    "prisma:seed": "tsx prisma/seed.ts",
+    "prisma:seed": "tsx prisma/seed/index.ts",
     "prisma:seed:admin": "tsx prisma/seed-admin.ts",
     "postinstall": "prisma generate"
   },

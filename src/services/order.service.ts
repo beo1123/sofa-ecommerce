@@ -43,25 +43,53 @@ export class OrderService {
       throw { status: 400, body: { success: false, error: { message: "Cart is empty", code: "EMPTY_CART" } } };
     }
 
-    // compute totals
-    const subtotal = Number(cart.subtotal ?? 0);
-    const shippingCost = Number(shipping.shippingCost ?? 0);
-    const tax = Number(shipping.tax ?? 0);
-    const total = +(subtotal + shippingCost + tax).toFixed(2);
-
-    // validate inventory
-    const skus = cart.items.map((i) => i.sku);
+    // validate inventory & fetch authoritative prices from DB
+    const skus = cart.items.map((i) => i.sku).filter(Boolean);
     const inventories = await this.prisma.inventory.findMany({
       where: { sku: { in: skus } },
-      select: { id: true, sku: true, quantity: true, reserved: true },
+      select: {
+        id: true,
+        sku: true,
+        quantity: true,
+        reserved: true,
+        variant: {
+          select: {
+            id: true,
+            price: true,
+            productId: true,
+            product: { select: { title: true, status: true } },
+          },
+        },
+      },
     });
 
+    let computedSubtotal = 0;
+
     for (const item of cart.items) {
+      if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
+        throw {
+          status: 400,
+          body: {
+            success: false,
+            error: { message: `Invalid quantity for SKU ${item.sku}`, code: "INVALID_QUANTITY" },
+          },
+        };
+      }
+
       const inv = inventories.find((x) => x.sku === item.sku);
       if (!inv) {
         throw {
           status: 400,
           body: { success: false, error: { message: `SKU ${item.sku} not found`, code: "SKU_NOT_FOUND" } },
+        };
+      }
+      if (inv.variant.product.status !== "PUBLISHED") {
+        throw {
+          status: 400,
+          body: {
+            success: false,
+            error: { message: `Product for SKU ${item.sku} is not available`, code: "UNAVAILABLE" },
+          },
         };
       }
       const available = inv.quantity - inv.reserved;
@@ -71,7 +99,16 @@ export class OrderService {
           body: { success: false, error: { message: `Insufficient stock for ${item.sku}`, code: "OUT_OF_STOCK" } },
         };
       }
+
+      const unitPrice = Number(inv.variant.price);
+      computedSubtotal += unitPrice * item.quantity;
     }
+
+    // compute authoritative totals
+    const subtotal = +computedSubtotal.toFixed(2);
+    const shippingCost = Math.max(0, Number(shipping?.shippingCost ?? 0) || 0);
+    const tax = Math.max(0, Number(shipping?.tax ?? 0) || 0);
+    const total = +(subtotal + shippingCost + tax).toFixed(2);
 
     try {
       const order = await this.prisma.$transaction(async (tx) => {
@@ -109,16 +146,18 @@ export class OrderService {
           const inv = inventories.find((x) => x.sku === item.sku);
           if (!inv) continue;
 
+          const unitPrice = Number(inv.variant.price);
+
           await tx.orderItem.create({
             data: {
               orderId: created.id,
-              productId: item.productId,
-              variantId: item.variantId ?? undefined,
+              productId: inv.variant.productId,
+              variantId: inv.variant.id,
               sku: item.sku,
-              name: item.name,
-              price: new Decimal(item.price),
+              name: item.name || inv.variant.product.title,
+              price: new Decimal(unitPrice),
               quantity: item.quantity,
-              total: new Decimal(item.price * item.quantity),
+              total: new Decimal(+(unitPrice * item.quantity).toFixed(2)),
             },
           });
 

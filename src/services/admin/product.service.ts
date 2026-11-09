@@ -411,8 +411,8 @@ export class AdminProductService {
         .filter((r) => r.variantName && r.sku && r.price != null)
         .map((r) => {
           const attrs: Record<string, string> = {};
-          if (r.color) attrs.color = r.color;
-          if (r.material) attrs.material = r.material;
+          if (r.color && String(r.color).trim()) attrs.color = String(r.color).trim();
+          if (r.material && String(r.material).trim()) attrs.material = String(r.material).trim();
 
           return {
             name: String(r.variantName),

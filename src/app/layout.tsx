@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="vi">
-      <body className="min-h-screen bg-white text-slate-900">
+      <body className="min-h-screen bg-[var(--color-bg-page)] text-[var(--color-text-default)] antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

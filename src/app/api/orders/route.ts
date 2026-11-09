@@ -14,11 +14,13 @@ export async function POST(req: Request) {
 
     validateRequest(body, { cart: "object", paymentMethod: "string" });
 
-    // ⬇️ detect guest case
-    const isGuest = !body.userId;
+    const session = await getServerSession(authOptions);
+    const authenticatedUserId = session?.user?.id ? Number(session.user.id) : null;
+    const isGuest = !authenticatedUserId;
+
     const result = await orderService.createOrder({
       ...body,
-      userId: body.userId ?? null,
+      userId: authenticatedUserId,
       guestEmail: isGuest ? (body.recipient?.email ?? body.guestEmail) : undefined,
     });
 

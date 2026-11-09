@@ -17,15 +17,13 @@ export const metadata = generatePageMetadata({
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen">
-      <section className="container mx-auto px-4 py-10">
-        <HeroSection />
-        <WhyChooseSection />
-        <CraftsmanshipSection />
-        <MaterialsSection />
-        <GallerySection />
-        <CTASection />
-      </section>
-    </main>
+    <div className="min-h-screen py-4 sm:py-8 lg:py-10 space-y-8 sm:space-y-12 lg:space-y-16">
+      <HeroSection />
+      <WhyChooseSection />
+      <CraftsmanshipSection />
+      <MaterialsSection />
+      <GallerySection />
+      <CTASection />
+    </div>
   );
 }

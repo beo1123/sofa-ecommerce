@@ -81,8 +81,8 @@ export function buildAdminProductPayload(data: ProductFormSubmitData, includeVar
       price: Number(variant.price),
       compareAtPrice: variant.compareAtPrice ? Number(variant.compareAtPrice) : undefined,
       attributes: {
-        ...(variant.color ? { color: variant.color } : {}),
-        ...(variant.material ? { material: variant.material } : {}),
+        ...(variant.color?.trim() ? { color: variant.color.trim() } : {}),
+        ...(variant.material?.trim() ? { material: variant.material.trim() } : {}),
       },
       inventory: variant.sku ? { sku: variant.sku, quantity: Number(variant.quantity ?? 0) } : undefined,
     })),

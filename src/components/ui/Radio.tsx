@@ -31,7 +31,7 @@ export default function RadioGroup({ name, options, value, onChange, error }: Ra
               "flex items-center justify-between gap-4 rounded-xl border px-4 py-3 cursor-pointer transition-all",
               checked
                 ? "border-[var(--color-brand-300)] bg-[var(--color-brand-50)]"
-                : "border-gray-300 hover:border-[var(--color-brand-200)]"
+                : "border-[var(--color-brand-100)] bg-[var(--color-bg-page)] hover:border-[var(--color-brand-300)]"
             )}>
             <div className="flex items-center gap-3">
               <input

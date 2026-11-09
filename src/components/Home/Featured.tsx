@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Grid, { GridItem } from "@/components/ui/Grid";
 import ProductCard from "@/components/products/ProductCard";
 import { ProductService } from "@/services/products.service";
@@ -8,52 +9,42 @@ const productService = new ProductService(prisma);
 export default async function Featured() {
   const products = await productService.getFeaturedProducts(8);
   return (
-    <>
-      <h2 className="mb-lg text-2xl font-semibold">Sản phẩm nổi bật</h2>
-
-      <div className="block md:hidden overflow-x-auto -mx-4 px-4 scrollbar-hide pb-5">
-        <div className="flex gap-4">
-          {products.map((product) => (
-            <div key={product.id} className="min-w-[70%] sm:min-w-[50%]">
-              <ProductCard
-                product={{
-                  id: product.id,
-                  slug: product.slug,
-                  title: product.title,
-                  shortDescription: product.shortDescription ?? "",
-                  priceMin: product.priceMin,
-                  primaryImage: {
-                    url: product.primaryImage?.url ?? undefined,
-                    alt: product.primaryImage?.alt ?? product.title,
-                  },
-                }}
-              />
-            </div>
-          ))}
+    <div>
+      <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4">
+        <div>
+          <span className="inline-flex items-center rounded-full bg-[var(--color-brand-50)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--color-brand-400)] mb-2">
+            Tuyển chọn
+          </span>
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-[var(--color-text-default)]">
+            Sản phẩm nổi bật
+          </h2>
         </div>
+        <Link
+          href="/san-pham"
+          className="text-sm font-semibold text-[var(--color-brand-400)] hover:text-[var(--color-brand-300)] transition-colors">
+          Khám phá thêm →
+        </Link>
       </div>
 
-      <div className="hidden md:block">
-        <Grid cols={1} responsive={{ sm: 2, md: 3, lg: 4 }} gap="lg">
-          {products.map((product) => (
-            <GridItem key={product.id}>
-              <ProductCard
-                product={{
-                  id: product.id,
-                  slug: product.slug,
-                  title: product.title,
-                  shortDescription: product.shortDescription ?? "",
-                  priceMin: product.priceMin,
-                  primaryImage: {
-                    url: product.primaryImage?.url ?? undefined,
-                    alt: product.primaryImage?.alt ?? product.title,
-                  },
-                }}
-              />
-            </GridItem>
-          ))}
-        </Grid>
-      </div>
-    </>
+      <Grid cols={1} responsive={{ sm: 2, md: 3, lg: 4 }} gap="md">
+        {products.map((product) => (
+          <GridItem key={product.id}>
+            <ProductCard
+              product={{
+                id: product.id,
+                slug: product.slug,
+                title: product.title,
+                shortDescription: product.shortDescription ?? "",
+                priceMin: product.priceMin,
+                primaryImage: {
+                  url: product.primaryImage?.url ?? undefined,
+                  alt: product.primaryImage?.alt ?? product.title,
+                },
+              }}
+            />
+          </GridItem>
+        ))}
+      </Grid>
+    </div>
   );
 }

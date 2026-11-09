@@ -1,7 +1,6 @@
 import BlogCategoryFilter from "@/components/blog/BlogList/BlogCategoryFilter";
 import BlogGrid from "@/components/blog/BlogList/BlogGrid";
 import BlogHeader from "@/components/blog/BlogList/BlogHeader";
-import Container from "@/components/ui/Container";
 import { prisma } from "@/lib/prisma";
 import { generateHomeMetadata } from "@/seo/generators/generateMetadata";
 import { ArticleService } from "@/services/article.service";
@@ -35,12 +34,12 @@ export default async function BlogPage(props: { searchParams: Promise<{ page?: s
   }
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-muted)] px-5">
+    <div className="min-h-screen py-4 sm:py-8 lg:py-10 space-y-6 sm:space-y-8">
       <BlogHeader />
-      <Container>
+      <div>
         <BlogCategoryFilter categories={categories.data} selected={categorySlug} />
         <BlogGrid items={categorySlug ? articles.data.articles : articles.data} />
-      </Container>
-    </main>
+      </div>
+    </div>
   );
 }

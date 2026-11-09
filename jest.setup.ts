@@ -1,1 +1,2 @@
-import "@testing-library/jest-dom";
+// Jest global setup
+export {};

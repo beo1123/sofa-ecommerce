@@ -11,7 +11,7 @@ export default function Container({ children, className = "" }: Props) {
     <div
       className={`
         w-full
-        sm:max-w-7xl sm:mx-auto sm:px-6 lg:px-8
+        max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8
         ${className}
       `}>
       {children}
