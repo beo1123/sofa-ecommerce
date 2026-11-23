@@ -1,227 +1,285 @@
 "use client";
 
-import React, { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight, Loader2, Star, Upload, X } from "lucide-react";
-import axiosClient from "@/server/axiosClient";
+import React, { useId, useState } from "react";
+import clsx from "clsx";
+import { IconArrowLeft, IconArrowRight, IconLoader2, IconPhotoUp, IconTrash } from "@tabler/icons-react";
 
-interface ImageUploaderProps {
-  images: { url: string; alt?: string; isPrimary?: boolean }[];
-  onChange: (images: { url: string; alt?: string; isPrimary?: boolean }[]) => void;
-  folder?: string;
-  multiple?: boolean;
+export interface UploadedImageItem {
+  id?: number;
+  url: string;
+  alt?: string | null;
+  isPrimary?: boolean;
 }
 
-export default function ImageUploader({ images, onChange, folder = "products", multiple = true }: ImageUploaderProps) {
+interface ImageUploaderProps {
+  images: UploadedImageItem[];
+  onChange: (images: UploadedImageItem[]) => void;
+  folder?: string;
+  multiple?: boolean;
+  label?: string;
+}
+
+export default function ImageUploader({
+  images,
+  onChange,
+  folder = "products",
+  multiple = true,
+  label = "Hình ảnh sản phẩm",
+}: ImageUploaderProps) {
+  const radioGroupName = useId();
+  const [uploading, setUploading] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
   const [activeRemoveIndex, setActiveRemoveIndex] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const uploadMutation = useMutation({
-    mutationFn: async ({ file, uploadFolder }: { file: File; uploadFolder: string }) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("folder", uploadFolder);
-
-      const res = await axiosClient.post("/admin/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      return res.data?.data;
-    },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: async ({ url }: { url: string }) => {
-      await axiosClient.delete("/admin/upload", {
-        data: { url },
-      });
-    },
-  });
-
-  const uploading = uploadMutation.isPending;
-  const removing = deleteMutation.isPending;
-
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
+  const uploadFiles = async (fileList: FileList | File[]) => {
+    const files = Array.from(fileList).filter((f) => f.type.startsWith("image/"));
+    if (files.length === 0) {
+      setError("Vui lòng chọn file ảnh hợp lệ (JPEG, PNG, WebP, AVIF)");
+      return;
+    }
 
     setError(null);
+    setUploading(true);
 
     try {
-      const selectedFiles = multiple ? Array.from(files) : [files[0]];
-      const newImages = multiple ? [...images] : [];
+      const selectedFiles = multiple ? files : [files[0]];
+      const nextImages: UploadedImageItem[] = multiple ? [...images] : [];
 
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const file = selectedFiles[i];
-        if (!file) continue;
+      for (const file of selectedFiles) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("folder", folder);
 
-        const res = await uploadMutation.mutateAsync({ file, uploadFolder: folder });
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const json = await res.json();
 
-        if (res?.url) {
-          newImages.push({
-            url: res.url,
-            alt: file.name,
-            isPrimary: newImages.length === 0,
-          });
+        if (!res.ok || !json?.data?.url) {
+          throw new Error(json?.error?.message ?? "Upload ảnh thất bại");
         }
+
+        nextImages.push({
+          url: json.data.url as string,
+          alt: file.name.replace(/\.[^/.]+$/, ""),
+          isPrimary: nextImages.length === 0,
+        });
       }
 
-      onChange(newImages);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Upload thất bại");
+      if (nextImages.length > 0 && !nextImages.some((img) => img.isPrimary)) {
+        nextImages[0] = { ...nextImages[0], isPrimary: true };
+      }
+
+      onChange(nextImages);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload ảnh thất bại");
     } finally {
-      e.target.value = "";
+      setUploading(false);
+    }
+  };
+
+  const handleFileInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      await uploadFiles(e.target.files);
+    }
+    e.target.value = "";
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setDragActive(false);
+    if (uploading || activeRemoveIndex !== null) return;
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      await uploadFiles(e.dataTransfer.files);
     }
   };
 
   const handleRemove = async (index: number) => {
-    const image = images[index];
-    if (!image) return;
+    const target = images[index];
+    if (!target) return;
 
     setError(null);
     setActiveRemoveIndex(index);
 
     try {
-      await deleteMutation.mutateAsync({ url: image.url });
+      await fetch("/api/admin/upload", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: target.url }),
+      }).catch(() => undefined);
 
-      const updated = images.filter((_, i) => i !== index);
-      if (updated.length > 0 && !updated.some((img) => img.isPrimary)) {
-        updated[0] = { ...updated[0], isPrimary: true };
+      const next = images.filter((_, idx) => idx !== index);
+      if (next.length > 0 && !next.some((img) => img.isPrimary)) {
+        next[0] = { ...next[0], isPrimary: true };
       }
-      onChange(updated);
-    } catch (err: any) {
-      setError(err?.response?.data?.error?.message ?? "Xóa ảnh thất bại");
+      onChange(next);
+    } catch {
+      setError("Không thể xóa ảnh");
     } finally {
       setActiveRemoveIndex(null);
     }
   };
 
   const handleSetPrimary = (index: number) => {
-    const updated = images.map((img, i) => ({
+    const next = images.map((img, idx) => ({
       ...img,
-      isPrimary: i === index,
+      isPrimary: idx === index,
     }));
-
-    const primaryImage = updated[index];
-    const remainingImages = updated.filter((_, i) => i !== index);
-    onChange([primaryImage, ...remainingImages]);
+    onChange(next);
   };
 
   const handleMove = (index: number, direction: "left" | "right") => {
     const targetIndex = direction === "left" ? index - 1 : index + 1;
     if (targetIndex < 0 || targetIndex >= images.length) return;
+    const next = [...images];
+    const [moved] = next.splice(index, 1);
+    next.splice(targetIndex, 0, moved);
+    onChange(next);
+  };
 
-    const updated = [...images];
-    const [movedImage] = updated.splice(index, 1);
-    updated.splice(targetIndex, 0, movedImage);
-    onChange(updated);
+  const handleAltChange = (index: number, alt: string) => {
+    const next = images.map((img, idx) => (idx === index ? { ...img, alt } : img));
+    onChange(next);
   };
 
   return (
-    <div className="space-y-3">
-      <label className="block text-sm font-medium text-[var(--color-text-default)]">Hình ảnh sản phẩm</label>
-
-      {/* Image Grid */}
-      {images.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-          {images.map((img, i) => (
-            <div
-              key={i}
-              className={`relative group rounded-lg border-2 overflow-hidden aspect-square ${
-                img.isPrimary ? "border-[var(--color-brand-300)]" : "border-gray-200"
-              }`}>
-              <img src={img.url} alt={img.alt ?? ""} className="w-full h-full object-cover" />
-
-              {/* Overlay actions */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 p-2">
-                {multiple && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => handleMove(i, "left")}
-                      disabled={i === 0}
-                      className="p-1 bg-white text-gray-800 rounded shadow hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
-                      aria-label="Đưa ảnh sang trái">
-                      <ArrowLeft size={14} />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleMove(i, "right")}
-                      disabled={i === images.length - 1}
-                      className="p-1 bg-white text-gray-800 rounded shadow hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
-                      aria-label="Đưa ảnh sang phải">
-                      <ArrowRight size={14} />
-                    </button>
-                  </>
-                )}
-                {!img.isPrimary && (
-                  <button
-                    type="button"
-                    onClick={() => handleSetPrimary(i)}
-                    className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-white text-gray-800 rounded shadow hover:bg-gray-100">
-                    <Star size={12} />
-                    Ảnh chính
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={() => void handleRemove(i)}
-                  disabled={removing}
-                  className="p-1 bg-red-500 text-white rounded shadow hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
-                  aria-label="Xóa ảnh">
-                  {activeRemoveIndex === i ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />}
-                </button>
-              </div>
-
-              {/* Primary badge */}
-              {img.isPrimary && (
-                <span className="absolute top-1 left-1 text-[10px] bg-[var(--color-brand-300)] text-white px-1.5 py-0.5 rounded">
-                  Chính
-                </span>
-              )}
-
-              {multiple && (
-                <span className="absolute bottom-1 left-1 text-[10px] bg-black/70 text-white px-1.5 py-0.5 rounded">
-                  #{i + 1}
-                </span>
-              )}
-            </div>
-          ))}
+    <div className="space-y-4">
+      {label && (
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-sm font-medium text-text-default">{label}</span>
+          <span className="text-xs text-text-muted">{images.length} ảnh · Chọn radio để đặt ảnh đại diện chính</span>
         </div>
       )}
 
-      {/* Upload button */}
+      {/* Drag-drop zone */}
       <label
-        className={`flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
-          uploading
-            ? "border-gray-300 bg-gray-50"
-            : "border-gray-300 hover:border-[var(--color-brand-300)] hover:bg-[var(--color-brand-50)]/30"
-        }`}>
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragActive(true);
+        }}
+        onDragLeave={() => setDragActive(false)}
+        onDrop={handleDrop}
+        className={clsx(
+          "flex flex-col items-center justify-center gap-2 rounded-[12px] border-2 border-dashed p-7 text-center transition-colors cursor-pointer",
+          dragActive
+            ? "border-brand-300 bg-brand-50/60"
+            : "border-brand-200 bg-bg-muted hover:border-brand-300 hover:bg-brand-50/40",
+          uploading && "opacity-70 cursor-wait"
+        )}>
         {uploading ? (
           <>
-            <Loader2 size={24} className="animate-spin text-[var(--color-brand-300)]" />
-            <span className="text-sm text-[var(--color-text-muted)]">Đang upload...</span>
+            <IconLoader2 size={24} stroke={1.75} className="animate-spin text-brand-300" />
+            <span className="text-sm font-medium text-brand-400">Đang tải ảnh lên Cloudinary...</span>
           </>
         ) : (
           <>
-            <Upload size={24} className="text-[var(--color-text-muted)]" />
-            <span className="text-sm text-[var(--color-text-muted)]">Click để upload ảnh (JPEG, PNG, WebP)</span>
+            <span className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-brand-100 bg-bg-page text-brand-300">
+              <IconPhotoUp size={20} stroke={1.75} />
+            </span>
+            <p className="text-sm font-medium text-brand-400">Kéo thả ảnh vào đây hoặc nhấn để chọn file</p>
+            <p className="text-xs text-text-muted">Hỗ trợ JPEG, PNG, WebP, AVIF (tối đa 10 MB/ảnh)</p>
           </>
         )}
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp,image/avif"
           multiple={multiple}
-          onChange={handleUpload}
-          disabled={uploading || removing}
+          onChange={handleFileInput}
+          disabled={uploading || activeRemoveIndex !== null}
           className="hidden"
         />
       </label>
 
       {error && (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="text-xs text-red-600" role="alert">
           {error}
         </p>
+      )}
+
+      {/* Preview strip */}
+      {images.length > 0 && (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {images.map((img, idx) => (
+            <div
+              key={`${img.url}-${idx}`}
+              className={clsx(
+                "flex flex-col overflow-hidden rounded-[12px] border bg-bg-page transition-colors",
+                img.isPrimary ? "border-brand-400" : "border-brand-100"
+              )}>
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-50">
+                <img src={img.url} alt={img.alt ?? `Ảnh ${idx + 1}`} className="h-full w-full object-cover" />
+                <span className="absolute left-2 top-2 rounded-[20px] bg-bg-page/90 px-2 py-0.5 text-[11px] font-medium text-brand-400">
+                  #{idx + 1}
+                </span>
+                {img.isPrimary && (
+                  <span className="absolute right-2 top-2 rounded-[20px] bg-brand-400 px-2 py-0.5 text-[11px] font-medium text-white">
+                    Ảnh chính
+                  </span>
+                )}
+              </div>
+
+              <div className="space-y-2 p-2.5">
+                <input
+                  type="text"
+                  value={img.alt ?? ""}
+                  onChange={(e) => handleAltChange(idx, e.target.value)}
+                  placeholder="Mô tả ảnh (alt SEO)"
+                  className="w-full rounded-[8px] border border-brand-100 bg-bg-page px-2 py-1 text-xs text-text-default placeholder:text-text-muted/70 focus:border-brand-300 focus:outline-none focus:ring-[3px] focus:ring-brand-50"
+                />
+
+                <div className="flex items-center justify-between gap-2">
+                  <label className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-400 cursor-pointer">
+                    <input
+                      type="radio"
+                      name={radioGroupName}
+                      checked={Boolean(img.isPrimary)}
+                      onChange={() => handleSetPrimary(idx)}
+                      className="h-3.5 w-3.5 accent-brand-400"
+                    />
+                    <span>Ảnh chính</span>
+                  </label>
+
+                  <div className="flex items-center gap-1">
+                    {multiple && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => handleMove(idx, "left")}
+                          disabled={idx === 0}
+                          aria-label="Chuyển sang trái"
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-[8px] border border-brand-100 text-brand-300 hover:border-brand-200 hover:bg-brand-50 disabled:opacity-40 cursor-pointer">
+                          <IconArrowLeft size={14} stroke={1.75} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleMove(idx, "right")}
+                          disabled={idx === images.length - 1}
+                          aria-label="Chuyển sang phải"
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-[8px] border border-brand-100 text-brand-300 hover:border-brand-200 hover:bg-brand-50 disabled:opacity-40 cursor-pointer">
+                          <IconArrowRight size={14} stroke={1.75} />
+                        </button>
+                      </>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemove(idx)}
+                      disabled={activeRemoveIndex !== null}
+                      aria-label="Xóa ảnh"
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-[8px] border border-brand-100 text-red-600 hover:border-red-300 hover:bg-red-50 disabled:opacity-40 cursor-pointer">
+                      {activeRemoveIndex === idx ? (
+                        <IconLoader2 size={14} stroke={1.75} className="animate-spin" />
+                      ) : (
+                        <IconTrash size={14} stroke={1.75} />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

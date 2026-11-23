@@ -1,4 +1,6 @@
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -16,14 +18,13 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
 
-  experimental: {
-    serverComponentsExternalPackages: ["@prisma/client"],
-    cacheLife: {
-      default: {
-        stale: 300,
-        revalidate: 600,
-        expire: 3600,
-      },
+  serverExternalPackages: ["@prisma/client", "@react-pdf/renderer"],
+
+  cacheLife: {
+    default: {
+      stale: 300,
+      revalidate: 600,
+      expire: 3600,
     },
   },
 
@@ -33,7 +34,6 @@ const nextConfig = {
   compress: true,
 
   typescript: { ignoreBuildErrors: false },
-  eslint: { ignoreDuringBuilds: true },
 };
 
 export default nextConfig;

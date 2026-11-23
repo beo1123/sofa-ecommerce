@@ -1,28 +1,14 @@
-"use client";
-
 import React from "react";
-import Heading from "@/components/ui/Heading";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
+import { prisma } from "@/lib/prisma";
 import ProductForm from "@/components/admin/products/ProductForm";
-import { useAdminProductCreate } from "@/hooks/products/useAdminProductCreate";
 
-export default function NewProductPage() {
-  const { categories, loading, error, submit } = useAdminProductCreate();
+export const dynamic = "force-dynamic";
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-16">
-        <Spinner size={30} />
-      </div>
-    );
-  }
+export default async function NewProductPage() {
+  const categories = await prisma.category.findMany({
+    orderBy: { name: "asc" },
+    select: { id: true, name: true, slug: true },
+  });
 
-  return (
-    <div className="space-y-6 max-w-4xl">
-      <Heading level={2}>Thêm sản phẩm mới</Heading>
-      {error && <Alert variant="error" title="Lỗi" description={error} />}
-      <ProductForm categories={categories} onSubmit={submit} submitLabel="Tạo sản phẩm" />
-    </div>
-  );
+  return <ProductForm categories={categories} />;
 }

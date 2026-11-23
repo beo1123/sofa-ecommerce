@@ -1,5 +1,7 @@
 "use client";
+
 import React from "react";
+import clsx from "clsx";
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: string;
@@ -8,15 +10,10 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
+  inputSize?: "sm" | "md";
 }
 
-/**
- * Smart Input Component
- * - Fully compatible with React Hook Form & Zod
- * - Works with both controlled and uncontrolled forms
- * - Keeps accessibility (aria-invalid, aria-describedby)
- */
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label,
@@ -25,13 +22,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       leftIcon,
       rightIcon,
       fullWidth = false,
+      inputSize = "md",
       id,
-      className = "",
+      className,
       disabled,
       required,
-      value,
-      onChange,
-      onBlur,
       ...props
     },
     ref
@@ -41,37 +36,24 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const errorId = `${inputId}-error`;
     const helperId = `${inputId}-helper`;
     const hasError = Boolean(error);
-    const containerClass = fullWidth ? "w-full" : "";
-
-    const baseInputClasses =
-      "block w-full px-3 py-2 border rounded-md shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100";
-
-    const stateClasses = hasError
-      ? "border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500"
-      : "border-[var(--color-brand-100)] focus:ring-[var(--color-brand-300)] focus:border-[var(--color-brand-400)]";
-
-    const iconPadding = leftIcon ? "pl-10" : rightIcon ? "pr-10" : "";
-    const inputClasses = `${baseInputClasses} ${stateClasses} ${iconPadding} ${className}`;
 
     return (
-      <div className={containerClass}>
-        {/* LABEL */}
+      <div className={clsx(fullWidth && "w-full")}>
         {label && (
-          <label htmlFor={inputId} className="block text-sm font-medium text-[var(--color-text-default)] mb-1">
+          <label htmlFor={inputId} className="block text-sm font-medium text-text-default mb-1.5">
             {label}
             {required && (
-              <span className="text-red-500 ml-1" aria-label="required">
+              <span className="text-red-600 ml-1" aria-hidden="true">
                 *
               </span>
             )}
           </label>
         )}
 
-        {/* INPUT WRAPPER */}
         <div className="relative">
           {leftIcon && (
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-[var(--color-text-muted)]">{leftIcon}</span>
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-muted">
+              {leftIcon}
             </div>
           )}
 
@@ -80,31 +62,33 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             disabled={disabled}
             required={required}
-            className={inputClasses}
-            aria-invalid={hasError}
+            aria-invalid={hasError || undefined}
             aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
-            // ✅ Cho phép controlled & uncontrolled form
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
+            className={clsx(
+              "block w-full rounded-[8px] border bg-bg-page text-text-default placeholder:text-text-muted/70 shadow-none transition-colors duration-150 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-bg-muted",
+              inputSize === "sm" ? "h-8 px-2.5 text-sm" : "h-10 px-3 text-sm",
+              hasError
+                ? "border-red-400 focus:border-red-500 focus:ring-[3px] focus:ring-red-100"
+                : "border-brand-100 hover:border-brand-200 focus:border-brand-300 focus:ring-[3px] focus:ring-brand-50",
+              leftIcon && "pl-9",
+              rightIcon && "pr-9",
+              className
+            )}
             {...props}
           />
 
           {rightIcon && (
-            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-auto">
-              <span className="text-[var(--color-text-muted)]">{rightIcon}</span>
-            </div>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-text-muted">{rightIcon}</div>
           )}
         </div>
 
-        {/* ERROR / HELPER */}
         {error && (
-          <p id={errorId} className="mt-1 text-sm text-red-600" role="alert">
+          <p id={errorId} className="mt-1 text-xs text-red-600" role="alert">
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p id={helperId} className="mt-1 text-sm text-[var(--color-text-muted)]">
+          <p id={helperId} className="mt-1 text-xs text-text-muted">
             {helperText}
           </p>
         )}
@@ -114,4 +98,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
+
 export default Input;

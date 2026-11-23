@@ -2,14 +2,11 @@
 import React from "react";
 import Container from "@/components/ui/Container";
 import Link from "next/link";
-import { CategoryService } from "@/services/category.service";
-import { prisma } from "@/lib/prisma";
-
-const categoryService = new CategoryService(prisma);
+import { getSharedCategories } from "@/lib/cache/categories";
 
 export default async function Footer() {
-  // Fetch categories
-  const { data: categories } = await categoryService.getAll(1, 100, 0);
+  // Request-deduplicated categories shared with RootLayout & StorefrontLayout
+  const categories = await getSharedCategories();
   const socialLinks = [
     ["Facebook", process.env.NEXT_PUBLIC_FACEBOOK_URL],
     ["Instagram", process.env.NEXT_PUBLIC_INSTAGRAM_URL],

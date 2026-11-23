@@ -49,6 +49,14 @@ export default [
         alert: "readonly",
         confirm: "readonly",
         setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        fetch: "readonly",
+        FormData: "readonly",
+        URL: "readonly",
+        URLSearchParams: "readonly",
+        AbortController: "readonly",
         process: "readonly",
         console: "readonly", // ✅ FIX console undefined
         Buffer: "readonly", // Node.js Buffer (server-side API routes)

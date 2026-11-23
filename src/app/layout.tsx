@@ -7,19 +7,13 @@ import ReactQueryProvider from "../providers/ReactQueryProvider";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { baseMetadata } from "@/seo/baseMetadata";
-import { prisma } from "@/lib/prisma";
+import { getSharedCategories } from "@/lib/cache/categories";
 import { buildSiteNavigationSchema, organizationSchema, websiteSchema } from "@/seo/schema";
 
 export const metadata: Metadata = baseMetadata;
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const categories = await prisma.category.findMany({
-    orderBy: { createdAt: "desc" },
-    select: {
-      name: true,
-      slug: true,
-    },
-  });
+  const categories = await getSharedCategories();
 
   const siteNavigationSchema = buildSiteNavigationSchema(categories);
 

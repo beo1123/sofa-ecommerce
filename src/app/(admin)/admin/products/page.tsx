@@ -1,112 +1,97 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import Heading from "@/components/ui/Heading";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
-import Input from "@/components/ui/Input";
-import Dropdown from "@/components/ui/Dropdown";
+import { IconPlus, IconCategory } from "@tabler/icons-react";
+import { prisma } from "@/lib/prisma";
+import { toNumber } from "@/lib/format";
+import { resolveWorkshopCode } from "@/lib/slug";
+import { parseMaterialOptions } from "@/lib/workshop-types";
 import ProductTable from "@/components/admin/products/ProductTable";
-import ExcelImport from "@/components/admin/products/ExcelImport";
-import { Plus, Search } from "lucide-react";
-import { useAdminProducts } from "@/hooks/products/useAdminProducts";
+import type { SerializedCategoryOption, SerializedProductListItem } from "@/components/admin/products/types";
 
-export default function AdminProductsPage() {
-  const {
-    products,
-    meta,
-    loading,
-    error,
-    deleting,
-    categories,
-    searchInput,
-    statusFilter,
-    categoryFilter,
-    totalPages,
-    setSearchInput,
-    setStatusFilter,
-    setCategoryFilter,
-    handleDelete,
-    goToPreviousPage,
-    goToNextPage,
-  } = useAdminProducts();
+export const dynamic = "force-dynamic";
+
+export default async function AdminProductsPage() {
+  const [products, categories] = await Promise.all([
+    prisma.product.findMany({
+      orderBy: { updatedAt: "desc" },
+      include: {
+        category: { select: { id: true, name: true } },
+        images: {
+          orderBy: [{ isPrimary: "desc" }, { id: "asc" }],
+          take: 1,
+          select: { url: true },
+        },
+        variants: {
+          select: { price: true },
+        },
+        reviews: {
+          select: { approved: true },
+        },
+      },
+    }),
+    prisma.category.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, slug: true },
+    }),
+  ]);
+
+  const serializedProducts: SerializedProductListItem[] = products.map((p) => {
+    const prices = p.variants.map((v) => toNumber(v.price)).filter((n) => n >= 0);
+    const minPrice = prices.length > 0 ? Math.min(...prices) : null;
+    const pendingReviewCount = p.reviews.filter((r) => !r.approved).length;
+
+    return {
+      id: p.id,
+      workshopCode: resolveWorkshopCode(p.workshopCode, p.title),
+      title: p.title,
+      slug: p.slug,
+      status: p.status,
+      categoryId: p.categoryId,
+      categoryName: p.category?.name ?? null,
+      primaryImageUrl: p.images[0]?.url ?? null,
+      minPrice,
+      variantCount: p.variants.length,
+      reviewCount: p.reviews.length,
+      pendingReviewCount,
+      materialOptions: parseMaterialOptions(p.materialOptions),
+      allowCustomSize: p.allowCustomSize,
+      updatedAt: p.updatedAt.toISOString(),
+    };
+  });
+
+  const serializedCategories: SerializedCategoryOption[] = categories.map((c) => ({
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+  }));
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Heading level={2}>Quản lý sản phẩm</Heading>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">{meta.total} sản phẩm</p>
+          <h2 className="text-xl font-bold text-brand-400">Quản lý sản phẩm</h2>
+          <p className="mt-0.5 text-xs text-text-muted">
+            Danh mục mẫu sofa xưởng, chất liệu, biến thể giá và kiểm duyệt đánh giá khách hàng.
+          </p>
         </div>
-        <Link href="/admin/products/new">
-          <Button leftIcon={<Plus size={16} />}>Thêm sản phẩm</Button>
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/admin/categories"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[8px] border border-brand-300 bg-bg-page px-3.5 text-sm font-medium text-brand-400 transition-colors hover:bg-brand-50">
+            <IconCategory size={16} stroke={1.75} aria-hidden="true" />
+            <span>Danh mục</span>
+          </Link>
+          <Link
+            href="/admin/products/new"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[8px] bg-brand-400 px-3.5 text-sm font-medium text-white transition-colors hover:bg-brand-300">
+            <IconPlus size={16} stroke={1.75} aria-hidden="true" />
+            <span>Thêm sản phẩm</span>
+          </Link>
+        </div>
       </div>
 
-      {/* Excel Import */}
-      <ExcelImport />
-
-      {/* Content */}
-      {error && <Alert variant="error" title="Lỗi" description={error} />}
-
-      <Card variant="elevated" padding="none">
-        <div className="p-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-3">
-          <Input
-            placeholder="Tìm theo tên hoặc slug..."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            leftIcon={<Search size={16} />}
-            fullWidth
-          />
-          <Dropdown
-            value={categoryFilter}
-            onChange={setCategoryFilter}
-            options={[
-              { label: "Tất cả danh mục", value: "ALL" },
-              ...categories.map((cat) => ({ label: cat.name, value: String(cat.id) })),
-            ]}
-            fullWidth
-          />
-          <Dropdown
-            value={statusFilter}
-            onChange={setStatusFilter}
-            options={[
-              { label: "Tất cả trạng thái", value: "ALL" },
-              { label: "Nháp", value: "DRAFT" },
-              { label: "Đã đăng", value: "PUBLISHED" },
-              { label: "Đã lưu trữ", value: "ARCHIVED" },
-            ]}
-            fullWidth
-          />
-        </div>
-
-        {loading ? (
-          <div className="flex items-center justify-center py-16">
-            <Spinner size={30} />
-          </div>
-        ) : (
-          <ProductTable products={products} totalCount={meta.total} onDelete={handleDelete} deleting={deleting} />
-        )}
-      </Card>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2">
-          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
-            Trước
-          </Button>
-          <span className="text-sm text-[var(--color-text-muted)]">
-            Trang {meta.page} / {totalPages}
-          </span>
-          <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>
-            Sau
-          </Button>
-        </div>
-      )}
+      <ProductTable initialProducts={serializedProducts} categories={serializedCategories} />
     </div>
   );
 }

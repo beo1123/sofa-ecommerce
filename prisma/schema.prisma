@@ -126,12 +126,24 @@ model Product {
   OrderItem        OrderItem[]
   WishlistItem     WishlistItem[]
 
+  // Workshop fields (additive)
+  workshopCode    String?
+  priceNote       String?
+  defaultWidthCm  Int?
+  defaultDepthCm  Int?
+  defaultHeightCm Int?
+  allowCustomSize Boolean   @default(false)
+  materialOptions Json      @default("[]")
+  colorOptions    Json      @default("[]")
+  linkedArticles  Article[]
+
   @@index([title], map: "idx_product_title")
   @@index([slug], map: "idx_product_slug")
   @@index([status], map: "idx_product_status")
   @@index([createdAt], map: "idx_product_createdAt")
   @@index([title, shortDescription], map: "idx_product_title_shortdesc")
   @@index([categoryId], map: "idx_product_category")
+  @@index([workshopCode], map: "idx_product_workshopCode")
 }
 
 model Category {
@@ -235,10 +247,26 @@ model Order {
   Refund        Refund[]
   statusHistory OrderStatusHistory[]
 
+  // Workshop fields (additive)
+  depositPaid    Decimal      @default(0) @db.Decimal(12, 2)
+  isCustomSize   Boolean      @default(false)
+  customWidthCm  Int?
+  customDepthCm  Int?
+  customHeightCm Int?
+  materialChoice String?
+  colorChoice    String?
+  internalNote   String?
+  deliverDate    DateTime?
+  invoiceUrl     String?
+  workshopStatus String       @default("new")
+  shipment       Shipment?
+  depositLogs    DepositLog[]
+
   @@index([orderNumber])
   @@index([userId])
   @@index([status])
   @@index([createdAt])
+  @@index([workshopStatus])
 }
 
 model OrderItem {
@@ -477,6 +505,14 @@ model Article {
   authorId Int?
   author   User? @relation(fields: [authorId], references: [id])
 
+  // Tiptap, product linking, and SEO fields (additive)
+  bodyJson        Json?
+  linkedProductId Int?
+  linkedProduct   Product? @relation(fields: [linkedProductId], references: [id])
+  seoTitle        String?
+  seoDescription  String?
+  coverImageUrl   String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -484,6 +520,7 @@ model Article {
   @@index([status])
   @@index([categoryId])
   @@index([publishedAt])
+  @@index([linkedProductId])
 }
 
 enum ArticleStatus {
@@ -501,4 +538,60 @@ model ArticleCategory {
   updatedAt DateTime  @updatedAt
 
   @@index([slug])
+}
+
+// =========================================================
+// WORKSHOP EXTENSIONS: INQUIRIES, SHIPMENTS, DEPOSIT LOGS
+// =========================================================
+
+model Inquiry {
+  id         Int      @id @default(autoincrement())
+  name       String
+  phone      String
+  district   String?
+  city       String   @default("TP.HCM")
+  roomType   String?
+  budgetMin  Int?
+  budgetMax  Int?
+  note       String?
+  source     String   @default("web")
+  assignedTo String?
+  status     String   @default("new")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([status], map: "idx_inquiry_status")
+  @@index([source], map: "idx_inquiry_source")
+  @@index([createdAt], map: "idx_inquiry_createdAt")
+}
+
+model Shipment {
+  id            Int       @id @default(autoincrement())
+  orderId       Int       @unique
+  order         Order     @relation(fields: [orderId], references: [id])
+  scheduledDate DateTime?
+  driverName    String?
+  needsCrane    Boolean   @default(false)
+  buildingFloor Int?
+  hasElevator   Boolean   @default(true)
+  specialNote   String?
+  status        String    @default("scheduled")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status], map: "idx_shipment_status")
+  @@index([scheduledDate], map: "idx_shipment_scheduledDate")
+}
+
+model DepositLog {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  order      Order    @relation(fields: [orderId], references: [id])
+  amount     Decimal  @db.Decimal(12, 2)
+  method     String?
+  note       String?
+  recordedBy String?
+  createdAt  DateTime @default(now())
+
+  @@index([orderId], map: "idx_depositlog_order")
 }

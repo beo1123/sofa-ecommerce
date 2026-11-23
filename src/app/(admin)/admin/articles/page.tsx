@@ -1,108 +1,77 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import Heading from "@/components/ui/Heading";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
-import Input from "@/components/ui/Input";
-import Dropdown from "@/components/ui/Dropdown";
+import { IconFolder, IconPlus } from "@tabler/icons-react";
+import { prisma } from "@/lib/prisma";
+import { resolveWorkshopCode } from "@/lib/slug";
 import ArticleTable from "@/components/admin/articles/ArticleTable";
-import { Plus, Search } from "lucide-react";
-import { useAdminArticles } from "@/hooks/articles/useAdminArticles";
+import type { SerializedArticleCategory, SerializedArticleListItem } from "@/components/admin/articles/types";
 
-export default function AdminArticlesPage() {
-  const {
-    articles,
-    meta,
-    loading,
-    error,
-    deleting,
-    categories,
-    searchInput,
-    statusFilter,
-    categoryFilter,
-    totalPages,
-    setSearchInput,
-    setStatusFilter,
-    setCategoryFilter,
-    handleDelete,
-    goToPreviousPage,
-    goToNextPage,
-  } = useAdminArticles();
+export const dynamic = "force-dynamic";
+
+export default async function AdminArticlesPage() {
+  const [articles, categories] = await Promise.all([
+    prisma.article.findMany({
+      orderBy: { updatedAt: "desc" },
+      include: {
+        category: { select: { id: true, name: true } },
+        linkedProduct: { select: { title: true, workshopCode: true } },
+      },
+    }),
+    prisma.articleCategory.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, slug: true },
+    }),
+  ]);
+
+  const serializedArticles: SerializedArticleListItem[] = articles.map((a) => ({
+    id: a.id,
+    title: a.title,
+    slug: a.slug,
+    status: a.status,
+    coverImageUrl: a.coverImageUrl ?? a.thumbnail,
+    categoryId: a.categoryId,
+    categoryName: a.category?.name ?? null,
+    linkedProductTitle: a.linkedProduct?.title ?? null,
+    linkedProductCode: a.linkedProduct
+      ? resolveWorkshopCode(a.linkedProduct.workshopCode, a.linkedProduct.title)
+      : null,
+    publishedAt: a.publishedAt ? a.publishedAt.toISOString() : null,
+    updatedAt: a.updatedAt.toISOString(),
+  }));
+
+  const serializedCategories: SerializedArticleCategory[] = categories.map((c) => ({
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+  }));
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Heading level={2}>Quản lý bài viết</Heading>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">{meta.total} bài viết</p>
+          <h2 className="text-xl font-bold text-brand-400">Quản lý bài đăng</h2>
+          <p className="mt-0.5 text-xs text-text-muted">
+            Quản lý bài viết tư vấn, bàn giao thực tế, SEO và sản phẩm liên kết.
+          </p>
         </div>
-        <Link href="/admin/articles/new">
-          <Button leftIcon={<Plus size={16} />}>Thêm bài viết</Button>
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/admin/article-categories"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[8px] border border-brand-300 bg-bg-page px-3.5 text-sm font-medium text-brand-400 transition-colors hover:bg-brand-50">
+            <IconFolder size={16} stroke={1.75} aria-hidden="true" />
+            <span>Danh mục bài</span>
+          </Link>
+          <Link
+            href="/admin/articles/new"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[8px] bg-brand-400 px-3.5 text-sm font-medium text-white transition-colors hover:bg-brand-300">
+            <IconPlus size={16} stroke={1.75} aria-hidden="true" />
+            <span>Viết bài mới</span>
+          </Link>
+        </div>
       </div>
 
-      {/* Content */}
-      {error && <Alert variant="error" title="Lỗi" description={error} />}
-
-      <Card variant="elevated" padding="none">
-        <div className="p-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-3">
-          <Input
-            placeholder="Tìm theo tiêu đề hoặc slug..."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            leftIcon={<Search size={16} />}
-            fullWidth
-          />
-          <Dropdown
-            value={categoryFilter}
-            onChange={setCategoryFilter}
-            options={[
-              { label: "Tất cả danh mục", value: "ALL" },
-              ...categories.map((category) => ({ label: category.name, value: String(category.id) })),
-            ]}
-            fullWidth
-          />
-          <Dropdown
-            value={statusFilter}
-            onChange={setStatusFilter}
-            options={[
-              { label: "Tất cả trạng thái", value: "ALL" },
-              { label: "Nháp", value: "DRAFT" },
-              { label: "Đã đăng", value: "PUBLISHED" },
-              { label: "Đã lưu trữ", value: "ARCHIVED" },
-            ]}
-            fullWidth
-          />
-        </div>
-
-        {loading ? (
-          <div className="flex items-center justify-center py-16">
-            <Spinner size={30} />
-          </div>
-        ) : (
-          <ArticleTable articles={articles} onDelete={handleDelete} deleting={deleting} />
-        )}
-      </Card>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2">
-          <Button variant="outline" size="sm" disabled={meta.page <= 1} onClick={goToPreviousPage}>
-            Trước
-          </Button>
-          <span className="text-sm text-[var(--color-text-muted)]">
-            Trang {meta.page} / {totalPages}
-          </span>
-          <Button variant="outline" size="sm" disabled={meta.page >= totalPages} onClick={goToNextPage}>
-            Sau
-          </Button>
-        </div>
-      )}
+      <ArticleTable initialArticles={serializedArticles} categories={serializedCategories} />
     </div>
   );
 }

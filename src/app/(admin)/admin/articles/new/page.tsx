@@ -1,28 +1,26 @@
-"use client";
-
 import React from "react";
-import Heading from "@/components/ui/Heading";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
+import { prisma } from "@/lib/prisma";
+import { resolveWorkshopCode } from "@/lib/slug";
 import ArticleForm from "@/components/admin/articles/ArticleForm";
-import { useAdminArticleCreate } from "@/hooks/articles/useAdminArticleCreate";
 
-export default function NewArticlePage() {
-  const { categories, loading, error, submit } = useAdminArticleCreate();
+export const dynamic = "force-dynamic";
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-16">
-        <Spinner size={30} />
-      </div>
-    );
-  }
+export default async function NewArticlePage() {
+  const [categories, products] = await Promise.all([
+    prisma.articleCategory.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, slug: true },
+    }),
+    prisma.product.findMany({
+      orderBy: { updatedAt: "desc" },
+      select: { id: true, title: true, slug: true, workshopCode: true },
+    }),
+  ]);
 
-  return (
-    <div className="space-y-6 max-w-4xl">
-      <Heading level={2}>Thêm bài viết mới</Heading>
-      {error && <Alert variant="error" title="Lỗi" description={error} />}
-      <ArticleForm categories={categories} onSubmit={submit} submitLabel="Tạo bài viết" />
-    </div>
-  );
+  const resolvedProducts = products.map((p) => ({
+    ...p,
+    workshopCode: resolveWorkshopCode(p.workshopCode, p.title),
+  }));
+
+  return <ArticleForm categories={categories} products={resolvedProducts} />;
 }

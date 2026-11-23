@@ -1,64 +1,51 @@
-import ProductsPageClient from "@/components/products/ProductsPageClient";
+import React from "react";
 import type { Metadata } from "next";
-import { ProductQueryParams } from "@/types/products/ProductQueryParams";
-import { getProductListSSR } from "@/lib/products/productSSR";
-import { cache } from "react";
-import { CategoryService } from "@/services/category.service";
-import { prisma } from "@/lib/prisma";
-import { ProductService } from "@/services/products.service";
 import Script from "next/script";
+import { prisma } from "@/lib/prisma";
+import { StorefrontService } from "@/services/storefront.service";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/seo/schema";
 import { generateCategoryMetadata } from "@/seo/generators/generateMetadata";
-import { parseOptionalNumber, parsePositiveInt, parseStringParam } from "@/server/utils/api";
+import { parseOptionalNumber, parseStringParam } from "@/server/utils/api";
+import StoreProductListing, { type StoreSortKey } from "@/components/store/StoreProductListing";
+
+export const dynamic = "force-dynamic";
 
 const BASE_URL = "https://sofaphamgia.com";
-const categoryService = new CategoryService(prisma);
-const productService = new ProductService(prisma);
+const storefrontService = new StorefrontService(prisma);
 
 interface ProductsPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-const getCachedCategories = cache(async () => {
-  return await categoryService.getAll(1, 100, 0);
-});
-
-const getCachedFilters = cache(async () => {
-  return await productService.getFilters();
-});
-
-const getCachedProducts = cache(async (params: ProductQueryParams) => {
-  return await getProductListSSR(params);
-});
-
 export async function generateMetadata(props: ProductsPageProps): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const categorySlug = parseStringParam(searchParams.category);
-  const hasFilterOrPageParams = Boolean(
+  const hasFilterParams = Boolean(
     parseStringParam(searchParams.material) ||
       parseStringParam(searchParams.color) ||
       parseOptionalNumber(searchParams.priceMin) !== undefined ||
-      parseOptionalNumber(searchParams.priceMax) !== undefined ||
-      parsePositiveInt(searchParams.page, 1) > 1
+      parseOptionalNumber(searchParams.priceMax) !== undefined
   );
 
   if (!categorySlug) {
     return {
-      title: "Sofa Phòng Khách Cao Cấp | Sofa Phạm Gia",
+      title: "Sofa Phòng Khách Đóng Tại Xưởng | Sofa Phạm Gia",
       description:
-        "Khám phá bộ sưu tập sofa phòng khách, sofa băng, sofa góc, sofa da và sofa vải cao cấp của Sofa Phạm Gia.",
+        "Khám phá bộ sưu tập sofa góc, sofa băng, sofa da và sofa vải đóng theo yêu cầu tại xưởng Sofa Phạm Gia TP.HCM.",
       alternates: { canonical: `${BASE_URL}/san-pham` },
-      ...(hasFilterOrPageParams ? { robots: { index: false, follow: true } } : {}),
+      ...(hasFilterParams ? { robots: { index: false, follow: true } } : {}),
     };
   }
 
-  const result = await getCachedCategories();
-  const category = result.data.find((c) => c.slug === categorySlug);
+  const category = await prisma.category.findUnique({
+    where: { slug: categorySlug },
+    select: { name: true, slug: true },
+  });
 
   if (!category) {
     return {
-      title: "Danh mục không tồn tại | Sofa Phạm Gia",
-      description: "Khám phá các mẫu sofa và nội thất cao cấp của Sofa Phạm Gia.",
+      title: "Danh mục sản phẩm | Sofa Phạm Gia",
+      description: "Bộ sưu tập sofa đóng trực tiếp tại xưởng Sofa Phạm Gia.",
       alternates: { canonical: `${BASE_URL}/san-pham` },
       robots: { index: false, follow: true },
     };
@@ -67,68 +54,80 @@ export async function generateMetadata(props: ProductsPageProps): Promise<Metada
   const meta = generateCategoryMetadata({
     name: category.name,
     slug: category.slug,
-    description: `Bộ sưu tập ${category.name} với thiết kế hiện đại, chất liệu bền đẹp và phù hợp nhiều không gian sống.`,
+    description: `Bộ sưu tập ${category.name} sản xuất trực tiếp tại xưởng Sofa Phạm Gia — tùy chỉnh kích thước, chất liệu và màu sắc.`,
   });
 
-  if (hasFilterOrPageParams) {
-    return {
-      ...meta,
-      robots: { index: false, follow: true },
-    };
-  }
-
-  return meta;
+  return hasFilterParams ? { ...meta, robots: { index: false, follow: true } } : meta;
 }
 
 export default async function ProductsPage(props: ProductsPageProps) {
-  const searchParams = await props.searchParams;
+  const [searchParams, catalog] = await Promise.all([props.searchParams, storefrontService.getPublishedCatalog()]);
 
-  const page = parsePositiveInt(searchParams.page, 1, 1, 10000);
-  const perPage = parsePositiveInt(searchParams.perPage, 12, 1, 100);
-  const categorySlug = parseStringParam(searchParams.category);
+  const categoryParam = parseStringParam(searchParams.category) ?? "";
+  const materialParam = parseStringParam(searchParams.material) ?? "";
+  const colorParam = parseStringParam(searchParams.color) ?? "";
+  const sortParam = parseStringParam(searchParams.sort);
+  const initialSort: StoreSortKey = sortParam === "price_asc" || sortParam === "price_desc" ? sortParam : "newest";
 
-  const filterParams: ProductQueryParams = {
-    page,
-    perPage,
-    category: categorySlug,
-    priceMin: parseOptionalNumber(searchParams.priceMin),
-    priceMax: parseOptionalNumber(searchParams.priceMax),
-    color: parseStringParam(searchParams.color),
-    material: parseStringParam(searchParams.material),
-  };
+  const { min: minBound, max: maxBound } = catalog.priceBounds;
+  const rawPriceMin = parseOptionalNumber(searchParams.priceMin);
+  const rawPriceMax = parseOptionalNumber(searchParams.priceMax);
+  const initialPriceMin = rawPriceMin !== undefined ? Math.max(minBound, Math.min(rawPriceMin, maxBound)) : minBound;
+  const initialPriceMax =
+    rawPriceMax !== undefined ? Math.min(maxBound, Math.max(rawPriceMax, initialPriceMin)) : maxBound;
 
-  const [data, categories, filtersData] = await Promise.all([
-    getCachedProducts(filterParams),
-    getCachedCategories(),
-    getCachedFilters(),
-  ]);
-
-  // JSON-LD: breadcrumb + danh sách sản phẩm
-  const categoryName = categorySlug ? categories.data.find((c) => c.slug === categorySlug)?.name : undefined;
+  const activeCategoryName = catalog.categories.find((c) => c.slug === categoryParam)?.name;
   const breadcrumbItems = [
     { name: "Trang chủ", url: BASE_URL },
     { name: "Sản phẩm", url: `${BASE_URL}/san-pham` },
-    ...(categoryName ? [{ name: categoryName, url: `${BASE_URL}/san-pham?category=${categorySlug}` }] : []),
+    ...(activeCategoryName
+      ? [
+          {
+            name: activeCategoryName,
+            url: `${BASE_URL}/san-pham?category=${categoryParam}`,
+          },
+        ]
+      : []),
   ];
-  const itemListName = categoryName ? `Sofa ${categoryName}` : "Tất cả sản phẩm Sofa";
-  const itemListUrl = categorySlug ? `${BASE_URL}/san-pham?category=${categorySlug}` : `${BASE_URL}/san-pham`;
+
+  const schemaItems = catalog.products.slice(0, 20).map((p) => ({
+    title: p.title,
+    slug: p.slug,
+    images: p.primaryImageUrl ? [{ url: p.primaryImageUrl }] : [],
+    variants: p.minPrice !== null ? [{ price: p.minPrice }] : [],
+  }));
 
   return (
     <>
       <Script id="breadcrumb-jsonld" type="application/ld+json">
         {JSON.stringify(buildBreadcrumbSchema(breadcrumbItems))}
       </Script>
-      {data?.items?.length ? (
+      {schemaItems.length > 0 && (
         <Script id="itemlist-jsonld" type="application/ld+json">
-          {JSON.stringify(buildItemListSchema(itemListName, itemListUrl, data.items))}
+          {JSON.stringify(
+            buildItemListSchema(
+              activeCategoryName ? `Sofa ${activeCategoryName}` : "Tất cả sản phẩm Sofa Phạm Gia",
+              categoryParam ? `${BASE_URL}/san-pham?category=${categoryParam}` : `${BASE_URL}/san-pham`,
+              schemaItems
+            )
+          )}
         </Script>
-      ) : null}
-      <ProductsPageClient
-        initialItems={data?.items ?? []}
-        initialMeta={data.meta}
-        initialParams={filterParams}
-        categories={categories.data}
-        filtersData={filtersData}
+      )}
+
+      <StoreProductListing
+        products={catalog.products}
+        categories={catalog.categories}
+        allMaterials={catalog.allMaterials}
+        allColors={catalog.allColors}
+        priceBounds={catalog.priceBounds}
+        initialFilters={{
+          category: categoryParam,
+          material: materialParam,
+          color: colorParam,
+          priceMin: initialPriceMin,
+          priceMax: initialPriceMax,
+          sort: initialSort,
+        }}
       />
     </>
   );

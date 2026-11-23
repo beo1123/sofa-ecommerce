@@ -4,25 +4,33 @@ import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
 import { requireAdmin } from "@/lib/admin";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Admin – Sofa Ecommerce",
+  title: "Quản trị – Sofa Phạm Gia",
   robots: { index: false, follow: false },
 };
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
+  let session: Awaited<ReturnType<typeof requireAdmin>>;
   try {
-    await requireAdmin();
+    session = await requireAdmin();
   } catch {
     redirect("/dang-nhap?callbackUrl=/admin");
   }
 
+  const pendingInquiriesCount = await prisma.inquiry.count({
+    where: { status: "new" },
+  });
+
   return (
-    <div className="min-h-screen flex bg-[var(--color-bg-muted)] text-slate-900">
-      <AdminSidebar />
-      <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
-        <AdminHeader />
-        <main className="flex-1 p-6">{children}</main>
+    <div className="min-h-screen bg-bg-page text-text-default">
+      <AdminSidebar pendingInquiriesCount={pendingInquiriesCount} />
+
+      <div className="flex min-h-screen flex-col lg:pl-[220px]">
+        <AdminHeader userName={session.user?.name} userEmail={session.user?.email} userRole={session.user?.roles} />
+
+        <main className="flex-1 overflow-y-auto px-4 py-5 lg:px-6 lg:py-6">{children}</main>
       </div>
     </div>
   );

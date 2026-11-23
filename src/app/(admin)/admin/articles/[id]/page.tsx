@@ -1,35 +1,65 @@
-"use client";
-
 import React from "react";
-import { useParams } from "next/navigation";
-import Heading from "@/components/ui/Heading";
-import Spinner from "@/components/ui/Spinner";
-import Alert from "@/components/ui/Alert";
+import { notFound } from "next/navigation";
+import { prisma } from "@/lib/prisma";
+import { resolveWorkshopCode } from "@/lib/slug";
 import ArticleForm from "@/components/admin/articles/ArticleForm";
-import { useAdminArticleEdit } from "@/hooks/articles/useAdminArticleEdit";
+import type { SerializedArticleDetail } from "@/components/admin/articles/types";
 
-export default function EditArticlePage() {
-  const params = useParams();
-  const articleId = params.id as string;
-  const { article, categories, formDefaults, loading, error, submit } = useAdminArticleEdit(articleId);
+export const dynamic = "force-dynamic";
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-16">
-        <Spinner size={30} />
-      </div>
-    );
+interface EditArticlePageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function EditArticlePage({ params }: EditArticlePageProps) {
+  const { id } = await params;
+  const articleId = Number(id);
+  if (!Number.isInteger(articleId) || articleId <= 0) {
+    notFound();
   }
+
+  const [article, categories, products] = await Promise.all([
+    prisma.article.findUnique({
+      where: { id: articleId },
+    }),
+    prisma.articleCategory.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, slug: true },
+    }),
+    prisma.product.findMany({
+      orderBy: { updatedAt: "desc" },
+      select: { id: true, title: true, slug: true, workshopCode: true },
+    }),
+  ]);
 
   if (!article) {
-    return <Alert variant="error" title="Không tìm thấy bài viết" />;
+    notFound();
   }
 
-  return (
-    <div className="space-y-6 max-w-4xl">
-      <Heading level={2}>Chỉnh sửa: {article.title}</Heading>
-      {error && <Alert variant="error" title="Lỗi" description={error} />}
-      <ArticleForm defaultValues={formDefaults} categories={categories} onSubmit={submit} submitLabel="Cập nhật" />
-    </div>
-  );
+  const serializedArticle: SerializedArticleDetail = {
+    id: article.id,
+    title: article.title,
+    slug: article.slug,
+    excerpt: article.excerpt,
+    content: article.content,
+    bodyJson:
+      article.bodyJson && typeof article.bodyJson === "object" && !Array.isArray(article.bodyJson)
+        ? (article.bodyJson as Record<string, unknown>)
+        : null,
+    thumbnail: article.thumbnail,
+    coverImageUrl: article.coverImageUrl,
+    status: article.status,
+    publishedAt: article.publishedAt ? article.publishedAt.toISOString() : null,
+    categoryId: article.categoryId,
+    linkedProductId: article.linkedProductId,
+    seoTitle: article.seoTitle,
+    seoDescription: article.seoDescription,
+  };
+
+  const resolvedProducts = products.map((p) => ({
+    ...p,
+    workshopCode: resolveWorkshopCode(p.workshopCode, p.title),
+  }));
+
+  return <ArticleForm initialArticle={serializedArticle} categories={categories} products={resolvedProducts} />;
 }

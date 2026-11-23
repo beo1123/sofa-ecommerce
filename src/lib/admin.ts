@@ -16,7 +16,7 @@ export async function requireAdmin() {
     throw { status: 401, body: fail("Unauthorized", "UNAUTHORIZED") };
   }
 
-  if (session.user.roles !== ADMIN_ROLE) {
+  if (session.user.roles?.toLowerCase() !== ADMIN_ROLE.toLowerCase()) {
     throw { status: 403, body: fail("Forbidden – admin only", "FORBIDDEN") };
   }
 
